@@ -1,0 +1,360 @@
+
+
+body {
+    font: 18px "Century Gothic", Futura, sans-serif;
+    background-color: #d0c0bf27;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23d7cee7' fill-opacity='0.08' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");  
+}
+nav  {
+  color: whitesmoke;
+  font-weight: 800;
+  background-color: #ff8a8ac0;
+  height: 15vh;
+}
+
+/*  MEDIA QUERYS   */
+
+/* On screens that are 992px or less, set the background color to blue */
+@media screen and (max-width: 992px) {
+  nav {
+    height: auto;
+  }
+  .dropdown-menu {
+    width: 90vw !important;
+    margin: 0px !important;
+  }
+
+  .form-login-splash {
+    display: none;
+  }
+}
+
+/* On screens that are 600px or less, set the background color to olive */
+@media screen and (max-width: 600px) {
+  nav {
+    height: auto;
+  }
+  .dropdown-menu {
+    width: 90vw !important;
+    margin: 0px !important;
+  }
+
+  .form-login-splash {
+    display: none;
+  }
+}
+
+nav > * {
+  padding: 0px;
+  text-decoration: none;
+}
+
+.nav-link {
+  color: white;
+  font-size: 15px;
+  width: auto;
+  margin: 30px;
+
+}
+
+.nav-link:hover  {
+  color: rgb(53, 129, 206);
+}
+
+
+.img-round {
+    border-radius: 50%;
+}
+
+
+.header-subtitle {
+  font-weight: 1000;
+  color: rgb(16, 99, 177);
+}
+
+.header-title {
+  font-size: 32px;
+  font-weight: 800;
+  color: black;
+}
+
+.header-description {
+  margin-top: 20px;
+  font-size: 18px;
+  color: slategray;
+  font-style: italic;
+}
+  .hero:nth-child(even) {
+   padding: 20px;
+   box-sizing: border-box;;
+   background-color: #407cfcc0;
+   border-radius: 25px;
+   clip-path: ellipse(300% 100% at -120% 0%);
+   box-shadow: rgba(47, 52, 56, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+  }
+
+.hero:nth-child(odd){
+  height: 500px;
+  box-sizing: border-box;;
+  border-radius: 10px;
+  clip-path: ellipse(300% 100% at -120% 0%);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 50px -5px, rgba(0, 0, 0, 0.795) 0px 8px 16px -8px;
+
+}
+
+
+.header-action {
+    margin-top: 5vh;
+    background-color: salmon;
+    border: none;
+    border-radius: 25px;
+    padding: 15px;
+    font-weight: bold;
+}
+
+
+.header-action-no-margin {
+  background-color: salmon;
+  border: none;
+  border-radius: 25px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-weight: bold;
+  width: auto;
+  position: relative;
+  top: -10px;
+}
+
+.header-action-no-margin:hover {
+  background-color: #8c2f2fd4;
+  color: white;
+  font-weight: bold;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.795) 0px 8px 16px -8px;
+}
+
+.header-action:hover {
+  background-color: #e44b4b;
+  color: white;
+  font-weight: bold;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.795) 0px 8px 16px -8px;
+}
+
+
+.header-section-space {
+  margin-top: 10vh;
+}
+
+
+
+
+.body-section-title {
+  font-weight: 1000;
+}
+
+
+.drop-shadow {
+  background-color: rgba(9, 0, 22, 0.296);
+}
+
+.blob {
+  background-color:rgba(238, 158, 147, 0.522);
+  border: 20px solid rgba(240, 152, 152, 0.789);
+  padding: 40px;
+  mask-image: url('blob-mask-header.svg');
+  mask-mode: luminance, alpha, match-source;
+  mask-repeat: no-repeat;
+}
+
+.blob-lg {
+  background-color:rgba(172, 212, 255, 0.522);
+  padding: 50px;
+  mask-image: url('blob.svg');
+  mask-mode: luminance, alpha, match-source;
+  mask-repeat: no-repeat;
+}
+
+
+.blob > img {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.795) 0px 8px 16px -8px; 
+  border-radius: 20px;
+}
+
+.multi-color-section {
+  font-weight: 1000;
+  font-family:cursive;
+  font-style: uppercase !important;
+  font-size: 7vw;
+}
+
+.multi-color-section > span:nth-child(1) {
+  color: salmon;
+  font-size: 32px;
+  
+}
+
+.multi-color-section > span:nth-child(2) {
+  color: dodgerblue;
+  font-size: 32px;
+}
+
+.multi-color-section > span:nth-child(3) {
+  color:firebrick;
+  font-size: 32px;
+}
+
+
+/* drop down menu styling   */
+
+.dropdown-menu {
+  background-color: rgb(247, 243, 243);
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+  padding: 25px;
+  width: 50vw;
+  margin: 25vw;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+}
+
+ .dropdown-title {
+  font-weight: 1000;
+  font-size: 16px;
+  color: rgb(38, 58, 79);
+} 
+
+.dropdown-subtitle {
+    margin-top: 0.5vh;
+    font-size: 16px;
+    color: rgb(61, 61, 61);
+}
+
+
+.dropdown-link {
+  font-size: 16px; 
+  color:rgb(29, 35, 70);
+  text-decoration: none;
+}
+
+.dropdown-link:hover {
+  color: salmon;
+  cursor: pointer;
+}
+
+.dropdown-icon {
+  font-size: 20px;
+}
+
+.dropdown-desc {
+  margin-top: 1vh;
+  font-size: 14px;
+  color: slategray;
+  font-weight: 300;
+}
+
+.border-breakpoint {
+  border-bottom: 1px solid salmon;
+  margin: 10px;
+}
+
+
+/* end of drop down styling  */
+
+.hidden {
+  padding: 100px;
+  display: block;
+  clip-path: circle(57.1% at 50% 50%);
+  z-index: 1;
+}
+
+
+footer {
+  color: white;
+  box-shadow: rgba(47, 52, 56, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+  background:  #121635;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 100px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+
+.brand-img {
+  float: left !important;
+  width: 100%;
+  height: auto;
+}
+.sepia {
+  filter: grayscale(60%);
+}
+
+.footer {
+  width: 80%;
+}
+
+.footer-list > * {
+  color: white;
+  background-color: transparent;
+  border: none;
+}
+
+/* footer list stylings  */
+
+.footer-section-title {
+  color: rgb(142, 159, 245);
+  font-size: 24px;
+  font-weight: 1000;
+
+}
+
+.footer-section-subtitle {
+    color: whitesmoke;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.footer-section-divider {
+  padding: 0px;
+  border-bottom: 1px solid rgba(250, 128, 114, 0.453);
+  width: 50vw;
+}
+
+.footer-section-link > a {
+  margin-left: 40px;
+  text-decoration: none;
+  color: whitesmoke;
+  font-weight: 800;
+  font-size: 16px;
+
+}
+
+.footer-section-link > a:hover {
+  color: salmon;
+}
+
+
+.footer-bottom {
+  text-decoration: italic !important;
+  text-align: center;
+}
+
+
+
+/* animation styles   */
+
+
+.fade-in {
+  animation: rollDropDown 2.0s ease 0s 1 normal forwards;
+}
+
+/* animation rolling Drop Down */
+
+@keyframes rollDropDown {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/*  end of form login screen  */
