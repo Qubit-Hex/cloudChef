@@ -139,10 +139,24 @@ nav > * {
   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.795) 0px 8px 16px -8px;
 }
 
+/* header spacing element for the landing space provide helpor margin pushes for some of the content  */
 
 .header-section-space {
   margin-top: 10vh;
 }
+
+.header-section-space-md {
+  margin-top: 20vh;
+}
+
+.header-section-space-lg {
+  margin-top: 30vh;
+}
+.header-section-space-xl {
+  margin-top: 40vh;
+}
+
+
 
 
 

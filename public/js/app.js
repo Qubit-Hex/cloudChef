@@ -2612,7 +2612,7 @@ var Header = /*#__PURE__*/function (_React$Component) {
                   children: " Home "
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
                   className: "nav-link dropdown-toggle",
-                  href: "#",
+                  href: "/solutions/",
                   id: "dropdown-solutions",
                   role: "button",
                   "data-bs-toggle": "dropdown",
@@ -2625,7 +2625,6 @@ var Header = /*#__PURE__*/function (_React$Component) {
                     className: "nav-item",
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
                       className: "dropdown-title",
-                      href: "#",
                       children: "How we can Help"
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
                       className: "dropdown-subtitle text-center",
@@ -2644,6 +2643,7 @@ var Header = /*#__PURE__*/function (_React$Component) {
                             className: "fas fa-robot dropdown-icon"
                           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
                             className: "dropdown-link",
+                            href: "/solutions/",
                             children: " Automate Outdated Processes  "
                           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
                             className: "dropdown-desc",
@@ -2657,6 +2657,7 @@ var Header = /*#__PURE__*/function (_React$Component) {
                             className: "fas fa-database dropdown-icon"
                           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
                             className: "dropdown-link",
+                            href: "/solutions/",
                             children: " Access Information from anywhere   "
                           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
                             className: "dropdown-desc",
@@ -2674,6 +2675,7 @@ var Header = /*#__PURE__*/function (_React$Component) {
                               className: "fas fa-broadcast-tower dropdown-icon"
                             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
                               className: "dropdown-link",
+                              href: "/solutions/",
                               children: " Intergrate data across systems  "
                             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
                               className: "dropdown-desc",
@@ -2687,6 +2689,7 @@ var Header = /*#__PURE__*/function (_React$Component) {
                               className: "fas fa-chart-line dropdown-icon"
                             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
                               className: "dropdown-link",
+                              href: "/solutions/",
                               children: " Real time data "
                             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
                               className: "dropdown-desc",
@@ -2708,7 +2711,7 @@ var Header = /*#__PURE__*/function (_React$Component) {
                   })]
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
                   className: "nav-link dropdown-toggle",
-                  href: "#",
+                  href: "/features/",
                   id: "dropdown-features",
                   role: "button",
                   "data-bs-toggle": "dropdown",
@@ -2744,6 +2747,7 @@ var Header = /*#__PURE__*/function (_React$Component) {
                             className: "fas fa-utensils dropdown-icon"
                           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
                             className: "dropdown-link",
+                            href: "/features/",
                             children: " Recipe Management "
                           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
                             className: "dropdown-desc",
@@ -2757,6 +2761,7 @@ var Header = /*#__PURE__*/function (_React$Component) {
                             className: "far fa-chart-bar dropdown-icon"
                           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
                             className: "dropdown-link",
+                            href: "/features/",
                             children: " Food Cost Management "
                           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
                             className: "dropdown-desc",
@@ -2773,6 +2778,7 @@ var Header = /*#__PURE__*/function (_React$Component) {
                             className: "fas fa-people-carry dropdown-icon"
                           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
                             className: "dropdown-link",
+                            href: "/features/",
                             children: " Inventory Management "
                           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
                             className: "dropdown-desc",
@@ -2786,6 +2792,7 @@ var Header = /*#__PURE__*/function (_React$Component) {
                             className: "fas fa-user-tie dropdown-icon"
                           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
                             className: "dropdown-link",
+                            href: "/features/",
                             children: " Employee Management System"
                           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
                             className: "dropdown-desc",
@@ -2797,7 +2804,7 @@ var Header = /*#__PURE__*/function (_React$Component) {
                   })
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
                   className: "nav-link",
-                  href: "#",
+                  href: "/pricing/",
                   children: "Pricing"
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
                   className: "nav-link",
@@ -3295,9 +3302,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 function FeaturesContainer(props) {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
-    children: " Test"
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    className: "page-content",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_componets_home_header__WEBPACK_IMPORTED_MODULE_1__.Header, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      className: "container",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+        className: "row"
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_componets_home_footer__WEBPACK_IMPORTED_MODULE_2__.Footer, {})]
   });
 }
 
@@ -3460,7 +3474,98 @@ __webpack_require__.r(__webpack_exports__);
 
 function SolutionsContainer(props) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_componets_home_header__WEBPACK_IMPORTED_MODULE_1__.Header, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_componets_home_footer__WEBPACK_IMPORTED_MODULE_2__.Footer, {})]
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_componets_home_header__WEBPACK_IMPORTED_MODULE_1__.Header, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      className: "container header-section-space-md mb-4",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "row",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "col-sm  blob-lg",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+            className: "img-fluid",
+            src: "/img/chef-blacknwhite.jpg"
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "col-sm header-section-space-md",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
+            className: "header-subtitle",
+            children: " AUTOMATE OUTDATED PROCCESSES "
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+            className: "header-title",
+            children: " Work Smarter, not Harder! "
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("section", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+              className: "header-description",
+              children: "Data driven technology eliminates manual data entry and associated labor costs, see how it can help with your bottom line. Elimate errrors and let automation take over."
+            })
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "row header-section-space-md",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "col-sm",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+            className: "img-fluid",
+            src: "/img/world.svg"
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "col-sm header-section-space-md",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("section", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
+              className: "header-subtitle",
+              children: " ANYWHERE ANYTIME "
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+              className: "header-title",
+              children: " No Matter Where Life Takes You"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+              className: "header-description",
+              children: "Get visibility into purchases and performance across locations and on any device, Access Information from any device no matter where you are."
+            })]
+          })
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "row header-section-space-md",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "col-sm",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+            src: "/img/prediction.svg",
+            className: "img-fluid"
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "col-sm header-section-space-md",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
+            className: "header-subtitle",
+            children: " Data-Driven Business Insights"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+            className: "header-title",
+            children: " Putting Your Data to Good Use"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+            className: "header-description",
+            children: "Discover Data driven business insights. Tap into an intelligent, marketing-driven customer data warehouse that can be leveraged for marketing insights and business decisions."
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "row header-section-space-md",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "col-sm blob-lg",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+            src: "/img/service.jpg",
+            className: "img-fluid"
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "col-sm header-section-space-md",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
+            className: "header-subtitle",
+            children: "   REAL TIME COMMINICATION "
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+            className: "header-title",
+            children: " Instant Data in your organisation"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+            className: "header-description",
+            children: "If you've ever had a bad experience with a restaurant, had to deal with high-turnover of employees, and an unhappy customer base, then we have the perfect solution for you. We're an award-winning restaurant saas that helps restaurants manage everything from customer feedback and recipe management to employee management and marketing campaigns."
+          })]
+        })]
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_componets_home_footer__WEBPACK_IMPORTED_MODULE_2__.Footer, {})]
   });
 }
 
@@ -8071,7 +8176,7 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_blob_mask_header_svg__WEBPACK_IMPORTED_MODULE_2__["default"]);
 var ___CSS_LOADER_URL_REPLACEMENT_1___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_blob_svg__WEBPACK_IMPORTED_MODULE_3__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\nbody {\n    font: 18px \"Century Gothic\", Futura, sans-serif;\n    background-color: #d0c0bf27;\n    background-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23d7cee7' fill-opacity='0.08' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E\");  \n}\nnav  {\n  color: whitesmoke;\n  font-weight: 800;\n  background-color: #ff8a8ac0;\n  height: 15vh;\n}\n\n/*  MEDIA QUERYS   */\n\n/* On screens that are 992px or less, set the background color to blue */\n@media screen and (max-width: 992px) {\n  nav {\n    height: auto;\n  }\n  .dropdown-menu {\n    width: 90vw !important;\n    margin: 0px !important;\n  }\n\n  .form-login-splash {\n    display: none;\n  }\n}\n\n/* On screens that are 600px or less, set the background color to olive */\n@media screen and (max-width: 600px) {\n  nav {\n    height: auto;\n  }\n  .dropdown-menu {\n    width: 90vw !important;\n    margin: 0px !important;\n  }\n\n  .form-login-splash {\n    display: none;\n  }\n}\n\nnav > * {\n  padding: 0px;\n  text-decoration: none;\n}\n\n.nav-link {\n  color: white;\n  font-size: 15px;\n  width: auto;\n  margin: 30px;\n\n}\n\n.nav-link:hover  {\n  color: rgb(53, 129, 206);\n}\n\n\n.img-round {\n    border-radius: 50%;\n}\n\n\n.header-subtitle {\n  font-weight: 1000;\n  color: rgb(16, 99, 177);\n}\n\n.header-title {\n  font-size: 32px;\n  font-weight: 800;\n  color: black;\n}\n\n.header-description {\n  margin-top: 20px;\n  font-size: 18px;\n  color: slategray;\n  font-style: italic;\n}\n  .hero:nth-child(even) {\n   padding: 20px;\n   box-sizing: border-box;;\n   background-color: #407cfcc0;\n   border-radius: 25px;\n   -webkit-clip-path: ellipse(300% 100% at -120% 0%);\n           clip-path: ellipse(300% 100% at -120% 0%);\n   box-shadow: rgba(47, 52, 56, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;\n  }\n\n.hero:nth-child(odd){\n  height: 500px;\n  box-sizing: border-box;;\n  border-radius: 10px;\n  -webkit-clip-path: ellipse(300% 100% at -120% 0%);\n          clip-path: ellipse(300% 100% at -120% 0%);\n  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 50px -5px, rgba(0, 0, 0, 0.795) 0px 8px 16px -8px;\n\n}\n\n\n.header-action {\n    margin-top: 5vh;\n    background-color: salmon;\n    border: none;\n    border-radius: 25px;\n    padding: 15px;\n    font-weight: bold;\n}\n\n\n.header-action-no-margin {\n  background-color: salmon;\n  border: none;\n  border-radius: 25px;\n  padding-left: 20px;\n  padding-right: 20px;\n  font-weight: bold;\n  width: auto;\n  position: relative;\n  top: -10px;\n}\n\n.header-action-no-margin:hover {\n  background-color: #8c2f2fd4;\n  color: white;\n  font-weight: bold;\n  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.795) 0px 8px 16px -8px;\n}\n\n.header-action:hover {\n  background-color: #e44b4b;\n  color: white;\n  font-weight: bold;\n  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.795) 0px 8px 16px -8px;\n}\n\n\n.header-section-space {\n  margin-top: 10vh;\n}\n\n\n\n\n.body-section-title {\n  font-weight: 1000;\n}\n\n\n.drop-shadow {\n  background-color: rgba(9, 0, 22, 0.296);\n}\n\n.blob {\n  background-color:rgba(238, 158, 147, 0.522);\n  border: 20px solid rgba(240, 152, 152, 0.789);\n  padding: 40px;\n  -webkit-mask-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n          mask-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n  mask-mode: luminance, alpha, match-source;\n  -webkit-mask-repeat: no-repeat;\n          mask-repeat: no-repeat;\n}\n\n.blob-lg {\n  background-color:rgba(172, 212, 255, 0.522);\n  padding: 50px;\n  -webkit-mask-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n          mask-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n  mask-mode: luminance, alpha, match-source;\n  -webkit-mask-repeat: no-repeat;\n          mask-repeat: no-repeat;\n}\n\n\n.blob > img {\n  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.795) 0px 8px 16px -8px; \n  border-radius: 20px;\n}\n\n.multi-color-section {\n  font-weight: 1000;\n  font-family:cursive;\n  font-style: uppercase !important;\n  font-size: 7vw;\n}\n\n.multi-color-section > span:nth-child(1) {\n  color: salmon;\n  font-size: 32px;\n  \n}\n\n.multi-color-section > span:nth-child(2) {\n  color: dodgerblue;\n  font-size: 32px;\n}\n\n.multi-color-section > span:nth-child(3) {\n  color:firebrick;\n  font-size: 32px;\n}\n\n\n/* drop down menu styling   */\n\n.dropdown-menu {\n  background-color: rgb(247, 243, 243);\n  border-bottom-left-radius: 25px;\n  border-bottom-right-radius: 25px;\n  padding: 25px;\n  width: 50vw;\n  margin: 25vw;\n  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;\n}\n\n .dropdown-title {\n  font-weight: 1000;\n  font-size: 16px;\n  color: rgb(38, 58, 79);\n} \n\n.dropdown-subtitle {\n    margin-top: 0.5vh;\n    font-size: 16px;\n    color: rgb(61, 61, 61);\n}\n\n\n.dropdown-link {\n  font-size: 16px; \n  color:rgb(29, 35, 70);\n  text-decoration: none;\n}\n\n.dropdown-link:hover {\n  color: salmon;\n  cursor: pointer;\n}\n\n.dropdown-icon {\n  font-size: 20px;\n}\n\n.dropdown-desc {\n  margin-top: 1vh;\n  font-size: 14px;\n  color: slategray;\n  font-weight: 300;\n}\n\n.border-breakpoint {\n  border-bottom: 1px solid salmon;\n  margin: 10px;\n}\n\n\n/* end of drop down styling  */\n\n.hidden {\n  padding: 100px;\n  display: block;\n  -webkit-clip-path: circle(57.1% at 50% 50%);\n          clip-path: circle(57.1% at 50% 50%);\n  z-index: 1;\n}\n\n\nfooter {\n  color: white;\n  box-shadow: rgba(47, 52, 56, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;\n  background:  #121635;\n  box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 100px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;\n  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */\n}\n\n\n.brand-img {\n  float: left !important;\n  width: 100%;\n  height: auto;\n}\n.sepia {\n  filter: grayscale(60%);\n}\n\n.footer {\n  width: 80%;\n}\n\n.footer-list > * {\n  color: white;\n  background-color: transparent;\n  border: none;\n}\n\n/* footer list stylings  */\n\n.footer-section-title {\n  color: rgb(142, 159, 245);\n  font-size: 24px;\n  font-weight: 1000;\n\n}\n\n.footer-section-subtitle {\n    color: whitesmoke;\n    font-size: 18px;\n    font-weight: 600;\n}\n\n.footer-section-divider {\n  padding: 0px;\n  border-bottom: 1px solid rgba(250, 128, 114, 0.453);\n  width: 50vw;\n}\n\n.footer-section-link > a {\n  margin-left: 40px;\n  text-decoration: none;\n  color: whitesmoke;\n  font-weight: 800;\n  font-size: 16px;\n\n}\n\n.footer-section-link > a:hover {\n  color: salmon;\n}\n\n\n.footer-bottom {\n  -webkit-text-decoration: italic !important;\n          text-decoration: italic !important;\n  text-align: center;\n}\n\n\n\n/* animation styles   */\n\n\n.fade-in {\n  -webkit-animation: rollDropDown 2.0s ease 0s 1 normal forwards;\n          animation: rollDropDown 2.0s ease 0s 1 normal forwards;\n}\n\n/* animation rolling Drop Down */\n\n@-webkit-keyframes rollDropDown {\n  0% {\n    opacity: 0;\n    transform: scale(0.6);\n  }\n\n  100% {\n    opacity: 1;\n    transform: scale(1);\n  }\n}\n\n@keyframes rollDropDown {\n  0% {\n    opacity: 0;\n    transform: scale(0.6);\n  }\n\n  100% {\n    opacity: 1;\n    transform: scale(1);\n  }\n}\n\n/*  end of form login screen  */", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\nbody {\n    font: 18px \"Century Gothic\", Futura, sans-serif;\n    background-color: #d0c0bf27;\n    background-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23d7cee7' fill-opacity='0.08' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E\");  \n}\nnav  {\n  color: whitesmoke;\n  font-weight: 800;\n  background-color: #ff8a8ac0;\n  height: 15vh;\n}\n\n/*  MEDIA QUERYS   */\n\n/* On screens that are 992px or less, set the background color to blue */\n@media screen and (max-width: 992px) {\n  nav {\n    height: auto;\n  }\n  .dropdown-menu {\n    width: 90vw !important;\n    margin: 0px !important;\n  }\n\n  .form-login-splash {\n    display: none;\n  }\n}\n\n/* On screens that are 600px or less, set the background color to olive */\n@media screen and (max-width: 600px) {\n  nav {\n    height: auto;\n  }\n  .dropdown-menu {\n    width: 90vw !important;\n    margin: 0px !important;\n  }\n\n  .form-login-splash {\n    display: none;\n  }\n}\n\nnav > * {\n  padding: 0px;\n  text-decoration: none;\n}\n\n.nav-link {\n  color: white;\n  font-size: 15px;\n  width: auto;\n  margin: 30px;\n\n}\n\n.nav-link:hover  {\n  color: rgb(53, 129, 206);\n}\n\n\n.img-round {\n    border-radius: 50%;\n}\n\n\n.header-subtitle {\n  font-weight: 1000;\n  color: rgb(16, 99, 177);\n}\n\n.header-title {\n  font-size: 32px;\n  font-weight: 800;\n  color: black;\n}\n\n.header-description {\n  margin-top: 20px;\n  font-size: 18px;\n  color: slategray;\n  font-style: italic;\n}\n  .hero:nth-child(even) {\n   padding: 20px;\n   box-sizing: border-box;;\n   background-color: #407cfcc0;\n   border-radius: 25px;\n   -webkit-clip-path: ellipse(300% 100% at -120% 0%);\n           clip-path: ellipse(300% 100% at -120% 0%);\n   box-shadow: rgba(47, 52, 56, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;\n  }\n\n.hero:nth-child(odd){\n  height: 500px;\n  box-sizing: border-box;;\n  border-radius: 10px;\n  -webkit-clip-path: ellipse(300% 100% at -120% 0%);\n          clip-path: ellipse(300% 100% at -120% 0%);\n  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 50px -5px, rgba(0, 0, 0, 0.795) 0px 8px 16px -8px;\n\n}\n\n\n.header-action {\n    margin-top: 5vh;\n    background-color: salmon;\n    border: none;\n    border-radius: 25px;\n    padding: 15px;\n    font-weight: bold;\n}\n\n\n.header-action-no-margin {\n  background-color: salmon;\n  border: none;\n  border-radius: 25px;\n  padding-left: 20px;\n  padding-right: 20px;\n  font-weight: bold;\n  width: auto;\n  position: relative;\n  top: -10px;\n}\n\n.header-action-no-margin:hover {\n  background-color: #8c2f2fd4;\n  color: white;\n  font-weight: bold;\n  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.795) 0px 8px 16px -8px;\n}\n\n.header-action:hover {\n  background-color: #e44b4b;\n  color: white;\n  font-weight: bold;\n  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.795) 0px 8px 16px -8px;\n}\n\n/* header spacing element for the landing space provide helpor margin pushes for some of the content  */\n\n.header-section-space {\n  margin-top: 10vh;\n}\n\n.header-section-space-md {\n  margin-top: 20vh;\n}\n\n.header-section-space-lg {\n  margin-top: 30vh;\n}\n.header-section-space-xl {\n  margin-top: 40vh;\n}\n\n\n\n\n\n\n.body-section-title {\n  font-weight: 1000;\n}\n\n\n.drop-shadow {\n  background-color: rgba(9, 0, 22, 0.296);\n}\n\n.blob {\n  background-color:rgba(238, 158, 147, 0.522);\n  border: 20px solid rgba(240, 152, 152, 0.789);\n  padding: 40px;\n  -webkit-mask-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n          mask-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n  mask-mode: luminance, alpha, match-source;\n  -webkit-mask-repeat: no-repeat;\n          mask-repeat: no-repeat;\n}\n\n.blob-lg {\n  background-color:rgba(172, 212, 255, 0.522);\n  padding: 50px;\n  -webkit-mask-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n          mask-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n  mask-mode: luminance, alpha, match-source;\n  -webkit-mask-repeat: no-repeat;\n          mask-repeat: no-repeat;\n}\n\n\n.blob > img {\n  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.795) 0px 8px 16px -8px; \n  border-radius: 20px;\n}\n\n.multi-color-section {\n  font-weight: 1000;\n  font-family:cursive;\n  font-style: uppercase !important;\n  font-size: 7vw;\n}\n\n.multi-color-section > span:nth-child(1) {\n  color: salmon;\n  font-size: 32px;\n  \n}\n\n.multi-color-section > span:nth-child(2) {\n  color: dodgerblue;\n  font-size: 32px;\n}\n\n.multi-color-section > span:nth-child(3) {\n  color:firebrick;\n  font-size: 32px;\n}\n\n\n/* drop down menu styling   */\n\n.dropdown-menu {\n  background-color: rgb(247, 243, 243);\n  border-bottom-left-radius: 25px;\n  border-bottom-right-radius: 25px;\n  padding: 25px;\n  width: 50vw;\n  margin: 25vw;\n  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;\n}\n\n .dropdown-title {\n  font-weight: 1000;\n  font-size: 16px;\n  color: rgb(38, 58, 79);\n} \n\n.dropdown-subtitle {\n    margin-top: 0.5vh;\n    font-size: 16px;\n    color: rgb(61, 61, 61);\n}\n\n\n.dropdown-link {\n  font-size: 16px; \n  color:rgb(29, 35, 70);\n  text-decoration: none;\n}\n\n.dropdown-link:hover {\n  color: salmon;\n  cursor: pointer;\n}\n\n.dropdown-icon {\n  font-size: 20px;\n}\n\n.dropdown-desc {\n  margin-top: 1vh;\n  font-size: 14px;\n  color: slategray;\n  font-weight: 300;\n}\n\n.border-breakpoint {\n  border-bottom: 1px solid salmon;\n  margin: 10px;\n}\n\n\n/* end of drop down styling  */\n\n.hidden {\n  padding: 100px;\n  display: block;\n  -webkit-clip-path: circle(57.1% at 50% 50%);\n          clip-path: circle(57.1% at 50% 50%);\n  z-index: 1;\n}\n\n\nfooter {\n  color: white;\n  box-shadow: rgba(47, 52, 56, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;\n  background:  #121635;\n  box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 100px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;\n  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */\n}\n\n\n.brand-img {\n  float: left !important;\n  width: 100%;\n  height: auto;\n}\n.sepia {\n  filter: grayscale(60%);\n}\n\n.footer {\n  width: 80%;\n}\n\n.footer-list > * {\n  color: white;\n  background-color: transparent;\n  border: none;\n}\n\n/* footer list stylings  */\n\n.footer-section-title {\n  color: rgb(142, 159, 245);\n  font-size: 24px;\n  font-weight: 1000;\n\n}\n\n.footer-section-subtitle {\n    color: whitesmoke;\n    font-size: 18px;\n    font-weight: 600;\n}\n\n.footer-section-divider {\n  padding: 0px;\n  border-bottom: 1px solid rgba(250, 128, 114, 0.453);\n  width: 50vw;\n}\n\n.footer-section-link > a {\n  margin-left: 40px;\n  text-decoration: none;\n  color: whitesmoke;\n  font-weight: 800;\n  font-size: 16px;\n\n}\n\n.footer-section-link > a:hover {\n  color: salmon;\n}\n\n\n.footer-bottom {\n  -webkit-text-decoration: italic !important;\n          text-decoration: italic !important;\n  text-align: center;\n}\n\n\n\n/* animation styles   */\n\n\n.fade-in {\n  -webkit-animation: rollDropDown 2.0s ease 0s 1 normal forwards;\n          animation: rollDropDown 2.0s ease 0s 1 normal forwards;\n}\n\n/* animation rolling Drop Down */\n\n@-webkit-keyframes rollDropDown {\n  0% {\n    opacity: 0;\n    transform: scale(0.6);\n  }\n\n  100% {\n    opacity: 1;\n    transform: scale(1);\n  }\n}\n\n@keyframes rollDropDown {\n  0% {\n    opacity: 0;\n    transform: scale(0.6);\n  }\n\n  100% {\n    opacity: 1;\n    transform: scale(1);\n  }\n}\n\n/*  end of form login screen  */", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

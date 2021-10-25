@@ -21,5 +21,21 @@ import {Footer } from "../componets/home/footer";
 
 export default function FeaturesContainer(props) {
 
-    return <h1> Test</h1>
+    return (
+      <div className='page-content'>
+
+          <Header/>
+
+            <div className='container'>
+
+            <div className='row'>
+
+                
+            </div>
+
+            </div>
+
+          <Footer />
+      </div>
+    );
 }
