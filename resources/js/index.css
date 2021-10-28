@@ -167,29 +167,42 @@ nav > * {
 
 
 .drop-shadow {
-  background-color: rgba(9, 0, 22, 0.296);
+  background-color: rgba(68, 61, 77, 0.296);
 }
 
 .blob {
-  background-color:rgba(238, 158, 147, 0.522);
-  border: 20px solid rgba(240, 152, 152, 0.789);
+  background-color:rgba(255, 128, 111, 0.09);
+  border: 10px solid rgba(0, 0, 0, 0.789);
   padding: 40px;
   mask-image: url('blob-mask-header.svg');
-  mask-mode: luminance, alpha, match-source;
+  mask-mode: alpha;
   mask-repeat: no-repeat;
+  width: 350px;
+  height: 350px;
+  margin: auto;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
 }
 
 .blob-lg {
-  background-color:rgba(172, 212, 255, 0.522);
+  border: 10px solid rgba(240, 152, 152, 0.2);
+  padding: 40px;
+  background-color:rgba(255, 162, 152, 0.118);
   padding: 50px;
   mask-image: url('blob.svg');
   mask-mode: luminance, alpha, match-source;
   mask-repeat: no-repeat;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
+}
+
+.blob-lg > img {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 40px -5px, rgba(0, 0, 0, 0.795) 0px 8px 16px -8px; 
+  border-radius: 20px;
 }
 
 
+
 .blob > img {
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.795) 0px 8px 16px -8px; 
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 60px -2px, rgba(0, 0, 0, 0.795) 0px 8px 16px -8px; 
   border-radius: 20px;
 }
 
@@ -254,7 +267,7 @@ nav > * {
 }
 
 .dropdown-icon {
-  font-size: 20px;
+  font-size: 40px;
 }
 
 .dropdown-desc {
@@ -286,6 +299,10 @@ footer {
   background:  #121635;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 100px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.md {
+  width: 25vh;
 }
 
 
@@ -359,16 +376,89 @@ footer {
 
 /* animation rolling Drop Down */
 
-@keyframes rollDropDown {
+/*  end of form login screen  */
+
+
+
+/* end of form login screen  */
+
+
+/* start of payment form  */
+
+
+.payment-card {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 14px;
+  border: 10px solid rgba(97, 134, 255, 0.131);
+  margin: 20px;
+  height: 100%;
+}
+ .payment-card:nth-child(odd)
+ {
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+  border-style: solid;
+  border-bottom: none;
+  border-width: 20px;
+  padding: 20px;
+  animation: rollDropDown 2.0s ease 0s 1 normal forwards;
+ }
+ @keyframes rollDropDown {
   0% {
     opacity: 0;
-    transform: scale(0.6);
+    transform: scale(0.0);
   }
 
   100% {
     opacity: 1;
-    transform: scale(1);
+    transform: scale(1.0);
   }
+ }
+ 
+
+ .payment-card:hover {
+  cursor: pointer;
+  background-color: rgba(253, 241, 246, 0.193);
+ }
+
+.payment-card  h1 {
+  font-size: 24px;
+  font-weight: 1000;
+  color: rgb(38, 58, 79);
+  font-weight: 1000;
 }
 
-/*  end of form login screen  */
+
+
+.payment-card h2 {
+  font-size: 18px;
+  font-weight: 600;
+  color: rgb(61, 61, 61);
+}
+
+
+.payment-card p {
+  font-size: 16px;
+  font-weight: 800;
+  color: rgb(73, 71, 71);
+}
+
+/* make glass effect on card  */
+.glass-effect {
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+}
+
+
+.image-center-icon {
+  width: 250px;
+  height: 250px;
+  margin: auto;
+}
+
+
+.image-center-icon img {
+  margin: auto;
+  width: 250px;
+  height: 250px;
+}

@@ -187,9 +187,10 @@
                     <div className='row'>
                         <div className='col-sm'>
                             <li>
-                            <i className="fas fa-people-carry dropdown-icon"></i>
-                              <a className='dropdown-link' href='/features/'> Inventory Management </a>
-                              <p className='dropdown-desc'>Easy-to-use inventory management that both ops & finance teams will love</p>
+                            <i className="fas fa-users  dropdown-icon"></i>
+                              <a className='dropdown-link' href='/features/'> Communication System </a>
+                              <p className='dropdown-desc'>Easy-to-use Communication system update team in real time,
+                              get data drivin insights from customers in real time</p>
                             </li>
                         </div>
 

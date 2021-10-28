@@ -58,7 +58,7 @@
       </div>
         <div className="container" style={{ marginTop: "10%" }}>
           <div className="row">
-            <div className="col-sm mb-3 blob">
+            <div className="col-sm mb-3 blob-lg">
               <img src="/img/food-phone.jpg" className="img-fluid" alt="" />
             </div>
             <div className="col-sm">

@@ -19,13 +19,13 @@ background: linear-gradient(to right, #e1eec398, #e1eec398); /* W3C, IE 10+/ Edg
   }
 
     .image-badge {
-      height: 50%;
+      height: auto;
       background-image: linear-gradient(45deg, #8baaaabb 0%rgba(174, 139, 156, 0.727)9c 100%);
     }
   
   .form-login {
-    background-color: white;
     padding: 20px;
+    background-color: rgba(255, 255, 255, 0.734);
     border-bottom-left-radius: 20px;
   }
   
@@ -79,7 +79,8 @@ background: linear-gradient(to right, #e1eec398, #e1eec398); /* W3C, IE 10+/ Edg
   .form-login-splash {
     height: auto;
     /* do not touch */
-    background-image:url('../../assets/img/login.svg') ;
+    background-image:url('../../assets/img/restaurant-outline.svg');
+    background-repeat: no-repeat;
     background-size: contain;
     padding: 0px;
     margin: 0px;
@@ -108,7 +109,7 @@ background: linear-gradient(to right, #e1eec398, #e1eec398); /* W3C, IE 10+/ Edg
 
 
   .icon-large {
-    font-size: 40px;
+    font-size: 50px;
   }
 /*  MEDIA QUERYS   */
 

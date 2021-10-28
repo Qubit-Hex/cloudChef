@@ -1,6 +1,17 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./node_modules/@babel/runtime/regenerator/index.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
+  \**********************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+module.exports = __webpack_require__(/*! regenerator-runtime */ "./node_modules/regenerator-runtime/runtime.js");
+
+
+/***/ }),
+
 /***/ "./node_modules/axios/index.js":
 /*!*************************************!*\
   !*** ./node_modules/axios/index.js ***!
@@ -2229,7 +2240,7 @@ var Body = /*#__PURE__*/function (_React$Component) {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
             className: "row",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-              className: "col-sm mb-3 blob",
+              className: "col-sm mb-3 blob-lg",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
                 src: "/img/food-phone.jpg",
                 className: "img-fluid",
@@ -2775,14 +2786,14 @@ var Header = /*#__PURE__*/function (_React$Component) {
                         className: "col-sm",
                         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("li", {
                           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
-                            className: "fas fa-people-carry dropdown-icon"
+                            className: "fas fa-users  dropdown-icon"
                           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
                             className: "dropdown-link",
                             href: "/features/",
-                            children: " Inventory Management "
+                            children: " Communication System "
                           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
                             className: "dropdown-desc",
-                            children: "Easy-to-use inventory management that both ops & finance teams will love"
+                            children: "Easy-to-use Communication system update team in real time, get data drivin insights from customers in real time"
                           })]
                         })
                       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
@@ -2898,42 +2909,86 @@ var LoginPage = /*#__PURE__*/function (_React$Component) {
 
     _this.state = {};
     return _this;
-  } // this will  prevent the event and verify if we go a token back or no
+  } // do some form checks inorder to see if form is valid before even submiting 
 
 
   _createClass(LoginPage, [{
-    key: "isssueRequest",
-    value: function isssueRequest(event) {} // send a token with the information to our api backend
+    key: "validateForm",
+    value: function validateForm(event) {
+      // loop though the events inorder to verify that form is actually validated 
+      for (var i = 0; i < event.target.length - 2; i++) {
+        var res = event.target[i].value.length !== 0 ? true : false;
+
+        if (res === true) {
+          // continue the loop 
+          continue;
+        } else {
+          console.log('error');
+          event.preventDefault();
+          break;
+        }
+      } // submit the form if the all fields are filled out
+
+
+      postData('/authentication/login/', ['something']);
+      return event.target.submit();
+    } // generate our CSFR TOKEN FOR OUR APPLICATION 
 
   }, {
-    key: "sendRequestToken",
-    value: function sendRequestToken(e) {
-      e.preventDefault();
-      console.log(e);
+    key: "generateToken",
+    value: function generateToken() {
+      var token = document.getElementById('_token_').content;
+      var data = new Object(); // get basic information about our user to send back to the server=
+
+      data = {
+        token: true,
+        tokenValue: token,
+        isLoggedIn: false,
+        time: Date.now()
+      };
+      console.log(data);
+      return token;
+    } // validate the form 
+
+  }, {
+    key: "validate",
+    value: function validate(event, number) {
+      var errorWrapper = document.getElementsByClassName('error-message')[number];
+
+      if (event.target.value.length === 0) {
+        errorWrapper.innerText = 'Please fill out this field it is required';
+      } else {
+        errorWrapper.innerText = '';
+        return true;
+      }
     }
   }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
         id: "login-color-box",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
           className: "container pannel",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
             className: "row",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
               className: "col form-login",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("form", {
                 className: "form-login",
                 method: "POST",
-                action: "/",
+                action: "/authentication/login/",
                 onSubmit: function onSubmit(e) {
-                  e.preventDefault();
+                  _this2.validateForm(e);
                 },
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
                   className: "blob image-badge",
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
                     className: "img-fluid",
-                    src: "/img/logo/black.png"
+                    src: "/img/restaurant-outline.svg",
+                    width: "50vh",
+                    height: "50vw"
                   })
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
                   className: "form-login-title text-center",
@@ -2946,8 +3001,13 @@ var LoginPage = /*#__PURE__*/function (_React$Component) {
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
                     "for": "username",
                     children: "Username "
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                    className: "error-message text-center text-danger"
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
                     name: "username",
+                    onChange: function onChange(e) {
+                      _this2.validate(e, 0);
+                    },
                     type: "email",
                     className: "form-control",
                     "aria-describedby": "emailHelp",
@@ -2958,8 +3018,13 @@ var LoginPage = /*#__PURE__*/function (_React$Component) {
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
                     "for": "password",
                     children: "Password"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                    className: "error-message text-center text-danger"
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
                     name: "password",
+                    onChange: function onChange(e) {
+                      _this2.validate(e, 1);
+                    },
                     type: "password",
                     className: "form-control",
                     placeholder: "password"
@@ -2969,12 +3034,24 @@ var LoginPage = /*#__PURE__*/function (_React$Component) {
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
                     "for": "client-id",
                     children: " Client ID"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                    className: "error-message text-center text-danger"
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
                     name: "client-id",
+                    onChange: function onChange(e) {
+                      _this2.validate(e, 2);
+                    },
                     type: "text",
                     className: "form-control",
                     placeholder: "ID Number"
                   })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+                  className: "form-group",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+                    type: "hidden",
+                    name: "_token",
+                    value: this.generateToken()
+                  })
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
                   className: "form-group mt-4",
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
@@ -2984,10 +3061,6 @@ var LoginPage = /*#__PURE__*/function (_React$Component) {
                   })
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
                   type: "submit",
-                  onClick: function onClick(e) {
-                    e.preventDefault();
-                    console.log('test');
-                  },
                   name: "submit",
                   className: "btn-lg header-action",
                   style: {
@@ -2996,12 +3069,7 @@ var LoginPage = /*#__PURE__*/function (_React$Component) {
                   children: "Login "
                 })]
               })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-              className: "col form-login-splash",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-                className: "form-splash-drop-shadow"
-              })
-            })]
+            })
           })
         })
       });
@@ -3024,9 +3092,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "RegisterPage": () => (/* binding */ RegisterPage)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -3061,6 +3139,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var RegisterPage = /*#__PURE__*/function (_React$Component) {
   _inherits(RegisterPage, _React$Component);
 
@@ -3073,10 +3152,50 @@ var RegisterPage = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(RegisterPage, [{
+    key: "postToApi",
+    value: // create a function to post to api
+    function () {
+      var _postToApi = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(url, method, data) {
+        var grabber;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return fetch(url, {
+                  method: method,
+                  credentials: 'same-origin',
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  body: new FormData(data)
+                });
+
+              case 2:
+                grabber = _context.sent;
+                return _context.abrupt("return", grabber);
+
+              case 4:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      function postToApi(_x, _x2, _x3) {
+        return _postToApi.apply(this, arguments);
+      }
+
+      return postToApi;
+    }() // do some form checks inorder to see if form is valid before even submiting 
+
+  }, {
     key: "validateForm",
-    value: // do some form checks inorder to see if form is valid before even submiting 
-    function validateForm(event) {
-      // loop though the events inorder to verify that form is actually validated 
+    value: function validateForm(event) {
+      // loop though the events inorder to verify that form is actually validated        
+      event.preventDefault();
+
       for (var i = 0; i < event.target.length - 2; i++) {
         var res = event.target[i].value.length !== 0 ? true : false;
 
@@ -3084,13 +3203,24 @@ var RegisterPage = /*#__PURE__*/function (_React$Component) {
           // continue the loop 
           continue;
         } else {
-          console.log('error');
-          event.preventDefault();
           break;
         }
-      } // submit the form if the all fields are filled out
+      } // if the form is valid then we can submit the form
 
 
+      var url = '/authentication/register/'; /// PSUDO CODE 
+      // 1. POST FORM DATA TO API
+      // 2. GET RESPONSE FROM API
+      // 3. SEND RESPONSE FROM API TO THE AUTHENTICATION CHANNEL
+      // 4. GET JSON OBJECT REQUEST FROM THE AUTHENTICATION CHANNEL
+      // 5. STORE THE JSON OBJECT IN THE LOCAL STORAGE
+      // 6. IF THE JSON IN STORE SEND CREDENTIALS TO THE API TO VERIFY THEY ARE A REAL USER
+      // 6. REDIRECT THE USER TO THE SUCCESS PAGE
+      // 7. LOAD THE DASHBOARD
+      // 8. IF THE USER IS NOT LOGGED IN THEN REDIRECT TO THE LOGIN PAGE
+      // 9. IF THE USER IS LOGGED IN THEN REDIRECT TO THE DASHBOARd
+
+      console.log(event.target);
       return event.target.submit();
     } // generate our CSFR TOKEN FOR OUR APPLICATION 
 
@@ -3106,7 +3236,6 @@ var RegisterPage = /*#__PURE__*/function (_React$Component) {
         isLoggedIn: false,
         time: Date.now()
       };
-      console.log(data);
       return token;
     } // validates the form content to make sure that the input fields are set
 
@@ -3127,47 +3256,51 @@ var RegisterPage = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this = this;
 
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
         id: "login-color-box",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
           className: "container pannel",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             className: "row",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
               className: "col form-login",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("form", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("form", {
                 className: "form-login",
                 method: "POST",
                 action: "/authentication/register/",
-                onSubmit: this.validateForm,
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+                onSubmit: function onSubmit(e) {
+                  _this.validateForm(e);
+                },
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
                   className: "blob image-badge",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
                     className: "img-fluid",
-                    src: "/img/logo/black.png"
+                    src: "/img/restaurant-outline.svg",
+                    width: "50vh",
+                    height: "50vw"
                   })
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
                   className: "form-login-title text-center",
                   children: " Register "
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h3", {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
                   className: "form-login-title text-center",
                   style: {
                     'font-size': '18px',
                     'color': 'dodgerblue'
                   },
                   children: " Please fill out form to register an account "
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h4", {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h4", {
                   className: "error text-danger",
                   children: "  "
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
                   className: "form-group",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
-                    htmlFor: "username",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+                    htmlFor: "email",
                     children: "Email "
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
                     className: "error-message text-center text-danger"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
-                    name: "username",
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+                    name: "email",
                     type: "email",
                     onChange: function onChange(e) {
                       _this.validate(e, 0);
@@ -3176,30 +3309,30 @@ var RegisterPage = /*#__PURE__*/function (_React$Component) {
                     "aria-describedby": "emailHelp",
                     placeholder: "Please enter your email"
                   })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
                   className: "form-group",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
                     htmlFor: "name",
                     children: " Your Fullname "
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
                     className: "error-message text-center text-danger"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
                     type: "text",
                     className: "form-control",
                     onChange: function onChange(e) {
                       _this.validate(e, 1);
                     },
-                    name: "name",
-                    placeholder: "Full-name"
+                    name: "full-name",
+                    placeholder: "full-name"
                   })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
                   className: "form-group",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
                     htmlFor: "company",
                     children: "   Company Name "
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
                     className: "error-message text-center text-danger"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
                     type: "text",
                     className: "form-control",
                     onChange: function onChange(e) {
@@ -3208,14 +3341,14 @@ var RegisterPage = /*#__PURE__*/function (_React$Component) {
                     name: "company",
                     placeholder: "Your company Name"
                   })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
                   className: "form-group",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
                     htmlFor: "password",
                     children: "Password"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
                     className: "error-message text-center text-danger"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
                     name: "password",
                     type: "password",
                     onChange: function onChange(e) {
@@ -3224,14 +3357,14 @@ var RegisterPage = /*#__PURE__*/function (_React$Component) {
                     className: "form-control",
                     placeholder: "password"
                   })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
                   className: "form-group",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("label", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
                     htmlFor: "password",
                     children: "Confirm Password"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
                     className: "error-message text-center text-danger"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
                     name: "password-confirm",
                     type: "password",
                     onChange: function onChange(e) {
@@ -3240,14 +3373,14 @@ var RegisterPage = /*#__PURE__*/function (_React$Component) {
                     className: "form-control",
                     placeholder: "Confirm Password"
                   })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
                   className: "form-group",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
                     type: "hidden",
                     name: "_token",
                     value: this.generateToken()
                   })
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
                   type: "submit",
                   name: "submit",
                   className: "btn-lg header-action",
@@ -3257,9 +3390,7 @@ var RegisterPage = /*#__PURE__*/function (_React$Component) {
                   children: "Register "
                 })]
               })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-              className: "col form-login-splash"
-            })]
+            })
           })
         })
       });
@@ -3267,7 +3398,7 @@ var RegisterPage = /*#__PURE__*/function (_React$Component) {
   }]);
 
   return RegisterPage;
-}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+}(react__WEBPACK_IMPORTED_MODULE_2__.Component);
 
 /***/ }),
 
@@ -3306,11 +3437,111 @@ __webpack_require__.r(__webpack_exports__);
 function FeaturesContainer(props) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
     className: "page-content",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_componets_home_header__WEBPACK_IMPORTED_MODULE_1__.Header, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-      className: "container",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-        className: "row"
-      })
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_componets_home_header__WEBPACK_IMPORTED_MODULE_1__.Header, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      className: "container header-section-space-md mb-4",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "row",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "col-sm",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+            className: "img-fluid",
+            src: "/img/team-hands.svg"
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "col-sm header-section-space-md",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
+            className: "header-subtitle",
+            children: "EXPLORE THE PLATFORM  "
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+            className: "header-title",
+            children: " Do less, earn more."
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "row header-section-space-md",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "col-sm blob-lg",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+            className: "img-fluid hero-image",
+            src: "/img/recipe-man-img.jpg"
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "col-sm header-section-space-md",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
+            className: "header-subtitle",
+            children: " Recipe Management  "
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+            className: "header-title",
+            children: " A Recipe for Success "
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+            className: "header-description",
+            children: " Manage recipes in a simple interface update team in real time with any changes the you roll out.  effortlessly perfect consistency.  "
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "row header-section-space-md",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "col-sm",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+            className: "img-fluid hero-image",
+            src: "/img/savings.svg"
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "col-sm header-section-space-md",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
+            className: "header-subtitle",
+            children: "  FOOD COST MANAGEMENT  "
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+            className: "header-title",
+            children: "  INCREASE YOUR BOTTOM LINE   "
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+            className: "header-description",
+            children: "  Track you food cost, and waste easily figure where you are wasting money using data driven technolgy   "
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "row header-section-space-md",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "col-sm",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+            src: "/img/employee-man-img.svg",
+            className: "img-fluid"
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "col-sm header-section-space-md",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
+            className: "header-subtitle",
+            children: "  EMPLOYEE MANAGEMENT "
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+            className: "header-title",
+            children: " A SYSTEM FOR YOUR EMPLOYEES   "
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+            className: "header-description",
+            children: " Manage schedules, time off, availibility, drop shifts and more!   "
+          })]
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "row header-section-space-md",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+          className: "col-sm",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+            src: "/img/com-img.svg",
+            className: "img-fluid"
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "col-sm header-section-space-md",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
+            className: "header-subtitle",
+            children: "  COMMUNICATION  "
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+            className: "header-title",
+            children: "  KNOW WHAT GOING ON IN REAL TIME   "
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+            className: "header-description",
+            children: " Connect your whole orginization together and get updates in realtime! we connect you to your customers, and employee so you can roll out changes in real time hyper-focus on the customer experience and increase your business  "
+          })]
+        })]
+      })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_componets_home_footer__WEBPACK_IMPORTED_MODULE_2__.Footer, {})]
   });
 }
@@ -3403,6 +3634,185 @@ function LoginContainer(props) {
 
 /***/ }),
 
+/***/ "./resources/js/containers/pricing.container.jsx":
+/*!*******************************************************!*\
+  !*** ./resources/js/containers/pricing.container.jsx ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ PricingContainer)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _componets_home_header__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../componets/home/header */ "./resources/js/componets/home/header.jsx");
+/* harmony import */ var _componets_home_footer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../componets/home/footer */ "./resources/js/componets/home/footer.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/**
+ * 
+ *  naem: pricing container
+ * 
+ *  type: container
+ * 
+ *  purpose: to handle the pricing page
+ * 
+ */
+
+
+
+
+
+
+var PricingContainer = /*#__PURE__*/function (_Component) {
+  _inherits(PricingContainer, _Component);
+
+  var _super = _createSuper(PricingContainer);
+
+  function PricingContainer() {
+    _classCallCheck(this, PricingContainer);
+
+    return _super.apply(this, arguments);
+  }
+
+  _createClass(PricingContainer, [{
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "page-content",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_componets_home_header__WEBPACK_IMPORTED_MODULE_1__.Header, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          className: "container header-section-space-md mb-4",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            className: "row mb-4",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+              className: "col-sm",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
+                className: "header-subtitle  text-center",
+                children: "Pricing"
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+              className: "col-sm",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+                src: "/img/pricing-image.svg",
+                className: "img-fluid"
+              })
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            className: "row",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+              className: "col-sm m-2",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                className: "card payment-card",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                  className: "card-body",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
+                    children: "Basic Plan  ( Table for one please ) "
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                    className: "image-center-icon",
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+                      className: "img-fluid",
+                      src: "/img/restaurant-outline.svg",
+                      width: "50vh",
+                      height: "50vw"
+                    })
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+                    className: "card-subtitle mb-2 text-muted",
+                    children: "$0/month"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                    className: "card-text",
+                    children: "Try our basic plan for free"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                    children: " One store "
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                    children: " Access your information anywhere "
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                    children: " Cloud based services, access your information anywhere "
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                    children: " Manage staff using our platform "
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                    children: " Cloud QR CODE ORDERING "
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+                    type: "button",
+                    className: "header-action  md",
+                    children: "Sign Up"
+                  })]
+                })
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+              "class": "col-sm m-2",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                className: "card payment-card",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+                  className: "card-body",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
+                    children: "Corporate PLAN   ( PARTY OF 100 ) "
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+                    children: "(COMMING SOON) "
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                    className: "image-center-icon",
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+                      className: "img-fluid",
+                      src: "/img/team-meeting.svg",
+                      width: "50vh",
+                      height: "50vw"
+                    })
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+                    className: "card-subtitle mb-2 text-muted",
+                    children: "PLEASE CONTACT"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
+                    className: "card-text",
+                    children: ["For corprate account please contact us for more information. Corporate account is available for 100 people.", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                      children: " Unlimited tables."
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                      children: "     Unlimited Stores. "
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                      children: "Unlimited staff. "
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+                      children: " Unlimited customers. "
+                    })]
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+                    type: "button",
+                    className: "header-action  md",
+                    children: "Contact US"
+                  })]
+                })
+              })
+            })]
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_componets_home_footer__WEBPACK_IMPORTED_MODULE_2__.Footer, {})]
+      });
+    }
+  }]);
+
+  return PricingContainer;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+
+
+/***/ }),
+
 /***/ "./resources/js/containers/register.container.jsx":
 /*!********************************************************!*\
   !*** ./resources/js/containers/register.container.jsx ***!
@@ -3459,7 +3869,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /**
  *  file: solutions
- * 
+ * ~
  *  type: container
  * 
  * 
@@ -3620,14 +4030,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ AppRoutes)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _containers_home_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./containers/home.container */ "./resources/js/containers/home.container.jsx");
 /* harmony import */ var _containers_login_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./containers/login.container */ "./resources/js/containers/login.container.jsx");
 /* harmony import */ var _containers_register_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./containers/register.container */ "./resources/js/containers/register.container.jsx");
 /* harmony import */ var _containers_solutions_container__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./containers/solutions.container */ "./resources/js/containers/solutions.container.jsx");
 /* harmony import */ var _containers_features_container__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./containers/features.container */ "./resources/js/containers/features.container.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _containers_pricing_container__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./containers/pricing.container */ "./resources/js/containers/pricing.container.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /***
  * 
  * 
@@ -3649,26 +4060,30 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 function AppRoutes() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.BrowserRouter, {
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Switch, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.BrowserRouter, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Switch, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
         path: "/solutions/",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_containers_solutions_container__WEBPACK_IMPORTED_MODULE_4__["default"], {})
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_containers_solutions_container__WEBPACK_IMPORTED_MODULE_4__["default"], {})
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
         path: "/features/",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_containers_features_container__WEBPACK_IMPORTED_MODULE_5__["default"], {})
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
-        path: "/pricing/"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_containers_features_container__WEBPACK_IMPORTED_MODULE_5__["default"], {})
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
+        path: "/pricing/",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_containers_pricing_container__WEBPACK_IMPORTED_MODULE_6__["default"], {})
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
+        path: "/dashboard/"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
         path: "/login/",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_containers_login_container__WEBPACK_IMPORTED_MODULE_2__["default"], {})
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_containers_login_container__WEBPACK_IMPORTED_MODULE_2__["default"], {})
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
         path: "/register/",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_containers_register_container__WEBPACK_IMPORTED_MODULE_3__["default"], {})
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_8__.Route, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_containers_register_container__WEBPACK_IMPORTED_MODULE_3__["default"], {})
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
         path: "/",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_containers_home_container__WEBPACK_IMPORTED_MODULE_1__["default"], {})
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_containers_home_container__WEBPACK_IMPORTED_MODULE_1__["default"], {})
       })]
     })
   });
@@ -8132,7 +8547,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/getUrl.js */ "./node_modules/css-loader/dist/runtime/getUrl.js");
 /* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _img_login_svg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../img/login.svg */ "./resources/js/assets/img/login.svg");
+/* harmony import */ var _img_restaurant_outline_svg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../img/restaurant-outline.svg */ "./resources/js/assets/img/restaurant-outline.svg");
 /* harmony import */ var _img_Waiau_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../img/Waiau.svg */ "./resources/js/assets/img/Waiau.svg");
 // Imports
 
@@ -8140,10 +8555,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
-var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_img_login_svg__WEBPACK_IMPORTED_MODULE_2__["default"]);
+var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_img_restaurant_outline_svg__WEBPACK_IMPORTED_MODULE_2__["default"]);
 var ___CSS_LOADER_URL_REPLACEMENT_1___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_img_Waiau_svg__WEBPACK_IMPORTED_MODULE_3__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "#login-color-box {\n\n  background: #e1eec377;  /* fallback for old browsers */\nbackground: linear-gradient(to right, #e1eec398, #e1eec398); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */\n  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;\n\n}\n\n.pannel {\n  border-radius: 20px;   \n   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;\n  } \n  \n  .pannel img {\n    border: 1px solid rgba(0, 0, 0, 0.097);\n    border-top-left-radius: 50%;\n    min-width: 100% !important;\n    height: 100% !important;  \n  }\n\n    .image-badge {\n      height: 50%;\n      background-image: linear-gradient(45deg, #8baaaabb 0%rgba(174, 139, 156, 0.727)9c 100%);\n    }\n  \n  .form-login {\n    background-color: white;\n    padding: 20px;\n    border-bottom-left-radius: 20px;\n  }\n  \n  .form-login label {\n      margin-top: 10px;\n      color: slategray;\n      font-size: 16px;\n      font-style: italic;\n      text-align: center;\n  \n  }\n  \n  .form-login input {\n      width: 100%;\n      border: none;\n      margin-top: 10px;\n      padding: 10px;\n      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;\n  }\n\n\n  .form-login-title {\n    font-size: 24px;\n    font-weight: 900;\n  }\n\n  .form-login input:focus {\n    box-shadow: rgba(39, 21, 21, 0.453) 4px 6px 14px -2px;\n  }\n\n\n  .form-login .link {\n    font-weight: 600;\n    font-size: 18px;\n    color: rgb(0, 60, 170);\n    margin-top: 10px;\n    text-decoration: none;\n  }\n\n  .form-login .link:hover {\n    color: salmon;\n  }\n\n\n  .form-splash-drop-shadow {\n    background-color:rgba(65, 65, 65, 0.179);\n    width: 100%;\n    height: 100%;\n  }\n  \n  .form-login-splash {\n    height: auto;\n    /* do not touch */\n    background-image:url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ") ;\n    background-size: contain;\n    padding: 0px;\n    margin: 0px;\n    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;\n    border-bottom-right-radius: 20px;\n  }\n\n\n  .form-register-splash {\n    height: auto;\n    /* do not touch */\n    background-image:url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ") ;\n    background-size: contain;\n    padding: 0px;\n    margin: 0px;\n    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;\n    border-bottom-right-radius: 20px;\n\n  }\n  \n  .error-message {\n    margin-left: 20px;\n    font-weight: 800;\n    font-size: 16px;\n  }\n\n\n  .icon-large {\n    font-size: 40px;\n  }\n/*  MEDIA QUERYS   */\n\n/* On screens that are 992px or less, set the background color to blue */\n@media screen and (max-width: 992px) {\n  nav {\n    height: auto;\n  }\n  .dropdown-menu {\n    width: 90vw !important;\n    margin: 0px !important;\n  }\n\n  img { \n    width: 100vw;\n  }\n}\n\n/* On screens that are 600px or less, set the background color to olive */\n@media screen and (max-width: 600px) {\n  nav {\n    height: auto;\n  }\n  .dropdown-menu {\n    width: 90vw !important;\n    margin: 0px !important;\n  }\n\n\n  img {\n    width: 100vw;\n  }\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "#login-color-box {\n\n  background: #e1eec377;  /* fallback for old browsers */\nbackground: linear-gradient(to right, #e1eec398, #e1eec398); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */\n  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;\n\n}\n\n.pannel {\n  border-radius: 20px;   \n   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;\n  } \n  \n  .pannel img {\n    border: 1px solid rgba(0, 0, 0, 0.097);\n    border-top-left-radius: 50%;\n    min-width: 100% !important;\n    height: 100% !important;  \n  }\n\n    .image-badge {\n      height: auto;\n      background-image: linear-gradient(45deg, #8baaaabb 0%rgba(174, 139, 156, 0.727)9c 100%);\n    }\n  \n  .form-login {\n    padding: 20px;\n    background-color: rgba(255, 255, 255, 0.734);\n    border-bottom-left-radius: 20px;\n  }\n  \n  .form-login label {\n      margin-top: 10px;\n      color: slategray;\n      font-size: 16px;\n      font-style: italic;\n      text-align: center;\n  \n  }\n  \n  .form-login input {\n      width: 100%;\n      border: none;\n      margin-top: 10px;\n      padding: 10px;\n      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;\n  }\n\n\n  .form-login-title {\n    font-size: 24px;\n    font-weight: 900;\n  }\n\n  .form-login input:focus {\n    box-shadow: rgba(39, 21, 21, 0.453) 4px 6px 14px -2px;\n  }\n\n\n  .form-login .link {\n    font-weight: 600;\n    font-size: 18px;\n    color: rgb(0, 60, 170);\n    margin-top: 10px;\n    text-decoration: none;\n  }\n\n  .form-login .link:hover {\n    color: salmon;\n  }\n\n\n  .form-splash-drop-shadow {\n    background-color:rgba(65, 65, 65, 0.179);\n    width: 100%;\n    height: 100%;\n  }\n  \n  .form-login-splash {\n    height: auto;\n    /* do not touch */\n    background-image:url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n    background-repeat: no-repeat;\n    background-size: contain;\n    padding: 0px;\n    margin: 0px;\n    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;\n    border-bottom-right-radius: 20px;\n  }\n\n\n  .form-register-splash {\n    height: auto;\n    /* do not touch */\n    background-image:url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ") ;\n    background-size: contain;\n    padding: 0px;\n    margin: 0px;\n    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;\n    border-bottom-right-radius: 20px;\n\n  }\n  \n  .error-message {\n    margin-left: 20px;\n    font-weight: 800;\n    font-size: 16px;\n  }\n\n\n  .icon-large {\n    font-size: 50px;\n  }\n/*  MEDIA QUERYS   */\n\n/* On screens that are 992px or less, set the background color to blue */\n@media screen and (max-width: 992px) {\n  nav {\n    height: auto;\n  }\n  .dropdown-menu {\n    width: 90vw !important;\n    margin: 0px !important;\n  }\n\n  img { \n    width: 100vw;\n  }\n}\n\n/* On screens that are 600px or less, set the background color to olive */\n@media screen and (max-width: 600px) {\n  nav {\n    height: auto;\n  }\n  .dropdown-menu {\n    width: 90vw !important;\n    margin: 0px !important;\n  }\n\n\n  img {\n    width: 100vw;\n  }\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -8176,7 +8591,7 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_blob_mask_header_svg__WEBPACK_IMPORTED_MODULE_2__["default"]);
 var ___CSS_LOADER_URL_REPLACEMENT_1___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_blob_svg__WEBPACK_IMPORTED_MODULE_3__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\nbody {\n    font: 18px \"Century Gothic\", Futura, sans-serif;\n    background-color: #d0c0bf27;\n    background-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23d7cee7' fill-opacity='0.08' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E\");  \n}\nnav  {\n  color: whitesmoke;\n  font-weight: 800;\n  background-color: #ff8a8ac0;\n  height: 15vh;\n}\n\n/*  MEDIA QUERYS   */\n\n/* On screens that are 992px or less, set the background color to blue */\n@media screen and (max-width: 992px) {\n  nav {\n    height: auto;\n  }\n  .dropdown-menu {\n    width: 90vw !important;\n    margin: 0px !important;\n  }\n\n  .form-login-splash {\n    display: none;\n  }\n}\n\n/* On screens that are 600px or less, set the background color to olive */\n@media screen and (max-width: 600px) {\n  nav {\n    height: auto;\n  }\n  .dropdown-menu {\n    width: 90vw !important;\n    margin: 0px !important;\n  }\n\n  .form-login-splash {\n    display: none;\n  }\n}\n\nnav > * {\n  padding: 0px;\n  text-decoration: none;\n}\n\n.nav-link {\n  color: white;\n  font-size: 15px;\n  width: auto;\n  margin: 30px;\n\n}\n\n.nav-link:hover  {\n  color: rgb(53, 129, 206);\n}\n\n\n.img-round {\n    border-radius: 50%;\n}\n\n\n.header-subtitle {\n  font-weight: 1000;\n  color: rgb(16, 99, 177);\n}\n\n.header-title {\n  font-size: 32px;\n  font-weight: 800;\n  color: black;\n}\n\n.header-description {\n  margin-top: 20px;\n  font-size: 18px;\n  color: slategray;\n  font-style: italic;\n}\n  .hero:nth-child(even) {\n   padding: 20px;\n   box-sizing: border-box;;\n   background-color: #407cfcc0;\n   border-radius: 25px;\n   -webkit-clip-path: ellipse(300% 100% at -120% 0%);\n           clip-path: ellipse(300% 100% at -120% 0%);\n   box-shadow: rgba(47, 52, 56, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;\n  }\n\n.hero:nth-child(odd){\n  height: 500px;\n  box-sizing: border-box;;\n  border-radius: 10px;\n  -webkit-clip-path: ellipse(300% 100% at -120% 0%);\n          clip-path: ellipse(300% 100% at -120% 0%);\n  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 50px -5px, rgba(0, 0, 0, 0.795) 0px 8px 16px -8px;\n\n}\n\n\n.header-action {\n    margin-top: 5vh;\n    background-color: salmon;\n    border: none;\n    border-radius: 25px;\n    padding: 15px;\n    font-weight: bold;\n}\n\n\n.header-action-no-margin {\n  background-color: salmon;\n  border: none;\n  border-radius: 25px;\n  padding-left: 20px;\n  padding-right: 20px;\n  font-weight: bold;\n  width: auto;\n  position: relative;\n  top: -10px;\n}\n\n.header-action-no-margin:hover {\n  background-color: #8c2f2fd4;\n  color: white;\n  font-weight: bold;\n  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.795) 0px 8px 16px -8px;\n}\n\n.header-action:hover {\n  background-color: #e44b4b;\n  color: white;\n  font-weight: bold;\n  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.795) 0px 8px 16px -8px;\n}\n\n/* header spacing element for the landing space provide helpor margin pushes for some of the content  */\n\n.header-section-space {\n  margin-top: 10vh;\n}\n\n.header-section-space-md {\n  margin-top: 20vh;\n}\n\n.header-section-space-lg {\n  margin-top: 30vh;\n}\n.header-section-space-xl {\n  margin-top: 40vh;\n}\n\n\n\n\n\n\n.body-section-title {\n  font-weight: 1000;\n}\n\n\n.drop-shadow {\n  background-color: rgba(9, 0, 22, 0.296);\n}\n\n.blob {\n  background-color:rgba(238, 158, 147, 0.522);\n  border: 20px solid rgba(240, 152, 152, 0.789);\n  padding: 40px;\n  -webkit-mask-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n          mask-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n  mask-mode: luminance, alpha, match-source;\n  -webkit-mask-repeat: no-repeat;\n          mask-repeat: no-repeat;\n}\n\n.blob-lg {\n  background-color:rgba(172, 212, 255, 0.522);\n  padding: 50px;\n  -webkit-mask-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n          mask-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n  mask-mode: luminance, alpha, match-source;\n  -webkit-mask-repeat: no-repeat;\n          mask-repeat: no-repeat;\n}\n\n\n.blob > img {\n  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.795) 0px 8px 16px -8px; \n  border-radius: 20px;\n}\n\n.multi-color-section {\n  font-weight: 1000;\n  font-family:cursive;\n  font-style: uppercase !important;\n  font-size: 7vw;\n}\n\n.multi-color-section > span:nth-child(1) {\n  color: salmon;\n  font-size: 32px;\n  \n}\n\n.multi-color-section > span:nth-child(2) {\n  color: dodgerblue;\n  font-size: 32px;\n}\n\n.multi-color-section > span:nth-child(3) {\n  color:firebrick;\n  font-size: 32px;\n}\n\n\n/* drop down menu styling   */\n\n.dropdown-menu {\n  background-color: rgb(247, 243, 243);\n  border-bottom-left-radius: 25px;\n  border-bottom-right-radius: 25px;\n  padding: 25px;\n  width: 50vw;\n  margin: 25vw;\n  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;\n}\n\n .dropdown-title {\n  font-weight: 1000;\n  font-size: 16px;\n  color: rgb(38, 58, 79);\n} \n\n.dropdown-subtitle {\n    margin-top: 0.5vh;\n    font-size: 16px;\n    color: rgb(61, 61, 61);\n}\n\n\n.dropdown-link {\n  font-size: 16px; \n  color:rgb(29, 35, 70);\n  text-decoration: none;\n}\n\n.dropdown-link:hover {\n  color: salmon;\n  cursor: pointer;\n}\n\n.dropdown-icon {\n  font-size: 20px;\n}\n\n.dropdown-desc {\n  margin-top: 1vh;\n  font-size: 14px;\n  color: slategray;\n  font-weight: 300;\n}\n\n.border-breakpoint {\n  border-bottom: 1px solid salmon;\n  margin: 10px;\n}\n\n\n/* end of drop down styling  */\n\n.hidden {\n  padding: 100px;\n  display: block;\n  -webkit-clip-path: circle(57.1% at 50% 50%);\n          clip-path: circle(57.1% at 50% 50%);\n  z-index: 1;\n}\n\n\nfooter {\n  color: white;\n  box-shadow: rgba(47, 52, 56, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;\n  background:  #121635;\n  box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 100px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;\n  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */\n}\n\n\n.brand-img {\n  float: left !important;\n  width: 100%;\n  height: auto;\n}\n.sepia {\n  filter: grayscale(60%);\n}\n\n.footer {\n  width: 80%;\n}\n\n.footer-list > * {\n  color: white;\n  background-color: transparent;\n  border: none;\n}\n\n/* footer list stylings  */\n\n.footer-section-title {\n  color: rgb(142, 159, 245);\n  font-size: 24px;\n  font-weight: 1000;\n\n}\n\n.footer-section-subtitle {\n    color: whitesmoke;\n    font-size: 18px;\n    font-weight: 600;\n}\n\n.footer-section-divider {\n  padding: 0px;\n  border-bottom: 1px solid rgba(250, 128, 114, 0.453);\n  width: 50vw;\n}\n\n.footer-section-link > a {\n  margin-left: 40px;\n  text-decoration: none;\n  color: whitesmoke;\n  font-weight: 800;\n  font-size: 16px;\n\n}\n\n.footer-section-link > a:hover {\n  color: salmon;\n}\n\n\n.footer-bottom {\n  -webkit-text-decoration: italic !important;\n          text-decoration: italic !important;\n  text-align: center;\n}\n\n\n\n/* animation styles   */\n\n\n.fade-in {\n  -webkit-animation: rollDropDown 2.0s ease 0s 1 normal forwards;\n          animation: rollDropDown 2.0s ease 0s 1 normal forwards;\n}\n\n/* animation rolling Drop Down */\n\n@-webkit-keyframes rollDropDown {\n  0% {\n    opacity: 0;\n    transform: scale(0.6);\n  }\n\n  100% {\n    opacity: 1;\n    transform: scale(1);\n  }\n}\n\n@keyframes rollDropDown {\n  0% {\n    opacity: 0;\n    transform: scale(0.6);\n  }\n\n  100% {\n    opacity: 1;\n    transform: scale(1);\n  }\n}\n\n/*  end of form login screen  */", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\nbody {\n    font: 18px \"Century Gothic\", Futura, sans-serif;\n    background-color: #d0c0bf27;\n    background-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23d7cee7' fill-opacity='0.08' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E\");  \n}\nnav  {\n  color: whitesmoke;\n  font-weight: 800;\n  background-color: #ff8a8ac0;\n  height: 15vh;\n}\n\n/*  MEDIA QUERYS   */\n\n/* On screens that are 992px or less, set the background color to blue */\n@media screen and (max-width: 992px) {\n  nav {\n    height: auto;\n  }\n  .dropdown-menu {\n    width: 90vw !important;\n    margin: 0px !important;\n  }\n\n  .form-login-splash {\n    display: none;\n  }\n}\n\n/* On screens that are 600px or less, set the background color to olive */\n@media screen and (max-width: 600px) {\n  nav {\n    height: auto;\n  }\n  .dropdown-menu {\n    width: 90vw !important;\n    margin: 0px !important;\n  }\n\n  .form-login-splash {\n    display: none;\n  }\n}\n\nnav > * {\n  padding: 0px;\n  text-decoration: none;\n}\n\n.nav-link {\n  color: white;\n  font-size: 15px;\n  width: auto;\n  margin: 30px;\n\n}\n\n.nav-link:hover  {\n  color: rgb(53, 129, 206);\n}\n\n\n.img-round {\n    border-radius: 50%;\n}\n\n\n.header-subtitle {\n  font-weight: 1000;\n  color: rgb(16, 99, 177);\n}\n\n.header-title {\n  font-size: 32px;\n  font-weight: 800;\n  color: black;\n}\n\n.header-description {\n  margin-top: 20px;\n  font-size: 18px;\n  color: slategray;\n  font-style: italic;\n}\n  .hero:nth-child(even) {\n   padding: 20px;\n   box-sizing: border-box;;\n   background-color: #407cfcc0;\n   border-radius: 25px;\n   -webkit-clip-path: ellipse(300% 100% at -120% 0%);\n           clip-path: ellipse(300% 100% at -120% 0%);\n   box-shadow: rgba(47, 52, 56, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;\n  }\n\n.hero:nth-child(odd){\n  height: 500px;\n  box-sizing: border-box;;\n  border-radius: 10px;\n  -webkit-clip-path: ellipse(300% 100% at -120% 0%);\n          clip-path: ellipse(300% 100% at -120% 0%);\n  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 50px -5px, rgba(0, 0, 0, 0.795) 0px 8px 16px -8px;\n\n}\n\n\n.header-action {\n    margin-top: 5vh;\n    background-color: salmon;\n    border: none;\n    border-radius: 25px;\n    padding: 15px;\n    font-weight: bold;\n}\n\n\n.header-action-no-margin {\n  background-color: salmon;\n  border: none;\n  border-radius: 25px;\n  padding-left: 20px;\n  padding-right: 20px;\n  font-weight: bold;\n  width: auto;\n  position: relative;\n  top: -10px;\n}\n\n.header-action-no-margin:hover {\n  background-color: #8c2f2fd4;\n  color: white;\n  font-weight: bold;\n  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.795) 0px 8px 16px -8px;\n}\n\n.header-action:hover {\n  background-color: #e44b4b;\n  color: white;\n  font-weight: bold;\n  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.795) 0px 8px 16px -8px;\n}\n\n/* header spacing element for the landing space provide helpor margin pushes for some of the content  */\n\n.header-section-space {\n  margin-top: 10vh;\n}\n\n.header-section-space-md {\n  margin-top: 20vh;\n}\n\n.header-section-space-lg {\n  margin-top: 30vh;\n}\n.header-section-space-xl {\n  margin-top: 40vh;\n}\n\n\n\n\n\n\n.body-section-title {\n  font-weight: 1000;\n}\n\n\n.drop-shadow {\n  background-color: rgba(68, 61, 77, 0.296);\n}\n\n.blob {\n  background-color:rgba(255, 128, 111, 0.09);\n  border: 10px solid rgba(0, 0, 0, 0.789);\n  padding: 40px;\n  -webkit-mask-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n          mask-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n  mask-mode: alpha;\n  -webkit-mask-repeat: no-repeat;\n          mask-repeat: no-repeat;\n  width: 350px;\n  height: 350px;\n  margin: auto;\n  box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;\n}\n\n.blob-lg {\n  border: 10px solid rgba(240, 152, 152, 0.2);\n  padding: 40px;\n  background-color:rgba(255, 162, 152, 0.118);\n  padding: 50px;\n  -webkit-mask-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n          mask-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n  mask-mode: luminance, alpha, match-source;\n  -webkit-mask-repeat: no-repeat;\n          mask-repeat: no-repeat;\n  box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;\n}\n\n.blob-lg > img {\n  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 40px -5px, rgba(0, 0, 0, 0.795) 0px 8px 16px -8px; \n  border-radius: 20px;\n}\n\n\n\n.blob > img {\n  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 60px -2px, rgba(0, 0, 0, 0.795) 0px 8px 16px -8px; \n  border-radius: 20px;\n}\n\n.multi-color-section {\n  font-weight: 1000;\n  font-family:cursive;\n  font-style: uppercase !important;\n  font-size: 7vw;\n}\n\n.multi-color-section > span:nth-child(1) {\n  color: salmon;\n  font-size: 32px;\n  \n}\n\n.multi-color-section > span:nth-child(2) {\n  color: dodgerblue;\n  font-size: 32px;\n}\n\n.multi-color-section > span:nth-child(3) {\n  color:firebrick;\n  font-size: 32px;\n}\n\n\n/* drop down menu styling   */\n\n.dropdown-menu {\n  background-color: rgb(247, 243, 243);\n  border-bottom-left-radius: 25px;\n  border-bottom-right-radius: 25px;\n  padding: 25px;\n  width: 50vw;\n  margin: 25vw;\n  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;\n}\n\n .dropdown-title {\n  font-weight: 1000;\n  font-size: 16px;\n  color: rgb(38, 58, 79);\n} \n\n.dropdown-subtitle {\n    margin-top: 0.5vh;\n    font-size: 16px;\n    color: rgb(61, 61, 61);\n}\n\n\n.dropdown-link {\n  font-size: 16px; \n  color:rgb(29, 35, 70);\n  text-decoration: none;\n}\n\n.dropdown-link:hover {\n  color: salmon;\n  cursor: pointer;\n}\n\n.dropdown-icon {\n  font-size: 40px;\n}\n\n.dropdown-desc {\n  margin-top: 1vh;\n  font-size: 14px;\n  color: slategray;\n  font-weight: 300;\n}\n\n.border-breakpoint {\n  border-bottom: 1px solid salmon;\n  margin: 10px;\n}\n\n\n/* end of drop down styling  */\n\n.hidden {\n  padding: 100px;\n  display: block;\n  -webkit-clip-path: circle(57.1% at 50% 50%);\n          clip-path: circle(57.1% at 50% 50%);\n  z-index: 1;\n}\n\n\nfooter {\n  color: white;\n  box-shadow: rgba(47, 52, 56, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;\n  background:  #121635;\n  box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 100px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;\n  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */\n}\n\n.md {\n  width: 25vh;\n}\n\n\n.brand-img {\n  float: left !important;\n  width: 100%;\n  height: auto;\n}\n.sepia {\n  filter: grayscale(60%);\n}\n\n.footer {\n  width: 80%;\n}\n\n.footer-list > * {\n  color: white;\n  background-color: transparent;\n  border: none;\n}\n\n/* footer list stylings  */\n\n.footer-section-title {\n  color: rgb(142, 159, 245);\n  font-size: 24px;\n  font-weight: 1000;\n\n}\n\n.footer-section-subtitle {\n    color: whitesmoke;\n    font-size: 18px;\n    font-weight: 600;\n}\n\n.footer-section-divider {\n  padding: 0px;\n  border-bottom: 1px solid rgba(250, 128, 114, 0.453);\n  width: 50vw;\n}\n\n.footer-section-link > a {\n  margin-left: 40px;\n  text-decoration: none;\n  color: whitesmoke;\n  font-weight: 800;\n  font-size: 16px;\n\n}\n\n.footer-section-link > a:hover {\n  color: salmon;\n}\n\n\n.footer-bottom {\n  -webkit-text-decoration: italic !important;\n          text-decoration: italic !important;\n  text-align: center;\n}\n\n\n\n/* animation styles   */\n\n\n.fade-in {\n  -webkit-animation: rollDropDown 2.0s ease 0s 1 normal forwards;\n          animation: rollDropDown 2.0s ease 0s 1 normal forwards;\n}\n\n/* animation rolling Drop Down */\n\n/*  end of form login screen  */\n\n\n\n/* end of form login screen  */\n\n\n/* start of payment form  */\n\n\n.payment-card {\n  background-color: rgba(255, 255, 255, 0.8);\n  border-radius: 20px;\n  padding: 20px;\n  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 14px;\n  border: 10px solid rgba(97, 134, 255, 0.131);\n  margin: 20px;\n  height: 100%;\n}\n .payment-card:nth-child(odd)\n {\n  box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;\n  border-style: solid;\n  border-bottom: none;\n  border-width: 20px;\n  padding: 20px;\n  -webkit-animation: rollDropDown 2.0s ease 0s 1 normal forwards;\n          animation: rollDropDown 2.0s ease 0s 1 normal forwards;\n }\n @-webkit-keyframes rollDropDown {\n  0% {\n    opacity: 0;\n    transform: scale(0.0);\n  }\n\n  100% {\n    opacity: 1;\n    transform: scale(1.0);\n  }\n }\n @keyframes rollDropDown {\n  0% {\n    opacity: 0;\n    transform: scale(0.0);\n  }\n\n  100% {\n    opacity: 1;\n    transform: scale(1.0);\n  }\n }\n \n\n .payment-card:hover {\n  cursor: pointer;\n  background-color: rgba(253, 241, 246, 0.193);\n }\n\n.payment-card  h1 {\n  font-size: 24px;\n  font-weight: 1000;\n  color: rgb(38, 58, 79);\n  font-weight: 1000;\n}\n\n\n\n.payment-card h2 {\n  font-size: 18px;\n  font-weight: 600;\n  color: rgb(61, 61, 61);\n}\n\n\n.payment-card p {\n  font-size: 16px;\n  font-weight: 800;\n  color: rgb(73, 71, 71);\n}\n\n/* make glass effect on card  */\n.glass-effect {\n  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;\n}\n\n\n.image-center-icon {\n  width: 250px;\n  height: 250px;\n  margin: auto;\n}\n\n\n.image-center-icon img {\n  margin: auto;\n  width: 250px;\n  height: 250px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -8318,10 +8733,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/assets/img/login.svg":
-/*!*******************************************!*\
-  !*** ./resources/js/assets/img/login.svg ***!
-  \*******************************************/
+/***/ "./resources/js/assets/img/restaurant-outline.svg":
+/*!********************************************************!*\
+  !*** ./resources/js/assets/img/restaurant-outline.svg ***!
+  \********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -8329,7 +8744,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/login.svg?9f6e7347a9f3920206c80289801ffdc1");
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/restaurant-outline.svg?9285502d986b500b94164bb00b062cda");
 
 /***/ }),
 
@@ -73152,6 +73567,770 @@ if (false) {} else {
 
 if (false) {} else {
   module.exports = __webpack_require__(/*! ./cjs/react-jsx-runtime.development.js */ "./node_modules/react/cjs/react-jsx-runtime.development.js");
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/regenerator-runtime/runtime.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/regenerator-runtime/runtime.js ***!
+  \*****************************************************/
+/***/ ((module) => {
+
+/**
+ * Copyright (c) 2014-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+var runtime = (function (exports) {
+  "use strict";
+
+  var Op = Object.prototype;
+  var hasOwn = Op.hasOwnProperty;
+  var undefined; // More compressible than void 0.
+  var $Symbol = typeof Symbol === "function" ? Symbol : {};
+  var iteratorSymbol = $Symbol.iterator || "@@iterator";
+  var asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator";
+  var toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
+
+  function define(obj, key, value) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+    return obj[key];
+  }
+  try {
+    // IE 8 has a broken Object.defineProperty that only works on DOM objects.
+    define({}, "");
+  } catch (err) {
+    define = function(obj, key, value) {
+      return obj[key] = value;
+    };
+  }
+
+  function wrap(innerFn, outerFn, self, tryLocsList) {
+    // If outerFn provided and outerFn.prototype is a Generator, then outerFn.prototype instanceof Generator.
+    var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator;
+    var generator = Object.create(protoGenerator.prototype);
+    var context = new Context(tryLocsList || []);
+
+    // The ._invoke method unifies the implementations of the .next,
+    // .throw, and .return methods.
+    generator._invoke = makeInvokeMethod(innerFn, self, context);
+
+    return generator;
+  }
+  exports.wrap = wrap;
+
+  // Try/catch helper to minimize deoptimizations. Returns a completion
+  // record like context.tryEntries[i].completion. This interface could
+  // have been (and was previously) designed to take a closure to be
+  // invoked without arguments, but in all the cases we care about we
+  // already have an existing method we want to call, so there's no need
+  // to create a new function object. We can even get away with assuming
+  // the method takes exactly one argument, since that happens to be true
+  // in every case, so we don't have to touch the arguments object. The
+  // only additional allocation required is the completion record, which
+  // has a stable shape and so hopefully should be cheap to allocate.
+  function tryCatch(fn, obj, arg) {
+    try {
+      return { type: "normal", arg: fn.call(obj, arg) };
+    } catch (err) {
+      return { type: "throw", arg: err };
+    }
+  }
+
+  var GenStateSuspendedStart = "suspendedStart";
+  var GenStateSuspendedYield = "suspendedYield";
+  var GenStateExecuting = "executing";
+  var GenStateCompleted = "completed";
+
+  // Returning this object from the innerFn has the same effect as
+  // breaking out of the dispatch switch statement.
+  var ContinueSentinel = {};
+
+  // Dummy constructor functions that we use as the .constructor and
+  // .constructor.prototype properties for functions that return Generator
+  // objects. For full spec compliance, you may wish to configure your
+  // minifier not to mangle the names of these two functions.
+  function Generator() {}
+  function GeneratorFunction() {}
+  function GeneratorFunctionPrototype() {}
+
+  // This is a polyfill for %IteratorPrototype% for environments that
+  // don't natively support it.
+  var IteratorPrototype = {};
+  define(IteratorPrototype, iteratorSymbol, function () {
+    return this;
+  });
+
+  var getProto = Object.getPrototypeOf;
+  var NativeIteratorPrototype = getProto && getProto(getProto(values([])));
+  if (NativeIteratorPrototype &&
+      NativeIteratorPrototype !== Op &&
+      hasOwn.call(NativeIteratorPrototype, iteratorSymbol)) {
+    // This environment has a native %IteratorPrototype%; use it instead
+    // of the polyfill.
+    IteratorPrototype = NativeIteratorPrototype;
+  }
+
+  var Gp = GeneratorFunctionPrototype.prototype =
+    Generator.prototype = Object.create(IteratorPrototype);
+  GeneratorFunction.prototype = GeneratorFunctionPrototype;
+  define(Gp, "constructor", GeneratorFunctionPrototype);
+  define(GeneratorFunctionPrototype, "constructor", GeneratorFunction);
+  GeneratorFunction.displayName = define(
+    GeneratorFunctionPrototype,
+    toStringTagSymbol,
+    "GeneratorFunction"
+  );
+
+  // Helper for defining the .next, .throw, and .return methods of the
+  // Iterator interface in terms of a single ._invoke method.
+  function defineIteratorMethods(prototype) {
+    ["next", "throw", "return"].forEach(function(method) {
+      define(prototype, method, function(arg) {
+        return this._invoke(method, arg);
+      });
+    });
+  }
+
+  exports.isGeneratorFunction = function(genFun) {
+    var ctor = typeof genFun === "function" && genFun.constructor;
+    return ctor
+      ? ctor === GeneratorFunction ||
+        // For the native GeneratorFunction constructor, the best we can
+        // do is to check its .name property.
+        (ctor.displayName || ctor.name) === "GeneratorFunction"
+      : false;
+  };
+
+  exports.mark = function(genFun) {
+    if (Object.setPrototypeOf) {
+      Object.setPrototypeOf(genFun, GeneratorFunctionPrototype);
+    } else {
+      genFun.__proto__ = GeneratorFunctionPrototype;
+      define(genFun, toStringTagSymbol, "GeneratorFunction");
+    }
+    genFun.prototype = Object.create(Gp);
+    return genFun;
+  };
+
+  // Within the body of any async function, `await x` is transformed to
+  // `yield regeneratorRuntime.awrap(x)`, so that the runtime can test
+  // `hasOwn.call(value, "__await")` to determine if the yielded value is
+  // meant to be awaited.
+  exports.awrap = function(arg) {
+    return { __await: arg };
+  };
+
+  function AsyncIterator(generator, PromiseImpl) {
+    function invoke(method, arg, resolve, reject) {
+      var record = tryCatch(generator[method], generator, arg);
+      if (record.type === "throw") {
+        reject(record.arg);
+      } else {
+        var result = record.arg;
+        var value = result.value;
+        if (value &&
+            typeof value === "object" &&
+            hasOwn.call(value, "__await")) {
+          return PromiseImpl.resolve(value.__await).then(function(value) {
+            invoke("next", value, resolve, reject);
+          }, function(err) {
+            invoke("throw", err, resolve, reject);
+          });
+        }
+
+        return PromiseImpl.resolve(value).then(function(unwrapped) {
+          // When a yielded Promise is resolved, its final value becomes
+          // the .value of the Promise<{value,done}> result for the
+          // current iteration.
+          result.value = unwrapped;
+          resolve(result);
+        }, function(error) {
+          // If a rejected Promise was yielded, throw the rejection back
+          // into the async generator function so it can be handled there.
+          return invoke("throw", error, resolve, reject);
+        });
+      }
+    }
+
+    var previousPromise;
+
+    function enqueue(method, arg) {
+      function callInvokeWithMethodAndArg() {
+        return new PromiseImpl(function(resolve, reject) {
+          invoke(method, arg, resolve, reject);
+        });
+      }
+
+      return previousPromise =
+        // If enqueue has been called before, then we want to wait until
+        // all previous Promises have been resolved before calling invoke,
+        // so that results are always delivered in the correct order. If
+        // enqueue has not been called before, then it is important to
+        // call invoke immediately, without waiting on a callback to fire,
+        // so that the async generator function has the opportunity to do
+        // any necessary setup in a predictable way. This predictability
+        // is why the Promise constructor synchronously invokes its
+        // executor callback, and why async functions synchronously
+        // execute code before the first await. Since we implement simple
+        // async functions in terms of async generators, it is especially
+        // important to get this right, even though it requires care.
+        previousPromise ? previousPromise.then(
+          callInvokeWithMethodAndArg,
+          // Avoid propagating failures to Promises returned by later
+          // invocations of the iterator.
+          callInvokeWithMethodAndArg
+        ) : callInvokeWithMethodAndArg();
+    }
+
+    // Define the unified helper method that is used to implement .next,
+    // .throw, and .return (see defineIteratorMethods).
+    this._invoke = enqueue;
+  }
+
+  defineIteratorMethods(AsyncIterator.prototype);
+  define(AsyncIterator.prototype, asyncIteratorSymbol, function () {
+    return this;
+  });
+  exports.AsyncIterator = AsyncIterator;
+
+  // Note that simple async functions are implemented on top of
+  // AsyncIterator objects; they just return a Promise for the value of
+  // the final result produced by the iterator.
+  exports.async = function(innerFn, outerFn, self, tryLocsList, PromiseImpl) {
+    if (PromiseImpl === void 0) PromiseImpl = Promise;
+
+    var iter = new AsyncIterator(
+      wrap(innerFn, outerFn, self, tryLocsList),
+      PromiseImpl
+    );
+
+    return exports.isGeneratorFunction(outerFn)
+      ? iter // If outerFn is a generator, return the full iterator.
+      : iter.next().then(function(result) {
+          return result.done ? result.value : iter.next();
+        });
+  };
+
+  function makeInvokeMethod(innerFn, self, context) {
+    var state = GenStateSuspendedStart;
+
+    return function invoke(method, arg) {
+      if (state === GenStateExecuting) {
+        throw new Error("Generator is already running");
+      }
+
+      if (state === GenStateCompleted) {
+        if (method === "throw") {
+          throw arg;
+        }
+
+        // Be forgiving, per 25.3.3.3.3 of the spec:
+        // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-generatorresume
+        return doneResult();
+      }
+
+      context.method = method;
+      context.arg = arg;
+
+      while (true) {
+        var delegate = context.delegate;
+        if (delegate) {
+          var delegateResult = maybeInvokeDelegate(delegate, context);
+          if (delegateResult) {
+            if (delegateResult === ContinueSentinel) continue;
+            return delegateResult;
+          }
+        }
+
+        if (context.method === "next") {
+          // Setting context._sent for legacy support of Babel's
+          // function.sent implementation.
+          context.sent = context._sent = context.arg;
+
+        } else if (context.method === "throw") {
+          if (state === GenStateSuspendedStart) {
+            state = GenStateCompleted;
+            throw context.arg;
+          }
+
+          context.dispatchException(context.arg);
+
+        } else if (context.method === "return") {
+          context.abrupt("return", context.arg);
+        }
+
+        state = GenStateExecuting;
+
+        var record = tryCatch(innerFn, self, context);
+        if (record.type === "normal") {
+          // If an exception is thrown from innerFn, we leave state ===
+          // GenStateExecuting and loop back for another invocation.
+          state = context.done
+            ? GenStateCompleted
+            : GenStateSuspendedYield;
+
+          if (record.arg === ContinueSentinel) {
+            continue;
+          }
+
+          return {
+            value: record.arg,
+            done: context.done
+          };
+
+        } else if (record.type === "throw") {
+          state = GenStateCompleted;
+          // Dispatch the exception by looping back around to the
+          // context.dispatchException(context.arg) call above.
+          context.method = "throw";
+          context.arg = record.arg;
+        }
+      }
+    };
+  }
+
+  // Call delegate.iterator[context.method](context.arg) and handle the
+  // result, either by returning a { value, done } result from the
+  // delegate iterator, or by modifying context.method and context.arg,
+  // setting context.delegate to null, and returning the ContinueSentinel.
+  function maybeInvokeDelegate(delegate, context) {
+    var method = delegate.iterator[context.method];
+    if (method === undefined) {
+      // A .throw or .return when the delegate iterator has no .throw
+      // method always terminates the yield* loop.
+      context.delegate = null;
+
+      if (context.method === "throw") {
+        // Note: ["return"] must be used for ES3 parsing compatibility.
+        if (delegate.iterator["return"]) {
+          // If the delegate iterator has a return method, give it a
+          // chance to clean up.
+          context.method = "return";
+          context.arg = undefined;
+          maybeInvokeDelegate(delegate, context);
+
+          if (context.method === "throw") {
+            // If maybeInvokeDelegate(context) changed context.method from
+            // "return" to "throw", let that override the TypeError below.
+            return ContinueSentinel;
+          }
+        }
+
+        context.method = "throw";
+        context.arg = new TypeError(
+          "The iterator does not provide a 'throw' method");
+      }
+
+      return ContinueSentinel;
+    }
+
+    var record = tryCatch(method, delegate.iterator, context.arg);
+
+    if (record.type === "throw") {
+      context.method = "throw";
+      context.arg = record.arg;
+      context.delegate = null;
+      return ContinueSentinel;
+    }
+
+    var info = record.arg;
+
+    if (! info) {
+      context.method = "throw";
+      context.arg = new TypeError("iterator result is not an object");
+      context.delegate = null;
+      return ContinueSentinel;
+    }
+
+    if (info.done) {
+      // Assign the result of the finished delegate to the temporary
+      // variable specified by delegate.resultName (see delegateYield).
+      context[delegate.resultName] = info.value;
+
+      // Resume execution at the desired location (see delegateYield).
+      context.next = delegate.nextLoc;
+
+      // If context.method was "throw" but the delegate handled the
+      // exception, let the outer generator proceed normally. If
+      // context.method was "next", forget context.arg since it has been
+      // "consumed" by the delegate iterator. If context.method was
+      // "return", allow the original .return call to continue in the
+      // outer generator.
+      if (context.method !== "return") {
+        context.method = "next";
+        context.arg = undefined;
+      }
+
+    } else {
+      // Re-yield the result returned by the delegate method.
+      return info;
+    }
+
+    // The delegate iterator is finished, so forget it and continue with
+    // the outer generator.
+    context.delegate = null;
+    return ContinueSentinel;
+  }
+
+  // Define Generator.prototype.{next,throw,return} in terms of the
+  // unified ._invoke helper method.
+  defineIteratorMethods(Gp);
+
+  define(Gp, toStringTagSymbol, "Generator");
+
+  // A Generator should always return itself as the iterator object when the
+  // @@iterator function is called on it. Some browsers' implementations of the
+  // iterator prototype chain incorrectly implement this, causing the Generator
+  // object to not be returned from this call. This ensures that doesn't happen.
+  // See https://github.com/facebook/regenerator/issues/274 for more details.
+  define(Gp, iteratorSymbol, function() {
+    return this;
+  });
+
+  define(Gp, "toString", function() {
+    return "[object Generator]";
+  });
+
+  function pushTryEntry(locs) {
+    var entry = { tryLoc: locs[0] };
+
+    if (1 in locs) {
+      entry.catchLoc = locs[1];
+    }
+
+    if (2 in locs) {
+      entry.finallyLoc = locs[2];
+      entry.afterLoc = locs[3];
+    }
+
+    this.tryEntries.push(entry);
+  }
+
+  function resetTryEntry(entry) {
+    var record = entry.completion || {};
+    record.type = "normal";
+    delete record.arg;
+    entry.completion = record;
+  }
+
+  function Context(tryLocsList) {
+    // The root entry object (effectively a try statement without a catch
+    // or a finally block) gives us a place to store values thrown from
+    // locations where there is no enclosing try statement.
+    this.tryEntries = [{ tryLoc: "root" }];
+    tryLocsList.forEach(pushTryEntry, this);
+    this.reset(true);
+  }
+
+  exports.keys = function(object) {
+    var keys = [];
+    for (var key in object) {
+      keys.push(key);
+    }
+    keys.reverse();
+
+    // Rather than returning an object with a next method, we keep
+    // things simple and return the next function itself.
+    return function next() {
+      while (keys.length) {
+        var key = keys.pop();
+        if (key in object) {
+          next.value = key;
+          next.done = false;
+          return next;
+        }
+      }
+
+      // To avoid creating an additional object, we just hang the .value
+      // and .done properties off the next function object itself. This
+      // also ensures that the minifier will not anonymize the function.
+      next.done = true;
+      return next;
+    };
+  };
+
+  function values(iterable) {
+    if (iterable) {
+      var iteratorMethod = iterable[iteratorSymbol];
+      if (iteratorMethod) {
+        return iteratorMethod.call(iterable);
+      }
+
+      if (typeof iterable.next === "function") {
+        return iterable;
+      }
+
+      if (!isNaN(iterable.length)) {
+        var i = -1, next = function next() {
+          while (++i < iterable.length) {
+            if (hasOwn.call(iterable, i)) {
+              next.value = iterable[i];
+              next.done = false;
+              return next;
+            }
+          }
+
+          next.value = undefined;
+          next.done = true;
+
+          return next;
+        };
+
+        return next.next = next;
+      }
+    }
+
+    // Return an iterator with no values.
+    return { next: doneResult };
+  }
+  exports.values = values;
+
+  function doneResult() {
+    return { value: undefined, done: true };
+  }
+
+  Context.prototype = {
+    constructor: Context,
+
+    reset: function(skipTempReset) {
+      this.prev = 0;
+      this.next = 0;
+      // Resetting context._sent for legacy support of Babel's
+      // function.sent implementation.
+      this.sent = this._sent = undefined;
+      this.done = false;
+      this.delegate = null;
+
+      this.method = "next";
+      this.arg = undefined;
+
+      this.tryEntries.forEach(resetTryEntry);
+
+      if (!skipTempReset) {
+        for (var name in this) {
+          // Not sure about the optimal order of these conditions:
+          if (name.charAt(0) === "t" &&
+              hasOwn.call(this, name) &&
+              !isNaN(+name.slice(1))) {
+            this[name] = undefined;
+          }
+        }
+      }
+    },
+
+    stop: function() {
+      this.done = true;
+
+      var rootEntry = this.tryEntries[0];
+      var rootRecord = rootEntry.completion;
+      if (rootRecord.type === "throw") {
+        throw rootRecord.arg;
+      }
+
+      return this.rval;
+    },
+
+    dispatchException: function(exception) {
+      if (this.done) {
+        throw exception;
+      }
+
+      var context = this;
+      function handle(loc, caught) {
+        record.type = "throw";
+        record.arg = exception;
+        context.next = loc;
+
+        if (caught) {
+          // If the dispatched exception was caught by a catch block,
+          // then let that catch block handle the exception normally.
+          context.method = "next";
+          context.arg = undefined;
+        }
+
+        return !! caught;
+      }
+
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        var record = entry.completion;
+
+        if (entry.tryLoc === "root") {
+          // Exception thrown outside of any try block that could handle
+          // it, so set the completion value of the entire function to
+          // throw the exception.
+          return handle("end");
+        }
+
+        if (entry.tryLoc <= this.prev) {
+          var hasCatch = hasOwn.call(entry, "catchLoc");
+          var hasFinally = hasOwn.call(entry, "finallyLoc");
+
+          if (hasCatch && hasFinally) {
+            if (this.prev < entry.catchLoc) {
+              return handle(entry.catchLoc, true);
+            } else if (this.prev < entry.finallyLoc) {
+              return handle(entry.finallyLoc);
+            }
+
+          } else if (hasCatch) {
+            if (this.prev < entry.catchLoc) {
+              return handle(entry.catchLoc, true);
+            }
+
+          } else if (hasFinally) {
+            if (this.prev < entry.finallyLoc) {
+              return handle(entry.finallyLoc);
+            }
+
+          } else {
+            throw new Error("try statement without catch or finally");
+          }
+        }
+      }
+    },
+
+    abrupt: function(type, arg) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.tryLoc <= this.prev &&
+            hasOwn.call(entry, "finallyLoc") &&
+            this.prev < entry.finallyLoc) {
+          var finallyEntry = entry;
+          break;
+        }
+      }
+
+      if (finallyEntry &&
+          (type === "break" ||
+           type === "continue") &&
+          finallyEntry.tryLoc <= arg &&
+          arg <= finallyEntry.finallyLoc) {
+        // Ignore the finally entry if control is not jumping to a
+        // location outside the try/catch block.
+        finallyEntry = null;
+      }
+
+      var record = finallyEntry ? finallyEntry.completion : {};
+      record.type = type;
+      record.arg = arg;
+
+      if (finallyEntry) {
+        this.method = "next";
+        this.next = finallyEntry.finallyLoc;
+        return ContinueSentinel;
+      }
+
+      return this.complete(record);
+    },
+
+    complete: function(record, afterLoc) {
+      if (record.type === "throw") {
+        throw record.arg;
+      }
+
+      if (record.type === "break" ||
+          record.type === "continue") {
+        this.next = record.arg;
+      } else if (record.type === "return") {
+        this.rval = this.arg = record.arg;
+        this.method = "return";
+        this.next = "end";
+      } else if (record.type === "normal" && afterLoc) {
+        this.next = afterLoc;
+      }
+
+      return ContinueSentinel;
+    },
+
+    finish: function(finallyLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.finallyLoc === finallyLoc) {
+          this.complete(entry.completion, entry.afterLoc);
+          resetTryEntry(entry);
+          return ContinueSentinel;
+        }
+      }
+    },
+
+    "catch": function(tryLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.tryLoc === tryLoc) {
+          var record = entry.completion;
+          if (record.type === "throw") {
+            var thrown = record.arg;
+            resetTryEntry(entry);
+          }
+          return thrown;
+        }
+      }
+
+      // The context.catch method must only be called with a location
+      // argument that corresponds to a known catch block.
+      throw new Error("illegal catch attempt");
+    },
+
+    delegateYield: function(iterable, resultName, nextLoc) {
+      this.delegate = {
+        iterator: values(iterable),
+        resultName: resultName,
+        nextLoc: nextLoc
+      };
+
+      if (this.method === "next") {
+        // Deliberately forget the last sent value so that we don't
+        // accidentally pass it on to the delegate.
+        this.arg = undefined;
+      }
+
+      return ContinueSentinel;
+    }
+  };
+
+  // Regardless of whether this script is executing as a CommonJS module
+  // or not, return the runtime object so that we can declare the variable
+  // regeneratorRuntime in the outer scope, which allows this module to be
+  // injected easily by `bin/regenerator --include-runtime script.js`.
+  return exports;
+
+}(
+  // If this script is executing as a CommonJS module, use module.exports
+  // as the regeneratorRuntime namespace. Otherwise create a new empty
+  // object. Either way, the resulting object will be used to initialize
+  // the regeneratorRuntime variable at the top of this file.
+   true ? module.exports : 0
+));
+
+try {
+  regeneratorRuntime = runtime;
+} catch (accidentalStrictMode) {
+  // This module should not be running in strict mode, so the above
+  // assignment should always work unless something is misconfigured. Just
+  // in case runtime.js accidentally runs in strict mode, in modern engines
+  // we can explicitly access globalThis. In older engines we can escape
+  // strict mode using a global Function call. This could conceivably fail
+  // if a Content Security Policy forbids using Function, but in that case
+  // the proper solution is to fix the accidental strict mode problem. If
+  // you've misconfigured your bundler to force strict mode and applied a
+  // CSP to forbid Function, and you're not willing to fix either of those
+  // problems, please detail your unique predicament in a GitHub issue.
+  if (typeof globalThis === "object") {
+    globalThis.regeneratorRuntime = runtime;
+  } else {
+    Function("r", "regeneratorRuntime = r")(runtime);
+  }
 }
 
 

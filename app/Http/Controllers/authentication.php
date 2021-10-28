@@ -16,21 +16,9 @@ class authentication extends Controller
 
     public function __construct()
     {
-        if (session_start()) {
-
-        } else {
-            // something went wrong trigger and error 
-        }
-    }
-
-
-    public function initTokenSession($token)
-    {
+    
         session_start();
-
-        return $_SESSION['_token_'] = $token;
     }
-
 
     /**
      * 
@@ -41,49 +29,71 @@ class authentication extends Controller
     
     public function getPostData() {
 
-        // generate our post object
-        $userObject = [
-            'username' => $_POST['username'],
-            'name' => $_POST['name'],
-            'company' => $_POST['company'],
-            'password' => $_POST['password'],
-            'token' => $_POST['_token'],
-            'authenticated' => false,
-            'authorization' => false,
+        // sanitize the input that user provided!
+        $postData = filter_var_array($_POST, FILTER_SANITIZE_STRING);
 
-        ];
+        if (empty($postData)) {
+            $errorObject = [
+                'message' => 'Your post data is empty invalid',
+                'code' => '400',
+                'status' => 'error'                
+            ];
 
-        // our error object for the request 
-        $errorObject = [
-            'error' => 'request rejected'
-        ];
-
-
-        if ($_POST['password'] === $_POST['password-confirm']) {
-            $this->initTokenSession($userObject['token']);
-            return json_encode($userObject);
-        }
-
-        return json_encode($errorObject);
+            return $errorObject;
+        } 
+        return $postData;
     }
 
-// login functionality 
+    // generate a uniqid token for the user 
+    private function generateUniqueID() {
+        return uniqid();
+    }
+
+    // here we create a session for the user using the unique id as the salt
+
+    private function generateToken($token, $uid) {
+
+        return hash('sha256', $token . $uId);
+    } 
+
+    // this is going to form a jsoon  object by the server giving us a public key
+    // and the user by using the public key we can encrypt the user data and send it back to the user
+    private function generateJsonWebToken($user) {
+
+        $payload = [
+            'id' => null,
+            '_token' => null,
+            '_session' => null,
+            'host' => 'http://localhost:8000',
+            'sub' => $user->id,
+            'iat' => time(),
+            'exp' => time() + (60 * 60)
+        ];
+
+
+        return JWT::encode($payload, $this->key);
+    }
+
+
+
+    private function fetchAccessToken($token, $public, $private) {
+
+    }
+
+/*
+    type of login functionality session and token based 
+
+    session based: grabs the session and compare it to our records 
+    token based: grabs the token and compare it to our records
+    we also use something called a session token to make sure that the user is not a bot and that the user is not a hacker
+
+*/ 
     public function login()
     {
-        $postData = $this->getPostData();
-    }
-
-    // logout user 
-
-    public function logout()
-    {
-        $postData = $this->getPostData();
-    }
-
-    // provide user registration
-    public function register() {
+        $postData = $this->getPostData();       
 
     }
+
     /**
      * 
      *   errorObject
@@ -92,10 +102,15 @@ class authentication extends Controller
      *  format: => JSON
      */
     public function errorObject($request = null, $errorMessage, $errorType) {
-
+        $errorObject = [
+            message => $errorMessage,
+            request => $request,
+            errorType => $errorType,
+        ];
+        return $errorObject;
     }
 
-// this a call to call the requests based on what the request type is
+// VERIFY OUR PATH AND ALSO PREVENT AND SNOOPING AROUND
     public function requestType($request = null) {
         if ($request === 'login') {
             return $this->login();

@@ -26,6 +26,7 @@
  import RegisterContainer from './containers/register.container';
  import SolutionsContainer from './containers/solutions.container'; 
  import FeaturesContainer from './containers/features.container';
+ import PricingContainer from './containers/pricing.container';
  
  export default function AppRoutes() {
     return (
@@ -44,8 +45,12 @@
 
 
         <Route path='/pricing/'>
+          <PricingContainer />
 
+        </Route>
 
+        <Route path='/dashboard/'>
+           
         </Route>
 
 
