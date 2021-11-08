@@ -49,10 +49,6 @@
 
         </Route>
 
-        <Route path='/dashboard/'>
-           
-        </Route>
-
 
         <Route path="/login/">
             <LoginContainer />
@@ -63,6 +59,9 @@
               <RegisterContainer />
         </Route>
 
+     // make a protected route in react router for dashboard
+     
+      
  
           <Route path="/">
              <HomeContainer />
