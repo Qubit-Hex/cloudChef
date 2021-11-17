@@ -18,21 +18,34 @@ use App\Http\Controllers\dashboard;
 
 
 
-// home page routes  
+/**
+ *      Routes: Home page routes 
+ * 
+ *     @purpose: to the home application      
+ */
+
 
 Route::get('/home/', [home::class, 'index']);
-Route::get('/login/', [home::class, 'index']);
+Route::get('/login/', [home::class, 'index'])->name('login');
 Route::get('/register/', [home::class, 'index']);
 Route::get('/solutions/', [home::class, 'index']);
 Route::get('/pricing/', [home::class, 'index']);
 Route::get('/features/', [home::class, 'index']);
+
+/**
+ *      Routes: Authentication routes 
+ * 
+ *     @purpose: to the authentication application      
+ */
+
+Route::post('/authentication/login/', [authentication::class, 'login'])->name('auth/login/');
+Route::post('/authentication/register/', [authentication::class, 'register'])->name('register');
+
+
+
+// final route if no other route is matched
 Route::get('/', [home::class, 'index']);
+// end of home page application routes 
 
 
-// end of home page routes 
 
-
-// authentication routes 
-Route::post('/authentication/{request}/', [authentication::class, 'index']);
-Route::get('/authentication/logout/', [authentication::class, 'logout']);
-// end of authentication routes

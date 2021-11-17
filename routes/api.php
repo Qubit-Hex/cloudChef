@@ -14,9 +14,22 @@ use App\Http\Controllers\BookController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+
+
+/**
+ * 
+ *  Route: GET /auth/
+ * 
+ *  purpose: to get the user's token
+ * 
+ *  @param: email, password
+ *  @return: token 
+ */
+
+
+Route::get('/auth/', function (Request $request) {
+    
+    if ($request->input('key') === '1234') {
+        echo "hello mate";
+    }
 });
-
-
-
