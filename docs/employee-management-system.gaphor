@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="utf-8"?>
+<gaphor xmlns="http://gaphor.sourceforge.net/model" version="3.0" gaphor-version="2.6.5">
+<StyleSheet id="0d4a45f0-4876-11ec-9504-03d8b4c1c62f"/>
+<Diagram id="110b99bb-4876-11ec-88a4-03d8b4c1c62f">
+<name>
+<val>employee-management-system</val>
+</name>
+<ownedPresentation>
+<reflist>
+<ref refid="22d076eb-4876-11ec-aaa2-03d8b4c1c62f"/>
+<ref refid="29931064-4876-11ec-aa79-03d8b4c1c62f"/>
+<ref refid="361b0a5b-4876-11ec-8031-03d8b4c1c62f"/>
+<ref refid="44389086-4876-11ec-bca2-03d8b4c1c62f"/>
+<ref refid="5a01a138-4876-11ec-a08a-03d8b4c1c62f"/>
+<ref refid="667fe6a5-4876-11ec-a466-03d8b4c1c62f"/>
+<ref refid="82f18954-4876-11ec-b7f5-03d8b4c1c62f"/>
+<ref refid="8691b0ff-4876-11ec-8463-03d8b4c1c62f"/>
+<ref refid="8bdc0238-4876-11ec-905d-03d8b4c1c62f"/>
+<ref refid="13e82a3c-4877-11ec-a5ca-03d8b4c1c62f"/>
+<ref refid="2f32228c-4878-11ec-9a75-03d8b4c1c62f"/>
+<ref refid="88f9da8b-4878-11ec-99b5-03d8b4c1c62f"/>
+</reflist>
+</ownedPresentation>
+</Diagram>
+<Interaction id="22d03cb1-4876-11ec-a9ec-03d8b4c1c62f">
+<name>
+<val>employee Data</val>
+</name>
+<presentation>
+<reflist>
+<ref refid="22d076eb-4876-11ec-aaa2-03d8b4c1c62f"/>
+</reflist>
+</presentation>
+</Interaction>
+<InteractionItem id="22d076eb-4876-11ec-aaa2-03d8b4c1c62f">
+<matrix>
+<val>(1.0, 0.0, 0.0, 1.0, 270.0, 192.63999999999993)</val>
+</matrix>
+<width>
+<val>327.6417525773196</val>
+</width>
+<height>
+<val>132.7949152542373</val>
+</height>
+<diagram>
+<ref refid="110b99bb-4876-11ec-88a4-03d8b4c1c62f"/>
+</diagram>
+<subject>
+<ref refid="22d03cb1-4876-11ec-a9ec-03d8b4c1c62f"/>
+</subject>
+</InteractionItem>
+<FlowItem id="29931064-4876-11ec-aa79-03d8b4c1c62f">
+<diagram>
+<ref refid="110b99bb-4876-11ec-88a4-03d8b4c1c62f"/>
+</diagram>
+<horizontal>
+<val>0</val>
+</horizontal>
+<matrix>
+<val>(1.0, 0.0, 0.0, 1.0, 395.3999999999998, 231.63999999999987)</val>
+</matrix>
+<points>
+<val>[(19.0, 9.0), (255.0, 6.0)]</val>
+</points>
+</FlowItem>
+<Device id="361ab11b-4876-11ec-ac49-03d8b4c1c62f">
+<name>
+<val>employee-management-system]</val>
+</name>
+<presentation>
+<reflist>
+<ref refid="361b0a5b-4876-11ec-8031-03d8b4c1c62f"/>
+</reflist>
+</presentation>
+</Device>
+<NodeItem id="361b0a5b-4876-11ec-8031-03d8b4c1c62f">
+<matrix>
+<val>(1.0, 0.0, 0.0, 1.0, 649.4000000000017, 214.63999999999987)</val>
+</matrix>
+<width>
+<val>261.0</val>
+</width>
+<height>
+<val>113.0</val>
+</height>
+<diagram>
+<ref refid="110b99bb-4876-11ec-88a4-03d8b4c1c62f"/>
+</diagram>
+<subject>
+<ref refid="361ab11b-4876-11ec-ac49-03d8b4c1c62f"/>
+</subject>
+</NodeItem>
+<Class id="443850aa-4876-11ec-ae05-03d8b4c1c62f">
+<name>
+<val>store_schedule</val>
+</name>
+<ownedAttribute>
+<reflist>
+<ref refid="02db59e2-4877-11ec-9feb-03d8b4c1c62f"/>
+<ref refid="f69055cc-4876-11ec-b70e-03d8b4c1c62f"/>
+<ref refid="fab44574-4876-11ec-a692-03d8b4c1c62f"/>
+<ref refid="fc8a026e-4876-11ec-93e5-03d8b4c1c62f"/>
+</reflist>
+</ownedAttribute>
+<presentation>
+<reflist>
+<ref refid="44389086-4876-11ec-bca2-03d8b4c1c62f"/>
+</reflist>
+</presentation>
+</Class>
+<ClassItem id="44389086-4876-11ec-bca2-03d8b4c1c62f">
+<matrix>
+<val>(1.0, 0.0, 0.0, 1.0, 0.6000000000000076, 480.78000000000003)</val>
+</matrix>
+<width>
+<val>298.8987915407855</val>
+</width>
+<height>
+<val>165.0</val>
+</height>
+<diagram>
+<ref refid="110b99bb-4876-11ec-88a4-03d8b4c1c62f"/>
+</diagram>
+<subject>
+<ref refid="443850aa-4876-11ec-ae05-03d8b4c1c62f"/>
+</subject>
+</ClassItem>
+<Class id="5a0182c3-4876-11ec-ae89-03d8b4c1c62f">
+<name>
+<val>store_communication</val>
+</name>
+<ownedAttribute>
+<reflist>
+<ref refid="b9ea9f76-4876-11ec-8809-03d8b4c1c62f"/>
+<ref refid="63a9aa65-4877-11ec-8d1b-03d8b4c1c62f"/>
+<ref refid="c0b4dcc9-4876-11ec-a22d-03d8b4c1c62f"/>
+<ref refid="c9291257-4876-11ec-a2ac-03d8b4c1c62f"/>
+<ref refid="5364dd1f-4877-11ec-b4b9-03d8b4c1c62f"/>
+<ref refid="566e7b3f-4877-11ec-967b-03d8b4c1c62f"/>
+<ref refid="588fcc16-4877-11ec-b31b-03d8b4c1c62f"/>
+<ref refid="5acc4f07-4877-11ec-bc0f-03d8b4c1c62f"/>
+<ref refid="5c9eb329-4877-11ec-b362-03d8b4c1c62f"/>
+</reflist>
+</ownedAttribute>
+<presentation>
+<reflist>
+<ref refid="5a01a138-4876-11ec-a08a-03d8b4c1c62f"/>
+</reflist>
+</presentation>
+</Class>
+<ClassItem id="5a01a138-4876-11ec-a08a-03d8b4c1c62f">
+<matrix>
+<val>(1.0, 0.0, 0.0, 1.0, 389.1800000000011, 510.96)</val>
+</matrix>
+<width>
+<val>342.8558762886586</val>
+</width>
+<height>
+<val>202.0</val>
+</height>
+<diagram>
+<ref refid="110b99bb-4876-11ec-88a4-03d8b4c1c62f"/>
+</diagram>
+<subject>
+<ref refid="5a0182c3-4876-11ec-ae89-03d8b4c1c62f"/>
+</subject>
+</ClassItem>
+<Class id="667fb5e3-4876-11ec-94a8-03d8b4c1c62f">
+<name>
+<val>store_employee_data</val>
+</name>
+<ownedAttribute>
+<reflist>
+<ref refid="9f507d2d-4876-11ec-b33b-03d8b4c1c62f"/>
+<ref refid="a6ae562b-4876-11ec-afc0-03d8b4c1c62f"/>
+<ref refid="a898f405-4876-11ec-b85f-03d8b4c1c62f"/>
+<ref refid="ad827288-4876-11ec-a836-03d8b4c1c62f"/>
+</reflist>
+</ownedAttribute>
+<presentation>
+<reflist>
+<ref refid="667fe6a5-4876-11ec-a466-03d8b4c1c62f"/>
+</reflist>
+</presentation>
+</Class>
+<ClassItem id="667fe6a5-4876-11ec-a466-03d8b4c1c62f">
+<matrix>
+<val>(1.0, 0.0, 0.0, 1.0, 868.9000000000016, 510.9600000000001)</val>
+</matrix>
+<width>
+<val>347.81587628865805</val>
+</width>
+<height>
+<val>207.3046779661014</val>
+</height>
+<diagram>
+<ref refid="110b99bb-4876-11ec-88a4-03d8b4c1c62f"/>
+</diagram>
+<subject>
+<ref refid="667fb5e3-4876-11ec-94a8-03d8b4c1c62f"/>
+</subject>
+</ClassItem>
+<InterfaceRealizationItem id="82f18954-4876-11ec-b7f5-03d8b4c1c62f">
+<diagram>
+<ref refid="110b99bb-4876-11ec-88a4-03d8b4c1c62f"/>
+</diagram>
+<horizontal>
+<val>0</val>
+</horizontal>
+<matrix>
+<val>(1.0, 0.0, 0.0, 1.0, 740.4000000000018, 327.6399999999999)</val>
+</matrix>
+<points>
+<val>[(0.0, 0.0), (-150.89971273022263, 183.3200000000001)]</val>
+</points>
+<tail-connection>
+<ref refid="5a01a138-4876-11ec-a08a-03d8b4c1c62f"/>
+</tail-connection>
+</InterfaceRealizationItem>
+<InterfaceRealizationItem id="8691b0ff-4876-11ec-8463-03d8b4c1c62f">
+<diagram>
+<ref refid="110b99bb-4876-11ec-88a4-03d8b4c1c62f"/>
+</diagram>
+<horizontal>
+<val>0</val>
+</horizontal>
+<matrix>
+<val>(1.0, 0.0, 0.0, 1.0, 911.4000000000018, 312.6399999999999)</val>
+</matrix>
+<points>
+<val>[(0.0, 0.0), (43.51058872782369, 198.32000000000022)]</val>
+</points>
+<tail-connection>
+<ref refid="667fe6a5-4876-11ec-a466-03d8b4c1c62f"/>
+</tail-connection>
+</InterfaceRealizationItem>
+<InterfaceRealizationItem id="8bdc0238-4876-11ec-905d-03d8b4c1c62f">
+<diagram>
+<ref refid="110b99bb-4876-11ec-88a4-03d8b4c1c62f"/>
+</diagram>
+<horizontal>
+<val>0</val>
+</horizontal>
+<matrix>
+<val>(1.0, 0.0, 0.0, 1.0, 652.4000000000018, 317.6399999999999)</val>
+</matrix>
+<points>
+<val>[(0.0, 0.0), (-419.20859109036485, 180.14000000000016)]</val>
+</points>
+<tail-connection>
+<ref refid="44389086-4876-11ec-bca2-03d8b4c1c62f"/>
+</tail-connection>
+</InterfaceRealizationItem>
+<Property id="9f507d2d-4876-11ec-b33b-03d8b4c1c62f">
+<class_>
+<ref refid="667fb5e3-4876-11ec-94a8-03d8b4c1c62f"/>
+</class_>
+<name>
+<val>employee_id</val>
+</name>
+</Property>
+<Property id="a6ae562b-4876-11ec-afc0-03d8b4c1c62f">
+<class_>
+<ref refid="667fb5e3-4876-11ec-94a8-03d8b4c1c62f"/>
+</class_>
+<name>
+<val>store_id</val>
+</name>
+</Property>
+<Property id="a898f405-4876-11ec-b85f-03d8b4c1c62f">
+<class_>
+<ref refid="667fb5e3-4876-11ec-94a8-03d8b4c1c62f"/>
+</class_>
+<name>
+<val>account_id</val>
+</name>
+</Property>
+<Property id="ad827288-4876-11ec-a836-03d8b4c1c62f">
+<class_>
+<ref refid="667fb5e3-4876-11ec-94a8-03d8b4c1c62f"/>
+</class_>
+<name>
+<val>data: (json)</val>
+</name>
+</Property>
+<Property id="b9ea9f76-4876-11ec-8809-03d8b4c1c62f">
+<class_>
+<ref refid="5a0182c3-4876-11ec-ae89-03d8b4c1c62f"/>
+</class_>
+<name>
+<val>commincation_job_id</val>
+</name>
+</Property>
+<Property id="c0b4dcc9-4876-11ec-a22d-03d8b4c1c62f">
+<class_>
+<ref refid="5a0182c3-4876-11ec-ae89-03d8b4c1c62f"/>
+</class_>
+<name>
+<val>storeID</val>
+</name>
+</Property>
+<Property id="c9291257-4876-11ec-a2ac-03d8b4c1c62f">
+<class_>
+<ref refid="5a0182c3-4876-11ec-ae89-03d8b4c1c62f"/>
+</class_>
+<name>
+<val>employeeID</val>
+</name>
+</Property>
+<Property id="f69055cc-4876-11ec-b70e-03d8b4c1c62f">
+<class_>
+<ref refid="443850aa-4876-11ec-ae05-03d8b4c1c62f"/>
+</class_>
+<name>
+<val>employeeID</val>
+</name>
+</Property>
+<Property id="fab44574-4876-11ec-a692-03d8b4c1c62f">
+<class_>
+<ref refid="443850aa-4876-11ec-ae05-03d8b4c1c62f"/>
+</class_>
+<name>
+<val>storeNumber</val>
+</name>
+</Property>
+<Property id="fc8a026e-4876-11ec-93e5-03d8b4c1c62f">
+<class_>
+<ref refid="443850aa-4876-11ec-ae05-03d8b4c1c62f"/>
+</class_>
+<name>
+<val>Date</val>
+</name>
+</Property>
+<Property id="02db59e2-4877-11ec-9feb-03d8b4c1c62f">
+<class_>
+<ref refid="443850aa-4876-11ec-ae05-03d8b4c1c62f"/>
+</class_>
+<name>
+<val>schedule_ID</val>
+</name>
+</Property>
+<Comment id="13e81f1c-4877-11ec-bc84-03d8b4c1c62f">
+<body>
+<val>THE employee system is as designed as follows it take the employee ID, and store Number as the input, and return a schedule Query, store_commincation_query or store employee query</val>
+</body>
+<presentation>
+<reflist>
+<ref refid="13e82a3c-4877-11ec-a5ca-03d8b4c1c62f"/>
+</reflist>
+</presentation>
+</Comment>
+<CommentItem id="13e82a3c-4877-11ec-a5ca-03d8b4c1c62f">
+<matrix>
+<val>(1.0, 0.0, 0.0, 1.0, 92.35824742268039, -68.0)</val>
+</matrix>
+<width>
+<val>729.0</val>
+</width>
+<height>
+<val>125.79491525423731</val>
+</height>
+<diagram>
+<ref refid="110b99bb-4876-11ec-88a4-03d8b4c1c62f"/>
+</diagram>
+<subject>
+<ref refid="13e81f1c-4877-11ec-bc84-03d8b4c1c62f"/>
+</subject>
+</CommentItem>
+<Property id="5364dd1f-4877-11ec-b4b9-03d8b4c1c62f">
+<class_>
+<ref refid="5a0182c3-4876-11ec-ae89-03d8b4c1c62f"/>
+</class_>
+<name>
+<val>to</val>
+</name>
+</Property>
+<Property id="566e7b3f-4877-11ec-967b-03d8b4c1c62f">
+<class_>
+<ref refid="5a0182c3-4876-11ec-ae89-03d8b4c1c62f"/>
+</class_>
+<name>
+<val>from</val>
+</name>
+</Property>
+<Property id="588fcc16-4877-11ec-b31b-03d8b4c1c62f">
+<class_>
+<ref refid="5a0182c3-4876-11ec-ae89-03d8b4c1c62f"/>
+</class_>
+<name>
+<val>subject</val>
+</name>
+</Property>
+<Property id="5acc4f07-4877-11ec-bc0f-03d8b4c1c62f">
+<class_>
+<ref refid="5a0182c3-4876-11ec-ae89-03d8b4c1c62f"/>
+</class_>
+<name>
+<val>attachment</val>
+</name>
+</Property>
+<Property id="5c9eb329-4877-11ec-b362-03d8b4c1c62f">
+<class_>
+<ref refid="5a0182c3-4876-11ec-ae89-03d8b4c1c62f"/>
+</class_>
+<name>
+<val>message</val>
+</name>
+</Property>
+<Property id="63a9aa65-4877-11ec-8d1b-03d8b4c1c62f">
+<class_>
+<ref refid="5a0182c3-4876-11ec-ae89-03d8b4c1c62f"/>
+</class_>
+<name>
+<val>commmincation_group_id</val>
+</name>
+</Property>
+<Comment id="2f321c05-4878-11ec-8ebb-03d8b4c1c62f">
+<body>
+<val>PARM:  STORE ID, EMPLOYEE ID, TOKEN INORDER TO PREFORM A REQUEST ON THE SYSTEM</val>
+</body>
+<presentation>
+<reflist>
+<ref refid="2f32228c-4878-11ec-9a75-03d8b4c1c62f"/>
+</reflist>
+</presentation>
+</Comment>
+<CommentItem id="2f32228c-4878-11ec-9a75-03d8b4c1c62f">
+<matrix>
+<val>(1.0, 0.0, 0.0, 1.0, 835.7400000000009, 110.55999999999996)</val>
+</matrix>
+<width>
+<val>554.3758762886579</val>
+</width>
+<height>
+<val>96.45532203389837</val>
+</height>
+<diagram>
+<ref refid="110b99bb-4876-11ec-88a4-03d8b4c1c62f"/>
+</diagram>
+<subject>
+<ref refid="2f321c05-4878-11ec-8ebb-03d8b4c1c62f"/>
+</subject>
+</CommentItem>
+<Comment id="88f9d025-4878-11ec-b956-03d8b4c1c62f">
+<body>
+<val>THE REQUEST CYCLE FOR THIS SYSTEM IS AS FOLLOWS
+
+get -&gt; get information from the server
+
+
+post -&gt;  add a new record to the index
+
+
+delete -&gt; delete a record
+
+put -&gt; update or modify the resource
+
+
+patch -&gt; update or modify resource</val>
+</body>
+<presentation>
+<reflist>
+<ref refid="88f9da8b-4878-11ec-99b5-03d8b4c1c62f"/>
+</reflist>
+</presentation>
+</Comment>
+<CommentItem id="88f9da8b-4878-11ec-99b5-03d8b4c1c62f">
+<matrix>
+<val>(1.0, 0.0, 0.0, 1.0, 1182.755876288659, 163.43491525423727)</val>
+</matrix>
+<width>
+<val>496.79999999999995</val>
+</width>
+<height>
+<val>324.0</val>
+</height>
+<diagram>
+<ref refid="110b99bb-4876-11ec-88a4-03d8b4c1c62f"/>
+</diagram>
+<subject>
+<ref refid="88f9d025-4878-11ec-b956-03d8b4c1c62f"/>
+</subject>
+</CommentItem>
+</gaphor>

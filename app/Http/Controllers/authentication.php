@@ -1,10 +1,8 @@
 <?php
-
-
 /**
  * 
  * 
- *   class: authentication 
+ *   @class: authentication 
  * 
  * 
  *  @purpose:  inorder to provide authentication services for the user that is connected to the system
@@ -21,8 +19,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
-use App\Http\Services\auth\auth;
-;
+use App\Http\Services\auth\AuthenticationService;
+
 
 
 class authentication extends Controller
@@ -30,37 +28,18 @@ class authentication extends Controller
     public function __construct()
     {
 
-        // include the authentication middleware and other authentication services 
+       // INCLUDE THE AUTHENTICATION SERVICES HERE
 
-        $this->auth = new auth();
-    }
-
-
-    /**
-     *  
-     * @method: validatelogin
-     * 
-     *  @purpose:  inorder to provide authentication services for the user that is connected to the system  
-     * 
-     *  @param: array $request
-     * 
-     */
-
-
-    public function validatelogin($input)
-    {
-        // validate the login details
-        return $this->auth->init($input);
+        $this->authenticationService = new AuthenticationService();
     }
 
     /**
      * 
      *  @method: login
      *  
-     *  @purpose: to provide the login page for the user
+     *  @purpose: to form the login request the will be sent to the authentication service
      * 
-     *  @param: request
-     * 
+     *  @param: arrayt $request;
      */
 
     public function login(Request $request)
@@ -75,52 +54,53 @@ class authentication extends Controller
         'email' => $request->input('username'),
         'password' => $request->input('password'),
         'token' => $request->input('_token'),
-        'clientid' => $request->input('client-id'),
+        'clientid' =>  filter_var($request->input('clientId'), FILTER_VALIDATE_INT)
       ];
-
-        /*
-            validate the login request
-
-            if the validation is successful
-            then redirect the user to the dashboard
-            else redirect the user to the login page    
-        */
-
-        if($this->validateLogin($input))
-        {
-            return redirect()->route('dashboard');
-        }
-        else
-        {
-            return redirect()->route('login');
-        }
+        return $this->authenticationService->loginRequest($input);
     }
 
+    /**
+     *  @method: register 
+     * 
+     *  @purpose: to register a new user to the system
+     *  @param: array $request
+     */
+
+    public function register(Request $request)
+    {
+      /**
+       *  build a register request data object!
+       *  for the register request 
+       * 
+       */
+
+        // registeration array request 
+        $input = [
+
+            'email' => $request->input('email'),
+            'name' => $request->input('fullname'),
+            'password' => $request->input('password'),
+            'token' => $request->input('_token'),
+            'company' => $request->input('company'), 
+            'password_confirm' => $request->input('password_confirm')
+
+        ];
+
+        return $this->authenticationService->registerRequest($input);
+    }
 
     /**
-     * 
      *  @method: logout
      * 
+     *  @purpose: to logout the user from the system
      * 
-     *  @purpose: to provide loging out services for the user 
-     * 
-     */
-    
-     public function logout(Request $request)
-     {
+     *  @param: array $request
+     */ 
 
-     }
-
-
-     /**
-      *  @method: register
-      
-        *  @purpose: to provide the registration page for the user
-        
-     */
-     public function register(Request $request)
-     {
-
-     }
-
+    public function logout(Request $request)
+    {
+      // we need to send the signature to the logout request 
+        // logout the user
+         return $this->authenticationService->logoutRequest($request);
+    }
 }

@@ -10,5 +10,5 @@
  */
 
 
-import './bootstrap';
-import './index.js';
+require('./bootstrap');
+require('./index.js');

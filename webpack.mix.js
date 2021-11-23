@@ -1,3 +1,5 @@
+'use strict'
+
 const mix = require('laravel-mix');
 
 /*
@@ -11,8 +13,7 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .react()
-    .sass('resources/sass/app.scss', 'public/css');
+mix.js('resources/js/app.js', 'public/js/app.js')
+    .react();
 
-mix.js('resources/js/dashboard.js', 'public/js').react();
+mix.js('resources/js/dashboard.js', 'public/js/dashboard.js').react();

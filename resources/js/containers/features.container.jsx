@@ -100,7 +100,7 @@ export default function FeaturesContainer(props) {
                     <h2 className='header-title'>  KNOW WHAT GOING ON IN REAL TIME   </h2>
                     <p className='header-description'> Connect your whole orginization together and get updates in realtime!
                     we connect you to your customers, and employee so you can roll out changes in real time hyper-focus on the customer experience and 
-                    increase your business  </p>
+                    increase your profit!.  </p>
 
                 </div>
 

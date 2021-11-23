@@ -21,7 +21,7 @@ use App\Http\Controllers\dashboard;
 /**
  *      Routes: Home page routes 
  * 
- *     @purpose: to the home application      
+ *     @purpose: to provide the home page routes for the user 
  */
 
 
@@ -35,17 +35,22 @@ Route::get('/features/', [home::class, 'index']);
 /**
  *      Routes: Authentication routes 
  * 
- *     @purpose: to the authentication application      
+ *     @purpose: to route the authentication routes of the application      
  */
 
 Route::post('/authentication/login/', [authentication::class, 'login'])->name('auth/login/');
 Route::post('/authentication/register/', [authentication::class, 'register'])->name('register');
 
 
+/**
+ *      Routes: Dashboard routes 
+ * 
+ *     @purpose: to route the dashboard routes of the application     
+ */
+
+
+
 
 // final route if no other route is matched
 Route::get('/', [home::class, 'index']);
-// end of home page application routes 
-
-
-
+// end of home page application routes =

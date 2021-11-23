@@ -25,6 +25,6 @@
     <div id="root">
 
     </div>
-       <script src="{{ asset('js/app.js') }}" type='module'></script>
+       <script src="{{ asset('js/app.js') }}"></script>
   </body>
 </html>

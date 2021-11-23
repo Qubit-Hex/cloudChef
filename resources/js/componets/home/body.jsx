@@ -10,10 +10,20 @@
 
 
 
- import React from 'react';
+import React from 'react';
 
  export class Body extends React.Component {
-    render() {
+
+
+  constructor(props) {
+
+    super(props);
+
+  }
+
+
+
+  render() {
       return (
 
 
@@ -30,7 +40,7 @@
             />
           </div>
 
-          <div className="col-sm">
+          <div className="col-sm header-section-space-md">
             <h1 className="header-subtitle"> Cloud Chef </h1>
 
             <h2 className="header-title"> The Secret Ingredient </h2>
@@ -48,20 +58,20 @@
               recipe mangement and training system.
             </h4>
 
-            <button
+             <a href='/login/'><button
               className="btn btn-primary header-action"
               style={{ marginRight: "40px" }}
             > See it in Action
-            </button>
+            </button> </a>
           </div>
         </div>
       </div>
-        <div className="container" style={{ marginTop: "10%" }}>
+        <div className="container">
           <div className="row">
             <div className="col-sm mb-3 blob-lg">
               <img src="/img/food-phone.jpg" className="img-fluid" alt="" />
             </div>
-            <div className="col-sm">
+            <div className="col-sm header-section-space-md">
               <h1 className="body-section-title"> ALL OF YOUR RECIPES </h1>
   
               <h1 className="multi-color-section">
@@ -83,7 +93,7 @@
               <img src="/img/burger-present.jpg" className="img-fluid" alt="" />
             </div>
   
-            <div className="col-sm">
+            <div className="col-sm header-section-space-md">
               <h1 className="body-section-title">
                 {" "}
                 Accurate Recipes Across All Locations
@@ -99,12 +109,12 @@
             </div>
           </div>
   
-          <div className="row mt-4">
+          <div className="row mt-4 header-section-space-md">
             <div className="col-sm">
               <img src="/img/baker-image.jpg" className="img-fluid hero sepia" />
             </div>
   
-            <div className="col-sm">
+            <div className="col-sm header-section-space-md">
               <h1 className="body-section-title">
                 {" "}
                 Configure Calculations to What You Want{" "}

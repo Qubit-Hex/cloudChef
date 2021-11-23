@@ -28,6 +28,10 @@ export default class PricingContainer extends Component {
                         <div className='col-sm'>
                                 <h1 className='header-subtitle  text-center'>Pricing</h1>
 
+                                <p className='text-center mt-4'>
+                                See our pricing plan and choose the best plan the will suit your business needs.
+                                    </p>
+
                                 </div>
                             <div className='col-sm'>
 
@@ -42,7 +46,7 @@ export default class PricingContainer extends Component {
                                 <div className='col-sm m-2'>
                                     <div className='card payment-card'>              
                                         <div className='card-body'>
-                                            <h1>Basic Plan  ( Table for one please ) </h1>
+                                            <h1>Small Business Plan</h1>
                                             <div className='image-center-icon'>
                     <img className='img-fluid' src='/img/restaurant-outline.svg' width='50vh' height='50vw'/>
                  </div> 
@@ -56,7 +60,7 @@ export default class PricingContainer extends Component {
                                             <p> Access your information anywhere </p>
                                             <p> Cloud based services, access your information anywhere </p>
                                             <p> Manage staff using our platform </p>
-                                            <p> Cloud QR CODE ORDERING </p>
+                                            <p> And much more </p>
                                             
 
                                             <button type='button' className='header-action  md'>Sign Up</button>
@@ -69,7 +73,7 @@ export default class PricingContainer extends Component {
 
                                     <div className='card payment-card'>              
                                         <div className='card-body'>
-                                            <h1>Corporate PLAN   ( PARTY OF 100 ) </h1>
+                                            <h1> Corporate Resturant Plan </h1>
                                             <h2>(COMMING SOON) </h2>
                                             <div className='image-center-icon'>
                     <img className='img-fluid' src='/img/team-meeting.svg' width='50vh' height='50vw'/>
@@ -79,10 +83,10 @@ export default class PricingContainer extends Component {
                                               For corprate account please contact us for more information.
                                               Corporate account is available for 100 people.
                                               <p></p>
-                                             <p> Unlimited tables.</p>
                                              <p>     Unlimited Stores. </p>
                                               <p>Unlimited staff. </p>
                                                <p> Unlimited customers. </p>
+                                               <p> real time store performance. </p>
                                             </p>
 
                                             

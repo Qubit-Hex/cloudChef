@@ -13,6 +13,7 @@
 import React from "react";
 
 import '../../assets/css/login.css';
+import fetchServiceProvider from '../../lib/fetchServiceProvider.js';
 
 
 
@@ -23,81 +24,130 @@ export class LoginPage extends React.Component {
         super(props);
 
         // our application state
+
+      this.fetchServiceProvider = new fetchServiceProvider();
+
         this.state = {
 
         }
     }
 
-  // do some form checks inorder to see if form is valid before even submiting 
+    /**
+     * 
+     * @method: validateForm
+     * 
+     * @purpose  inorder to validate the form before submitting the form 
+     * @parmeter    event
+     * @returns event;
+     */
   validateForm (event) {
-    // loop though the events inorder to verify that form is actually validated 
-    for (let i = 0; i < event.target.length - 2; i++) {
-        const res = event.target[i].value.length !== 0? true : false;
-        if (res === true) {
-            // continue the loop 
-            continue;
-        }   else {
-            console.log('error'); 
-            event.preventDefault();
-            break;
-        }
-    }
-// submit the form if the all fields are filled out
+    
+    // verify the all inputs fields are filled before sending our request to the api
+    event.preventDefault();
 
-    postData('/authentication/login/', ['something']);
-    return event.target.submit();
-   
-}
-// generate our CSFR TOKEN FOR OUR APPLICATION 
+    if (event.target.username.value.length !== 0 &&  event.target.password.value.length !== 0 && event.target['client-id'].value.length !== 0) {
+      // create a request object for api request with input values
+      let request = {
+        username: event.target.username.value,
+        password: event.target.password.value,
+        clientId: event.target['client-id'].value,
+        _token: this.generateToken(),
+      }
+
+      return this.login(request);
+    } 
+
+
+     return document.getElementById('error-response').innerHTML = 'Please fill in all fields';
+  }
+
+  /**
+   *  
+   * method: login api Request 
+   * 
+   *  @purpose: inorder to preform the fetre request to the login api 
+   */
+
+  login(request) {
+  
+    let headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer ' + request._token,
+    };
+    this.fetchServiceProvider.$post('/api/auth/login', request, headers, (response) => {
+
+// update the messages that are comming from the api 
+      console.log(response);
+
+      if (response.message) {
+        document.getElementById('error-response').innerHTML = response.message;
+      }
+      // we are going to recieve a token so we are going to store it in a cookie 
+      if (response.signature) {
+        document.cookie = 'api_public_key=' + response.signature + '; path=/';
+      }
+
+      // check if user is authentication if so then we will 
+      // redirect the user to the dashboard 
+      if (response.authenticated) {
+       window.location.href = '/dashboard/';
+      }
+  });
+} 
+ 
 generateToken()
 {
     const token = document.getElementById('_token_').content;
-
-
-    let data = new Object();
-
-
-    // get basic information about our user to send back to the server=
-    data = {
-        token: true,
-        tokenValue: token,
-        isLoggedIn: false,
-        time: Date.now(),          
-    }
-      
-    console.log(data);
     return token;
 }
 
+/**
+ * @method": validate 
+ * 
+ * @purpose: inorder to validate the form as the user is typing inorder to notify the user if they need to enter the required fields
+ * @returns  event 
+ */
 
-// validate the form 
-validate(event, number) {
-
-    const errorWrapper = document.getElementsByClassName('error-message')[number];
-    if (event.target.value.length === 0) {
-        errorWrapper.innerText = 'Please fill out this field it is required';
-    } else {
-        errorWrapper.innerText = '';
-        return true;
-    }
+// could add a feature that will allow you to match the the error cases in the application
+// with the error messages that are coming from the api maybe?
+ validate(event, number) {
+  // to make a shaking animation of our login store
+  const errorWrapper = document.getElementsByClassName('error-message')[number];
+  if (event.target.value.length === 0) {
+      errorWrapper.classList.add('text-danger');
+      errorWrapper.classList.remove('text-success');
+      errorWrapper.innerText = 'Please fill out this field it is required';
+      document.getElementById('registration-form').classList.add('shake-animation')
+  } else {
+      errorWrapper.innerHTML = `<i class="fas fa-check-circle"></i>  <span style='margin-left: 10PX;'> looks good! <?/span>`
+      errorWrapper.classList.add('text-success');
+      errorWrapper.classList.remove('text-danger');
+      document.getElementById('registration-form').classList.remove('shake-animation')
+      return true;
+  }
 }
 
-
     render() {
+
+
         return (
 
           <div id='login-color-box'>
            <div className='container pannel'>
             <div className='row'>
 
-                <div className='col form-login' >
-                <form className='form-login' method='POST' action='/authentication/login/'  onSubmit={ (e) => { this.validateForm(e) }}>
+                <div className='col form-login' id='registration-form'>
+                <form className='form-login' onSubmit={ (e) => { this.validateForm(e) }}>
                 <div className='blob image-badge'>
                     <img className='img-fluid' src='/img/restaurant-outline.svg' width='50vh' height='50vw'/>
                  </div> 
                     <h1 className='form-login-title text-center'> Please Login </h1>
 
-                    <h4 className='error text-danger'>  </h4>
+                    <h3 className='form-login-title text-center' style={{'font-size': '18px', 'color': 'dodgerblue'}}> Please enter your login details </h3> 
+
+
+                    <h4 className='error text-danger' id='error-response'>  </h4>
                 <div className="form-group">
                   <label for="username">Username </label>
                   <span className='error-message text-center text-danger'></span>

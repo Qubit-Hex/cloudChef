@@ -2174,7 +2174,7 @@ var Body = /*#__PURE__*/function (_React$Component) {
                 height: "500px"
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-              className: "col-sm header-section-space-md",
+              className: "col-sm",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
                 className: "header-subtitle",
                 children: " Cloud Chef "
@@ -2190,15 +2190,12 @@ var Body = /*#__PURE__*/function (_React$Component) {
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h4", {
                 className: "header-description",
                 children: "Make employee training easy and simple by using our cloud based recipe mangement and training system."
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("a", {
-                href: "/login/",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
-                  className: "btn btn-primary header-action",
-                  style: {
-                    marginRight: "40px"
-                  },
-                  children: " See it in Action"
-                }), " "]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+                className: "btn btn-primary header-action",
+                style: {
+                  marginRight: "40px"
+                },
+                children: " See it in Action"
               })]
             })]
           })
@@ -2214,7 +2211,7 @@ var Body = /*#__PURE__*/function (_React$Component) {
                 alt: ""
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-              className: "col-sm header-section-space-md",
+              className: "col-sm",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
                 className: "body-section-title",
                 children: " ALL OF YOUR RECIPES "
@@ -2242,7 +2239,7 @@ var Body = /*#__PURE__*/function (_React$Component) {
                 alt: ""
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-              className: "col-sm header-section-space-md",
+              className: "col-sm",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("h1", {
                 className: "body-section-title",
                 children: [" ", "Accurate Recipes Across All Locations"]
@@ -2252,7 +2249,7 @@ var Body = /*#__PURE__*/function (_React$Component) {
               })]
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-            className: "row mt-4 header-section-space-md",
+            className: "row mt-4",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
               className: "col-sm",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
@@ -2260,7 +2257,7 @@ var Body = /*#__PURE__*/function (_React$Component) {
                 className: "img-fluid hero sepia"
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-              className: "col-sm header-section-space-md",
+              className: "col-sm",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("h1", {
                 className: "body-section-title",
                 children: [" ", "Configure Calculations to What You Want", " "]
@@ -2344,104 +2341,112 @@ var Footer = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("footer", {
         className: "",
-        children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+        children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
           className: "container footer",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+            className: "row",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+              className: "col-sm",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
+                className: "img-fluid",
+                src: "/img/logo/Cloud Chef-logos_white.png",
+                alt: "",
+                width: "400px;"
+              })
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
             className: "row",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-              className: "row",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("span", {
-                className: "footer-bottom footer-section-subtitle",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
-                  className: "img-fluid",
-                  src: "/img/logo/Cloud Chef-logos_white.png",
-                  alt: "",
-                  width: "500px;"
-                }), "  2021 CLOUD CHEF INC "]
+              className: "col-sm",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("ul", {
+                className: "list-group footer-list",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
+                  className: "list-group-item footer-section-title",
+                  children: " Solutions "
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
+                  className: "list-group-item footer-section-subtitle",
+                  children: "  How We Help"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
+                  className: "list-group item footer-section-divider",
+                  children: " "
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("li", {
+                  className: "list-group-item footer-section-link",
+                  children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
+                    href: "#",
+                    children: "Automated Outdated Proccesses "
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("li", {
+                  className: "list-group-item footer-section-link",
+                  children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
+                    href: "#",
+                    children: "Access Information from anywhere "
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("li", {
+                  className: "list-group-item footer-section-link",
+                  children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
+                    href: "#",
+                    children: "Easily Integrate Data Across System "
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("li", {
+                  className: "list-group-item footer-section-link",
+                  children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
+                    href: "#",
+                    children: " Discover Data-Driven Insights "
+                  })]
+                })]
               })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-              className: "row",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-                className: "col-sm",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("ul", {
-                  className: "list-group footer-list",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
-                    className: "list-group-item footer-section-title",
-                    children: " Solutions "
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
-                    className: "list-group-item footer-section-subtitle",
-                    children: "  How We Help"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
-                    className: "list-group item footer-section-divider",
-                    children: " "
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("li", {
-                    className: "list-group-item footer-section-link",
-                    children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
-                      href: "#",
-                      children: "Automated Outdated Proccesses "
-                    })]
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("li", {
-                    className: "list-group-item footer-section-link",
-                    children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
-                      href: "#",
-                      children: "Access Information from anywhere "
-                    })]
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("li", {
-                    className: "list-group-item footer-section-link",
-                    children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
-                      href: "#",
-                      children: "Easily Integrate Data Across System "
-                    })]
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("li", {
-                    className: "list-group-item footer-section-link",
-                    children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
-                      href: "#",
-                      children: " Discover Data-Driven Insights "
-                    })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+              className: "col-sm",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("ul", {
+                className: "list-group footer-list",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
+                  className: "list-group-item footer-section-title",
+                  children: "  Features  "
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
+                  className: "list-group-item footer-section-subtitle",
+                  children: "  Explore the platform"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
+                  className: "list-group-item footer-section-divider",
+                  children: " "
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("li", {
+                  className: "list-group-item footer-section-link",
+                  children: ["  ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
+                    href: "#",
+                    children: "  Recipe Management "
                   })]
-                })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-                className: "col-sm",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("ul", {
-                  className: "list-group footer-list",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
-                    className: "list-group-item footer-section-title",
-                    children: "  Features  "
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
-                    className: "list-group-item footer-section-subtitle",
-                    children: "  Explore the platform"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("li", {
-                    className: "list-group-item footer-section-divider",
-                    children: " "
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("li", {
-                    className: "list-group-item footer-section-link",
-                    children: ["  ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
-                      href: "#",
-                      children: "  Recipe Management "
-                    })]
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("li", {
-                    className: "list-group-item footer-section-link",
-                    children: ["  ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
-                      href: "#",
-                      children: "  Inventory Management "
-                    }), " "]
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("li", {
-                    className: "list-group-item footer-section-link",
-                    children: ["  ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
-                      href: "#",
-                      children: "  Food Cost Management  "
-                    }), " "]
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("li", {
-                    className: "list-group-item footer-section-link",
-                    children: ["  ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
-                      href: "#",
-                      children: "  Employee Management "
-                    }), " "]
-                  })]
-                })
-              })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("li", {
+                  className: "list-group-item footer-section-link",
+                  children: ["  ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
+                    href: "#",
+                    children: "  Inventory Management "
+                  }), " "]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("li", {
+                  className: "list-group-item footer-section-link",
+                  children: ["  ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
+                    href: "#",
+                    children: "  Food Cost Management  "
+                  }), " "]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("li", {
+                  className: "list-group-item footer-section-link",
+                  children: ["  ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
+                    href: "#",
+                    children: "  Employee Management "
+                  }), " "]
+                })]
+              })
             })]
-          })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+            className: "row",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("span", {
+              className: "footer-bottom footer-section-subtitle",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
+                className: "img-fluid",
+                src: "/img/logo/Cloud Chef-logos_white.png",
+                alt: "",
+                width: "200px;"
+              }), "  2021 CLOUD CHEF INC "]
+            })
+          })]
         })]
       });
     }
@@ -2808,291 +2813,153 @@ var Header = /*#__PURE__*/function (_React$Component) {
 /*!************************************************!*\
   !*** ./resources/js/componets/login/login.jsx ***!
   \************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (() => {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "LoginPage": () => (/* binding */ LoginPage)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _assets_css_login_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../assets/css/login.css */ "./resources/js/assets/css/login.css");
-/* harmony import */ var _lib_fetchServiceProvider_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../lib/fetchServiceProvider.js */ "./resources/js/lib/fetchServiceProvider.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-/**
- * 
- *   file: login
- * 
- * 
- *  TYPE: (COMPONENT)
- * 
- *  Purpose: inorder to display the login page 
- * 
- */
-
-
-
-
-
-var LoginPage = /*#__PURE__*/function (_React$Component) {
-  _inherits(LoginPage, _React$Component);
-
-  var _super = _createSuper(LoginPage);
-
-  function LoginPage(props) {
-    var _this;
-
-    _classCallCheck(this, LoginPage);
-
-    _this = _super.call(this, props); // our application state
-
-    _this.fetchServiceProvider = new _lib_fetchServiceProvider_js__WEBPACK_IMPORTED_MODULE_2__["default"]();
-    _this.state = {};
-    return _this;
-  }
-  /**
-   * 
-   * @method: validateForm
-   * 
-   * @purpose  inorder to validate the form before submitting the form 
-   * @parmeter    event
-   * @returns event;
-   */
-
-
-  _createClass(LoginPage, [{
-    key: "validateForm",
-    value: function validateForm(event) {
-      // verify the all inputs fields are filled before sending our request to the api
-      event.preventDefault();
-
-      if (event.target.username.value.length !== 0 && event.target.password.value.length !== 0 && event.target['client-id'].value.length !== 0) {
-        // create a request object for api request with input values
-        var request = {
-          username: event.target.username.value,
-          password: event.target.password.value,
-          clientId: event.target['client-id'].value,
-          _token: this.generateToken()
-        };
-        return this.login(request);
-      }
-
-      return document.getElementById('error-response').innerHTML = 'Please fill in all fields';
-    }
-    /**
-     *  
-     * method: login api Request 
-     * 
-     *  @purpose: inorder to preform the fetre request to the login api 
-     */
-
-  }, {
-    key: "login",
-    value: function login(request) {
-      var headers = {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': 'Bearer ' + request._token
-      };
-      this.fetchServiceProvider.$post('/api/auth/login', request, headers, function (response) {
-        // update the messages that are comming from the api 
-        console.log(response);
-
-        if (response.message) {
-          document.getElementById('error-response').innerHTML = response.message;
-        } // we are going to recieve a token so we are going to store it in a cookie 
-
-
-        if (response.signature) {
-          document.cookie = 'api_public_key=' + response.signature + '; path=/';
-        } // check if user is authentication if so then we will 
-        // redirect the user to the dashboard 
-
-
-        if (response.authenticated) {
-          window.location.href = '/dashboard/';
-        }
-      });
-    }
-  }, {
-    key: "generateToken",
-    value: function generateToken() {
-      var token = document.getElementById('_token_').content;
-      return token;
-    }
-    /**
-     * @method": validate 
-     * 
-     * @purpose: inorder to validate the form as the user is typing inorder to notify the user if they need to enter the required fields
-     * @returns  event 
-     */
-    // could add a feature that will allow you to match the the error cases in the application
-    // with the error messages that are coming from the api maybe?
-
-  }, {
-    key: "validate",
-    value: function validate(event, number) {
-      // to make a shaking animation of our login store
-      var errorWrapper = document.getElementsByClassName('error-message')[number];
-
-      if (event.target.value.length === 0) {
-        errorWrapper.classList.add('text-danger');
-        errorWrapper.classList.remove('text-success');
-        errorWrapper.innerText = 'Please fill out this field it is required';
-        document.getElementById('registration-form').classList.add('shake-animation');
-      } else {
-        errorWrapper.innerHTML = "<i class=\"fas fa-check-circle\"></i>  <span style='margin-left: 10PX;'> looks good! <?/span>";
-        errorWrapper.classList.add('text-success');
-        errorWrapper.classList.remove('text-danger');
-        document.getElementById('registration-form').classList.remove('shake-animation');
-        return true;
-      }
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this2 = this;
-
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-        id: "login-color-box",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-          className: "container pannel",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-            className: "row",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-              className: "col form-login",
-              id: "registration-form",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("form", {
-                className: "form-login",
-                onSubmit: function onSubmit(e) {
-                  _this2.validateForm(e);
-                },
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                  className: "blob image-badge",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
-                    className: "img-fluid",
-                    src: "/img/restaurant-outline.svg",
-                    width: "50vh",
-                    height: "50vw"
-                  })
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
-                  className: "form-login-title text-center",
-                  children: " Please Login "
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
-                  className: "form-login-title text-center",
-                  style: {
-                    'font-size': '18px',
-                    'color': 'dodgerblue'
-                  },
-                  children: " Please enter your login details "
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h4", {
-                  className: "error text-danger",
-                  id: "error-response",
-                  children: "  "
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-                  className: "form-group",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
-                    "for": "username",
-                    children: "Username "
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
-                    className: "error-message text-center text-danger"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
-                    name: "username",
-                    onChange: function onChange(e) {
-                      _this2.validate(e, 0);
-                    },
-                    type: "email",
-                    className: "form-control",
-                    "aria-describedby": "emailHelp",
-                    placeholder: "Enter enter username"
-                  })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-                  className: "form-group",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
-                    "for": "password",
-                    children: "Password"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
-                    className: "error-message text-center text-danger"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
-                    name: "password",
-                    onChange: function onChange(e) {
-                      _this2.validate(e, 1);
-                    },
-                    type: "password",
-                    className: "form-control",
-                    placeholder: "password"
-                  })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-                  className: "form-group",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
-                    "for": "client-id",
-                    children: " Client ID"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
-                    className: "error-message text-center text-danger"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
-                    name: "client-id",
-                    onChange: function onChange(e) {
-                      _this2.validate(e, 2);
-                    },
-                    type: "text",
-                    className: "form-control",
-                    placeholder: "ID Number"
-                  })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                  className: "form-group",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
-                    type: "hidden",
-                    name: "_token",
-                    value: this.generateToken()
-                  })
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-                  className: "form-group mt-4",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
-                    className: "link text-center",
-                    href: "#",
-                    children: " Forgot Password"
-                  })
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
-                  type: "submit",
-                  name: "submit",
-                  className: "btn-lg header-action",
-                  style: {
-                    'width': '100%'
-                  },
-                  children: "Login "
-                })]
-              })
-            })
-          })
-        })
-      });
-    }
-  }]);
-
-  return LoginPage;
-}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+// /**
+//  * 
+//  *   file: login
+//  * 
+//  * 
+//  *  TYPE: (COMPONENT)
+//  * 
+//  *  Purpose: inorder to display the login page 
+//  * 
+//  */
+// import React from "react";
+// import '../../assets/css/login.css';
+// import fetchServiceProvider from '../../lib/fetchServiceProvider.js';
+// export class LoginPage extends React.Component {
+//     constructor(props) {
+//         super(props);
+//         // our application state
+//       this.fetchServiceProvider = new fetchServiceProvider();
+//         this.state = {
+//         }
+//     }
+//     /**
+//      * 
+//      * @method: validateForm
+//      * 
+//      * @purpose  inorder to validate the form before submitting the form 
+//      * @parmeter    event
+//      * @returns event;
+//      */
+//   validateForm (event) {
+//     // verify the all inputs fields are filled before sending our request to the api
+//     event.preventDefault();
+//     if (event.target.username.value.length !== 0 &&  event.target.password.value.length !== 0 && event.target['client-id'].value.length !== 0) {
+//       // create a request object for api request with input values
+//       let request = {
+//         username: event.target.username.value,
+//         password: event.target.password.value,
+//         clientId: event.target['client-id'].value,
+//         _token: this.generateToken(),
+//       }
+//       return this.login(request);
+//     } 
+//      return document.getElementById('error-response').innerHTML = 'Please fill in all fields';
+//   }
+//   /**
+//    *  
+//    * method: login api Request 
+//    * 
+//    *  @purpose: inorder to preform the fetre request to the login api 
+//    */
+//   login(request) {
+//     let headers = {
+//       'Content-Type': 'application/json',
+//       'Accept': 'application/json',
+//       'Authorization': 'Bearer ' + request._token,
+//     };
+//     this.fetchServiceProvider.$post('/api/auth/login', request, headers, (response) => {
+// // update the messages that are comming from the api 
+//       console.log(response);
+//       if (response.message) {
+//         document.getElementById('error-response').innerHTML = response.message;
+//       }
+//       // we are going to recieve a token so we are going to store it in a cookie 
+//       if (response.signature) {
+//         document.cookie = 'api_public_key=' + response.signature + '; path=/';
+//       }
+//       // check if user is authentication if so then we will 
+//       // redirect the user to the dashboard 
+//       if (response.authenticated) {
+//        // window.location.href = '/dashboard';
+//       }
+//   });
+// } 
+// generateToken()
+// {
+//     const token = document.getElementById('_token_').content;
+//     return token;
+// }
+// /**
+//  * @method": validate 
+//  * 
+//  * @purpose: inorder to validate the form as the user is typing inorder to notify the user if they need to enter the required fields
+//  * @returns  event 
+//  */
+// // could add a feature that will allow you to match the the error cases in the application
+// // with the error messages that are coming from the api maybe?
+//  validate(event, number) {
+//   // to make a shaking animation of our login store
+//   const errorWrapper = document.getElementsByClassName('error-message')[number];
+//   if (event.target.value.length === 0) {
+//       errorWrapper.classList.add('text-danger');
+//       errorWrapper.classList.remove('text-success');
+//       errorWrapper.innerText = 'Please fill out this field it is required';
+//       document.getElementById('registration-form').classList.add('shake-animation')
+//   } else {
+//       errorWrapper.innerHTML = `<i class="fas fa-check-circle"></i>  <span style='margin-left: 10PX;'> looks good! <?/span>`
+//       errorWrapper.classList.add('text-success');
+//       errorWrapper.classList.remove('text-danger');
+//       document.getElementById('registration-form').classList.remove('shake-animation')
+//       return true;
+//   }
+// }
+//     render() {
+//         return (
+//           <div id='login-color-box'>
+//            <div className='container pannel'>
+//             <div className='row'>
+//                 <div className='col form-login' id='registration-form'>
+//                 <form className='form-login' onSubmit={ (e) => { this.validateForm(e) }}>
+//                 <div className='blob image-badge'>
+//                     <img className='img-fluid' src='/img/restaurant-outline.svg' width='50vh' height='50vw'/>
+//                  </div> 
+//                     <h1 className='form-login-title text-center'> Please Login </h1>
+//                     <h3 className='form-login-title text-center' style={{'font-size': '18px', 'color': 'dodgerblue'}}> Please enter your login details </h3> 
+//                     <h4 className='error text-danger' id='error-response'>  </h4>
+//                 <div className="form-group">
+//                   <label for="username">Username </label>
+//                   <span className='error-message text-center text-danger'></span>
+//                   <input name='username'  onChange={ (e) => {this.validate(e, 0)}}  type="email" className="form-control" aria-describedby="emailHelp" placeholder="Enter enter username" />
+//                 </div>
+//                 <div className="form-group">
+//                   <label for="password">Password</label>
+//                   <span className='error-message text-center text-danger'></span>
+//                   <input name='password'  onChange={ (e) => {this.validate(e, 1)}}  type="password" className="form-control" placeholder="password" />
+//                 </div>
+//                 <div className="form-group">
+//                 <label for="client-id"> Client ID</label>
+//                 <span className='error-message text-center text-danger'></span>
+//                 <input name='client-id'  onChange={ (e) => {this.validate(e, 2)}}  type="text" className="form-control"  placeholder="ID Number" />
+//               </div>
+//               <div className='form-group'>
+//                <input type="hidden" name="_token" value={this.generateToken()} />
+//                </div>
+//                 <div className='form-group mt-4'>
+//                   <a className='link text-center' href='#'> Forgot Password</a>
+//                 </div>
+//                 <button type="submit" name='submit' className="btn-lg header-action" style={{'width': '100%'}}>Login </button>
+//               </form>
+//                 </div> 
+//             </div>
+//            </div>
+//            </div>
+//         );
+//     }
+// }
 
 /***/ }),
 
@@ -3207,15 +3074,10 @@ var RegisterPage = /*#__PURE__*/function (_React$Component) {
         'Content-type': 'application/json',
         'Accept': 'application/json',
         'Authorization': 'Bearer ' + this.generateToken()
-      }; // logic once we get a response from our callbac;
+      }; // logic once we get a response from our callbacl
 
       this.fetchServiceProvider.$post('/api/auth/register', request, headers, function (response) {
-        console.table(response); // return any infomration for the server for the display to see !
-
-        if (response.message !== 0) {
-          document.getElementById('server_response_wrapper').innerHTML = response.message;
-          document.getElementById('server_response_wrapper').style.fontWeight = 'bold';
-        }
+        console.table(response);
       });
     } // generate our CSFR TOKEN FOR OUR APPLICATION 
 
@@ -3264,7 +3126,7 @@ var RegisterPage = /*#__PURE__*/function (_React$Component) {
                 onSubmit: function onSubmit(e) {
                   _this2.validateForm(e);
                 },
-                children: ["[ ]", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
                   className: "blob image-badge",
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
                     className: "img-fluid",
@@ -3606,6 +3468,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _componets_home_footer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../componets/home/footer */ "./resources/js/componets/home/footer.jsx");
 /* harmony import */ var _componets_login_login__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../componets/login/login */ "./resources/js/componets/login/login.jsx");
+/* harmony import */ var _componets_login_login__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_componets_login_login__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _componets_home_header__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../componets/home/header */ "./resources/js/componets/home/header.jsx");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /**
@@ -8529,39 +8392,6 @@ function AppRoutes() {
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[5].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[5].oneOf[1].use[2]!./resources/js/assets/css/login.css":
-/*!*****************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[5].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[5].oneOf[1].use[2]!./resources/js/assets/css/login.css ***!
-  \*****************************************************************************************************************************************************************************************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
-/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/getUrl.js */ "./node_modules/css-loader/dist/runtime/getUrl.js");
-/* harmony import */ var _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _img_restaurant_outline_svg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../img/restaurant-outline.svg */ "./resources/js/assets/img/restaurant-outline.svg");
-/* harmony import */ var _img_Waiau_svg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../img/Waiau.svg */ "./resources/js/assets/img/Waiau.svg");
-// Imports
-
-
-
-
-var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
-var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_img_restaurant_outline_svg__WEBPACK_IMPORTED_MODULE_2__["default"]);
-var ___CSS_LOADER_URL_REPLACEMENT_1___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_img_Waiau_svg__WEBPACK_IMPORTED_MODULE_3__["default"]);
-// Module
-___CSS_LOADER_EXPORT___.push([module.id, "#login-color-box {\n\n  background: #e1eec377;  /* fallback for old browsers */\nbackground: linear-gradient(to right, #e1eec398, #e1eec398); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */\n  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;\n\n}\n\n.pannel {\n  border-radius: 20px;   \n   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;\n  } \n  \n  .pannel img {\n    border: 1px solid rgba(0, 0, 0, 0.097);\n    border-top-left-radius: 50%;\n    min-width: 100% !important;\n    height: 100% !important;  \n  }\n\n    .image-badge {\n      height: auto;\n      background-image: linear-gradient(45deg, #8baaaabb 0%rgba(174, 139, 156, 0.727)9c 100%);\n    }\n  \n  .form-login {\n    padding: 20px;\n    background-color: rgba(255, 255, 255, 0.734);\n    border-bottom-left-radius: 20px;\n  }\n  \n  .form-login label {\n      margin-top: 10px;\n      color: slategray;\n      font-size: 16px;\n      font-style: italic;\n      text-align: center;\n  \n  }\n  \n  .form-login input {\n      width: 100%;\n      border: none;\n      margin-top: 10px;\n      padding: 10px;\n      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;\n  }\n\n\n  .form-login-title {\n    font-size: 24px;\n    font-weight: 900;\n  }\n\n  .form-login input:focus {\n    box-shadow: rgba(39, 21, 21, 0.453) 4px 6px 14px -2px;\n  }\n\n\n  .form-login .link {\n    font-weight: 600;\n    font-size: 18px;\n    color: rgb(0, 60, 170);\n    margin-top: 10px;\n    text-decoration: none;\n  }\n\n  .form-login .link:hover {\n    color: salmon;\n  }\n\n\n  .form-splash-drop-shadow {\n    background-color:rgba(65, 65, 65, 0.179);\n    width: 100%;\n    height: 100%;\n  }\n  \n  .form-login-splash {\n    height: auto;\n    /* do not touch */\n    background-image:url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n    background-repeat: no-repeat;\n    background-size: contain;\n    padding: 0px;\n    margin: 0px;\n    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;\n    border-bottom-right-radius: 20px;\n  }\n\n\n  .form-register-splash {\n    height: auto;\n    /* do not touch */\n    background-image:url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ") ;\n    background-size: contain;\n    padding: 0px;\n    margin: 0px;\n    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;\n    border-bottom-right-radius: 20px;\n\n  }\n  \n  .error-message {\n    margin-left: 20px;\n    font-weight: 800;\n    font-size: 16px;\n  }\n\n\n  .icon-large {\n    font-size: 50px;\n  }\n/*  MEDIA QUERYS   */\n\n/* On screens that are 992px or less, set the background color to blue */\n@media screen and (max-width: 992px) {\n  nav {\n    height: auto;\n  }\n  .dropdown-menu {\n    width: 90vw !important;\n    margin: 0px !important;\n  }\n\n  img { \n    width: 100vw;\n  }\n}\n\n/* On screens that are 600px or less, set the background color to olive */\n@media screen and (max-width: 600px) {\n  nav {\n    height: auto;\n  }\n  .dropdown-menu {\n    width: 90vw !important;\n    margin: 0px !important;\n  }\n\n\n  img {\n    width: 100vw;\n  }\n}\n", ""]);
-// Exports
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
-
-
-/***/ }),
-
 /***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[5].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[5].oneOf[1].use[2]!./resources/js/index.css":
 /*!******************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[5].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[5].oneOf[1].use[2]!./resources/js/index.css ***!
@@ -8588,7 +8418,7 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_blob_mask_header_svg__WEBPACK_IMPORTED_MODULE_2__["default"]);
 var ___CSS_LOADER_URL_REPLACEMENT_1___ = _node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_1___default()(_blob_svg__WEBPACK_IMPORTED_MODULE_3__["default"]);
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "        body {\n            font: 18px \"Century Gothic\", Futura, sans-serif;\n            background-color: #7ca4ee38;\n            background-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23d7cee7' fill-opacity='0.08' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E\");\n        }\n        \n        nav {\n            background-color: rgba(248, 105, 105, 0.761);\n            font-weight: 800;\n            height: 15vh;\n        }\n        /*  MEDIA QUERYS   */\n        /* On screens that are 992px or less, set the background color to blue */\n        \n        @media screen and (max-width: 992px) {\n            nav {\n                height: auto;\n            }\n            .dropdown-menu {\n                width: 90vw !important;\n                margin: 0px !important;\n            }\n            .form-login-splash {\n                display: none;\n            }\n        }\n        /* On screens that are 600px or less, set the background color to olive */\n        \n        @media screen and (max-width: 600px) {\n            nav {\n                height: auto;\n            }\n            .dropdown-menu {\n                width: 90vw !important;\n                margin: 0px !important;\n            }\n            .form-login-splash {\n                display: none;\n            }\n        }\n        \n        nav>* {\n            text-decoration: none;\n        }\n        \n        .nav-link {\n            color: white;\n            font-size: 15px;\n            width: auto;\n            margin: 30px;\n        }\n        \n        .nav-link:hover {\n            color: rgb(53, 129, 206);\n        }\n        \n        .img-round {\n            border-radius: 50%;\n        }\n        \n        .header-subtitle {\n            font-weight: 1000;\n            color: rgb(16, 99, 177);\n        }\n        \n        .header-title {\n            font-size: 32px;\n            font-weight: 800;\n            color: black;\n        }\n        \n        .header-description {\n            margin-top: 20px;\n            font-size: 18px;\n            color: slategray;\n            font-style: italic;\n        }\n        \n        .hero:nth-child(even) {\n            padding: 20px;\n            box-sizing: border-box;\n            ;\n            background-color: #407cfcc0;\n            border-radius: 25px;\n            -webkit-clip-path: ellipse(300% 100% at -120% 0%);\n                    clip-path: ellipse(300% 100% at -120% 0%);\n            box-shadow: rgba(47, 52, 56, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;\n        }\n        \n        .hero:nth-child(odd) {\n            height: 500px;\n            box-sizing: border-box;\n            ;\n            border-radius: 10px;\n            -webkit-clip-path: ellipse(300% 100% at -120% 0%);\n                    clip-path: ellipse(300% 100% at -120% 0%);\n            box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 50px -5px, rgba(0, 0, 0, 0.795) 0px 8px 16px -8px;\n        }\n        \n        .header-action {\n            margin-top: 5vh;\n            background-color: salmon;\n            border: none;\n            border-radius: 25px;\n            padding: 15px;\n            font-weight: bold;\n        }\n        \n        .header-action-no-margin {\n            background-color: salmon;\n            border: none;\n            border-radius: 25px;\n            padding-left: 20px;\n            padding-right: 20px;\n            font-weight: bold;\n            width: auto;\n            position: relative;\n            top: -10px;\n        }\n        \n        .header-action-no-margin:hover {\n            background-color: #8c2f2fd4;\n            color: white;\n            font-weight: bold;\n            box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.795) 0px 8px 16px -8px;\n        }\n        \n        .header-action:hover {\n            background-color: #e44b4b;\n            color: white;\n            font-weight: bold;\n            box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.795) 0px 8px 16px -8px;\n        }\n        /* header spacing element for the landing space provide helpor margin pushes for some of the content  */\n        \n        .header-section-space {\n            margin-top: 10vh;\n        }\n        \n        .header-section-space-md {\n            margin-top: 20vh;\n        }\n        \n        .header-section-space-lg {\n            margin-top: 30vh;\n        }\n        \n        .header-section-space-xl {\n            margin-top: 40vh;\n        }\n        \n        .body-section-title {\n            font-weight: 1000;\n        }\n        \n        .drop-shadow {\n            background-color: rgba(68, 61, 77, 0.296);\n        }\n        \n        .blob {\n            background-color: rgba(255, 128, 111, 0.09);\n            border: 10px solid rgba(0, 0, 0, 0.789);\n            padding: 40px;\n            -webkit-mask-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n                    mask-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n            mask-mode: alpha;\n            -webkit-mask-repeat: no-repeat;\n                    mask-repeat: no-repeat;\n            width: 350px;\n            height: 350px;\n            margin: auto;\n            box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;\n        }\n        \n        .blob-lg {\n            border: 10px solid rgba(240, 152, 152, 0.2);\n            padding: 40px;\n            background-color: rgba(255, 162, 152, 0.118);\n            padding: 50px;\n            -webkit-mask-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n                    mask-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n            mask-mode: luminance, alpha, match-source;\n            -webkit-mask-repeat: no-repeat;\n                    mask-repeat: no-repeat;\n            box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;\n        }\n        \n        .blob-lg>img {\n            box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 40px -5px, rgba(0, 0, 0, 0.795) 0px 8px 16px -8px;\n            border-radius: 20px;\n        }\n        \n        .blob>img {\n            box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 60px -2px, rgba(0, 0, 0, 0.795) 0px 8px 16px -8px;\n            border-radius: 20px;\n        }\n        \n        .multi-color-section {\n            font-weight: 1000;\n            font-family: cursive;\n            font-style: uppercase !important;\n            font-size: 7vw;\n        }\n        \n        .multi-color-section>span:nth-child(1) {\n            color: salmon;\n            font-size: 32px;\n        }\n        \n        .multi-color-section>span:nth-child(2) {\n            color: dodgerblue;\n            font-size: 32px;\n        }\n        \n        .multi-color-section>span:nth-child(3) {\n            color: firebrick;\n            font-size: 32px;\n        }\n        /* drop down menu styling   */\n        \n        .dropdown-menu {\n            background-color: rgb(247, 243, 243);\n            border-bottom-left-radius: 25px;\n            border-bottom-right-radius: 25px;\n            padding: 25px;\n            width: 50vw;\n            margin: 25vw;\n            box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;\n        }\n        \n        .dropdown-title {\n            font-weight: 1000;\n            font-size: 16px;\n            color: rgb(38, 58, 79);\n        }\n        \n        .dropdown-subtitle {\n            margin-top: 0.5vh;\n            font-size: 16px;\n            color: rgb(61, 61, 61);\n        }\n        \n        .dropdown-link {\n            font-size: 16px;\n            color: rgb(29, 35, 70);\n            text-decoration: none;\n        }\n        \n        .dropdown-link:hover {\n            color: salmon;\n            cursor: pointer;\n        }\n        \n        .dropdown-icon {\n            font-size: 40px;\n        }\n        \n        .dropdown-desc {\n            margin-top: 1vh;\n            font-size: 14px;\n            color: slategray;\n            font-weight: 300;\n        }\n        \n        .border-breakpoint {\n            border-bottom: 1px solid salmon;\n            margin: 10px;\n        }\n        /* end of drop down styling  */\n        \n        .hidden {\n            padding: 100px;\n            display: block;\n            -webkit-clip-path: circle(57.1% at 50% 50%);\n                    clip-path: circle(57.1% at 50% 50%);\n            z-index: 1;\n        }\n        \n        footer {\n            color: white;\n            box-shadow: rgba(253, 127, 127, 0.583) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;\n            background-color: #1a1818d0;\n            box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 100px -5px, rgba(0, 17, 53, 0.04) 0px 10px 10px -5px;\n            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */\n        }\n        \n        .md {\n            width: 25vh;\n        }\n        \n        .brand-img {\n            float: left !important;\n            width: 100%;\n            height: auto;\n        }\n        \n        .sepia {\n            filter: grayscale(60%);\n        }\n        \n        .footer {\n            width: 80%;\n        }\n        \n        .footer>* {\n            text-shadow: 0px 1px 1px rgba(58, 20, 20, 0.426);\n        }\n        \n        .footer-list>* {\n            color: white;\n            background-color: transparent;\n            border: none;\n        }\n        /* footer list stylings  */\n        \n        .footer-section-title {\n            color: rgb(142, 159, 245);\n            font-size: 24px;\n            font-weight: 1000;\n        }\n        \n        .footer-section-subtitle {\n            color: whitesmoke;\n            font-size: 18px;\n            font-weight: 600;\n        }\n        \n        .footer-section-divider {\n            padding: 0px;\n            border-bottom: 1px solid rgba(250, 128, 114, 0.453);\n            width: 50vw;\n        }\n        \n        .footer-section-link>a {\n            margin-left: 40px;\n            text-decoration: none;\n            color: whitesmoke;\n            font-weight: 800;\n            font-size: 16px;\n        }\n        \n        .footer-section-link>a:hover {\n            color: salmon;\n        }\n        \n        .footer-bottom {\n            -webkit-text-decoration: italic !important;\n                    text-decoration: italic !important;\n            text-align: center;\n        }\n        /* animation styles   */\n        \n        .fade-in {\n            -webkit-animation: rollDropDown 2.0s ease 0s 1 normal forwards;\n                    animation: rollDropDown 2.0s ease 0s 1 normal forwards;\n        }\n        /* animation rolling Drop Down */\n        /*  end of form login screen  */\n        /* end of form login screen  */\n        /* start of payment form  */\n        \n        .payment-card {\n            background-color: rgba(255, 255, 255, 0.8);\n            border-radius: 20px;\n            padding: 20px;\n            box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 14px;\n            border: 10px solid rgba(97, 134, 255, 0.131);\n            margin: 20px;\n            height: 100%;\n        }\n        \n        .payment-card:nth-child(odd) {\n            box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;\n            border-style: solid;\n            border-bottom: none;\n            border-width: 20px;\n            padding: 20px;\n            -webkit-animation: rollDropDown 2.0s ease 0s 1 normal forwards;\n                    animation: rollDropDown 2.0s ease 0s 1 normal forwards;\n        }\n        \n        @-webkit-keyframes rollDropDown {\n            0% {\n                opacity: 0;\n                transform: scale(0.0);\n            }\n            100% {\n                opacity: 1;\n                transform: scale(1.0);\n            }\n        }\n        \n        @keyframes rollDropDown {\n            0% {\n                opacity: 0;\n                transform: scale(0.0);\n            }\n            100% {\n                opacity: 1;\n                transform: scale(1.0);\n            }\n        }\n        \n        .payment-card:hover {\n            cursor: pointer;\n            background-color: rgba(253, 241, 246, 0.193);\n        }\n        \n        .payment-card h1 {\n            font-size: 24px;\n            font-weight: 1000;\n            color: rgb(38, 58, 79);\n            font-weight: 1000;\n        }\n        \n        .payment-card h2 {\n            font-size: 18px;\n            font-weight: 600;\n            color: rgb(61, 61, 61);\n        }\n        \n        .payment-card p {\n            font-size: 16px;\n            font-weight: 800;\n            color: rgb(73, 71, 71);\n        }\n        /* make glass effect on card  */\n        \n        .glass-effect {\n            box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;\n        }\n        \n        .image-center-icon {\n            width: 250px;\n            height: 250px;\n            margin: auto;\n        }\n        \n        .image-center-icon img {\n            margin: auto;\n            width: 250px;\n            height: 250px;\n        }\n        /* make a shaking animaition class */\n        \n        .shake-animation {\n            -webkit-animation-name: shake;\n            animation-name: shake;\n            -webkit-animation-duration: 1s;\n            animation-duration: 1s;\n            -webkit-animation-fill-mode: both;\n            animation-fill-mode: both;\n        }\n        \n        @-webkit-keyframes shake {\n            0%,\n            100% {\n                transform: translate3d(0, 0, 0);\n            }\n            10%,\n            30%,\n            50%,\n            70%,\n            90% {\n                transform: translate3d(-10px, 0, 0);\n            }\n            20%,\n            40%,\n            60%,\n            80% {\n                transform: translate3d(10px, 0, 0);\n            }\n        }\n        \n        @keyframes shake {\n            0%,\n            100% {\n                transform: translate3d(0, 0, 0);\n            }\n            10%,\n            30%,\n            50%,\n            70%,\n            90% {\n                transform: translate3d(-10px, 0, 0);\n            }\n            20%,\n            40%,\n            60%,\n            80% {\n                transform: translate3d(10px, 0, 0);\n            }\n        }", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "    body {\n        font: 18px \"Century Gothic\", Futura, sans-serif;\n        background-color: #d0c0bf27;\n        background-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23d7cee7' fill-opacity='0.08' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E\");\n    }\n    \n    nav {\n        color: whitesmoke;\n        font-weight: 800;\n        background-color: #ff8a8ac0;\n        height: 15vh;\n    }\n    /*  MEDIA QUERYS   */\n    /* On screens that are 992px or less, set the background color to blue */\n    \n    @media screen and (max-width: 992px) {\n        nav {\n            height: auto;\n        }\n        .dropdown-menu {\n            width: 90vw !important;\n            margin: 0px !important;\n        }\n        .form-login-splash {\n            display: none;\n        }\n    }\n    /* On screens that are 600px or less, set the background color to olive */\n    \n    @media screen and (max-width: 600px) {\n        nav {\n            height: auto;\n        }\n        .dropdown-menu {\n            width: 90vw !important;\n            margin: 0px !important;\n        }\n        .form-login-splash {\n            display: none;\n        }\n    }\n    \n    nav>* {\n        padding: 0px;\n        text-decoration: none;\n    }\n    \n    .nav-link {\n        color: white;\n        font-size: 15px;\n        width: auto;\n        margin: 30px;\n    }\n    \n    .nav-link:hover {\n        color: rgb(53, 129, 206);\n    }\n    \n    .img-round {\n        border-radius: 50%;\n    }\n    \n    .header-subtitle {\n        font-weight: 1000;\n        color: rgb(16, 99, 177);\n    }\n    \n    .header-title {\n        font-size: 32px;\n        font-weight: 800;\n        color: black;\n    }\n    \n    .header-description {\n        margin-top: 20px;\n        font-size: 18px;\n        color: slategray;\n        font-style: italic;\n    }\n    \n    .hero:nth-child(even) {\n        padding: 20px;\n        box-sizing: border-box;\n        ;\n        background-color: #407cfcc0;\n        border-radius: 25px;\n        -webkit-clip-path: ellipse(300% 100% at -120% 0%);\n                clip-path: ellipse(300% 100% at -120% 0%);\n        box-shadow: rgba(47, 52, 56, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;\n    }\n    \n    .hero:nth-child(odd) {\n        height: 500px;\n        box-sizing: border-box;\n        ;\n        border-radius: 10px;\n        -webkit-clip-path: ellipse(300% 100% at -120% 0%);\n                clip-path: ellipse(300% 100% at -120% 0%);\n        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 50px -5px, rgba(0, 0, 0, 0.795) 0px 8px 16px -8px;\n    }\n    \n    .header-action {\n        margin-top: 5vh;\n        background-color: salmon;\n        border: none;\n        border-radius: 25px;\n        padding: 15px;\n        font-weight: bold;\n    }\n    \n    .header-action-no-margin {\n        background-color: salmon;\n        border: none;\n        border-radius: 25px;\n        padding-left: 20px;\n        padding-right: 20px;\n        font-weight: bold;\n        width: auto;\n        position: relative;\n        top: -10px;\n    }\n    \n    .header-action-no-margin:hover {\n        background-color: #8c2f2fd4;\n        color: white;\n        font-weight: bold;\n        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.795) 0px 8px 16px -8px;\n    }\n    \n    .header-action:hover {\n        background-color: #e44b4b;\n        color: white;\n        font-weight: bold;\n        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.795) 0px 8px 16px -8px;\n    }\n    /* header spacing element for the landing space provide helpor margin pushes for some of the content  */\n    \n    .header-section-space {\n        margin-top: 10vh;\n    }\n    \n    .header-section-space-md {\n        margin-top: 20vh;\n    }\n    \n    .header-section-space-lg {\n        margin-top: 30vh;\n    }\n    \n    .header-section-space-xl {\n        margin-top: 40vh;\n    }\n    \n    .body-section-title {\n        font-weight: 1000;\n    }\n    \n    .drop-shadow {\n        background-color: rgba(68, 61, 77, 0.296);\n    }\n    \n    .blob {\n        background-color: rgba(255, 128, 111, 0.09);\n        border: 10px solid rgba(0, 0, 0, 0.789);\n        padding: 40px;\n        -webkit-mask-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n                mask-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_0___ + ");\n        mask-mode: alpha;\n        -webkit-mask-repeat: no-repeat;\n                mask-repeat: no-repeat;\n        width: 350px;\n        height: 350px;\n        margin: auto;\n        box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;\n    }\n    \n    .blob-lg {\n        border: 10px solid rgba(240, 152, 152, 0.2);\n        padding: 40px;\n        background-color: rgba(255, 162, 152, 0.118);\n        padding: 50px;\n        -webkit-mask-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n                mask-image: url(" + ___CSS_LOADER_URL_REPLACEMENT_1___ + ");\n        mask-mode: luminance, alpha, match-source;\n        -webkit-mask-repeat: no-repeat;\n                mask-repeat: no-repeat;\n        box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;\n    }\n    \n    .blob-lg>img {\n        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 40px -5px, rgba(0, 0, 0, 0.795) 0px 8px 16px -8px;\n        border-radius: 20px;\n    }\n    \n    .blob>img {\n        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 60px -2px, rgba(0, 0, 0, 0.795) 0px 8px 16px -8px;\n        border-radius: 20px;\n    }\n    \n    .multi-color-section {\n        font-weight: 1000;\n        font-family: cursive;\n        font-style: uppercase !important;\n        font-size: 7vw;\n    }\n    \n    .multi-color-section>span:nth-child(1) {\n        color: salmon;\n        font-size: 32px;\n    }\n    \n    .multi-color-section>span:nth-child(2) {\n        color: dodgerblue;\n        font-size: 32px;\n    }\n    \n    .multi-color-section>span:nth-child(3) {\n        color: firebrick;\n        font-size: 32px;\n    }\n    /* drop down menu styling   */\n    \n    .dropdown-menu {\n        background-color: rgb(247, 243, 243);\n        border-bottom-left-radius: 25px;\n        border-bottom-right-radius: 25px;\n        padding: 25px;\n        width: 50vw;\n        margin: 25vw;\n        box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;\n    }\n    \n    .dropdown-title {\n        font-weight: 1000;\n        font-size: 16px;\n        color: rgb(38, 58, 79);\n    }\n    \n    .dropdown-subtitle {\n        margin-top: 0.5vh;\n        font-size: 16px;\n        color: rgb(61, 61, 61);\n    }\n    \n    .dropdown-link {\n        font-size: 16px;\n        color: rgb(29, 35, 70);\n        text-decoration: none;\n    }\n    \n    .dropdown-link:hover {\n        color: salmon;\n        cursor: pointer;\n    }\n    \n    .dropdown-icon {\n        font-size: 40px;\n    }\n    \n    .dropdown-desc {\n        margin-top: 1vh;\n        font-size: 14px;\n        color: slategray;\n        font-weight: 300;\n    }\n    \n    .border-breakpoint {\n        border-bottom: 1px solid salmon;\n        margin: 10px;\n    }\n    /* end of drop down styling  */\n    \n    .hidden {\n        padding: 100px;\n        display: block;\n        -webkit-clip-path: circle(57.1% at 50% 50%);\n                clip-path: circle(57.1% at 50% 50%);\n        z-index: 1;\n    }\n    \n    footer {\n        color: white;\n        box-shadow: rgba(184, 54, 54, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;\n        background: #1a0101e0;\n        box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 100px -5px, rgba(0, 17, 53, 0.04) 0px 10px 10px -5px;\n        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */\n    }\n    \n    .md {\n        width: 25vh;\n    }\n    \n    .brand-img {\n        float: left !important;\n        width: 100%;\n        height: auto;\n    }\n    \n    .sepia {\n        filter: grayscale(60%);\n    }\n    \n    .footer {\n        width: 80%;\n    }\n    \n    .footer-list>* {\n        color: white;\n        background-color: transparent;\n        border: none;\n    }\n    /* footer list stylings  */\n    \n    .footer-section-title {\n        color: rgb(142, 159, 245);\n        font-size: 24px;\n        font-weight: 1000;\n    }\n    \n    .footer-section-subtitle {\n        color: whitesmoke;\n        font-size: 18px;\n        font-weight: 600;\n    }\n    \n    .footer-section-divider {\n        padding: 0px;\n        border-bottom: 1px solid rgba(250, 128, 114, 0.453);\n        width: 50vw;\n    }\n    \n    .footer-section-link>a {\n        margin-left: 40px;\n        text-decoration: none;\n        color: whitesmoke;\n        font-weight: 800;\n        font-size: 16px;\n    }\n    \n    .footer-section-link>a:hover {\n        color: salmon;\n    }\n    \n    .footer-bottom {\n        -webkit-text-decoration: italic !important;\n                text-decoration: italic !important;\n        text-align: center;\n    }\n    /* animation styles   */\n    \n    .fade-in {\n        -webkit-animation: rollDropDown 2.0s ease 0s 1 normal forwards;\n                animation: rollDropDown 2.0s ease 0s 1 normal forwards;\n    }\n    /* animation rolling Drop Down */\n    /*  end of form login screen  */\n    /* end of form login screen  */\n    /* start of payment form  */\n    \n    .payment-card {\n        background-color: rgba(255, 255, 255, 0.8);\n        border-radius: 20px;\n        padding: 20px;\n        box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 14px;\n        border: 10px solid rgba(97, 134, 255, 0.131);\n        margin: 20px;\n        height: 100%;\n    }\n    \n    .payment-card:nth-child(odd) {\n        box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;\n        border-style: solid;\n        border-bottom: none;\n        border-width: 20px;\n        padding: 20px;\n        -webkit-animation: rollDropDown 2.0s ease 0s 1 normal forwards;\n                animation: rollDropDown 2.0s ease 0s 1 normal forwards;\n    }\n    \n    @-webkit-keyframes rollDropDown {\n        0% {\n            opacity: 0;\n            transform: scale(0.0);\n        }\n        100% {\n            opacity: 1;\n            transform: scale(1.0);\n        }\n    }\n    \n    @keyframes rollDropDown {\n        0% {\n            opacity: 0;\n            transform: scale(0.0);\n        }\n        100% {\n            opacity: 1;\n            transform: scale(1.0);\n        }\n    }\n    \n    .payment-card:hover {\n        cursor: pointer;\n        background-color: rgba(253, 241, 246, 0.193);\n    }\n    \n    .payment-card h1 {\n        font-size: 24px;\n        font-weight: 1000;\n        color: rgb(38, 58, 79);\n        font-weight: 1000;\n    }\n    \n    .payment-card h2 {\n        font-size: 18px;\n        font-weight: 600;\n        color: rgb(61, 61, 61);\n    }\n    \n    .payment-card p {\n        font-size: 16px;\n        font-weight: 800;\n        color: rgb(73, 71, 71);\n    }\n    /* make glass effect on card  */\n    \n    .glass-effect {\n        box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;\n    }\n    \n    .image-center-icon {\n        width: 250px;\n        height: 250px;\n        margin: auto;\n    }\n    \n    .image-center-icon img {\n        margin: auto;\n        width: 250px;\n        height: 250px;\n    }\n    /* make a shaking animaition class */\n    \n    .shake-animation {\n        -webkit-animation: shake 0.82s cubic-bezier(.36, .07, .19, .97) both;\n                animation: shake 0.82s cubic-bezier(.36, .07, .19, .97) both;\n        transform: translate3d(0, 0, 0);\n        -webkit-backface-visibility: hidden;\n                backface-visibility: hidden;\n        perspective: 1000px;\n    }\n    \n    @-webkit-keyframes shake {\n        10%,\n        90% {\n            transform: translate3d(-10px, 0, 0);\n            background-color: rgba(49, 2, 2, 0.583);\n        }\n        20%,\n        80% {\n            transform: translate3d(2px, 0, 0);\n        }\n        30%,\n        50%,\n        70% {\n            transform: translate3d(-4px, 0, 0);\n        }\n        40%,\n        60% {\n            transform: translate3d(10px, 0, 0);\n            background-color: rgba(255, 0, 0, 0.433);\n        }\n    }\n    \n    @keyframes shake {\n        10%,\n        90% {\n            transform: translate3d(-10px, 0, 0);\n            background-color: rgba(49, 2, 2, 0.583);\n        }\n        20%,\n        80% {\n            transform: translate3d(2px, 0, 0);\n        }\n        30%,\n        50%,\n        70% {\n            transform: translate3d(-4px, 0, 0);\n        }\n        40%,\n        60% {\n            transform: translate3d(10px, 0, 0);\n            background-color: rgba(255, 0, 0, 0.433);\n        }\n    }", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -8712,36 +8542,6 @@ module.exports = function (url, options) {
 
   return url;
 };
-
-/***/ }),
-
-/***/ "./resources/js/assets/img/Waiau.svg":
-/*!*******************************************!*\
-  !*** ./resources/js/assets/img/Waiau.svg ***!
-  \*******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/Waiau.svg?d009db6d359248f2a55016f7351f0479");
-
-/***/ }),
-
-/***/ "./resources/js/assets/img/restaurant-outline.svg":
-/*!********************************************************!*\
-  !*** ./resources/js/assets/img/restaurant-outline.svg ***!
-  \********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ("/images/restaurant-outline.svg?9285502d986b500b94164bb00b062cda");
 
 /***/ }),
 
@@ -74690,36 +74490,6 @@ if (false) {} else {
   module.exports = __webpack_require__(/*! ./cjs/scheduler-tracing.development.js */ "./node_modules/scheduler/cjs/scheduler-tracing.development.js");
 }
 
-
-/***/ }),
-
-/***/ "./resources/js/assets/css/login.css":
-/*!*******************************************!*\
-  !*** ./resources/js/assets/css/login.css ***!
-  \*******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
-/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_5_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_5_oneOf_1_use_2_login_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[5].oneOf[1].use[1]!../../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[5].oneOf[1].use[2]!./login.css */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[5].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[5].oneOf[1].use[2]!./resources/js/assets/css/login.css");
-
-            
-
-var options = {};
-
-options.insert = "head";
-options.singleton = false;
-
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_5_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_5_oneOf_1_use_2_login_css__WEBPACK_IMPORTED_MODULE_1__["default"], options);
-
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_5_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_5_oneOf_1_use_2_login_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 

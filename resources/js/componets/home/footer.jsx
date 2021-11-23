@@ -20,12 +20,14 @@ export class Footer extends React.Component {
         {" "}
   
             <div className='container footer'>
+
+
               <div className='row'>
-                  <div className='col-sm'>
-                        <img className="img-fluid"  src="/img/logo/Cloud Chef-logos_white.png" alt="" width="400px;" /> 
-                  </div>
+              <div className='row'>
+        {/** copyright section */}
+                 <span className='footer-bottom footer-section-subtitle'> 
+                 <img className="img-fluid"  src="/img/logo/Cloud Chef-logos_white.png" alt="" width="500px;" />  2021 CLOUD CHEF INC </span>
               </div>
-  
   
               <div className='row'>
                   <div className='col-sm'>
@@ -56,11 +58,7 @@ export class Footer extends React.Component {
                   </div>
               </div>
   
-              <div className='row'>
-        {/** copyright section */}
-                 <span className='footer-bottom footer-section-subtitle'> 
-                 <img className="img-fluid"  src="/img/logo/Cloud Chef-logos_white.png" alt="" width="200px;" />  2021 CLOUD CHEF INC </span>
-              </div>
+             </div>
             </div>
   
       
