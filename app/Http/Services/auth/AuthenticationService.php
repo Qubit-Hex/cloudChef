@@ -164,26 +164,19 @@ class AuthenticationService
         if ($userFetch == null) {
             return response()->json(['status' => false, 'message' => 'Invalid signature'], 401);
         }
-        
+
         // next once signature is validated we can destroy the session
         // and send  a response back the clinet
-
-        $userFetch->digital_access_tokens = null;
-        $userFetch->save();
+        DB::table('users')->where('digital_access_tokens', $signature)->update(['digital_access_tokens' => null]);
 
         // erase the session that the user has created 
-
         $response = [
             'status' => true,
             'request' => 'logout',
             'message' => 'You have been logged out successfully'
         ];
 
-    
-        $signature = $request->header('signature');
-        return response()->json(['status' => true, 'message' => 'Logout Successful', 'signature' => $signature], 200);
-
-
+        return response()->json($response, 200);
      }
 
 }

@@ -50,7 +50,16 @@ Route::post('/authentication/register/', [authentication::class, 'register'])->n
 
 
 
+Route::get('/dashboard/', [dashboard::class, 'index'])->name('dashboard');
+
+
+
+Route::get('/dashboard/profile/', [dashboard::class, 'profile'])->name('dashboard/profile');
+
+
 
 // final route if no other route is matched
 Route::get('/', [home::class, 'index']);
 // end of home page application routes =
+
+

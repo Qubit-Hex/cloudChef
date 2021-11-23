@@ -52,11 +52,82 @@ use App\Http\Controllers\dashboard;
 
     Route::post('auth/logout/', [authentication::class, 'logout'])->name('auth/logout');
     
-/**
- * 
- *  @purpose: inorder to route the dashboard once the user is logged in into to use our application  
- * 
- *  @Route: /dashboard/
- */
 
- Route::get('/dashboard/{request?}/{action?}/{method?}/', [dashboard::class, 'index'])->name('dashboard');
+
+
+    /***
+     * 
+     *  @route: users route.
+     * 
+     *  @purposee: to make the user api route for this application.
+     * 
+     */
+
+      Route::group(['middleware' => 'uac'], function () {
+
+   
+         // get your current user information 
+         Route::get('users/', [dashboard::class, 'getUserDetails'])->name('users/');
+
+
+         // the users that are a part of your currennt store
+         Route::get('users/{id}/', [dashboard::class, 'getUserDetails'])->name('users/{id}/');
+
+
+         // add a user to your store
+         Route::post('users/', [dashboard::class, 'createUser'])->name('users/');
+
+         // update a user to your store
+         Route::put('users/{id}/', [dashboard::class, 'updateUser'])->name('users/{id}/');
+
+         // delete a user to your store
+         Route::delete('users/{id}/', [dashboard::class, 'deleteUser'])->name('users/{id}/');
+      });
+
+
+      // group middle ware for accessing store data
+      Route::group(['middleware' => 'uac'], function () {
+
+         // get current store data 
+         Route::get('stores/', [dashboard::class, 'getStoreDetails'])->name('stores/');
+
+
+         // update current store data
+         Route::put('stores/{id}/', [dashboard::class, 'updateStore'])->name('stores/{id}/');
+
+
+         // add a store too the database for you to manage 
+         Route::post('stores/', [dashboard::class, 'createStore'])->name('stores/');
+
+      });
+
+
+      // customer reviews route anomoous
+
+
+      Route::group(['middleware' => 'uac'], function () {
+
+         // get current store data 
+         Route::get('reviews/{storeID?}', [dashboard::class, 'getReviews'])->name('reviews/');
+
+         // post a review to the store 
+
+         Route::post('reviews/{store}/{id?}', [dashboard::class, 'createReview'])->name('reviews/');
+
+         // update a review to the store
+
+
+         Route::put('reviews/{store}/{id}/{action}', [dashboard::class, 'updateReview'])->name('reviews/');
+
+
+         // delete will not exist for this resources since we want to keep the reviews transparent as possible 
+         // and we want to keep the reviews anonymous. and dont want ratings to be manipulated.
+
+      });
+      
+
+
+
+
+
+

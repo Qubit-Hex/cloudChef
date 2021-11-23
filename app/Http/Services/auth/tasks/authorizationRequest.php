@@ -20,8 +20,8 @@
 
 
 namespace App\Http\Services\auth\tasks;
-
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Response;
 use App\Models\User;
 use App\Models\sessions;
 use Dotenv\Repository\RepositoryInterface;
@@ -36,7 +36,7 @@ class authorizationRequest {
     private $request_type;
 
 
-    public function __constructor(Request $request) {
+    public function __constructor($request) {
 
         $this->request = $request;
         $this->request_type = $request->header('Authorization');
@@ -44,9 +44,33 @@ class authorizationRequest {
         $this->signature = $this->request->header('Signature');
         $this->user = new User();
         $this->session = new sessions();
-
     }
 
+    /**
+     *  
+     *  @method: isAuthorize
+     * 
+     *  @purpose: inorder to make sure the user is authentication before and afteer the request
+     */
+
+
+     public function isAuthorized(Response $response) 
+     {
+         // we are going to check our token and signature
+         return response()->json(['message' => 'You are not authorized to access this resource'], 401);
+     }
+
+
+     /**
+       *  @method: validate 
+       * 
+            @purpose: inorder to the validate the token and signature
+            and check that it hasnt been tampered with
+      */
+
+      public function validate($signature, $token) {
+
+      }
 
     /**
      *  @method: verifySignature
@@ -54,9 +78,7 @@ class authorizationRequest {
      *  @purpose: inorder to verify the request signature in the authorization header 
      * 
      */
-
-
-     public function verifyRequestSignature() {
+     public function verifyRequestSignature(Response $response) {
         return false;
     }
 
