@@ -8,9 +8,9 @@
  * 
  */
 
- import { Footer } from '../componets/home/footer';
- import { LoginPage } from '../componets/login/login';
- import {Header} from '../componets/home/header';
+ import { Footer } from '../components/home/footer';
+ import { LoginPage } from '../components/login/login';
+ import {Header} from '../components/home/header';
 
 export default function LoginContainer(props) {
     return (

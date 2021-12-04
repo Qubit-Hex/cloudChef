@@ -12,8 +12,8 @@
 
 import React, { Component } from 'react';
 
-import { Header} from "../componets/home/header";
-import {Footer } from "../componets/home/footer";
+import { Header} from "../components/home/header";
+import {Footer } from "../components/home/footer";
 
 export default class PricingContainer extends Component {
 

@@ -13,4 +13,23 @@ class home extends Controller
         
         return view('index');
     }
+
+    /**
+     * 
+     *  @method: loginPage
+     * 
+     * 
+     *  @purpoe: to check if the user is logged in and if so redirect to the dashboard
+     */
+
+    public function loginPage(Request $request) {
+        // check if the user is logged in
+        if (isset($_COOKIE['accessToken'])) {
+            // user is logged in
+            return redirect('/dashboard');
+        } else {
+        // user is not logged in
+            return view('index');
+        }
+    }
 }

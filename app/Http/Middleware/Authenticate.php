@@ -2,21 +2,49 @@
 
 namespace App\Http\Middleware;
 
-use Illuminate\Auth\Middleware\Authenticate as Middleware;
 
-class Authenticate extends Middleware
+use Closure;
+use Illuminate\Http\Response;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
+/**
+ * 
+ *  @class: authenticate
+ * 
+ *  @purpose: to perform any actions that are required for the user to authorized or authenticated
+ *   
+ */
+
+
+class Authenticate 
 {
 
-    /**
-     * Get the path the user should be redirected to when they are authenticated.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return string|null
-     */
+    // todo: get the authorization token from the login
+    // api then compare it with the token in the database
+    // if the token is valid then allow the user to access the the dashboard 
+    // else return a 401 error
     
-
-    protected function redirectTo($request)
+    public function handle(Request $request, Closure $next, $guard = null)
     {
-        
+        // check for a ACCESS COOKIE 
+
+
+        if (!empty($_COOKIE['accessToken'])) {
+            // check if the access token is valid
+            $userExist = DB::table('users')->where('remember_token', $_COOKIE['accessToken'])->exists();
+            if ($userExist) {
+                // access token is valid
+                return $next($request);
+            } else {
+                // access token is not valid
+                return response()->json([
+                    'authenticated' => false,
+                    'message' => 'Access Token is not valid', 'error' => 'Access Token is not valid'], 401);
+            }
+        } else {
+            return $next($request);
+        }
     }
+
 }

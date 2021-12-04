@@ -27,6 +27,7 @@
  import SolutionsContainer from './containers/solutions.container'; 
  import FeaturesContainer from './containers/features.container';
  import PricingContainer from './containers/pricing.container';
+ import DashboardContainer from "./containers/dashboard.container";
  
  export default function AppRoutes() {
     return (
@@ -48,25 +49,20 @@
           <PricingContainer />
 
         </Route>
-
-
         <Route path="/login/">
             <LoginContainer />
         </Route>
- 
- 
         <Route path='/register/'>
               <RegisterContainer />
         </Route>
-
-     // make a protected route in react router for dashboard
-     
-      
+        <Route path='/dashboard/'>
+            <DashboardContainer />
+          </Route>
  
           <Route path="/">
              <HomeContainer />
           </Route>
-          
+     
         </Switch>
     </Router>
     );

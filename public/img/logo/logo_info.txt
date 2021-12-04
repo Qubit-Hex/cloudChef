@@ -1,7 +1,7 @@
 
-            Fonts used: Lato-Bold,Montserrat-Regular 
+            Fonts used: Quicksand-Bold 
 
-            Colors used: 0E67B4,F7F3E8  
+            Colors used: F2EEE4,5065A8  
 
-            Icon url: https://thenounproject.com/term/chef/101453  
+            Icon url: https://thenounproject.com/term/restaurant/1452307  
         

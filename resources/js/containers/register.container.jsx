@@ -11,9 +11,9 @@
 
 import React from 'react';
 
-import { RegisterPage } from "../componets/register/register";
-import { Header  } from "../componets/home/header";
-import { Footer } from '../componets/home/footer';
+import { RegisterPage } from "../components/register/register";
+import { Header  } from "../components/home/header";
+import { Footer } from '../components/home/footer';
 
 
  

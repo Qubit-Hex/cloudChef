@@ -26,7 +26,7 @@ use App\Http\Controllers\dashboard;
 
 
 Route::get('/home/', [home::class, 'index']);
-Route::get('/login/', [home::class, 'index'])->name('login');
+Route::get('/login/', [home::class, 'loginPage'])->middleware('auth');
 Route::get('/register/', [home::class, 'index']);
 Route::get('/solutions/', [home::class, 'index']);
 Route::get('/pricing/', [home::class, 'index']);
@@ -43,14 +43,35 @@ Route::post('/authentication/register/', [authentication::class, 'register'])->n
 
 
 /**
- *      Routes: Dashboard routes 
+ *      Group Route: Dashboard
  * 
  *     @purpose: to route the dashboard routes of the application     
  */
 
+// dashboard group route 
+Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
+
+    Route::get('/', [dashboard::class, 'index'])->name('dashboard');
+    Route::get('/profile/', [dashboard::class, 'profile'])->name('profile');
+    Route::get('/settings/', [dashboard::class, 'settings'])->name('settings');
+    Route::get('/logout/', [dashboard::class, 'logout'])->name('logout');
+});
 
 
-Route::get('/dashboard/', [dashboard::class, 'index'])->name('dashboard');
+/**
+ *      Group Routes: Store
+ * 
+ *     @purpose: to route the store routes of the application 
+ * 
+ */
+
+ Route::group(['prefix' => 'store', 'middleware' => 'auth'], function () {
+    Route::get(('/'), function () {
+        return "test123";
+    });
+ });
+
+
 
 
 

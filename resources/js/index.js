@@ -12,7 +12,6 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import ReactDOM from "react-dom";
-import "./index.css";
 import AppRoutes from "./router.js";
 
 // UI Sections
@@ -21,8 +20,8 @@ let container = document.getElementById("root");
 
 // main application component for displaying webpages
 
-ReactDOM.render(
-  <BrowserRouter>
-  <AppRoutes />
-</BrowserRouter>,
-container);
+ReactDOM.render( 
+<BrowserRouter >
+    <AppRoutes / >
+    </BrowserRouter>,
+    container);

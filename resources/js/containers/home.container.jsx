@@ -21,9 +21,9 @@ import React from "react";
  * 
  * 
  */
- import { Body} from '../componets/home/body';
- import { Footer } from '../componets/home/footer';
- import {Header} from '../componets/home/header';
+ import { Body} from '../components/home/body';
+ import { Footer } from '../components/home/footer';
+ import {Header} from '../components/home/header';
 
 
  export default function HomeContainer(props) {

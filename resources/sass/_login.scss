@@ -1,0 +1,148 @@
+/*
+
+ file: login.scss
+
+ purpose: login page styles
+*/
+
+#login-color-box {
+    background: #e1eec377;
+    /* fallback for old browsers */
+    background: linear-gradient(to right, #e1eec398, #e1eec398);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.pannel {
+    border-radius: 20px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.pannel img {
+    border: 1px solid rgba(0, 0, 0, 0.097);
+    border-top-left-radius: 50%;
+    min-width: 100% !important;
+    height: 100% !important;
+}
+
+.image-badge {
+    height: auto;
+    background-image: linear-gradient(45deg, #8baaaabb 0%rgba(174, 139, 156, 0.727)9c 100%);
+}
+
+.form-login {
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.734);
+    border-bottom-left-radius: 20px;
+}
+
+.form-login label {
+    margin-top: 10px;
+    color: slategray;
+    font-size: 16px;
+    font-style: italic;
+    text-align: center;
+}
+
+.form-login input {
+    width: 100%;
+    border: none;
+    margin-top: 10px;
+    padding: 10px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.form-login-title {
+    font-size: 24px;
+    font-weight: 900;
+}
+
+.form-login input:focus {
+    box-shadow: rgba(39, 21, 21, 0.453) 4px 6px 14px -2px;
+}
+
+.form-login .link {
+    font-weight: 600;
+    font-size: 18px;
+    color: rgb(0, 60, 170);
+    margin-top: 10px;
+    text-decoration: none;
+}
+
+.form-login .link:hover {
+    color: salmon;
+}
+
+.form-splash-drop-shadow {
+    background-color: rgba(65, 65, 65, 0.179);
+    width: 100%;
+    height: 100%;
+}
+
+.form-login-splash {
+    height: auto;
+    /* do not touch */
+    background-image: url('/assets/img/restaurant-outline.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    padding: 0px;
+    margin: 0px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-bottom-right-radius: 20px;
+}
+
+.form-register-splash {
+    height: auto;
+    /* do not touch */
+    background-image: url('/assets/img/Waiau.svg');
+    background-size: contain;
+    padding: 0px;
+    margin: 0px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-bottom-right-radius: 20px;
+}
+
+.error-message {
+    margin-left: 20px;
+    font-weight: 800;
+    font-size: 16px;
+}
+
+.icon-large {
+    font-size: 50px;
+}
+
+
+/*  MEDIA QUERYS   */
+
+
+/* On screens that are 992px or less, set the background color to blue */
+
+@media screen and (max-width: 992px) {
+    nav {
+        height: auto;
+    }
+    .dropdown-menu {
+        width: 90vw !important;
+        margin: 0px !important;
+    }
+    img {
+        width: 100vw;
+    }
+}
+
+
+/* On screens that are 600px or less, set the background color to olive */
+
+@media screen and (max-width: 600px) {
+    nav {
+        height: auto;
+    }
+    .dropdown-menu {
+        width: 90vw !important;
+        margin: 0px !important;
+    }
+    img {
+        width: 100vw;
+    }
+}

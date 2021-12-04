@@ -10,7 +10,6 @@
  * 
  *  @author: oliver shwaba -> Qubit-hEx
  * 
- * 
  */
 
 
@@ -18,8 +17,7 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
-use App\Http\Services\auth\AuthenticationService;
+use App\Http\Services\Auth\AuthService;
 
 
 
@@ -27,10 +25,8 @@ class authentication extends Controller
 {
     public function __construct()
     {
-
-       // INCLUDE THE AUTHENTICATION SERVICES HERE
-
-        $this->authenticationService = new AuthenticationService();
+      // initilize the authentication service 
+      $this->auth = new AuthService();
     }
 
     /**
@@ -44,19 +40,8 @@ class authentication extends Controller
 
     public function login(Request $request)
     {
-
-      /*
-        build a login request data object!
-        for the login request
-      */
-
-      $input = [
-        'email' => $request->input('username'),
-        'password' => $request->input('password'),
-        'token' => $request->input('_token'),
-        'clientid' =>  filter_var($request->input('clientId'), FILTER_VALIDATE_INT)
-      ];
-        return $this->authenticationService->loginRequest($input);
+      // form our login request
+      return $this->auth::login($request);
     }
 
     /**
@@ -68,25 +53,8 @@ class authentication extends Controller
 
     public function register(Request $request)
     {
-      /**
-       *  build a register request data object!
-       *  for the register request 
-       * 
-       */
+      $this->auth::register($request);
 
-        // registeration array request 
-        $input = [
-
-            'email' => $request->input('email'),
-            'name' => $request->input('fullname'),
-            'password' => $request->input('password'),
-            'token' => $request->input('_token'),
-            'company' => $request->input('company'), 
-            'password_confirm' => $request->input('password_confirm')
-
-        ];
-
-        return $this->authenticationService->registerRequest($input);
     }
 
     /**
@@ -99,8 +67,6 @@ class authentication extends Controller
 
     public function logout(Request $request)
     {
-      // we need to send the signature to the logout request 
-        // logout the user
-         return $this->authenticationService->logoutRequest($request);
+      $this->auth::logout($request);
     }
 }
