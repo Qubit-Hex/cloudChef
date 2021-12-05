@@ -10785,9 +10785,15 @@ footer {
 }
 .dashboard-content .profile-img {
   box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
-  height: auto;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
   margin-bottom: 20px;
+}
+.dashboard-content .profile-img-sm {
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+  width: 75px;
+  border-radius: 50%;
 }
 .dashboard-content i {
   margin-right: 10px;
@@ -10827,11 +10833,30 @@ footer {
   cursor: pointer;
   background-color: #1c2e7a;
 }
+.dashboard-content .modal-title {
+  font-weight: bold;
+  font-size: 1.5em;
+}
 .dashboard-content .modal {
   display: block;
+  -webkit-animation: fadeIn 2s;
+          animation: fadeIn 2s;
   padding: 20px;
   background-color: #0a0a167c !important;
   z-index: 1;
+}
+.dashboard-content .modal .btn-close {
+  padding: 10px;
+}
+.dashboard-content .modal .btn-close:hover {
+  background-color: #e76d6d;
+  border-radius: 50%;
+  color: #fff;
+}
+.dashboard-content .modal btn-close:active {
+  background-color: #f82f2f;
+  border-radius: 50%;
+  color: #fff;
 }
 .dashboard-content .modal-dialog {
   position: relative;
@@ -10843,10 +10868,40 @@ footer {
   box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
   padding: 50px;
 }
+.dashboard-content .success-message-wrapper i {
+  font-size: 2em;
+  color: #2350e4;
+}
+.dashboard-content .success-message-wrapper .success-message {
+  font-size: 1em;
+  font-weight: bold;
+  font-style: italic;
+}
+.dashboard-content .failure-message-wrapper i {
+  font-size: 2em;
+  color: #ff0000;
+}
+.dashboard-content .failure-message-wrapper .failure-message {
+  font-size: 1.5em;
+  font-weight: bold;
+}
 
 /*---------------------------------------------------------------------
     animation classes for the dashboard nav 
 */
-.fade-enter-active {
-  transition: opacity 0.5s;
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

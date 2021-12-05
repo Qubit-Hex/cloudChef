@@ -170,9 +170,16 @@ $navbar-bg-color: #07058a83;
 
     .profile-img {
         box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
-        height: auto;
+        width: 200px;
+        height: 200px;
         border-radius: 50%;
         margin-bottom: 20px;
+    }
+
+    .profile-img-sm {
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+        width: 75px;
+        border-radius: 50%;
     }
 
     i {
@@ -219,11 +226,36 @@ $navbar-bg-color: #07058a83;
 
     /* Message box styling for our appl;ication  */
 
+    .modal-title {
+        font-weight: bold;
+        font-size: 1.5em;
+    }
+
     .modal {
         display: block;
+        animation: fadeIn 2s;
         padding: 20px;
         background-color: #0a0a167c !important;
         z-index: 1;
+
+
+        .btn-close {
+            padding: 10px;
+        }
+
+
+        .btn-close:hover {
+            background-color: rgb(231, 109, 109);
+            border-radius: 50%;
+            color: #fff;
+        }
+
+
+        btn-close:active {
+            background-color: rgb(248, 47, 47);
+            border-radius: 50%;
+            color: #fff;
+        }
     }
 
     .modal-dialog {
@@ -238,12 +270,47 @@ $navbar-bg-color: #07058a83;
         rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
         padding: 50px;
     }
+
+
+    .success-message-wrapper {
+
+        i {
+            font-size: 2em;
+            color: #2350e4;
+        }
+
+
+        .success-message {
+            font-size: 1em;
+            font-weight: bold;
+            font-style: italic;
+        }
+    }
+
+
+    .failure-message-wrapper {
+        i {
+            font-size: 2em;
+            color: #ff0000;
+        }
+
+        .failure-message {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+    }
 }
 
 /*---------------------------------------------------------------------
     animation classes for the dashboard nav 
 */
 
-.fade-enter-active {
-    transition: opacity .5s;
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }

@@ -13,6 +13,7 @@ import * as d3 from "d3";
 
 import React, { Component } from 'react';
 import { ProfileCard } from "../components/dashboard/profile-card";
+import { ContactNavbar} from "../components/dashboard/contactsNavbar";
 
 
 export default function DashboardContainer(props) {
@@ -88,20 +89,20 @@ export default function DashboardContainer(props) {
 
       <div className='container-fluid rm-pm dashboard-content'>
 
+
+
+
         <div className='row'>
           <h1 className='header-title'> Contacts <small className='sub-caption ' > Welcome ( john doe) </small></h1>
           
-          <div id='message-box-container'> </div>
+         <ContactNavbar />
+
+
           <div class="col">
-           
-           
-           {/** 
-            * 
-            *  @component: Employee 
-            * 
-            */}
-           
-           
+            {/* contact navigation bar */}
+
+            
+
             {/**
              * 
              *  @component: ProfileCard
@@ -110,10 +111,12 @@ export default function DashboardContainer(props) {
              * 
              */}
 
+
+          <div id='message-box-container'> </div>
           <ProfileCard user='Chad Micheal' 
             image='/img/face.jpg' 
             address='123 lorne st'
-            location='regina, Saskatchewan'
+            location='my example, province'
             phone='306-555-555-555'
             email='example@GMAIL.COM'
             name='HAVY'
@@ -127,7 +130,7 @@ export default function DashboardContainer(props) {
             <ProfileCard user='Heather Smith' 
             image='/img/face2.jpg' 
             address='123 lorne st'
-            location='regina, Saskatchewan'
+            location='my example, province'
             phone='306-555-555-555'
             email='example@GMAIL.COM'
             name='HAVY'
@@ -142,7 +145,7 @@ export default function DashboardContainer(props) {
           <ProfileCard user='Amanda Smith' 
             image='/img/face3.jpg' 
             address='123 lorne st'
-            location='regina, Saskatchewan'
+            location='my example, province'
             phone='306-555-555-555'
             email='example@GMAIL.COM'
             name='HAVY'
@@ -156,7 +159,7 @@ export default function DashboardContainer(props) {
           <ProfileCard user='Adam Smith'
             image='/img/face4.jpg'
             address='123 lorne st'
-            location='regina, Saskatchewan'
+            location='my example, province'
             phone='306-555-555-555'
             email='oliver@gmail.com'
             name='havery'
