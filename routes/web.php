@@ -42,6 +42,8 @@ Route::post('/authentication/login/', [authentication::class, 'login'])->name('a
 Route::post('/authentication/register/', [authentication::class, 'register'])->name('register');
 
 
+
+
 /**
  *      Group Route: Dashboard
  * 
@@ -50,34 +52,9 @@ Route::post('/authentication/register/', [authentication::class, 'register'])->n
 
 // dashboard group route 
 Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
-
     Route::get('/', [dashboard::class, 'index'])->name('dashboard');
-    Route::get('/profile/', [dashboard::class, 'profile'])->name('profile');
-    Route::get('/settings/', [dashboard::class, 'settings'])->name('settings');
-    Route::get('/logout/', [dashboard::class, 'logout'])->name('logout');
+    Route::get('/{page}', [dashboard::class, 'index']);
 });
-
-
-/**
- *      Group Routes: Store
- * 
- *     @purpose: to route the store routes of the application 
- * 
- */
-
- Route::group(['prefix' => 'store', 'middleware' => 'auth'], function () {
-    Route::get(('/'), function () {
-        return "test123";
-    });
- });
-
-
-
-
-
-Route::get('/dashboard/profile/', [dashboard::class, 'profile'])->name('dashboard/profile');
-
-
 
 // final route if no other route is matched
 Route::get('/', [home::class, 'index']);

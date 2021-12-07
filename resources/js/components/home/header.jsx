@@ -46,7 +46,7 @@
       <div className="_header_">
         <nav className="navbar navbar-expand-lg navbar-transparent ml-auto mt-auto">
                   <a className='navbar-brand' href='/'>
-                  <img className="img-fluid" width='25%' height='25%' src="/img/logo/Cloud Chef-logos_white.png"  alt=""/> 
+                  <img className="img-fluid" width='150px' height='150px' src="/img/logo/Cloud Chef-logos_white.png"  alt=""/> 
             </a>
     
                
@@ -154,18 +154,16 @@
                   <div className='container'>
                     <div className='row'>
                     {/** RECFACTOR THIS */}
-                          <div className='col-sm'>
                               <li>
                                 
                                   <a className='dropdown-title'>Explore the Platform </a>
                                   <p className='dropdown-subtitle text-center'>provides easy-to-use tools to better run your restaurant.</p>
                               </li>
                                 <div className='border-breakpoint' />
-                          </div>
                     </div>
 
                     <div className='row'>
-                        <div className='col-sm'>
+                        <div className='col'>
                             <li>
                                 <i className="fas fa-utensils dropdown-icon"></i>
                                 <a className='dropdown-link' href='/features/'> Recipe Management </a>
@@ -174,7 +172,7 @@
                         </div>
 
 
-                        <div className='col-sm'>
+                        <div className='col'>
                             <li>
                                 <i className="far fa-chart-bar dropdown-icon"></i>
                                 <a className='dropdown-link' href='/features/'> Food Cost Management </a>
@@ -185,7 +183,7 @@
 
 
                     <div className='row'>
-                        <div className='col-sm'>
+                        <div className='col'>
                             <li>
                             <i className="fas fa-users  dropdown-icon"></i>
                               <a className='dropdown-link' href='/features/'> Communication System </a>
@@ -195,7 +193,7 @@
                         </div>
 
 
-                        <div className='col-sm'>
+                        <div className='col'>
                             <li>
                                   <i className="fas fa-user-tie dropdown-icon"></i>
                                   <a className='dropdown-link' href='/features/'> Employee Management System</a>

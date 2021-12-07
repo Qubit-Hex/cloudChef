@@ -10,6 +10,7 @@
 // colors
 
 $navbar-bg-color: #07058a83;
+$bg-color: linear-gradient(to right, #e1eec398, #e1eec398);
 
 .remove-spacing {
     max-width: 30%;
@@ -26,19 +27,8 @@ $navbar-bg-color: #07058a83;
 }
 
 .dashboard-nav-color {
-    z-index: 0 !important;
-    background: #000000; /* fallback for old browsers */
-    background: -webkit-linear-gradient(
-        to right,
-        #434343,
-        #000000
-    ); /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(
-        to right,
-        #434343,
-        #000000
-    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
+    background-color: $navbar-bg-color;
     box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
         rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
 
@@ -154,11 +144,16 @@ $navbar-bg-color: #07058a83;
 
     .card {
         border: none;       
-        padding: 25px;
+        padding-top: 25px;
         padding-bottom: 0px;
         box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
         margin: 20px;
         border-radius: 30px;
+    }
+
+    .card-footer {
+        border-bottom-left-radius: 30px;
+        border-bottom-right-radius: 30px;
     }
 
     .card-title {
@@ -313,4 +308,85 @@ $navbar-bg-color: #07058a83;
     to {
         opacity: 1;
     }
+}
+
+
+
+// ------------------- table styling -------------------------
+
+.table {
+    padding: 10px;;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 8px -2px,
+        rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+
+        thead {
+            padding: 10px;
+            background-color: #3f4ed89f;
+            color: #fff;
+            font-weight: bold;
+            font-size: 1.2em;
+            text-align: center;
+            border-radius: 20px;
+        }
+
+        tr {
+            border-bottom: 1px solid #ddd;
+        }
+
+        td {
+            padding: 10px;
+            text-align: center;
+        }
+
+
+        td:hover {
+            cursor: pointer;
+            background-color: #4069f04d;
+        }
+}
+
+
+
+.drop-shift-icon {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 2em;
+    color: #6580f7;
+
+}
+
+
+.employee-card {
+    border: none;
+    padding: 25px;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+    margin: 20px;
+    border-radius: 30px;
+
+
+    .employee-icon {
+        font-size: 2em;
+        color:rgb(117, 103, 235)
+
+     
+    }
+}
+
+.shift-shop {
+
+    padding: 20px;
+    max-height: 400px;
+    overflow-y: scroll;
+    border-top: 5px solid #1a2d8373;
+}
+
+.card-border {
+    box-sizing: content-box;
+    border-radius: 20px;
+}
+
+.btn-sm {
+    width: 200px;
+    height: auto;
+    margin: auto;
 }

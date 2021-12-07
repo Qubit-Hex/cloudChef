@@ -14,6 +14,12 @@ class dashboard extends Controller
         $this->middleware('auth');
     }
     //
+
+
+    public function contacts()
+    {
+        return view('dashboard.contacts');
+    }
     
     /**
      *  @method: index 
@@ -22,8 +28,8 @@ class dashboard extends Controller
      * 
      *  @return: return the dashboard view
      */
-    public function index(Request $request)
+    public function index(Request $request, $page = null)
     {
-        return view('index');
+            return view('index');
     }
 }

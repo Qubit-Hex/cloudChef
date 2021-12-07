@@ -16,6 +16,7 @@ export class MessageBox extends React.Component {
         this.state = {
             user: this.props.user,
             profile: this.props.profile,
+            message: null,
         };
     }
 
@@ -64,6 +65,8 @@ export class MessageBox extends React.Component {
                     </div>
 
                     </div>
+
+                    <p> {this.state.message} </p>
                 </div>
             </div>
         </div>
@@ -114,6 +117,26 @@ export class MessageBox extends React.Component {
 
     }
 
+
+
+    /**
+     *  @method: validation
+     *
+     */
+
+
+    validation(e) {
+        if (e.target.value.length > 0) {
+            this.setState({
+                message: e.target.value
+            });
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /**
      *
      *
@@ -150,7 +173,7 @@ export class MessageBox extends React.Component {
                                     <div className="form-group">    
             
                                         <label for='message'>Message</label>
-                                        <textarea class="form-control" id="message" rows="3"></textarea>
+                                        <textarea onChange={ (e) => { this.validation(e); } }class="form-control" id="message" rows="3"></textarea>
                                     </div>
 
                                 </form>
@@ -158,7 +181,7 @@ export class MessageBox extends React.Component {
                             </div>
                             <div class="modal-footer">
                                  <button className='btn btn-danger' onClick={ (e) => {this.hideModal() }}> Cancel <i className='fa fa-ban'></i></button>
-                                 <button className='btn btn-success' onClick={ (e) => {this.successMessage()}}> Send <i className='fas fa-paper-plane'></i></button>
+                                 <button className='btn btn-primary' onClick={ (e) => {this.successMessage()}}> Send <i className='fas fa-paper-plane'></i></button>
                             </div>
                         </div>
                     </div>
