@@ -30,6 +30,7 @@ class Authenticate
         // check for a ACCESS COOKIE 
 
 
+        // change this to be header instead of cookie for each request
         if (!empty($_COOKIE['accessToken'])) {
             // check if the access token is valid
             $userExist = DB::table('users')->where('remember_token', $_COOKIE['accessToken'])->exists();

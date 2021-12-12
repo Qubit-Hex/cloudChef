@@ -9,14 +9,13 @@
 
 // colors
 
-$navbar-bg-color: #07058a83;
+$navbar-bg-color: linear-gradient(to right, #2f5aaabe, #6580f7d3);
 $bg-color: linear-gradient(to right, #e1eec398, #e1eec398);
 
 .remove-spacing {
     max-width: 30%;
 }
 .dashboard-nav-title {
-
     font-size: 1.5em;
     font-weight: bold;
     color: #fff !important;
@@ -27,8 +26,7 @@ $bg-color: linear-gradient(to right, #e1eec398, #e1eec398);
 }
 
 .dashboard-nav-color {
-
-    background-color: $navbar-bg-color;
+    background: $navbar-bg-color;
     box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
         rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
 
@@ -132,8 +130,7 @@ $bg-color: linear-gradient(to right, #e1eec398, #e1eec398);
 
 .dashboard-content {
     padding: 25px;
-    width: 90%;
-    margin: 0px;
+    margin: 0px !important;
 
     .sub-caption {
         color: slategray;
@@ -143,7 +140,7 @@ $bg-color: linear-gradient(to right, #e1eec398, #e1eec398);
     }
 
     .card {
-        border: none;       
+        border: none;
         padding-top: 25px;
         padding-bottom: 0px;
         box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
@@ -187,16 +184,37 @@ $bg-color: linear-gradient(to right, #e1eec398, #e1eec398);
         padding: 5px;
         padding-left: 15px;
         padding-right: 15px;
-        width: auto;
+        max-width: 100%;
         color: #fff;
-        font-size: 0.8em;
+        font-size: 1em;
         font-weight: bold;
         margin-bottom: 10px;
+    }
+
+    @media screen and (max-width: 1000px) {
+        .role-badge {
+            font-size: 0.7em;
+        }
     }
 
     .role-badge:hover {
         cursor: pointer;
         background-color: #1c2e7a;
+    }
+
+    .bg-danger {
+        background-color: #ff0000;
+    }
+
+    .text-cancel {
+        text-decoration: line-through;
+    }
+
+    .bg-danger:hover {
+        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+            rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+        cursor: pointer;
+        background-color: #ff8b8b !important;
     }
 
     .btn-message {
@@ -209,14 +227,33 @@ $bg-color: linear-gradient(to right, #e1eec398, #e1eec398);
         color: #fff;
         font-size: 0.8em;
         font-weight: bold;
-        margin-bottom: 10px;
         width: 100%;
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
     }
 
     .btn-message:hover {
         cursor: pointer;
         background-color: #1c2e7a;
+    }
 
+    .btn-danger {
+        border: none !important;
+        background-color: #ff7f7bcc; /* fallback for old browsers */
+        border-radius: 10px;
+        padding: 5px;
+        padding-left: 15px;
+        padding-right: 15px;
+        width: auto;
+        color: #fff;
+        font-size: 0.8em;
+        font-weight: bold;
+        width: 100%;
+        margin: auto;
+    }
+
+    .btn-danger:hover {
+        cursor: pointer;
+        background-color: #5c0000;
     }
 
     /* Message box styling for our appl;ication  */
@@ -224,6 +261,8 @@ $bg-color: linear-gradient(to right, #e1eec398, #e1eec398);
     .modal-title {
         font-weight: bold;
         font-size: 1.5em;
+        text-emphasis: bold;
+        text-align: center;
     }
 
     .modal {
@@ -233,18 +272,22 @@ $bg-color: linear-gradient(to right, #e1eec398, #e1eec398);
         background-color: #0a0a167c !important;
         z-index: 1;
 
-
-        .btn-close {
-            padding: 10px;
+        .modal-close {
+            border: none;
+            font-size: 2em !important;
+            background: transparent;
+            padding: 0px;
+            color: white !important;
         }
 
-
-        .btn-close:hover {
+        .modal-close:hover {
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+                rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+                rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
             background-color: rgb(231, 109, 109);
             border-radius: 50%;
             color: #fff;
         }
-
 
         btn-close:active {
             background-color: rgb(248, 47, 47);
@@ -254,26 +297,55 @@ $bg-color: linear-gradient(to right, #e1eec398, #e1eec398);
     }
 
     .modal-dialog {
+        border: none;
         position: relative;
-        top: 15%;       
+        top: 15%;
     }
 
     .modal-content {
+        border: none !important;
         border-radius: 20px;
         width: 100%;
-        box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
-        rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
-        padding: 50px;
+        box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+            rgba(0, 0, 0, 0.22) 0px 15px 12px;
     }
 
+    .modal-header {
+        padding: 25px;
+        background: #6580f7; /* fallback for old browsers */
+        background: -webkit-linear-gradient(
+            to right,
+            #2a589cc5,
+            #6580f7d7
+        ); /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(
+            to right,
+            #2f5aaabe,
+            #6580f7d3
+        ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        border-radius: 20px 20px 0px 0px;
+        color: white;
+        text-align: center !important;
+
+        button {
+            color: #cccccc !important; /* fallback for old browsers */
+        }
+    }
+
+    .modal-body {
+        padding: 50px;
+        border-radius: 0px 0px 20px 20px;
+    }
+
+    .bg-blue {
+        background-color: #0c29a888;
+    }
 
     .success-message-wrapper {
-
         i {
             font-size: 2em;
             color: #2350e4;
         }
-
 
         .success-message {
             font-size: 1em;
@@ -281,7 +353,6 @@ $bg-color: linear-gradient(to right, #e1eec398, #e1eec398);
             font-style: italic;
         }
     }
-
 
     .failure-message-wrapper {
         i {
@@ -294,6 +365,10 @@ $bg-color: linear-gradient(to right, #e1eec398, #e1eec398);
             font-weight: bold;
         }
     }
+}
+
+.apply-scale-entrance {
+    animation: scaleEntrance 3s ease-in-out;
 }
 
 /*---------------------------------------------------------------------
@@ -310,70 +385,75 @@ $bg-color: linear-gradient(to right, #e1eec398, #e1eec398);
     }
 }
 
+@keyframes scaleEntrance {
+    0% {
+        transform: scale(2);
+    }
 
+    100% {
+        transform: scale(1);
+    }
+}
 
 // ------------------- table styling -------------------------
 
 .table {
-    padding: 10px;;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 8px -2px,
-        rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    padding: 10px;
+    font-size: small;
+    max-width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+        rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    height: auto;
 
-        thead {
-            padding: 10px;
-            background-color: #3f4ed89f;
-            color: #fff;
-            font-weight: bold;
-            font-size: 1.2em;
-            text-align: center;
-            border-radius: 20px;
+    thead {
+        padding: 25px;
+        background-color: #1871e69f;
+        color: #fff;
+        font-weight: bold;
+        font-size: 1em;
+        text-align: center;
+        border-radius: 20px;
+    }
+
+    td {
+        font-size: 16px;
+        padding: 10px;
+        text-align: center;
+        border-radius: 20px;
+
+        span {
+            margin-top: 20px;
         }
+    }
 
-        tr {
-            border-bottom: 1px solid #ddd;
-        }
-
-        td {
-            padding: 10px;
-            text-align: center;
-        }
-
-
-        td:hover {
-            cursor: pointer;
-            background-color: #4069f04d;
-        }
+    td:hover {
+        cursor: pointer;
+        background-color: #88a1f54d;
+    }
 }
-
-
 
 .drop-shift-icon {
     margin-left: 10px;
     margin-right: 10px;
     font-size: 2em;
     color: #6580f7;
-
 }
 
-
 .employee-card {
+    width: 100%;
     border: none;
-    padding: 25px;
-    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
-    margin: 20px;
+    padding: 10px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    margin: 10px;
     border-radius: 30px;
-
 
     .employee-icon {
         font-size: 2em;
-        color:rgb(117, 103, 235)
-
-     
+        color: rgb(117, 103, 235);
     }
 }
 
 .shift-shop {
-
     padding: 20px;
     max-height: 400px;
     overflow-y: scroll;
@@ -390,3 +470,282 @@ $bg-color: linear-gradient(to right, #e1eec398, #e1eec398);
     height: auto;
     margin: auto;
 }
+
+/* we will  render a medium svg for the component  */
+
+.svg-md {
+    width: 300px !important;
+    height: 300px !important;
+}
+
+/* Schedule Container  styles */
+
+.schedule_pill {
+    padding: 10px;
+    border-radius: 20px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 1.2em;
+    text-align: center;
+    overflow-x: scroll;
+}
+
+/*  start of contact box pannel   */
+
+.messagebox-background-nav {
+    background-color: #ececec3f;
+    padding: 150px;
+}
+
+.message-box-card {
+    padding: 0px !important;
+    border-radius: none !important;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+        rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+
+    .message-box-message {
+        font-size: 16px;
+        font-style: italic;
+        border-radius: none !important;
+    }
+}
+
+.no-margin {
+    * {
+        margin: 0px;
+        border-radius: 0px;
+    }
+}
+
+.shadow {
+    padding: 0px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+        rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+}
+
+
+
+.contact-hover-action:hover {
+    background-color: #2350e415;
+    cursor: pointer;
+}
+
+.message-pannel-toggler {
+    font-size: 100px !important;
+    color: #2350e47c;
+}
+
+/* end of Contact Box pannels  */
+
+
+.message-pannel-container {
+
+    .message-pannel-header {
+        margin-bottom: 10px;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+            rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    }
+
+    padding: 20px;
+    input[message-search="true"] {
+        border: none;
+        font-size: auto;
+        font-style: italic;
+        width: auto;
+        height: 40px;
+        border-radius: 20px;
+        border: none;
+        padding: 10px;
+        font-size: 1em;
+        background-color: #ececec3f;
+        color: #2350e47c;
+        font-weight: bold;
+        margin-bottom: 10px;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+            rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    }
+
+    button[message-button-search="true"] {
+        font-size: 14px;
+        font-style: italic;
+        height: 40px;
+        border-radius: 20px;
+        border: none;
+        font-size: 1em;
+        background-color: #23118877;
+        color: white;
+        font-weight: bold;
+        margin-bottom: 10px;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+            rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+        border: none;
+    }
+
+    button[message-button-search="true"]:hover {
+        background-color: #1e1c9c23;
+        color: #8665be;
+        cursor: pointer;
+    }
+
+    label {
+        font-size: 16px;
+        font-style: italic;
+        border-radius: 20px;
+        border: none;
+        font-size: 1em;
+        color: #02051fe1;
+        font-weight: bold;
+    }
+
+    .hidden-label {
+        display: none;
+    }
+
+    button:hover .hidden-label {
+        // dead stop animation
+        display: block;
+        animation: deadStop 1.25s cubic-bezier(0.23, 1, 0.320, 1);
+    }
+    @keyframes deadStop {
+        // slide in fade
+        0% {
+            height: 0px;
+            transform: translateX(100px);
+            opacity: 0;
+        }
+        100% {
+            height: 20px;
+            transform: translateX(0px);
+            opacity: 1;
+        }
+    }
+
+    // a modern looking textarea
+
+    textarea[message-content="true"] {
+        font-size: 14px;
+        font-style: italic;
+        height: auto;
+        border-radius: 20px;
+        padding: 10px;
+        font-size: 1em;
+        background-color: transparent;
+        color: #091642c7;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    textarea[message-content="true"] {
+        width: 100%;
+        height: 200px;
+        resize: none;
+    }
+}
+
+/*  start of Messages Pannel  */
+
+.container-chat-log {
+    background-color: #c1d8d81a;
+    width: auto;
+    padding: 20px;
+    margin: 20px;
+    height: 100%;
+    overflow-y: scroll;
+    height: 25vh;
+    border: 1px solid #32416d28;
+
+ p:nth-child(odd) {
+        background-color: #ececec3f;
+        color: #2350e47c;
+        font-weight: bold;
+        font-size: 1.2em;
+        padding: 10px;
+        border-radius: 20px;
+        margin-bottom: 10px;
+ }
+
+ .chat-bubble {
+        padding: 10px;
+        border-radius: 20px;
+        margin-bottom: 10px;
+        font-weight: 200;
+        font-size: 1.2em;
+
+       .convo-recipient {
+        background: #e6eefae1;  /* fallback for old browsers */
+        color: rgba(20, 20, 20, 0.918);
+        font-size: 16px;
+        padding: 20px;
+        border-radius: 20px;
+        margin-bottom: 10px;
+        width: 100%;
+        float: left;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    }
+    
+    .convo-user:hover {
+        background: #336ac2ea;  /* fallback for old browsers */
+        cursor: pointer;
+    }
+    // modern chat bubble
+
+    .convo-user {
+        background: #0a244dea;  /* fallback for old browsers */
+        color: #ffffffe5;
+        font-size: 16px;
+        padding: 20px;
+        border-radius: 20px;
+        margin-bottom: 10px;
+        width: 70%;
+        float: right;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+        .covo-sent-msg {
+            color: white !important;
+            font-weight: 400;
+            font-weight: 900;
+            font-size: 12px;          
+        }
+    
+    }
+
+        .convo-recipient:hover {
+            background-color: #77d3f72a;
+            cursor: pointer;
+        }
+        
+
+    }
+    
+}
+
+.dont-show {
+    display: none;
+}
+
+#chat-component-hide {
+    display: block;
+
+}
+
+
+
+/* end of Messages Pannel */
+
+
+
+/* scroll bar styling for the box container  */
+.container-chat-log::-webkit-scrollbar {
+    width: 12px;               /* width of the entire scrollbar */
+  }
+  
+.container-chat-log::-webkit-scrollbar-track {
+    background: rgb(204, 205, 240); 
+    border-radius: 10px;       /* color of the tracking area */
+  }
+  
+  .container-chat-log::-webkit-scrollbar-thumb {
+    background-color: rgba(29, 29, 155, 0.411);    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+  }
+  /* end of the scroll styling  */

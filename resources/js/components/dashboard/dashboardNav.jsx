@@ -77,6 +77,15 @@ export class DashboardNav extends Component {
                   Settings
                 </span>
               </a>
+
+
+              <a href='/dashboard/notification/' className='nav-link'>
+                {/** font awesome bell icon */}
+                <i class="fas fa-bell"></i>
+                <span className='nav-link-text'> 
+                <i class="fas fa-angle-down"></i>
+                </span>
+              </a>
     
               <a  href='/dashboard/logout/'className='nav-link'>
                 {/** font awesome power button */}

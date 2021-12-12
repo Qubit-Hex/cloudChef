@@ -80,11 +80,16 @@ export class RegisterPage extends React.Component {
 
 
             // return any infomration for the server for the display to see !
-            if (response.message !== 0 ) {
+            if (response.message.length !== 0 ) {
                 document.getElementById('server_response_wrapper').innerHTML = response.message;
                 document.getElementById('server_response_wrapper').style.fontWeight = 'bold';
             }
 
+            // preform the redirect to the login page
+
+            if (response.status === 'success') {
+                window.location.href = '/login/';
+            }
     });
 }
 

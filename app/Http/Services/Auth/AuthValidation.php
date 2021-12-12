@@ -21,11 +21,10 @@ class AuthValidation {
      */
 
      static function validateEmail($email)  {
-         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-             return true;
-         } else {
-             return false;
-         }
+         // regex for email
+            $regex = '/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/';
+            $filtered = filter_var($email, FILTER_VALIDATE_EMAIL);
+            return preg_match($regex, $filtered) === false ? false : true;
      }
 
 
@@ -69,7 +68,9 @@ class AuthValidation {
 
 
     static function validateString($string) {
-        if (filter_var($string, FILTER_SANITIZE_STRING)) {
+        // use regex instead because php filter doesnt do its job well
+        $filtered = filter_var($string, FILTER_SANITIZE_STRING);
+        if (preg_match("/^[a-zA-Z0-9\s]+$/", $filtered)) {
             return true;
         } else {
             return false;
@@ -84,6 +85,7 @@ class AuthValidation {
      *  @purpose: to check if the input is empty
      */
 
+
      static function checkIfEmpty($input) {
          if (empty($input)) {
              return false;
@@ -91,5 +93,42 @@ class AuthValidation {
              return true;
          }
      }
+
+
+     /**
+      *  @method: confirmPassword 
+      *
+      * @purpose: to confirm the password of the user
+      *
+      * @return: true if the password matches, false if not
+      */
+
+      static function confirmPassword($password, $confirmPassword) {
+          if (!empty($password) && !empty($confirmPassword)) {
+            return $password === $confirmPassword ? true : false;
+          }
+          return false;
+      }
+
+
+
+      /**
+       * 
+       *  @method: validateName 
+       *  
+       * 
+       *  @purpose: to validate the name of the user 
+       * 
+       */
+
+      static function validateName($input) {
+        // use an a-z regix to check if the name is valid   
+        if (preg_match("/^[a-zA-Z\s]+$/", $input)) {
+                return true;
+            } else {
+                return false;
+            }
+      }
+      
 }
 ?>

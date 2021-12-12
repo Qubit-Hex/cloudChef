@@ -49,13 +49,15 @@ export class MessageBox extends React.Component {
             <div class="modal-dialog fade-enter-active">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">Message Sent!</h5>
+                        <h5 class="header-subtitle"> <i class="fas fa-info-circle mr-4"></i>  Infomation</h5>
+
                         <button
-                            type="button"
-                            class="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                         onClick={ (e) => {this.hideModal() }}></button>
+                                    type="button"
+                                    class="btn-transparent modal-close far fa-times-circle"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"
+                                 onClick={ (e) => {this.hideModal() }}></button>
+                       
                     </div>
                     <div class="modal-body">
 
@@ -64,9 +66,12 @@ export class MessageBox extends React.Component {
                     <span className='success-message ml-4'>Message was sent successfully!</span>
                     </div>
 
-                    </div>
 
-                    <p> {this.state.message} </p>
+                    <img src='/img/SVG/network_outline.svg' class='img-fluid' />
+
+
+                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -90,16 +95,16 @@ export class MessageBox extends React.Component {
 
         return ReactDOM.render(
             <div class="modal">
-            <div class="modal-dialog fade-enter-active">
+            <div class="modal-dialog apply-scale-entrance">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Message Sent!</h5>
                         <button
-                            type="button"
-                            class="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                         onClick={ (e) => {this.hideModal() }}></button>
+                                    type="button"
+                                    class="btn-transparent modal-close far fa-times-circle"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"
+                                 onClick={ (e) => {this.hideModal() }}></button>
                     </div>
                     <div class="modal-body">
 
@@ -149,14 +154,14 @@ export class MessageBox extends React.Component {
 
     render() {
         return (
-                <div class="modal">
+                <div class="modal apply-scale-entrance">
                     <div class="modal-dialog fade-enter-active">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title">Send Message</h5>
                                 <button
                                     type="button"
-                                    class="btn-close"
+                                    class="btn-transparent modal-close far fa-times-circle"
                                     data-bs-dismiss="modal"
                                     aria-label="Close"
                                  onClick={ (e) => {this.hideModal() }}></button>
@@ -178,11 +183,10 @@ export class MessageBox extends React.Component {
 
                                 </form>
                                  
+                            <button className='btn btn-message mt-2' onClick={ (e) => {this.successMessage()}}> Send <i className='fas fa-paper-plane'></i></button>
+                            <button className='btn btn-danger mt-2' onClick={ (e) => {this.hideModal() }}> Cancel <i className='fa fa-ban'></i></button>
                             </div>
-                            <div class="modal-footer">
-                                 <button className='btn btn-danger' onClick={ (e) => {this.hideModal() }}> Cancel <i className='fa fa-ban'></i></button>
-                                 <button className='btn btn-primary' onClick={ (e) => {this.successMessage()}}> Send <i className='fas fa-paper-plane'></i></button>
-                            </div>
+
                         </div>
                     </div>
                 </div>

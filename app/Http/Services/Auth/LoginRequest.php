@@ -34,17 +34,18 @@
         $userExists = DB::table('users')->where('email', $messageArray['username'])->exists();
         // NOW THAT THE INPUT IS VALIDATED WE A GOING TO PREFORM THE LOGIN REQUEST
 
-        if ($userExists) {
+       if ($userExists) {
             // check if the password is valid for the user 
             $password = DB::table('users')->where('email', $messageArray['username'])->value('password');
+            $salt = DB::table('users')->where('email', $messageArray['username'])->value('salt');
 
-            if ($password === $messageArray['password']) {
+            if ($password === hash('sha256', $messageArray['password']. $salt)) {
                 // password is valid 
-                //  check the status of the user 
+                //  check the status of the use 
 
                 $status = DB::table('users')->where('email', $messageArray['username'])->value('status');
 
-                if ($status === 1) {
+                if ($status === 0) {
                  // display response that the user has been banned 
                     return response()->json(['message' => 'User has been banned', 
                                 'error' => 'User has been banned'], 400);

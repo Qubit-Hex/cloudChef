@@ -53,7 +53,7 @@ class authentication extends Controller
 
     public function register(Request $request)
     {
-      $this->auth::register($request);
+     return  $this->auth::register($request);
 
     }
 
@@ -67,6 +67,6 @@ class authentication extends Controller
 
     public function logout(Request $request)
     {
-      $this->auth::logout($request);
+      return  $this->auth::logout($request);
     }
 }

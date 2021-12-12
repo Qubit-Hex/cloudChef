@@ -57,4 +57,13 @@ use App\Http\Controllers\dashboard;
 
 
 
+    /**
+     * 
+     *  @routes: /dashboard/{store}/{memberID}?token={token}/
+     * 
+     *  @purpose: these routes are for the user to perform CRUD operations on the store
+     */
+
+
+     Route::post('dashboard/{storeID}/{memberID}?token={token}/message/', [message::class, 'createJob'])->name('dashboard/{storeID}/{memberID}?token={token}/job/');
 
