@@ -13,6 +13,8 @@ import react from "react";
 
 
 
+import FetchServiceProvider from "../../../lib/fetchServiceProvider";
+
 export class ChatboxMessageBubble extends react.Component {
 
     constructor(props)
@@ -29,6 +31,9 @@ export class ChatboxMessageBubble extends react.Component {
         }
 
     }
+
+
+
 
 
     /**

@@ -57,7 +57,7 @@ export default class FetchServiceProvider {
      *  @purpose: to fetch data from an api using a get request
      */
 
-    $get(url, $data, headers, callback) {
+    $get(url, headers, callback) {
             
             let request = new Request(url, {
                 method: 'GET',

@@ -74,10 +74,7 @@ class Enforcer {
              'bearer' => $request->header('bearer'),
              'authorization' => $request->header('authorization'),
              'JWT' => $request->header('JWT'),
-         ]; 
-
-
-          // FINISH THE AUTHORIZATION CHECKS LATER TODAY, AND START ON GRAPHING THE API
+         ];
 
      }
 

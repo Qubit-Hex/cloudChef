@@ -27,8 +27,7 @@ class Authenticate
     
     public function handle(Request $request, Closure $next, $guard = null)
     {
-        // check for a ACCESS COOKIE 
-
+        // AUTHORIZATION HEADERS
 
         // change this to be header instead of cookie for each request
         if (!empty($_COOKIE['accessToken'])) {

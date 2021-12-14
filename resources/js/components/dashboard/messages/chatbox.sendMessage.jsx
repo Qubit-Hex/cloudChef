@@ -8,6 +8,7 @@
 
 
 import React from "react";
+import FetchServiceProvider from "../../../lib/fetchServiceProvider";
 
 
 export class ChatboxSendMessage extends React.Component {
@@ -33,7 +34,9 @@ export class ChatboxSendMessage extends React.Component {
 
     sendMessage()
     {
+        let fetchRequest = new FetchServiceProvider();
 
+        
 
     }
 

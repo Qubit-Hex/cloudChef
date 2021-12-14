@@ -21,7 +21,7 @@ class Message extends Controller
         // prevent any one from sending more than 5 messages per second 
 
         $this->requestToken  = bin2hex(openssl_random_pseudo_bytes(16));
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
     /**
      *  @method:  get 
@@ -54,7 +54,7 @@ class Message extends Controller
 
      public function send(Request $request)
      {
-         
+
         // send message structure
         $messageRequest = [
             'userID' => $request->input('userID'),

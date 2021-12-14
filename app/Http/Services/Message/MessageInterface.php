@@ -74,7 +74,7 @@
      * 
      */
 
-    public function deleteMessage($id);
+    static function deleteMessage($id);
 
 
 

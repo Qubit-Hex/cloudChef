@@ -2702,7 +2702,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ChatboxMessageBubble": () => (/* binding */ ChatboxMessageBubble)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../lib/fetchServiceProvider */ "./resources/js/lib/fetchServiceProvider.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2732,6 +2733,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
  *  @purpose: to render the chat bubble of the active converstation 
  * 
  */
+
 
 
 
@@ -2775,13 +2777,13 @@ var ChatboxMessageBubble = /*#__PURE__*/function (_react$Component) {
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
         className: "chat-buble-container",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
           className: "row mt-2 d-inline-flex",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("p", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
             className: this.verifyMessages() + "m-1",
-            children: [this.state.message, " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("small", {
+            children: [this.state.message, " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("small", {
               className: "text-muted covo-sent-msg",
               children: [" ", this.state.status, " At: ", this.state.time]
             })]
@@ -2941,8 +2943,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _chatbox_chatBubble__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chatbox.chatBubble */ "./resources/js/components/dashboard/messages/chatbox.chatBubble.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../lib/fetchServiceProvider */ "./resources/js/lib/fetchServiceProvider.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -2976,6 +2986,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
+
 var ChatboxMessages = /*#__PURE__*/function (_react$Component) {
   _inherits(ChatboxMessages, _react$Component);
 
@@ -2986,8 +2998,7 @@ var ChatboxMessages = /*#__PURE__*/function (_react$Component) {
 
     _classCallCheck(this, ChatboxMessages);
 
-    _this = _super.call(this, props); // ok ill be back in 5 minutes and finish the autthorization for messaging users !!!
-
+    _this = _super.call(this, props);
     /**
      *   @blueprint
      *
@@ -3010,36 +3021,94 @@ var ChatboxMessages = /*#__PURE__*/function (_react$Component) {
   /**
    *
    *
+   *   @method: fetchChatMessages
    *
+   *   @purpose: inorder to fectch our chat messages and render them using our bubble
+   *             component
    *
    */
 
 
   _createClass(ChatboxMessages, [{
+    key: "fetchChatMessages",
+    value: function fetchChatMessages() {
+      // @TODO: add auth header once route testing is done
+      // we will add the authorization header later
+      var fetchService = new _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_2__["default"]();
+      var headers = {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      };
+      var request = {
+        userID: 4,
+        sharedKey: "testKey",
+        message: null,
+        time: Date.now()
+      }; /// build the query for our api inorder to get the messages from the database
+
+      var url = "/api/messages/get?userID=" + request.userID + "&sharedKey=" + request.sharedKey + "&message=" + request.message + "&time=" + request.message;
+      return fetchService.$get(url, headers, function (response) {
+        var container = document.getElementById("chatbubble-container");
+
+        if (response.message) {
+          // parse out messages boxes
+          var chatBubbles = [];
+          var counter = 0;
+
+          var _iterator = _createForOfIteratorHelper(response.message),
+              _step;
+
+          try {
+            for (_iterator.s(); !(_step = _iterator.n()).done;) {
+              var node = _step.value;
+
+              if (counter % 2 === 0) {
+                chatBubbles.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_chatbox_chatBubble__WEBPACK_IMPORTED_MODULE_1__.ChatboxMessageBubble, {
+                    message: node.message,
+                    time: node.timestamp,
+                    status: "to",
+                    profileImg: "/img/SVG/female_user.svg"
+                  }), " "]
+                }, counter));
+              } else {
+                chatBubbles.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_chatbox_chatBubble__WEBPACK_IMPORTED_MODULE_1__.ChatboxMessageBubble, {
+                    message: node.message,
+                    time: node.timestamp,
+                    status: "from",
+                    profileImg: "/img/SVG/female_user.svg"
+                  }), " "]
+                }, counter));
+              }
+
+              counter++;
+            }
+          } catch (err) {
+            _iterator.e(err);
+          } finally {
+            _iterator.f();
+          }
+
+          console.log(response.message);
+          react_dom__WEBPACK_IMPORTED_MODULE_3__.render(chatBubbles, container);
+        } else {
+          // return an errro
+          return false;
+        }
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
         className: "container-chatbox-messages",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
           className: "container-chat-log",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
             className: "container-fluid chat-bubble",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_chatbox_chatBubble__WEBPACK_IMPORTED_MODULE_1__.ChatboxMessageBubble, {
-              message: "test message",
-              time: "10:00pm",
-              status: "to",
-              profileImg: "/img/SVG/female_user.svg"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_chatbox_chatBubble__WEBPACK_IMPORTED_MODULE_1__.ChatboxMessageBubble, {
-              message: "another test buble message ",
-              time: "10:00pm",
-              status: "from",
-              profileImg: "/img/SVG/male_user.svg"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_chatbox_chatBubble__WEBPACK_IMPORTED_MODULE_1__.ChatboxMessageBubble, {
-              message: "lorsidofkjsoghiuherwjlkm;",
-              time: "10:00pm",
-              status: "from",
-              profileImg: "/img/SVG/male_user.svg"
-            })]
+            id: "chatbubble-container",
+            children: this.fetchChatMessages()
           })
         })
       });
@@ -3248,7 +3317,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ChatboxSendMessage": () => (/* binding */ ChatboxSendMessage)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../lib/fetchServiceProvider */ "./resources/js/lib/fetchServiceProvider.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3281,6 +3351,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var ChatboxSendMessage = /*#__PURE__*/function (_React$Component) {
   _inherits(ChatboxSendMessage, _React$Component);
 
@@ -3308,7 +3379,9 @@ var ChatboxSendMessage = /*#__PURE__*/function (_React$Component) {
 
   _createClass(ChatboxSendMessage, [{
     key: "sendMessage",
-    value: function sendMessage() {}
+    value: function sendMessage() {
+      var fetchRequest = new _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_1__["default"]();
+    }
     /**
      * 
      *  @method: validation 
@@ -3329,14 +3402,14 @@ var ChatboxSendMessage = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
         className: "chatbox-message-controls",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
           className: "form-group",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("label", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("label", {
             "for": "message",
             className: "m-4",
-            children: ["Message", " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+            children: ["Message", " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
               id: "textarea-error",
               className: "text-danger",
               style: {
@@ -3344,7 +3417,7 @@ var ChatboxSendMessage = /*#__PURE__*/function (_React$Component) {
                 fontSize: "14px"
               }
             })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("textarea", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("textarea", {
             "message-content": "true",
             onChange: function onChange(e) {
               _this2.validation(e);
@@ -3352,27 +3425,27 @@ var ChatboxSendMessage = /*#__PURE__*/function (_React$Component) {
             "class": "form-control",
             id: "message",
             rows: "3"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
             className: "container",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
               className: "row",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
                 className: "col",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("button", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
                   className: "btn btn-message",
                   onClick: function onClick(e) {
                     _this2.sendMessage();
                   },
-                  children: [" ", "Send", " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
+                  children: [" ", "Send", " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
                     "class": "fa fa-paper-plane hidden-label",
                     "aria-hidden": "true"
                   })]
                 })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
                 className: "col",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("button", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
                   className: "btn btn-danger",
-                  children: [" ", "Cancel", " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
+                  children: [" ", "Cancel", " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
                     "class": "fas fa-comment-slash hidden-label"
                   })]
                 })
@@ -7369,17 +7442,9 @@ var FetchServiceProvider = /*#__PURE__*/function () {
   }
   /**
    * 
-   *  @method: getData 
+   *  @method: $post 
    * 
-   *  @purpose: to fetch data from an api
-   *
-   *  @param: url - the url of the api 
-   *  @param: requestType - the type of request to be made
-   *  @param: data - the data to be sent to the api
-   *  @param: headers - the headers to be sent to the api
-   * @param: callback - the callback function to be called when the data is fetched
-   *
-   * @returns: void
+   *  @purpose: to fetch data from an api using a post request 
    *
    */
 
@@ -7390,6 +7455,28 @@ var FetchServiceProvider = /*#__PURE__*/function () {
       var request = new Request(url, {
         method: 'POST',
         body: JSON.stringify(data),
+        headers: headers
+      });
+      fetch(request).then(function (response) {
+        return response.json();
+      }).then(function (data) {
+        callback(data);
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    }
+    /**
+     * 
+     *  @method: $get 
+     * 
+     *  @purpose: to fetch data from an api using a get request
+     */
+
+  }, {
+    key: "$get",
+    value: function $get(url, headers, callback) {
+      var request = new Request(url, {
+        method: 'GET',
         headers: headers
       });
       fetch(request).then(function (response) {

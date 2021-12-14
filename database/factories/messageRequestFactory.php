@@ -12,7 +12,7 @@ class messageRequestFactory extends Factory
      *
      * @var string
      */
-    protected $model = Model::class;
+    protected $model = StoreMessages::class;
 
     /**
      * Define the model's default state.
@@ -22,7 +22,7 @@ class messageRequestFactory extends Factory
     public function definition()
     {
         return [
-            //
+            
         ];
     }
 }

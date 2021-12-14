@@ -76,6 +76,17 @@ class MessageService  {
     }
 
 
+    static function deleteMessage($requestObject)
+    {
+        $validation = new MessageValidation($requestObject);
+
+        // TODO: add validation for the message id
+        // before any changes are made to the datbase 
+        
+        return DispatchMessage::deleteMessage($requestObject);
+    }
+
+
 }
 
 

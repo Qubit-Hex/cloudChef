@@ -16,11 +16,8 @@ use Illuminate\Http\Request;
 class requestLimit
 {
 
-    public function __construct()
-    {   
-        $this->requestCount = 0;
-        $this->requestLimit = 5;
-    }
+    private $requestCount = 0;
+    private $requestLimit = 5;
 
     /**
      * Handle an incoming request.
@@ -29,6 +26,8 @@ class requestLimit
      * @param  \Closure  $next
      * @return mixed
      */
+
+     
     public function handle(Request $request, Closure $next)
     {   
 

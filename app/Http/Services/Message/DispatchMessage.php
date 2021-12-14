@@ -58,7 +58,7 @@ class DispatchMessage implements MessageInterface
       */
 
 
-     public function deleteMessage($id)
+     static function deleteMessage($id)
      {
          $db = DB::table('store_messages')->where('messageID', $id)->delete();
 
