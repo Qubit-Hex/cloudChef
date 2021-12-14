@@ -23,17 +23,9 @@ export default class FetchServiceProvider {
 
     /**
      * 
-     *  @method: getData 
+     *  @method: $post 
      * 
-     *  @purpose: to fetch data from an api
-     *
-     *  @param: url - the url of the api 
-     *  @param: requestType - the type of request to be made
-     *  @param: data - the data to be sent to the api
-     *  @param: headers - the headers to be sent to the api
-     * @param: callback - the callback function to be called when the data is fetched
-     *
-     * @returns: void
+     *  @purpose: to fetch data from an api using a post request 
      *
      */
 
@@ -56,6 +48,32 @@ export default class FetchServiceProvider {
                 console.log(error);
             });
 
+    }
+
+    /**
+     * 
+     *  @method: $get 
+     * 
+     *  @purpose: to fetch data from an api using a get request
+     */
+
+    $get(url, $data, headers, callback) {
+            
+            let request = new Request(url, {
+                method: 'GET',
+                headers: headers
+            });
+    
+            fetch(request)
+                .then(response => {
+                    return response.json();
+                })
+                .then(data => {
+                    callback(data);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
     }
 
 

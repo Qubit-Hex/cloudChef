@@ -56,6 +56,9 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
     Route::get('/{page}', [dashboard::class, 'index']);
 });
 
+
+
+
 // final route if no other route is matched
 Route::get('/', [home::class, 'index']);
 // end of home page application routes =

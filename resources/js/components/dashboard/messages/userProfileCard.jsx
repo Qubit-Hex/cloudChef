@@ -1,6 +1,6 @@
 /**
  *
- *  @class: MessagesContactCard
+ *  @class: UserProfile
  *
  *
  *  @purpose: to render the contact card for the messages page
@@ -9,7 +9,7 @@
 
 import React from "react";
 
-export class MessagesContactCard extends React.Component {
+export class UserProfile extends React.Component {
     constructor(props) {
         super(props);
 
@@ -43,8 +43,8 @@ export class MessagesContactCard extends React.Component {
     render() {
         return (
             <div className="card no-margin row p-0">
-                <div className="card-body contact-hover-action">
-                    <div className="container-fluid">
+                <div className="card-body">
+                    <div className="container-fluid contact-hover-action">
                         <div className="row">
                             <div className="col">
                                 

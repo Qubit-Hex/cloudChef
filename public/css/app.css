@@ -11115,6 +11115,11 @@ footer {
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 }
 
+.contact-hover-action {
+  padding: 25px;
+  border-radius: 30px;
+}
+
 .contact-hover-action:hover {
   background-color: #2350e415;
   cursor: pointer;
@@ -11137,12 +11142,12 @@ footer {
   border: none;
   font-size: auto;
   font-style: italic;
-  width: auto;
+  width: 100%;
   height: 40px;
   border-radius: 20px;
   border: none;
-  padding: 10px;
-  font-size: 1em;
+  padding: 20px;
+  font-size: 0.9em;
   background-color: #ececec3f;
   color: #2350e47c;
   font-weight: bold;
@@ -11255,36 +11260,36 @@ footer {
   font-size: 1.2em;
 }
 .container-chat-log .chat-bubble .convo-recipient {
-  background: #e6eefae1;
+  background: #ffffffe1;
   /* fallback for old browsers */
   color: rgba(20, 20, 20, 0.918);
   font-size: 16px;
   padding: 20px;
   border-radius: 20px;
   margin-bottom: 10px;
-  width: 100%;
+  width: auto;
   float: left;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }
 .container-chat-log .chat-bubble .convo-user:hover {
-  background: #336ac2ea;
+  background: #bad4fdea;
   /* fallback for old browsers */
   cursor: pointer;
 }
 .container-chat-log .chat-bubble .convo-user {
-  background: #0a244dea;
+  background: #98bdf8ea;
   /* fallback for old browsers */
-  color: #ffffffe5;
+  color: #070707e5;
   font-size: 16px;
   padding: 20px;
   border-radius: 20px;
   margin-bottom: 10px;
-  width: 70%;
+  width: auto;
   float: right;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }
 .container-chat-log .chat-bubble .convo-user .covo-sent-msg {
-  color: white !important;
+  color: black !important;
   font-weight: 400;
   font-weight: 900;
   font-size: 12px;

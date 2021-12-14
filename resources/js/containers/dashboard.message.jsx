@@ -13,7 +13,8 @@
 
 import React, { Component } from "react";
 
-import { MessagesContactCard } from "../components/dashboard/messages/msgProfileCard";
+import { UserProfile } from "../components/dashboard/messages/userProfileCard";
+import { ChatBoxContainer } from "../components/dashboard/messages/chatbox.container";
 
 export class MessagePage extends React.Component {
     constructor(props) {
@@ -41,6 +42,23 @@ export class MessagePage extends React.Component {
             : (errorMessage.innerHTML = "");
     }
 
+
+
+    /**
+     * 
+     *  @method: renderContactList 
+     * 
+     *   
+     *  @purpose: inorder to render contacts the user has searched for the in specific store
+     * 
+     */
+
+
+     renderContactsList()
+     {
+
+     }
+
     render() {
         return (
             <div className="container-fluid profile_card dashboard-content">
@@ -62,9 +80,14 @@ export class MessagePage extends React.Component {
                             <label for="searchbox">
                                 Search Your Contacts
                             </label>{" "}
+
+                            {/**  add on change event we will use to search the databse 
+                             *    
+                             */}
                             
                             <div className="input-group-append ">
                             <input
+                                onChange={this.renderContactsList()}
                                 type="text"
                                 message-search="true"
                                 className="form-control searchBox"
@@ -83,7 +106,13 @@ export class MessagePage extends React.Component {
                             </div>
                         </div>
 
-                        <MessagesContactCard
+                        <div className='contacts-container'>
+                            {/**  we will rende rthe contacts of the user when a name is searched here 
+                             *  TODO: AFTER I finish reactactoring 
+                             */}
+
+
+                        <UserProfile
                             name="Heather Smith"
                             role="@heathersmith"
                             image="/img/face2.jpg"
@@ -93,7 +122,7 @@ export class MessagePage extends React.Component {
                             onClick={this.showMessageCenter()}
                         />
 
-                        <MessagesContactCard
+                        <UserProfile
                             name="John Doe"
                             role="@johndoe"
                             image="/img/face.jpg"
@@ -101,215 +130,47 @@ export class MessagePage extends React.Component {
                             isActive="OFFLINE"
                         />
 
-                        <MessagesContactCard
+                        <UserProfile
                             name="Adam Smith"
                             role="@AdmSmith"
                             image="/img/face4.jpg"
                             date="2 days ago"
                             isActive="ONLINE"
                         />
+                        </div>
+
+                    </div>
+
+                    <div className='col'>
+
+                    {/**
+                     * 
+                     *  refactor section into some sub sections to reduce the complexity 
+                     *  
+                     *    - @messageBox Pannel -> the container to hold our content 
+                     *    - @profileHeader -> the user you are contacting there data eg photo, contact button, and phone button
+                     *    - @messageContainer -> the container that will call the message api every x amount of time to
+                     *                            refesh to message to get real time updates. 
+                     * 
+                     */}
+
+
+                    {/** this is the container that we will update inorder to show the chatBox of 
+                     *   a user 
+                     */}
+                     <div id='messagePannel-container'>
+
+                        <ChatBoxContainer 
+                            user='heather Smith'
+                            profileImg='/img/face2.jpg'
+                            token="my super secret token"
+                        />
+
+                     </div>
+
                     </div>
                     {/*  Message box*/}
 
-                    <div className="col" id="chat-component-hide">
-                        <div className="='message-pannel-container shadow">
-                            <div className="modal-header">
-                                <h2>
-                                    {" "}
-                                    <i class="fas fa-comment-dots"></i>
-                                    <b>Messages</b>{" "}
-                                </h2>
-                                <i
-                                    className="fa fa-comments"
-                                    aria-hidden="true"
-                                ></i>
-                            </div>
-
-                            <div className="col">
-                                <div className="message-pannel-container">
-                                    {/** Here is the container that will render the message boxs */}
-
-                                    <div className="message-pannel-header">
-                                        <div className='col'>
-
-                                        <img
-                                            src="/img/face2.jpg"
-                                            className="img-fluid profile-img-sm m-4"
-                                        />
-                                        <b> Heather Smith </b>
-                                        <i className="fa fa-circle online text-success fa-beat"></i>
-
-                                        </div>
-
-
-                                        <div className='row'>
-                                            <div className='col m-4'>
-
-                                        <button
-                                            className="btn btn-message"
-                                            onMouseEnter={(e) => {
-                                                let container =
-                                                    document.getElementsByClassName(
-                                                        "button-text"
-                                                    )[0];
-
-                                                container.innerHTML = "Profile";
-                                            }}
-                                            onMouseLeave={(e) => {
-                                                let container =
-                                                    document.getElementsByClassName(
-                                                        "button-text"
-                                                    )[1];
-                                                // the text of the container in order make the text dis apear
-
-                                                container.innerHTML = "";
-                                            }}
-                                        >
-                                            <i className="fa fa-user-circle">
-                                                {" "}
-                                            </i>
-
-                                            <div className="hidden-label">
-                                                <b className="button-text"> </b>
-                                            </div>
-                                        </button>
-                                            </div>
-                                        {/* cal, the user button */}
-
-                                        <div className='col m-4'>
-
-                                        <button
-                                            className="btn btn-message"
-                                            onMouseEnter={(e) => {
-                                                let container =
-                                                    document.getElementsByClassName(
-                                                        "button-text"
-                                                    )[1];
-
-                                                container.innerHTML = "Phone";
-                                            }}
-                                            onMouseLeave={(e) => {
-                                                let container =
-                                                    document.getElementsByClassName(
-                                                        "button-text"
-                                                    )[1];
-                                                // the text of the container in order make the text dis apear
-
-                                                container.innerHTML = "";
-                                            }}
-                                        >
-                                            <i className="fas fa-phone"> </i>
-                                            <div className="hidden-label">
-                                                <b class="button-text"></b>
-                                            </div>
-                                        </button>
-                                        </div>
-                                        </div>
-
-                                        {/**  user profile button */}
-                                    </div>
-
-                                    {/* converstation container for our conversations */}
-
-                                    {/**
-                                     *  left = recipient
-                                     *  right: you
-                                     */}
-                                    {/* converstations will repeat form right to left ording fashion  */}  
-                                
-                                    <div className="container-chat-log">
-                                    
-                                        <div className="chat-bubble">
-                                            <div className="row">
-                                                <div className="col">
-                                                    <p className="convo-user  m-1">
-                                                        short message test test
-                                                        2 <br />
-                                                        <small className="text-muted covo-sent-msg">
-                                                            {" "}
-                                                            Recived At: 12:01pm
-                                                        </small>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div className="row">
-                                               
-                                                    <p className="convo-recipient m-1">
-                                                        Testing a long Message
-                                                        Lorem ipsum dolor, sit
-                                                        amet consectetur
-                                                        adipisicing elit. Quos
-                                                        accusamus obcaecati
-                                                        soluta nihil
-                                                        necessitatibus iure
-                                                        quidem nemo sequi,
-                                                        minima voluptas aut
-                                                        porro eos optio debitis
-                                                        dicta dolorum veritatis,
-                                                        ut a.
-                                                        <br />
-                                                        <small className="text-muted covo-sent-msg">
-                                                            {" "}
-                                                            Sent At: 12:00pm{" "}
-                                                        </small>
-                                                    </p>
-                                            </div>
-                                        </div>
-
-                                        {/* end of the chat container section  */}
-                                    </div>
-                                    {/* Message box container  */}
-                                    {/**  employee image modal    */}
-                                    <div className="form-group">
-                                        <label for="message" className="m-4">
-                                            Message{" "}
-                                            <span
-                                                id="textarea-error"
-                                                className="text-danger"
-                                                style={{
-                                                    fontWeight: "300",
-                                                    fontSize: "14px",
-                                                }}
-                                            ></span>
-                                        </label>
-
-                                        <textarea
-                                            message-content="true"
-                                            onChange={(e) => {
-                                                this.validation(e);
-                                            }}
-                                            class="form-control"
-                                            id="message"
-                                            rows="3"
-                                        ></textarea>
-
-                                        <div className="container">
-                                            <div className="row">
-                                                <div className="col">
-                                                    <button className="btn btn-message">
-                                                        {" "}
-                                                        Send{" "}
-                                                        <i
-                                                            class="fa fa-paper-plane hidden-label"
-                                                            aria-hidden="true"
-                                                        ></i>
-                                                    </button>
-                                                </div>
-
-                                                <div className="col">
-                                                    <button className="btn btn-danger">
-                                                        {" "}
-                                                        Cancel{" "}
-                                                        <i class="fas fa-comment-slash hidden-label"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         );

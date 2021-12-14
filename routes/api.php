@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\authentication;
 use App\Http\Controllers\dashboard;
+use App\Http\Controllers\Message;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -53,17 +54,59 @@ use App\Http\Controllers\dashboard;
     Route::post('auth/logout/', [authentication::class, 'logout'])->name('auth/logout');
       
 
+     /**
+ * 
+ *  Group Route: messsages
+ * 
+ *  @putpose: to route the messages route api , for sending and receiving messages 
+ *             only if authorized to sendthe message belonging to the store 
+ */
 
+
+
+Route::group(['prefix' => 'messages', 'middleware' => 'auth'], function () {
+
+    /**
+     *  
+     *  @Route: /messages/get/
+     * 
+     *  @purpose: to get messages from the user to the store
+     * 
+     */
+    Route::get('/get', [message::class,  'get'])->name('messages/get');
 
 
 
     /**
      * 
-     *  @routes: /dashboard/{store}/{memberID}?token={token}/
+     *  @Route: /messages/send/
      * 
-     *  @purpose: these routes are for the user to perform CRUD operations on the store
+     *  @purpose: to send messages from the user to the store 
+     *  
      */
+     Route::get('/send', [message::class, 'send'])->name('messages/send');
 
 
-     Route::post('dashboard/{storeID}/{memberID}?token={token}/message/', [message::class, 'createJob'])->name('dashboard/{storeID}/{memberID}?token={token}/job/');
 
+
+     /**
+      *  @route: /messages/delete
+      *
+      *  @purpose: inorder order to delete messages from the store to the user
+      */
+
+      Route::delete('/delete', [message::class, 'delete'])->name('messages/delete');
+
+
+    
+      /**
+       *  
+       *  @route: /messages/update
+       * 
+       *  @purpose: inorder to update the message status from the store to the user
+       */
+      
+       Route::patch('/update', [message::class, 'update'])->name('messages/update');
+
+
+});

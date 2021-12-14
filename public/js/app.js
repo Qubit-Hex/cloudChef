@@ -2690,16 +2690,715 @@ var MessageBox = /*#__PURE__*/function (_React$Component) {
 
 /***/ }),
 
-/***/ "./resources/js/components/dashboard/messages/msgProfileCard.jsx":
-/*!***********************************************************************!*\
-  !*** ./resources/js/components/dashboard/messages/msgProfileCard.jsx ***!
-  \***********************************************************************/
+/***/ "./resources/js/components/dashboard/messages/chatbox.chatBubble.jsx":
+/*!***************************************************************************!*\
+  !*** ./resources/js/components/dashboard/messages/chatbox.chatBubble.jsx ***!
+  \***************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "MessagesContactCard": () => (/* binding */ MessagesContactCard)
+/* harmony export */   "ChatboxMessageBubble": () => (/* binding */ ChatboxMessageBubble)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/**
+ * 
+ *  @file  chatbox.chatMessages 
+ * 
+ *  @purpose: to render the chat bubble of the active converstation 
+ * 
+ */
+
+
+
+var ChatboxMessageBubble = /*#__PURE__*/function (_react$Component) {
+  _inherits(ChatboxMessageBubble, _react$Component);
+
+  var _super = _createSuper(ChatboxMessageBubble);
+
+  function ChatboxMessageBubble(props) {
+    var _this;
+
+    _classCallCheck(this, ChatboxMessageBubble);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      message: _this.props.message,
+      time: _this.props.time,
+      status: _this.props.status,
+      profileImg: _this.props.profileImg
+    };
+    return _this;
+  }
+  /**
+   * 
+   * @method: verifiyMessages
+   * 
+   *  @purpose: to align the message box wether the user is a senders 
+   *            or reciver of the messsages 
+   */
+
+
+  _createClass(ChatboxMessageBubble, [{
+    key: "verifyMessages",
+    value: function verifyMessages() {
+      if (this.state.status === 'to') {
+        return "convo-user ";
+      } else if (this.state.status === 'from') {
+        return "convo-recipient ";
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+        className: "chat-buble-container",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+          className: "row mt-2 d-inline-flex",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("p", {
+            className: this.verifyMessages() + "m-1",
+            children: [this.state.message, " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("small", {
+              className: "text-muted covo-sent-msg",
+              children: [" ", this.state.status, " At: ", this.state.time]
+            })]
+          })
+        })
+      });
+    }
+  }]);
+
+  return ChatboxMessageBubble;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+/***/ }),
+
+/***/ "./resources/js/components/dashboard/messages/chatbox.container.jsx":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/dashboard/messages/chatbox.container.jsx ***!
+  \**************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ChatBoxContainer": () => (/* binding */ ChatBoxContainer)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _chatbox_profile__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chatbox.profile */ "./resources/js/components/dashboard/messages/chatbox.profile.jsx");
+/* harmony import */ var _chatbox_messages__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./chatbox.messages */ "./resources/js/components/dashboard/messages/chatbox.messages.jsx");
+/* harmony import */ var _chatbox_sendMessage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./chatbox.sendMessage */ "./resources/js/components/dashboard/messages/chatbox.sendMessage.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/**
+ * 
+ *  @File  chatbox.container.jsx 
+ * 
+ * 
+ * 
+ *  @purpose inorder to hold our chatbox functionality components together 
+ * 
+ */
+
+
+
+
+
+
+var ChatBoxContainer = /*#__PURE__*/function (_React$Component) {
+  _inherits(ChatBoxContainer, _React$Component);
+
+  var _super = _createSuper(ChatBoxContainer);
+
+  function ChatBoxContainer(props) {
+    var _this;
+
+    _classCallCheck(this, ChatBoxContainer);
+
+    _this = _super.call(this, props); // this will hold our DS for fetching our data from the api
+
+    /**
+     *  @Blueprint 
+     * 
+     *  how it will work is the props userID will create post request fetching a 
+     *  once time public key for our converstation inorder to validate who is messaging within
+     *  ours groups that our enforcer module that will take care of
+     */
+
+    _this.state = {
+      User: _this.props.user,
+      profileImg: _this.props.profileImg,
+      token: _this.props.sharedToken
+    };
+    return _this;
+  }
+
+  _createClass(ChatBoxContainer, [{
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        className: "chatbox-container",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          id: "chat-component-hide",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+            className: "='message-pannel-container shadow",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+              className: "modal-header",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("h2", {
+                children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
+                  "class": "fas fa-comment-dots"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("b", {
+                  children: "Messages"
+                }), " "]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
+                className: "fa fa-comments",
+                "aria-hidden": "true"
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+              className: "col",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+                className: "container message-pannel-container",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                  className: "message-pannel-header",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_chatbox_profile__WEBPACK_IMPORTED_MODULE_1__.ChatboxProfile, {
+                    name: this.state.User,
+                    status: true,
+                    profileImg: this.state.profileImg
+                  })
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_chatbox_messages__WEBPACK_IMPORTED_MODULE_2__.ChatboxMessages, {
+                  user: this.state.User,
+                  profileImg: this.state.profileImg
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_chatbox_sendMessage__WEBPACK_IMPORTED_MODULE_3__.ChatboxSendMessage, {
+                  user: this.state.User
+                })]
+              })
+            })]
+          })
+        })
+      });
+    }
+  }]);
+
+  return ChatBoxContainer;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+/***/ }),
+
+/***/ "./resources/js/components/dashboard/messages/chatbox.messages.jsx":
+/*!*************************************************************************!*\
+  !*** ./resources/js/components/dashboard/messages/chatbox.messages.jsx ***!
+  \*************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ChatboxMessages": () => (/* binding */ ChatboxMessages)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _chatbox_chatBubble__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chatbox.chatBubble */ "./resources/js/components/dashboard/messages/chatbox.chatBubble.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/**
+ *
+ *  @file: chatbox.messages.jsx
+ *
+ *
+ *
+ *  @purpose: to render the chatbox messages in our messages pannel
+ */
+
+
+
+
+var ChatboxMessages = /*#__PURE__*/function (_react$Component) {
+  _inherits(ChatboxMessages, _react$Component);
+
+  var _super = _createSuper(ChatboxMessages);
+
+  function ChatboxMessages(props) {
+    var _this;
+
+    _classCallCheck(this, ChatboxMessages);
+
+    _this = _super.call(this, props); // ok ill be back in 5 minutes and finish the autthorization for messaging users !!!
+
+    /**
+     *   @blueprint
+     *
+     *   user -> the userid  of the we are messaging
+     *   sharedKey -> a shared key for to establish a message request handshake to actually send the
+     *              message if only the key is valid
+     *   message -> the message
+     *   time -> the current of the rwquest
+     *
+     *  messageStatus -> this is a boolean and will switch to true if the user has seen the message
+     *
+     */
+
+    _this.state = {
+      user: _this.props.user,
+      profileImg: _this.props.profileImg
+    };
+    return _this;
+  }
+  /**
+   *
+   *
+   *
+   *
+   */
+
+
+  _createClass(ChatboxMessages, [{
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        className: "container-chatbox-messages",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          className: "container-chat-log",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "container-fluid chat-bubble",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_chatbox_chatBubble__WEBPACK_IMPORTED_MODULE_1__.ChatboxMessageBubble, {
+              message: "test message",
+              time: "10:00pm",
+              status: "to",
+              profileImg: "/img/SVG/female_user.svg"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_chatbox_chatBubble__WEBPACK_IMPORTED_MODULE_1__.ChatboxMessageBubble, {
+              message: "another test buble message ",
+              time: "10:00pm",
+              status: "from",
+              profileImg: "/img/SVG/male_user.svg"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_chatbox_chatBubble__WEBPACK_IMPORTED_MODULE_1__.ChatboxMessageBubble, {
+              message: "lorsidofkjsoghiuherwjlkm;",
+              time: "10:00pm",
+              status: "from",
+              profileImg: "/img/SVG/male_user.svg"
+            })]
+          })
+        })
+      });
+    }
+  }]);
+
+  return ChatboxMessages;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+/***/ }),
+
+/***/ "./resources/js/components/dashboard/messages/chatbox.profile.jsx":
+/*!************************************************************************!*\
+  !*** ./resources/js/components/dashboard/messages/chatbox.profile.jsx ***!
+  \************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ChatboxProfile": () => (/* binding */ ChatboxProfile)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/**
+ * 
+ *  #file: chatbox.profile
+ * 
+ * 
+ *  @purpose: display the profile information of the user your are contacting 
+ */
+
+
+
+var ChatboxProfile = /*#__PURE__*/function (_react$Component) {
+  _inherits(ChatboxProfile, _react$Component);
+
+  var _super = _createSuper(ChatboxProfile);
+
+  function ChatboxProfile(props) {
+    var _this;
+
+    _classCallCheck(this, ChatboxProfile);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      name: _this.props.name,
+      status: _this.props.status,
+      profileImg: _this.props.profileImg
+    };
+    return _this;
+  }
+  /**
+   * 
+   * method: isUserActive 
+   * 
+   * @purpose: inorder to check if the user is active and display the respective color code bases on the input given 
+   * 
+   * 
+   * 
+   */
+
+
+  _createClass(ChatboxProfile, [{
+    key: "isUserActive",
+    value: function isUserActive() {
+      var activityStatus = this.state.status;
+
+      if (activityStatus === true) {
+        return "fa fa-circle online text-success fa-beat";
+      }
+
+      return "fa fa-circle online text-danger fa-beat";
+    }
+    /**
+     *   
+     *  @method: showProfileModal
+     * 
+     * 
+     *  @purpose: inorder to show the profile Modal of the user 
+     */
+
+  }, {
+    key: "showProfileModal",
+    value: function showProfileModal() {}
+    /**
+     *  
+     *   @method: showPhoneModal
+     *  
+     *  
+     *  @purpose; inorder to show the phone modal of the specific user 
+     * 
+     */
+
+  }, {
+    key: "showPhoneModal",
+    value: function showPhoneModal() {}
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        className: "messagebox-profile-nav",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+          className: "col-8 m-2",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
+            src: this.state.profileImg,
+            className: "img-fluid profile-img-sm m-4"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("b", {
+            children: [" ", this.state.name, " "]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
+            className: this.isUserActive()
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+          className: "row",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+            className: "col m-4",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("button", {
+              className: "btn btn-message",
+              onMouseEnter: function onMouseEnter(e) {
+                var container = document.getElementsByClassName("button-text")[0];
+                container.innerHTML = "Profile";
+              },
+              onMouseLeave: function onMouseLeave(e) {
+                var container = document.getElementsByClassName("button-text")[1]; // the text of the container in order make the text dis apear
+
+                container.innerHTML = "";
+              },
+              onClick: this.showProfileModal(),
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
+                className: "fa fa-user-circle",
+                children: " "
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+                className: "hidden-label",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("b", {
+                  className: "button-text",
+                  children: " "
+                })
+              })]
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+            className: "col m-4",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("button", {
+              className: "btn btn-message",
+              onMouseEnter: function onMouseEnter(e) {
+                var container = document.getElementsByClassName("button-text")[1];
+                container.innerHTML = "Phone";
+              },
+              onMouseLeave: function onMouseLeave(e) {
+                var container = document.getElementsByClassName("button-text")[1]; // the text of the container in order make the text dis apear
+
+                container.innerHTML = "";
+              },
+              onClick: this.showPhoneModal(),
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
+                className: "fas fa-phone",
+                children: " "
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+                className: "hidden-label",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("b", {
+                  "class": "button-text"
+                })
+              })]
+            })
+          })]
+        })]
+      });
+    }
+  }]);
+
+  return ChatboxProfile;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+/***/ }),
+
+/***/ "./resources/js/components/dashboard/messages/chatbox.sendMessage.jsx":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/dashboard/messages/chatbox.sendMessage.jsx ***!
+  \****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ChatboxSendMessage": () => (/* binding */ ChatboxSendMessage)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/**
+ * 
+ *  @file: chatbox.sendMessage 
+ * 
+ *  @purpose: this will send messages to the user 
+ * 
+ */
+
+
+
+var ChatboxSendMessage = /*#__PURE__*/function (_React$Component) {
+  _inherits(ChatboxSendMessage, _React$Component);
+
+  var _super = _createSuper(ChatboxSendMessage);
+
+  function ChatboxSendMessage(props) {
+    var _this;
+
+    _classCallCheck(this, ChatboxSendMessage);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      user: _this.props.user
+    };
+    return _this;
+  }
+  /**
+   * 
+   *  @method: sendMessage 
+   * 
+   *  @purpose: this is going to send a message to the user           
+   *
+   **/
+
+
+  _createClass(ChatboxSendMessage, [{
+    key: "sendMessage",
+    value: function sendMessage() {}
+    /**
+     * 
+     *  @method: validation 
+     *      // change to validatation message and have a validate method to return a boolean value so we can reuse the method 
+     * 
+     *  @purpose: this will validate the input of the controls
+     */
+
+  }, {
+    key: "validation",
+    value: function validation(e) {
+      var errorMessage = document.getElementById("textarea-error");
+      console.log(e.target.value.length);
+      return e.target.value.length === 0 ? errorMessage.innerHTML = "Please fill out this field" : errorMessage.innerHTML = "";
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+        className: "chatbox-message-controls",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+          className: "form-group",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("label", {
+            "for": "message",
+            className: "m-4",
+            children: ["Message", " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+              id: "textarea-error",
+              className: "text-danger",
+              style: {
+                fontWeight: "300",
+                fontSize: "14px"
+              }
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("textarea", {
+            "message-content": "true",
+            onChange: function onChange(e) {
+              _this2.validation(e);
+            },
+            "class": "form-control",
+            id: "message",
+            rows: "3"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+            className: "container",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+              className: "row",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+                className: "col",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("button", {
+                  className: "btn btn-message",
+                  onClick: function onClick(e) {
+                    _this2.sendMessage();
+                  },
+                  children: [" ", "Send", " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
+                    "class": "fa fa-paper-plane hidden-label",
+                    "aria-hidden": "true"
+                  })]
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+                className: "col",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("button", {
+                  className: "btn btn-danger",
+                  children: [" ", "Cancel", " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
+                    "class": "fas fa-comment-slash hidden-label"
+                  })]
+                })
+              })]
+            })
+          })]
+        })
+      });
+    }
+  }]);
+
+  return ChatboxSendMessage;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+/***/ }),
+
+/***/ "./resources/js/components/dashboard/messages/userProfileCard.jsx":
+/*!************************************************************************!*\
+  !*** ./resources/js/components/dashboard/messages/userProfileCard.jsx ***!
+  \************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "UserProfile": () => (/* binding */ UserProfile)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
@@ -2727,7 +3426,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 /**
  *
- *  @class: MessagesContactCard
+ *  @class: UserProfile
  *
  *
  *  @purpose: to render the contact card for the messages page
@@ -2736,15 +3435,15 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-var MessagesContactCard = /*#__PURE__*/function (_React$Component) {
-  _inherits(MessagesContactCard, _React$Component);
+var UserProfile = /*#__PURE__*/function (_React$Component) {
+  _inherits(UserProfile, _React$Component);
 
-  var _super = _createSuper(MessagesContactCard);
+  var _super = _createSuper(UserProfile);
 
-  function MessagesContactCard(props) {
+  function UserProfile(props) {
     var _this;
 
-    _classCallCheck(this, MessagesContactCard);
+    _classCallCheck(this, UserProfile);
 
     _this = _super.call(this, props);
     _this.state = {
@@ -2768,7 +3467,7 @@ var MessagesContactCard = /*#__PURE__*/function (_React$Component) {
    */
 
 
-  _createClass(MessagesContactCard, [{
+  _createClass(UserProfile, [{
     key: "renderMessagesPannel",
     value: function renderMessagesPannel() {}
   }, {
@@ -2777,9 +3476,9 @@ var MessagesContactCard = /*#__PURE__*/function (_React$Component) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
         className: "card no-margin row p-0",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-          className: "card-body contact-hover-action",
+          className: "card-body",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-            className: "container-fluid",
+            className: "container-fluid contact-hover-action",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
               className: "row",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
@@ -2831,7 +3530,7 @@ var MessagesContactCard = /*#__PURE__*/function (_React$Component) {
     }
   }]);
 
-  return MessagesContactCard;
+  return UserProfile;
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
 /***/ }),
@@ -5129,8 +5828,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "MessagePage": () => (/* binding */ MessagePage)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _components_dashboard_messages_msgProfileCard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/dashboard/messages/msgProfileCard */ "./resources/js/components/dashboard/messages/msgProfileCard.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _components_dashboard_messages_userProfileCard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/dashboard/messages/userProfileCard */ "./resources/js/components/dashboard/messages/userProfileCard.jsx");
+/* harmony import */ var _components_dashboard_messages_chatbox_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/dashboard/messages/chatbox.container */ "./resources/js/components/dashboard/messages/chatbox.container.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -5169,6 +5869,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var MessagePage = /*#__PURE__*/function (_React$Component) {
   _inherits(MessagePage, _React$Component);
 
@@ -5200,232 +5901,96 @@ var MessagePage = /*#__PURE__*/function (_React$Component) {
       console.log(e.target.value.length);
       return e.target.value.length === 0 ? errorMessage.innerHTML = "Please fill out this field" : errorMessage.innerHTML = "";
     }
+    /**
+     * 
+     *  @method: renderContactList 
+     * 
+     *   
+     *  @purpose: inorder to render contacts the user has searched for the in specific store
+     * 
+     */
+
+  }, {
+    key: "renderContactsList",
+    value: function renderContactsList() {}
   }, {
     key: "render",
     value: function render() {
-      var _this = this;
-
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
         className: "container-fluid profile_card dashboard-content",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
           className: "row",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
             className: "col message-contact shadow",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
               className: "modal-header",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("h2", {
-                children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("h2", {
+                children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
                   "class": "fas fa-user-tie"
-                }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("b", {
+                }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("b", {
                   children: "Contacts"
                 }), " "]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
                 className: "fa fa-comments",
                 "aria-hidden": "true"
               })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
               className: "form-group mt-2 mb-2 message-pannel-container",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("label", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
                 "for": "searchbox",
                 children: "Search Your Contacts"
-              }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+              }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
                 className: "input-group-append ",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+                  onChange: this.renderContactsList(),
                   type: "text",
                   "message-search": "true",
                   className: "form-control searchBox",
                   placeholder: "Search",
                   "aria-label": "Recipient's username",
                   "aria-describedby": "basic-addon2"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
                   "message-button-search": "true",
                   className: "btn btn-primary ml-2",
                   type: "button",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
                     "class": "fas fa-search"
                   })
                 })]
               })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components_dashboard_messages_msgProfileCard__WEBPACK_IMPORTED_MODULE_1__.MessagesContactCard, {
-              name: "Heather Smith",
-              role: "@heathersmith",
-              image: "/img/face2.jpg",
-              date: "53 minutes ago",
-              active: "false",
-              isActive: "ONLINE",
-              onClick: this.showMessageCenter()
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components_dashboard_messages_msgProfileCard__WEBPACK_IMPORTED_MODULE_1__.MessagesContactCard, {
-              name: "John Doe",
-              role: "@johndoe",
-              image: "/img/face.jpg",
-              date: "1 hour ago",
-              isActive: "OFFLINE"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_components_dashboard_messages_msgProfileCard__WEBPACK_IMPORTED_MODULE_1__.MessagesContactCard, {
-              name: "Adam Smith",
-              role: "@AdmSmith",
-              image: "/img/face4.jpg",
-              date: "2 days ago",
-              isActive: "ONLINE"
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-            className: "col",
-            id: "chat-component-hide",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-              className: "='message-pannel-container shadow",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-                className: "modal-header",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("h2", {
-                  children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
-                    "class": "fas fa-comment-dots"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("b", {
-                    children: "Messages"
-                  }), " "]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
-                  className: "fa fa-comments",
-                  "aria-hidden": "true"
-                })]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-                className: "col",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-                  className: "message-pannel-container",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-                    className: "message-pannel-header",
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-                      className: "col",
-                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
-                        src: "/img/face2.jpg",
-                        className: "img-fluid profile-img-sm m-4"
-                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("b", {
-                        children: " Heather Smith "
-                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
-                        className: "fa fa-circle online text-success fa-beat"
-                      })]
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-                      className: "row",
-                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-                        className: "col m-4",
-                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
-                          className: "btn btn-message",
-                          onMouseEnter: function onMouseEnter(e) {
-                            var container = document.getElementsByClassName("button-text")[0];
-                            container.innerHTML = "Profile";
-                          },
-                          onMouseLeave: function onMouseLeave(e) {
-                            var container = document.getElementsByClassName("button-text")[1]; // the text of the container in order make the text dis apear
-
-                            container.innerHTML = "";
-                          },
-                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
-                            className: "fa fa-user-circle",
-                            children: " "
-                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-                            className: "hidden-label",
-                            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("b", {
-                              className: "button-text",
-                              children: " "
-                            })
-                          })]
-                        })
-                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-                        className: "col m-4",
-                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
-                          className: "btn btn-message",
-                          onMouseEnter: function onMouseEnter(e) {
-                            var container = document.getElementsByClassName("button-text")[1];
-                            container.innerHTML = "Phone";
-                          },
-                          onMouseLeave: function onMouseLeave(e) {
-                            var container = document.getElementsByClassName("button-text")[1]; // the text of the container in order make the text dis apear
-
-                            container.innerHTML = "";
-                          },
-                          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
-                            className: "fas fa-phone",
-                            children: " "
-                          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-                            className: "hidden-label",
-                            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("b", {
-                              "class": "button-text"
-                            })
-                          })]
-                        })
-                      })]
-                    })]
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-                    className: "container-chat-log",
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-                      className: "chat-bubble",
-                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-                        className: "row",
-                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-                          className: "col",
-                          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
-                            className: "convo-user  m-1",
-                            children: ["short message test test 2 ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("small", {
-                              className: "text-muted covo-sent-msg",
-                              children: [" ", "Recived At: 12:01pm"]
-                            })]
-                          })
-                        })
-                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-                        className: "row",
-                        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
-                          className: "convo-recipient m-1",
-                          children: ["Testing a long Message Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quos accusamus obcaecati soluta nihil necessitatibus iure quidem nemo sequi, minima voluptas aut porro eos optio debitis dicta dolorum veritatis, ut a.", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("small", {
-                            className: "text-muted covo-sent-msg",
-                            children: [" ", "Sent At: 12:00pm", " "]
-                          })]
-                        })
-                      })]
-                    })
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-                    className: "form-group",
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("label", {
-                      "for": "message",
-                      className: "m-4",
-                      children: ["Message", " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-                        id: "textarea-error",
-                        className: "text-danger",
-                        style: {
-                          fontWeight: "300",
-                          fontSize: "14px"
-                        }
-                      })]
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("textarea", {
-                      "message-content": "true",
-                      onChange: function onChange(e) {
-                        _this.validation(e);
-                      },
-                      "class": "form-control",
-                      id: "message",
-                      rows: "3"
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-                      className: "container",
-                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-                        className: "row",
-                        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-                          className: "col",
-                          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
-                            className: "btn btn-message",
-                            children: [" ", "Send", " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
-                              "class": "fa fa-paper-plane hidden-label",
-                              "aria-hidden": "true"
-                            })]
-                          })
-                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-                          className: "col",
-                          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
-                            className: "btn btn-danger",
-                            children: [" ", "Cancel", " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
-                              "class": "fas fa-comment-slash hidden-label"
-                            })]
-                          })
-                        })]
-                      })
-                    })]
-                  })]
-                })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+              className: "contacts-container",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_dashboard_messages_userProfileCard__WEBPACK_IMPORTED_MODULE_1__.UserProfile, {
+                name: "Heather Smith",
+                role: "@heathersmith",
+                image: "/img/face2.jpg",
+                date: "53 minutes ago",
+                active: "false",
+                isActive: "ONLINE",
+                onClick: this.showMessageCenter()
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_dashboard_messages_userProfileCard__WEBPACK_IMPORTED_MODULE_1__.UserProfile, {
+                name: "John Doe",
+                role: "@johndoe",
+                image: "/img/face.jpg",
+                date: "1 hour ago",
+                isActive: "OFFLINE"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_dashboard_messages_userProfileCard__WEBPACK_IMPORTED_MODULE_1__.UserProfile, {
+                name: "Adam Smith",
+                role: "@AdmSmith",
+                image: "/img/face4.jpg",
+                date: "2 days ago",
+                isActive: "ONLINE"
               })]
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            className: "col",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+              id: "messagePannel-container",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_dashboard_messages_chatbox_container__WEBPACK_IMPORTED_MODULE_2__.ChatBoxContainer, {
+                user: "heather Smith",
+                profileImg: "/img/face2.jpg",
+                token: "my super secret token"
+              })
             })
           })]
         })
