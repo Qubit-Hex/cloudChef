@@ -19,7 +19,9 @@ export class ChatboxSendMessage extends React.Component {
         super(props);
 
         this.state = {
-            user: this.props.user
+            user: this.props.user,
+            sendingMessage: false,
+
         };
     }
 
@@ -32,12 +34,35 @@ export class ChatboxSendMessage extends React.Component {
      *
      **/
 
-    sendMessage()
+    sendMessage(event)
     {
-        let fetchRequest = new FetchServiceProvider();
+        let fetchService = new FetchServiceProvider();
 
-        
 
+
+        // headers 
+
+        const headers = {
+            "Content-type": "application/json",
+            Accept:  "application/json",
+        };
+
+
+        // request object
+
+        const request = {
+            userID: 4,
+            sharedKey: "testKey",
+            message: document.getElementById('chatbox-message-content').value,
+        };
+
+
+        let url =
+        `/api/messages/send?userID=${request.userID}&sharedKey=${request.sharedKey}&message=${request.message}`;
+    
+        return fetchService.$get(url, headers, (response) => {
+
+        });
     }
 
 
@@ -82,7 +107,7 @@ export class ChatboxSendMessage extends React.Component {
                                                 this.validation(e);
                                             }}
                                             class="form-control"
-                                            id="message"
+                                            id="chatbox-message-content"
                                             rows="3"
                                         ></textarea>
 
@@ -93,13 +118,14 @@ export class ChatboxSendMessage extends React.Component {
                                                     
                                                     onClick={
                                                         (e) => {
-                                                            this.sendMessage()
+                                                            this.sendMessage(e)
                                                     }}>
                                                         {" "}
                                                         Send{" "}
                                                         <i
                                                             class="fa fa-paper-plane hidden-label"
                                                             aria-hidden="true"
+                                                            id='make_loading_event'
                                                         ></i>
                                                     </button>
                                                 </div>

@@ -8,6 +8,9 @@
  */
 
 import React from "react";
+import ReactDOM from "react-dom";
+import { ChatBoxContainer } from "./chatbox.container";
+
 
 export class UserProfile extends React.Component {
     constructor(props) {
@@ -19,7 +22,6 @@ export class UserProfile extends React.Component {
             role: this.props.role,
             date: this.props.date,
             isActive: this.props.isActive,
-            onClick: this.props.onClick,
         };
     }
 
@@ -35,16 +37,33 @@ export class UserProfile extends React.Component {
      */
 
 
-    renderMessagesPannel()
+    renderMessagesPannel(e)
     {
+        let container = document.getElementById('messagePannel-container');
 
+        if (ReactDOM.unmountComponentAtNode(container)) {
+             ReactDOM.hydrate(<ChatBoxContainer 
+            user={this.state.name}
+            profileImg={this.state.image}
+            token="my super secret token" />, container);
+        } else {
+            ReactDOM.render(<ChatBoxContainer 
+            user={this.state.name}
+            profileImg={this.state.image}
+            token="my super secret token" />, container);
+        }
+       
     }
 
     render() {
         return (
-            <div className="card no-margin row p-0">
+            <div className="card no-margin row p-0" onClick={ (e) => {this.renderMessagesPannel() }}>
                 <div className="card-body">
-                    <div className="container-fluid contact-hover-action">
+                    <div className="container-fluid contact-hover-action" 
+                     onClick={  (e) => {
+                             this.renderMessagesPannel
+                     }
+                     }>
                         <div className="row">
                             <div className="col">
                                 
@@ -107,6 +126,8 @@ export class UserProfile extends React.Component {
                     </div>
                 </div>
             </div>
+
+            
         );
     }
 }

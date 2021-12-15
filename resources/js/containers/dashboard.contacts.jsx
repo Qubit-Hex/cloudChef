@@ -39,7 +39,7 @@ export class ContactsPage extends Component {
        <ContactNavbar />
       
       
-        <div className="col">
+        <div className="row">
           {/* contact navigation bar */}
       
           {/**
@@ -62,38 +62,8 @@ export class ContactsPage extends Component {
           role='MANAGER'
           />         
         </div>
-      
-        <div className='col'>
-      
-          <ProfileCard user='Heather Smith' 
-          image='/img/face2.jpg' 
-          address='123 lorne st'
-          location='my example, province'
-          phone='306-555-555-555'
-          email='example@GMAIL.COM'
-          name='HAVY'
-          role='HOSTESS'
-          />
-         </div>
-      </div>
-      
-      <div className='row'>
-      
-      <div className='col'>
-        <ProfileCard user='Amanda Smith' 
-          image='/img/face3.jpg' 
-          address='123 lorne st'
-          location='my example, province'
-          phone='306-555-555-555'
-          email='example@GMAIL.COM'
-          name='HAVY'
-          role='COOK'
-          />
-        </div>
-      
-      
-      
-        <div className='col'>
+
+        <div className='row'>
         <ProfileCard user='Adam Smith'
           image='/img/face4.jpg'
           address='123 lorne st'
@@ -104,7 +74,9 @@ export class ContactsPage extends Component {
           role='Kitchen Manager' />
         </div>
       
-        </div>
+    
+      </div>
+      
       
       </div>
             

@@ -19,6 +19,12 @@ import { ChatBoxContainer } from "../components/dashboard/messages/chatbox.conta
 export class MessagePage extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            userData: null,
+            name: null,
+            profileImg: null,
+        };
     }
 
     showMessageCenter() {
@@ -42,27 +48,49 @@ export class MessagePage extends React.Component {
             : (errorMessage.innerHTML = "");
     }
 
-
-
     /**
-     * 
-     *  @method: renderContactList 
-     * 
-     *   
+     *
+     *  @method: renderContactList
+     *
+     *
      *  @purpose: inorder to render contacts the user has searched for the in specific store
-     * 
+     *
      */
 
-
-     renderContactsList()
-     {
-
-     }
+    renderContactsList() {}
 
     render() {
         return (
             <div className="container-fluid profile_card dashboard-content">
                 <div className="row">
+                    <div className="col">
+                        {/**
+                         *
+                         *  refactor section into some sub sections to reduce the complexity
+                         *
+                         *    - @messageBox Pannel -> the container to hold our content
+                         *    - @profileHeader -> the user you are contacting there data eg photo, contact button, and phone button
+                         *    - @messageContainer -> the container that will call the message api every x amount of time to
+                         *                            refesh to message to get real time updates.
+                         *
+                         */}
+
+                        {/** this is the container that we will update inorder to show the chatBox of
+                         *   a user
+                         */}
+                        <div id="messagePannel-container">
+                            <img
+                                src="/img/SVG/network_outline.svg"
+                                className="img-fluid m-auto"
+                            />
+
+                            <b className="text-center">
+                                {" "}
+                                Please select a contact to start chatting{" "}
+                            </b>
+                        </div>
+                    </div>
+
                     {/** Contact list section  */}
                     <div className="col message-contact shadow">
                         <div className="modal-header">
@@ -77,25 +105,21 @@ export class MessagePage extends React.Component {
                         </div>
 
                         <div className="form-group mt-2 mb-2 message-pannel-container">
-                            <label for="searchbox">
-                                Search Your Contacts
-                            </label>{" "}
-
-                            {/**  add on change event we will use to search the databse 
-                             *    
+                            <label for="searchbox">Search Your Contacts</label>{" "}
+                            {/**  add on change event we will use to search the databse
+                             *
                              */}
-                            
                             <div className="input-group-append ">
-                            <input
-                                onChange={this.renderContactsList()}
-                                type="text"
-                                message-search="true"
-                                className="form-control searchBox"
-                                placeholder="Search"
-                                aria-label="Recipient's username"
-                                aria-describedby="basic-addon2"
-                            />
-                            
+                                <input
+                                    onChange={this.renderContactsList()}
+                                    type="text"
+                                    message-search="true"
+                                    className="form-control searchBox"
+                                    placeholder="Search"
+                                    aria-label="Recipient's username"
+                                    aria-describedby="basic-addon2"
+                                />
+
                                 <button
                                     message-button-search="true"
                                     className="btn btn-primary ml-2"
@@ -106,71 +130,39 @@ export class MessagePage extends React.Component {
                             </div>
                         </div>
 
-                        <div className='contacts-container'>
-                            {/**  we will rende rthe contacts of the user when a name is searched here 
-                             *  TODO: AFTER I finish reactactoring 
+                        <div className="contacts-container">
+                            {/**  we will rende rthe contacts of the user when a name is searched here
+                             *  TODO: AFTER I finish reactactoring
                              */}
 
+                            <UserProfile
+                                name="Heather Smith"
+                                role="@heathersmith"
+                                image="/img/face2.jpg"
+                                date="53 minutes ago"
+                                active="false"
+                                isActive="ONLINE"
+                            />
 
-                        <UserProfile
-                            name="Heather Smith"
-                            role="@heathersmith"
-                            image="/img/face2.jpg"
-                            date="53 minutes ago"
-                            active="false"
-                            isActive="ONLINE"
-                            onClick={this.showMessageCenter()}
-                        />
+                            <UserProfile
+                                name="John Doe"
+                                role="@johndoe"
+                                image="/img/face.jpg"
+                                date="1 hour ago"
+                                isActive="OFFLINE"
+                            />
 
-                        <UserProfile
-                            name="John Doe"
-                            role="@johndoe"
-                            image="/img/face.jpg"
-                            date="1 hour ago"
-                            isActive="OFFLINE"
-                        />
-
-                        <UserProfile
-                            name="Adam Smith"
-                            role="@AdmSmith"
-                            image="/img/face4.jpg"
-                            date="2 days ago"
-                            isActive="ONLINE"
-                        />
+                            <UserProfile
+                                name="Adam Smith"
+                                role="@AdmSmith"
+                                image="/img/face4.jpg"
+                                date="2 days ago"
+                                isActive="ONLINE"
+                            />
                         </div>
-
                     </div>
 
-                    <div className='col'>
-
-                    {/**
-                     * 
-                     *  refactor section into some sub sections to reduce the complexity 
-                     *  
-                     *    - @messageBox Pannel -> the container to hold our content 
-                     *    - @profileHeader -> the user you are contacting there data eg photo, contact button, and phone button
-                     *    - @messageContainer -> the container that will call the message api every x amount of time to
-                     *                            refesh to message to get real time updates. 
-                     * 
-                     */}
-
-
-                    {/** this is the container that we will update inorder to show the chatBox of 
-                     *   a user 
-                     */}
-                     <div id='messagePannel-container'>
-
-                        <ChatBoxContainer 
-                            user='heather Smith'
-                            profileImg='/img/face2.jpg'
-                            token="my super secret token"
-                        />
-
-                     </div>
-
-                    </div>
                     {/*  Message box*/}
-
                 </div>
             </div>
         );

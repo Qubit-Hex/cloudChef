@@ -31,7 +31,7 @@ export class ContactNavbar extends React.Component {
                       <div className='form-group ml-lg-4'>
                       <label htmlFor='text-bold' className='mr-2'>Search Contacts</label>       
                       <input type="text" className="form-control" placeholder="Search" />
-                      <button className='btn btn-primary mt-4'> Search </button>
+                      <button className='btn btn-message mt-4'> Search </button>
                       </div>
                   </div>
                   

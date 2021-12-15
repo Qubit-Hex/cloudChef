@@ -64,14 +64,10 @@ export class ChatboxMessages extends react.Component {
 
         /// build the query for our api inorder to get the messages from the database
         let url =
-            "/api/messages/get?userID=" +
-            request.userID +
-            "&sharedKey=" +
-            request.sharedKey +
-            "&message=" +
-            request.message +
-            "&time=" +
-            request.message;
+            `/api/messages/get?userID=${request.userID}
+            &sharedKey=${request.sharedKey}
+            &message=${request.message}
+            &time=${request.message}`;
 
         
 
@@ -112,11 +108,23 @@ export class ChatboxMessages extends react.Component {
 
                     counter++;
                 }
+                
+                    ReactDOM.render(chatBubbles, container);
 
-                console.log(response.message);
-
-                ReactDOM.render(chatBubbles, container);
-            } else {
+                    if (response.message.length === 0) {
+                        ReactDOM.render(
+                            <div className="d-flex"> 
+                                <img src='/img/SVG/empty_inbox.svg' width={200}  height={200} className="img-fluid"  />
+                                <b className='h1'>No Messages</b>
+                               
+                            </div>,
+                            container
+                        );
+                    }
+                    return setTimeout((res) => {   
+                    this.fetchChatMessages();
+                }, 7000);
+            }else {
                 // return an errro
                 return false;
             }

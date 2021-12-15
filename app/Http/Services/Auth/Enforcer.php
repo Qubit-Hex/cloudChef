@@ -32,7 +32,7 @@ class Enforcer {
         $encryption = new ModuleEncryption();
 
 
-        // chanbge the access token of the user to RSA -> 256 bit
+        // chanbge the access token of the user to sha256 
         // and return the new access token to the client
         
         $newToken = $encryption->random(32);
