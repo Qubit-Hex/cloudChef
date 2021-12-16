@@ -19,6 +19,13 @@ import { ChatBoxContainer } from "../components/dashboard/messages/chatbox.conta
 export class MessagePage extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            userData: null,
+            name: null,
+            profileImg : null,
+
+        }
     }
 
     showMessageCenter() {
@@ -120,6 +127,7 @@ export class MessagePage extends React.Component {
                             active="false"
                             isActive="ONLINE"
                             onClick={this.showMessageCenter()}
+
                         />
 
                         <UserProfile
@@ -165,6 +173,12 @@ export class MessagePage extends React.Component {
                             profileImg='/img/face2.jpg'
                             token="my super secret token"
                         />
+                         
+
+                         <img src='/img/SVG/network_outline.svg' className='img-fluid m-auto' />
+                         
+                         <b className='text-center'> Please select a contact to start chatting </b>
+
 
                      </div>
 

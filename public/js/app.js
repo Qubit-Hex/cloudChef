@@ -5949,9 +5949,17 @@ var MessagePage = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(MessagePage);
 
   function MessagePage(props) {
+    var _this;
+
     _classCallCheck(this, MessagePage);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    _this.state = {
+      userData: null,
+      name: null,
+      profileImg: null
+    };
+    return _this;
   }
 
   _createClass(MessagePage, [{
@@ -6057,13 +6065,19 @@ var MessagePage = /*#__PURE__*/function (_React$Component) {
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             className: "col",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
               id: "messagePannel-container",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_dashboard_messages_chatbox_container__WEBPACK_IMPORTED_MODULE_2__.ChatBoxContainer, {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_dashboard_messages_chatbox_container__WEBPACK_IMPORTED_MODULE_2__.ChatBoxContainer, {
                 user: "heather Smith",
                 profileImg: "/img/face2.jpg",
                 token: "my super secret token"
-              })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+                src: "/img/SVG/network_outline.svg",
+                className: "img-fluid m-auto"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("b", {
+                className: "text-center",
+                children: " Please select a contact to start chatting "
+              })]
             })
           })]
         })
