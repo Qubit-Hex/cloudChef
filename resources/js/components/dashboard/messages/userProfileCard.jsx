@@ -13,18 +13,24 @@ import { ChatBoxContainer } from "./chatbox.container";
 
 
 export class UserProfile extends React.Component {
+    
     constructor(props) {
         super(props);
 
         this.state = {
-            image: this.props.image,
+            // inheritanted state from the parent component 
+            profileID: this.props.profileID,
+            userID: this.props.userID,
             name: this.props.name,
+            image: this.props.image,
             role: this.props.role,
             date: this.props.date,
             isActive: this.props.isActive,
+            
+            // state for the component
+            token: "my super secret token",
         };
     }
-
 
     /**
      * 
@@ -45,12 +51,14 @@ export class UserProfile extends React.Component {
              ReactDOM.hydrate(<ChatBoxContainer 
             user={this.state.name}
             profileImg={this.state.image}
-            token="my super secret token" />, container);
+            sharedState={this.state} // this is the hook to the parent component
+            token={this.state.token} />, container);
         } else {
             ReactDOM.render(<ChatBoxContainer 
             user={this.state.name}
+            sharedState={this.state} // this is the hook to the parent component
             profileImg={this.state.image}
-            token="my super secret token" />, container);
+            token={this.state.token} />, container);
         }
        
     }

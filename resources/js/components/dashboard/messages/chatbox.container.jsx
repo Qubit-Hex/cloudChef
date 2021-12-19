@@ -14,15 +14,15 @@ import React from "react";
 import { ChatboxProfile } from "./chatbox.profile";
 import { ChatboxMessages } from "./chatbox.messages";
 import { ChatboxSendMessage } from "./chatbox.sendMessage";
+
+
+
 export class ChatBoxContainer extends React.Component {
     
     
     constructor(props) {
 
         super(props);
-
-        // this will hold our DS for fetching our data from the api
-        
 
         /**
          *  @Blueprint 
@@ -32,10 +32,11 @@ export class ChatBoxContainer extends React.Component {
          *  ours groups that our enforcer module that will take care of
          */
         this.state = {
+
             User: this.props.user,
             profileImg: this.props.profileImg,
             token: this.props.sharedToken, 
-
+            sharedState: this.props.sharedState,
         };
     }
 
@@ -73,21 +74,24 @@ export class ChatBoxContainer extends React.Component {
                                         <ChatboxProfile 
                                             name={this.state.User}
                                             status={true}
-                                            profileImg={this.state.profileImg} />
+                                            profileImg={this.state.profileImg} 
+                                            sharedState={this.state.sharedState}  />
 
                                     </div>
 
-
+                                    {/** message box */}
                                      <ChatboxMessages
                                         user={this.state.User}
                                         profileImg={this.state.profileImg}
+                                        sharedState={this.state.sharedState}
                                      />
 
 
+                                    {/** section for sending messages */}
                                      <ChatboxSendMessage 
                                         user={this.state.User} 
-
-                                     
+                                        profileImg={this.state.profileImg}
+                                        sharedState={this.state.sharedState}
                                      />
                                 </div>
                             </div>

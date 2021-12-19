@@ -20,8 +20,6 @@ class schedule extends Controller
 
     public function __construct(Request $request)
     {   
-        $this->RequestObject = $request;
-        $this->requestToken = bin2hex(openssl_random_pseudo_bytes(32));
 
     }
 

@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\authentication;
 use App\Http\Controllers\dashboard;
 use App\Http\Controllers\Message;
+use App\Http\Controllers\store_members;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -109,4 +111,40 @@ Route::group(['prefix' => 'messages', 'middleware' => 'auth'], function () {
        Route::patch('/update', [message::class, 'update'])->name('messages/update');
 
 
+});
+
+
+/**
+ * 
+ *  @route: /contacts/
+ * 
+ *  @purpose: inorder to get the contacts of the store
+ *  
+ */
+
+
+
+Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
+
+
+    /**
+     * 
+     *  @route: /contacts/get/
+     * 
+     *  @purpose: inorder to get the contacts of the store
+     *  
+     */
+
+    Route::get('/get', [store_members::class, 'get'])->name('contacts/get');
+
+
+    /**
+     * 
+     *  @route: /contacts/add/
+     * 
+     *  @purpose: inorder to add the contacts of the store
+     *  
+     */
+
+     Route::post('/add', [store_members::class, 'add'])->name('contacts/add');
 });

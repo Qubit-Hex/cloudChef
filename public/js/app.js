@@ -2861,8 +2861,7 @@ var ChatBoxContainer = /*#__PURE__*/function (_React$Component) {
 
     _classCallCheck(this, ChatBoxContainer);
 
-    _this = _super.call(this, props); // this will hold our DS for fetching our data from the api
-
+    _this = _super.call(this, props);
     /**
      *  @Blueprint 
      * 
@@ -2874,7 +2873,8 @@ var ChatBoxContainer = /*#__PURE__*/function (_React$Component) {
     _this.state = {
       User: _this.props.user,
       profileImg: _this.props.profileImg,
-      token: _this.props.sharedToken
+      token: _this.props.sharedToken,
+      sharedState: _this.props.sharedState
     };
     return _this;
   }
@@ -2909,13 +2909,17 @@ var ChatBoxContainer = /*#__PURE__*/function (_React$Component) {
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_chatbox_profile__WEBPACK_IMPORTED_MODULE_1__.ChatboxProfile, {
                     name: this.state.User,
                     status: true,
-                    profileImg: this.state.profileImg
+                    profileImg: this.state.profileImg,
+                    sharedState: this.state.sharedState
                   })
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_chatbox_messages__WEBPACK_IMPORTED_MODULE_2__.ChatboxMessages, {
                   user: this.state.User,
-                  profileImg: this.state.profileImg
+                  profileImg: this.state.profileImg,
+                  sharedState: this.state.sharedState
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_chatbox_sendMessage__WEBPACK_IMPORTED_MODULE_3__.ChatboxSendMessage, {
-                  user: this.state.User
+                  user: this.state.User,
+                  profileImg: this.state.profileImg,
+                  sharedState: this.state.sharedState
                 })]
               })
             })]
@@ -3001,20 +3005,19 @@ var ChatboxMessages = /*#__PURE__*/function (_react$Component) {
     _this = _super.call(this, props);
     /**
      *   @blueprint
-     *
-     *   user -> the userid  of the we are messaging
-     *   sharedKey -> a shared key for to establish a message request handshake to actually send the
-     *              message if only the key is valid
-     *   message -> the message
-     *   time -> the current of the rwquest
-     *
-     *  messageStatus -> this is a boolean and will switch to true if the user has seen the message
+     *  
+     *  user -> userID
+     * 
+     *  profileImg -> profileImg
+     * 
+     *  sharedState -> the parents state 
      *
      */
 
     _this.state = {
       user: _this.props.user,
-      profileImg: _this.props.profileImg
+      profileImg: _this.props.profileImg,
+      sharedState: _this.props.sharedState
     };
     return _this;
   }
@@ -3034,23 +3037,39 @@ var ChatboxMessages = /*#__PURE__*/function (_react$Component) {
     value: function fetchChatMessages() {
       var _this2 = this;
 
-      // @TODO: add auth header once route testing is done
-      // we will add the authorization header later
+      // change this to use web sockets instead of fetch
       var fetchService = new _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_2__["default"]();
       var headers = {
         "Content-Type": "application/json",
         Accept: "application/json"
       };
+      console.log(this.state.sharedState);
       var request = {
-        userID: 4,
-        sharedKey: "testKey",
-        message: null,
+        storeID: this.state.sharedState.storeID,
+        messageFrom: 4,
+        messageTo: this.state.sharedState.userID,
         time: Date.now()
       }; /// build the query for our api inorder to get the messages from the database
 
-      var url = "/api/messages/get?userID=".concat(request.userID, "\n            &sharedKey=").concat(request.sharedKey, "\n            &message=").concat(request.message, "\n            &time=").concat(request.message);
+      var url = "/api/messages/get?messageFrom=".concat(request.messageFrom, "&messageTo=").concat(request.messageTo, "&storeID=").concat(request.storeID);
       return fetchService.$get(url, headers, function (response) {
         var container = document.getElementById("chatbubble-container");
+        console.log(response.message);
+
+        if (response.message.length === 0) {
+          react_dom__WEBPACK_IMPORTED_MODULE_3__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+            className: "d-flex",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+              src: "/img/SVG/empty_inbox.svg",
+              width: 200,
+              height: 200,
+              className: "img-fluid"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("b", {
+              className: "h1",
+              children: "No Messages"
+            })]
+          }), container);
+        }
 
         if (response.message) {
           // parse out messages boxes
@@ -3064,7 +3083,8 @@ var ChatboxMessages = /*#__PURE__*/function (_react$Component) {
             for (_iterator.s(); !(_step = _iterator.n()).done;) {
               var node = _step.value;
 
-              if (counter % 2 === 0) {
+              //  check if the message belongs to the user 
+              if (node.userID === _this2.state.sharedState.userID) {
                 chatBubbles.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_chatbox_chatBubble__WEBPACK_IMPORTED_MODULE_1__.ChatboxMessageBubble, {
                     message: node.message,
@@ -3093,29 +3113,11 @@ var ChatboxMessages = /*#__PURE__*/function (_react$Component) {
           }
 
           react_dom__WEBPACK_IMPORTED_MODULE_3__.render(chatBubbles, container);
-
-          if (response.message.length === 0) {
-            react_dom__WEBPACK_IMPORTED_MODULE_3__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-              className: "d-flex",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
-                src: "/img/SVG/empty_inbox.svg",
-                width: 200,
-                height: 200,
-                className: "img-fluid"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("b", {
-                className: "h1",
-                children: "No Messages"
-              })]
-            }), container);
-          }
-
-          return setTimeout(function (res) {
-            _this2.fetchChatMessages();
-          }, 7000);
-        } else {
-          // return an errro
-          return false;
         }
+
+        return setTimeout(function (res) {
+          _this2.fetchChatMessages();
+        }, 7000);
       });
     }
   }, {
@@ -3385,7 +3387,9 @@ var ChatboxSendMessage = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.state = {
       user: _this.props.user,
-      sendingMessage: false
+      sendingMessage: false,
+      sharedKey: _this.props.sharedKey,
+      sharedState: _this.props.sharedState
     };
     return _this;
   }
@@ -3409,7 +3413,7 @@ var ChatboxSendMessage = /*#__PURE__*/function (_React$Component) {
       }; // request object
 
       var request = {
-        userID: 4,
+        userID: this.state.user,
         sharedKey: "testKey",
         message: document.getElementById('chatbox-message-content').value
       };
@@ -3559,11 +3563,16 @@ var UserProfile = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      image: _this.props.image,
+      // inheritanted state from the parent component 
+      profileID: _this.props.profileID,
+      userID: _this.props.userID,
       name: _this.props.name,
+      image: _this.props.image,
       role: _this.props.role,
       date: _this.props.date,
-      isActive: _this.props.isActive
+      isActive: _this.props.isActive,
+      // state for the component
+      token: "my super secret token"
     };
     return _this;
   }
@@ -3587,13 +3596,17 @@ var UserProfile = /*#__PURE__*/function (_React$Component) {
         react_dom__WEBPACK_IMPORTED_MODULE_1__.hydrate( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_chatbox_container__WEBPACK_IMPORTED_MODULE_2__.ChatBoxContainer, {
           user: this.state.name,
           profileImg: this.state.image,
-          token: "my super secret token"
+          sharedState: this.state // this is the hook to the parent component
+          ,
+          token: this.state.token
         }), container);
       } else {
         react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_chatbox_container__WEBPACK_IMPORTED_MODULE_2__.ChatBoxContainer, {
           user: this.state.name,
+          sharedState: this.state // this is the hook to the parent component
+          ,
           profileImg: this.state.image,
-          token: "my super secret token"
+          token: this.state.token
         }), container);
       }
     }
@@ -5938,7 +5951,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _components_dashboard_messages_userProfileCard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/dashboard/messages/userProfileCard */ "./resources/js/components/dashboard/messages/userProfileCard.jsx");
 /* harmony import */ var _components_dashboard_messages_chatbox_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/dashboard/messages/chatbox.container */ "./resources/js/components/dashboard/messages/chatbox.container.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../lib/fetchServiceProvider */ "./resources/js/lib/fetchServiceProvider.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -5978,6 +5995,9 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
+
+
 var MessagePage = /*#__PURE__*/function (_React$Component) {
   _inherits(MessagePage, _React$Component);
 
@@ -5990,7 +6010,10 @@ var MessagePage = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      userData: null,
+      userData: {
+        // display all the user data 
+        contacts: _this.fetchStoreContacts()
+      },
       name: null,
       profileImg: null
     };
@@ -6027,88 +6050,122 @@ var MessagePage = /*#__PURE__*/function (_React$Component) {
      */
 
   }, {
-    key: "renderContactsList",
-    value: function renderContactsList() {}
+    key: "fetchStoreContacts",
+    value: function fetchStoreContacts() {
+      var _this2 = this;
+
+      var container = document.getElementById("container-contact-list");
+      var fetchService = new _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_3__["default"]();
+      var headers = {
+        "Content-type": "application/json",
+        Accept: "application/json" // we will add the toke to header after testing is complete
+
+      }; // fetch our members data from the api
+
+      var contactElements = [];
+      fetchService.$get("/api/members/get", headers, function (response) {
+        // we will render the data here
+        var data = response.data; // rendeer our react component her
+
+        if (response.data) {
+          for (var i = 0; i < data.length; i++) {
+            contactElements.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_dashboard_messages_userProfileCard__WEBPACK_IMPORTED_MODULE_1__.UserProfile, {
+              profileID: data[i].profileID,
+              userID: data[i].userID,
+              name: data[i].name,
+              role: data[i].role,
+              image: data[i].profileIMG,
+              date: "53 minutes ago",
+              active: "false",
+              isActive: "ONLINE"
+            }, i));
+          } // to get the value you have to return the promise
+
+
+          return _this2.renderContactList(contactElements);
+        } // render issue
+
+
+        return false;
+      });
+      return contactElements;
+    }
+    /**
+     *
+     *  @method: renderContactList
+     * 
+     *  @purpose: inorder to render the contact list from an jsx.elent
+     *
+     */
+
+  }, {
+    key: "renderContactList",
+    value: function renderContactList(contacts) {
+      var container = document.getElementById('container-contact-list');
+      return react_dom__WEBPACK_IMPORTED_MODULE_4__.hydrate(contacts, container);
+    }
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+      /// trigger a error message if our contact data isn't available
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
         className: "container-fluid profile_card dashboard-content",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
           className: "row",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-            className: "col",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-              id: "messagePannel-container",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
-                src: "/img/SVG/network_outline.svg",
-                className: "img-fluid m-auto"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("b", {
-                className: "text-center",
-                children: [" ", "Please select a contact to start chatting", " "]
-              })]
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
             className: "col message-contact shadow",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
               className: "modal-header",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("h2", {
-                children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("h2", {
+                children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
                   "class": "fas fa-user-tie"
-                }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("b", {
+                }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("b", {
                   children: "Contacts"
                 }), " "]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
                 className: "fa fa-comments",
                 "aria-hidden": "true"
               })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
               className: "form-group mt-2 mb-2 message-pannel-container",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
                 "for": "searchbox",
                 children: "Search Your Contacts"
-              }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+              }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
                 className: "input-group-append ",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
-                  onChange: this.renderContactsList(),
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
                   type: "text",
+                  id: "contact-search",
                   "message-search": "true",
                   className: "form-control searchBox",
                   placeholder: "Search",
                   "aria-label": "Recipient's username",
                   "aria-describedby": "basic-addon2"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
                   "message-button-search": "true",
                   className: "btn btn-primary ml-2",
                   type: "button",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
                     "class": "fas fa-search"
                   })
                 })]
               })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
               className: "contacts-container",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_dashboard_messages_userProfileCard__WEBPACK_IMPORTED_MODULE_1__.UserProfile, {
-                name: "Heather Smith",
-                role: "@heathersmith",
-                image: "/img/face2.jpg",
-                date: "53 minutes ago",
-                active: "false",
-                isActive: "ONLINE"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_dashboard_messages_userProfileCard__WEBPACK_IMPORTED_MODULE_1__.UserProfile, {
-                name: "John Doe",
-                role: "@johndoe",
-                image: "/img/face.jpg",
-                date: "1 hour ago",
-                isActive: "OFFLINE"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_dashboard_messages_userProfileCard__WEBPACK_IMPORTED_MODULE_1__.UserProfile, {
-                name: "Adam Smith",
-                role: "@AdmSmith",
-                image: "/img/face4.jpg",
-                date: "2 days ago",
-                isActive: "ONLINE"
-              })]
+              id: "container-contact-list"
             })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+            className: "col",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+              id: "messagePannel-container",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
+                src: "/img/SVG/network_outline.svg",
+                className: "img-fluid m-auto"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("b", {
+                className: "text-center",
+                children: [" ", "Please select a contact to start chatting", " "]
+              })]
+            })
           })]
         })
       });

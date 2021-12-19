@@ -21,7 +21,8 @@ export class ChatboxSendMessage extends React.Component {
         this.state = {
             user: this.props.user,
             sendingMessage: false,
-
+            sharedKey: this.props.sharedKey,
+            sharedState: this.props.sharedState,
         };
     }
 
@@ -38,8 +39,6 @@ export class ChatboxSendMessage extends React.Component {
     {
         let fetchService = new FetchServiceProvider();
 
-
-
         // headers 
 
         const headers = {
@@ -47,11 +46,10 @@ export class ChatboxSendMessage extends React.Component {
             Accept:  "application/json",
         };
 
-
         // request object
 
         const request = {
-            userID: 4,
+            userID: this.state.user,
             sharedKey: "testKey",
             message: document.getElementById('chatbox-message-content').value,
         };
@@ -141,7 +139,6 @@ export class ChatboxSendMessage extends React.Component {
                                         </div>
                                     </div>
             </div>
-
         );
     }
 }

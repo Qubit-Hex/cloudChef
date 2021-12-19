@@ -6,6 +6,14 @@ use Illuminate\Http\Request;
 use App\Http\Services\Message\MessageService;
 use PDO;
 
+/**
+ * 
+ *  @controller: Message
+ * 
+ * 
+ *  @purpose: inorder to controll our messaging datta
+ */
+
 class Message extends Controller
 {
 
@@ -15,7 +23,6 @@ class Message extends Controller
     public function __construct()
     {
         // include our authentication middleware for this route 
-
         // generate a random token for logs for each request
         // we also have a rate throttler for this route we need to add
         // prevent any one from sending more than 5 messages per second 
@@ -32,12 +39,13 @@ class Message extends Controller
     public function get(Request $request)
     {
 
+        // message request structure 
         $messageRequest = [
-            'userID' => $request->input('userID'),  
-            'sharedKey' => $request->input('sharedKey'),
-            'message' => null,
+            'storeID' => $request->input('storeID'),
+            'messageFrom' => $request->input('messageFrom'),  
+            'messageTo' => $request->input('messageTo'),
             'time' => $request->input('time'),
-            'token' => $this->requestToken,
+            'signature' => $this->requestToken,
         ];
 
         return MessageService::getMessages($messageRequest);
@@ -57,21 +65,16 @@ class Message extends Controller
 
         // send message structure
         $messageRequest = [
-            'userID' => $request->input('userID'),
-            'sharedKey' => $request->input('sharedKey'),
+            'storeID' => $request->input('storeID'),
+            'messageFrom' => $request->input('messageFrom'),
+            'messageTo' => $request->input('messageTo'),
             'message' => $request->input('message'),
             'time' => $request->input('time'),
-            'token' => $this->requestToken,
+            'signature' => $this->requestToken,
         ];
 
         return MessageService::sendMessage($messageRequest);
 
      }
-
-
-
-     /**
-      *   @method 
-      */
 
 }

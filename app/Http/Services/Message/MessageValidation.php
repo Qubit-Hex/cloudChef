@@ -19,27 +19,6 @@ class MessageValidation {
     {
         // our structure 
 
-        $this->userID = $messageObject['userID'];
-        $this->shareKey = $messageObject['sharedKey'];
-        $this->message = $messageObject['message'];
-        $this->time = $messageObject['time'];
-
-    }
-
-    /**
-     *  
-     *  @method: isShareTokenValid
-     * 
-     * 
-     *  @purpose: checks to see if our shared converstation toke is valid 
-     */
-
-    public function  isSharedTokenValid() {
-        $db = DB::table('messageService')->where('sharedKey', $this->shareKey)->first();
-        if($db) {
-            return true;
-        }
-        return false;
     }
 
     /**
@@ -51,13 +30,6 @@ class MessageValidation {
 
     public function isUserValid()  {
             
-            $user = DB::table('users')->where('userID', $this->userID)->first();
-    
-            if($user) {
-                return true;
-            }
-    
-            return false;
     }
 
 
@@ -71,10 +43,6 @@ class MessageValidation {
 
      public function isMessageValid() {
 
-        if (strlen($this->message) > 0) {
-            return true;
-        }
-        return false;
      }
  }
 ?>

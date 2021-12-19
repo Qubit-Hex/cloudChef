@@ -31,11 +31,7 @@ export class ChatboxMessageBubble extends react.Component {
         }
 
     }
-
-
-
-
-
+    
     /**
      * 
      * @method: verifiyMessages

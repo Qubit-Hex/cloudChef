@@ -5,6 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+/**
+ * 
+ *  @controller: dashboard
+ * 
+ * 
+ *  @purpose: inorder to get the dashboard data
+ * 
+ * 
+ */
+
 class dashboard extends Controller
 {
     public function __construct()

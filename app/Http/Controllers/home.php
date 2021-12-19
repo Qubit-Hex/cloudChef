@@ -4,6 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+/**
+ * 
+ *  @controller: home 
+ * 
+ *  @purpose: inorder to render the landing page of our application 
+ * 
+ */
+
 
 class home extends Controller
 {

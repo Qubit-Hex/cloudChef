@@ -15,13 +15,26 @@ import React, { Component } from "react";
 
 import { UserProfile } from "../components/dashboard/messages/userProfileCard";
 import { ChatBoxContainer } from "../components/dashboard/messages/chatbox.container";
+import FetchServiceProvider from "../lib/fetchServiceProvider";
+import ReactDOM from "react-dom";
+import { map } from "jquery";
+
+
+
+
+
+
 
 export class MessagePage extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            userData: null,
+
+            userData: {
+                // display all the user data 
+                contacts: this.fetchStoreContacts(),
+            },
             name: null,
             profileImg: null,
         };
@@ -57,40 +70,73 @@ export class MessagePage extends React.Component {
      *
      */
 
-    renderContactsList() {}
+    fetchStoreContacts() {
+        let container = document.getElementById("container-contact-list");
+        let fetchService = new FetchServiceProvider();
+
+        let headers = {
+            "Content-type": "application/json",
+            Accept: "application/json",
+            // we will add the toke to header after testing is complete
+        };
+        // fetch our members data from the api
+
+        let contactElements = [];
+
+        fetchService.$get("/api/members/get", headers, (response) => {
+            // we will render the data here
+            let data = response.data;
+            // rendeer our react component her
+            if (response.data) {
+
+                for (let i = 0; i < data.length; i++) {
+                    contactElements.push(
+                        <UserProfile
+                            key={i}
+                            profileID={data[i].profileID}
+                            userID={data[i].userID}
+                            name={data[i].name}
+                            role={data[i].role}
+                            image={data[i].profileIMG}
+                            date="53 minutes ago"
+                            active="false"
+                            isActive="ONLINE"
+                        />
+                    );
+                }
+                // to get the value you have to return the promise
+                return this.renderContactList(contactElements);
+            }
+            // render issue
+            return false;
+        });
+
+        return contactElements;
+    }
+
+
+    /**
+     *
+     *  @method: renderContactList
+     * 
+     *  @purpose: inorder to render the contact list from an jsx.elent
+     *
+     */
+
+
+    renderContactList(contacts) {
+       let container = document.getElementById('container-contact-list');
+       return ReactDOM.hydrate(contacts, container);
+    }
+
 
     render() {
+            /// trigger a error message if our contact data isn't available
+
+
         return (
             <div className="container-fluid profile_card dashboard-content">
                 <div className="row">
-                    <div className="col">
-                        {/**
-                         *
-                         *  refactor section into some sub sections to reduce the complexity
-                         *
-                         *    - @messageBox Pannel -> the container to hold our content
-                         *    - @profileHeader -> the user you are contacting there data eg photo, contact button, and phone button
-                         *    - @messageContainer -> the container that will call the message api every x amount of time to
-                         *                            refesh to message to get real time updates.
-                         *
-                         */}
-
-                        {/** this is the container that we will update inorder to show the chatBox of
-                         *   a user
-                         */}
-                        <div id="messagePannel-container">
-                            <img
-                                src="/img/SVG/network_outline.svg"
-                                className="img-fluid m-auto"
-                            />
-
-                            <b className="text-center">
-                                {" "}
-                                Please select a contact to start chatting{" "}
-                            </b>
-                        </div>
-                    </div>
-
                     {/** Contact list section  */}
                     <div className="col message-contact shadow">
                         <div className="modal-header">
@@ -111,8 +157,8 @@ export class MessagePage extends React.Component {
                              */}
                             <div className="input-group-append ">
                                 <input
-                                    onChange={this.renderContactsList()}
                                     type="text"
+                                    id="contact-search"
                                     message-search="true"
                                     className="form-control searchBox"
                                     placeholder="Search"
@@ -130,38 +176,25 @@ export class MessagePage extends React.Component {
                             </div>
                         </div>
 
-                        <div className="contacts-container">
-                            {/**  we will rende rthe contacts of the user when a name is searched here
-                             *  TODO: AFTER I finish reactactoring
-                             */}
-
-                            <UserProfile
-                                name="Heather Smith"
-                                role="@heathersmith"
-                                image="/img/face2.jpg"
-                                date="53 minutes ago"
-                                active="false"
-                                isActive="ONLINE"
-                            />
-
-                            <UserProfile
-                                name="John Doe"
-                                role="@johndoe"
-                                image="/img/face.jpg"
-                                date="1 hour ago"
-                                isActive="OFFLINE"
-                            />
-
-                            <UserProfile
-                                name="Adam Smith"
-                                role="@AdmSmith"
-                                image="/img/face4.jpg"
-                                date="2 days ago"
-                                isActive="ONLINE"
-                            />
+                        <div className="contacts-container" id="container-contact-list">
+                            
+                          
                         </div>
                     </div>
 
+                    <div className="col">
+                        <div id="messagePannel-container">
+                            <img
+                                src="/img/SVG/network_outline.svg"
+                                className="img-fluid m-auto"
+                            />
+
+                            <b className="text-center">
+                                {" "}
+                                Please select a contact to start chatting{" "}
+                            </b>
+                        </div>
+                    </div>
                     {/*  Message box*/}
                 </div>
             </div>

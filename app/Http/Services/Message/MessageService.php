@@ -28,11 +28,6 @@ class MessageService  {
     {   
        $validation = new MessageValidation($requestObject);
 
-       if (!$validation->isSharedTokenValid()) {
-    
-        return Response()->json(['message' => 'Invalid shared token'], 401);
-      }
-
       if (!$validation->isUserValid()) {
     
         return Response()->json(['message' => 'Invalid user id'], 401);
@@ -55,12 +50,6 @@ class MessageService  {
     static function sendMessage($requestObject)
     {
         $validation = new MessageValidation($requestObject);
-
-
-        if (!$validation->isSharedTokenValid()) {
-            return Response()->json(['message' => 'Invalid shared token'], 401);
-        }
-
 
         if (!$validation->isUserValid()) {
             return Response()->json(['message' => 'Invalid user id'], 401);

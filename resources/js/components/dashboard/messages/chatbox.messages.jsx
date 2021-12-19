@@ -19,19 +19,19 @@ export class ChatboxMessages extends react.Component {
 
         /**
          *   @blueprint
-         *
-         *   user -> the userid  of the we are messaging
-         *   sharedKey -> a shared key for to establish a message request handshake to actually send the
-         *              message if only the key is valid
-         *   message -> the message
-         *   time -> the current of the rwquest
-         *
-         *  messageStatus -> this is a boolean and will switch to true if the user has seen the message
+         *  
+         *  user -> userID
+         * 
+         *  profileImg -> profileImg
+         * 
+         *  sharedState -> the parents state 
          *
          */
+
         this.state = {
             user: this.props.user,
             profileImg: this.props.profileImg,
+            sharedState: this.props.sharedState,
         };
     }
 
@@ -46,8 +46,8 @@ export class ChatboxMessages extends react.Component {
      */
 
     fetchChatMessages() {
-        // @TODO: add auth header once route testing is done
-        // we will add the authorization header later
+      // change this to use web sockets instead of fetch
+
         let fetchService = new FetchServiceProvider();
 
         const headers = {
@@ -55,34 +55,44 @@ export class ChatboxMessages extends react.Component {
             Accept: "application/json",
         };
 
+        console.log(this.state.sharedState);
         const request = {
-            userID: 4,
-            sharedKey: "testKey",
-            message: null,
+            storeID: this.state.sharedState.storeID,
+            messageFrom: 4,
+            messageTo: this.state.sharedState.userID,
             time: Date.now(),
         };
 
         /// build the query for our api inorder to get the messages from the database
-        let url =
-            `/api/messages/get?userID=${request.userID}
-            &sharedKey=${request.sharedKey}
-            &message=${request.message}
-            &time=${request.message}`;
-
+        let url = `/api/messages/get?messageFrom=${request.messageFrom}&messageTo=${request.messageTo}&storeID=${request.storeID}`;
         
 
         return fetchService.$get(url, headers, (response) => {
             let container = document.getElementById("chatbubble-container");
 
+
+            console.log(response.message);
+
+            if (response.message.length === 0) {
+                ReactDOM.render(
+                    <div className="d-flex"> 
+                        <img src='/img/SVG/empty_inbox.svg' width={200}  height={200} className="img-fluid"  />
+                        <b className='h1'>No Messages</b>
+                       
+                    </div>,
+                    container
+                );
+            }
+
             if (response.message) {
                 // parse out messages boxes
-
                 let chatBubbles = [];
-
                 let counter = 0;
 
+
                 for (const node of response.message) {
-                    if (counter % 2 === 0) {
+                    //  check if the message belongs to the user 
+                    if (node.userID === this.state.sharedState.userID) {
                         chatBubbles.push(
                             <div key={counter}>
                                 <ChatboxMessageBubble
@@ -111,24 +121,11 @@ export class ChatboxMessages extends react.Component {
                 
                     ReactDOM.render(chatBubbles, container);
 
-                    if (response.message.length === 0) {
-                        ReactDOM.render(
-                            <div className="d-flex"> 
-                                <img src='/img/SVG/empty_inbox.svg' width={200}  height={200} className="img-fluid"  />
-                                <b className='h1'>No Messages</b>
-                               
-                            </div>,
-                            container
-                        );
                     }
                     return setTimeout((res) => {   
                     this.fetchChatMessages();
                 }, 7000);
-            }else {
-                // return an errro
-                return false;
-            }
-        });
+            });
     }
 
     render() {
@@ -137,8 +134,7 @@ export class ChatboxMessages extends react.Component {
                 <div className="container-chat-log">
                     <div
                         className="container-fluid chat-bubble"
-                        id="chatbubble-container"
-                    >
+                        id="chatbubble-container">
                         {this.fetchChatMessages()}
                     </div>
 
