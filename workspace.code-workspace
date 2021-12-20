@@ -5,6 +5,8 @@
 		}
 	],
 	"settings": {
-		"files.exclude": {}
+		"files.exclude": {
+			"app/Http/Services/Message/modules/eventMessageBus": true
+		}
 	}
 }

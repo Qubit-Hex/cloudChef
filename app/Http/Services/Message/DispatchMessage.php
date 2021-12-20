@@ -270,7 +270,7 @@ class DispatchMessage implements MessageInterface
           *
           *  we need to add something later for larger groups not just 1 on 1 conversations ?
           */
-          
+
         $db = DB::insert('insert into user_group_member (groupID, userID, storeID) values (?, ?, ?)', [$groupID, $userID, storeID]);
         $db_recipient = DB::insert('insert into user_group_member (groupID, userID, storeID) values (?, ?, ?)', [$groupID, $recipientID, storeID]);
 
@@ -338,5 +338,6 @@ class DispatchMessage implements MessageInterface
 
     public function dispatcher($data)
     {
+        
     }
 }
