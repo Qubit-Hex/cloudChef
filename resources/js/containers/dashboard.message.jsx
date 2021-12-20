@@ -87,6 +87,9 @@ export class MessagePage extends React.Component {
             // we will render the data here
             let data = response.data;
             // rendeer our react component her
+
+            console.log(response); 
+            
             if (response.data) {
 
                 for (let i = 0; i < data.length; i++) {
@@ -101,6 +104,7 @@ export class MessagePage extends React.Component {
                             date="53 minutes ago"
                             active="false"
                             isActive="ONLINE"
+                            storeID={data[i].storeID}
                         />
                     );
                 }

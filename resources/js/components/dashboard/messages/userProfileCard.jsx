@@ -13,7 +13,7 @@ import { ChatBoxContainer } from "./chatbox.container";
 
 
 export class UserProfile extends React.Component {
-    
+
     constructor(props) {
         super(props);
 
@@ -26,6 +26,7 @@ export class UserProfile extends React.Component {
             role: this.props.role,
             date: this.props.date,
             isActive: this.props.isActive,
+            storeID: this.props.storeID,
             
             // state for the component
             token: "my super secret token",

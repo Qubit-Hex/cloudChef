@@ -2780,12 +2780,17 @@ var ChatboxMessageBubble = /*#__PURE__*/function (_react$Component) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
         className: "chat-buble-container",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-          className: "row mt-2 d-inline-flex",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+          className: "row mt-2",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
             className: this.verifyMessages() + "m-1",
-            children: [this.state.message, " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("small", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
+              className: "fa fa-user-circle-o fa-2x mr-2",
+              "aria-hidden": "true"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("span", {
+              children: [" ", this.state.message, " "]
+            }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("small", {
               className: "text-muted covo-sent-msg",
-              children: [" ", this.state.status, " At: ", this.state.time]
+              children: ["Sent:  ", this.state.time]
             })]
           })
         })
@@ -3022,17 +3027,46 @@ var ChatboxMessages = /*#__PURE__*/function (_react$Component) {
     return _this;
   }
   /**
-   *
-   *
-   *   @method: fetchChatMessages
-   *
-   *   @purpose: inorder to fectch our chat messages and render them using our bubble
-   *             component
+   *  
+   * @method: getCookie 
+   * 
+   * 
+   * 
+   *  @purpose: to get the cookie value via name in a string  
+   * 
    *
    */
 
 
   _createClass(ChatboxMessages, [{
+    key: "getCookie",
+    value: function getCookie(name) {
+      var nameEQ = name + "=";
+      var ca = document.cookie.split(";");
+
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+
+        while (c.charAt(0) == " ") {
+          c = c.substring(1, c.length);
+        }
+
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+      }
+
+      return null;
+    }
+    /**
+     *
+     *
+     *   @method: fetchChatMessages
+     *
+     *   @purpose: inorder to fectch our chat messages and render them using our bubble
+     *             component
+     *
+     */
+
+  }, {
     key: "fetchChatMessages",
     value: function fetchChatMessages() {
       var _this2 = this;
@@ -3045,36 +3079,60 @@ var ChatboxMessages = /*#__PURE__*/function (_react$Component) {
       };
       console.log(this.state.sharedState);
       var request = {
-        storeID: this.state.sharedState.storeID,
-        messageFrom: 4,
-        messageTo: this.state.sharedState.userID,
-        time: Date.now()
+        storeID: 1,
+        token: this.getCookie('accessToken'),
+        // users token that is logged in  
+        userID: this.state.sharedState.userID,
+        requestTime: Date.now()
       }; /// build the query for our api inorder to get the messages from the database
 
-      var url = "/api/messages/get?messageFrom=".concat(request.messageFrom, "&messageTo=").concat(request.messageTo, "&storeID=").concat(request.storeID);
+      var url = "/api/messages/get?storeID=".concat(request.storeID, "&token=").concat(request.token, "&userID=").concat(request.userID, "&requestTime=").concat(request.requestTime);
       return fetchService.$get(url, headers, function (response) {
-        var container = document.getElementById("chatbubble-container");
-        console.log(response.message);
+        var container = document.getElementById("chatbubble-container"); // proccess error messages
 
-        if (response.message.length === 0) {
-          react_dom__WEBPACK_IMPORTED_MODULE_3__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-            className: "d-flex",
+        if (response.error) {
+          return react_dom__WEBPACK_IMPORTED_MODULE_3__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+            className: "col",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
-              src: "/img/SVG/empty_inbox.svg",
-              width: 200,
-              height: 200,
-              className: "img-fluid"
+              src: "/img/something_wrong.png",
+              className: "img-fluid",
+              width: 150,
+              height: 150
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("b", {
-              className: "h1",
-              children: "No Messages"
+              style: {
+                fontWeight: 600
+              },
+              children: "Error"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("b", {
+              className: "h4",
+              children: [" ", response.error]
             })]
           }), container);
         }
+
+        if (response.message.length === 0) {
+          return react_dom__WEBPACK_IMPORTED_MODULE_3__.hydrate( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+            className: "col",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("b", {
+              style: {
+                fontWeight: 700
+              },
+              children: " No Messages "
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+              src: "/img/SVG/empty_inbox.svg",
+              className: "img-fluid",
+              width: 100,
+              height: 100
+            })]
+          }), container);
+        } // proccess success messages
+
 
         if (response.message) {
           // parse out messages boxes
           var chatBubbles = [];
           var counter = 0;
+          console.log(response.message);
 
           var _iterator = _createForOfIteratorHelper(response.message),
               _step;
@@ -3113,11 +3171,12 @@ var ChatboxMessages = /*#__PURE__*/function (_react$Component) {
           }
 
           react_dom__WEBPACK_IMPORTED_MODULE_3__.render(chatBubbles, container);
-        }
+        } // retry connection every 10 seconds
+
 
         return setTimeout(function (res) {
-          _this2.fetchChatMessages();
-        }, 7000);
+          return _this2.fetchChatMessages();
+        }, 8000);
       });
     }
   }, {
@@ -3571,6 +3630,7 @@ var UserProfile = /*#__PURE__*/function (_React$Component) {
       role: _this.props.role,
       date: _this.props.date,
       isActive: _this.props.isActive,
+      storeID: _this.props.storeID,
       // state for the component
       token: "my super secret token"
     };
@@ -6067,6 +6127,8 @@ var MessagePage = /*#__PURE__*/function (_React$Component) {
         // we will render the data here
         var data = response.data; // rendeer our react component her
 
+        console.log(response);
+
         if (response.data) {
           for (var i = 0; i < data.length; i++) {
             contactElements.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_dashboard_messages_userProfileCard__WEBPACK_IMPORTED_MODULE_1__.UserProfile, {
@@ -6077,7 +6139,8 @@ var MessagePage = /*#__PURE__*/function (_React$Component) {
               image: data[i].profileIMG,
               date: "53 minutes ago",
               active: "false",
-              isActive: "ONLINE"
+              isActive: "ONLINE",
+              storeID: data[i].storeID
             }, i));
           } // to get the value you have to return the promise
 

@@ -54,16 +54,16 @@ export class ChatboxMessageBubble extends react.Component {
         return (
             <div className="chat-buble-container">
 
-                <div className="row mt-2 d-inline-flex">
-                  
-                    <p className={this.verifyMessages() + "m-1"}>
-                        
-                     {this.state.message } <br />
+                <div className="row mt-2">
+                
+                 
+                    <div className={this.verifyMessages() + "m-1"}>
+                      <i className="fa fa-user-circle-o fa-2x mr-2" aria-hidden="true"></i>   
+                       <span> {this.state.message } </span> <br />
                         <small className="text-muted covo-sent-msg">
-                            {" "}
-                            {this.state.status} At: {this.state.time}
+                           Sent:  {this.state.time}
                         </small>
-                    </p>   
+                    </div>   
                     </div>
                    
             </div>

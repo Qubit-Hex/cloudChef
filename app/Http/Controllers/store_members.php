@@ -29,8 +29,13 @@ class store_members extends Controller
     {
         // FIX TO SHOW ONLY MEMBER OF THE USERS STORE INSTEAD OF THE WHOLE MEMBERS LIST
         // FOR ALL THE STORES. 
-        
-        $members = DB::table('user_profile')->where('name', 'LIKE', $request->input('search'))->get();
+
+        // check the users access token to get the store id 
+        $user = DB::table('users')->where('remember_token', $_COOKIE['accessToken'])->first();
+        // get the store members associated with the store id
+        $store = DB::table('store_members')->where('userID', $user->userID)->first();
+         
+        $members = DB::table('user_profile')->where('storeID', $store->storeID)->get();
         return response()->json( ['data' => $members,
         // add any aditional data to the response that you want to send back
                         'search' => $request->input('search')], 200);

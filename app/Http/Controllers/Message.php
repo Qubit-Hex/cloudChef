@@ -17,6 +17,10 @@ use PDO;
 class Message extends Controller
 {
 
+    // TODO inpliment encapuslation for the rate limits for this class to abstract details we dont
+    // REALLY CARE ABOUT IN THIS CLASS  
+
+    
     private $rateLimit = 5;
     private $rateLimitPeriod = 1;
 
@@ -34,18 +38,19 @@ class Message extends Controller
      *  @method:  get 
      * 
      *  @purpose: inorder to retrive the converstation for the api between a group / and or 2 users 
+     * 
      */
     
     public function get(Request $request)
     {
 
-        // message request structure 
+        // REDESIGN THIS DATA STRUCTURE TO FIT OUR NEW ARCHITECTURE DESIGN
         $messageRequest = [
             'storeID' => $request->input('storeID'),
-            'messageFrom' => $request->input('messageFrom'),  
-            'messageTo' => $request->input('messageTo'),
-            'time' => $request->input('time'),
-            'signature' => $this->requestToken,
+            'token' => $request->input('token'),
+            'userID' => $request->input('userID'),
+            'requestTime' => $request->input('requestTime'),
+
         ];
 
         return MessageService::getMessages($messageRequest);
@@ -63,14 +68,13 @@ class Message extends Controller
      public function send(Request $request)
      {
 
-        // send message structure
+        // REDESIGN THIS DATA STRUCTURE TO FIT OUR NEW ARCHITECTURE DESIGN
         $messageRequest = [
             'storeID' => $request->input('storeID'),
-            'messageFrom' => $request->input('messageFrom'),
-            'messageTo' => $request->input('messageTo'),
+            'token' => $request->input('token'),
+            'userID' => $request->input('userID'),
+            'requestTime' => $request->input('requestTime'),
             'message' => $request->input('message'),
-            'time' => $request->input('time'),
-            'signature' => $this->requestToken,
         ];
 
         return MessageService::sendMessage($messageRequest);

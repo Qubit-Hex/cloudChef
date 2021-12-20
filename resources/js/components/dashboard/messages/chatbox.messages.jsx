@@ -35,6 +35,29 @@ export class ChatboxMessages extends react.Component {
         };
     }
 
+
+    /**
+     *  
+     * @method: getCookie 
+     * 
+     * 
+     * 
+     *  @purpose: to get the cookie value via name in a string  
+     * 
+     *
+     */
+
+    getCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(";");
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == " ") c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    }
+
     /**
      *
      *
@@ -56,39 +79,55 @@ export class ChatboxMessages extends react.Component {
         };
 
         console.log(this.state.sharedState);
+
         const request = {
-            storeID: this.state.sharedState.storeID,
-            messageFrom: 4,
-            messageTo: this.state.sharedState.userID,
-            time: Date.now(),
+            storeID: 1,
+            token: this.getCookie('accessToken'), // users token that is logged in  
+            userID: this.state.sharedState.userID,
+            requestTime: Date.now(),
         };
 
         /// build the query for our api inorder to get the messages from the database
-        let url = `/api/messages/get?messageFrom=${request.messageFrom}&messageTo=${request.messageTo}&storeID=${request.storeID}`;
+        let url = `/api/messages/get?storeID=${request.storeID}&token=${request.token}&userID=${request.userID}&requestTime=${request.requestTime}`;
         
 
         return fetchService.$get(url, headers, (response) => {
             let container = document.getElementById("chatbubble-container");
 
 
-            console.log(response.message);
-
-            if (response.message.length === 0) {
-                ReactDOM.render(
-                    <div className="d-flex"> 
-                        <img src='/img/SVG/empty_inbox.svg' width={200}  height={200} className="img-fluid"  />
-                        <b className='h1'>No Messages</b>
+            // proccess error messages
+            if (response.error) {
+              return  ReactDOM.render(
+                    <div className="col"> 
+                        <img src='/img/something_wrong.png' className="img-fluid" width={150}  height={150}  />
+                        <b style={{fontWeight: 600}}>Error</b> 
+                        <b className='h4'> { response.error }</b>
                        
                     </div>,
                     container
                 );
             }
 
+            if (response.message.length === 0) {
+                return ReactDOM.hydrate(
+                    <div className="col">        
+                        <b style={{fontWeight: 700}}> No Messages </b>
+                        <img src='/img/SVG/empty_inbox.svg' className="img-fluid" width={100}  height={100}  />
+                       
+                    </div>,
+                    container
+                );
+
+            }
+
+
+            // proccess success messages
             if (response.message) {
                 // parse out messages boxes
                 let chatBubbles = [];
                 let counter = 0;
 
+                console.log(response.message);
 
                 for (const node of response.message) {
                     //  check if the message belongs to the user 
@@ -122,9 +161,10 @@ export class ChatboxMessages extends react.Component {
                     ReactDOM.render(chatBubbles, container);
 
                     }
+                    // retry connection every 10 seconds
                     return setTimeout((res) => {   
-                    this.fetchChatMessages();
-                }, 7000);
+                     return this.fetchChatMessages();
+                }, 8000);
             });
     }
 

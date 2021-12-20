@@ -30,9 +30,12 @@ class MessageService  {
 
       if (!$validation->isUserValid()) {
     
-        return Response()->json(['message' => 'Invalid user id'], 401);
+        return Response()->json(['error' => 'Invalid user id'], 401);
       }
-        // now we will  grab our data for the databse and display the data in a json format
+
+      if (!$validation->isStoreValid()) {
+          return Response()->json(['error' => 'Invalid store id'], 401);
+      } 
 
         return DispatchMessage::getMessages($requestObject);
     }
