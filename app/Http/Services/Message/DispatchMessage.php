@@ -23,8 +23,6 @@ class DispatchMessage implements MessageInterface
 
     // give me a key of 100 bits
     private $key = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
-
     // TODO inpliment encapuslation for this class to make it more secure
     // and hide the details of how the message is send/received/deleted
 
@@ -90,6 +88,8 @@ class DispatchMessage implements MessageInterface
 
     static function sendMessage($data)
     {
+
+        
     }
     /*
       * @method: getMessages 
@@ -119,6 +119,17 @@ class DispatchMessage implements MessageInterface
         // load the user we want to talk to 
         $userSelected = $user_profiles->where('userID', $data['userID'])->first();
 
+
+        // check if we are talking to our selfs
+        if ($response['userID'] === $currentUser) {
+            // we are talking to ourself 
+            $response['message'] = 'You cannot send a message to yourself';
+            $response['status'] = 'error';
+
+             die(Response()->json(['errpr' => $response['message']], 400));
+        }
+
+
         if ($userSelected) {
 
             // next filter the store group
@@ -139,11 +150,8 @@ class DispatchMessage implements MessageInterface
                 }, json_decode(json_encode($currentUserConvos, true), true));
 
                 // check if a key exists in both arrays
-
                 $switched = false;
                 $convoGroupID = null;
-
-
                 // check we already have a converstation with the user 
                 for ($i = 0; $i < count($recipientGroups); $i++) {
 
@@ -156,46 +164,89 @@ class DispatchMessage implements MessageInterface
                         $switched = true;
                         $convoGroupID = $recipientGroups[$i];
                         break;
-                    } 
+                    }
                 }
-                
+
                 // check if our switch has been activiated
-                if ($switched === true ) {
+                if ($switched === true) {
                     // now get the messages with the group id
-                    $userConverstation = DB::table('user_messages')->where('groupID', $convoGroupID)->get();
-                    return Response()->json(['status' => 'success',
-                                             'message' => json_decode(json_encode($userConverstation, true), true)], 200);
-                     
+                    $userConverstation = DB::table('user_messages')->where('groupID', $convoGroupID)->where('storeID', $data['storeID'])->get();
+                    return Response()->json([
+                        'status' => 'success',
+                        'message' => json_decode(json_encode($userConverstation, true), true)
+                    ], 200);
                 } else {
                     // create a new conversation group one doesnt exist 
+                    return Self::createConversation($data['storeID'], $currentUser, $data['userID']);
                 }
-
-                // now lets search all the group ids to see if the current user exists in the group 
-                return Response()->json([
-                    'status' => 'success',
-                    'data' => $response,
-                    'message' => 'example message',
-                ], 200);
             } else {
-                return Response()->json([
-                    'status' => 'error',
-                    'data' => $response,
-                    'message' => ''
-                ], 404);
+                // create a new conversation group one doesnt exist 
+                return Self::createConversation($data['storeID'], $currentUser, $data['userID']);
             }
-
         } else {
-            // return the resposne to the application 
-            return Response()->json([
-                'status' => 'error',
-                'message' => 'user not found',
-                'data' => $response
-            ]);
+            return Response()->json(['error' => 'User does not exist'], 401);
         }
 
-        // return our message response to the user
-        return Response()->json(['message' => $response], 200);
+        return Response()->json(['error' => 'User does not exist'], 401);
     }
+
+
+    /**
+     *  @method: createConversation
+     * 
+     *  @purpose: this function is used to create a new converstation
+     *  
+     */
+
+    static function createConversation($storeID, $userID, $recipientID) {
+        /**
+         *  @blueprint:
+         * 
+         *  $storeID -> the storeID of the user
+         *  $userID -> the userID of the user
+         *  $recipientID -> the userID of the recipient
+         * 
+         */
+
+         if ($userID === $recipientID) {
+            return Response()->json(['error' => 'You cannot send a message to yourself'], 401);
+         }
+
+            // check if the user has a conversation with the recipient
+
+        $currentUserConvos = DB::table('user_group_member')->where('storeID', $storeID)->where('userID', $userID)->get();
+
+         define('storeID', $storeID);
+         define('userID', $userID);
+         define('recipientID', $recipientID);
+
+        // create a new group
+
+        return Self::createGroup($storeID, $userID, $recipientID);
+
+    }
+
+    /**
+     * 
+     *  @method: createGroup
+     * 
+     * 
+     *  @purpose: this function is used to create a new group,
+     * 
+     */
+
+     static function createGroup($storeID, $userID, $recipientID)
+     {
+         $db = DB::insert('insert into user_groups (storeID) values (?)', [$storeID]);
+
+         // get the last inserted id
+            $groupID = DB::table('user_groups')->latest('groupID')->first()->groupID;
+
+         if ($db) {
+             return Self::addUserToGroup($groupID, $userID, $recipientID);
+         }
+         return false;
+     }
 
 
     /**
@@ -204,22 +255,76 @@ class DispatchMessage implements MessageInterface
      *  @purpose: inorder to add a user to the group 
      */
 
-    public function addUserToGroup()
-    {
-        // impliment details later 
+    static function addUserToGroup($groupID, $userID, $recipientID) {
+        /**
+         *  @blueprint:
+         * 
+         *  $groupID -> the groupID of the user
+         *  $userID -> the userID of the user
+         *  $recipientID -> the userID of the recipient
+         * 
+         */
+
+         /**
+          *  @Objective:
+          *
+          *  we need to add something later for larger groups not just 1 on 1 conversations ?
+          */
+          
+        $db = DB::insert('insert into user_group_member (groupID, userID, storeID) values (?, ?, ?)', [$groupID, $userID, storeID]);
+        $db_recipient = DB::insert('insert into user_group_member (groupID, userID, storeID) values (?, ?, ?)', [$groupID, $recipientID, storeID]);
+
+        if ($db && $db_recipient) {
+            return true;
+        } else {
+            // check if the users exist in the datbase ?   
+            $user_group_member = DB::table('user_group_member')->where('groupID', $groupID)->where('userID', $userID)->first();
+            $user_group_member_recipient = DB::table('user_group_member')->where('groupID', $groupID)->where('userID', $recipientID)->first();
+
+            // send error message for which user wasnt added to the database?
+            if (!$user_group_member) {
+                // run cleanup function
+                return Response()->json(['error' => 'User is not in the group'], 401);
+            } 
+
+            if (!$user_group_member_recipient) {
+                // run cleanup function
+                return Response()->json(['error' => 'Recipient is not in the group'], 401);
+            }
+        }
     }
 
 
     /**
      *  @method: removeUserFromGroup
      * 
-     *  @purpose: inorder to remove a user from the group 
+     *  @purpose: inorder to remove a user from the group / also acts as a clean up function if something goes wrong with our inserts 
      * 
      */
 
-    public function removeUserFromGroup()
+    public function removeUserFromGroup($groupID, $userID, $recipientID)
     {
-        // impliment details later 
+        $db = DB::table('user_group_member')->where('groupID', $groupID)->where('userID', $userID)->delete();
+        $db_recipient = DB::table('user_group_member')->where('groupID', $groupID)->where('userID', $recipientID)->delete();
+
+        if ($db && $db_recipient) {
+            return true;
+        } else {
+            // check if the users exist in the datbase ?   
+            $user_group_member = DB::table('user_group_member')->where('groupID', $groupID)->where('userID', $userID)->first();
+            $user_group_member_recipient = DB::table('user_group_member')->where('groupID', $groupID)->where('userID', $recipientID)->first();
+
+            // send error message for which user wasnt added to the database?
+            if (!$user_group_member) {
+                // run cleanup function
+                return Response()->json(['error' => 'User is not in the group'], 401);
+            } 
+
+            if (!$user_group_member_recipient) {
+                // run cleanup function
+                return Response()->json(['error' => 'Recipient is not in the group'], 401);
+            }
+        }
     }
 
 

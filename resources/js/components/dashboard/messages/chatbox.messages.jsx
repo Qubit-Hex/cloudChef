@@ -87,12 +87,17 @@ export class ChatboxMessages extends react.Component {
             requestTime: Date.now(),
         };
 
+        console.log(request);
+
         /// build the query for our api inorder to get the messages from the database
         let url = `/api/messages/get?storeID=${request.storeID}&token=${request.token}&userID=${request.userID}&requestTime=${request.requestTime}`;
         
 
         return fetchService.$get(url, headers, (response) => {
             let container = document.getElementById("chatbubble-container");
+
+
+            console.log(response);
 
 
             // proccess error messages
@@ -136,7 +141,7 @@ export class ChatboxMessages extends react.Component {
                             <div key={counter}>
                                 <ChatboxMessageBubble
                                     message={node.message}
-                                    time={node.timestamp}
+                                    time={node.time}
                                     status="to"
                                     profileImg="/img/SVG/female_user.svg"
                                 />{" "}
@@ -147,7 +152,7 @@ export class ChatboxMessages extends react.Component {
                             <div key={counter}>
                                 <ChatboxMessageBubble
                                     message={node.message}
-                                    time={node.timestamp}
+                                    time={node.time}
                                     status="from"
                                     profileImg="/img/SVG/female_user.svg"
                                 />{" "}
@@ -163,6 +168,7 @@ export class ChatboxMessages extends react.Component {
                     }
                     // retry connection every 10 seconds
                     return setTimeout((res) => {   
+                        // change to use a web socket instead and maintain the connection with the server
                      return this.fetchChatMessages();
                 }, 8000);
             });

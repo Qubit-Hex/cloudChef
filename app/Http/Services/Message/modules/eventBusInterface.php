@@ -42,7 +42,7 @@ use phpDocumentor\Reflection\Types\Self_;
      * 
      */
 
-    static function call($eventName, $messageCode );
+    static function call($eventName, $messageCode ) : bool;
 
     /**
      *  @method: dispatch
@@ -55,7 +55,7 @@ use phpDocumentor\Reflection\Types\Self_;
      * @return void
      * 
      */
-    static function dispatch($eventName, $messageCode);
+    static function dispatch($eventName, $messageCode) : bool;
 
 
     /**
@@ -66,7 +66,7 @@ use phpDocumentor\Reflection\Types\Self_;
      * 
      */
 
-    static function blockTransaction();
+     static function blockTransaction() : bool;
 
 
     /**
@@ -77,7 +77,7 @@ use phpDocumentor\Reflection\Types\Self_;
      *  @purpose: this will unblock our message transaction and allow our invalid message to be sent
      * 
      */
-    static function unBlockTransaction();
+    static function unBlockTransaction() : bool;
 
 
     /**
@@ -88,7 +88,7 @@ use phpDocumentor\Reflection\Types\Self_;
      * 
      */
 
-     static function approveTransaction();
+     static function approveTransaction() : bool;
 
  }
 

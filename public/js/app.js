@@ -3084,11 +3084,13 @@ var ChatboxMessages = /*#__PURE__*/function (_react$Component) {
         // users token that is logged in  
         userID: this.state.sharedState.userID,
         requestTime: Date.now()
-      }; /// build the query for our api inorder to get the messages from the database
+      };
+      console.log(request); /// build the query for our api inorder to get the messages from the database
 
       var url = "/api/messages/get?storeID=".concat(request.storeID, "&token=").concat(request.token, "&userID=").concat(request.userID, "&requestTime=").concat(request.requestTime);
       return fetchService.$get(url, headers, function (response) {
-        var container = document.getElementById("chatbubble-container"); // proccess error messages
+        var container = document.getElementById("chatbubble-container");
+        console.log(response); // proccess error messages
 
         if (response.error) {
           return react_dom__WEBPACK_IMPORTED_MODULE_3__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
@@ -3146,7 +3148,7 @@ var ChatboxMessages = /*#__PURE__*/function (_react$Component) {
                 chatBubbles.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_chatbox_chatBubble__WEBPACK_IMPORTED_MODULE_1__.ChatboxMessageBubble, {
                     message: node.message,
-                    time: node.timestamp,
+                    time: node.time,
                     status: "to",
                     profileImg: "/img/SVG/female_user.svg"
                   }), " "]
@@ -3155,7 +3157,7 @@ var ChatboxMessages = /*#__PURE__*/function (_react$Component) {
                 chatBubbles.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_chatbox_chatBubble__WEBPACK_IMPORTED_MODULE_1__.ChatboxMessageBubble, {
                     message: node.message,
-                    time: node.timestamp,
+                    time: node.time,
                     status: "from",
                     profileImg: "/img/SVG/female_user.svg"
                   }), " "]
@@ -3175,6 +3177,7 @@ var ChatboxMessages = /*#__PURE__*/function (_react$Component) {
 
 
         return setTimeout(function (res) {
+          // change to use a web socket instead and maintain the connection with the server
           return _this2.fetchChatMessages();
         }, 8000);
       });
