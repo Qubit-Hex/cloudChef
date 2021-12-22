@@ -27,6 +27,30 @@ export class ChatboxSendMessage extends React.Component {
         };
     }
 
+    /**
+     *  
+     * @method: getCookie 
+     * 
+     * 
+     * 
+     *  @purpose: to get the cookie value via name in a string  
+     * 
+     *
+     */
+
+     getCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(";");
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == " ") c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    }
+
+
+
 
     /**
      * 
@@ -50,16 +74,24 @@ export class ChatboxSendMessage extends React.Component {
         // request object
 
         const request = {
-            userID: this.state.user,
+            storeID: this.state.sharedState.storeID,
+            userID: this.state.userID,
             profileImg: this.state.profileImg,
             sharedState: this.state.sharedState,
-            token: this.state.token,
+            token: this.getCookie('accessToken'),
             message: document.getElementById('chatbox-message-content').value,
         };
 
+        
+        console.log(this.state);
+        // rest API CALL INORDER TO SEND A MESSAGE TO THE USER
 
-        let url =
-        `/api/messages/send?userID=${request.userID}&profileImg=${request.profileImg}&sharedState=${request.sharedState}&token=${request.token}&message=${request.message}`;
+        // NOTES: NEED TO ADD WEB WORKER TO LISTEN FOR MESSAGE EVENTS AND THEN ADD TO THE CHATBOX AFTER 
+        // MY ROUTE TESTING IS COMPLETE...
+
+
+
+        let url = `/api/messages/send?storeID=${request.storeID}&userID=${request.userID}&profileImg=${request.profileImg}&sharedState=${request.sharedState}&token=${request.token}&message=${request.message}`;
     
         return fetchService.$get(url, headers, (response) => {
             console.log(response);
@@ -83,7 +115,6 @@ export class ChatboxSendMessage extends React.Component {
 
 
     render() {
-
 
         return (
             <div className='chatbox-message-controls'>

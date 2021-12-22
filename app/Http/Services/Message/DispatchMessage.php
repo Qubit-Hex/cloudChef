@@ -16,12 +16,18 @@ namespace App\Http\Services\Message;
 use App\Http\Services\Message\MessageInterface;
 use Illuminate\Http\Client\ResponseSequence;
 use Illuminate\Support\Facades\DB;
+use Psr\Http\Message\ResponseInterface;
 
 class DispatchMessage implements MessageInterface
 {
     private $key = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     // TODO inpliment encapuslation for this class to make it more secure
     // and hide the details of how the message is send/received/deleted
+
+
+
+    private $rateLimiter = 5;
+    private $timeout = 1000;
 
 
     public function __construct()
@@ -105,6 +111,97 @@ class DispatchMessage implements MessageInterface
 
     static function sendMessage($data)
     {
+            // add message structure for store messsages 
+
+
+            /**
+             *  @blueprint: 
+             * 
+             *   storeID -> users store 
+             *   token -> the unique access token for the user 
+             *   userID -> the recipient of the user 
+             *   requestTime -> time of the request  
+             *   Message -> the message we are going to send to the user 
+             * 
+             */
+
+
+             $requestObject = [
+                 'storeID' => $data['storeID'],
+                 'token' => $data['token'],
+                 'userID' => $data['userID'],
+                 'requestTime' => $data['requestTime'],
+                 'message' => $data['message']
+             ];
+
+
+             // get current user db info
+             $currentUser = DB::table('users')->where('remember_token', $requestObject['token'])->first()->userID;
+             $user_profile = DB::table('user_profile')->where('storeID', $requestObject['storeID'])->where('userID', $requestObject['userID'])->first();
+
+
+
+             // check if im trying to send a message to myself 
+             if ($currentUser == $requestObject['userID']) {
+                 return response()->json([
+                     'status' => 'error',
+                     'message' => 'You cannot send message to yourself'
+                 ]);
+                }
+
+
+             if (!$user_profile) {
+                 return response()->json([
+                     'status' => 'error',
+                     'message' => 'The user you are trying to send message to is not a member of this store',
+                     'trace' => $requestObject
+                 ]);
+             }
+
+
+             $groupID = DB::table('user_group_member')->where('userID', $requestObject['userID'])->where('storeID', $requestObject['storeID'])->first()->groupID;
+
+
+             // insert new message into the datababse
+             $insertMessage = DB::table('user_messages')->insert([
+                 'storeID' => $requestObject['storeID'],
+                 'userID' => $currentUser,
+                 'groupID' => $groupID,
+                 'message' => $requestObject['message'],
+                 'time' => $requestObject['requestTime'],
+                 'messageReadState' => 0,
+             ]);
+
+
+             // check if the message was sent successfully
+             if ($insertMessage) {
+                 return response()->json([
+                     'status' => 'success',
+                     'message' => 'Message sent successfully',
+                     'trace' => $requestObject
+                 ]);
+                }
+
+                // check if the user is blocked by the current user
+            
+
+             // debug json response for REST API 
+             return Response()->json([
+                 'status' => 'success',
+                 'message' => 'message sent successfully',
+                 'data' => [
+                     'storeID' => $requestObject['storeID'],
+                     'token' => $requestObject['token'],
+                     'userID' => $requestObject['userID'],
+                     'requestTime' => $requestObject['requestTime'],
+                     'message' => $requestObject['message'],
+                     'status' => 'sent',
+                     'user_profile' => $user_profile,
+                     'message' => $requestObject['message'],
+                 ]
+             ]);
+
+
 
         
     }

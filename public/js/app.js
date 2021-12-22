@@ -3436,15 +3436,44 @@ var ChatboxSendMessage = /*#__PURE__*/function (_React$Component) {
     return _this;
   }
   /**
+   *  
+   * @method: getCookie 
    * 
-   *  @method: sendMessage 
    * 
-   *  @purpose: this is going to send a message to the user           
+   * 
+   *  @purpose: to get the cookie value via name in a string  
+   * 
    *
-   **/
+   */
 
 
   _createClass(ChatboxSendMessage, [{
+    key: "getCookie",
+    value: function getCookie(name) {
+      var nameEQ = name + "=";
+      var ca = document.cookie.split(";");
+
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+
+        while (c.charAt(0) == " ") {
+          c = c.substring(1, c.length);
+        }
+
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+      }
+
+      return null;
+    }
+    /**
+     * 
+     *  @method: sendMessage 
+     * 
+     *  @purpose: this is going to send a message to the user           
+     *
+     **/
+
+  }, {
     key: "sendMessage",
     value: function sendMessage(event) {
       var fetchService = new _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_1__["default"](); // headers 
@@ -3455,13 +3484,18 @@ var ChatboxSendMessage = /*#__PURE__*/function (_React$Component) {
       }; // request object
 
       var request = {
-        userID: this.state.user,
+        storeID: this.state.sharedState.storeID,
+        userID: this.state.userID,
         profileImg: this.state.profileImg,
         sharedState: this.state.sharedState,
-        token: this.state.token,
+        token: this.getCookie('accessToken'),
         message: document.getElementById('chatbox-message-content').value
       };
-      var url = "/api/messages/send?userID=".concat(request.userID, "&profileImg=").concat(request.profileImg, "&sharedState=").concat(request.sharedState, "&token=").concat(request.token, "&message=").concat(request.message);
+      console.log(this.state); // rest API CALL INORDER TO SEND A MESSAGE TO THE USER
+      // NOTES: NEED TO ADD WEB WORKER TO LISTEN FOR MESSAGE EVENTS AND THEN ADD TO THE CHATBOX AFTER 
+      // MY ROUTE TESTING IS COMPLETE...
+
+      var url = "/api/messages/send?storeID=".concat(request.storeID, "&userID=").concat(request.userID, "&profileImg=").concat(request.profileImg, "&sharedState=").concat(request.sharedState, "&token=").concat(request.token, "&message=").concat(request.message);
       return fetchService.$get(url, headers, function (response) {
         console.log(response);
       });

@@ -58,10 +58,6 @@ class MessageService  {
             return Response()->json(['message' => 'Invalid user id'], 401);
         }
 
-        if (!$validation->isMessageValid()) {
-            return Response()->json(['message' => 'Invalid message'], 401);
-        }
-
         // send the message to user 
 
         return DispatchMessage::sendMessage($requestObject);
