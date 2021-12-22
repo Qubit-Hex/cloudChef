@@ -131,7 +131,7 @@ export class ChatboxMessages extends react.Component {
             }
 
 
-            // proccess success messages
+            // render the chat bubble of the message component
             if (response.message) {
                 // parse out messages boxes
                 let chatBubbles = [];
@@ -145,7 +145,7 @@ export class ChatboxMessages extends react.Component {
                         profileImg={this.state.profileImg}
                         sharedState={this.state.sharedState}
                         status="to"
-                        
+                        token={this.state.token}
                     />);
                     
                 }

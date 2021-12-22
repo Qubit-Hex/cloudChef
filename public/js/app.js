@@ -3139,7 +3139,7 @@ var ChatboxMessages = /*#__PURE__*/function (_react$Component) {
               height: 100
             })]
           }), container);
-        } // proccess success messages
+        } // render the chat bubble of the message component
 
 
         if (response.message) {
@@ -3153,7 +3153,8 @@ var ChatboxMessages = /*#__PURE__*/function (_react$Component) {
               user: _this2.state.user,
               profileImg: _this2.state.profileImg,
               sharedState: _this2.state.sharedState,
-              status: "to"
+              status: "to",
+              token: _this2.state.token
             }, i));
           }
 
@@ -3431,7 +3432,8 @@ var ChatboxSendMessage = /*#__PURE__*/function (_React$Component) {
       profileImg: _this.props.profileImg,
       sharedState: _this.props.sharedState,
       token: _this.props.token,
-      userID: _this.props.userID
+      userID: _this.props.userID,
+      textareaError: ""
     };
     return _this;
   }
@@ -3476,6 +3478,8 @@ var ChatboxSendMessage = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "sendMessage",
     value: function sendMessage(event) {
+      var _this2 = this;
+
       var fetchService = new _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_1__["default"](); // headers 
 
       var headers = {
@@ -3490,14 +3494,17 @@ var ChatboxSendMessage = /*#__PURE__*/function (_React$Component) {
         sharedState: this.state.sharedState,
         token: this.getCookie('accessToken'),
         message: document.getElementById('chatbox-message-content').value
-      };
-      console.log(this.state); // rest API CALL INORDER TO SEND A MESSAGE TO THE USER
-      // NOTES: NEED TO ADD WEB WORKER TO LISTEN FOR MESSAGE EVENTS AND THEN ADD TO THE CHATBOX AFTER 
+      }; // NOTES: NEED TO ADD WEB WORKER TO LISTEN FOR MESSAGE EVENTS AND THEN ADD TO THE CHATBOX AFTER 
       // MY ROUTE TESTING IS COMPLETE...
 
       var url = "/api/messages/send?storeID=".concat(request.storeID, "&userID=").concat(request.userID, "&profileImg=").concat(request.profileImg, "&sharedState=").concat(request.sharedState, "&token=").concat(request.token, "&message=").concat(request.message);
       return fetchService.$get(url, headers, function (response) {
-        console.log(response);
+        if (response.inputError === true) {
+          // proccess error
+          _this2.setState({
+            textareaError: response.errorMessage
+          });
+        }
       });
     }
     /**
@@ -3517,7 +3524,7 @@ var ChatboxSendMessage = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
         className: "chatbox-message-controls",
@@ -3532,12 +3539,13 @@ var ChatboxSendMessage = /*#__PURE__*/function (_React$Component) {
               style: {
                 fontWeight: "300",
                 fontSize: "14px"
-              }
+              },
+              children: this.state.textareaError
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("textarea", {
             "message-content": "true",
             onChange: function onChange(e) {
-              _this2.validation(e);
+              _this3.validation(e);
             },
             "class": "form-control",
             id: "chatbox-message-content",
@@ -3551,7 +3559,7 @@ var ChatboxSendMessage = /*#__PURE__*/function (_React$Component) {
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
                   className: "btn btn-message",
                   onClick: function onClick(e) {
-                    _this2.sendMessage(e);
+                    _this3.sendMessage(e);
                   },
                   children: [" ", "Send", " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
                     "class": "fa fa-paper-plane hidden-label",

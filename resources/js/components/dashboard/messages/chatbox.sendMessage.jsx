@@ -24,6 +24,7 @@ export class ChatboxSendMessage extends React.Component {
             sharedState: this.props.sharedState,
             token: this.props.token,
             userID: this.props.userID,
+            textareaError: "",
         };
     }
 
@@ -82,10 +83,6 @@ export class ChatboxSendMessage extends React.Component {
             message: document.getElementById('chatbox-message-content').value,
         };
 
-        
-        console.log(this.state);
-        // rest API CALL INORDER TO SEND A MESSAGE TO THE USER
-
         // NOTES: NEED TO ADD WEB WORKER TO LISTEN FOR MESSAGE EVENTS AND THEN ADD TO THE CHATBOX AFTER 
         // MY ROUTE TESTING IS COMPLETE...
 
@@ -94,7 +91,11 @@ export class ChatboxSendMessage extends React.Component {
         let url = `/api/messages/send?storeID=${request.storeID}&userID=${request.userID}&profileImg=${request.profileImg}&sharedState=${request.sharedState}&token=${request.token}&message=${request.message}`;
     
         return fetchService.$get(url, headers, (response) => {
-            console.log(response);
+
+            if (response.inputError === true) {
+                // proccess error
+                this.setState({textareaError: response.errorMessage});
+            }
         });
     }
 
@@ -128,7 +129,10 @@ export class ChatboxSendMessage extends React.Component {
                                                     fontWeight: "300",
                                                     fontSize: "14px",
                                                 }}
-                                            ></span>
+                                            >
+
+                                                {this.state.textareaError}
+                                            </span>
                                         </label>
 
                                         <textarea

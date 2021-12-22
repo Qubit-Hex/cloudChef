@@ -20,19 +20,24 @@ use Psr\Http\Message\ResponseInterface;
 
 class DispatchMessage implements MessageInterface
 {
-    private $key = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+
+    // we will impliment a encryption pipelines for the users in the coverstations 
+    const PrivateMessageKey = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     // TODO inpliment encapuslation for this class to make it more secure
     // and hide the details of how the message is send/received/deleted
 
 
 
-    private $rateLimiter = 5;
-    private $timeout = 1000;
+
+    // IMPLIMENT A PIPELINE FOR LIMITING THE NUMBERS OF MESSAGES THAT CAN BE SENT IN A GIVEN TIME PERIOD
+    const RateLimit = 10;
+    const RateLimitTime = 60;
 
 
     public function __construct()
     {
-        // initilize are event dispatcher here \
+        // initilize are event dispatcher here 
 
         // we will use this accross class to verify the requests of the message
         $this->initMessageKey = openssl_random_pseudo_bytes(32);
@@ -50,6 +55,9 @@ class DispatchMessage implements MessageInterface
 
     public function getAllMessages()
     {
+        $messages = DB::table('messages')->get();
+        // dump the database of messsage to the console
+        return Response()->json('DB_MESSAGES', $messages);
     }
 
     /**
@@ -62,6 +70,16 @@ class DispatchMessage implements MessageInterface
 
     public function getMessageById($id)
     {
+        $db = DB::table('user_messages')->where('messageID', $id)->first();
+
+        // check if the message is found in the database
+
+        if ($db) {
+            return Response()->json(['message' => 'message found', 
+                                     'data' => $db]);
+        }
+
+        return Response()->Json(['message' => 'message not found'], 404);
     }
 
     /**
@@ -73,6 +91,15 @@ class DispatchMessage implements MessageInterface
 
     static function deleteMessage($id)
     {
+
+       $db = DB::table('user_messages')->where('messageID', $id)->delete();
+
+       if ($db) {
+           return Response()->json(['message' => 'message deleted']);
+       }
+
+       return Response()->json(['message' => 'message not found'], 404);
+
     }
 
 
@@ -126,6 +153,9 @@ class DispatchMessage implements MessageInterface
              */
 
 
+
+             // form request object to send to the server 
+             // TODO: add validation for the message
              $requestObject = [
                  'storeID' => $data['storeID'],
                  'token' => $data['token'],
@@ -133,6 +163,15 @@ class DispatchMessage implements MessageInterface
                  'requestTime' => $data['requestTime'],
                  'message' => $data['message']
              ];
+
+
+
+             // check if the user message is empty ? 
+             if (strlen($requestObject['message']) ===  0) {
+                 return Response()->json(['error' => 'Message cannot be empty',
+                                         'inputError' => true,
+                                         'errorMessage' => "Message cant be empty please fill out this field"], 401);
+             }
 
 
              // get current user db info
@@ -150,6 +189,7 @@ class DispatchMessage implements MessageInterface
                 }
 
 
+                // is user profile valid?
              if (!$user_profile) {
                  return response()->json([
                      'status' => 'error',
@@ -159,6 +199,7 @@ class DispatchMessage implements MessageInterface
              }
 
 
+             // get group id of the user
              $groupID = DB::table('user_group_member')->where('userID', $requestObject['userID'])->where('storeID', $requestObject['storeID'])->first()->groupID;
 
 
