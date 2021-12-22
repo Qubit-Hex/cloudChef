@@ -32,6 +32,8 @@ export class ChatboxMessages extends react.Component {
             user: this.props.user,
             profileImg: this.props.profileImg,
             sharedState: this.props.sharedState,
+            userID: this.props.userID,
+            token: this.props.token,
         };
     }
 
@@ -56,6 +58,12 @@ export class ChatboxMessages extends react.Component {
             if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
         }
         return null;
+    }
+
+
+    verifySender()  {
+
+
     }
 
     /**
@@ -83,11 +91,11 @@ export class ChatboxMessages extends react.Component {
         const request = {
             storeID: 1,
             token: this.getCookie('accessToken'), // users token that is logged in  
-            userID: this.state.sharedState.userID,
+            userID: this.state.userID,
             requestTime: Date.now(),
         };
 
-        console.log(request);
+      
 
         /// build the query for our api inorder to get the messages from the database
         let url = `/api/messages/get?storeID=${request.storeID}&token=${request.token}&userID=${request.userID}&requestTime=${request.requestTime}`;
@@ -95,9 +103,6 @@ export class ChatboxMessages extends react.Component {
 
         return fetchService.$get(url, headers, (response) => {
             let container = document.getElementById("chatbubble-container");
-
-
-            console.log(response);
 
 
             // proccess error messages
@@ -130,47 +135,23 @@ export class ChatboxMessages extends react.Component {
             if (response.message) {
                 // parse out messages boxes
                 let chatBubbles = [];
-                let counter = 0;
-
-                console.log(response.message);
-
-                for (const node of response.message) {
-                    //  check if the message belongs to the user 
-                    if (node.userID === this.state.sharedState.userID) {
-                        chatBubbles.push(
-                            <div key={counter}>
-                                <ChatboxMessageBubble
-                                    message={node.message}
-                                    time={node.time}
-                                    status="to"
-                                    profileImg="/img/SVG/female_user.svg"
-                                />{" "}
-                            </div>
-                        );
-                    } else {
-                        chatBubbles.push(
-                            <div key={counter}>
-                                <ChatboxMessageBubble
-                                    message={node.message}
-                                    time={node.time}
-                                    status="from"
-                                    profileImg="/img/SVG/female_user.svg"
-                                />{" "}
-                            </div>
-                        );
-                    }
-
-                    counter++;
+                for (let i = 0; i < response.message.length; i++) {
+                    console.log(this.state.sharedState);
+                    
+                    chatBubbles.push( <ChatboxMessageBubble
+                        key={i}
+                        message={response.message[i].message}
+                        user={this.state.user}
+                        profileImg={this.state.profileImg}
+                        sharedState={this.state.sharedState}
+                        status="to"
+                        
+                    />);
+                    
                 }
-                
-                    ReactDOM.render(chatBubbles, container);
 
-                    }
-                    // retry connection every 10 seconds
-                    return setTimeout((res) => {   
-                        // change to use a web socket instead and maintain the connection with the server
-                     return this.fetchChatMessages();
-                }, 8000);
+                ReactDOM.render(chatBubbles, container);
+            }
             });
     }
 

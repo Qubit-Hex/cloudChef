@@ -16,8 +16,19 @@ export class DashboardNav extends Component {
     constructor(props) {
 
         super(props);
+
+        /**
+         * 
+         *  our state here we will be using to update store specific details of the
+         *  design of the dashboard!
+         * 
+         */
+
+
         this.state = {
-            isOpen: false
+            isOpen: false,
+            storeName: '',
+
         }
     }
 

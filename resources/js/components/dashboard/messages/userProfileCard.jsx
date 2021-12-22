@@ -43,7 +43,6 @@ export class UserProfile extends React.Component {
      *  
      */
 
-
     renderMessagesPannel(e)
     {
         let container = document.getElementById('messagePannel-container');
@@ -52,18 +51,21 @@ export class UserProfile extends React.Component {
              ReactDOM.hydrate(<ChatBoxContainer 
             user={this.state.name}
             profileImg={this.state.image}
-            sharedState={this.state} // this is the hook to the parent component
+            sharedState={this.state}
+            userID={this.state.userID} // this is the hook to the parent component
             token={this.state.token} />, container);
         } else {
             ReactDOM.render(<ChatBoxContainer 
             user={this.state.name}
             sharedState={this.state} // this is the hook to the parent component
             profileImg={this.state.image}
+            userID={this.state.userID}
             token={this.state.token} />, container);
         }
        
     }
 
+    
     render() {
         return (
             <div className="card no-margin row p-0" onClick={ (e) => {this.renderMessagesPannel() }}>

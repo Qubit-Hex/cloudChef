@@ -19,8 +19,6 @@ class Message extends Controller
 
     // TODO inpliment encapuslation for the rate limits for this class to abstract details we dont
     // REALLY CARE ABOUT IN THIS CLASS  
-
-    
     private $rateLimit = 5;
     private $rateLimitPeriod = 1;
 

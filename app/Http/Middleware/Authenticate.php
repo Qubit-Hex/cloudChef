@@ -19,11 +19,6 @@ use Illuminate\Support\Facades\DB;
 
 class Authenticate 
 {
-
-    // todo: get the authorization token from the login
-    // api then compare it with the token in the database
-    // if the token is valid then allow the user to access the the dashboard 
-    // else return a 401 error
     
     public function handle(Request $request, Closure $next, $guard = null)
     {
@@ -43,8 +38,29 @@ class Authenticate
                     'message' => 'Access Token is not valid', 'error' => 'Access Token is not valid'], 401);
             }
         } else {
+            // tood - add a check for the access token in the header
+            // check if the access token is valid
             return $next($request);
+    }
+}
+    /**
+     * 
+     *  @method: getTokenFromHeader 
+     * 
+     * 
+     *  @purpose: to get the token from the header TO AUTHENTICATE ANY REST API REQUESTS    
+     * 
+     */
+
+
+    private function getTokenFromHeader(Request $request)
+    {
+        $header = $request->header('Authorization');
+        if (!empty($header)) {
+            $token = explode(' ', $header)[1];
+            return $token;
         }
+        return null;
     }
 
 }

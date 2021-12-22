@@ -2290,8 +2290,16 @@ var DashboardNav = /*#__PURE__*/function (_Component) {
     _classCallCheck(this, DashboardNav);
 
     _this = _super.call(this, props);
+    /**
+     * 
+     *  our state here we will be using to update store specific details of the
+     *  design of the dashboard!
+     * 
+     */
+
     _this.state = {
-      isOpen: false
+      isOpen: false,
+      storeName: ''
     };
     return _this;
   }
@@ -2879,6 +2887,7 @@ var ChatBoxContainer = /*#__PURE__*/function (_React$Component) {
       User: _this.props.user,
       profileImg: _this.props.profileImg,
       token: _this.props.sharedToken,
+      userID: _this.props.userID,
       sharedState: _this.props.sharedState
     };
     return _this;
@@ -2915,16 +2924,22 @@ var ChatBoxContainer = /*#__PURE__*/function (_React$Component) {
                     name: this.state.User,
                     status: true,
                     profileImg: this.state.profileImg,
-                    sharedState: this.state.sharedState
+                    sharedState: this.state.sharedState,
+                    token: this.state.token,
+                    userID: this.state.userID
                   })
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_chatbox_messages__WEBPACK_IMPORTED_MODULE_2__.ChatboxMessages, {
                   user: this.state.User,
                   profileImg: this.state.profileImg,
-                  sharedState: this.state.sharedState
+                  sharedState: this.state.sharedState,
+                  token: this.state.token,
+                  userID: this.state.userID
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_chatbox_sendMessage__WEBPACK_IMPORTED_MODULE_3__.ChatboxSendMessage, {
                   user: this.state.User,
                   profileImg: this.state.profileImg,
-                  sharedState: this.state.sharedState
+                  sharedState: this.state.sharedState,
+                  token: this.state.token,
+                  userID: this.state.userID
                 })]
               })
             })]
@@ -2956,12 +2971,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -3022,7 +3031,9 @@ var ChatboxMessages = /*#__PURE__*/function (_react$Component) {
     _this.state = {
       user: _this.props.user,
       profileImg: _this.props.profileImg,
-      sharedState: _this.props.sharedState
+      sharedState: _this.props.sharedState,
+      userID: _this.props.userID,
+      token: _this.props.token
     };
     return _this;
   }
@@ -3056,6 +3067,9 @@ var ChatboxMessages = /*#__PURE__*/function (_react$Component) {
 
       return null;
     }
+  }, {
+    key: "verifySender",
+    value: function verifySender() {}
     /**
      *
      *
@@ -3082,15 +3096,13 @@ var ChatboxMessages = /*#__PURE__*/function (_react$Component) {
         storeID: 1,
         token: this.getCookie('accessToken'),
         // users token that is logged in  
-        userID: this.state.sharedState.userID,
+        userID: this.state.userID,
         requestTime: Date.now()
-      };
-      console.log(request); /// build the query for our api inorder to get the messages from the database
+      }; /// build the query for our api inorder to get the messages from the database
 
       var url = "/api/messages/get?storeID=".concat(request.storeID, "&token=").concat(request.token, "&userID=").concat(request.userID, "&requestTime=").concat(request.requestTime);
       return fetchService.$get(url, headers, function (response) {
-        var container = document.getElementById("chatbubble-container");
-        console.log(response); // proccess error messages
+        var container = document.getElementById("chatbubble-container"); // proccess error messages
 
         if (response.error) {
           return react_dom__WEBPACK_IMPORTED_MODULE_3__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
@@ -3133,53 +3145,20 @@ var ChatboxMessages = /*#__PURE__*/function (_react$Component) {
         if (response.message) {
           // parse out messages boxes
           var chatBubbles = [];
-          var counter = 0;
-          console.log(response.message);
 
-          var _iterator = _createForOfIteratorHelper(response.message),
-              _step;
-
-          try {
-            for (_iterator.s(); !(_step = _iterator.n()).done;) {
-              var node = _step.value;
-
-              //  check if the message belongs to the user 
-              if (node.userID === _this2.state.sharedState.userID) {
-                chatBubbles.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_chatbox_chatBubble__WEBPACK_IMPORTED_MODULE_1__.ChatboxMessageBubble, {
-                    message: node.message,
-                    time: node.time,
-                    status: "to",
-                    profileImg: "/img/SVG/female_user.svg"
-                  }), " "]
-                }, counter));
-              } else {
-                chatBubbles.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_chatbox_chatBubble__WEBPACK_IMPORTED_MODULE_1__.ChatboxMessageBubble, {
-                    message: node.message,
-                    time: node.time,
-                    status: "from",
-                    profileImg: "/img/SVG/female_user.svg"
-                  }), " "]
-                }, counter));
-              }
-
-              counter++;
-            }
-          } catch (err) {
-            _iterator.e(err);
-          } finally {
-            _iterator.f();
+          for (var i = 0; i < response.message.length; i++) {
+            console.log(_this2.state.sharedState);
+            chatBubbles.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_chatbox_chatBubble__WEBPACK_IMPORTED_MODULE_1__.ChatboxMessageBubble, {
+              message: response.message[i].message,
+              user: _this2.state.user,
+              profileImg: _this2.state.profileImg,
+              sharedState: _this2.state.sharedState,
+              status: "to"
+            }, i));
           }
 
           react_dom__WEBPACK_IMPORTED_MODULE_3__.render(chatBubbles, container);
-        } // retry connection every 10 seconds
-
-
-        return setTimeout(function (res) {
-          // change to use a web socket instead and maintain the connection with the server
-          return _this2.fetchChatMessages();
-        }, 8000);
+        }
       });
     }
   }, {
@@ -3449,9 +3428,10 @@ var ChatboxSendMessage = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.state = {
       user: _this.props.user,
-      sendingMessage: false,
-      sharedKey: _this.props.sharedKey,
-      sharedState: _this.props.sharedState
+      profileImg: _this.props.profileImg,
+      sharedState: _this.props.sharedState,
+      token: _this.props.token,
+      userID: _this.props.userID
     };
     return _this;
   }
@@ -3476,11 +3456,15 @@ var ChatboxSendMessage = /*#__PURE__*/function (_React$Component) {
 
       var request = {
         userID: this.state.user,
-        sharedKey: "testKey",
+        profileImg: this.state.profileImg,
+        sharedState: this.state.sharedState,
+        token: this.state.token,
         message: document.getElementById('chatbox-message-content').value
       };
-      var url = "/api/messages/send?userID=".concat(request.userID, "&sharedKey=").concat(request.sharedKey, "&message=").concat(request.message);
-      return fetchService.$get(url, headers, function (response) {});
+      var url = "/api/messages/send?userID=".concat(request.userID, "&profileImg=").concat(request.profileImg, "&sharedState=").concat(request.sharedState, "&token=").concat(request.token, "&message=").concat(request.message);
+      return fetchService.$get(url, headers, function (response) {
+        console.log(response);
+      });
     }
     /**
      * 
@@ -3494,7 +3478,6 @@ var ChatboxSendMessage = /*#__PURE__*/function (_React$Component) {
     key: "validation",
     value: function validation(e) {
       var errorMessage = document.getElementById("textarea-error");
-      console.log(e.target.value.length);
       return e.target.value.length === 0 ? errorMessage.innerHTML = "Please fill out this field" : errorMessage.innerHTML = "";
     }
   }, {
@@ -3659,7 +3642,8 @@ var UserProfile = /*#__PURE__*/function (_React$Component) {
         react_dom__WEBPACK_IMPORTED_MODULE_1__.hydrate( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_chatbox_container__WEBPACK_IMPORTED_MODULE_2__.ChatBoxContainer, {
           user: this.state.name,
           profileImg: this.state.image,
-          sharedState: this.state // this is the hook to the parent component
+          sharedState: this.state,
+          userID: this.state.userID // this is the hook to the parent component
           ,
           token: this.state.token
         }), container);
@@ -3669,6 +3653,7 @@ var UserProfile = /*#__PURE__*/function (_React$Component) {
           sharedState: this.state // this is the hook to the parent component
           ,
           profileImg: this.state.image,
+          userID: this.state.userID,
           token: this.state.token
         }), container);
       }
@@ -6074,8 +6059,8 @@ var MessagePage = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.state = {
       userData: {
-        // display all the user data 
-        contacts: _this.fetchStoreContacts()
+        // display all the user data
+        contacts: []
       },
       name: null,
       profileImg: null
@@ -6104,76 +6089,49 @@ var MessagePage = /*#__PURE__*/function (_React$Component) {
       return e.target.value.length === 0 ? errorMessage.innerHTML = "Please fill out this field" : errorMessage.innerHTML = "";
     }
     /**
+     *  @method: componentDidMount
      *
-     *  @method: renderContactList
+     *  @purpose: to get the data from the api and render it to the dom
      *
-     *
-     *  @purpose: inorder to render contacts the user has searched for the in specific store
      *
      */
 
   }, {
-    key: "fetchStoreContacts",
-    value: function fetchStoreContacts() {
+    key: "componentDidMount",
+    value: function componentDidMount() {
       var _this2 = this;
 
-      var container = document.getElementById("container-contact-list");
-      var fetchService = new _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_3__["default"]();
+      var fetchService = new _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_3__["default"](); // headers
+
       var headers = {
         "Content-type": "application/json",
         Accept: "application/json" // we will add the toke to header after testing is complete
 
-      }; // fetch our members data from the api
+      }; // grab the user data from the api
 
-      var contactElements = [];
       fetchService.$get("/api/members/get", headers, function (response) {
         // we will render the data here
-        var data = response.data; // rendeer our react component her
-
-        console.log(response);
+        var data = response.data; // rendeer our react component here
 
         if (response.data) {
-          for (var i = 0; i < data.length; i++) {
-            contactElements.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_dashboard_messages_userProfileCard__WEBPACK_IMPORTED_MODULE_1__.UserProfile, {
-              profileID: data[i].profileID,
-              userID: data[i].userID,
-              name: data[i].name,
-              role: data[i].role,
-              image: data[i].profileIMG,
-              date: "53 minutes ago",
-              active: "false",
-              isActive: "ONLINE",
-              storeID: data[i].storeID
-            }, i));
-          } // to get the value you have to return the promise
-
-
-          return _this2.renderContactList(contactElements);
-        } // render issue
+          // render the data
+          _this2.setState({
+            // set the state of the data
+            userData: {
+              contacts: data
+            }
+          });
+        } // render issue message
 
 
         return false;
       });
-      return contactElements;
-    }
-    /**
-     *
-     *  @method: renderContactList
-     * 
-     *  @purpose: inorder to render the contact list from an jsx.elent
-     *
-     */
-
-  }, {
-    key: "renderContactList",
-    value: function renderContactList(contacts) {
-      var container = document.getElementById('container-contact-list');
-      return react_dom__WEBPACK_IMPORTED_MODULE_4__.hydrate(contacts, container);
     }
   }, {
     key: "render",
     value: function render() {
       /// trigger a error message if our contact data isn't available
+      console.log(this.setState.userData);
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
         className: "container-fluid profile_card dashboard-content",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
@@ -6218,7 +6176,20 @@ var MessagePage = /*#__PURE__*/function (_React$Component) {
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
               className: "contacts-container",
-              id: "container-contact-list"
+              id: "container-contact-list",
+              children: this.state.userData.contacts.map(function (contact) {
+                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components_dashboard_messages_userProfileCard__WEBPACK_IMPORTED_MODULE_1__.UserProfile, {
+                  profileID: contact.profileID,
+                  userID: contact.userID,
+                  name: contact.name,
+                  role: contact.role,
+                  image: contact.profileIMG,
+                  date: "53 minutes ago",
+                  active: "false",
+                  isActive: "ONLINE",
+                  storeID: contact.storeID
+                }, contact.userID);
+              })
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
             className: "col",

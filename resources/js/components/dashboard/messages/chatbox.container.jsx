@@ -36,6 +36,7 @@ export class ChatBoxContainer extends React.Component {
             User: this.props.user,
             profileImg: this.props.profileImg,
             token: this.props.sharedToken, 
+            userID: this.props.userID,
             sharedState: this.props.sharedState,
         };
     }
@@ -75,7 +76,11 @@ export class ChatBoxContainer extends React.Component {
                                             name={this.state.User}
                                             status={true}
                                             profileImg={this.state.profileImg} 
-                                            sharedState={this.state.sharedState}  />
+                                            sharedState={this.state.sharedState} 
+                                            token={this.state.token}
+                                            userID={this.state.userID}
+                                            />
+
 
                                     </div>
 
@@ -84,6 +89,8 @@ export class ChatBoxContainer extends React.Component {
                                         user={this.state.User}
                                         profileImg={this.state.profileImg}
                                         sharedState={this.state.sharedState}
+                                        token={this.state.token}
+                                        userID={this.state.userID}
                                      />
 
 
@@ -92,6 +99,8 @@ export class ChatBoxContainer extends React.Component {
                                         user={this.state.User} 
                                         profileImg={this.state.profileImg}
                                         sharedState={this.state.sharedState}
+                                        token={this.state.token}
+                                        userID={this.state.userID}
                                      />
                                 </div>
                             </div>

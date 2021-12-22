@@ -19,13 +19,21 @@ use Illuminate\Support\Facades\DB;
 
 class DispatchMessage implements MessageInterface
 {
-
-
-    // give me a key of 100 bits
     private $key = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     // TODO inpliment encapuslation for this class to make it more secure
     // and hide the details of how the message is send/received/deleted
 
+
+    public function __construct()
+    {
+        // initilize are event dispatcher here \
+
+        // we will use this accross class to verify the requests of the message
+        $this->initMessageKey = openssl_random_pseudo_bytes(32);
+
+    }
+
+   
     /**
      * 
      * @function: getAllMessages
@@ -71,7 +79,16 @@ class DispatchMessage implements MessageInterface
 
     public function createMessage($data)
     {
-        // request for a new message object 
+        # make a structure for sending messages 
+        
+        $message = [
+            'storeID' => $data['storeID'],
+            'token' => $data['token'],
+            'userID' => $data['userID'],
+            'requestTime' => $data['requestTime'],
+            'message' => $data['message'],
+            'status' => $data['status'],
+        ];
 
     }
 
@@ -126,7 +143,7 @@ class DispatchMessage implements MessageInterface
             $response['message'] = 'You cannot send a message to yourself';
             $response['status'] = 'error';
 
-             die(Response()->json(['errpr' => $response['message']], 400));
+             die(Response()->json(['error' => $response['message']], 400));
         }
 
 
@@ -134,8 +151,8 @@ class DispatchMessage implements MessageInterface
 
             // next filter the store group
 
-            $currentUserConvos = DB::table('user_group_member')->where('storeID', $data['storeID'])->where('userID', $currentUser)->get();
-            $fetch_user_convo = DB::table('user_group_member')->where('storeID', $data['storeID'])->where('userID', $data['userID'])->get();
+            $currentUserConvos = DB::table('user_group_member')->where('storeID', $response['storeID'])->where('userID', $currentUser)->get();
+            $fetch_user_convo = DB::table('user_group_member')->where('storeID', $response['storeID'])->where('userID', $response['userID'])->get();
             if ($fetch_user_convo) {
 
                 // your current conversations
@@ -212,8 +229,7 @@ class DispatchMessage implements MessageInterface
             return Response()->json(['error' => 'You cannot send a message to yourself'], 401);
          }
 
-            // check if the user has a conversation with the recipient
-
+        // check if the user has a conversation with the recipient
         $currentUserConvos = DB::table('user_group_member')->where('storeID', $storeID)->where('userID', $userID)->get();
 
          define('storeID', $storeID);
@@ -298,7 +314,7 @@ class DispatchMessage implements MessageInterface
     /**
      *  @method: removeUserFromGroup
      * 
-     *  @purpose: inorder to remove a user from the group / also acts as a clean up function if something goes wrong with our inserts 
+     *  @purpose: inorder to remove a user from the group / also acts as a clean up function if something goes wrong with our inserts :/
      * 
      */
 

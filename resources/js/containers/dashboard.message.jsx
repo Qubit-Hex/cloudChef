@@ -19,21 +19,14 @@ import FetchServiceProvider from "../lib/fetchServiceProvider";
 import ReactDOM from "react-dom";
 import { map } from "jquery";
 
-
-
-
-
-
-
 export class MessagePage extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-
             userData: {
-                // display all the user data 
-                contacts: this.fetchStoreContacts(),
+                // display all the user data
+                contacts: [],
             },
             name: null,
             profileImg: null,
@@ -62,82 +55,47 @@ export class MessagePage extends React.Component {
     }
 
     /**
+     *  @method: componentDidMount
      *
-     *  @method: renderContactList
+     *  @purpose: to get the data from the api and render it to the dom
      *
-     *
-     *  @purpose: inorder to render contacts the user has searched for the in specific store
      *
      */
 
-    fetchStoreContacts() {
-        let container = document.getElementById("container-contact-list");
-        let fetchService = new FetchServiceProvider();
+    componentDidMount() {
+        const fetchService = new FetchServiceProvider();
+        // headers
 
-        let headers = {
+        const headers = {
             "Content-type": "application/json",
             Accept: "application/json",
             // we will add the toke to header after testing is complete
         };
-        // fetch our members data from the api
 
-        let contactElements = [];
-
+        // grab the user data from the api
         fetchService.$get("/api/members/get", headers, (response) => {
             // we will render the data here
             let data = response.data;
-            // rendeer our react component her
+            // rendeer our react component here
 
-            console.log(response); 
-            
             if (response.data) {
-
-                for (let i = 0; i < data.length; i++) {
-                    contactElements.push(
-                        <UserProfile
-                            key={i}
-                            profileID={data[i].profileID}
-                            userID={data[i].userID}
-                            name={data[i].name}
-                            role={data[i].role}
-                            image={data[i].profileIMG}
-                            date="53 minutes ago"
-                            active="false"
-                            isActive="ONLINE"
-                            storeID={data[i].storeID}
-                        />
-                    );
-                }
-                // to get the value you have to return the promise
-                return this.renderContactList(contactElements);
+                // render the data
+                this.setState({
+                    // set the state of the data
+                    userData: {
+                        contacts: data,
+                    },
+                });
             }
-            // render issue
+            // render issue message
             return false;
         });
-
-        return contactElements;
     }
-
-
-    /**
-     *
-     *  @method: renderContactList
-     * 
-     *  @purpose: inorder to render the contact list from an jsx.elent
-     *
-     */
-
-
-    renderContactList(contacts) {
-       let container = document.getElementById('container-contact-list');
-       return ReactDOM.hydrate(contacts, container);
-    }
-
 
     render() {
-            /// trigger a error message if our contact data isn't available
+        /// trigger a error message if our contact data isn't available
 
-
+        console.log(this.setState.userData);
         return (
             <div className="container-fluid profile_card dashboard-content">
                 <div className="row">
@@ -180,9 +138,26 @@ export class MessagePage extends React.Component {
                             </div>
                         </div>
 
-                        <div className="contacts-container" id="container-contact-list">
-                            
-                          
+                        <div
+                            className="contacts-container"
+                            id="container-contact-list"
+                        >
+                            {this.state.userData.contacts.map((contact) => {
+                                return (
+                                    <UserProfile
+                                        key={contact.userID}
+                                        profileID={contact.profileID}
+                                        userID={contact.userID}
+                                        name={contact.name}
+                                        role={contact.role}
+                                        image={contact.profileIMG}
+                                        date="53 minutes ago"
+                                        active="false"
+                                        isActive="ONLINE"
+                                        storeID={contact.storeID}
+                                    />
+                                );
+                            })}
                         </div>
                     </div>
 

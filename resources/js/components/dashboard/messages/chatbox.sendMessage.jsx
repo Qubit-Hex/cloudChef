@@ -20,9 +20,10 @@ export class ChatboxSendMessage extends React.Component {
 
         this.state = {
             user: this.props.user,
-            sendingMessage: false,
-            sharedKey: this.props.sharedKey,
+            profileImg: this.props.profileImg,
             sharedState: this.props.sharedState,
+            token: this.props.token,
+            userID: this.props.userID,
         };
     }
 
@@ -50,16 +51,18 @@ export class ChatboxSendMessage extends React.Component {
 
         const request = {
             userID: this.state.user,
-            sharedKey: "testKey",
+            profileImg: this.state.profileImg,
+            sharedState: this.state.sharedState,
+            token: this.state.token,
             message: document.getElementById('chatbox-message-content').value,
         };
 
 
         let url =
-        `/api/messages/send?userID=${request.userID}&sharedKey=${request.sharedKey}&message=${request.message}`;
+        `/api/messages/send?userID=${request.userID}&profileImg=${request.profileImg}&sharedState=${request.sharedState}&token=${request.token}&message=${request.message}`;
     
         return fetchService.$get(url, headers, (response) => {
-
+            console.log(response);
         });
     }
 
@@ -75,8 +78,6 @@ export class ChatboxSendMessage extends React.Component {
      validation(e) 
      {
         let errorMessage = document.getElementById("textarea-error");
-        console.log(e.target.value.length);
-
         return e.target.value.length === 0 ? (errorMessage.innerHTML = "Please fill out this field") : (errorMessage.innerHTML = "");
     }
 
