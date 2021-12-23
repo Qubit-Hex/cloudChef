@@ -2757,32 +2757,16 @@ var ChatboxMessageBubble = /*#__PURE__*/function (_react$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
+      name: _this.props.name,
       message: _this.props.message,
       time: _this.props.time,
-      status: _this.props.status,
+      color: _this.props.color,
       profileImg: _this.props.profileImg
     };
     return _this;
   }
-  /**
-   * 
-   * @method: verifiyMessages
-   * 
-   *  @purpose: to align the message box wether the user is a senders 
-   *            or reciver of the messsages 
-   */
-
 
   _createClass(ChatboxMessageBubble, [{
-    key: "verifyMessages",
-    value: function verifyMessages() {
-      if (this.state.status === 'to') {
-        return "convo-user ";
-      } else if (this.state.status === 'from') {
-        return "convo-recipient ";
-      }
-    }
-  }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
@@ -2790,7 +2774,10 @@ var ChatboxMessageBubble = /*#__PURE__*/function (_react$Component) {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
           className: "row mt-2",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-            className: this.verifyMessages() + "m-1",
+            className: "convo-user m-1",
+            style: {
+              backgroundColor: this.state.color
+            },
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
               className: "fa fa-user-circle-o fa-2x mr-2",
               "aria-hidden": "true"
@@ -3033,7 +3020,9 @@ var ChatboxMessages = /*#__PURE__*/function (_react$Component) {
       profileImg: _this.props.profileImg,
       sharedState: _this.props.sharedState,
       userID: _this.props.userID,
-      token: _this.props.token
+      token: _this.props.token,
+      // thos will be used to map the message styling of the user of the message bubbles 
+      messageMap: _this.props.messageMap
     };
     return _this;
   }
@@ -3067,9 +3056,47 @@ var ChatboxMessages = /*#__PURE__*/function (_react$Component) {
 
       return null;
     }
+    /**
+     * 
+     *  @method: componentDidMount
+     *  
+     * 
+     * 
+     *  @purpose: to call the fetchChatMessages function to get the messages from the database and update the state 
+     * 
+     */
+
   }, {
-    key: "verifySender",
-    value: function verifySender() {}
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var API_CALL = this.fetchChatMessages();
+    }
+    /**
+     * 
+     * @method: generateUniqueColors  
+     * 
+     * @purpose: to generate a unique color for each unique user in coverstion
+     * 
+     */
+
+  }, {
+    key: "generateUniqueColors",
+    value: function generateUniqueColors() {
+      // modern ui color with some transparency rgb
+      var uiColors = ["rgba(52, 152, 219,0.7)", // peter river 
+      "rgba(41, 128, 185,0.7)", // belize hole
+      "rgba(39, 174, 96,0.7)", // nephritis
+      "rgba(241, 196, 15,0.7)", // sun flower
+      "rgba(231, 76, 60,0.7)", // alizarin
+      "rgba(192, 57, 43,0.7)", // pomegranate
+      "rgba(0, 98, 102,0.7)", // wisteria
+      "rgba(27, 20, 100,0.7)" // midnight blue
+      ]; // generate a random number between 0 and the length of the list of colors
+
+      var randomNumber = Math.floor(Math.random() * uiColors.length - 1);
+      var color = uiColors[randomNumber];
+      return color;
+    }
     /**
      *
      *
@@ -3091,7 +3118,6 @@ var ChatboxMessages = /*#__PURE__*/function (_react$Component) {
         "Content-Type": "application/json",
         Accept: "application/json"
       };
-      console.log(this.state.sharedState);
       var request = {
         storeID: 1,
         token: this.getCookie('accessToken'),
@@ -3144,18 +3170,35 @@ var ChatboxMessages = /*#__PURE__*/function (_react$Component) {
 
         if (response.message) {
           // parse out messages boxes
-          var chatBubbles = [];
+          var chatBubbles = []; // maps the user and unique colors in  a map
+
+          var uniqueUserID = [];
+          var uniqueUserColor = [];
 
           for (var i = 0; i < response.message.length; i++) {
-            console.log(_this2.state.sharedState);
-            chatBubbles.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_chatbox_chatBubble__WEBPACK_IMPORTED_MODULE_1__.ChatboxMessageBubble, {
-              message: response.message[i].message,
-              user: _this2.state.user,
-              profileImg: _this2.state.profileImg,
-              sharedState: _this2.state.sharedState,
-              status: "to",
-              token: _this2.state.token
-            }, i));
+            if (uniqueUserID.includes(response.message[i].userID)) {
+              var index = uniqueUserID.indexOf(response.message[i].userID);
+              chatBubbles.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_chatbox_chatBubble__WEBPACK_IMPORTED_MODULE_1__.ChatboxMessageBubble, {
+                message: response.message[i].message,
+                user: _this2.state.user,
+                profileImg: _this2.state.profileImg,
+                sharedState: _this2.state.sharedState,
+                color: uniqueUserColor[index],
+                token: _this2.state.token
+              }, i));
+            } else {
+              // map the user ID to the array 
+              uniqueUserID.push(response.message[i].userID);
+              uniqueUserColor.push(_this2.generateUniqueColors());
+              chatBubbles.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_chatbox_chatBubble__WEBPACK_IMPORTED_MODULE_1__.ChatboxMessageBubble, {
+                message: response.message[i].message,
+                user: _this2.state.user,
+                profileImg: _this2.state.profileImg,
+                sharedState: _this2.state.sharedState,
+                color: uniqueUserColor[uniqueUserColor.length - 1],
+                token: _this2.state.token
+              }, i));
+            }
           }
 
           react_dom__WEBPACK_IMPORTED_MODULE_3__.render(chatBubbles, container);
@@ -3406,11 +3449,11 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 /**
- * 
- *  @file: chatbox.sendMessage 
- * 
- *  @purpose: this will send messages to the user 
- * 
+ *
+ *  @file: chatbox.sendMessage
+ *
+ *  @purpose: this will send messages to the user
+ *
  */
 
 
@@ -3426,25 +3469,29 @@ var ChatboxSendMessage = /*#__PURE__*/function (_React$Component) {
 
     _classCallCheck(this, ChatboxSendMessage);
 
-    _this = _super.call(this, props);
+    _this = _super.call(this, props); // refs
+
+    _this.messageContent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createRef();
+    _this.sendMessageContent = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createRef();
     _this.state = {
       user: _this.props.user,
       profileImg: _this.props.profileImg,
       sharedState: _this.props.sharedState,
       token: _this.props.token,
       userID: _this.props.userID,
-      textareaError: ""
+      textareaError: "",
+      messageContent: ""
     };
     return _this;
   }
   /**
-   *  
-   * @method: getCookie 
-   * 
-   * 
-   * 
-   *  @purpose: to get the cookie value via name in a string  
-   * 
+   *
+   * @method: getCookie
+   *
+   *
+   *
+   *  @purpose: to get the cookie value via name in a string
+   *
    *
    */
 
@@ -3468,33 +3515,35 @@ var ChatboxSendMessage = /*#__PURE__*/function (_React$Component) {
       return null;
     }
     /**
-     * 
-     *  @method: sendMessage 
-     * 
-     *  @purpose: this is going to send a message to the user           
+     *
+     *  @method: sendMessage
+     *
+     *  @purpose: this is going to send a message to the user
      *
      **/
 
   }, {
     key: "sendMessage",
-    value: function sendMessage(event) {
+    value: function sendMessage() {
       var _this2 = this;
 
-      var fetchService = new _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_1__["default"](); // headers 
+      var fetchService = new _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_1__["default"](); // headers
 
       var headers = {
         "Content-type": "application/json",
         Accept: "application/json"
       }; // request object
 
+      var messageContent = this.state.messageContent;
       var request = {
         storeID: this.state.sharedState.storeID,
         userID: this.state.userID,
         profileImg: this.state.profileImg,
         sharedState: this.state.sharedState,
-        token: this.getCookie('accessToken'),
-        message: document.getElementById('chatbox-message-content').value
-      }; // NOTES: NEED TO ADD WEB WORKER TO LISTEN FOR MESSAGE EVENTS AND THEN ADD TO THE CHATBOX AFTER 
+        token: this.getCookie("accessToken"),
+        message: messageContent
+      };
+      console.log(messageContent); // NOTES: NEED TO ADD WEB WORKER TO LISTEN FOR MESSAGE EVENTS AND THEN ADD TO THE CHATBOX AFTER
       // MY ROUTE TESTING IS COMPLETE...
 
       var url = "/api/messages/send?storeID=".concat(request.storeID, "&userID=").concat(request.userID, "&profileImg=").concat(request.profileImg, "&sharedState=").concat(request.sharedState, "&token=").concat(request.token, "&message=").concat(request.message);
@@ -3508,10 +3557,10 @@ var ChatboxSendMessage = /*#__PURE__*/function (_React$Component) {
       });
     }
     /**
-     * 
-     *  @method: validation 
-     *      // change to validatation message and have a validate method to return a boolean value so we can reuse the method 
-     * 
+     *
+     *  @method: validation
+     *      // change to validatation message and have a validate method to return a boolean value so we can reuse the method
+     *
      *  @purpose: this will validate the input of the controls
      */
 
@@ -3521,10 +3570,37 @@ var ChatboxSendMessage = /*#__PURE__*/function (_React$Component) {
       var errorMessage = document.getElementById("textarea-error");
       return e.target.value.length === 0 ? errorMessage.innerHTML = "Please fill out this field" : errorMessage.innerHTML = "";
     }
+    /**
+     *
+     *  @method: componentDidMount
+     *
+     *
+     *  @purpose: this will run after the component has mounted
+     *
+     *
+     *
+     */
+
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this3 = this;
+
+      this.messageContent.current.addEventListener("change", function (e) {
+        _this3.setState({
+          messageContent: _this3.messageContent.current.value
+        });
+      });
+      this.sendMessageContent.current.addEventListener("click", function (e) {
+        _this3.sendMessage();
+
+        console.log(_this3.state);
+      });
+    }
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
         className: "chatbox-message-controls",
@@ -3545,10 +3621,11 @@ var ChatboxSendMessage = /*#__PURE__*/function (_React$Component) {
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("textarea", {
             "message-content": "true",
             onChange: function onChange(e) {
-              _this3.validation(e);
+              _this4.validation(e);
             },
             "class": "form-control",
             id: "chatbox-message-content",
+            ref: this.messageContent,
             rows: "3"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
             className: "container",
@@ -3558,9 +3635,7 @@ var ChatboxSendMessage = /*#__PURE__*/function (_React$Component) {
                 className: "col",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("button", {
                   className: "btn btn-message",
-                  onClick: function onClick(e) {
-                    _this3.sendMessage(e);
-                  },
+                  ref: this.sendMessageContent,
                   children: [" ", "Send", " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
                     "class": "fa fa-paper-plane hidden-label",
                     "aria-hidden": "true",
@@ -3661,7 +3736,9 @@ var UserProfile = /*#__PURE__*/function (_React$Component) {
       storeID: _this.props.storeID,
       // state for the component
       token: "my super secret token"
-    };
+    }; // refs
+
+    _this.renderMessagesPannel = _this.renderMessagesPannel.bind(_assertThisInitialized(_this));
     return _this;
   }
   /**
@@ -3671,7 +3748,7 @@ var UserProfile = /*#__PURE__*/function (_React$Component) {
    *  @purpose: inorder to render the conversation pannel between you and the user.. 
    * 
    * 
-   *  
+   *   DONT KNOW WHY IT WORKS BUT IT DOES! THIS REMOVE THE ERROR MESSAGE
    */
 
 
@@ -3679,26 +3756,16 @@ var UserProfile = /*#__PURE__*/function (_React$Component) {
     key: "renderMessagesPannel",
     value: function renderMessagesPannel(e) {
       var container = document.getElementById('messagePannel-container');
-
-      if (react_dom__WEBPACK_IMPORTED_MODULE_1__.unmountComponentAtNode(container)) {
-        react_dom__WEBPACK_IMPORTED_MODULE_1__.hydrate( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_chatbox_container__WEBPACK_IMPORTED_MODULE_2__.ChatBoxContainer, {
+      react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_chatbox_container__WEBPACK_IMPORTED_MODULE_2__.ChatBoxContainer, {
           user: this.state.name,
           profileImg: this.state.image,
           sharedState: this.state,
           userID: this.state.userID // this is the hook to the parent component
           ,
           token: this.state.token
-        }), container);
-      } else {
-        react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_chatbox_container__WEBPACK_IMPORTED_MODULE_2__.ChatBoxContainer, {
-          user: this.state.name,
-          sharedState: this.state // this is the hook to the parent component
-          ,
-          profileImg: this.state.image,
-          userID: this.state.userID,
-          token: this.state.token
-        }), container);
-      }
+        }, this.state.profileID), " "]
+      }), container);
     }
   }, {
     key: "render",
@@ -3714,9 +3781,6 @@ var UserProfile = /*#__PURE__*/function (_React$Component) {
           className: "card-body",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
             className: "container-fluid contact-hover-action",
-            onClick: function onClick(e) {
-              _this2.renderMessagesPannel;
-            },
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
               className: "row",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
@@ -6106,7 +6170,9 @@ var MessagePage = /*#__PURE__*/function (_React$Component) {
       },
       name: null,
       profileImg: null
-    };
+    }; // refs 
+
+    var messagePannel = _this.messagePannel = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createRef();
     return _this;
   }
 
@@ -6167,16 +6233,18 @@ var MessagePage = /*#__PURE__*/function (_React$Component) {
 
 
         return false;
-      });
+      }); // add a web worker threads
     }
   }, {
     key: "render",
     value: function render() {
       /// trigger a error message if our contact data isn't available
       console.log(this.setState.userData);
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
         className: "container-fluid profile_card dashboard-content",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+          className: "row"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
           className: "row",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
             className: "col message-contact shadow",
@@ -6235,18 +6303,13 @@ var MessagePage = /*#__PURE__*/function (_React$Component) {
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
             className: "col",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
               id: "messagePannel-container",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
-                src: "/img/SVG/network_outline.svg",
-                className: "img-fluid m-auto"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("b", {
-                className: "text-center",
-                children: [" ", "Please select a contact to start chatting", " "]
-              })]
+              ref: this.messagePannel,
+              children: this.props.children
             })
           })]
-        })
+        })]
       });
     }
   }]);

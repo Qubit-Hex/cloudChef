@@ -696,17 +696,17 @@ $bg-color: linear-gradient(to right, #e1eec398, #e1eec398);
 
     .convo-user {
         background: #98bdf8ea;  /* fallback for old browsers */
-        color: #070707e5;
+        color: rgba(17, 17, 17, 0.918);
+        font-weight: 600;
         font-size: 16px;
         padding: 20px;
         border-radius: 20px;
         margin-bottom: 10px;
-        width: auto;
+        width: 80%;
         float: right;
         box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
         .covo-sent-msg {
             color: rgb(0, 0, 0) !important;
-            font-weight: 400;
             font-weight: 900;
             font-size: 12px;          
         }

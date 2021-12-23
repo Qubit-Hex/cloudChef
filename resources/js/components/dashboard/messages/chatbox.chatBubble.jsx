@@ -24,29 +24,13 @@ export class ChatboxMessageBubble extends react.Component {
 
 
         this.state = {
+            name: this.props.name,
             message: this.props.message,
             time: this.props.time,
-            status: this.props.status,
+            color: this.props.color,
             profileImg: this.props.profileImg
         }
 
-    }
-    
-    /**
-     * 
-     * @method: verifiyMessages
-     * 
-     *  @purpose: to align the message box wether the user is a senders 
-     *            or reciver of the messsages 
-     */
-
-    verifyMessages()
-    {
-        if (this.state.status === 'to') {
-            return "convo-user ";
-        } else if (this.state.status === 'from') {
-            return "convo-recipient ";
-        }
     }
 
     render()
@@ -57,7 +41,7 @@ export class ChatboxMessageBubble extends react.Component {
                 <div className="row mt-2">
                 
                  
-                    <div className={this.verifyMessages() + "m-1"}>
+                    <div className="convo-user m-1" style={{backgroundColor: this.state.color}}>
                       <i className="fa fa-user-circle-o fa-2x mr-2" aria-hidden="true"></i>   
                        <span> {this.state.message } </span> <br />
                         <small className="text-muted covo-sent-msg">

@@ -6,7 +6,8 @@
 	],
 	"settings": {
 		"files.exclude": {
-			"app/Http/Services/Message/modules/eventMessageBus": true
+			"app/Http/Services/Message/modules/eventMessageBus": true,
+			"resources/js/lib/scheduler/proccessScheduler.js": true
 		},
 		"workspace.isHidden": true
 	}

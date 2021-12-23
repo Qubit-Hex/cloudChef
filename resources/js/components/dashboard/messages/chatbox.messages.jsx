@@ -34,6 +34,8 @@ export class ChatboxMessages extends react.Component {
             sharedState: this.props.sharedState,
             userID: this.props.userID,
             token: this.props.token,
+            // thos will be used to map the message styling of the user of the message bubbles 
+            messageMap: this.props.messageMap,
         };
     }
 
@@ -60,11 +62,54 @@ export class ChatboxMessages extends react.Component {
         return null;
     }
 
+    /**
+     * 
+     *  @method: componentDidMount
+     *  
+     * 
+     * 
+     *  @purpose: to call the fetchChatMessages function to get the messages from the database and update the state 
+     * 
+     */
 
-    verifySender()  {
+    componentDidMount() {
+        let API_CALL = this.fetchChatMessages();
 
-
+        
     }
+
+
+    /**
+     * 
+     * @method: generateUniqueColors  
+     * 
+     * @purpose: to generate a unique color for each unique user in coverstion
+     * 
+     */
+
+    generateUniqueColors() {
+
+        // modern ui color with some transparency rgb
+
+        const uiColors = [
+            "rgba(52, 152, 219,0.7)", // peter river 
+            "rgba(41, 128, 185,0.7)", // belize hole
+            "rgba(39, 174, 96,0.7)", // nephritis
+            "rgba(241, 196, 15,0.7)", // sun flower
+            "rgba(231, 76, 60,0.7)", // alizarin
+            "rgba(192, 57, 43,0.7)", // pomegranate
+            "rgba(0, 98, 102,0.7)", // wisteria
+            "rgba(27, 20, 100,0.7)", // midnight blue
+        ];
+
+        // generate a random number between 0 and the length of the list of colors
+        let randomNumber = Math.floor(Math.random() * uiColors.length - 1);
+
+        let color = uiColors[randomNumber];
+
+        return color;
+    }
+
 
     /**
      *
@@ -86,7 +131,6 @@ export class ChatboxMessages extends react.Component {
             Accept: "application/json",
         };
 
-        console.log(this.state.sharedState);
 
         const request = {
             storeID: 1,
@@ -135,18 +179,42 @@ export class ChatboxMessages extends react.Component {
             if (response.message) {
                 // parse out messages boxes
                 let chatBubbles = [];
+
+                // maps the user and unique colors in  a map
+                let uniqueUserID = [];
+                let uniqueUserColor = [];
+
                 for (let i = 0; i < response.message.length; i++) {
-                    console.log(this.state.sharedState);
-                    
-                    chatBubbles.push( <ChatboxMessageBubble
-                        key={i}
-                        message={response.message[i].message}
-                        user={this.state.user}
-                        profileImg={this.state.profileImg}
-                        sharedState={this.state.sharedState}
-                        status="to"
-                        token={this.state.token}
-                    />);
+
+                    if (uniqueUserID.includes(response.message[i].userID)) {
+                        const index = uniqueUserID.indexOf(response.message[i].userID);
+
+                        chatBubbles.push( <ChatboxMessageBubble
+                            key={i}
+                            message={response.message[i].message}
+                            user={this.state.user}
+                            profileImg={this.state.profileImg}
+                            sharedState={this.state.sharedState}
+                            color={uniqueUserColor[index]}
+                            token={this.state.token}
+                        />);
+
+
+                    } else {
+                        // map the user ID to the array 
+                        uniqueUserID.push(response.message[i].userID);
+                        uniqueUserColor.push(this.generateUniqueColors());
+
+                        chatBubbles.push( <ChatboxMessageBubble
+                            key={i}
+                            message={response.message[i].message}
+                            user={this.state.user}
+                            profileImg={this.state.profileImg}
+                            sharedState={this.state.sharedState}
+                            color={uniqueUserColor[uniqueUserColor.length - 1]}
+                            token={this.state.token}
+                        />);
+                    }
                     
                 }
 

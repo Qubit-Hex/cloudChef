@@ -31,6 +31,11 @@ export class MessagePage extends React.Component {
             name: null,
             profileImg: null,
         };
+
+
+        // refs 
+
+        const messagePannel = this.messagePannel = React.createRef();
     }
 
     showMessageCenter() {
@@ -63,6 +68,10 @@ export class MessagePage extends React.Component {
      */
 
     componentDidMount() {
+
+
+
+        
         const fetchService = new FetchServiceProvider();
         // headers
 
@@ -90,6 +99,12 @@ export class MessagePage extends React.Component {
             // render issue message
             return false;
         });
+
+
+
+        // add a web worker threads
+        
+
     }
 
     render() {
@@ -98,6 +113,8 @@ export class MessagePage extends React.Component {
         console.log(this.setState.userData);
         return (
             <div className="container-fluid profile_card dashboard-content">
+                <div className="row">
+                </div>
                 <div className="row">
                     {/** Contact list section  */}
                     <div className="col message-contact shadow">
@@ -160,18 +177,10 @@ export class MessagePage extends React.Component {
                             })}
                         </div>
                     </div>
-
+                
                     <div className="col">
-                        <div id="messagePannel-container">
-                            <img
-                                src="/img/SVG/network_outline.svg"
-                                className="img-fluid m-auto"
-                            />
-
-                            <b className="text-center">
-                                {" "}
-                                Please select a contact to start chatting{" "}
-                            </b>
+                        <div id="messagePannel-container" ref={this.messagePannel}>
+                           {this.props.children}
                         </div>
                     </div>
                     {/*  Message box*/}

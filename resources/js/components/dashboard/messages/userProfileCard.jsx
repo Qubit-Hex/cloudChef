@@ -31,6 +31,11 @@ export class UserProfile extends React.Component {
             // state for the component
             token: "my super secret token",
         };
+
+
+        // refs
+
+        this.renderMessagesPannel = this.renderMessagesPannel.bind(this);
     }
 
     /**
@@ -40,29 +45,20 @@ export class UserProfile extends React.Component {
      *  @purpose: inorder to render the conversation pannel between you and the user.. 
      * 
      * 
-     *  
+     *   DONT KNOW WHY IT WORKS BUT IT DOES! THIS REMOVE THE ERROR MESSAGE
      */
 
     renderMessagesPannel(e)
     {
         let container = document.getElementById('messagePannel-container');
 
-        if (ReactDOM.unmountComponentAtNode(container)) {
-             ReactDOM.hydrate(<ChatBoxContainer 
+             ReactDOM.render(<div><ChatBoxContainer 
+            key={this.state.profileID}
             user={this.state.name}
             profileImg={this.state.image}
             sharedState={this.state}
             userID={this.state.userID} // this is the hook to the parent component
-            token={this.state.token} />, container);
-        } else {
-            ReactDOM.render(<ChatBoxContainer 
-            user={this.state.name}
-            sharedState={this.state} // this is the hook to the parent component
-            profileImg={this.state.image}
-            userID={this.state.userID}
-            token={this.state.token} />, container);
-        }
-       
+            token={this.state.token} /> </div>, container);
     }
 
     
@@ -70,11 +66,7 @@ export class UserProfile extends React.Component {
         return (
             <div className="card no-margin row p-0" onClick={ (e) => {this.renderMessagesPannel() }}>
                 <div className="card-body">
-                    <div className="container-fluid contact-hover-action" 
-                     onClick={  (e) => {
-                             this.renderMessagesPannel
-                     }
-                     }>
+                    <div className="container-fluid contact-hover-action">
                         <div className="row">
                             <div className="col">
                                 

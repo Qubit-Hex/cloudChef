@@ -49,10 +49,7 @@
 <ref refid="5d15cff5-4814-11ec-8a26-c56595aabf0e"/>
 <ref refid="5e5a3c32-4815-11ec-9e44-c56595aabf0e"/>
 <ref refid="042999de-4816-11ec-a0f3-c56595aabf0e"/>
-<ref refid="8a29d320-4816-11ec-9c1f-c56595aabf0e"/>
-<ref refid="f6d07f72-4817-11ec-bcb1-c56595aabf0e"/>
 <ref refid="280da281-4818-11ec-a616-c56595aabf0e"/>
-<ref refid="7606e1eb-4818-11ec-b2b7-c56595aabf0e"/>
 <ref refid="f0925aec-480f-11ec-ba96-c56595aabf0e"/>
 <ref refid="07a3af6c-4810-11ec-8b9e-c56595aabf0e"/>
 <ref refid="751e72a7-4810-11ec-86f9-c56595aabf0e"/>
@@ -75,8 +72,6 @@
 <body>
 <val>Food Management System Design
 
-
- The design of this system is simple.  We have to design it as system that will connect to catagory classes that will for fill the based on on the job type
 </val>
 </body>
 <presentation>
@@ -87,13 +82,13 @@
 </Comment>
 <CommentItem id="50963158-480e-11ec-818c-c56595aabf0e">
 <matrix>
-<val>(1.0, 0.0, 0.0, 1.0, 108.46399999999998, -45.57599999999997)</val>
+<val>(1.0, 0.0, 0.0, 1.0, 47.564000000000085, 107.52479999999998)</val>
 </matrix>
 <width>
-<val>679.5039999999998</val>
+<val>688.0360000000001</val>
 </width>
 <height>
-<val>184.42690909090928</val>
+<val>64.23839999999996</val>
 </height>
 <diagram>
 <ref refid="46b87186-480e-11ec-8cb0-c56595aabf0e"/>
@@ -492,7 +487,7 @@
 </Class>
 <ClassItem id="c1c525bf-4811-11ec-868a-c56595aabf0e">
 <matrix>
-<val>(1.0, 0.0, 0.0, 1.0, 575.5, 1013.7388463329687)</val>
+<val>(1.0, 0.0, 0.0, 1.0, 493.5, 1001.5)</val>
 </matrix>
 <width>
 <val>221.0</val>
@@ -543,7 +538,7 @@
 </Comment>
 <CommentItem id="22f7ae76-4812-11ec-b4d9-c56595aabf0e">
 <matrix>
-<val>(1.0, 0.0, 0.0, 1.0, 178.0, 315.5)</val>
+<val>(1.0, 0.0, 0.0, 1.0, 178.0, 330.1399999999999)</val>
 </matrix>
 <width>
 <val>232.0</val>
@@ -712,7 +707,7 @@
 <val>(1.0, 0.0, 0.0, 1.0, 774.0, 1075.5)</val>
 </matrix>
 <points>
-<val>[(-61.5, 106.2388463329687), (133.3599999999998, -43.19409217252041)]</val>
+<val>[(-143.5, 94.0), (133.3599999999998, -43.19409217252041)]</val>
 </points>
 <head-connection>
 <ref refid="c1c525bf-4811-11ec-868a-c56595aabf0e"/>
@@ -799,7 +794,7 @@ values:
 </Comment>
 <CommentItem id="54f67f8c-4813-11ec-9f73-c56595aabf0e">
 <matrix>
-<val>(1.0, 0.0, 0.0, 1.0, 128.41599999999994, 786.4175735913944)</val>
+<val>(1.0, 0.0, 0.0, 1.0, 108.464, 767.0564199243631)</val>
 </matrix>
 <width>
 <val>319.79999999999995</val>
@@ -910,7 +905,7 @@ values:
 </Comment>
 <CommentItem id="e0a5f926-4813-11ec-86f4-c56595aabf0e">
 <matrix>
-<val>(1.0, 0.0, 0.0, 1.0, 778.5, 1340.3319999999997)</val>
+<val>(1.0, 0.0, 0.0, 1.0, 1713.348, 1169.5)</val>
 </matrix>
 <width>
 <val>175.0</val>
@@ -1123,7 +1118,7 @@ values:
 </Comment>
 <CommentItem id="042999de-4816-11ec-a0f3-c56595aabf0e">
 <matrix>
-<val>(1.0, 0.0, 0.0, 1.0, 284.7999999999998, 1245.3319999999999)</val>
+<val>(1.0, 0.0, 0.0, 1.0, 178.0, 1267.9487999999994)</val>
 </matrix>
 <width>
 <val>301.2000000000001</val>
@@ -1149,7 +1144,7 @@ values:
 <val>(1.0, 0.0, 0.0, 1.0, 482.4, 1188.494558451633)</val>
 </matrix>
 <points>
-<val>[(118.94399999999985, -23.211649360724095), (-83.60000000000002, 56.83744154836677)]</val>
+<val>[(118.94399999999985, -23.211649360724095), (-190.3999999999998, 79.45424154836633)]</val>
 </points>
 <tail-connection>
 <ref refid="042999de-4816-11ec-a0f3-c56595aabf0e"/>
@@ -1163,35 +1158,6 @@ values:
 <val>tableLetter</val>
 </name>
 </Property>
-<Comment id="8a29cceb-4816-11ec-bb92-c56595aabf0e">
-<body>
-<val>table letter for better grouping we will name our table from a - z number 0 - 25 in a section 
-
-which will give us 25^2</val>
-</body>
-<presentation>
-<reflist>
-<ref refid="8a29d320-4816-11ec-9c1f-c56595aabf0e"/>
-</reflist>
-</presentation>
-</Comment>
-<CommentItem id="8a29d320-4816-11ec-9c1f-c56595aabf0e">
-<matrix>
-<val>(1.0, 0.0, 0.0, 1.0, 990.328, 776.8945584516331)</val>
-</matrix>
-<width>
-<val>472.80000000000007</val>
-</width>
-<height>
-<val>86.40000000000003</val>
-</height>
-<diagram>
-<ref refid="46b87186-480e-11ec-8cb0-c56595aabf0e"/>
-</diagram>
-<subject>
-<ref refid="8a29cceb-4816-11ec-bb92-c56595aabf0e"/>
-</subject>
-</CommentItem>
 <CommentLineItem id="8e27e8a8-4817-11ec-9765-c56595aabf0e">
 <diagram>
 <ref refid="46b87186-480e-11ec-8cb0-c56595aabf0e"/>
@@ -1203,7 +1169,7 @@ which will give us 25^2</val>
 <val>(1.0, 0.0, 0.0, 1.0, 1408.3199999999997, 1099.618909090909)</val>
 </matrix>
 <points>
-<val>[(32.122339940855454, 39.21199999999999), (-527.1808575305311, 240.71309090909062)]</val>
+<val>[(32.122339940855454, 39.21199999999999), (407.6671424694689, 69.88109090909097)]</val>
 </points>
 <head-connection>
 <ref refid="5e5a3c32-4815-11ec-9e44-c56595aabf0e"/>
@@ -1212,33 +1178,6 @@ which will give us 25^2</val>
 <ref refid="e0a5f926-4813-11ec-86f4-c56595aabf0e"/>
 </tail-connection>
 </CommentLineItem>
-<Comment id="f6d07481-4817-11ec-a15d-c56595aabf0e">
-<body>
-<val>FOOD MANAGEMENT SYSTEM IS A API ROUTE NOT SOMETHING PHYSICAL ATTATCHED TOA DATABASE </val>
-</body>
-<presentation>
-<reflist>
-<ref refid="f6d07f72-4817-11ec-bcb1-c56595aabf0e"/>
-</reflist>
-</presentation>
-</Comment>
-<CommentItem id="f6d07f72-4817-11ec-bcb1-c56595aabf0e">
-<matrix>
-<val>(1.0, 0.0, 0.0, 1.0, 1019.032, 226.9789090909094)</val>
-</matrix>
-<width>
-<val>916.3279999999995</val>
-</width>
-<height>
-<val>82.94399999999987</val>
-</height>
-<diagram>
-<ref refid="46b87186-480e-11ec-8cb0-c56595aabf0e"/>
-</diagram>
-<subject>
-<ref refid="f6d07481-4817-11ec-a15d-c56595aabf0e"/>
-</subject>
-</CommentItem>
 <Class id="280d85ab-4818-11ec-9a14-c56595aabf0e">
 <name>
 <val>food_managment_waste</val>
@@ -1327,37 +1266,6 @@ which will give us 25^2</val>
 <val>business_cost</val>
 </name>
 </Property>
-<Comment id="7606d333-4818-11ec-854b-c56595aabf0e">
-<body>
-<val>Operatation cost: what they cost me out of pocket
-
-Business: cost as a business what did i lose by not selling this product
-
-</val>
-</body>
-<presentation>
-<reflist>
-<ref refid="7606e1eb-4818-11ec-b2b7-c56595aabf0e"/>
-</reflist>
-</presentation>
-</Comment>
-<CommentItem id="7606e1eb-4818-11ec-b2b7-c56595aabf0e">
-<matrix>
-<val>(1.0, 0.0, 0.0, 1.0, 1861.4015999999979, 863.2945584516331)</val>
-</matrix>
-<width>
-<val>501.81120000000146</val>
-</width>
-<height>
-<val>369.0188131289803</val>
-</height>
-<diagram>
-<ref refid="46b87186-480e-11ec-8cb0-c56595aabf0e"/>
-</diagram>
-<subject>
-<ref refid="7606d333-4818-11ec-854b-c56595aabf0e"/>
-</subject>
-</CommentItem>
 <Generalization id="56e07704-5c94-11ec-8e49-67b2f04219ac">
 <general>
 <ref refid="5e5a2767-4815-11ec-933d-c56595aabf0e"/>
