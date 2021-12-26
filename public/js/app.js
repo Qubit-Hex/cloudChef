@@ -2311,7 +2311,13 @@ var DashboardNav = /*#__PURE__*/function (_Component) {
         className: "navbar dashboard-nav-color navbar-expand-lg navbar-transparent ml-auto mt-auto",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("h3", {
           className: "dashboard-nav-title",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
+            src: "/img/logo/Cloud Chef-logos_white.png",
+            width: "100px",
+            height: "100px",
+            alt: "cloud chef logo",
+            className: "img-fluid"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
             className: "fas fa-store mr-2"
           }), "Store / ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("small", {
             className: "dashboard-nav-title-sub",
@@ -2320,14 +2326,7 @@ var DashboardNav = /*#__PURE__*/function (_Component) {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
           className: "nav",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-            className: "nav-items",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
-              src: "/img/logo/Cloud Chef-logos_white.png",
-              width: "100px",
-              height: "100px",
-              alt: "cloud chef logo",
-              className: "img-fluid"
-            })
+            className: "nav-items"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("a", {
             href: "/dashboard/",
             className: "nav-link",
@@ -6240,11 +6239,9 @@ var MessagePage = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       /// trigger a error message if our contact data isn't available
       console.log(this.setState.userData);
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
         className: "container-fluid profile_card dashboard-content",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-          className: "row"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
           className: "row",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
             className: "col message-contact shadow",
@@ -6309,7 +6306,7 @@ var MessagePage = /*#__PURE__*/function (_React$Component) {
               children: this.props.children
             })
           })]
-        })]
+        })
       });
     }
   }]);

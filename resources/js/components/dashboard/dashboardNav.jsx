@@ -39,6 +39,7 @@ export class DashboardNav extends Component {
             <nav className="navbar dashboard-nav-color navbar-expand-lg navbar-transparent ml-auto mt-auto">
             <h3 className='dashboard-nav-title'>
               {/** store icon font awesome  */}
+              <img src='/img/logo/Cloud Chef-logos_white.png' width='100px' height='100px' alt='cloud chef logo' className='img-fluid' />
               <i className="fas fa-store mr-2"></i>
               Store / <small className='dashboard-nav-title-sub'>example restaurant </small> </h3>
     
@@ -47,7 +48,6 @@ export class DashboardNav extends Component {
     
     
               <div className='nav-items'>
-                <img src='/img/logo/Cloud Chef-logos_white.png' width='100px' height='100px' alt='cloud chef logo' className='img-fluid' />
     
               </div>
     

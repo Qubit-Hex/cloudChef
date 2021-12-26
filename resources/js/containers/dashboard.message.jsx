@@ -32,9 +32,6 @@ export class MessagePage extends React.Component {
             profileImg: null,
         };
 
-
-        // refs 
-
         const messagePannel = this.messagePannel = React.createRef();
     }
 
@@ -113,8 +110,7 @@ export class MessagePage extends React.Component {
         console.log(this.setState.userData);
         return (
             <div className="container-fluid profile_card dashboard-content">
-                <div className="row">
-                </div>
+                
                 <div className="row">
                     {/** Contact list section  */}
                     <div className="col message-contact shadow">
