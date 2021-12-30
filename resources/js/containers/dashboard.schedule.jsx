@@ -130,7 +130,7 @@ export class SchedulePage extends Component {
 
 
                             <div className="col">
-                                        <div className="form-group ml-lg-4">
+                                        <div className="form-group ml-4">
                                             <label className="m-4 h4 font-weight-bolder">
                                                 {" "}
                                                 Select Schedule{" "}
@@ -142,20 +142,19 @@ export class SchedulePage extends Component {
 
                                             </small>
 
-
-                                            <select className="form-control">
+                                                <select className="form-control">
                                                 <option> 10/10/10 </option>
                                                 <option> 10/10/10 </option>
                                                 <option> 10/10/10  </option>
                                             </select>
 
-                                            <button className="btn btn-message mt-4">
+                                            <button className="btn btn-sm btn-message mt-4">
                                                 {" "}
                                                 Choose{" "}
                                             </button>
-                                        </div>
+
                                     </div>
-                            <table class="table">
+                            <table class="table mt-4">
                                 <thead>
                                     <tr>
                                         <th scope="col"> Name </th>
@@ -585,6 +584,7 @@ export class SchedulePage extends Component {
                                     </tr>
                                 </tbody>
                             </table>
+                            </div>
                         </div>
                     </div>
                 </div>

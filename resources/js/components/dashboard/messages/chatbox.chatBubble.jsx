@@ -23,6 +23,7 @@ export class ChatboxMessageBubble extends react.Component {
         super(props);
 
 
+        // change this to use props instead of state
         this.state = {
             name: this.props.name,
             message: this.props.message,

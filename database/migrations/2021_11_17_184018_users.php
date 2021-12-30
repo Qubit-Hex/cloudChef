@@ -31,18 +31,6 @@ class Users extends Migration
             $table->string('salt', 128);
             $table->rememberToken()->nullable();
             $table->string('digital_access_tokens')->nullable(); 
-            // this certificate is used to verify the user owners ship in  a store
-            // image this as a key to physical store and not as a password
-            /**
-             *  example:
-             *
-             *  { 
-             *             storeID: {
-             *                "token": "accessToken", // this is the access token THIS ACTS AS A KEY TO ACCESS A SPECIFIC STRE API 
-             *            }
-             *  }
-             * 
-             */
             $table->timestamps();
             // this will include the status of the user account.
             $table->boolean('status');

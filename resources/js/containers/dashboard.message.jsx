@@ -23,6 +23,9 @@ export class MessagePage extends React.Component {
     constructor(props) {
         super(props);
 
+
+        // @NOTES: CHANGES THIS TO USE PROPS INSTEAD OF STATE
+
         this.state = {
             userData: {
                 // display all the user data
@@ -52,8 +55,8 @@ export class MessagePage extends React.Component {
         console.log(e.target.value.length);
 
         return e.target.value.length === 0
-            ? (errorMessage.innerHTML = "Please fill out this field")
-            : (errorMessage.innerHTML = "");
+            ? (errorMessage.textContent = "Please fill out this field")
+            : (errorMessage.textContentsel = "");
     }
 
     /**
@@ -96,9 +99,6 @@ export class MessagePage extends React.Component {
             // render issue message
             return false;
         });
-
-
-
         // add a web worker threads
         
 
@@ -125,37 +125,12 @@ export class MessagePage extends React.Component {
                             ></i>
                         </div>
 
-                        <div className="form-group mt-2 mb-2 message-pannel-container">
-                            <label for="searchbox">Search Your Contacts</label>{" "}
-                            {/**  add on change event we will use to search the databse
-                             *
-                             */}
-                            <div className="input-group-append ">
-                                <input
-                                    type="text"
-                                    id="contact-search"
-                                    message-search="true"
-                                    className="form-control searchBox"
-                                    placeholder="Search"
-                                    aria-label="Recipient's username"
-                                    aria-describedby="basic-addon2"
-                                />
-
-                                <button
-                                    message-button-search="true"
-                                    className="btn btn-primary ml-2"
-                                    type="button"
-                                >
-                                    <i class="fas fa-search"></i>
-                                </button>
-                            </div>
-                        </div>
-
                         <div
                             className="contacts-container"
                             id="container-contact-list"
                         >
                             {this.state.userData.contacts.map((contact) => {
+
                                 return (
                                     <UserProfile
                                         key={contact.userID}
@@ -163,19 +138,36 @@ export class MessagePage extends React.Component {
                                         userID={contact.userID}
                                         name={contact.name}
                                         role={contact.role}
-                                        image={contact.profileIMG}
+                                        image={contact.img}
                                         date="53 minutes ago"
                                         active="false"
                                         isActive="ONLINE"
                                         storeID={contact.storeID}
+                
                                     />
+
                                 );
+
+
                             })}
                         </div>
                     </div>
-                
+                    {/** Message section */}    
+
                     <div className="col">
-                        <div id="messagePannel-container" ref={this.messagePannel}>
+
+                    <div className='row' id='mesage-info-node'>
+                            <div className='col-md-12'>
+                                    <h3 className='text-center'> <b> Please select a contact inorder to view messages  </b></h3>
+                                    <img src='/img/SVG/mail.svg' 
+                                        alt='mail' 
+                                        className='mx-auto d-block mt-4' 
+                                        width={300} 
+                                        height={300}/>
+                                </div>
+                            </div>  
+
+                        <div id="messagePannel-container" className='mt-4' ref={this.messagePannel}>
                            {this.props.children}
                         </div>
                     </div>

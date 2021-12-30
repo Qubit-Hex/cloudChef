@@ -9,8 +9,9 @@
 
 // colors
 
-$navbar-bg-color: linear-gradient(to right, #ff8787e7, #ff6655d3);
+$navbar-bg-color: linear-gradient(to right, #ff5757e7, #9d2a1dd9);
 $bg-color: linear-gradient(to right, #e1eec398, #e1eec398);
+$modal-bg-color: linear-gradient(to right, #a92e26b9, #ff4b2ba3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
 .remove-spacing {
     max-width: 30%;
@@ -141,8 +142,7 @@ $bg-color: linear-gradient(to right, #e1eec398, #e1eec398);
 
     .card {
         border: none;
-        padding-top: 25px;
-        padding-bottom: 0px;
+        padding: 50px;
         box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
         margin: 20px;
         border-radius: 30px;
@@ -312,20 +312,11 @@ $bg-color: linear-gradient(to right, #e1eec398, #e1eec398);
 
     .modal-header {
         padding: 25px;
-        background: #6580f7; /* fallback for old browsers */
-        background: -webkit-linear-gradient(
-            to right,
-            #2a589cc5,
-            #6580f7d7
-        ); /* Chrome 10-25, Safari 5.1-6 */
-        background: linear-gradient(
-            to right,
-            #2f5aaabe,
-            #6580f7d3
-        ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-        border-radius: 20px 20px 0px 0px;
-        color: white;
+        background: $modal-bg-color;
         text-align: center !important;
+        border-radius: 20px 20px 0px 0px;
+        padding: 25px;
+        color: white !important;
 
         button {
             color: #cccccc !important; /* fallback for old browsers */
@@ -344,7 +335,6 @@ $bg-color: linear-gradient(to right, #e1eec398, #e1eec398);
     .success-message-wrapper {
         i {
             font-size: 2em;
-            color: #2350e4;
         }
 
         .success-message {

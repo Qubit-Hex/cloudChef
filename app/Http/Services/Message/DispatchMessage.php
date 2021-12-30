@@ -210,7 +210,7 @@ class DispatchMessage implements MessageInterface
                  'groupID' => $groupID,
                  'message' => $requestObject['message'],
                  'time' => $requestObject['requestTime'],
-                 'messageReadState' => 0,
+                 'read' => 0,
              ]);
 
 
@@ -226,7 +226,7 @@ class DispatchMessage implements MessageInterface
                 // check if the user is blocked by the current user
             
 
-             // debug json response for REST API 
+             // debug json response for REST API  REMOVE THIS LATER
              return Response()->json([
                  'status' => 'success',
                  'message' => 'message sent successfully',
@@ -270,10 +270,7 @@ class DispatchMessage implements MessageInterface
         $currentUser = DB::table('users')->where('remember_token', $data['token'])->first()->userID;
 
         // load profiles from our store 
-        $user_profiles = DB::table('user_profile')->where('storeID', $data['storeID'])->get();
-        // load the user we want to talk to 
-        $userSelected = $user_profiles->where('userID', $data['userID'])->first();
-
+        $user_profiles = DB::table('user_profile')->where('storeID', $data['storeID'])->where('userID', $data['userID'])->get();
 
         // check if we are talking to our selfs
         if ($response['userID'] === $currentUser) {
@@ -285,7 +282,7 @@ class DispatchMessage implements MessageInterface
         }
 
 
-        if ($userSelected) {
+        if ($user_profiles) {
 
             // next filter the store group
 
@@ -302,23 +299,36 @@ class DispatchMessage implements MessageInterface
                 // requesting the messages
                 $recipientGroups = array_map(function ($key) {
                     return $key['groupID'];
-                }, json_decode(json_encode($currentUserConvos, true), true));
+                }, json_decode(json_encode($fetch_user_convo, true), true));
 
                 // check if a key exists in both arrays
                 $switched = false;
                 $convoGroupID = null;
                 // check we already have a converstation with the user 
                 for ($i = 0; $i < count($recipientGroups); $i++) {
-
-                    // make sure we are not messaging ourself
-                    if ($currentUser === $userSelected->userID) {
-                        return Response()->json(['error' => 'You cannot send a message to yourself'], 401);
-                    }
                     // now check if the user has a conversation with the current user
                     if (in_array($recipientGroups[$i], $userGroups)) {
                         $switched = true;
                         $convoGroupID = $recipientGroups[$i];
                         break;
+                    } 
+
+
+                    // change this later inorder to properly fetch the new messages
+                    for ($i = 0; $i < count($userGroups); $i++) {
+                        // now check if the user has a conversation with the current user
+                        if (in_array($userGroups[$i], $userGroups)) {
+                            $switched = true;
+                            $convoGroupID = $recipientGroups[$i];
+                            break;
+
+                        } 
+                    }
+                        
+                    
+                    // make sure we are not messaging ourself
+                    if ($currentUser === $user_profiles[$i]->userID) {
+                        return Response()->json(['error' => $user_profiles], 401);
                     }
                 }
 
@@ -484,6 +494,44 @@ class DispatchMessage implements MessageInterface
 
     /**
      * 
+     * 
+     *  @method: generateSignature
+     * 
+     *  @purpose: this function is used to generate a signature for the message
+     * 
+     * 
+     */
+
+     public function generateSignature($message, $rounds = 5)
+     {
+         $message;
+
+
+         #iterate through the rounds seems to better than using recursion 
+         # for speed bottle necks   
+         
+        for ($i = 0; $i < $rounds; $i++) {
+            $message = hash('sha256', $message);
+        }
+        # we will use this a key for each user to encrypt/decrypt the message  
+        return $message;
+     }
+
+    /**
+     * 
+     *  @method: dispatcherPrivateState 
+     * 
+     *  @purpose: this function is used to dispatch the private state of the user
+     */
+
+
+    private function dispatcherPrivateState($userID, $storeID, $args = [])
+    {
+
+    }
+
+    /**
+     * 
      *  @method: dispatcher 
      *
      *  @purpose: this function is used to dispatch the correct message to the user
@@ -492,6 +540,8 @@ class DispatchMessage implements MessageInterface
 
     public function dispatcher($data)
     {
-        
+        // simple state machine for accepting messages from the user using event broadcasting 
+
+
     }
 }

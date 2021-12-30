@@ -77,7 +77,8 @@ export class ChatboxSendMessage extends React.Component {
             storeID: this.state.sharedState.storeID,
             userID: this.state.userID,
             profileImg: this.state.profileImg,
-            sharedState: this.state.sharedState,
+            // format date to be sent to the server
+            requestTime: Date.now(),
             token: this.getCookie("accessToken"),
             message: messageContent,
         };
@@ -87,7 +88,7 @@ export class ChatboxSendMessage extends React.Component {
         // NOTES: NEED TO ADD WEB WORKER TO LISTEN FOR MESSAGE EVENTS AND THEN ADD TO THE CHATBOX AFTER
         // MY ROUTE TESTING IS COMPLETE...
 
-        let url = `/api/messages/send?storeID=${request.storeID}&userID=${request.userID}&profileImg=${request.profileImg}&sharedState=${request.sharedState}&token=${request.token}&message=${request.message}`;
+        let url = `/api/messages/send?storeID=${request.storeID}&userID=${request.userID}&profileImg=${request.profileImg}&&token=${request.token}&message=${request.message}&requestTime=${request.requestTime}`;
 
         return fetchService.$get(url, headers, (response) => {
             if (response.inputError === true) {

@@ -52,8 +52,8 @@ class Authenticate
      * 
      */
 
-
-    private function getTokenFromHeader(Request $request)
+     
+    private function getTokenFromHeader(Request $request, Closure $next, $guard = null)
     {
         $header = $request->header('Authorization');
         if (!empty($header)) {

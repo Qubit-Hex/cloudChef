@@ -89,17 +89,16 @@ export class ChatboxMessages extends react.Component {
 
     generateUniqueColors() {
 
-        // modern ui color with some transparency rgb
-
+        // modern ui color with some transparency
         const uiColors = [
-            "rgba(52, 152, 219,0.7)", // peter river 
-            "rgba(41, 128, 185,0.7)", // belize hole
-            "rgba(39, 174, 96,0.7)", // nephritis
-            "rgba(241, 196, 15,0.7)", // sun flower
-            "rgba(231, 76, 60,0.7)", // alizarin
-            "rgba(192, 57, 43,0.7)", // pomegranate
-            "rgba(0, 98, 102,0.7)", // wisteria
-            "rgba(27, 20, 100,0.7)", // midnight blue
+            "rgba(52, 152, 219,0.1)", // peter river 
+            "rgba(41, 128, 185,0.1)", // belize hole
+            "rgba(39, 174, 96,0.1)", // nephritis
+            "rgba(241, 196, 15,0.1)", // sun flower
+            "rgba(231, 76, 60,0.1)", // alizarin
+            "rgba(192, 57, 43,0.1)", // pomegranate
+            "rgba(0, 98, 102,0.1)", // wisteria
+            "rgba(27, 20, 100,0.1)", // midnight blue
         ];
 
         // generate a random number between 0 and the length of the list of colors

@@ -1,5 +1,3 @@
-'use strict'
-
 const mix = require('laravel-mix');
 
 /*
@@ -13,9 +11,6 @@ const mix = require('laravel-mix');
  |
  */
 
-
-// declare all bundles we will creating for our whole application 
-
-
-
-mix.js('resources/js/app.js', 'public/js/app.js').react().sass('resources/sass/app.scss', 'public/css/app.css');
+mix.js('resources/js/app.js', 'public/js')
+    .react()
+    .sass('resources/sass/app.scss', 'public/css');

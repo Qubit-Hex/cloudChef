@@ -19,7 +19,6 @@ class UserRegistrationLog extends Migration
             $table->id('log_number')->autoIncrement();
             $table->string('user_agent');
             $table->string('ip_address');
-            $table->bigInteger('counter');
             $table->timestamps();
         });
     }

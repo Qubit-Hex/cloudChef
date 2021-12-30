@@ -27,10 +27,17 @@ class store_members extends Controller
 
     public function get(Request $request)
     {
-        // FIX TO SHOW ONLY MEMBER OF THE USERS STORE INSTEAD OF THE WHOLE MEMBERS LIST
-        // FOR ALL THE STORES. 
 
-        // check the users access token to get the store id 
+        // CHANGE THE TO A INPUT FOR THE FRONT END TO PASS THE TOKEN RATHER THAN RELAYING 
+        // ON A COOKIE INCASE OF A HEADLESS BROWSER...
+
+         if (empty($_COOKIE['accessToken'])) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'You are not logged in'
+            ]);
+        }
+
         $user = DB::table('users')->where('remember_token', $_COOKIE['accessToken'])->first()->userID;
         // get the store members associated with the store id
         $store = DB::table('store_members')->where('userID', $user)->first();

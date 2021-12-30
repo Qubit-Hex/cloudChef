@@ -19,6 +19,7 @@ export class UserProfile extends React.Component {
 
         this.state = {
             // inheritanted state from the parent component 
+            // dont use state for this component since we are using props REFACTOR THI!!!
             profileID: this.props.profileID,
             userID: this.props.userID,
             name: this.props.name,
@@ -30,6 +31,7 @@ export class UserProfile extends React.Component {
             
             // state for the component
             token: "my super secret token",
+            render: false,
         };
 
 
@@ -52,19 +54,45 @@ export class UserProfile extends React.Component {
     {
         let container = document.getElementById('messagePannel-container');
 
-             ReactDOM.render(<div><ChatBoxContainer 
-            key={this.state.profileID}
-            user={this.state.name}
-            profileImg={this.state.image}
-            sharedState={this.state}
-            userID={this.state.userID} // this is the hook to the parent component
-            token={this.state.token} /> </div>, container);
+        // add a condition to destory rendered contain and render the new one
+        // we have changed this to using on child isntead of multiple childs 
+        // so this implimentations might be changed in the future 
+        // BLOODY HELL..... 
+        
+        if(container.hasChildNodes())
+        {
+            ReactDOM.unmountComponentAtNode(container);
+
+            // render the new one
+            ReactDOM.render(<div><ChatBoxContainer
+                user={this.state.name}
+                profileImg={this.state.image}
+                sharedState={this.state}
+                userID={this.state.userID} // this is the hook to the parent component
+                token={this.state.token} /> </div>, container);
+        } else {
+            ReactDOM.render(<div><ChatBoxContainer
+                user={this.state.name}
+                profileImg={this.state.image}
+                sharedState={this.state}
+                userID={this.state.userID} // this is the hook to the parent component
+                token={this.state.token} /> </div>, container);
+        }
     }
 
     
     render() {
         return (
-            <div className="card no-margin row p-0" onClick={ (e) => {this.renderMessagesPannel() }}>
+            <div className="card no-margin row p-0" onClick={ (e) => {
+                const infoPannel = document.getElementById("mesage-info-node");
+                if (infoPannel) {
+                    // destroy the display of the info pannel
+                    infoPannel.style.display = "none";
+                }
+                // call our method inorder to render the users conversation pannel
+                this.renderMessagesPannel() 
+            }
+                }>
                 <div className="card-body">
                     <div className="container-fluid contact-hover-action">
                         <div className="row">

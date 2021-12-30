@@ -71,7 +71,7 @@ class Message extends Controller
             'storeID' => $request->input('storeID'),
             'token' => $request->input('token'),
             'userID' => $request->input('userID'),
-            'requestTime' => $request->input('requestTime'),
+            'requestTime' => null,
             'message' => $request->input('message'),
         ];
 
