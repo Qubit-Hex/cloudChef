@@ -312,8 +312,6 @@ class DispatchMessage implements MessageInterface
                         $convoGroupID = $recipientGroups[$i];
                         break;
                     } 
-
-
                     // change this later inorder to properly fetch the new messages
                     for ($i = 0; $i < count($userGroups); $i++) {
                         // now check if the user has a conversation with the current user
@@ -321,7 +319,6 @@ class DispatchMessage implements MessageInterface
                             $switched = true;
                             $convoGroupID = $recipientGroups[$i];
                             break;
-
                         } 
                     }
                         

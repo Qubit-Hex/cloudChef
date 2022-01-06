@@ -53,11 +53,6 @@ export class UserProfile extends React.Component {
     renderMessagesPannel(e)
     {
         let container = document.getElementById('messagePannel-container');
-
-        // add a condition to destory rendered contain and render the new one
-        // we have changed this to using on child isntead of multiple childs 
-        // so this implimentations might be changed in the future 
-        // BLOODY HELL..... 
         
         if(container.hasChildNodes())
         {

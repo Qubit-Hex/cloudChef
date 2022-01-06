@@ -69,4 +69,18 @@ class authentication extends Controller
     {
       return  $this->auth::logout($request);
     }
+
+    /**
+     * 
+     *  @method: verify 
+     *  
+     *  @purpose: to verify the user that is connected to the system it take a token value as the input when funneling the request
+     * 
+     */
+
+
+    public function verify(Request $request)
+    {
+      return  $this->auth::verify($request);
+    }
 }

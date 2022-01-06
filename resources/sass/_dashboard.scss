@@ -9,9 +9,9 @@
 
 // colors
 
-$navbar-bg-color: linear-gradient(to right, #ff5757e7, #9d2a1dd9);
+$navbar-bg-color: linear-gradient(to right, #fd9494e7, #d04434d9);
 $bg-color: linear-gradient(to right, #e1eec398, #e1eec398);
-$modal-bg-color: linear-gradient(to right, #a92e26b9, #ff4b2ba3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+$modal-bg-color: linear-gradient(to right, #fd9494e7, #d04434d9);
 
 .remove-spacing {
     max-width: 30%;
@@ -30,6 +30,7 @@ $modal-bg-color: linear-gradient(to right, #a92e26b9, #ff4b2ba3); /* W3C, IE 10+
     background: $navbar-bg-color;
     box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
         rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+        height: 10%;
 
     i {
         margin-right: 10px;
@@ -388,7 +389,7 @@ $modal-bg-color: linear-gradient(to right, #a92e26b9, #ff4b2ba3); /* W3C, IE 10+
 // ------------------- table styling -------------------------
 
 .table {
-    padding: 10px;
+    padding: 25px;
     font-size: small;
     max-width: 100%;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
@@ -396,8 +397,8 @@ $modal-bg-color: linear-gradient(to right, #a92e26b9, #ff4b2ba3); /* W3C, IE 10+
     height: auto;
 
     thead {
-        padding: 25px;
-        background-color: #1871e69f;
+        padding: 100px !important;
+        background-color: #002e6ad7;
         color: #fff;
         font-weight: bold;
         font-size: 1em;
@@ -409,7 +410,6 @@ $modal-bg-color: linear-gradient(to right, #a92e26b9, #ff4b2ba3); /* W3C, IE 10+
         font-size: 16px;
         padding: 10px;
         text-align: center;
-        border-radius: 20px;
 
         span {
             margin-top: 20px;
@@ -418,7 +418,7 @@ $modal-bg-color: linear-gradient(to right, #a92e26b9, #ff4b2ba3); /* W3C, IE 10+
 
     td:hover {
         cursor: pointer;
-        background-color: #88a1f54d;
+        background-color: #2d3d4833;
     }
 }
 
@@ -692,8 +692,7 @@ $modal-bg-color: linear-gradient(to right, #a92e26b9, #ff4b2ba3); /* W3C, IE 10+
         padding: 20px;
         border-radius: 20px;
         margin-bottom: 10px;
-        width: 80%;
-        float: right;
+        width: 90%;
         box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
         .covo-sent-msg {
             color: rgb(0, 0, 0) !important;
@@ -739,6 +738,29 @@ $modal-bg-color: linear-gradient(to right, #a92e26b9, #ff4b2ba3); /* W3C, IE 10+
   
   .container-chat-log::-webkit-scrollbar-thumb {
     background-color: rgba(29, 29, 155, 0.411);    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+  }
+
+
+
+  
+ // styling for the contacts box scrollbar   
+  .contacts-container {
+      max-height: 100vh;
+      width: auto;
+      overflow-y: scroll;
+    }
+    .contacts-container::-webkit-scrollbar {
+      width: 12px;               /* width of the entire scrollbar */
+    }
+    
+  .contacts-container::-webkit-scrollbar-track {
+    background: rgba(175, 175, 175, 0.46); 
+    border-radius: 10px;       /* color of the tracking area */
+  }
+  
+  .contacts-container::-webkit-scrollbar-thumb {
+    background-color: rgba(184, 104, 104, 0.467);    /* color of the scroll thumb */
     border-radius: 20px;       /* roundness of the scroll thumb */
   }
   /* end of the scroll styling  */

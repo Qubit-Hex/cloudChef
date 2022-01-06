@@ -100,9 +100,15 @@ export class MessagePage extends React.Component {
             return false;
         });
         // add a web worker threads
-        
-
+    
     }
+
+
+    /**
+     * 
+     * @returns 
+     * 
+     */
 
     render() {
         /// trigger a error message if our contact data isn't available
@@ -113,8 +119,8 @@ export class MessagePage extends React.Component {
                 
                 <div className="row">
                     {/** Contact list section  */}
-                    <div className="col message-contact shadow">
-                        <div className="modal-header">
+
+                    <div className="modal-header">
                             <h2>
                                 {" "}
                                 <i class="fas fa-user-tie"></i> <b>Contacts</b>{" "}
@@ -124,6 +130,9 @@ export class MessagePage extends React.Component {
                                 aria-hidden="true"
                             ></i>
                         </div>
+
+
+                    <div className="col mt-4 message-contact shadow">
 
                         <div
                             className="contacts-container"
@@ -147,23 +156,24 @@ export class MessagePage extends React.Component {
                                     />
 
                                 );
-
-
                             })}
                         </div>
                     </div>
                     {/** Message section */}    
 
-                    <div className="col">
+                    <div className="col mt-4">
 
                     <div className='row' id='mesage-info-node'>
-                            <div className='col-md-12'>
-                                    <h3 className='text-center'> <b> Please select a contact inorder to view messages  </b></h3>
+                            <div className='col-md-12 '>
+                                    <h3 className='text-center mt-4'> <b> Please select a contact to view messages  </b></h3>
+                                    <br/>
+
                                     <img src='/img/SVG/mail.svg' 
                                         alt='mail' 
                                         className='mx-auto d-block mt-4' 
                                         width={300} 
                                         height={300}/>
+
                                 </div>
                             </div>  
 

@@ -176,6 +176,31 @@
 
          }
 
+         /**
+          *  @method: verify 
+
+            *  @purpose: to verify the user that is connected to the system
+
+          */
+
+          static function verify(Request $request)
+          {
+                $token = $request->header('bearer');
+
+
+                $db = DB::table('users')->where('remember_token', $token)->first();
+
+                if ($db == null) {
+                    return response()->json(['message' => 'Token is not valid', 
+                            'error' => 'Invalid Token',
+                            'auth' => false], 400);
+                }
+
+                return response()->json(['message' => 'Token is valid', 
+                            'auth' => true], 200);
+
+          }
+
  }
 
 

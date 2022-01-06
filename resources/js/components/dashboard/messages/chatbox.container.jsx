@@ -48,17 +48,6 @@ export class ChatBoxContainer extends React.Component {
             <div className='chatbox-container'>
                  <div id="chat-component-hide">
                         <div className="='message-pannel-container shadow">
-                            <div className="modal-header">
-                                <h2>
-                                    {" "}
-                                    <i class="fas fa-comment-dots"></i>
-                                    <b>Messages</b>{" "}
-                                </h2>
-                                <i
-                                    className="fa fa-comments"
-                                    aria-hidden="true"
-                                ></i>
-                            </div>
 
                             <div className="col">
                                 <div className="container message-pannel-container">

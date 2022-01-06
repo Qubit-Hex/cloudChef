@@ -13,6 +13,12 @@ import { ChatboxMessageBubble } from "./chatbox.chatBubble";
 import FetchServiceProvider from "../../../lib/fetchServiceProvider";
 import ReactDOM from "react-dom";
 
+
+//  OUR BROADCASTING CLASSES
+
+import { BroadcastChatProvider } from "../../../lib/connection/BroadcastChatProvider";
+
+
 export class ChatboxMessages extends react.Component {
     constructor(props) {
         super(props);
@@ -35,7 +41,6 @@ export class ChatboxMessages extends react.Component {
             userID: this.props.userID,
             token: this.props.token,
             // thos will be used to map the message styling of the user of the message bubbles 
-            messageMap: this.props.messageMap,
         };
     }
 
@@ -73,7 +78,12 @@ export class ChatboxMessages extends react.Component {
      */
 
     componentDidMount() {
+
+        // dont know why this is here but it is needed for now 
         let API_CALL = this.fetchChatMessages();
+
+
+        this.startChatBroadcast();
 
         
     }
@@ -107,6 +117,49 @@ export class ChatboxMessages extends react.Component {
         let color = uiColors[randomNumber];
 
         return color;
+    }
+
+    /**
+     * 
+     * 
+     *  @method: fetchProfileName
+     * 
+     * 
+     * @returns string 
+     * 
+     *
+     */
+
+
+    fetchProfileName = (userID) => {
+
+        let cookie = this.getCookie('accessToken');
+
+        // use a promise to get the profile information 
+        // that we so desire 
+
+         function getValues(userID, cookie) {
+            let fetchServiceProvider = new FetchServiceProvider();
+            let data = [];
+
+            let headers = {
+                "Content-Type": "application/json",
+                "accessToken": cookie,
+            };
+
+            // return a promise inorder for us to use the .then method
+            // when we need to access the data
+
+            // tried some other methods but this is simplest way that works looks hacky but works
+            return new Promise((resolve, reject) => {
+                fetchServiceProvider.$get(`/api/members/find/?id=${userID}`, headers, (response) => {
+                   return resolve(response);
+                });
+            });
+
+        }
+
+        return getValues(userID, cookie);
     }
 
 
@@ -178,12 +231,18 @@ export class ChatboxMessages extends react.Component {
             if (response.message) {
                 // parse out messages boxes
                 let chatBubbles = [];
-
                 // maps the user and unique colors in  a map
                 let uniqueUserID = [];
                 let uniqueUserColor = [];
 
                 for (let i = 0; i < response.message.length; i++) {
+
+                    /**
+                     *  @important: please note that the user parm is a promise 
+                     *              that will be resolved in the chat bubble component
+                     *  
+                     *              incase they is some cofusions with anyone that is reading this code
+                     */
 
                     if (uniqueUserID.includes(response.message[i].userID)) {
                         const index = uniqueUserID.indexOf(response.message[i].userID);
@@ -191,13 +250,12 @@ export class ChatboxMessages extends react.Component {
                         chatBubbles.push( <ChatboxMessageBubble
                             key={i}
                             message={response.message[i].message}
-                            user={this.state.user}
+                            user={this.fetchProfileName(response.message[i].userID)}
                             profileImg={this.state.profileImg}
                             sharedState={this.state.sharedState}
                             color={uniqueUserColor[index]}
                             token={this.state.token}
                         />);
-
 
                     } else {
                         // map the user ID to the array 
@@ -207,7 +265,7 @@ export class ChatboxMessages extends react.Component {
                         chatBubbles.push( <ChatboxMessageBubble
                             key={i}
                             message={response.message[i].message}
-                            user={this.state.user}
+                            user={this.fetchProfileName(response.message[i].userID)}
                             profileImg={this.state.profileImg}
                             sharedState={this.state.sharedState}
                             color={uniqueUserColor[uniqueUserColor.length - 1]}
@@ -219,8 +277,34 @@ export class ChatboxMessages extends react.Component {
 
                 ReactDOM.render(chatBubbles, container);
             }
-            });
+        });
     }
+    
+    /**
+     * 
+     * @method: startChatBroadcast  
+     * 
+     *  @purpose: inorder to start the chat broadcast use long polling 
+     *            to get the messages from the database and update the chat in real time 
+     */
+
+    startChatBroadcast() {
+
+        // load our chat interface object 
+
+        let BroadcastChat = new BroadcastChatProvider();
+
+        // form our connection object 
+
+        const requestObject = {
+            url: `/api/messages/get?storeID=${this.state.storeID}&token=${this.state.token}&userID=${this.state.userID}&requestTime=${Date.now()}`,
+            // no need to pass the headers as we are using the long polling method
+        }
+
+        // check our connection using the state of the provider 
+
+    }
+
 
     render() {
         return (
@@ -233,6 +317,7 @@ export class ChatboxMessages extends react.Component {
                     </div>
 
                     {/* end of the chat container section  */}
+
                 </div>
             </div>
         );

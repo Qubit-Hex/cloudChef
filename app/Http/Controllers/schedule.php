@@ -108,7 +108,6 @@ class schedule extends Controller
     public function updateSchedule(Request $request)
     {
         $requestObject = [
-
                 'employee_id' => $request['employee_id'],
                 'schedule_id' => $request['schedule_id'],
                 'schedule_date' => $request['schedule_date'],

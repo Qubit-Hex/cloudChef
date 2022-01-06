@@ -6,7 +6,7 @@
  *  purpose: inorder to fetch data from api in various ways and request types 
  *           -- note that this class is not meant to be used directly, but rather
  *         -- to be extended by other classes that need to fetch data from an api
- * 
+ *         -- please note this is a helper class and prevent chaining helll :/
  * 
  *  @author Oliver Shwaba  Qubit-hEx
  */
@@ -142,5 +142,35 @@ export default class FetchServiceProvider {
                     });
         
         }
+
+
+        /**
+         * 
+         *  @method: $put
+         * 
+         *  @purpose: to fetch data from an api using a put request
+         *  
+         */
+
+        $patch(url, data, headers, callback) {
+                    
+                    let request = new Request(url, {
+                        method: 'PATCH',
+                        body: JSON.stringify(data),
+                        headers: headers
+                    });
+            
+                    fetch(request)
+                        .then(response => {
+                            return response.json();
+                        })
+                        .then(data => {
+                            callback(data);
+                        })
+                        .catch(error => {
+                            console.log(error);
+                        });
+            
+            }
         
 }

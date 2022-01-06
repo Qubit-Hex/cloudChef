@@ -13,7 +13,7 @@ import react from "react";
 
 
 
-import FetchServiceProvider from "../../../lib/fetchServiceProvider";
+import FetchServiceProvider from "../../../lib/connection/BroadcastChatProvider";
 
 export class ChatboxMessageBubble extends react.Component {
 
@@ -21,17 +21,21 @@ export class ChatboxMessageBubble extends react.Component {
     {
 
         super(props);
-
-
-        // change this to use props instead of state
         this.state = {
-            name: this.props.name,
-            message: this.props.message,
-            time: this.props.time,
-            color: this.props.color,
-            profileImg: this.props.profileImg
+            read: false,
+            name: '',
         }
 
+
+
+    }
+
+    componentDidMount() {
+        let user = this.props.user;
+
+        user.then(response => {
+            return this.setState({ name: response.data});
+        });
     }
 
     render()
@@ -42,15 +46,15 @@ export class ChatboxMessageBubble extends react.Component {
                 <div className="row mt-2">
                 
                  
-                    <div className="convo-user m-1" style={{backgroundColor: this.state.color}}>
-                      <i className="fa fa-user-circle-o fa-2x mr-2" aria-hidden="true"></i>   
-                       <span> {this.state.message } </span> <br />
-                        <small className="text-muted covo-sent-msg">
-                           Sent:  {this.state.time}
-                        </small>
+                    <div className="convo-user m-1" style={{backgroundColor: this.props.color}}>
+                      <img width={50} height={50} src={this.props.profileImg} alt={this.props.user}/>
+                      <span className='text-muted'> { 
+                          this.state.name
+                      }</span> <br/><br/>
+                       <span> {this.props.message } </span> <br /><br/>
+
                     </div>   
-                    </div>
-                   
+                    </div>                  
             </div>
         );
     }

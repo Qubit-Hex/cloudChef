@@ -147,4 +147,16 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
      */
 
      Route::post('/add', [store_members::class, 'add'])->name('contacts/add');
-});
+
+
+
+     /**
+      *  @route: /contacts/find
+      *
+      *  @purpose: inorder order to find a contact of the store
+      *
+      *  @parm: int $id
+      */
+       
+         Route::get('/find', [store_members::class, 'find'])->name('contacts/find'); 
+    });

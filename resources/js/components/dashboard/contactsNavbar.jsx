@@ -44,7 +44,6 @@ export class ContactNavbar extends React.Component {
                               <option> All </option>
                           </select>
                       </div>
-
                   </div>
                 </div>
              

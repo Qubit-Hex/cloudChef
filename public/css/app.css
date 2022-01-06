@@ -7,7 +7,6 @@
  @purpose: inorder to sryle the landing page of our dashboard application 
 
 */
-/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 .remove-spacing {
   max-width: 30%;
 }
@@ -23,8 +22,9 @@
 }
 
 .dashboard-nav-color {
-  background: linear-gradient(to right, #ff5757e7, #9d2a1dd9);
+  background: linear-gradient(to right, #fd9494e7, #d04434d9);
   box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+  height: 10%;
 }
 .dashboard-nav-color i {
   margin-right: 10px;
@@ -270,7 +270,7 @@
 }
 .dashboard-content .modal-header {
   padding: 25px;
-  background: linear-gradient(to right, #a92e26b9, #ff4b2ba3);
+  background: linear-gradient(to right, #fd9494e7, #d04434d9);
   text-align: center !important;
   border-radius: 20px 20px 0px 0px;
   padding: 25px;
@@ -345,15 +345,15 @@
   }
 }
 .table {
-  padding: 10px;
+  padding: 25px;
   font-size: small;
   max-width: 100%;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
   height: auto;
 }
 .table thead {
-  padding: 25px;
-  background-color: #1871e69f;
+  padding: 100px !important;
+  background-color: #002e6ad7;
   color: #fff;
   font-weight: bold;
   font-size: 1em;
@@ -364,14 +364,13 @@
   font-size: 16px;
   padding: 10px;
   text-align: center;
-  border-radius: 20px;
 }
 .table td span {
   margin-top: 20px;
 }
 .table td:hover {
   cursor: pointer;
-  background-color: #88a1f54d;
+  background-color: #2d3d4833;
 }
 
 .drop-shift-icon {
@@ -627,8 +626,7 @@
   padding: 20px;
   border-radius: 20px;
   margin-bottom: 10px;
-  width: 80%;
-  float: right;
+  width: 90%;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }
 .container-chat-log .chat-bubble .convo-user .covo-sent-msg {
@@ -664,6 +662,30 @@
 
 .container-chat-log::-webkit-scrollbar-thumb {
   background-color: rgba(29, 29, 155, 0.411);
+  /* color of the scroll thumb */
+  border-radius: 20px;
+  /* roundness of the scroll thumb */
+}
+
+.contacts-container {
+  max-height: 100vh;
+  width: auto;
+  overflow-y: scroll;
+}
+
+.contacts-container::-webkit-scrollbar {
+  width: 12px;
+  /* width of the entire scrollbar */
+}
+
+.contacts-container::-webkit-scrollbar-track {
+  background: rgba(175, 175, 175, 0.46);
+  border-radius: 10px;
+  /* color of the tracking area */
+}
+
+.contacts-container::-webkit-scrollbar-thumb {
+  background-color: rgba(184, 104, 104, 0.467);
   /* color of the scroll thumb */
   border-radius: 20px;
   /* roundness of the scroll thumb */

@@ -29,7 +29,7 @@ class store_members extends Controller
     {
 
         // CHANGE THE TO A INPUT FOR THE FRONT END TO PASS THE TOKEN RATHER THAN RELAYING 
-        // ON A COOKIE INCASE OF A HEADLESS BROWSER...
+        // ON A COOKIE INCASE OF A HEADLESS BROWSER... OR A FAKE COOKIE TO BYPASS THE AUTHENTICATION
 
          if (empty($_COOKIE['accessToken'])) {
             return response()->json([
@@ -38,6 +38,18 @@ class store_members extends Controller
             ]);
         }
 
+        // CHECK THE COOKIE AND DOES IT EXIST IN THE DATABASE
+
+        $user = DB::table('users')->where('remember_token', $_COOKIE['accessToken'])->first();
+
+        if ($user == null) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'You are not logged in'
+            ]);
+        }
+
+        // GET THE STORE PROFILE DATA
         $user = DB::table('users')->where('remember_token', $_COOKIE['accessToken'])->first()->userID;
         // get the store members associated with the store id
         $store = DB::table('store_members')->where('userID', $user)->first();
@@ -76,6 +88,51 @@ class store_members extends Controller
     
     public function add(Request $request)
     {
+
+    }
+
+
+
+    /**
+     *  
+     *  @method: find
+     * 
+     *  @purpose: inorder to find a store member in the database 
+     * 
+     */
+
+    public function find(Request $request)
+    {
+
+        $input = $request->input('id');
+
+        $userData = DB::table('users')->where('remember_token', $request->header('accessToken'))->first();
+
+        if ($userData == null) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'You are not logged in'
+            ]);
+        }
+
+        // proccessed to get the request 
+
+        $currentUserID = $userData->userID;
+
+        $storeOwnership = DB::table('store_members')->where('userID', $currentUserID)->first()->storeID;
+
+        if ($storeOwnership == null) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'You are not a member of a store'
+            ]);
+        }
+
+        // return the users nam
+
+        $storeMember = DB::table('user_profile')->where('storeID', $storeOwnership)->where('userID', $input)->first()->name;
+
+        return response()->json(['data' => $storeMember], 200);
 
     }
 }
