@@ -7,6 +7,7 @@ use App\Http\Controllers\dashboard;
 use App\Http\Controllers\Message;
 use App\Http\Controllers\store_members;
 use App\Http\Controllers\store;
+use App\Http\Controllers\schedule;
 
 /*
 |--------------------------------------------------------------------------
@@ -173,11 +174,25 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
 
      Route::group(['prefix' => '/store', 'middleware' => 'auth'], function () {
 
+
+
+        /**
+             *  @route: /user/store/schedule/get
+             *
+             *  @purpose: inorder to get the store schedule of the user
+             */
+
+            Route::get ('/schedule/get', [schedule::class, 'get'])->name('/store/schedule/get');
+
+
         /**
          *  @route: /user/store/get
          *
          *  @purpose: inorder to ge the store of the user
          */
-            Route::get ('/get', [store::class, 'get'])->name('user/store/get');
+            Route::get ('/get', [store::class, 'get'])->name('/store/get');
+
+
+
 
      });
