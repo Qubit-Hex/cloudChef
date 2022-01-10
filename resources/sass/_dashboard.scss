@@ -1,9 +1,9 @@
 /*
 
- @file: dashboard.css 
+ @file: dashboard.css
 
 
- @purpose: inorder to sryle the landing page of our dashboard application 
+ @purpose: inorder to sryle the landing page of our dashboard application
 
 */
 
@@ -363,7 +363,7 @@ $modal-bg-color: linear-gradient(to right, #fd9494e7, #d04434d9);
 }
 
 /*---------------------------------------------------------------------
-    animation classes for the dashboard nav 
+    animation classes for the dashboard nav
 */
 
 @keyframes fadeIn {
@@ -677,7 +677,7 @@ $modal-bg-color: linear-gradient(to right, #fd9494e7, #d04434d9);
         float: left;
         box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
     }
-    
+
     .convo-user:hover {
         background: #bad4fdea;  /* fallback for old browsers */
         cursor: pointer;
@@ -697,19 +697,19 @@ $modal-bg-color: linear-gradient(to right, #fd9494e7, #d04434d9);
         .covo-sent-msg {
             color: rgb(0, 0, 0) !important;
             font-weight: 900;
-            font-size: 12px;          
+            font-size: 12px;
         }
-    
+
     }
 
         .convo-recipient:hover {
             background-color: #77d3f72a;
             cursor: pointer;
         }
-        
+
 
     }
-    
+
 }
 
 .dont-show {
@@ -730,12 +730,12 @@ $modal-bg-color: linear-gradient(to right, #fd9494e7, #d04434d9);
 .container-chat-log::-webkit-scrollbar {
     width: 12px;               /* width of the entire scrollbar */
   }
-  
+
 .container-chat-log::-webkit-scrollbar-track {
-    background: rgb(204, 205, 240); 
+    background: rgb(204, 205, 240);
     border-radius: 10px;       /* color of the tracking area */
   }
-  
+
   .container-chat-log::-webkit-scrollbar-thumb {
     background-color: rgba(29, 29, 155, 0.411);    /* color of the scroll thumb */
     border-radius: 20px;       /* roundness of the scroll thumb */
@@ -743,8 +743,8 @@ $modal-bg-color: linear-gradient(to right, #fd9494e7, #d04434d9);
 
 
 
-  
- // styling for the contacts box scrollbar   
+
+ // styling for the contacts box scrollbar
   .contacts-container {
       max-height: 100vh;
       width: auto;
@@ -753,12 +753,12 @@ $modal-bg-color: linear-gradient(to right, #fd9494e7, #d04434d9);
     .contacts-container::-webkit-scrollbar {
       width: 12px;               /* width of the entire scrollbar */
     }
-    
+
   .contacts-container::-webkit-scrollbar-track {
-    background: rgba(175, 175, 175, 0.46); 
+    background: rgba(175, 175, 175, 0.46);
     border-radius: 10px;       /* color of the tracking area */
   }
-  
+
   .contacts-container::-webkit-scrollbar-thumb {
     background-color: rgba(184, 104, 104, 0.467);    /* color of the scroll thumb */
     border-radius: 20px;       /* roundness of the scroll thumb */

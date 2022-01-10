@@ -13,6 +13,8 @@ import ReactDOM from "react-dom";
 import { ShiftDrop } from "../components/dashboard/shiftDrop";
 import { ShiftPickup } from "../components/dashboard/shiftPickup";
 
+import FetchServiceProvider from "../lib/fetchServiceProvider";
+
 export class SchedulePage extends Component {
     constructor(props) {
         super(props);
@@ -21,7 +23,7 @@ export class SchedulePage extends Component {
         const date = new Date();
         this.state = {
             date: date.toLocaleDateString(),
-            user: this.props.user,
+            user: '',
         };
     }
 
@@ -52,26 +54,72 @@ export class SchedulePage extends Component {
         return ReactDOM.render(<ShiftDrop />, modalContainer);
     }
 
+
+    /**
+     *
+     * @method: getUsername - gets the username of the user
+     *
+     * @purpose: to get the username of the user
+     *
+     */
+
+    getUsername() {
+
+        const fetchService = new FetchServiceProvider();
+
+        let headers = {
+            "Content-Type": "application/json",
+            "accessToken": fetchService.getCookie('accessToken'),
+        }
+
+        fetchService.$get("/api/members/find", headers, (response) => {
+            console.log(response);
+
+            this.setState({user: response.username});
+
+        });
+    }
+
+
+    /**
+     *  @method: componentDidMount
+     *
+     *  @description: This method is responsible for updating the state of the component.
+     *
+     *
+    */
+
+    componentDidMount(prevProps, prevState) {
+
+        // we need to add this inorder to prevent a infinite loop when the component is mounted
+        if (this.state.user === '') {
+            this.getUsername();
+        }
+
+        return;
+    }
+
+
     render() {
-        return (      
+        return (
             <div className="container-fluid dashboard-content mt-md-4">
                 {/**  container for sending modals to the user  */}
 
-                <h2 className='ml-4'> <b>Schedule</b> <small className='sub-caption ' > Welcome ( john doe) </small></h2>
+                <h2 className='ml-4'> <b>Schedule</b> <small className='sub-caption ' > Welcome (
+               { this.state.user } ) </small></h2>
 
 
                 <div id="modal-container" className="modal-container"></div>
 
                 {/**  container for the schedule components   */}
 
-                {/* refactor into an component that i CAN LOOP THOUGH  THE 
+                {/* refactor into an component that i CAN LOOP THOUGH  THE
                     THE SCHEDULE DATA AND RENDER IT */}
 
                 <div className="row">
                     <div className="col card fit-table">
                         <h2 className="header-subtitle text-center mt-4 ">
-                            {" "}
-                            View your current Schedule{" "}
+                          {" View your current schedule"}
                         </h2>
 
                         <img
@@ -85,55 +133,13 @@ export class SchedulePage extends Component {
                         <div className="row  schedule_pill">
                             {/* ADD SEARCH AND FILTER PARTS  */}
 
-                            <div className="profile_Navbar">
-                                <div className="row">
-                                    <div className="col">
-                                        <div className="form-group ml-lg-4">
-                                            <label
-                                                htmlFor="text-bold"
-                                                className="m-4 h4 font-weight-bolder"
-                                            >
-                                                Search Employees
-                                            </label>
-                                            <input
-                                                type="text"
-                                                className="form-control"
-                                                placeholder="Search"
-                                            />
-                                            <button className="btn btn-message mt-4">
-                                                {" "}
-                                                Search{" "}
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                    <div className="col">
-                                        <div className="form-group ml-lg-4">
-                                            <label className="m-4 h4 font-weight-bolder">
-                                                {" "}
-                                                Filter by Role{" "}
-                                            </label>
-                                            <select className="form-control">
-                                                <option> Manager </option>
-                                                <option> Employee </option>
-                                                <option> All </option>
-                                            </select>
-
-                                            <button className="btn btn-message mt-4">
-                                                {" "}
-                                                Filter Employees{" "}
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                           
 
 
                             <div className="col">
                                         <div className="form-group ml-4">
                                             <label className="m-4 h4 font-weight-bolder">
-                                                {" "}
-                                                Select Schedule{" "}
+                                                <b> Select Schedule</b>
                                             </label>
 
                                             <small className='text-muted text-center'>
@@ -609,7 +615,7 @@ export class SchedulePage extends Component {
 
                         <div className="card-body">
 
-                           
+
 
                             <div className="row">
                                 <div className="col">

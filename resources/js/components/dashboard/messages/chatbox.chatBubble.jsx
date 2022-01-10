@@ -11,10 +11,6 @@
 
 import react from "react";
 
-
-
-import FetchServiceProvider from "../../../lib/connection/BroadcastChatProvider";
-
 export class ChatboxMessageBubble extends react.Component {
 
     constructor(props)
@@ -29,6 +25,12 @@ export class ChatboxMessageBubble extends react.Component {
 
 
     }
+
+    /**
+     *   @method: componentDidMount
+     * 
+     *   @purpose: to get the user name of the user who sent the message
+     */
 
     componentDidMount() {
         let user = this.props.user;

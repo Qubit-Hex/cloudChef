@@ -131,7 +131,6 @@ export class UserProfile extends React.Component {
 
                             <div  className="col ">
                                 <small className='text-muted font-italic'> 
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione ipsum magnam quaerat eum sunt inventore qui veritatis non commodi temporibus veniam soluta odio, reiciendis consequuntur amet eligendi molestias facilis ea.                                
                                 </small>
                             </div>
 
@@ -144,11 +143,7 @@ export class UserProfile extends React.Component {
                 <div className="card-footer modal-footer">
                     <div className="col">
                         {/** font awesome clock */}
-                        <i className="far fa-clock fa-lg"></i>
-                        <b className="text-muted h6">
-                            {" "}
-                            Last Active: {this.state.date}{" "}
-                        </b>
+                    
                     </div>
                 </div>
             </div>

@@ -6,6 +6,7 @@ use App\Http\Controllers\authentication;
 use App\Http\Controllers\dashboard;
 use App\Http\Controllers\Message;
 use App\Http\Controllers\store_members;
+use App\Http\Controllers\store;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +22,7 @@ use App\Http\Controllers\store_members;
 
 /**
  * @purpose: inorder to check the login credintials of the user before issuing a token for our client to use.
-*   
+*
 *  @Route: /auth/login/
 */
 
@@ -54,14 +55,14 @@ use App\Http\Controllers\store_members;
      */
 
     Route::post('auth/logout/', [authentication::class, 'logout'])->name('auth/logout');
-      
+
 
      /**
- * 
+ *
  *  Group Route: messsages
- * 
- *  @putpose: to route the messages route api , for sending and receiving messages 
- *             only if authorized to sendthe message belonging to the store 
+ *
+ *  @putpose: to route the messages route api , for sending and receiving messages
+ *             only if authorized to sendthe message belonging to the store
  */
 
 
@@ -69,22 +70,22 @@ use App\Http\Controllers\store_members;
 Route::group(['prefix' => 'messages', 'middleware' => 'auth'], function () {
 
     /**
-     *  
+     *
      *  @Route: /messages/get/
-     * 
+     *
      *  @purpose: to get messages from the user to the store
-     * 
+     *
      */
     Route::get('/get', [message::class,  'get'])->name('messages/get');
 
 
 
     /**
-     * 
+     *
      *  @Route: /messages/send/
-     * 
-     *  @purpose: to send messages from the user to the store 
-     *  
+     *
+     *  @purpose: to send messages from the user to the store
+     *
      */
      Route::get('/send', [message::class, 'send'])->name('messages/send');
 
@@ -100,14 +101,14 @@ Route::group(['prefix' => 'messages', 'middleware' => 'auth'], function () {
       Route::delete('/delete', [message::class, 'delete'])->name('messages/delete');
 
 
-    
+
       /**
-       *  
+       *
        *  @route: /messages/update
-       * 
+       *
        *  @purpose: inorder to update the message status from the store to the user
        */
-      
+
        Route::patch('/update', [message::class, 'update'])->name('messages/update');
 
 
@@ -115,11 +116,11 @@ Route::group(['prefix' => 'messages', 'middleware' => 'auth'], function () {
 
 
 /**
- * 
+ *
  *  @route: /contacts/
- * 
+ *
  *  @purpose: inorder to get the contacts of the store
- *  
+ *
  */
 
 
@@ -128,22 +129,22 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
 
 
     /**
-     * 
+     *
      *  @route: /contacts/get/
-     * 
+     *
      *  @purpose: inorder to get the contacts of the store
-     *  
+     *
      */
 
     Route::get('/get', [store_members::class, 'get'])->name('contacts/get');
 
 
     /**
-     * 
+     *
      *  @route: /contacts/add/
-     * 
+     *
      *  @purpose: inorder to add the contacts of the store
-     *  
+     *
      */
 
      Route::post('/add', [store_members::class, 'add'])->name('contacts/add');
@@ -157,6 +158,26 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
       *
       *  @parm: int $id
       */
-       
-         Route::get('/find', [store_members::class, 'find'])->name('contacts/find'); 
+
+         Route::get('/find', [store_members::class, 'find'])->name('contacts/find');
     });
+
+
+    /**
+     *
+     *  @route: /user/store/
+     *
+     *  @purpose: inorder to get the store of the user
+     */
+
+
+     Route::group(['prefix' => '/store', 'middleware' => 'auth'], function () {
+
+        /**
+         *  @route: /user/store/get
+         *
+         *  @purpose: inorder to ge the store of the user
+         */
+            Route::get ('/get', [store::class, 'get'])->name('user/store/get');
+
+     });

@@ -1,10 +1,10 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);
 /*
 
- @file: dashboard.css 
+ @file: dashboard.css
 
 
- @purpose: inorder to sryle the landing page of our dashboard application 
+ @purpose: inorder to sryle the landing page of our dashboard application
 
 */
 .remove-spacing {
@@ -310,7 +310,7 @@
 }
 
 /*---------------------------------------------------------------------
-    animation classes for the dashboard nav 
+    animation classes for the dashboard nav
 */
 @-webkit-keyframes fadeIn {
   from {
