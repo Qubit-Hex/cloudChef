@@ -8,6 +8,7 @@ use App\Http\Controllers\Message;
 use App\Http\Controllers\store_members;
 use App\Http\Controllers\store;
 use App\Http\Controllers\schedule;
+use App\Http\Controllers\employee;
 
 /*
 |--------------------------------------------------------------------------
@@ -174,6 +175,16 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
 
      Route::group(['prefix' => '/store', 'middleware' => 'auth'], function () {
 
+        /**
+         *
+         * @route: /user/store/employee/get
+         *
+         *
+         *  @purpose: inorder to get the employee infomration of a specific employee of the store
+        */
+
+            Route::get('/employee/get/{id}', [employee::class, 'get'])->name('store/employee/get/{id}');
+
 
 
         /**
@@ -182,7 +193,17 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
              *  @purpose: inorder to get the store schedule of the user
              */
 
-            Route::get ('/schedule/get', [schedule::class, 'get'])->name('/store/schedule/get');
+            Route::get ('/schedule/get', [schedule::class, 'get'])->name('/store/schedule/get/');
+
+
+        /**
+         *
+         *  @Route: /user/store/schedule/add
+         *
+         *  @purpose: inorder to add the store schedule of the user
+         */
+
+            Route::post('/schedule/add', [schedule::class, 'add'])->name('/store/schedule/add');
 
 
         /**
@@ -191,6 +212,8 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
          *  @purpose: inorder to ge the store of the user
          */
             Route::get ('/get', [store::class, 'get'])->name('/store/get');
+
+
 
 
 

@@ -16,102 +16,288 @@
  */
 
 
+/**
+ *
+ *  @TODO: - Add the ability to edit the schedule.
+ *      - Add the ability to delete the schedule.
+ *      - Add the ability to add the schedule.
+ *      - ALSO WE NEED TO REFACTOR WITH IT IS A WORKING SOLUTION.
+ *        BUT LET'S REFINE IT LATER, SO ITS SYTAXICAL SUGAR. :)
+ *
+ */
 
+import { result } from "lodash";
+import { resolve } from "path-browserify";
+import React, { Children } from "react";
+import FetchServiceProvider from "../../lib/fetchServiceProvider";
 
+// render the schedule for the api and render it to the screen.
 
-import { parse } from 'path-browserify';
-import React from 'react';
-import FetchServiceProvider from '../../lib/fetchServiceProvider';
+/**
+ *
+ *  @function: <Network> getStoreSchedule
+ *
+ *
+ *  @purpose: this is inorder to get the schedule for the store returning a promise containing our schedule data for use to work with in other functions.
+ *
+ */
 
+const getStoreSchedule = (cookie, storeId, week) => {
+    const headers = {
+        "Content-Type": "application/json",
+        accessToken: cookie,
+    };
 
-export class SchedulePannel  extends React.Component {
+    const route = "/api/store/schedule/get";
 
-    constructor(props) {
+    const fetchServiceProvider = new FetchServiceProvider();
 
-        super(props);
+    return fetchServiceProvider.get(route, headers);
+};
 
-        this.state = {
-            attempts: 0,
-            schedule: [],
-        };
-    }
+/**
+ *  @function ParseUserSchedule
+ *
+ *
+ *  @purpose: this function is used inorder to parse the schedule data from the server. in a format the is usable in the front end.
+ *
+ *
+ *  FIX: FIX THE METHOD INORDER TO FILL EMPTY SCHEDULE DATA. IF WE CANT FETCH CERTIN DAYS FROM THE SERVER...
+ *       BUT I MIGHT ADD SOME SORT OF FAIL SAFE METHOD INORDER TO FILL THE SCHEDULE WITH EMPTY DATA. DIRECTLY FROM THE SERVER.
+ *       NOT TOO SURE YET.. BUT I THINK IT IS A GOOD IDEA.
+ */
 
-    componentDidMount() {
+const ParseUserSchedule = (props) => {
+    const request = new FetchServiceProvider();
+    const schedule = getStoreSchedule(request.getCookie("accessToken"), 1);
 
-        if (this.state.schedule.length === 0  && this.state.attempts < 3) {
-            this.fetchSchedule();
-            this.setState({attempts: this.state.attempts + 1});
-        }
+    const [data, setData] = React.useState([]);
 
-        return;
-    }
+    const [userTotalHours, setUserTotalHours] = React.useState(0);
 
+    // update the state with the data from the server.
+    React.useEffect(() => {
+        schedule.then((res) => {
+            setData(res.data);
+        });
+    }, []);
 
-    /**
-     *
-     *  @method: fetchSchedule
-     *
-     *  @description: This method is responsible for fetching the schedule from the server. and set the state of the schedule.
-     *
-     */
+    // parse the total hours for the user.
+    const parseTotalHours = () => {
+        return <td>
+            <span className='mt-4'>{userTotalHours}</span></td>;
+    };
 
-    fetchSchedule() {
-        let fetchService = new FetchServiceProvider();
+    // map the employeeID to a array Index that is sorted by the employeeID.
 
-        const headers = {
-            'Content-Type': 'application/json',
-            'accessToken': fetchService.getCookie('accessToken'),
-        };
-
-        fetchService.$get('/api/store/schedule/get', headers, (response) =>  {
-
-            if (response.data.length > 0) {
-                this.setState({schedule: response.data});
-
-            }
-            // set the state of our new schedule and render it to the user.
+    const mapEmployeeID = (data) => {
+        let employeeNumbers = data.map((employee) => {
+            return employee.employeeID;
         });
 
-        }
-
-
-        /**
-         *
-         *  @method: parseSchedule
-         *
-         *  @purpose: inorder to orginize the schedule data by employeeID by using the employeeID as the key.
-         *
-         */
-
-        parseSchedule() {
-        const schedule = this.state.schedule;
-
-        let parsedSchedule = new Object();
-        //te to the parse schedule object by using the employeeID as the key
-
-        schedule.map((employee) => {
-
-            if (parsedSchedule[employee.employeeID] === undefined) {
-                parsedSchedule[employee.employeeID] = [];
-            }
-
-
-            if (parsedSchedule[employee.employeeID]) {
-                parsedSchedule[employee.employeeID].push(employee);
-            }
+        // remove duplicates from the array.
+        employeeNumbers = employeeNumbers.filter((item, index) => {
+            return employeeNumbers.indexOf(item) === index;
         });
 
-        return parsedSchedule;
-    }
+        // attach employee Data to the employeeID number.
+        let employeeData = [];
+        employeeNumbers.forEach((employeeID) => {
+            let employee = data.filter((employee) => {
+                return employee.employeeID === employeeID;
+            });
+
+            employeeData.push(employee);
+        });
+        return employeeData;
+    };
+
+    return mapEmployeeID(data).map((item, index) => {
+        return item;
+    });
+};
+
+/**
+ *
+ * @function: parseTotalHours
+ *
+ * @purpose: this function is inorder to parse the total hours for the user and return it to the user in html format to be rendered to the screen.
+ *
+ */
+
+const ParseTotalHours = (props) => {
+    return <td>{props.hours}</td>;
+};
 
 
+const getEmployeeInfo = (employeeID) => {
+    const api = new FetchServiceProvider();
+    const headers = {
+        "Content-Type": "application/json",
+        accessToken: api.getCookie("accessToken"),
+    };
 
-    render() {
+    const route = "/api/store/employee/get/" + employeeID + "/";
+
+    return api.get(route, headers);
+}
+
+/**
+ *
+ * @function: RenderProfile
+ *
+ *  @purpose: inorder to render the schedule profile to the screen.
+ *
+ */
+
+const RenderProfile = (props) => {
+
+    const [userProfile, setUserProfile] = React.useState([]);
+
+    React.useEffect( async function () {
+            getEmployeeInfo(props.data[0].employeeID).then((res) => {
+                setUserProfile(res);
+            });
+        }, []);
+
+    return (
+        <td>
+            <div className="col">
+                <img
+                    src="/img/SVG/male_user.svg"
+                    className="profile-img-sm"
+                    alt="user photo"
+                />
+            </div>
+
+            <br />
+
+            <div className="col">
+                <span> { userProfile.name }</span>
+            </div>
+
+            <div className="col">
+                <span className="role-badge badge badge-primary card-text-sub-text ml-1 bold">
+                    { userProfile.department  }
+                </span>
+            </div>
+        </td>
+    );
+}
+
+
+/**
+ *
+ * @function: generateStoreMembersSchedule
+ *
+ * @purpose: this function is inorder to generate the schedule for the store members and return it to the user in html format to be rendered to the screen.
+ *
+*/
+
+
+const GenerateStoreMembersSchedule = (props) => {
+    const StoreSchedule = ParseUserSchedule(props);
+
+    const [userTotalHours, setUserTotalHours] = React.useState(0);
+
+    // here we will update the state with the total hours for the user.
+    const calculateTotalHours = (data) => {
+
+        let totalHours = 0;
+
+        // map hour hours that the user has worked.
+        let calc = data.map((item) => {
+
+            if (item.is_off_day === 1) {
+                return 0;
+            }
+            // if the user is working on a day that is not a off day.
+            return item.end_time - item.start_time;
+        });
+
+        // sum all the numbers in the array we created.
+        calc.forEach((item) => {
+            totalHours += item;
+        });
+
+        return (<td className="card-text-sub-text"> {totalHours} </td>);
+    };
+
+    // render the time badge based on the time.
+    const renderTimeBadge = (time) => {
+        if (time.is_off_day === 1) {
+            return (
+                <span className="role-danger badge badge-danger card-text-sub-text  bold">
+                    {" "}
+                    OFF{" "}
+                </span>
+            );
+            return "OFF";
+        } else if (time.is_open === 0) {
+            return (
+                <span className="role-na badge badge-danger card-text-sub-text bold">
+                    {" UNAVAILABLE "}
+                </span>
+            )
+        }
+
+        else {
+            // this is temporary. we will be changing to float values inorder to get the hours + the minutes.
+            // of the schedule time.
+            return (
+                <span className="role-badge badge badge-success card-text-sub-text  bold">
+                    {" "}
+                    {time.start_time +
+                        ":00" +
+                        " - " +
+                        time.end_time +
+                        ":00"}{" "}
+                </span>
+            );
+        }
+    };
+
+    // here we are going render the remaining table table data for each user
+    // this is a <td> generator for the schedule. for each user. when going over the map function.
+    const renderTable = (data) => {
+        return data.map((item, index) => {
+            return <td key={index}> {renderTimeBadge(item)}</td>;
+        });
+    };
+
+    return StoreSchedule.map((employee, index) => {
         return (
-            <table class="table mt-4">
+            <tr key={index}>
+                <RenderProfile data={employee} />
+
+                {/* call our functions inorder to complete the table row of the schedule component */}
+                {renderTable(employee)}
+                {calculateTotalHours(employee)}
+            </tr>
+        );
+    });
+};
+
+/**
+ *
+ *  @function: SchedulePannel
+ *
+ *
+ *  @description: This component is responsible for rendering the schedule of the organization.
+ *
+ */
+
+export const SchedulePannel = (props) => {
+    const { NetworkRequest } = new FetchServiceProvider();
+
+    const request = new FetchServiceProvider();
+
+    const { userCookie } = request.getCookie("accessToken");
+
+    return (
+        <table class="table mt-4">
             <thead>
                 <tr>
-                    { this.parseSchedule() }
                     <th scope="col"> Name </th>
                     <th scope="col"> Sunday </th>
                     <th scope="col"> Monday </th>
@@ -124,77 +310,13 @@ export class SchedulePannel  extends React.Component {
                 </tr>
             </thead>
             <tbody id="wrapper_test">
-                <tr>
-                    <td>
-                        <div className="col">
-                            <img
-                                src="/img/SVG/male_user.svg"
-                                className="profile-img-sm"
-                                alt="user photo"
-                            />
-                        </div>
+                {/** call our rendering function to render the said schedule */}
 
-                        <br/>
-
-                        <div className="col">
-                            <span> Example User </span>
-                        </div>
-
-                        <div className="col">
-                            <span className="role-badge badge badge-primary card-text-sub-text ml-1 bold">
-                                Manager
-                            </span>
-                        </div>
-                    </td>
-                    <td>
-                        <span className="role-badge badge badge-primary card-text-sub-text  bold">
-                            8:00 - 17:00{" "}
-                        </span>
-                    </td>
-                    <td>
-                        <span className="role-badge badge badge-danger card-text-sub-text  bold">
-                            OFF
-                        </span>
-                    </td>
-                    <td>
-                        {" "}
-                        <span className="role-badge badge badge-primary card-text-sub-text  bold">
-                            8:00 - 17:00{" "}
-                        </span>
-                    </td>
-                    <td>
-                        {" "}
-                        <span className="role-badge badge badge-primary card-text-sub-text  bold">
-                            8:00 - 17:00{" "}
-                        </span>{" "}
-                    </td>
-                    <td>
-                        {" "}
-                        <span className="role-badge badge badge-primary card-text-sub-text  bold">
-                            8:00 - 17:00{" "}
-                        </span>{" "}
-                    </td>
-                    <td>
-                        {" "}
-                        <span className="role-badge badge badge-primary card-text-sub-text  bold">
-                            8:00 - 17:00{" "}
-                        </span>
-                    </td>
-                    <td>
-                        {" "}
-                        <span className="role-badge badge badge-primary card-text-sub-text  bold">
-                            8:00 - 17:00{" "}
-                        </span>{" "}
-                    </td>
-                    <td>
-                        <span className="role-badge badge badge-primary card-text-sub-text ml-1 bold">
-                            40 Hours
-                        </span>
-                    </td>
-                </tr>
+                <GenerateStoreMembersSchedule
+                    week={props.week}
+                    year={props.year}
+                />
             </tbody>
         </table>
-
-        );
-    }
-}
+    );
+};

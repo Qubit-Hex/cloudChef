@@ -98,6 +98,35 @@ export default class FetchServiceProvider {
 
     /**
      *
+     * @method: get
+     *
+     * @purpose: to fetch data from an api using a get request and return the data no callback
+     *
+     */
+
+    async get(url, headers) {
+
+                let request = new Request(url, {
+                    method: 'GET',
+                    headers: headers
+                });
+
+                return fetch(request)
+                    .then(response => {
+                        return new Promise((resolve, reject) => {
+                            response.json().then(data => {
+                                resolve(data);
+                            });
+                        });
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+
+        }
+
+    /**
+     *
      * @method: put
      *
      * @purpose: to fetch data from an api using a put request

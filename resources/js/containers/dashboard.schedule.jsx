@@ -7,7 +7,7 @@
  *
  *
  *  @author: Oliver Shwaba -> Qubit-hEx
- * 
+ *
  */
 
 import React, { Component } from "react";
@@ -22,11 +22,14 @@ export class SchedulePage extends Component {
     constructor(props) {
         super(props);
 
-        console.log(document.cookie);
         const date = new Date();
         this.state = {
             date: date.toLocaleDateString(),
             user: '',
+            // we will use this state inorder to get the schedule data from the server.
+            // and pass it to our schedule component in the props.
+            year: '',
+            month: '',
         };
     }
 
@@ -76,11 +79,24 @@ export class SchedulePage extends Component {
         }
 
         fetchService.$get("/api/members/find", headers, (response) => {
-            console.log(response);
 
             this.setState({user: response.username});
 
         });
+    }
+
+
+    /**
+     *
+     *  @method: getStoreSchedules
+     *
+     *  @purpose: to retrive the schedules from the store and make them available via
+     *               drop down to user so they can look at current and previous schedules
+     */
+
+    getStoreSchedules() {
+
+        
     }
 
 
@@ -151,11 +167,11 @@ export class SchedulePage extends Component {
 
                                             </small>
 
-                                                <select className="form-control">
-
+                                            <select className="form-control">
+                                             { this.fetchUserSchedule() }
                                             </select>
 
-                                            <button className="btn btn-sm btn-message mt-4">
+                                            <button className="btn btn-message btn-sm mt-4">
                                                 {" "}
                                                 Choose{" "}
                                             </button>

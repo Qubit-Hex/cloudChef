@@ -155,7 +155,7 @@
   margin-right: 10px;
 }
 .dashboard-content .role-badge {
-  background-color: #6580f7;
+  background-color: #1536cac0;
   /* fallback for old browsers */
   border-radius: 10px;
   padding: 5px;
@@ -163,6 +163,30 @@
   padding-right: 15px;
   max-width: 100%;
   color: #fff;
+  font-size: 1em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.dashboard-content .role-danger {
+  background-color: #a71919;
+  /* fallback for old browsers */
+  border-radius: 10px;
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  max-width: 100%;
+  color: #fff;
+  font-size: 1em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.dashboard-content .role-na {
+  border-radius: 10px;
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  max-width: 100%;
+  color: rgba(34, 34, 34, 0.796);
   font-size: 1em;
   font-weight: bold;
   margin-bottom: 10px;
@@ -198,7 +222,7 @@
   color: #fff;
   font-size: 0.8em;
   font-weight: bold;
-  width: 100%;
+  width: auto;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
 }
 .dashboard-content .btn-message:hover {
@@ -393,6 +417,24 @@
   color: #7567eb;
 }
 
+.shift-shop::-webkit-scrollbar {
+  width: 12px;
+  /* width of the entire scrollbar */
+}
+
+.shift-shop::-webkit-scrollbar-track {
+  background: rgba(175, 175, 175, 0.46);
+  border-radius: 10px;
+  /* color of the tracking area */
+}
+
+.shift-shop::-webkit-scrollbar-thumb {
+  background-color: rgba(17, 60, 199, 0.467);
+  /* color of the scroll thumb */
+  border-radius: 20px;
+  /* roundness of the scroll thumb */
+}
+
 .shift-shop {
   padding: 20px;
   max-height: 400px;
@@ -418,6 +460,24 @@
 }
 
 /* Schedule Container  styles */
+.schedule_pill::-webkit-scrollbar {
+  width: 12px;
+  /* width of the entire scrollbar */
+}
+
+.schedule_pill::-webkit-scrollbar-track {
+  background: rgba(175, 175, 175, 0.46);
+  border-radius: 10px;
+  /* color of the tracking area */
+}
+
+.schedule_pill::-webkit-scrollbar-thumb {
+  background-color: rgba(9, 32, 119, 0.467);
+  /* color of the scroll thumb */
+  border-radius: 20px;
+  /* roundness of the scroll thumb */
+}
+
 .schedule_pill {
   padding: 10px;
   border-radius: 20px;

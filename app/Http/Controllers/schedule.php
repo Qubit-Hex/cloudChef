@@ -40,7 +40,7 @@ class schedule extends Controller
             'time' => $request->header('time'),
             'command' => $request->header('command')
         ];
-        
+
         return ScheduleService::getSchedule($query);
      }
 }

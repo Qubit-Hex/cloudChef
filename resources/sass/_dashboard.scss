@@ -30,7 +30,7 @@ $modal-bg-color: linear-gradient(to right, #fd9494e7, #d04434d9);
     background: $navbar-bg-color;
     box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,
         rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
-        height: 10%;
+    height: 10%;
 
     i {
         margin-right: 10px;
@@ -180,7 +180,7 @@ $modal-bg-color: linear-gradient(to right, #fd9494e7, #d04434d9);
     }
 
     .role-badge {
-        background-color: #6580f7; /* fallback for old browsers */
+        background-color: #1536cac0; /* fallback for old browsers */
         border-radius: 10px;
         padding: 5px;
         padding-left: 15px;
@@ -191,6 +191,34 @@ $modal-bg-color: linear-gradient(to right, #fd9494e7, #d04434d9);
         font-weight: bold;
         margin-bottom: 10px;
     }
+
+    .role-danger {
+        background-color: #a71919; /* fallback for old browsers */
+        border-radius: 10px;
+        padding: 5px;
+        padding-left: 15px;
+        padding-right: 15px;
+        max-width: 100%;
+        color: #fff;
+        font-size: 1em;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+
+    .role-na {
+
+        border-radius: 10px;
+        padding: 5px;
+        padding-left: 15px;
+        padding-right: 15px;
+        max-width: 100%;
+        color: rgba(34, 34, 34, 0.796);
+        font-size: 1em;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
 
     @media screen and (max-width: 1000px) {
         .role-badge {
@@ -228,7 +256,7 @@ $modal-bg-color: linear-gradient(to right, #fd9494e7, #d04434d9);
         color: #fff;
         font-size: 0.8em;
         font-weight: bold;
-        width: 100%;
+        width: auto;
         box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
     }
 
@@ -443,6 +471,24 @@ $modal-bg-color: linear-gradient(to right, #fd9494e7, #d04434d9);
     }
 }
 
+// custom scroll bar for shift shop
+
+.shift-shop::-webkit-scrollbar {
+    width: 12px; /* width of the entire scrollbar */
+}
+
+.shift-shop::-webkit-scrollbar-track {
+    background: rgba(175, 175, 175, 0.46);
+    border-radius: 10px; /* color of the tracking area */
+}
+
+.shift-shop::-webkit-scrollbar-thumb {
+    background-color: rgba(17, 60, 199, 0.467); /* color of the scroll thumb */
+    border-radius: 20px; /* roundness of the scroll thumb */
+}
+
+
+
 .shift-shop {
     padding: 20px;
     max-height: 400px;
@@ -469,6 +515,21 @@ $modal-bg-color: linear-gradient(to right, #fd9494e7, #d04434d9);
 }
 
 /* Schedule Container  styles */
+
+
+.schedule_pill::-webkit-scrollbar {
+    width: 12px; /* width of the entire scrollbar */
+}
+
+.schedule_pill::-webkit-scrollbar-track {
+    background: rgba(175, 175, 175, 0.46);
+    border-radius: 10px; /* color of the tracking area */
+}
+
+.schedule_pill::-webkit-scrollbar-thumb {
+    background-color: rgba(9, 32, 119, 0.467); /* color of the scroll thumb */
+    border-radius: 20px; /* roundness of the scroll thumb */
+}
 
 .schedule_pill {
     padding: 10px;
@@ -519,7 +580,6 @@ $modal-bg-color: linear-gradient(to right, #fd9494e7, #d04434d9);
     border-radius: 30px;
 }
 
-
 .contact-hover-action:hover {
     background-color: #2350e415;
     cursor: pointer;
@@ -532,9 +592,7 @@ $modal-bg-color: linear-gradient(to right, #fd9494e7, #d04434d9);
 
 /* end of Contact Box pannels  */
 
-
 .message-pannel-container {
-
     .message-pannel-header {
         margin-bottom: 10px;
         box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
@@ -599,7 +657,7 @@ $modal-bg-color: linear-gradient(to right, #fd9494e7, #d04434d9);
     button:hover .hidden-label {
         // dead stop animation
         display: block;
-        animation: deadStop 1.25s cubic-bezier(0.23, 1, 0.320, 1);
+        animation: deadStop 1.25s cubic-bezier(0.23, 1, 0.32, 1);
     }
     @keyframes deadStop {
         // slide in fade
@@ -649,7 +707,7 @@ $modal-bg-color: linear-gradient(to right, #fd9494e7, #d04434d9);
     height: 25vh;
     border: 1px solid #32416d28;
 
- p:nth-child(odd) {
+    p:nth-child(odd) {
         background-color: #ececec3f;
         color: #2350e47c;
         font-weight: bold;
@@ -657,59 +715,57 @@ $modal-bg-color: linear-gradient(to right, #fd9494e7, #d04434d9);
         padding: 10px;
         border-radius: 20px;
         margin-bottom: 10px;
- }
+    }
 
- .chat-bubble {
+    .chat-bubble {
         padding: 10px;
         border-radius: 20px;
         margin-bottom: 10px;
         font-weight: 200;
         font-size: 1.2em;
 
-       .convo-recipient {
-        background: #ffffffe1;  /* fallback for old browsers */
-        color: rgba(20, 20, 20, 0.918);
-        font-size: 16px;
-        padding: 20px;
-        border-radius: 20px;
-        margin-bottom: 10px;
-        width:  auto;
-        float: left;
-        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
-    }
-
-    .convo-user:hover {
-        background: #bad4fdea;  /* fallback for old browsers */
-        cursor: pointer;
-    }
-    // modern chat bubble
-
-    .convo-user {
-        background: #98bdf8ea;  /* fallback for old browsers */
-        color: rgba(17, 17, 17, 0.918);
-        font-weight: 600;
-        font-size: 16px;
-        padding: 20px;
-        border-radius: 20px;
-        margin-bottom: 10px;
-        width: 90%;
-        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
-        .covo-sent-msg {
-            color: rgb(0, 0, 0) !important;
-            font-weight: 900;
-            font-size: 12px;
+        .convo-recipient {
+            background: #ffffffe1; /* fallback for old browsers */
+            color: rgba(20, 20, 20, 0.918);
+            font-size: 16px;
+            padding: 20px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+            width: auto;
+            float: left;
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+                rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
         }
 
-    }
+        .convo-user:hover {
+            background: #bad4fdea; /* fallback for old browsers */
+            cursor: pointer;
+        }
+        // modern chat bubble
+
+        .convo-user {
+            background: #98bdf8ea; /* fallback for old browsers */
+            color: rgba(17, 17, 17, 0.918);
+            font-weight: 600;
+            font-size: 16px;
+            padding: 20px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+            width: 90%;
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+                rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+            .covo-sent-msg {
+                color: rgb(0, 0, 0) !important;
+                font-weight: 900;
+                font-size: 12px;
+            }
+        }
 
         .convo-recipient:hover {
             background-color: #77d3f72a;
             cursor: pointer;
         }
-
-
     }
-
 }
 
 .dont-show {
@@ -720,47 +776,45 @@ $modal-bg-color: linear-gradient(to right, #fd9494e7, #d04434d9);
     display: block;
 }
 
-
-
 /* end of Messages Pannel */
-
-
 
 /* scroll bar styling for the box container  */
 .container-chat-log::-webkit-scrollbar {
-    width: 12px;               /* width of the entire scrollbar */
-  }
+    width: 12px; /* width of the entire scrollbar */
+}
 
 .container-chat-log::-webkit-scrollbar-track {
     background: rgb(204, 205, 240);
-    border-radius: 10px;       /* color of the tracking area */
-  }
+    border-radius: 10px; /* color of the tracking area */
+}
 
-  .container-chat-log::-webkit-scrollbar-thumb {
-    background-color: rgba(29, 29, 155, 0.411);    /* color of the scroll thumb */
-    border-radius: 20px;       /* roundness of the scroll thumb */
-  }
+.container-chat-log::-webkit-scrollbar-thumb {
+    background-color: rgba(29, 29, 155, 0.411); /* color of the scroll thumb */
+    border-radius: 20px; /* roundness of the scroll thumb */
+}
 
+// styling for the contacts box scrollbar
+.contacts-container {
+    max-height: 100vh;
+    width: auto;
+    overflow-y: scroll;
+}
+.contacts-container::-webkit-scrollbar {
+    width: 12px; /* width of the entire scrollbar */
+}
 
-
-
- // styling for the contacts box scrollbar
-  .contacts-container {
-      max-height: 100vh;
-      width: auto;
-      overflow-y: scroll;
-    }
-    .contacts-container::-webkit-scrollbar {
-      width: 12px;               /* width of the entire scrollbar */
-    }
-
-  .contacts-container::-webkit-scrollbar-track {
+.contacts-container::-webkit-scrollbar-track {
     background: rgba(175, 175, 175, 0.46);
-    border-radius: 10px;       /* color of the tracking area */
-  }
+    border-radius: 10px; /* color of the tracking area */
+}
 
-  .contacts-container::-webkit-scrollbar-thumb {
-    background-color: rgba(184, 104, 104, 0.467);    /* color of the scroll thumb */
-    border-radius: 20px;       /* roundness of the scroll thumb */
-  }
-  /* end of the scroll styling  */
+.contacts-container::-webkit-scrollbar-thumb {
+    background-color: rgba(
+        184,
+        104,
+        104,
+        0.467
+    ); /* color of the scroll thumb */
+    border-radius: 20px; /* roundness of the scroll thumb */
+}
+/* end of the scroll styling  */
