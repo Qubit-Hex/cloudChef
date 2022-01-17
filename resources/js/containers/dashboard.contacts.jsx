@@ -1,10 +1,10 @@
 /**
- * 
+ *
  *  @file: dashboard.contacts.jsx
- * 
- * 
+ *
+ *
  *  @purpose: to render the contacts page
- * 
+ *
  */
 
 
@@ -27,7 +27,7 @@ export class ContactsPage extends Component {
 
     render() {
         return (
-            
+
       <div className='container-fluid rm-pm dashboard-content'>
 
 
@@ -35,37 +35,37 @@ export class ContactsPage extends Component {
 
       <div className='row'>
         <h2 className='ml-4'> <b>Contacts</b> <small className='sub-caption ' > Welcome ( john doe) </small></h2>
-        
+
        <ContactNavbar />
-      
-      
+
+
         <div className="row">
           {/* contact navigation bar */}
-      
+
           {/**
-           * 
+           *
            *  @component: ProfileCard
-           * 
+           *
            *  @purpose: inorder to render the profile card component for users in the database
-           * 
+           *
            */}
-      
-      
+
+
         <div id='message-box-container'> </div>
-        <ProfileCard user='Chad Micheal' 
-          image='/img/face.jpg' 
+        <ProfileCard user='Chad Micheal'
+          image='/img/profiles/male_user.svg'
           address='123 lorne st'
           location='my example, province'
           phone='306-555-555-555'
           email='example@GMAIL.COM'
           name='HAVY'
           role='MANAGER'
-          />         
+          />
         </div>
 
         <div className='row'>
         <ProfileCard user='Adam Smith'
-          image='/img/face4.jpg'
+          image='/img/profiles/male_user.svg'
           address='123 lorne st'
           location='my example, province'
           phone='306-555-555-555'
@@ -73,13 +73,13 @@ export class ContactsPage extends Component {
           name='havery'
           role='Kitchen Manager' />
         </div>
-      
-    
+
+
       </div>
-      
-      
+
+
       </div>
-            
+
             );
         }
 

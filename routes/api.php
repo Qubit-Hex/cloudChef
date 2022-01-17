@@ -177,7 +177,7 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
 
         /**
          *
-         * @route: /user/store/employee/get
+         * @route: /store/employee/get
          *
          *
          *  @purpose: inorder to get the employee infomration of a specific employee of the store
@@ -188,7 +188,7 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
 
 
         /**
-             *  @route: /user/store/schedule/get
+             *  @route: /store/schedule/get
              *
              *  @purpose: inorder to get the store schedule of the user
              */
@@ -198,12 +198,37 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
 
         /**
          *
-         *  @Route: /user/store/schedule/add
+         *  @Route: /store/schedule/add
          *
          *  @purpose: inorder to add the store schedule of the user
          */
 
             Route::post('/schedule/add', [schedule::class, 'add'])->name('/store/schedule/add');
+
+
+        /**
+         *
+         * @Route: /store/schedule/find
+         *
+         * @purpose: inorder to find a specific schedule of the store
+         *
+         */
+
+            Route::get('/schedule/find', [schedule::class, 'find'])->name('/store/schedule/find');
+
+
+        /***
+         *
+         *
+         * @route: /store/schedule/dropshift/
+         *
+         *
+         *  @purpose: inorder to drop a shift of a specific employee of the store
+         *
+         */
+
+                Route::get('/schedule/dropshift', [schedule::class, 'dropshift'])->name('/store/schedule/dropshift');
+
 
 
         /**

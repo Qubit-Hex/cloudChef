@@ -12,9 +12,14 @@
 
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import { ShiftDrop } from "../components/dashboard/shiftDrop";
-import { ShiftPickup } from "../components/dashboard/shiftPickup";
+
+
+
+// main components of the schedule
 import { SchedulePannel } from "../components/schedule/schedule.schedule";
+import { ScheduleDrop } from "../components/schedule/schedule.dropShift";
+import { SchedulePickup } from "../components/schedule/schedule.pickupshift";
+
 
 import FetchServiceProvider from "../lib/fetchServiceProvider";
 
@@ -23,13 +28,18 @@ export class SchedulePage extends Component {
         super(props);
 
         const date = new Date();
+
         this.state = {
             date: date.toLocaleDateString(),
             user: '',
             // we will use this state inorder to get the schedule data from the server.
             // and pass it to our schedule component in the props.
             year: '',
-            month: '',
+            week: '',
+            // we will use this state inorder to get the schedule data from the server.
+            // and parse in the <select> element for user to view whatever past or present
+            // schedule they want to view.
+            schedulesAvailable: [],
         };
     }
 
@@ -43,21 +53,6 @@ export class SchedulePage extends Component {
     pickupRequest() {
         // temp
         alert("Pickup request sent!");
-    }
-
-    /**
-     *
-     *  @method: handleShiftDrop
-     *
-     *  @description: This method is responsible for displaying a modal to confirm the drop of a shift.
-     *                 before calling the API to drop the shift.
-     *
-     */
-
-    handleShiftDrop(event) {
-        let modalContainer = document.getElementById("modal-container");
-
-        return ReactDOM.render(<ShiftDrop />, modalContainer);
     }
 
 
@@ -85,18 +80,62 @@ export class SchedulePage extends Component {
         });
     }
 
+    /**
+     *
+     *  @method: fetchSchedules
+     *
+     *  @purpose: This method is responsible for fetching the schedule data from the server and return a promise.
+     *            upon the return of said data
+     *
+     */
+
+    async fetchSchedules() {
+        let request = new FetchServiceProvider();
+
+        let headers = {
+            "Content-Type": "application/json",
+            "accessToken": request.getCookie('accessToken'),
+        }
+
+        const apiRoute = '/api/store/schedule/find';
+
+
+        const response = await request.get(apiRoute, headers);
+
+
+        return response;
+    }
+
 
     /**
      *
-     *  @method: getStoreSchedules
+     *  @method: updateScheduleState
      *
-     *  @purpose: to retrive the schedules from the store and make them available via
-     *               drop down to user so they can look at current and previous schedules
+     *  @description: This method is responsible for updating the state of the schedule.
+     *                this is done inorder to update the schedule when the user selects a different
+     *                schedule from the dropdown.
+     *
+     *
      */
 
-    getStoreSchedules() {
+    updateScheduleState(e)
+    {
+        // loop though select to see what the user has selected
+        let selectedSchedule = e.target.options;
+        let year;
+        let week;
 
-        
+        // loop though the schedules available to find the schedule that the user has selected
+        for (let i = 0; i < selectedSchedule.length; i++) {
+            if (selectedSchedule[i].selected === true) {
+                year = selectedSchedule[i].getAttribute('data-year');
+                week = selectedSchedule[i].getAttribute('data-week');
+
+                // update the state of the schedule
+                this.setState({year: year, week: week});
+            }
+        }
+        return true;
     }
 
 
@@ -115,13 +154,44 @@ export class SchedulePage extends Component {
             this.getUsername();
         }
 
+        // grab the schedule state of the current store that we are working with from the server.
+        if (this.state.schedulesAvailable.length === 0) {
+            this.fetchSchedules()
+                .then((response) => {
+                    this.setState({schedulesAvailable: response.data});
+
+                }).catch((error) => {
+                    return new Error('We could not fetch the schedules');
+                });
+        }
+
         return;
+    }
+
+    /**
+     *
+     * @method: calculateDate
+     *
+     * @purpose: to calculate the date range with only the year and week number
+     *
+     */
+
+    calculateDate(year, weekNumber) {
+        let date = new Date(year, 0, 1 + (weekNumber - 1) * 7);
+        let day = date.getDay();
+        let startDate = new Date(date.getFullYear(), date.getMonth(), date.getDate() + (day === 0 ? -6 : 1) - date.getDay());
+        let endDate = new Date(date.getFullYear(), date.getMonth
+            (), date.getDate() + (day === 0 ? 0 : 7) - date.getDay());
+        let startDateString = startDate.toLocaleDateString();
+        let endDateString = endDate.toLocaleDateString();
+
+        return startDateString + " - " + endDateString;
     }
 
 
     render() {
         return (
-            <div className="container-fluid dashboard-content mt-md-4">
+            <div className="container-fluid dashboard-content">
                 {/**  container for sending modals to the user  */}
 
                 <h2 className='ml-4'> <b>Schedule</b> <small className='sub-caption ' > Welcome (
@@ -149,26 +219,34 @@ export class SchedulePage extends Component {
                             className="mx-auto img-fluid"
                         />
 
-                        <div className="row  schedule_pill">
+                        <div className="schedule_pill">
                             {/* ADD SEARCH AND FILTER PARTS  */}
 
-
-
-
-                            <div className="col">
                                         <div className="form-group ml-4">
                                             <label className="m-4 h4 font-weight-bolder">
-                                                <b> Select Schedule</b>
+                                                <b> Schedule</b>
                                             </label>
 
                                             <small className='text-muted text-center'>
 
-                                                <b> Current: {this.state.date}</b>
+                                                <b> Viewing Schedule of: {this.calculateDate(2018, 1)}</b>
 
                                             </small>
 
-                                            <select className="form-control">
-                                             { this.fetchUserSchedule() }
+                                            {/** gonna transform this element into a functional componet one i have completed it */}
+                                            <select className="form-control"   onClick={ (e) => {
+                                                                this.updateScheduleState(e)
+
+                                                            }}>
+                                                <option>Please Select a schedule to continue. </option>
+                                                {this.state.schedulesAvailable.map((schedule) => {
+                                                    // map the schedules available and display them in the dropdown
+                                                    return (
+                                                        <option className='text-bold' key={schedule.id} data-year={schedule.year} data-week={schedule.week}>
+                                                                { 'Schedule #' + schedule.id } {this.calculateDate(schedule.year, schedule.week)}
+                                                        </option>
+                                                    );
+                                                })}
                                             </select>
 
                                             <button className="btn btn-message btn-sm mt-4">
@@ -177,113 +255,26 @@ export class SchedulePage extends Component {
                                             </button>
 
                                     </div>
-                                {/* RENDER THE SCHEDULE COMPONENT  */}
-                                 { <SchedulePannel /> }
-                            </div>
+                                {/* RENDER THE SCHEDULE COMPONENT
+                                    This component will update the schedule based on what the state change of the page container
+                                    is. As think of it as a wrapper for the schedule component.
+                                    where we pass state changes based on the small components of the page inorder to update the component
+                                    without too much leeway.
+
+                                */}
+                                 { <SchedulePannel year={this.state.year} week={this.state.week}/> }
+
                         </div>
                     </div>
                 </div>
 
                 {/** ADD 2 CARDS ONE FOR DROPING SHIFTS AND ONE FOR PICKING UP SHIFTS    */}
-                    <div className="row card">
-                            <h2 className="header-subtitle text-center">
-                                DROP SHIFT <br />
-                            </h2>
-
-                            <h5 className="text-muted text-center ">
-                                    {" "}
-                                    Choose any shifts you would like to drop
-                                    {/* finish the drop component for drop down system  */}
-                                </h5>
-                    <img
-                                src="/img/SVG/people_connection.svg"
-                                className="mx-auto"
-                                width="300px"
-                                height="300px"
-                            />
-
-                        <div className="card-body">
-
-
-
-                            <div className="row">
-                                <div className="col">
-                                    <div className="form-group">
-                                        <label className="text-bold">
-                                            <b>
-                                                Select Shift you want to drop{" "}
-                                            </b>
-                                        </label>
-                                        <input
-                                            type="date"
-                                            className="form-control"
-                                        />
-                                        <button
-                                            onClick={(e) => {
-                                                this.handleShiftDrop();
-                                            }}
-                                            className="btn btn-message mt-2"
-                                        >
-                                            {" "}
-                                            Drop Shift{" "}
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div className="row card pannel-border-light">
+                            <ScheduleDrop />
                     </div>
 
-                    <div className="row card card-border p-2">
-                            <h2 className="header-subtitle text-center mt-4">PICK UP SHIFTS</h2>
-                            <h5 className="text-center text-muted">
-                                Choose any shifts you would like to pick up!
-                            </h5>
-                            <img
-                                src="/img/SVG/pick-up-shift.svg"
-                                alt="pick-up-shift"
-                                className="mx-auto"
-                                width="300px"
-                                height="300px"
-                            />
-                        <div className="card-body">
-
-                            <br />
-                        </div>
-
-                        <div className="shift-shop">
-                            <ShiftPickup
-                                message="I need the day off, to buy a new car"
-                                gender="male"
-                                name="Chad Brown"
-                                position="Manager"
-                                day="monday"
-                                start="9:00AM"
-                                end="5:00PM"
-                                cardCount="0"
-                            />
-
-                            <ShiftPickup
-                                message="I need the day off, for a family get together"
-                                gender="male"
-                                name="Micheal Smith"
-                                position="Dishwasher"
-                                day="monday"
-                                start="9:00AM"
-                                end="5:00PM"
-                                cardCount="0"
-                            />
-
-                            <ShiftPickup
-                                message="I need the day off, for my brother's birthday"
-                                gender="female"
-                                name="Amanda smith"
-                                position="Manager"
-                                day="tuesday"
-                                start="9:00AM"
-                                end="5:00PM"
-                                cardCount={0}
-                            />
-                        </div>
+                    <div className="row card card-border">
+                           <SchedulePickup />
                     </div>
                 </div>
         );

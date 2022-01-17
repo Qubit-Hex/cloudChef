@@ -44,14 +44,21 @@ class employee extends Controller
                 // next lets check if the
                 $employee = DB::table('employee')->where('storeID', $store_members->storeID)->where('id', $id)->first();
 
+                $userImg = DB::table('user_profile')->where('userID', $employee->userID)->first()->img;
+
                 // if the employee exists
                 if ($employee) {
                     // next we need to retrive other other information before returning the employee data to the client
+
+                    // PLEASE NOTE: WE NEED SOME DATABASE REFACTORING HERE
+                    // SO THAT WE DONT HAVE TODO HACKY STUFF INORDER TO GET OUR DATA
+                
                     $department = DB::table('department')->where('id', $employee->department_id)->first()->name;
 
                     return response()->json([
                         'name' => $employee->first_name . ' ' . $employee->last_name,
-                        'department' => $department
+                        'department' => $department,
+                        'url' => $userImg
                     ]);
 
                 } else {

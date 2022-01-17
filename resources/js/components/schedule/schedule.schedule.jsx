@@ -26,8 +26,8 @@
  *
  */
 
-import { result } from "lodash";
-import { resolve } from "path-browserify";
+
+
 import React, { Children } from "react";
 import FetchServiceProvider from "../../lib/fetchServiceProvider";
 
@@ -160,11 +160,14 @@ const RenderProfile = (props) => {
             });
         }, []);
 
+
+
+
     return (
         <td>
             <div className="col">
                 <img
-                    src="/img/SVG/male_user.svg"
+                    src={ userProfile.url }
                     className="profile-img-sm"
                     alt="user photo"
                 />
@@ -220,7 +223,30 @@ const GenerateStoreMembersSchedule = (props) => {
             totalHours += item;
         });
 
-        return (<td className="card-text-sub-text"> {totalHours} </td>);
+        // send an overTime message to the user if they have worked more than 40 hours.
+        if (totalHours > 40) {
+
+            return (<td className="card-text-sub-text">
+                <div className='alert alert-warning' role='alert'>
+                 <i className="fas fa-exclamation-triangle mt-2"></i>
+                    <span> OverTime  </span>
+                    <span className='ml-4 mt-2 text-center'>{ totalHours - 40 } Hours</span>
+                </div>
+
+                <span className='role-na badge badge-danger card-text-sub-text ml-1 bold'>
+                        <p> { totalHours } </p>
+                </span>
+
+
+          </td>);
+        }
+
+        // send a normal message to the user if they have worked less than 40 hours or less
+        return (<td className="card-text-sub-text">
+            <span className='role-na badge badge-success card-text-sub-text ml-1  ml-1 bold'>
+            {totalHours}
+            </span>
+        </td>);
     };
 
     // render the time badge based on the time.
@@ -266,9 +292,10 @@ const GenerateStoreMembersSchedule = (props) => {
     };
 
     return StoreSchedule.map((employee, index) => {
+
         return (
             <tr key={index}>
-                <RenderProfile data={employee} />
+                <RenderProfile data={employee} key={index}/>
 
                 {/* call our functions inorder to complete the table row of the schedule component */}
                 {renderTable(employee)}
@@ -299,13 +326,14 @@ export const SchedulePannel = (props) => {
             <thead>
                 <tr>
                     <th scope="col"> Name </th>
-                    <th scope="col"> Sunday </th>
+
                     <th scope="col"> Monday </th>
                     <th scope="col"> Tuesday </th>
                     <th scope="col"> Wednesday </th>
                     <th scope="col"> Thursday </th>
                     <th scope="col"> Friday </th>
                     <th scope="col"> Saturday </th>
+                    <th scope="col"> Sunday </th>
                     <th scope="col"> Total Hours </th>
                 </tr>
             </thead>
@@ -315,7 +343,9 @@ export const SchedulePannel = (props) => {
                 <GenerateStoreMembersSchedule
                     week={props.week}
                     year={props.year}
-                />
+                >
+                    {props.Children}
+                </GenerateStoreMembersSchedule>
             </tbody>
         </table>
     );

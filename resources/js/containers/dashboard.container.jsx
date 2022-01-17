@@ -1,11 +1,11 @@
 /**
- * 
+ *
  *  file: dashboard.container.jsx
- * 
- * 
+ *
+ *
  *  purpose:  container for the dashboard component
- * 
- *  
+ *
+ *
  */
 
 
@@ -36,13 +36,13 @@ import { MessagePage } from "./dashboard.message";
 
 
 /**
- * 
+ *
  * @function: DashboardContainer
- * 
- * 
- * @purpose: to route the dashboard pages for the user! 
- * 
- * 
+ *
+ *
+ * @purpose: to route the dashboard pages for the user!
+ *
+ *
  */
 
 export default class DashboardContainer extends Component {
@@ -65,13 +65,13 @@ export default class DashboardContainer extends Component {
   }
 
   /**'
-   * 
-   * 
-   * @method: parseCookieByName
-   * 
-   * @returns string 
    *
-   * 
+   *
+   * @method: parseCookieByName
+   *
+   * @returns string
+   *
+   *
    */
 
   parseCookieByName = (cookieName) => {
@@ -91,12 +91,12 @@ export default class DashboardContainer extends Component {
   }
 
   /**
- * 
+ *
  * @method: checkAuthentication
- * 
- * 
- * @returns  boolen 
- * 
+ *
+ *
+ * @returns  boolen
+ *
  */
 
   checkAuthentication = (cookieValue) => {
@@ -137,8 +137,8 @@ export default class DashboardContainer extends Component {
 
   /**
    *   @method: getUserInformation
-   * 
-   * 
+   *
+   *
    *  @purpose: to get the user information from the server and store it in the application state
    */
 
@@ -153,11 +153,11 @@ export default class DashboardContainer extends Component {
 
 
   /**
-   * 
-   *  @method: componentDidUpdate 
-   * 
-   *  @purpose: to check if the user is authenticated or not... 
-   * 
+   *
+   *  @method: componentDidUpdate
+   *
+   *  @purpose: to check if the user is authenticated or not...
+   *
    */
 
   componentDidUpdate(prevProps, prevState) {
@@ -165,7 +165,7 @@ export default class DashboardContainer extends Component {
     if (this.state.isAuthenticated !== prevState.isAuthenticated) {
       // if the user is authenticated then we will get their information
       if (this.state.isAuthenticated === true) {
-        // get the user information and store the information inside the application state 
+        // get the user information and store the information inside the application state
         this.getUserInformation();
       } else {
         // if the user is not authenticated then we will redirect them to the login page
@@ -176,15 +176,15 @@ export default class DashboardContainer extends Component {
     } else {
         return React.render(<div> Not Authenticated </div>, document.getElementById('root'));
     }
-    
+
   }
 
 
   render() {
     return (
       <div className='content_container'>
-        <DashboardNav />
-        {/* We are going to Route the Dashboard Sub Routes here for now might put this as a function in the route file later 
+        <DashboardNav  />
+        {/* We are going to Route the Dashboard Sub Routes here for now might put this as a function in the route file later
       to better orginize the code but for now it will stay :/ */}
 
         <Router>

@@ -189,6 +189,35 @@ export default class FetchServiceProvider {
 
         }
 
+        /**
+         *
+         * @method: delete
+         *
+         *
+         *  @purpose: to send a delete request to the api without a callback
+         *
+         */
+
+
+        delete(url, headers) {
+
+                    let request = new Request(url, {
+                        method: 'DELETE',
+                        headers: headers
+                    });
+                return fetch(request)
+                .then(response => {
+                    return new Promise((resolve, reject) => {
+                        response.json().then(data => {
+                            resolve(data);
+                        });
+                    });
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        }
+
 
         /**
          *

@@ -1,9 +1,9 @@
 /**
- * 
+ *
  *  file: index.js
- * 
- *  type: (main) 
- *  
+ *
+ *  type: (main)
+ *
  *  purpose: main file inorder to get things going
  */
 
@@ -20,8 +20,9 @@ let container = document.getElementById("root");
 
 // main application component for displaying webpages
 
-ReactDOM.render( 
+ReactDOM.render(
 <BrowserRouter >
     <AppRoutes / >
+        <div id='notification-container'>  </div>
     </BrowserRouter>,
     container);

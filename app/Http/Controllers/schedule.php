@@ -38,9 +38,50 @@ class schedule extends Controller
         $query = [
             'token' => $request->header('Authorization'),
             'time' => $request->header('time'),
+           // 'reason' => $request->header('reason'),
             'command' => $request->header('command')
         ];
 
         return ScheduleService::getSchedule($query);
      }
+
+
+
+     /**
+      *  @method: find
+      *
+      *  @purpose: inorder to find a schedule in a store and return it to the client
+      */
+
+      public function find(Request $request) {
+
+            $query = [
+                'token' => $request->header('accessToken'),
+                'time' => $request->header('time'),
+                'command' => $request->header('command')
+            ];
+
+            return ScheduleService::findSchedule($query);
+      }
+
+
+      /**
+       *
+       *  @method: dropShift
+       *
+       *  @purpose: inorder for a employee to send a drop shift request to the server
+       *
+       */
+
+       public function dropShift(Request $request) {
+
+            $query = [
+                'token' => $request->header('accessToken'),
+                'command' => $request->header('command'),
+                'shift' => $request->header('shift'),
+                'reason' => $request->header('reason'),
+            ];
+
+            return ScheduleService::dropShift($query);
+       }
 }

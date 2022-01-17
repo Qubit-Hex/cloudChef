@@ -203,6 +203,7 @@ create table  if not exists employee (
     department_id integer,
     first_name text,
     last_name text,
+    gender varchar,
     salary integer,
     is_active boolean, -- weather the employee is still active is the organization
     start_date date, -- the date the employee started working
