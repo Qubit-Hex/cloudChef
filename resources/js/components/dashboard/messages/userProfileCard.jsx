@@ -18,7 +18,7 @@ export class UserProfile extends React.Component {
         super(props);
 
         this.state = {
-            // inheritanted state from the parent component 
+            // inheritanted state from the parent component
             // dont use state for this component since we are using props REFACTOR THI!!!
             profileID: this.props.profileID,
             userID: this.props.userID,
@@ -28,7 +28,7 @@ export class UserProfile extends React.Component {
             date: this.props.date,
             isActive: this.props.isActive,
             storeID: this.props.storeID,
-            
+
             // state for the component
             token: "my super secret token",
             render: false,
@@ -41,19 +41,19 @@ export class UserProfile extends React.Component {
     }
 
     /**
-     * 
+     *
      *  @method: renderMessagesPannel
-     * 
-     *  @purpose: inorder to render the conversation pannel between you and the user.. 
-     * 
-     * 
+     *
+     *  @purpose: inorder to render the conversation pannel between you and the user..
+     *
+     *
      *   DONT KNOW WHY IT WORKS BUT IT DOES! THIS REMOVE THE ERROR MESSAGE
      */
 
     renderMessagesPannel(e)
     {
         let container = document.getElementById('messagePannel-container');
-        
+
         if(container.hasChildNodes())
         {
             ReactDOM.unmountComponentAtNode(container);
@@ -75,7 +75,7 @@ export class UserProfile extends React.Component {
         }
     }
 
-    
+
     render() {
         return (
             <div className="card no-margin row p-0" onClick={ (e) => {
@@ -85,14 +85,14 @@ export class UserProfile extends React.Component {
                     infoPannel.style.display = "none";
                 }
                 // call our method inorder to render the users conversation pannel
-                this.renderMessagesPannel() 
+                this.renderMessagesPannel()
             }
                 }>
                 <div className="card-body">
                     <div className="container-fluid contact-hover-action">
                         <div className="row">
                             <div className="col">
-                                
+
                                 <img
                                     src={this.state.image}
                                     alt="employee-icon"
@@ -103,7 +103,7 @@ export class UserProfile extends React.Component {
                                 <p className="card-title m-">
                                     {this.state.name}
                                 </p>
-                                
+
                                 <small className="m-1 text-muted font-italic">
                                     {this.state.role}
                                 </small>
@@ -112,17 +112,17 @@ export class UserProfile extends React.Component {
                             </div>
 
                             <div className="col-lg-8 mt-4">
-                               
+
                                 {/** is the user Active or is not ? */}
                                 <span className="role-badge btn-success ml-lg-4">
                                     {this.state.isActive }
                                 </span>
 
-                              
+
 
                             </div>
 
-                            
+
                         </div>
 
                         {/** Last Message display*/}
@@ -130,25 +130,25 @@ export class UserProfile extends React.Component {
                         <div className="row mt-4">
 
                             <div  className="col ">
-                                <small className='text-muted font-italic'> 
+                                <small className='text-muted font-italic'>
                                 </small>
                             </div>
 
                         </div>
 
-                      
+
                     </div>
                 </div>
 
                 <div className="card-footer modal-footer">
                     <div className="col">
                         {/** font awesome clock */}
-                    
+
                     </div>
                 </div>
             </div>
 
-            
+
         );
     }
 }

@@ -97,7 +97,7 @@ export class DashboardNav extends Component {
                             className="btn header-action remove-hamburger-menu"
                             style={{
                                 backgroundColor: "transparent",
-                                borderRadius: "0px",
+                                borderRadius: "5px",
                                 marginLeft: "10px",
                                 marginRight: "10px",
                             }}
@@ -155,6 +155,17 @@ export class DashboardNav extends Component {
                             <span className="nav-link-text">Schedule</span>
                         </a>
 
+                        <a href="/dashboard/recipie/" className="nav-link">
+                            {/**  food management pat for cloud recipes etcc... */}
+                            <i className="fas fa-hamburger"></i>
+                            <span className="nav-link-text">Recipies</span>
+                        </a>
+
+                        <a href='/dashboard/analytics/' className="nav-link">
+                            <i className="fas fa-chart-line"></i>
+                            <span className="nav-link-text">Analytics</span>
+                        </a>
+
                         <a href="/dashboard/messages/" className="nav-link">
                             {/** font awesome chat icon */}
                             <i class="fas fa-comments"></i>
@@ -172,25 +183,12 @@ export class DashboardNav extends Component {
                             <span className="nav-link-text">Settings</span>
                         </a>
 
-                        <a href="/dashboard/recipie/" className="nav-link">
-                            {/**  food management pat for cloud recipes etcc... */}
-                            <i className="fas fa-hamburger"></i>
-                            <span className="nav-link-text">Recipies</span>
-                        </a>
-
-                        <a href="/dashboard/notification/" className="nav-link">
-                            {/** font awesome bell icon */}
-                            <i class="fas fa-bell"></i>
-                            <span className="nav-link-text">
-                                <i class="fas fa-angle-down"></i>
-                            </span>
-                        </a>
-
+                        {/** LOGOUT BUTTON  WITH A POWER BUTTON*/}
                         <a href="/dashboard/logout/" className="nav-link">
-                            {/** font awesome power button */}
                             <i class="fas fa-power-off"></i>
                             <span className="nav-link-text">Logout</span>
                         </a>
+                        
                     </div>
                 </nav>{" "}
             </div>

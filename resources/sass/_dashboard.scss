@@ -15,7 +15,7 @@ $navbar-bg-color: linear-gradient(to right, #fd9494, rgb(208, 68, 52) );
 $bg-color: linear-gradient(to right, #e1eec398, #e1eec398);
 $modal-bg-color: linear-gradient(to right, #fd9494e7, #d04434d9);
 
-$navbar-color-dashboard:  #fd9494;
+$navbar-color-dashboard:  #cc5656;
 
 .remove-spacing {
     max-width: 30%;
@@ -31,7 +31,7 @@ $navbar-color-dashboard:  #fd9494;
 }
 
 .header-navbar-dashboard {
-    background-color: $navbar-bg-color;
+    background-color: $navbar-color-dashboard;
     border-radius: 0;
     border: none;
     padding: 10px;
@@ -965,4 +965,25 @@ thead
     margin-right: 10px;
 }
 
-//
+// drop shift role badge
+
+.dropshift-role {
+    border: none !important;
+    background-color: #701f1ccc; /* fallback for old browsers */
+    border-radius: 10px;
+    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: auto;
+    color: #fff;
+    font-size: 0.8em;
+    font-weight: bold;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.dropshift-role:hover {
+    cursor: pointer;
+    background-color: #310000;
+}
+

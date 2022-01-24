@@ -36,10 +36,10 @@ class schedule extends Controller
      public function get(Request $request) {
 
         $query = [
-            'token' => $request->header('Authorization'),
+            'token' => $request->header('accessToken'),
             'time' => $request->header('time'),
-           // 'reason' => $request->header('reason'),
-            'command' => $request->header('command')
+            'week' => $request->header('week'),
+            'year' => $request->header('year')
         ];
 
         return ScheduleService::getSchedule($query);
@@ -84,4 +84,41 @@ class schedule extends Controller
 
             return ScheduleService::dropShift($query);
        }
+
+
+       /**
+        *  @method: dropshift_get
+        *
+        * @purpose: inorder to get the shifts of a specific employee of the store
+        */
+
+        public function getDroppedShifts(Request $request)
+        {
+            $query = [
+                'token' => $request->header('accessToken'),
+                'command' => $request->header('command'),
+                'time' => $request->header('time'),
+            ];
+
+            return ScheduleService::getDroppedShifts($query);
+        }
+
+
+        /**
+         *
+         *  @method: postShiftPickupRequest
+         *
+         *  @purpose: inorder for a employee to send a shift pickup request to the server
+         *
+         */
+        public function postShiftPickupRequest(Request $request)
+        {
+            $query = [
+                'token' => $request->header('accessToken'),
+                'command' => $request->header('command'),
+                'shift' => $request->header('shift'),
+            ];
+
+            return ScheduleService::postShiftPickupRequest($query);
+        }
 }

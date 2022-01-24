@@ -1,12 +1,12 @@
 /**
- * 
+ *
  *   file: login
- * 
- * 
+ *
+ *
  *  TYPE: (COMPONENT)
- * 
- *  Purpose: inorder to display the login page 
- * 
+ *
+ *  Purpose: inorder to display the login page
+ *
  */
 
 
@@ -32,17 +32,17 @@ export class LoginPage extends React.Component {
     }
 
     /**
-     * 
+     *
      * @method: validateForm
-     * 
-     * @purpose  inorder to validate the form before submitting the form 
+     *
+     * @purpose  inorder to validate the form before submitting the form
      * @parmeter    event
      * @returns event;
-     * 
+     *
      */
 
   validateForm (event) {
-    
+
     // verify the all inputs fields are filled before sending our request to the api
     event.preventDefault();
 
@@ -56,21 +56,21 @@ export class LoginPage extends React.Component {
       }
 
       return this.login(request);
-    } 
+    }
 
 
      return document.getElementById('error-response').innerHTML = 'Please fill in all fields';
   }
 
   /**
-   *  
-   * method: login api Request 
-   * 
-   *  @purpose: inorder to preform the fetre request to the login api 
+   *
+   * method: login api Request
+   *
+   *  @purpose: inorder to preform the fetre request to the login api
    */
 
   login(request) {
-  
+
     let headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
@@ -78,25 +78,22 @@ export class LoginPage extends React.Component {
     };
     this.fetchServiceProvider.$post('/api/auth/login', request, headers, (response) => {
 
-// update the messages that are comming from the api 
-      console.log(response);
-
       if (response.message) {
         document.getElementById('error-response').innerHTML = response.message;
       }
-      // we are going to recieve a token so we are going to store it in a cookie 
+      // we are going to recieve a token so we are going to store it in a cookie
       if (response.signature) {
         document.cookie = 'api_public_key=' + response.signature + '; path=/';
       }
 
-      // check if user is authentication if so then we will 
-      // redirect the user to the dashboard 
+      // check if user is authentication if so then we will
+      // redirect the user to the dashboard
       if (response.authenticated) {
        window.location.href = response.redirect;
       }
   });
-} 
- 
+}
+
 generateToken()
 {
     const token = document.getElementById('_token_').content;
@@ -104,10 +101,10 @@ generateToken()
 }
 
 /**
- * @method": validate 
- * 
+ * @method": validate
+ *
  * @purpose: inorder to validate the form as the user is typing inorder to notify the user if they need to enter the required fields
- * @returns  event 
+ * @returns  event
  */
 
 // could add a feature that will allow you to match the the error cases in the application
@@ -142,10 +139,10 @@ generateToken()
                 <form className='form-login' onSubmit={ (e) => { this.validateForm(e) }}>
                 <div className='blob image-badge'>
                     <img className='img-fluid' src='/img/restaurant-outline.svg' width='50vh' height='50vw'/>
-                 </div> 
+                 </div>
                     <h1 className='form-login-title text-center'> Please Login </h1>
 
-                    <h3 className='form-login-title text-center' style={{'font-size': '18px', 'color': 'dodgerblue'}}> Please enter your login details </h3> 
+                    <h3 className='form-login-title text-center' style={{'font-size': '18px', 'color': 'dodgerblue'}}> Please enter your login details </h3>
 
 
                     <h4 className='error text-danger' id='error-response'>  </h4>
@@ -176,9 +173,9 @@ generateToken()
 
                 <button type="submit" name='submit' className="btn-lg header-action" style={{'width': '100%'}}>Login </button>
               </form>
-                </div> 
-                
-               
+                </div>
+
+
 
             </div>
            </div>

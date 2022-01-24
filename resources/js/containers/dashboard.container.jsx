@@ -193,6 +193,7 @@ export default class DashboardContainer extends Component {
             <Route path='/dashboard/schedule/' component={SchedulePage} />
             <Route path='/dashboard/messages/' component={MessagePage} />
 
+
           </Switch>
         </Router>
 

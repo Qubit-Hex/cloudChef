@@ -230,6 +230,18 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
                 Route::get('/schedule/dropshift', [schedule::class, 'dropshift'])->name('/store/schedule/dropshift');
 
 
+        /**
+         *
+         * @route: /store/schedule/dropshift/get
+         *
+         *
+         *  @purpose: inorder to get the shifts of a specific employee of the store
+         *
+         *
+         */
+
+
+         Route::get('/schedule/dropshift/get', [schedule::class, 'getDroppedShifts'])->name('/store/schedule/dropshift/get');
 
         /**
          *  @route: /user/store/get
@@ -240,6 +252,16 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
 
 
 
+        /**
+         *
+         * @Route: /store/schedule/shiftPickup/
+         *
+         *
+         *  @purpose: inorder to pickup a shift of a specific employee of the store
+         *
+         */
+
+         Route::get('/schedule/pickup/', [schedule::class, 'postShiftPickupRequest'])->name('/store/schedule/pickup/');
 
 
 

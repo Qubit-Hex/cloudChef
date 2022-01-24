@@ -26,6 +26,7 @@
         "sass-loader": "^11.0.1"
     },
     "dependencies": {
+        "brain": "^1.0.0",
         "d3": "^7.1.1",
         "d3.js": "^0.0.2-security",
         "laravel-mix-polyfill": "^3.0.1",

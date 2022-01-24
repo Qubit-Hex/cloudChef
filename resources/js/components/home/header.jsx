@@ -1,12 +1,12 @@
 /**
- * 
+ *
  *  file: header
- * 
+ *
  *  type: (compent)
- * 
- * 
- *  purpose: inorder to render the header section of the page 
- * 
+ *
+ *
+ *  purpose: inorder to render the header section of the page
+ *
  */
 
 
@@ -34,7 +34,7 @@
   }
 
   getIconClass(state){
-    return state ? 'fa fa-bars' : 'far fa-window-close'; 
+    return state ? 'fa fa-bars' : 'far fa-window-close';
   }
 
 
@@ -46,15 +46,15 @@
       <div className="_header_">
         <nav className="navbar navbar-expand-lg navbar-transparent ml-auto mt-auto">
                   <a className='navbar-brand' href='/'>
-                  <img className="img-fluid" width='150px' height='150px' src="/img/logo/Cloud Chef-logos_white.png"  alt=""/> 
+                  <img className="img-fluid" width='150px' height='150px' src="/img/logo/Cloud Chef-logos_white.png"  alt=""/>
             </a>
-    
-               
-       
+
+
+
           <div className="container">
 
 
-            
+
             <button  onClick={this.handleToggle} className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon icon-large"><i className={this.getIconClass(this.state.hamToggle)}></i></span>
             </button>
@@ -86,7 +86,7 @@
                     <div className='row'>
 
                         <div className='col-sm'>
-                              <li >  
+                              <li >
                                 <i className="fas fa-robot dropdown-icon"></i>
                                 <a className='dropdown-link' href='/solutions/'> Automate Outdated Processes  </a>
                                 <p className='dropdown-desc'> Minimize data entry, manual workflows & associated labor costs  </p>
@@ -94,19 +94,19 @@
                         </div>
 
                         <div className='col-sm'>
-                            <li> 
+                            <li>
                               <i className="fas fa-database dropdown-icon"></i>
                               <a className='dropdown-link' href='/solutions/'> Access Information from anywhere   </a>
                               <p className='dropdown-desc'>Get visibility & take action on any mobile or desktop device</p>
-                            
+
                             </li>
                         </div>
 
-                        <div className='border-breakpoint' /> 
+                        <div className='border-breakpoint' />
                         <div className='row'>
 
                           <div className='col-sm'>
-                              <li> 
+                              <li>
                                 <i className="fas fa-broadcast-tower dropdown-icon"></i>
                                 <a className='dropdown-link' href='/solutions/'> Intergrate data across systems  </a>
                                 <p className='dropdown-desc'> A hub for your financial data without the need for redundant data entry</p>
@@ -117,24 +117,24 @@
                           <div className='col-sm'>
                             <li>
                                <i className="fas fa-chart-line dropdown-icon"></i>
-                               <a className='dropdown-link' href='/solutions/'> Real time data </a> 
+                               <a className='dropdown-link' href='/solutions/'> Real time data </a>
                                <p className='dropdown-desc'>  Accurate, real-time analytics improve purchasing, menu pricing & production </p>
                             </li>
                           </div>
-                          
-                          
+
+
                         </div>
 
                         <div className='row'>
                         <div className='col-sm'>
-                            
+
 
                             <p className='header-subtitle mt-4'>  Your success is our mission!  </p>
                         </div>
 
                         </div>
 
-                         
+
                     </div>
 
                   </div>
@@ -155,7 +155,7 @@
                     <div className='row'>
                     {/** RECFACTOR THIS */}
                               <li>
-                                
+
                                   <a className='dropdown-title'>Explore the Platform </a>
                                   <p className='dropdown-subtitle text-center'>provides easy-to-use tools to better run your restaurant.</p>
                               </li>
@@ -197,9 +197,9 @@
                             <li>
                                   <i className="fas fa-user-tie dropdown-icon"></i>
                                   <a className='dropdown-link' href='/features/'> Employee Management System</a>
-                                  <p className='dropdown-desc'> cloud chef employee management system is designed to make both managers and workers more productive by automating time tracking records, 
+                                  <p className='dropdown-desc'> cloud chef employee management system is designed to make both managers and workers more productive by automating time tracking records,
                                   reports and data analytics.</p>
-                            
+
                             </li>
                         </div>
 
@@ -208,7 +208,7 @@
                 </ul>
 
                 <a className="nav-link" href="/pricing/">
-                  Pricing 
+                  Pricing
                 </a>
 
                 <a className="nav-link" href="/login/">
@@ -232,4 +232,3 @@
     );
   }
   }
-  

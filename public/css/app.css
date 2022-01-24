@@ -22,7 +22,7 @@
 }
 
 .header-navbar-dashboard {
-  background-color: linear-gradient(to right, #fd9494, #d04434);
+  background-color: #cc5656;
   border-radius: 0;
   border: none;
   padding: 10px;
@@ -83,7 +83,7 @@
 }
 
 .dashboard-horizontal-nav {
-  background-color: #fd9494;
+  background-color: #cc5656;
   position: fixed;
   opacity: 0;
   height: 100%;
@@ -883,6 +883,27 @@
   height: 100px !important;
   border-radius: 50%;
   margin-right: 10px;
+}
+
+.dropshift-role {
+  border: none !important;
+  background-color: #701f1ccc;
+  /* fallback for old browsers */
+  border-radius: 10px;
+  padding: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  width: auto;
+  color: #fff;
+  font-size: 0.8em;
+  font-weight: bold;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.dropshift-role:hover {
+  cursor: pointer;
+  background-color: #310000;
 }
 
 body {
