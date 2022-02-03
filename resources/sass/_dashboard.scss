@@ -373,7 +373,7 @@ $navbar-color-dashboard:  #cc5656;
         background-color: #5c0000;
     }
 
-    /* Message box styling for our appl;ication  */
+    /* Message box styling for our application  */
 
     .modal-title {
         font-weight: bold;
@@ -388,6 +388,7 @@ $navbar-color-dashboard:  #cc5656;
         padding: 20px;
         background-color: #0a0a167c !important;
         z-index: 1;
+        width: 100%;
 
         .modal-close {
             border: none;
@@ -416,13 +417,14 @@ $navbar-color-dashboard:  #cc5656;
     .modal-dialog {
         border: none;
         position: relative;
-        top: 15%;
+        top: 12.5%;
+        max-height: 300px;
     }
 
     .modal-content {
         border: none !important;
         border-radius: 20px;
-        width: 100%;
+        width: 100% !important;
         box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
             rgba(0, 0, 0, 0.22) 0px 15px 12px;
     }
@@ -533,7 +535,7 @@ thead
 
     td {
         font-size: 16px;
-        padding: 10px;
+        padding: 15px;
         text-align: center;
 
         span {
@@ -987,3 +989,88 @@ thead
     background-color: #310000;
 }
 
+// recipe section
+
+.recipe-nav {
+
+    background-color: transparent;
+
+   .nav-link {
+       color: black;
+   }
+
+   .nav-link:hover {
+       color: black;
+   }
+
+    .nav-item {
+        width: 100%;
+        background-color:rgba(9, 33, 119, 0.076);
+    }
+    .nav-item:hover {
+        background-color: #bdccfd9e;
+        color: #fff;
+    }
+}
+
+
+.modal-recipe-img {
+    box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
+}
+
+
+// change the modal style if recipe-mod and modal are together
+
+.modal.recipe-modal {
+
+}
+
+
+.recipe-modal {
+
+
+    @media (min-width: 992px) {
+        .modal-dialog {
+            max-width: 800px;
+        }
+    }
+
+    .modal-dialog {
+        // make a responsive width for the modal
+        max-width: fit-content;
+        max-height: auto;
+    }
+
+
+    .modal-header {
+        background: #32416d;
+        border-bottom: none;
+    }
+
+    .modal-body {
+        padding: 10px;
+    }
+}
+
+
+// remove images from the mobile view
+
+.desktop-view {
+    display: block;
+}
+
+// views for tablet and mobile to remove images to save resources
+
+// tablet view
+@media (max-width: 991px) {
+    .desktop-view {
+        display: none;
+    }
+}
+
+// smaller mobile view
+@media (max-width: 767px) {
+    .desktop-view {
+        display: none;
+    }
+}

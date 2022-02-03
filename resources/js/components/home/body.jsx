@@ -1,11 +1,11 @@
 /**
- * 
- *   file: body 
- * 
+ *
+ *   file: body
+ *
  *   type: (component)
- * 
- * 
- *  purpose: inorder to rend the body section 
+ *
+ *
+ *  purpose: inorder to rend the body section
  */
 
 
@@ -48,14 +48,14 @@ import React from 'react';
 
             <h3 className="header-description">
               {" "}
-              Cloudchef is a restaurant management solution that helps any establishment and its staff work smarter and more efficient. 
-              We put all the information you need in one place, so you can train your employees, assign them tasks, and make smarter business decisions. 
+              Cloudchef is a restaurant management solution that helps any establishment and its staff work smarter and more efficient.
+              We put all the information you need in one place, so you can train your employees, assign them tasks, and make smarter business decisions.
               By sending out targeted promotions based on customer feedback, we help improve profitability{" "}
             </h3>
 
             <h4 className="header-description">
               Make employee training easy and simple by using our cloud based
-              recipe mangement and training system.
+              recipe management and training system.
             </h4>
 
              <a href='/login/'><button
@@ -73,7 +73,7 @@ import React from 'react';
             </div>
             <div className="col-sm header-section-space-md">
               <h1 className="body-section-title"> ALL OF YOUR RECIPES </h1>
-  
+
               <h1 className="multi-color-section">
                 {" "}
                 <span>Available</span> <span>Anywhere.</span>{" "}
@@ -87,12 +87,12 @@ import React from 'react';
               </p>
             </div>
           </div>
-  
+
           <div className="row mt-4">
             <div className="col-sm blob-lg">
               <img src="/img/burger-present.jpg" className="img-fluid" alt="" />
             </div>
-  
+
             <div className="col-sm header-section-space-md">
               <h1 className="body-section-title">
                 {" "}
@@ -108,18 +108,18 @@ import React from 'react';
               </p>
             </div>
           </div>
-  
+
           <div className="row mt-4 header-section-space-md">
             <div className="col-sm">
               <img src="/img/baker-image.jpg" className="img-fluid hero sepia" />
             </div>
-  
+
             <div className="col-sm header-section-space-md">
               <h1 className="body-section-title">
                 {" "}
                 Configure Calculations to What You Want{" "}
               </h1>
-  
+
               <p className="header-description">
                 Ingredients can come in many different forms, package sizes, and
                 weights when received from vendors. No matter what unit of

@@ -11,9 +11,8 @@
 
 
 import React, { Component } from 'react';
-import { ProfileCard } from "../components/dashboard/profile-card";
 import { ContactNavbar} from "../components/dashboard/contactsNavbar";
-
+import { ContactsTable } from "../components/dashboard/contacts/contact.table";
 
 export class ContactsPage extends Component {
 
@@ -34,45 +33,16 @@ export class ContactsPage extends Component {
 
 
       <div className='row'>
-        <h2 className='ml-4'> <b>Contacts</b> <small className='sub-caption ' > Welcome ( john doe) </small></h2>
-
-       <ContactNavbar />
-
 
         <div className="row">
           {/* contact navigation bar */}
 
-          {/**
-           *
-           *  @component: ProfileCard
-           *
-           *  @purpose: inorder to render the profile card component for users in the database
-           *
-           */}
-
-
         <div id='message-box-container'> </div>
-        <ProfileCard user='Chad Micheal'
-          image='/img/profiles/male_user.svg'
-          address='123 lorne st'
-          location='my example, province'
-          phone='306-555-555-555'
-          email='example@GMAIL.COM'
-          name='HAVY'
-          role='MANAGER'
-          />
-        </div>
 
-        <div className='row'>
-        <ProfileCard user='Adam Smith'
-          image='/img/profiles/male_user.svg'
-          address='123 lorne st'
-          location='my example, province'
-          phone='306-555-555-555'
-          email='oliver@gmail.com'
-          name='havery'
-          role='Kitchen Manager' />
+        <div className='table-contacts-container'>
+            <ContactsTable />
         </div>
+    </div>
 
 
       </div>

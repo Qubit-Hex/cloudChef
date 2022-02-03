@@ -26,7 +26,6 @@ import FetchServiceProvider from "../../../lib/fetchServiceProvider";
  *         i also need to writes some tests for this component. inorder to make sure that the component works as expected.
  */
 
-// render the schedule for the api and render it to the screen.
 
 /**
  *
@@ -109,17 +108,20 @@ const RenderSchedule = (props) => {
         // display a message to the user that there is no schedule for the week.
         return (
             <tr>
-                <td colSpan="7">
-                    <div className="alert alert-warning">
+                <td colSpan={9}>
+                    <div className="alert">
+                        <img src='/img/errors/empty_schedule.svg' alt="no schedule"  width={200} height={200} className='img-fluid mx-auto d-block'/>
+                        <br />
                         <strong className='text-center'>No Schedule
-                            <i className="fa fa-exclamation-triangle text-warning" aria-hidden="true" style={{
+                            <i className="far fa-calendar-times" style={{
                                 fontSize: '1.25em',
-                                marginLeft: '5px'
+                                marginLeft: '5px',
+                                color: '#ff0000'
                             }}></i>
                         </strong>
                             <br/>
-                        <small className='text-muted text-center'> Please select an schedule, <br/>
-      
+                        <small className='text-muted text-center'> Please select an schedule <br/>
+
                         </small>
                         {/** font awesome error icon */}
 

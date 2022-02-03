@@ -52,7 +52,7 @@ class employee extends Controller
 
                     // PLEASE NOTE: WE NEED SOME DATABASE REFACTORING HERE
                     // SO THAT WE DONT HAVE TODO HACKY STUFF INORDER TO GET OUR DATA
-                
+
                     $department = DB::table('department')->where('id', $employee->department_id)->first()->name;
 
                     return response()->json([
@@ -73,6 +73,68 @@ class employee extends Controller
         }
         return response()->json(['message' => 'failed'], 401);
     }
+
+    /**
+     *
+     *  @method: showCurrentEmployees
+     *
+     *  @purpose: inorder to get the current employees of the store
+     */
+
+     public function showCurrentEmployees(Request $request)
+     {
+         $DB = DB::table('employee')->get();
+
+         /**
+          *  @stub: result
+          *  name -> name of employee
+          *  id -> id of employee
+          * department -> department of employee
+          * phone -> phone number of employee
+          * email -> email of employee
+          * role -> role of the employee
+          */
+
+          // authenticate the user before proceeding to the request
+
+          $user = DB::table('users')->where('remember_token', $request->header('accessToken'))->first();
+
+          if ($user) {
+                $store_members = DB::table('store_members')->where('userID', $user->userID)->first();
+
+                if ($store_members) {
+                    $employees = DB::table('employee')->where('storeID', $store_members->storeID)->get();
+
+                    $result = [];
+
+                    foreach ($employees as $employee) {
+                        $result[] = [
+                            'name' => $employee->first_name . ' ' . $employee->last_name,
+                            'id' => $employee->id,
+                            'department' => DB::table('department')->where('id', $employee->department_id)->first()->name,
+                            'address' => $employee->address,
+                            'phone' => $employee->phone,
+                            'location' => $employee->location,
+                            'email' => $employee->email,
+
+                        ];
+                    }
+
+                    return response()->json([
+                        'status' => 'success',
+                        'data' => $result
+                    ]);
+                }
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'user does not belong to the store'
+                ], 401);
+          }
+
+
+
+         return response()->json($DB);
+     }
 
 
 }

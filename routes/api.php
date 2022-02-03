@@ -264,5 +264,14 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
          Route::get('/schedule/pickup/', [schedule::class, 'postShiftPickupRequest'])->name('/store/schedule/pickup/');
 
 
+        /**
+         *
+         *  @Route: /employees
+         *
+         *  @purpose: inorder to get the members of the store
+         *
+         */
 
+         Route::get('/employees', [employee::class, 'showCurrentEmployees'])->name('/store/employees');
+         
      });

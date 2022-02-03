@@ -62,6 +62,11 @@
               <div className="navbar-nav">
 
 
+            <div className='dropdown'>
+                <a className='nav-link dropdown-toggle' href='#' id='navbarDropdown' role='button' data-bs-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+                    Solutions
+                </a>
+            </div>
               <a className='nav-link' href='/'> Home </a>
                 <a
                   className="nav-link dropdown-toggle"

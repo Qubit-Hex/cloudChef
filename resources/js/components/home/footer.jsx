@@ -1,12 +1,12 @@
 /**
- * 
+ *
  *  file: footer
- * 
+ *
  *  type: (component)
- * 
- * 
+ *
+ *
  *  purpose: to render the footer component
- * 
+ *
  */
 
 
@@ -18,19 +18,16 @@ export class Footer extends React.Component {
       return (
         <footer className="">
         {" "}
-  
+
             <div className='container footer'>
 
 
               <div className='row'>
               <div className='row'>
-        {/** copyright section */}
-                 <span className='footer-bottom footer-section-subtitle'> 
-                 <img className="img-fluid"  src="/img/logo/Cloud Chef-logos_white.png" alt="" width="500px;" /> </span>
               </div>
-  
+
               <div className='row'>
-                  <div className='col-sm'>
+                  <div className='col-sm mt-4'>
                   {/* SOLUTIONS    */}
                       <ul className="list-group footer-list">
                       <li className="list-group-item footer-section-title"> Solutions </li>
@@ -42,7 +39,7 @@ export class Footer extends React.Component {
                       <li className='list-group-item footer-section-link'> <a href='#'> Discover Data-Driven Insights </a></li>
                       </ul>
                   </div>
-  
+
                   <div className='col-sm'>
                   {/* RECIPE MANAGEMENT  */}
                     <ul className='list-group footer-list'>
@@ -53,15 +50,15 @@ export class Footer extends React.Component {
                         <li className='list-group-item footer-section-link'>  <a href='#'>  Inventory Management </a> </li>
                         <li className='list-group-item footer-section-link'>  <a href='#'>  Food Cost Management  </a> </li>
                         <li className='list-group-item footer-section-link'>  <a href='#'>  Employee Management </a> </li>
-  
+
                     </ul>
                   </div>
               </div>
-  
+
              </div>
             </div>
-  
-      
+
+
         </footer>
       );
     }

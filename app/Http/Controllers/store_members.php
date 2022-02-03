@@ -113,8 +113,6 @@ class store_members extends Controller
             ]);
         }
 
-        // proccessed to get the request
-
         $currentUserID = $userData->userID;
 
         $storeOwnership = DB::table('store_members')->where('userID', $currentUserID)->first()->storeID;

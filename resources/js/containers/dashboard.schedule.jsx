@@ -240,7 +240,7 @@ export class SchedulePage extends Component {
 
                                         <div className="form-group ml-4">
 
-                                            <small className='text-muted text-center'>
+                                            <small className='text-muted text-center mb-4'>
 
                                                 <b> Viewing Schedule of: { this.calculateDate(this.state.year, this.state.week) }</b>
 
@@ -287,19 +287,15 @@ export class SchedulePage extends Component {
             </div>
 
 
-            <div className='row'>
-
-                {/** ADD 2 CARDS ONE FOR DROPING SHIFTS AND ONE FOR PICKING UP SHIFTS    */}
-                    <div className="col-sm card pannel-border-light">
+            <div className='row card fit-table'>
                             <ScheduleDrop />
-                    </div>
+            </div>
 
-                    <div className="col-sm card pannel-border-light">
+            <div className="row card card fit-table">
                            <SchedulePickup />
-                    </div>
+            </div>
 
                 </div>
-            </div>
         );
     }
 }

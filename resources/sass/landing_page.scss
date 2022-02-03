@@ -5,7 +5,7 @@ body {
 }
 
 nav {
-    background-color: rgba(248, 105, 105, 0.761);
+    background-color: rgba(174, 40, 40, 0.761);
     font-weight: 800;
 }
 
@@ -225,13 +225,20 @@ nav>* {
 
 /* drop down menu styling   */
 
+
+.dropdown-position {
+    position: absolute;
+    left: 20vw;
+    top: 0vh;
+}
+
 .dropdown-menu {
     background-color: rgb(247, 243, 243);
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
     padding: 25px;
     width: 50vw;
-    margin: 25vw;
+    margin: 10%;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
 }
 
@@ -363,6 +370,31 @@ footer {
 
 .fade-in {
     animation: rollDropDown 2.0s ease 0s 1 normal forwards;
+}
+
+// animation for showing the drop down menu
+.show {
+    animation: rollDropDown 2.0s ease 0s 1 normal forwards;
+    display: block;
+    -webkit-animation: rollDropDown 2.0s ease 0s 1 normal forwards;
+}
+
+.destroy {
+    display: block;
+    animation: rollDropDown 2.0s ease 0s 1 normal forwards;
+    -webkit-animation: rollDropDown 2.0s ease 0s 1 normal forwards;
+}
+
+
+// animation for dropping the drop down menu
+@keyframes rollDropDown {
+    0% {
+        transform: translateY(100%);
+    }
+
+    100% {
+        transform: translateY(0%);
+    }
 }
 
 

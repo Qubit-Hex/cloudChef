@@ -202,7 +202,7 @@
   padding: 25px;
   position: absolute;
   top: 20%;
-  /* Message box styling for our appl;ication  */
+  /* Message box styling for our application  */
 }
 .dashboard-content .sub-caption {
   color: slategray;
@@ -356,6 +356,7 @@
   padding: 20px;
   background-color: #0a0a167c !important;
   z-index: 1;
+  width: 100%;
 }
 .dashboard-content .modal .modal-close {
   border: none;
@@ -378,12 +379,13 @@
 .dashboard-content .modal-dialog {
   border: none;
   position: relative;
-  top: 15%;
+  top: 12.5%;
+  max-height: 300px;
 }
 .dashboard-content .modal-content {
   border: none !important;
   border-radius: 20px;
-  width: 100%;
+  width: 100% !important;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
 .dashboard-content .modal-header {
@@ -488,7 +490,7 @@
 }
 .table td {
   font-size: 16px;
-  padding: 10px;
+  padding: 15px;
   text-align: center;
 }
 .table td span {
@@ -906,6 +908,61 @@
   background-color: #310000;
 }
 
+.recipe-nav {
+  background-color: transparent;
+}
+.recipe-nav .nav-link {
+  color: black;
+}
+.recipe-nav .nav-link:hover {
+  color: black;
+}
+.recipe-nav .nav-item {
+  width: 100%;
+  background-color: rgba(9, 33, 119, 0.076);
+}
+.recipe-nav .nav-item:hover {
+  background-color: #bdccfd9e;
+  color: #fff;
+}
+
+.modal-recipe-img {
+  box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
+}
+
+@media (min-width: 992px) {
+  .recipe-modal .modal-dialog {
+    max-width: 800px;
+  }
+}
+.recipe-modal .modal-dialog {
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  max-height: auto;
+}
+.recipe-modal .modal-header {
+  background: #32416d;
+  border-bottom: none;
+}
+.recipe-modal .modal-body {
+  padding: 10px;
+}
+
+.desktop-view {
+  display: block;
+}
+
+@media (max-width: 991px) {
+  .desktop-view {
+    display: none;
+  }
+}
+@media (max-width: 767px) {
+  .desktop-view {
+    display: none;
+  }
+}
 body {
   font: 18px "Century Gothic", Futura, sans-serif;
   background-color: #ffffff00;
@@ -913,7 +970,7 @@ body {
 }
 
 nav {
-  background-color: rgba(248, 105, 105, 0.761);
+  background-color: rgba(174, 40, 40, 0.761);
   font-weight: 800;
 }
 
@@ -1128,13 +1185,19 @@ nav > * {
 }
 
 /* drop down menu styling   */
+.dropdown-position {
+  position: absolute;
+  left: 20vw;
+  top: 0vh;
+}
+
 .dropdown-menu {
   background-color: #f7f3f3;
   border-bottom-left-radius: 25px;
   border-bottom-right-radius: 25px;
   padding: 25px;
   width: 50vw;
-  margin: 25vw;
+  margin: 10%;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
 }
 
@@ -1265,6 +1328,35 @@ footer {
           animation: rollDropDown 2s ease 0s 1 normal forwards;
 }
 
+.show {
+  animation: rollDropDown 2s ease 0s 1 normal forwards;
+  display: block;
+  -webkit-animation: rollDropDown 2s ease 0s 1 normal forwards;
+}
+
+.destroy {
+  display: block;
+  animation: rollDropDown 2s ease 0s 1 normal forwards;
+  -webkit-animation: rollDropDown 2s ease 0s 1 normal forwards;
+}
+
+@-webkit-keyframes rollDropDown {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+@keyframes rollDropDown {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
 /* animation rolling Drop Down */
 /*  end of form login screen  */
 /* end of form login screen  */
@@ -1287,17 +1379,6 @@ footer {
   padding: 20px;
   -webkit-animation: rollDropDown 2s ease 0s 1 normal forwards;
           animation: rollDropDown 2s ease 0s 1 normal forwards;
-}
-
-@-webkit-keyframes rollDropDown {
-  0% {
-    opacity: 0;
-    transform: scale(0);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
 }
 
 @keyframes rollDropDown {

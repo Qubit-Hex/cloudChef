@@ -22,18 +22,13 @@ import {
 } from "react-router-dom";
 
 import FetchServiceProvider from "../lib/fetchServiceProvider";
-
 // this stores our dashboard templkate and the dashboard componen....
 import { DashboardNav } from "../components/dashboard/dashboardNav";
-
-
 // store all the pages for our api calls here
 import { ContactsPage } from "./dashboard.contacts";
 import { SchedulePage } from "./dashboard.schedule";
 import { MessagePage } from "./dashboard.message";
-
-
-
+import { DashboardRecipies } from "./dashboard.recipies";
 
 /**
  *
@@ -144,9 +139,6 @@ export default class DashboardContainer extends Component {
 
   getUserInformation = () => {
 
-    // ILL need to get the user information from the server and store it in the application state
-    // ILL IMPLIMENT THIS LATER
-    // BUG HUNTING RIGHT NOW.... BECAUSE THE GROUPS ISNT FULFILLING THE REQUIREMENTS
   }
 
 
@@ -184,11 +176,10 @@ export default class DashboardContainer extends Component {
     return (
       <div className='content_container'>
         <DashboardNav  />
-        {/* We are going to Route the Dashboard Sub Routes here for now might put this as a function in the route file later
-      to better orginize the code but for now it will stay :/ */}
 
         <Router>
           <Switch>
+            <Route path='/dashboard/recipie/' component={DashboardRecipies} />
             <Route path='/dashboard/contacts/' component={ContactsPage} />
             <Route path='/dashboard/schedule/' component={SchedulePage} />
             <Route path='/dashboard/messages/' component={MessagePage} />
