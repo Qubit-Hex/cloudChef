@@ -9,7 +9,7 @@ use App\Http\Controllers\store_members;
 use App\Http\Controllers\store;
 use App\Http\Controllers\schedule;
 use App\Http\Controllers\employee;
-
+use App\Http\Controllers\recipes;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -167,7 +167,7 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
 
     /**
      *
-     *  @route: /user/store/
+     *  @route: /store/
      *
      *  @purpose: inorder to get the store of the user
      */
@@ -187,61 +187,8 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
 
 
 
-        /**
-             *  @route: /store/schedule/get
-             *
-             *  @purpose: inorder to get the store schedule of the user
-             */
-
-            Route::get ('/schedule/get', [schedule::class, 'get'])->name('/store/schedule/get/');
 
 
-        /**
-         *
-         *  @Route: /store/schedule/add
-         *
-         *  @purpose: inorder to add the store schedule of the user
-         */
-
-            Route::post('/schedule/add', [schedule::class, 'add'])->name('/store/schedule/add');
-
-
-        /**
-         *
-         * @Route: /store/schedule/find
-         *
-         * @purpose: inorder to find a specific schedule of the store
-         *
-         */
-
-            Route::get('/schedule/find', [schedule::class, 'find'])->name('/store/schedule/find');
-
-
-        /***
-         *
-         *
-         * @route: /store/schedule/dropshift/
-         *
-         *
-         *  @purpose: inorder to drop a shift of a specific employee of the store
-         *
-         */
-
-                Route::get('/schedule/dropshift', [schedule::class, 'dropshift'])->name('/store/schedule/dropshift');
-
-
-        /**
-         *
-         * @route: /store/schedule/dropshift/get
-         *
-         *
-         *  @purpose: inorder to get the shifts of a specific employee of the store
-         *
-         *
-         */
-
-
-         Route::get('/schedule/dropshift/get', [schedule::class, 'getDroppedShifts'])->name('/store/schedule/dropshift/get');
 
         /**
          *  @route: /user/store/get
@@ -249,20 +196,6 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
          *  @purpose: inorder to ge the store of the user
          */
             Route::get ('/get', [store::class, 'get'])->name('/store/get');
-
-
-
-        /**
-         *
-         * @Route: /store/schedule/shiftPickup/
-         *
-         *
-         *  @purpose: inorder to pickup a shift of a specific employee of the store
-         *
-         */
-
-         Route::get('/schedule/pickup/', [schedule::class, 'postShiftPickupRequest'])->name('/store/schedule/pickup/');
-
 
         /**
          *
@@ -273,5 +206,45 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
          */
 
          Route::get('/employees', [employee::class, 'showCurrentEmployees'])->name('/store/employees');
-         
+
+         /**
+          *   @route / schedule /
+          *
+          *  @purpose: to get any information related to the schedule of the store
+          *
+          */
+
+
+         Route::group(['prefix' => '/schedule'], function () {
+
+            Route::get ('/get', [schedule::class, 'get'])->name('/schedule/get/');
+            Route::post('/add', [schedule::class, 'add'])->name('/schedule/add');
+            Route::get('/find', [schedule::class, 'find'])->name('/schedule/find');
+            Route::get('/dropshift', [schedule::class, 'dropshift'])->name('/schedule/dropshift');
+            Route::get('/dropshift/get', [schedule::class, 'getDroppedShifts'])->name('/schedule/dropshift/get');
+            Route::get('/pickup', [schedule::class, 'postShiftPickupRequest'])->name('/schedule/pickup/');
+
+        });
+
+
+         /**
+          *   @route: /recipes/
+          *
+          *   @purpose: inorder to get the recipes of the store
+          */
+
+          Route::group(['prefix' => '/recipes'], function () {
+
+              Route::get('/get', [recipes::class, 'get'])->name('recipes/get');
+
+              Route::post('/add', [recipes::class, 'add'])->name('recipes/add');
+
+              Route::get('/find/{id}', [recipes::class, 'find'])->name('recipes/find/{id}');
+
+              Route::get('/delete', [recipes::class, 'delete'])->name('recipes/delete');
+
+              Route::get('/update', [recipes::class, 'update'])->name('recipes/update');
+
+          });
+
      });

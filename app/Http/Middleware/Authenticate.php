@@ -9,20 +9,20 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 /**
- * 
+ *
  *  @class: authenticate
- * 
+ *
  *  @purpose: to perform any actions that are required for the user to authorized or authenticated
- *   
+ *
  */
 
 
-class Authenticate 
+class Authenticate
 {
-    
+
     public function handle(Request $request, Closure $next, $guard = null)
     {
-        // AUTHORIZATION HEADERS
+        // Auth HEADERS
 
         // change this to be header instead of cookie for each request
         if (!empty($_COOKIE['accessToken'])) {
@@ -44,15 +44,15 @@ class Authenticate
     }
 }
     /**
-     * 
-     *  @method: getTokenFromHeader 
-     * 
-     * 
-     *  @purpose: to get the token from the header TO AUTHENTICATE ANY REST API REQUESTS    
-     * 
+     *
+     *  @method: getTokenFromHeader
+     *
+     *
+     *  @purpose: to get the token from the header TO AUTHENTICATE ANY REST API REQUESTS
+     *
      */
 
-     
+
     private function getTokenFromHeader(Request $request, Closure $next, $guard = null)
     {
         $header = $request->header('Authorization');

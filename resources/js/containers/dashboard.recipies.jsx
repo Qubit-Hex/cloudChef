@@ -11,9 +11,17 @@
 import React from "react"
 import ReactDOM from "react-dom"
 import { RecipeModal } from "../components/dashboard/recipe/recipeModal";
-
+import FetchServiceProvider from "../lib/fetchServiceProvider";
 
 export const DashboardRecipies = (props) => {
+
+
+    // get the recipe information from the database
+    // and enumerate the table row inorder to get the recipes information
+    const getRecipes = () => {
+        const api = new FetchServiceProvider();
+
+    }
 
 
     return (
@@ -68,6 +76,7 @@ export const DashboardRecipies = (props) => {
                                     </thead>
 
                                     <tbody>
+                                        {/** refactor this section to show the recipes of a given store */}
                                         <tr>
                                             <td> Sliced Steak </td>
                                             <td> Mains </td>
@@ -83,7 +92,7 @@ export const DashboardRecipies = (props) => {
                                                         // for the code to be reusable though out our application
 
                                                         // we will use the modal container to render the modal component
-                                                        return ReactDOM.render(<RecipeModal />, modalContainer);
+                                                        return ReactDOM.render(<RecipeModal id='1'/>, modalContainer);
 
                                                     }
                                                 }>

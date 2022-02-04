@@ -67,21 +67,21 @@ export const NutritionalLabel = (props) => {
                                 }}>
                                     {/** align two text item on to left other to the left */}
                                     <span className='text-start w-25'> Fat  { props.fatTotal }</span>
-                                    <span className='text-end w-75'> 22%  </span>
+                                    <span className='text-end w-75'> { props.fatPercent }  </span>
                                 </div>
 
                                         <ul className='list-group-flush'>
                                             <li className='list-group-item'>
                                              <div className='row'>
                                                 <span className='text-start w-25'> Saturated Fat  { props.saturatedFat } </span>
-                                                <span className='text-end w-50'> 2%  </span>
+                                                <span className='text-end w-50'> { props.saturatedFatPercent } </span>
                                              </div>
                                           </li>
 
                                           <li className='list-group-item'>
                                                 <div className='row'>
                                                     <span className='text-start w-25'> Trans Fat { props.transfat } </span>
-                                                    <span className="text-end w-50"> 2%</span>
+                                                    <span className="text-end w-50"> { props.transFatPercent }</span>
                                                 </div>
                                           </li>
                                         </ul>
@@ -93,7 +93,7 @@ export const NutritionalLabel = (props) => {
                                     padding: '5px'}}>
                                 <div className='row' style={{fontWeight: '600'}}>
                                     <span className='text-start w-25'> Cholesterol { props.cholesterol }  </span>
-                                    <span className='text-end w-75'> 22%  </span>
+                                    <span className='text-end w-75'> { props.cholesterolPercent }  </span>
                                 </div>
                             </li>
                             <li className='list-group-item'  style={{
@@ -101,7 +101,7 @@ export const NutritionalLabel = (props) => {
                                 padding: '5px'}}>
                                 <div className='row' style={{fontWeight: '600'}}>
                                     <span className='text-start w-25'> Sodium  { props.sodium }   </span>
-                                    <span className='text-end w-75'> 22%  </span>
+                                    <span className='text-end w-75'>  { props.sodiumPercent } </span>
                                 </div>
                             </li>
                             <li className='list-group-item'  style={{
@@ -109,7 +109,7 @@ export const NutritionalLabel = (props) => {
                                 padding: '5px'}}>
                                 <div className='row' style={{fontWeight: '600'}}>
                                     <span className='text-start w-25'> Potassium  { props.potassium } </span>
-                                    <span className='text-end w-75'> 22%  </span>
+                                    <span className='text-end w-75'>{ props.potassiumPercent }  </span>
                                 </div>
                             </li>
                             <li className='list-group-item'  style={{
@@ -117,7 +117,7 @@ export const NutritionalLabel = (props) => {
                                 padding: '5px'}}>
                                 <div className='row' style={{fontWeight: '600'}}>
                                     <span className='text-start w-25'> Total Carbohydrate  { props.carbTotal } </span>
-                                    <span className='text-end w-75'> 22%  </span>
+                                    <span className='text-end w-75'> { props.carbsPercent } </span>
                                 </div>
 
                                 {/** types of carbs  */}
@@ -125,13 +125,13 @@ export const NutritionalLabel = (props) => {
                                     <li className='list-group-item'>
                                         <div className='row'>
                                             <span className='text-start w-25'> Dietary Fiber  { props.dietaryFiber }  </span>
-                                            <span className='text-end w-50'> 22%  </span>
+                                            <span className='text-end w-50'> { props.fiberPercent} </span>
                                         </div>
                                     </li>
                                     <li className='list-group-item'>
                                         <div className='row'>
                                             <span className='text-start w-25'> Sugars  { props.sugar } </span>
-                                            <span className='text-end w-50'> 22%  </span>
+                                            <span className='text-end w-50'> { props.sugarPercent }  </span>
                                         </div>
                                     </li>
                                 </ul>
@@ -140,7 +140,7 @@ export const NutritionalLabel = (props) => {
                                 padding: '5px'}}>
                                 <div className='row' style={{fontWeight: '600'}}>
                                     <span className='text-start w-25'> Protein  { props.protein } </span>
-                                    <span className='text-end w-75'> 22%  </span>
+                                    <span className='text-end w-75'> { props.proteinPercent }  </span>
                                 </div>
 
                             </li>
