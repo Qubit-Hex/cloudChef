@@ -23,12 +23,15 @@ import ReactDOM from "react-dom"
 import { NutritionalLabel } from "./nutritionalLabel";
 import FetchServiceProvider from "../../../lib/fetchServiceProvider";
 
-
 /**
- *  @function: RenderRecipeInfo
+ *
+ * @component: RecipeDetails
  *
  *
- *  @purpose: to render the recipe details of a given recipe
+ * @purpose: to render the recipe details component
+ *           such as the name, allergies, and flavour profile
+ *
+ *
  */
 
 const RecipeDetails = (props) => {
@@ -138,11 +141,15 @@ const RecipeDetails = (props) => {
     )
 }
 
-// end of recipe details section
-
-
-// recipe ingredients enumeration function
-// inorder to enmuerate the ingredients we need to use the map function
+/**
+ *
+ *  @component: RecipeIngredients
+ *
+ *
+ *  @purpose: inorder to render the ingredients of the recipe in a list from for the
+ *            end user to see how to prepare the recipe
+ *
+ */
 
 const RecipeIngredients = (props) => {
 
@@ -178,9 +185,13 @@ const RecipeIngredients = (props) => {
 }
 
 
-
-// render the cooking time of the recipe
-
+/**
+ *
+ * @component: RecipeCookingTime
+ *
+ * @purpose: inorder to render the cooking time of the recipe.
+ *          this will be used to display the cooking time of the recipe
+ */
 
 const RecipeCookingTime = (props) => {
 
@@ -237,6 +248,15 @@ const RecipeDirections = (props) => {
 }
 
 
+/**
+  * @component: RecipeModal
+  *
+  *
+  *  @purpose: inorder to render the modal for the recipe selected
+  *            !important: this is the main wrapper component to gluing all of our functionality together
+  *
+ */
+
 export const RecipeModal = (props) => {
 
     const [recipe, setRecipe] = React.useState({});
@@ -246,6 +266,7 @@ export const RecipeModal = (props) => {
     const [recipeFlavorProfile, setRecipeFlavorProfile] = React.useState({});
     const [recipeIngredients, setRecipeIngredients] = React.useState({});
     const [recipeSteps, setRecipeSteps] = React.useState({});
+    const [nutritionalFacts, setNutritionalFacts] = React.useState({});
 
     // close the window when the user clicks on the close button
     const closeWindow = () => {
@@ -256,7 +277,10 @@ export const RecipeModal = (props) => {
     // do all of our api calls that we require to get the recipe data for the given id
     const getRecipeData = () => {
         const api = new FetchServiceProvider();
-        const route = '/api/store/recipes/find/1/';
+
+        // get the current id of the recipe
+        // and return the recipe data
+        const route = `/api/store/recipes/find/${props.id}/`;
 
         const headers = {
             'Content-Type': 'application/json',
@@ -280,18 +304,25 @@ export const RecipeModal = (props) => {
             let flavourProfile = JSON.parse(response.data.flavour_profile.recipe_flavor_profile);
             let ingredients = JSON.parse(response.data.recipe_ingredients.recipe_ingredients);
             let recipeSteps = JSON.parse(response.data.recipe_steps.recipe_steps);
+            let nutritionalData = JSON.parse(response.data.recipe_nutritional_facts.recipe_nutritional_facts);
             // set all the infomation that we need inorder to the display the recipe information.
 
+            // tood make sure that we are setting the data correctly
+            // and add a error boundary to handle the error
+
+            // set our data to the state that we need inorder to render our functional components
             setRecipeAllergies(allergyJSON);
             setRecipeFlavorProfile(flavourProfile);
             setRecipeIngredients(ingredients);
             setRecipe(response.data.recipe);
             setRecipeSteps(recipeSteps);
+            setNutritionalFacts(nutritionalData);
 
-            console.log(response);
         });
 
+
     }, []);
+
 
 // check did the informtion load to the state of the component
 
@@ -327,12 +358,12 @@ export const RecipeModal = (props) => {
                                     </small>
                                 </div>
 
-                                <img src='/img/sliced-steak.jpg' width="400px" height="400px" alt="recipe" className='img-fluid modal-recipe-img rounded-2 desktop-view' />
+                                <img src={recipe.recipe_image} width="400px" height="400px" alt="recipe" className='img-fluid modal-recipe-img rounded-2 desktop-view' />
                             </div>
                             {/* render  the menu item description / allergen information  */}
 
                             <RecipeDetails
-                                catagory={recipe.recipe_name}
+                                catagory={recipe.catagory}
                                 glutenFree={recipeAllergies.gluten}
                                 eggFree={recipeAllergies.egg}
                                 fishFree={recipeAllergies.fish}
@@ -385,8 +416,9 @@ export const RecipeModal = (props) => {
                                                     (e) => {
                                                         let contentContainer = document.getElementById('recipe-details')
 
+                                                        {/** we will set our nutrional Facts here */}
                                                         return ReactDOM.render(
-                                                          <NutritionalLabel calories={700} /> , contentContainer);
+                                                          <NutritionalLabel  data={nutritionalFacts} /> , contentContainer);
                                                     }
 
                                                 }>

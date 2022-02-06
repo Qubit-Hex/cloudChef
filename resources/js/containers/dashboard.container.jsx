@@ -29,6 +29,7 @@ import { ContactsPage } from "./dashboard.contacts";
 import { SchedulePage } from "./dashboard.schedule";
 import { MessagePage } from "./dashboard.message";
 import { DashboardRecipies } from "./dashboard.recipies";
+import { DashboardAnalytics } from "./dashboard.analytics";
 
 /**
  *
@@ -183,6 +184,7 @@ export default class DashboardContainer extends Component {
             <Route path='/dashboard/contacts/' component={ContactsPage} />
             <Route path='/dashboard/schedule/' component={SchedulePage} />
             <Route path='/dashboard/messages/' component={MessagePage} />
+            <Route path='/dashboard/analytics/' component={DashboardAnalytics} />
 
 
           </Switch>

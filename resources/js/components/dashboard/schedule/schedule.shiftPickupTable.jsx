@@ -328,7 +328,9 @@ export const ShiftPickupTable = (props) => {
                 <th scope='col'> Action </th>
             </tr>
         </thead>
-        <tbody>
+        <tbody style={{
+            fontWeight: '500',
+        }}>
             <ShiftPickupContent />
 
         </tbody>

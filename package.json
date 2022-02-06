@@ -21,19 +21,21 @@
         "postcss": "^8.1.14",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
-        "resolve-url-loader": "^4.0.0",
+        "resolve-url-loader": "^5.0.0",
         "sass": "^1.32.11",
         "sass-loader": "^11.0.1"
     },
     "dependencies": {
         "brain": "^1.0.0",
-        "d3": "^7.1.1",
+        "d3": "^7.3.0",
         "d3.js": "^0.0.2-security",
         "laravel-mix-polyfill": "^3.0.1",
         "mix": "^0.0.1",
         "path-browserify": "^0.0.1",
+        "react-google-charts": "^4.0.0",
         "react-router": "^5.2.1",
         "react-router-dom": "^5.3.0",
+        "rechart": "^0.0.1",
         "webpack": "^5.64.2"
     }
 }

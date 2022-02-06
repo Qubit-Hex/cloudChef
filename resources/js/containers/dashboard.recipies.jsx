@@ -16,12 +16,72 @@ import FetchServiceProvider from "../lib/fetchServiceProvider";
 export const DashboardRecipies = (props) => {
 
 
+    const [recipes, setRecipes] = React.useState({});
+
+
     // get the recipe information from the database
     // and enumerate the table row inorder to get the recipes information
     const getRecipes = () => {
         const api = new FetchServiceProvider();
 
+        const route = '/api/store/recipes/get';
+
+        const headers = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'accessToken': api.getCookie('accessToken')
+        }
+
+        return api.get(route, headers);
     }
+
+    const dataTunnel = getRecipes();
+
+    React.useEffect( () => {
+
+    // get the data from our promise that holds our data
+        dataTunnel.then(response => {
+            setRecipes(response.data);
+        });
+    }, []);
+
+
+
+    // generator function to create the table rows
+
+    const generateTablesRows = () => {
+        return Object.keys(recipes).map((item, index ) => {
+            // auto generate the tables rows for each of the recipes in the database
+            return (
+                    <tr key={index}>
+                    <td> { recipes[item].recipe_name }</td>
+                    <td> { recipes[item].catagory } </td>
+                    <td>  { recipes[item].recipe_create_at }</td>
+                    <td> { recipes[item].recipe_update_at }</td>
+                    <td>
+                        <button className='btn btn-message' data-toggle="modal" data-target="#editRecipeModal"  onClick={
+                            (e) => {
+                                const modalContainer = document.getElementById('modal-container');
+                                // we will create a rough draft of what the card will look like,
+                                // and then we will pass it to the modal container
+                                // later we will use components inorder to achieve the same result
+
+                                // for the code to be reusable though out our application
+                                // we will use the modal container to render the modal component
+                                return ReactDOM.render(<RecipeModal id={ recipes[item].recipe_id  }/>, modalContainer);
+
+                            }
+                        }>
+                            View<i className="fas fa-eye m-2"></i>
+                        </button>
+
+                    </td>
+                </tr>
+            )
+        });
+
+    }
+
 
 
     return (
@@ -38,7 +98,7 @@ export const DashboardRecipies = (props) => {
                 <div id='modal-container' className="modal-container"></div>
                         <div className="col card fit-table">
                             <h2 className="header-subtitle text-center mt-4 ">
-                            {" View your current store Recipes"}
+                            {"Current store recipes"}
                             </h2>
 
                             <img
@@ -48,23 +108,23 @@ export const DashboardRecipies = (props) => {
                                 height="300px"
                                 className="mx-auto img-fluid" />
 
+                                <small className='text-center' style={{
+                                    fontWeight: '600'
+                                }}> All your recipes in one place,
+                                to make your life easier. </small>
 
-                            <div className='row'>
-                                <div className='col-md'>
-                                   {/** section to search recipes that the user requests  */}
-                                    <div className="form-group">
-                                        <label htmlFor="search-recipe" style={{
-                                            fontWeight: ''
-                                        }}>Search for a recipe</label>
-                                        <input type="text" className="form-control" id="search-recipe" placeholder="Search for a recipe" />
-                                        <button className='btn btn-message mt-2 mb-2 mx-auto d-block' style={{
-                                            width: '400px',
-                                        }}> Search </button>
-                                    </div>
-                                    </div>
-                            </div>
+                                {/**
+                                 *
+                                 * add a component inorder to add recipes to the page current store
+                                 *
+                                 *  @blueprint: add a component inorder to add recipes to the page current store
+                                 *              and then update the view to reflect the changes on that datbase
+                                 *
+                                 * */}
 
-                                <table className='table'>
+
+
+                                <table className='table mt-2 mb-2'>
                                     <thead>
                                         <tr>
                                             <th> Recipe </th>
@@ -76,31 +136,14 @@ export const DashboardRecipies = (props) => {
                                     </thead>
 
                                     <tbody>
-                                        {/** refactor this section to show the recipes of a given store */}
-                                        <tr>
-                                            <td> Sliced Steak </td>
-                                            <td> Mains </td>
-                                            <td> 2022-01-01</td>
-                                            <td> 2022-01-01</td>
-                                            <td>
-                                                <button className='btn btn-message' data-toggle="modal" data-target="#editRecipeModal"  onClick={
-                                                    (e) => {
-                                                        const modalContainer = document.getElementById('modal-container');
-                                                        // we will create a rough draft of what the card will look like,
-                                                        // and then we will pass it to the modal container
-                                                        // later we will use components inorder to achieve the same result
-                                                        // for the code to be reusable though out our application
+                                        {/** trigger the generator inorder to display our recipe data form the data
+                                         *  fetched from the database.
+                                         */}
 
-                                                        // we will use the modal container to render the modal component
-                                                        return ReactDOM.render(<RecipeModal id='1'/>, modalContainer);
 
-                                                    }
-                                                }>
-                                                    View<i className="fas fa-eye m-2"></i>
-                                                </button>
+                                        {  generateTablesRows() }
 
-                                            </td>
-                                        </tr>
+
                                     </tbody>
                                 </table>
 
