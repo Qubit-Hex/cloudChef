@@ -14,175 +14,22 @@
  *
  */
 
+
+// main core modules
 import React from "react"
 import ReactDOM from "react-dom"
+
+
+
+
 
 
 // import sub components
 
 import { NutritionalLabel } from "./nutritionalLabel";
 import FetchServiceProvider from "../../../lib/fetchServiceProvider";
-
-/**
- *
- * @component: RecipeDetails
- *
- *
- * @purpose: to render the recipe details component
- *           such as the name, allergies, and flavour profile
- *
- *
- */
-
-const RecipeDetails = (props) => {
-
-    // parse input of props
-
-    const parseInput = (input) => {
-        if (input === null) {
-            return "";
-        }
-        // now lets check if input is equal to true or false
-        return input === true ? "Yes" : "No";
-    }
-
-    return (
-        <ul className='list-group list-group-flush m-4'>
-
-        <li className='list-group-item'>
-            <div className='row'>
-                <small className='text-muted p-2'>
-                   {/** icon for recipe catagory in restaurant  */}
-                    <i className="fas fa-utensils" style={{
-                        color: '#ffc107',
-                        fontSize: '1.5rem'
-                    }}></i>
-                    <span className='text-center'> <strong> Recipe Catagory:  <span> {props.catagory} </span></strong></span>
-                </small>
-            </div>
-        </li>
-        {/* refactor this to a component */}
-
-        <li className='list-group-item'>
-            <div className='row'>
-                {/** allergy information  */}
-                <small className='text-muted p-2'>
-                    {/** icon for allergies use a greenish color */}
-                    <i className="fas fa-allergies" style={{
-                        color: '#28a745',
-                        fontSize: '1.5rem'
-                    }}></i>
-                    <span className='text-center'> <strong> Allergies: </strong></span>
-                </small>
-            </div>
-            <div className='row'>
-                <div className='col-md-4 m-1'>
-                    <small className='text-muted text-center p-2'>
-                        {/** brown bread color for bread icon */}
-                        Gluten Free:  <span className='text-danger bold'> { parseInput(props.glutenFree) }</span><br />
-                    </small>
-                </div>
-                <div className='col-md-4 m-1'>
-                    <small className='text-muted text-center p-2'>
-                        Egg Free:  <span className='text-success'> { parseInput(props.eggFree)} </span> <br />
-                    </small>
-                </div>
-                <div className='col-md-4 m-1'>
-                    <small className='text-muted text-center p-2'>
-                        Fish Free: <span className='text-success'> { parseInput(props.fishFree) } </span>  <br />
-                    </small>
-                </div>
-                <div className='col-md-4 m-1'>
-                    <small className='text-muted text-center p-2'>
-
-                        Nut Free: <span className='text-danger' > { parseInput(props.nutFree) } </span>  <br />
-                    </small>
-                </div>
-                <div className='col-md-4 m-1'>
-                    <small className='text-muted text-center p-2'>
-                        Dairy Free:  <span className='text-success'> { parseInput(props.dairyFree) } </span> <br />
-                    </small>
-                </div>
-            </div>
-        </li>
-
-        {/** now we are going to list the favour profile of the item we are displaying */}
-        <li className='list-group-item'>
-            <div className='row'>
-                <small className='text-muted p-2'>
-                   {/** food icon */}
-                    <i className="fas fa-utensils" style={{
-                        fontSize: '1.5rem'
-                    }}></i>
-                    <strong>Favour Profile </strong>  <br />
-                </small>
-            </div>
-            <div className='row'>
-                <div className='col m-1'>
-                    <small className='text-muted text-center p-2'>
-                        Spicy: <span className='text-danger'> { parseInput(props.spicy) } </span>  <br />
-                    </small>
-                </div>
-
-                    <div className='col m-1'>
-                        <small className='text-muted text-center p-2'>
-                            Sweet:   <span className='text-danger'> { parseInput(props.sweet)} </span><br />
-                        </small>
-                    </div>
-
-                    <div className='col m-1'>
-                        <small className='text-muted text-center p-2'>
-                            Savory: <span className='text-success'> { parseInput(props.savory)} </span> <br />
-                        </small>
-                    </div>
-            </div>
-        </li>
-     </ul>
-    )
-}
-
-/**
- *
- *  @component: RecipeIngredients
- *
- *
- *  @purpose: inorder to render the ingredients of the recipe in a list from for the
- *            end user to see how to prepare the recipe
- *
- */
-
-const RecipeIngredients = (props) => {
-
-    return (
-        <div className='recipe-ingredients'>
-        {/** ingedent list for the recipe selected  */}
-        <h2 className='text-center' style={{fontWeight: '700'}}> Ingredients </h2>
-        <span> Required Ingredients for this recipe. </span>
-        <ol className='list-group list-group-flush m-4'>
-
-            {/** now we are going to list the ingredients of the item we are displaying */}
-        {
-            Object.keys(props.data).map((item, index) => {
-                return (
-                    <li className='list-group-item' key={index}>
-                        <div className='row'>
-                            <small className='text-muted p-2'>
-                                <i className='fas fa-utensils'></i>
-                                <span className='text-center'>
-                                     <span> <strong>  { props.data[item] }  </strong></span>
-                                </span>
-                            </small>
-                        </div>
-                    </li>
-                );
-            })
-
-        }
-        </ol>
-    </div>
-);
-
-}
+import { RecipeDetails} from './core/RecipeDetails';
+import { RecipeIngredients} from './core/RecipeIngredients'
 
 
 /**
@@ -215,9 +62,9 @@ const RecipeDirections = (props) => {
         <section className='content-container'>
             <header>
                 <h1 className='text-center' style={{
-                    fontWeight: '400',
-                    fontSize: '1.5em'
-                }}> Recipe Directions  </h1>
+                    fontWeight: '600',
+                    fontSize: '1.25em'
+                }}> Directions  </h1>
             </header>
 
             <main>
@@ -228,11 +75,16 @@ const RecipeDirections = (props) => {
                 <div className='container'>
                     <div className='row'>
                         <div className='col-md-12'>
-                            <ol className='list-group'>
+                            <ol className='list-group '>
                                 {
                                     Object.keys(props.directions).map((item, index) => {
                                         return (
-                                            <li className='list-group-item' key={index}>
+                                            <li className='list-group-item'  style={{
+                                                marginTop: '20px',
+                                                marginBottom: '10px',
+                                                padding: '20px'
+
+                                            }}key={index}>
                                                 <p> <b> { Math.max( index + 1 )  + ".  " }</b>  { "  " + props.directions[item] } </p>
                                             </li>
                                         );
@@ -350,13 +202,6 @@ export const RecipeModal = (props) => {
                         {/* recipe modal to show the user the recipe details */}
                          <div className='d-flex flex-column justify-content-center align-items-center'>
                                 <h2 className='text-center mt-4 text-center'> <strong>Sliced Steak</strong>  </h2>
-
-                                <div className='d-flex flex-column justify-content-center align-items-center'>
-                                    <small className='text-muted p-2'>
-                                                <i className="fas fa-info-circle"></i>
-                                                <span className='text-center'>Slice steak is an entree a part of the main menu! </span> <br />
-                                    </small>
-                                </div>
 
                                 <img src={recipe.recipe_image} width="400px" height="400px" alt="recipe" className='img-fluid modal-recipe-img rounded-2 desktop-view' />
                             </div>

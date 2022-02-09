@@ -5,6 +5,14 @@ use App\Http\Controllers\home;
 use App\Http\Controllers\authentication;
 use App\Http\Controllers\dashboard;
 
+
+
+
+// auto loading our sub-routes
+require 'domains.php';
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,14 +22,11 @@ use App\Http\Controllers\dashboard;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
-
-
 
 /**
- *      Routes: Home page routes 
- * 
- *     @purpose: to provide the home page routes for the user 
+ *      Routes: Home page routes
+ *
+ *     @purpose: to provide the home page routes for the user
  */
 
 
@@ -33,9 +38,9 @@ Route::get('/pricing/', [home::class, 'index']);
 Route::get('/features/', [home::class, 'index']);
 
 /**
- *      Routes: Authentication routes 
- * 
- *     @purpose: to route the authentication routes of the application      
+ *      Routes: Authentication routes
+ *
+ *     @purpose: to route the authentication routes of the application
  */
 
 Route::post('/authentication/login/', [authentication::class, 'login'])->name('auth/login/');
@@ -46,11 +51,11 @@ Route::post('/authentication/register/', [authentication::class, 'register'])->n
 
 /**
  *      Group Route: Dashboard
- * 
- *     @purpose: to route the dashboard routes of the application     
+ *
+ *     @purpose: to route the dashboard routes of the application
  */
 
-// dashboard group route 
+// dashboard group route
 Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
     Route::get('/', [dashboard::class, 'index'])->name('dashboard');
     Route::get('/{page}', [dashboard::class, 'index']);
@@ -62,5 +67,8 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
 // final route if no other route is matched
 Route::get('/', [home::class, 'index']);
 // end of home page application routes =
+
+
+
 
 
