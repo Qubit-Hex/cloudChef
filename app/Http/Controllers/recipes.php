@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+
 class recipes extends Controller
 {
     public function __construct()
@@ -15,18 +16,113 @@ class recipes extends Controller
 
     /**
      *
-     *  @method: create
+     *  @method: file
      *
      *
-     *  @purpose: inorder to create a new recipe into the system
+     *  @purpose: inorder to check uploaded files and save them to the server
+     *
+     */
+    public function file(Request $request)
+    {
+        // change this later to be dynamic
+
+        // new feature will include a factory method of uploading files to the server
+
+        // but all stores will have a version number and a version number will be incremented everytime a new version is uploaded
+        // and bucket hash will be a stores unique hash that will be used to store the files in the server
+
+        // from there we have a base file system as such for our upload structure
+
+        // for now we will keep our upload system the same, but we will have to change the file structure to be dynamic later one
+        // otherwise we will have a collision.
+
+        /**
+         *   @blueprint:
+         *              \v1\
+         *                   \sioasdfjdiujfsd\
+         *
+         *                      BASE DIRECTORY
+         *
+         *                      SERVER GENERATATED DIRECTORY.
+         *
+         *                                     \recipeImages\catphoto.jpg
+         *
+         */
+
+        $uploadDirectory = '/fs/v1/recipes/';
+
+        // file upload function here
+        $file = $request->file('file');
+        $uploaded = $file->store('public/v1/recipes/');
+
+        // get and move it to the public server
+        $file_name = basename($uploaded);
+
+        // move the file from the private folder to the public folder
+        $movedFile = $file->move(public_path($uploadDirectory), $file_name);
+
+        // do some validation checks here
+        // return the path of the file to the client side
+        $newFileLocation = $uploadDirectory . $file_name;
+
+        // store the uploaded file on the file system
+        // return the location of the file to the client side.
+        return response()->json(['success' => true, 'uploaded' => $newFileLocation], 200);
+    }
+
+    /**
+     *
+     *
+     *  @purpose: inorder to add a new recipe to the system
+     *
      */
 
-
-     public function create(Request $request)
+     public function add(Request $request)
      {
-        // here we will create a new recipe into the system.
-     }
+            $data = $request->all();
 
+
+        // we use some closure functions here to validate the data that we are going to add to the system.
+
+        function validateRecipeSummary($data)
+        {
+            // here we will validate the recipe summary information that we are going to add to the system.
+
+        }
+
+
+        function validateRecipeInstructions($data)
+        {
+            // here we will validate the recipe instructions information that we are going to add to the system.
+
+        }
+
+
+        function validateRecipeIngredients($data)
+        {
+            // here we will validate the recipe ingredients information that we are going to add to the system.
+
+        }
+
+
+        function validateRecipeNutrition($data)
+        {
+            // here we will validate the recipe nutrition information that we are going to add to the system.
+
+        }
+
+
+        function validateRecipeCookingTime($data)
+        {
+            // here we will validate the recipe cooking time information that we are going to add to the system.
+
+        }
+
+
+
+        return response()->json(['status' => 200, 'data' => $data, 'message' => 'Recipe added successfully']);
+
+     }
 
      /**
       *  @method: delete

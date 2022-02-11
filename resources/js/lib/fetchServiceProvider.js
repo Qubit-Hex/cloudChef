@@ -127,6 +127,61 @@ export default class FetchServiceProvider {
 
     /**
      *
+     *  @method: post
+     *
+     *  @purpose: to fetch data from an api using a post request and return the data no callback
+     *
+     */
+
+    async post(url, data, headers) {
+        let request = new Request(url, {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: headers
+        });
+
+        return fetch(request)
+            .then(response => {
+                return new Promise((resolve, reject) => {
+                    response.json().then(data => {
+                        resolve(data);
+                    });
+                });
+            }).catch(error => {
+                console.log(error);
+            });
+    }
+
+    /**
+     *
+     *  @method: upload
+     *
+     *  @purpose: to upload a file to an api using a post request
+     * 
+     */
+
+    async upload(url, data, headers) {
+        let request = new Request(url, {
+            method: 'POST',
+            body: data,
+            headers: headers
+        });
+
+        return fetch(request)
+            .then(response => {
+                return new Promise((resolve, reject) => {
+                    response.json().then(data => {
+                        resolve(data);
+                    });
+                });
+            }).catch(error => {
+                console.log(error);
+            });
+    }
+
+
+    /**
+     *
      * @method: put
      *
      * @purpose: to fetch data from an api using a put request

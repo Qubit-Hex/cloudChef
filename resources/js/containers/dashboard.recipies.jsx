@@ -90,15 +90,11 @@ export const DashboardRecipies = (props) => {
                             }}>
                             Edit<i className="fas fa-edit m-2"></i>
                         </button>
-
-
                     </td>
                 </tr>
             )
         });
-
     }
-
 
 
     return (
@@ -156,6 +152,7 @@ export const DashboardRecipies = (props) => {
             {/** add a component inorder to dynamically search the recipes  in the database */}
             <div className="row">
                 <div id='modal-container' className="modal-container"></div>
+                <div id="modal-alert-container"></div>
                         <div className="col card fit-table">
                             <h2 className="header-subtitle text-center mt-4 ">
                             {"Current store recipes"}
@@ -181,9 +178,6 @@ export const DashboardRecipies = (props) => {
                                  *              and then update the view to reflect the changes on that datbase
                                  *
                                  * */}
-
-
-
                                 <table className='table mt-2 mb-2'>
                                     <thead>
                                         <tr>
@@ -199,14 +193,9 @@ export const DashboardRecipies = (props) => {
                                         {/** trigger the generator inorder to display our recipe data form the data
                                          *  fetched from the database.
                                          */}
-
-
                                         {  generateTablesRows() }
-
-
                                     </tbody>
                                 </table>
-
                             {/** modern recipe table for viewing recipes in a  */}
                    </div>
                 </div>

@@ -1018,14 +1018,6 @@ thead
     box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
 }
 
-
-// change the modal style if recipe-mod and modal are together
-
-.modal.recipe-modal {
-
-}
-
-
 .recipe-modal {
 
 
@@ -1073,4 +1065,19 @@ thead
     .desktop-view {
         display: none;
     }
+}
+
+
+
+// alert section
+
+
+.alert-container {
+    position: fixed;
+    bottom: 0;
+    left: 25%;
+    width: 50%;
+    z-index: 9999;
+    margin: 0;
+
 }

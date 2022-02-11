@@ -8,177 +8,87 @@
  *
  */
 
-import _ from "lodash";
+import _, { result } from "lodash";
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
-
-/**
- *
- * @component  Add Ingredents
- *
- *
- */
-
-
-const AddRecipeIngredients = (props) => {
+import ReactDOM, { unmountComponentAtNode } from "react-dom";
 
 
 
-    // the state where we will hold the ingredients
-    const [ingredient, setIngredient] = React.useState([]);
+// sub components export for the parent component
 
-    // close the modal window
-    const closeWindow = () => {
-        let container = document.getElementById("modal-container");
-        return ReactDOM.unmountComponentAtNode(container);
-    };
-
-
-
-    return (
-        <div className="modal apply-modal-animation recipe-modal">
-        <div
-            className="modal-dialog"
-            style={{
-                maxWidth: "80%",
-            }}
-        >
-            <div class="modal-content w-75">
-                <div class="modal-header">
-                    <h5 class="modal-title "> Add Recipe </h5>
-                    <button
-                        type="button"
-                        class="btn-transparent modal-close far fa-times-circle"
-                        aria-label="Close"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            closeWindow();
-                        }}
-                    ></button>
-                </div>
-                <div
-                    class="modal-body d-flex"
-                    style={{
-                        padding: "50px",
-                    }}
-                >
-        <div className='container'>
-        <div className="row">
-        <div className="col-md-12">
-            <h4 className='header-subtitle'> Ingredients </h4>
-            <div className="form-group">
-            <label htmlFor="recipe-ingredents">Add Ingredient </label>
-             <input type='text' className="form-control mt-2 mb-2" id="recipe-ingredents" placeholder="Enter ingredents" />
-             <button className='btn btn-message mt-2 mx-auto d-block' onClick={(e) => {
-                // append the the ingredents to the ingredents array
-                let ingredents = document.getElementById("recipe-ingredents").value;
-                // append the ingredents to the ingredents array
-                setIngredient(ingredient => [...ingredient, ingredents]);
-            }}> Add Ingredents </button>
-
-            </div>
-        </div>
-        </div>
-
-        <div className='row'>
-            {/** here we will render a table with the new ingrednets that we are going to add to the recipe */}
-            {/** refactor this into a componet that we will pass out state into,  */}
-            <table className='table mt-lg-3'>
-                <thead>
-                    <tr>
-                        <th> Ingredient </th>
-                        <th> Action </th>
-                    </tr>
-                </thead>
-
-                <tbody id='recipe-ingredents-list-container'>
-                    {/** our put will be generated here  */}
-                    {
-
-                    ingredient.map((item, index) => {
-                    return (
-                        <tr key={index}>
-                            <td> {item} </td>
-                            <td> <button className='btn btn-danger w-25 mx-auto d-block' data-key={index} onClick={
-                                // remove an item from the ingredents array
-                                (e) => {
-                                    let newState = ingredient;
-
-                                    // map all the ingredents in the array that does not equal our data key
-                                    let newArray = newState.map((item, key) => {
-                                        if (index !== key) {
-                                            return item;
-                                        }
-                                        // remove empty values
-                                    });
-                                    // remove all the empty values from the array
-                                    let cleanArray = newArray.filter(item => item);
-                                    setIngredient(cleanArray);
-                                }
-
-                            }> Remove </button></td>
-                        </tr>
-                    );
-                })
-                }
-                </tbody>
-            </table>
-        </div>
-        <div className="row-cols-1">
-                                {/** next and back buttons for the dialog  */}
-                                <div className='col mx-auto d-block'>
-                                    <button onClick={
-                                        (e) => {
-                                            alert('next page');
-                                        }
-                                    }
-                                        className="btn btn-message w-25 btn-block m-3"
-                                    >
-                                        Next
-                                    </button>
-
-                                    <button
-                                        className="btn btn-danger w-25 btn-block m-3"
-                                        onClick={(e) => {
-                                            alert('back page');
-
-                                        }}
-
-                                    >
-                                        Back
-                                    </button>
-
-
-                                </div>
-                                </div>
-
-        </div>
-
-        </div>
-        </div>
-        </div>
-        </div>
-    );
-}
+import { CreateNutritionalFacts } from "./core/create.NutritionalFacts";
+import { AddRecipeIngredients } from "./core/create.addRecipeIngredients";
+import FetchServiceProvider from "../../../lib/fetchServiceProvider";
 
 
 export const CreateRecipeModal = (props) => {
     // close the modal windows to the application
+
+
     const closeWindow = () => {
         let container = document.getElementById("modal-container");
         return ReactDOM.unmountComponentAtNode(container);
     };
 
-
-    // active the handle igredients page of the application
-
+    // check if the data is being passed to the component
     const handleIngredients = () => {
         let container = document.getElementById("modal-container");
 
-        return ReactDOM.render(<AddRecipeIngredients />, container);
+        // load all the user Inputs
+        let inputElements = container.querySelectorAll('input');
+
+        // return the values of the inputs to a object
+        let userInputs = _.map(inputElements, (input) => {
+           // return a object with the name as the key and the value as the value
+           // check inputs is a radio or a text input
+           // we need to perform the checks on the operatation.
+              if (input.type === "radio") {
+                  // check if the radio button is checked
+                    if (input.checked === true) {
+                        return {
+                            [input.name]: input.value
+                        }
+                }
+              }
+                if (input.type === "text") {
+                    return {
+                        [input.name]: input.value
+                    }
+                }
+                if (input.type === "file") {
+                    // send the file to the server side api for processing
+                    const api = new FetchServiceProvider();
+                    const route = "/api/store/recipes/file";
+
+                    const headers = {
+                        // headers for uploading the file
+                        "Accept": "application/json"
+
+                    }
+
+                    // get the raw binary data of the file
+                    const data = new FormData();
+                    data.append("file", input.files[0], input.files[0].name);
+
+                    console.log(data.get(input.files[0].name));
+
+                    // send the file to the server
+                    api.upload(route, data, headers).then((response) => {
+                        console.log(response);
+                    })
+                }
+        });
+
+        // now convert userInputs into a single object
+        let userInputsObject = _.reduce(userInputs, (result, input) => {
+            return {...result, ...input}
+        }, {});
+
+        // we will pass the state of the object into each component. This will be used to update the state of the application
+
+        // wrap this in setTimeout to wait for the file to be ready
+            return ReactDOM.render(<AddRecipeIngredients  recipeSummary={userInputsObject}/>, container);
     }
-
-
 
     // create our modal the will store the recipe information
     return (
@@ -219,6 +129,7 @@ export const CreateRecipeModal = (props) => {
                                     <input
                                         type="file"
                                         class="form-control mt-2 mb-2"
+                                        name='recipeImage'
                                         id="createrecipe-uploadimage"
                                     />
                                 </div>
@@ -230,7 +141,7 @@ export const CreateRecipeModal = (props) => {
                                 <div className="col-md-12">
                                     <div className="form-group">
                                         <label htmlFor="createrecipe-name">Recipe Name</label>
-                                        <input type="text" className="form-control mt-2 mb-2" id="createrecipe-name" placeholder="Enter recipe name" />
+                                        <input type="text" name='recipeName' className="form-control mt-2 mb-2" id="createrecipe-name" placeholder="Enter recipe name" />
                                     </div>
                                 </div>
                             </div>
@@ -240,7 +151,7 @@ export const CreateRecipeModal = (props) => {
                                     <label for="exampleFormControlSelect1">
                                         Category Name
                                     </label>
-                                    <input type='text' className='form-control mt-2 mb-2' placeholder='Please enter a category Name' />
+                                    <input type='text' name='recipeCatagory' className='form-control mt-2 mb-2' placeholder='Please enter a category Name' />
                                 </div>
                             </div>
 
@@ -265,9 +176,9 @@ export const CreateRecipeModal = (props) => {
                                             <input
                                                 class="form-check-input"
                                                 type="radio"
-                                                name="inlineRadioOptions"
-                                                id="inlineRadio1"
-                                                value="option1"
+                                                name="glutenFree"
+                                                id="inlineRadio"
+                                                value="true"
                                             />
                                             <label
                                                 class="form-check-label"
@@ -280,9 +191,9 @@ export const CreateRecipeModal = (props) => {
                                             <input
                                                 class="form-check-input"
                                                 type="radio"
-                                                name="inlineRadioOptions"
+                                                name="glutenFree"
                                                 id="inlineRadio2"
-                                                value="option2"
+                                                value="false"
                                             />
                                             <label
                                                 class="form-check-label"
@@ -304,9 +215,9 @@ export const CreateRecipeModal = (props) => {
                                             <input
                                                 class="form-check-input"
                                                 type="radio"
-                                                name="inlineRadioOptions"
+                                                name="dairyFree"
                                                 id="inlineRadio3"
-                                                value="option1"
+                                                value="true"
                                             />
                                             <label
                                                 class="form-check-label"
@@ -320,9 +231,9 @@ export const CreateRecipeModal = (props) => {
                                             <input
                                                 class="form-check-input"
                                                 type="radio"
-                                                name="inlineRadioOptions"
+                                                name="dairyFree"
                                                 id="inlineRadio3"
-                                                value="option1"
+                                                value="false"
                                             />
                                             <label
                                                 class="form-check-label"
@@ -346,9 +257,9 @@ export const CreateRecipeModal = (props) => {
                                             <input
                                                 class="form-check-input"
                                                 type="radio"
-                                                name="inlineRadioOptions"
-                                                id="inlineRadio3"
-                                                value="option1"
+                                                name="nutFree"
+                                                id="inlineRadio4"
+                                                value="true"
                                             />
                                             <label
                                                 class="form-check-label"
@@ -362,9 +273,9 @@ export const CreateRecipeModal = (props) => {
                                             <input
                                                 class="form-check-input"
                                                 type="radio"
-                                                name="inlineRadioOptions"
+                                                name="nutfeee"
                                                 id="inlineRadio3"
-                                                value="option1"
+                                                value="false"
                                             />
                                             <label
                                                 class="form-check-label"
@@ -386,9 +297,9 @@ export const CreateRecipeModal = (props) => {
                                             <input
                                                 class="form-check-input"
                                                 type="radio"
-                                                name="inlineRadioOptions"
+                                                name="eggFree"
                                                 id="inlineRadio3"
-                                                value="option1"
+                                                value="true"
                                             />
                                             <label
                                                 class="form-check-label"
@@ -402,9 +313,9 @@ export const CreateRecipeModal = (props) => {
                                             <input
                                                 class="form-check-input"
                                                 type="radio"
-                                                name="inlineRadioOptions"
+                                                name="eggFree"
                                                 id="inlineRadio3"
-                                                value="option1"
+                                                value="false"
                                             />
                                             <label
                                                 class="form-check-label"
@@ -427,9 +338,9 @@ export const CreateRecipeModal = (props) => {
                                             <input
                                                 class="form-check-input"
                                                 type="radio"
-                                                name="inlineRadioOptions"
+                                                name="fishFree"
                                                 id="inlineRadio3"
-                                                value="option1"
+                                                value="true"
                                             />
                                             <label
                                                 class="form-check-label"
@@ -443,9 +354,9 @@ export const CreateRecipeModal = (props) => {
                                             <input
                                                 class="form-check-input"
                                                 type="radio"
-                                                name="inlineRadioOptions"
+                                                name="fishFree"
                                                 id="inlineRadio3"
-                                                value="option1"
+                                                value="false"
                                             />
                                             <label
                                                 class="form-check-label"
@@ -479,9 +390,9 @@ export const CreateRecipeModal = (props) => {
                                             <input
                                                 class="form-check-input"
                                                 type="radio"
-                                                name="inlineRadioOptions"
+                                                name="sweet"
                                                 id="inlineRadio1"
-                                                value="option1"
+                                                value="true"
                                             />
                                             <label
                                                 className="for-check-label"
@@ -494,9 +405,9 @@ export const CreateRecipeModal = (props) => {
                                             <input
                                                 class="form-check-input"
                                                 type="radio"
-                                                name="inlineRadioOptions"
+                                                name="sweet"
                                                 id="inlineRadio2"
-                                                value="option2"
+                                                value="false"
                                             />
                                             <label
                                                 className="form-check-label"
@@ -517,9 +428,9 @@ export const CreateRecipeModal = (props) => {
                                             <input
                                                 class="form-check-input"
                                                 type="radio"
-                                                name="inlineRadioOptions"
+                                                name="savory"
                                                 id="inlineRadio1"
-                                                value="option1"
+                                                value="true"
                                             />
                                             <label
                                                 className="for-check-label"
@@ -532,9 +443,9 @@ export const CreateRecipeModal = (props) => {
                                             <input
                                                 class="form-check-input"
                                                 type="radio"
-                                                name="inlineRadioOptions"
+                                                name="savory"
                                                 id="inlineRadio2"
-                                                value="option2"
+                                                value="false"
                                             />
                                             <label
                                                 className="form-check-label"
@@ -556,9 +467,9 @@ export const CreateRecipeModal = (props) => {
                                             <input
                                                 class="form-check-input"
                                                 type="radio"
-                                                name="inlineRadioOptions"
+                                                name="spicy"
                                                 id="inlineRadio1"
-                                                value="option1"
+                                                value="true"
                                             />
                                             <label
                                                 className="for-check-label"
@@ -571,9 +482,9 @@ export const CreateRecipeModal = (props) => {
                                             <input
                                                 class="form-check-input"
                                                 type="radio"
-                                                name="inlineRadioOptions"
+                                                name="spicy"
                                                 id="inlineRadio2"
-                                                value="option2"
+                                                value="false"
                                             />
                                             <label
                                                 className="form-check-label"
@@ -586,28 +497,24 @@ export const CreateRecipeModal = (props) => {
                                 </div>
                             </div>
 
-                            <div className="row">
+                            <div className="row mt-4 mx-auto d-block">
                                 {/** next and back buttons for the dialog  */}
-                                <div className='col'>
+
+                                <div className="col-md-6 mx-auto d-block">
+
+
                                     <button onClick={
                                         (e) => {
                                             handleIngredients();
                                         }
                                     }
-                                        className="btn btn-message w-25 btn-block m-3"
+                                        className="btn btn-message w-50 btn-block m-3"
                                     >
                                         Next
                                     </button>
-
-                                    <button
-                                        className="btn btn-danger w-25 btn-block m-3"
-
-                                    >
-                                        Back
-                                    </button>
-
-
                                 </div>
+
+
                                 </div>
                         </div>
                     </div>

@@ -245,6 +245,10 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
 
               Route::get('/update', [recipes::class, 'update'])->name('recipes/update');
 
+
+              // this is a route we will use to verify uploaded files
+              Route::post('/file', [recipes::class, 'file'])->name('recipes/file');
+
           });
 
      });
