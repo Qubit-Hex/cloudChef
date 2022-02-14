@@ -151,9 +151,46 @@ class recipes extends Controller
             $data = $request->all();
         // we use some closure functions here to validate the data that we are going to add to the system.
 
+        // structure of our data
+
+        $nutritionalFacts = $data['nutritionalFacts'];
+        $recipeCookingTime = $data['recipeCookingTime'];
+        $recipeIngredients = $data['recipeIngredients']; // array strucutre
+        $recipeInstructions = $data['recipeInstructions']; // array structure
+        $recipeSummary = $data['recipeSummary'];
+
+
+        // we going to check the log if the file exists
+        $fileToken = function () use ($recipeSummary) {
+
+            $logEntry = DB::table('logs_recipe_file_logs')->where('honeypot_hash', $recipeSummary['key'])->first();
+
+            if ($logEntry) {
+                return true;
+            }
+            return false;
+        };
+
+
+        // check to see if the log entry of the file exists
+        // if so then proccess to the next step of the process
+        if (!$fileToken()) {
+            return response()->json(['error' => 'Invalid file token']);
+        }
+
+        // next lets insert some of the data
+
+        // OK I  JUST FIGURED OUT THAT THE DATABASE IS KIND OF MESSED UP
+        // I NEED TO REFACTOR THE TABLES INORDER FOR THE TABLE RELATIONSHIPS TO WORK
+        // BE I LITTERALLY HAVE a recipe concencry deadlock problem
+
+        
+
+
+
         // return the response to the client side.
         return response()->json(['status' => 200, 'data' => $data,
-         'message' => 'Recipe added successfully']);
+         'message' => 'Recipe added successfully', 'result' => $fileToken()]);
 
      }
 

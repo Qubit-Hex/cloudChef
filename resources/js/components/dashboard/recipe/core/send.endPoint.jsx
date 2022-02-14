@@ -53,7 +53,7 @@ import FetchServiceProvider from "../../../../lib/fetchServiceProvider";
 
 const TemplateModal = (props) => {
 
-    // close the modal container is. 
+    // close the modal container is.
     const closeWindow = () => {
         let container = document.getElementById('modal-container');
         // unmount the component
@@ -106,16 +106,12 @@ const TemplateModal = (props) => {
 
 export const SendEndPoint = (props) => {
 
-
-
-
-    console.log(props);
-
     // we will hold the message from our api
     const [apiMesssage, setApiMessage] = React.useState([]);
     // add an error boundry to our component
     const [error, setError] = React.useState(false);
     const [image, setImage] = React.useState(null);
+    const [imageToken, setImageToken] = React.useState(null);
 
     const query = props.query;
 
@@ -154,7 +150,15 @@ export const SendEndPoint = (props) => {
 
     // return a success message to the user or a faliure message to the user
     return (
-       <TemplateModal title="Recipe Submitted" />
+       <TemplateModal title="Recipe Submitted" body={
+              <div>
+                  <button className='btn btn-success' onClick={
+                      (e) => {
+                          return sendData();
+                      }
+                  }>Send Data </button>
+            </div>
+       } />
     );
 
 }
