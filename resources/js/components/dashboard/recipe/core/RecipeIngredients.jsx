@@ -16,8 +16,6 @@
 
  export const RecipeIngredients = (props) => {
 
-    console.log(props);
-    
     return (
         <div className='recipe-ingredients'>
         {/** ingedent list for the recipe selected  */}

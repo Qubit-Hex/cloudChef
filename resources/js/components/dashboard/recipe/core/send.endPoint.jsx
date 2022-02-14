@@ -7,6 +7,8 @@
  */
 
 
+import { data } from "jquery";
+import { repeat } from "lodash";
 import React from "react";
 import ReactDOM from "react-dom";
 
@@ -38,11 +40,76 @@ import FetchServiceProvider from "../../../../lib/fetchServiceProvider";
      |____/
  */
 
+/**
+ *     @component TemplateModal
+ *
+ *     @purpose: inorder to generate template modal
+ *
+ *    @props: component that you want to drop in the return statement
+ *
+ */
+
+
+
+const TemplateModal = (props) => {
+
+    // close the modal container is. 
+    const closeWindow = () => {
+        let container = document.getElementById('modal-container');
+        // unmount the component
+        return ReactDOM.unmountComponentAtNode(container);
+    }
+
+    return (
+        <div className="modal apply-modal-animation recipe-modal">
+        <div
+            className="modal-dialog"
+            style={{
+                maxWidth: "80%",
+            }}
+        >
+            <div class="modal-content w-75">
+                <div class="modal-header">
+                    <h5 class="modal-title "> { props.title } </h5>
+                    <button
+                        type="button"
+                        class="btn-transparent modal-close far fa-times-circle"
+                        aria-label="Close"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            closeWindow();
+                        }}
+                    ></button>
+                </div>
+                <div
+                    class="modal-body d-flex"
+                    style={{
+                        padding: "10px",
+                    }}>
+                        {props.body }  </div>
+                </div>
+            </div>
+        </div>
+    );
+
+}
+
+
+/**
+ *
+ *  @component SendEndPoint
+ *
+ *
+ *  @purpose to send Our Recipe Data to our end point for processing,,, this is the last component in the process
+ */
 
 
 export const SendEndPoint = (props) => {
 
 
+
+
+    console.log(props);
 
     // we will hold the message from our api
     const [apiMesssage, setApiMessage] = React.useState([]);
@@ -53,7 +120,7 @@ export const SendEndPoint = (props) => {
     const query = props.query;
 
 
-    const sendData = () => {
+    const  sendData = async () => {
         const api =     new FetchServiceProvider();
         const route =  "/api/store/recipes/add";
         const headers = {
@@ -61,41 +128,33 @@ export const SendEndPoint = (props) => {
             "Accept": "application/json"
         }
 
-        const data = {
+
+        // might chage this to a paramater later
+        // but i have to fix the bug first...
+
+        let data = {
             recipeSummary: query.recipeSummary,
             recipeIngredients: query.recipeIngredients,
             recipeInstructions: query.recipeInstructions,
             recipeCookingTime: query.recipeCookingTime,
-            nutritionalFacts: query.nutritionalFacts
+            nutritionalFacts: query.nutritionalFacts,
         }
 
-
-    // set a time out to wait for the image to be uploaded
+        // set our image url to the data object
         return api.post(route, data, headers);
     }
 
+    // send the data to our api endpoint for proccessing.
+    React.useEffect(() => {
 
-    // set the state to the data that we have recieved from our api
-    React.useEffect( () => {
-
-
-        sendData().then( (response) => {
-            if (response.status === 200) {
-                // remove the error
-                React.
-                // remove api response later its for debugging purposes only.
-                setApiMessage(response.data);
-                setError(false);
-            } else {
-                setError(true);
-            }
+        sendData().then(res => {
+            console.log(res);
         });
     }, []);
 
-    console.log('error', error);
-    console.log('apiMesssage', apiMesssage);
+    // return a success message to the user or a faliure message to the user
     return (
-        <h1> hello sir welcome to the endpoint... </h1>
+       <TemplateModal title="Recipe Submitted" />
     );
 
 }

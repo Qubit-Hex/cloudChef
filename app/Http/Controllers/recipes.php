@@ -24,50 +24,117 @@ class recipes extends Controller
      */
     public function file(Request $request)
     {
-        // change this later to be dynamic
 
-        // new feature will include a factory method of uploading files to the server
-
-        // but all stores will have a version number and a version number will be incremented everytime a new version is uploaded
-        // and bucket hash will be a stores unique hash that will be used to store the files in the server
-
-        // from there we have a base file system as such for our upload structure
-
-        // for now we will keep our upload system the same, but we will have to change the file structure to be dynamic later one
-        // otherwise we will have a collision.
-
-        /**
-         *   @blueprint:
-         *              \v1\
-         *                   \sioasdfjdiujfsd\
-         *
-         *                      BASE DIRECTORY
-         *
-         *                      SERVER GENERATATED DIRECTORY.
-         *
-         *                                     \recipeImages\catphoto.jpg
-         *
-         */
-
-        $uploadDirectory = '/fs/v1/recipes/';
-
+        $uploadDirectory = '/image/recipe/';
         // file upload function here
         $file = $request->file('file');
-        $uploaded = $file->store('public/v1/recipes/');
+        $uploaded = $file->store('public/uploads');
+         $file_name = basename($uploaded);
+        // create a closure to check if the file is an image
+
+
+        // validate that the file is actaully an image and not a fake file or scriot of some sort
+        function validateFile($file) {
+            $allowedFileTypes = [
+                'jpg' => 'image/jpeg',
+                'png' => 'image/png',
+                'gif' => 'image/gif',
+                'svg' => 'image/svg+xml',
+            ];
+
+            if (!in_array($file->getMimeType(), $allowedFileTypes)) {
+                return false;
+            }
+            return true;
+        }
+
+        //  only only svg, png, jpg, jpeg files
+        // we need to filter the file types here inorder to prevent any malicious files from being uploaded
+        $allowed = array('svg', 'png', 'jpg', 'jpeg');
+
+        // check is the file allowed
+        function checkFileAllowed($file_name, $allowed)
+        {
+            $ext = pathinfo($file_name, PATHINFO_EXTENSION);
+            if (in_array($ext, $allowed)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+
+        // check the file size of the image is less than 5mb
+        // limit the file size of the image to 5mb
+        function checkFileSize($file)
+        {
+            if ($file->getSize() > 5000000) {
+                return false;
+            }
+            return true;
+        }
+
+
+        // triggers
+        if (!validateFile($file)) {
+            return response()->json(['error' => 'Invalid file type.']);
+        }
+
+        if (!checkFileAllowed($file_name, $allowed)) {
+            return response()->json(['error' => 'Invalid file type.']);
+        }
+
+        if (!checkFileSize($file)) {
+            return response()->json(['error' => 'File size is too large.']);
+        }
+
+        // next we need to  get the hash value of the file
+        $hash = md5_file($file);
+
+        // lets search the entire database for the file hash exists or not
+        $file_exists = DB::table('recipe')->where('hash', $hash)->first();
+
+        // we are add the section where permission check is needed
+
+        // if the file exists we need to return the file name
+        if ($file_exists) {
+            return response()->json(['success' => true, 'hash' => $hash, 'file' => $file_exists->recipe_image]);
+        }
 
         // get and move it to the public server
-        $file_name = basename($uploaded);
-
         // move the file from the private folder to the public folder
-        $movedFile = $file->move(public_path($uploadDirectory), $file_name);
 
+        $movedFile = $file->move(public_path($uploadDirectory), $file_name);
         // do some validation checks here
+
         // return the path of the file to the client side
+
         $newFileLocation = $uploadDirectory . $file_name;
 
         // store the uploaded file on the file system
         // return the location of the file to the client side.
-        return response()->json(['success' => true, 'uploaded' => $newFileLocation], 200);
+
+        // now lets throw a little honey pot with out response to the client
+
+        $randomBytes = bin2hex(random_bytes(25));
+
+
+        // add a log entry to the database
+
+        // we need to log any attempts to upload files to the server
+        DB::table('logs_recipe_file_logs')->insert([
+            'honeypot_hash' => $randomBytes,
+            'file_hash' => $hash,
+            'file_path' => $newFileLocation,
+            'time_stamp' => date('Y-m-d H:i:s'),
+            'verified' => 0,
+            'message' => 'File uploaded',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+            ]);
+
+
+        return response()->json(['success' => true, 'file' => $hash,  'path' => $newFileLocation], 200);
     }
 
     /**
@@ -79,48 +146,13 @@ class recipes extends Controller
 
      public function add(Request $request)
      {
+         // get the full user input from the user.
             $data = $request->all();
-
-
         // we use some closure functions here to validate the data that we are going to add to the system.
 
-        function validateRecipeSummary($data)
-        {
-            // here we will validate the recipe summary information that we are going to add to the system.
-
-        }
-
-
-        function validateRecipeInstructions($data)
-        {
-            // here we will validate the recipe instructions information that we are going to add to the system.
-
-        }
-
-
-        function validateRecipeIngredients($data)
-        {
-            // here we will validate the recipe ingredients information that we are going to add to the system.
-
-        }
-
-
-        function validateRecipeNutrition($data)
-        {
-            // here we will validate the recipe nutrition information that we are going to add to the system.
-
-        }
-
-
-        function validateRecipeCookingTime($data)
-        {
-            // here we will validate the recipe cooking time information that we are going to add to the system.
-
-        }
-
-
-
-        return response()->json(['status' => 200, 'data' => $data, 'message' => 'Recipe added successfully']);
+        // return the response to the client side.
+        return response()->json(['status' => 200, 'data' => $data,
+         'message' => 'Recipe added successfully']);
 
      }
 

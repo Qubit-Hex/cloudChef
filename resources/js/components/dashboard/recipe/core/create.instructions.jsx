@@ -24,6 +24,7 @@ export const CreateInstructions = (props) => {
 
     // the state where we will hold the instructionss
     const [instructions, setInstructions] = React.useState([]);
+    const [image, setImage] = React.useState(null);
 
     // close the modal window
     const closeWindow = () => {
@@ -48,7 +49,7 @@ export const CreateInstructions = (props) => {
         let modalContainer = document.getElementById('modal-container');
         // the last component inorder to set the data to our api endpoint.
 
-        const messageQuery = {
+        let messageQuery = {
             recipeSummary: props.recipeSummary,
             recipeIngredients: props.recipeIngredients,
             recipeInstructions: instructions,
@@ -56,8 +57,20 @@ export const CreateInstructions = (props) => {
             nutritionalFacts: props.nutritionalFacts
         }
 
-        return ReactDOM.render(<SendEndPoint query={messageQuery}/>, modalContainer);
+        messageQuery.recipeSummary.recipeImage = image;
+
+
+        return ReactDOM.render(<SendEndPoint query={messageQuery} />, modalContainer);
     }
+
+
+    // fetch the data promise the promis and send it to the main send point.
+    React.useEffect(() => {
+
+        props.recipeSummary.recipeImage.then(res => {
+            setImage(res.path);
+        });
+    }, []);
 
 
 
