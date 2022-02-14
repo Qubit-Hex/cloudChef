@@ -22,7 +22,7 @@ export const CreateInstructions = (props) => {
 
 
 
-    // the state where we will hold the instructionss
+    // the state where we will hold the instructions
     const [instructions, setInstructions] = React.useState([]);
     const [image, setImage] = React.useState(null);
 
@@ -78,11 +78,8 @@ export const CreateInstructions = (props) => {
 
         <div className="modal apply-modal-animation recipe-modal">
         <div
-            className="modal-dialog"
-            style={{
-                maxWidth: "80%",
-            }}
-        >
+            className="modal-dialog">
+
             <div class="modal-content w-75">
                 <div class="modal-header">
                     <h5 class="modal-title "> Add Instructions </h5>
@@ -109,15 +106,16 @@ export const CreateInstructions = (props) => {
         <div className="row">
         <div className="col">
             <h4 className='header-subtitle'> Steps </h4>
-            <div className='col-md-6'>
+            <div className='col'>
             <div className="form-group ">
 
                 <label htmlFor="recipe-ingredents">Add Step  </label>
                 <small className='text-muted'> Example: whisk 3 eggs together. </small>
+                <span id='recipeInstructionsError' className='text-danger'></span>
                 <input type='text' className="form-control mt-2 mb-2" id="recipe-ingredents" placeholder="
                 Please Enter: instructions." />
 
-                <button className='btn btn-message mt-2 w-25 mx-auto d-block' onClick={(e) => {
+                <button className='btn btn-message mt-2 mx-auto d-block' onClick={(e) => {
                 // append the the ingredents to the ingredents array
                 let ingredents = document.getElementById("recipe-ingredents").value;
                 // append the ingredents to the ingredents array
@@ -191,7 +189,7 @@ export const CreateInstructions = (props) => {
                     return (
                         <tr key={index}>
                             <td> {item} </td>
-                            <td> <button className='btn btn-danger w-25 mx-auto d-block' data-key={index} onClick={
+                            <td> <button className='btn btn-danger mx-auto d-block' data-key={index} onClick={
                                 // remove an item from the ingredents array
                                 (e) => {
                                     // this is our clean up operation in the ingredents array
@@ -224,26 +222,41 @@ export const CreateInstructions = (props) => {
                                     {/** next and back buttons for the dialog  */}
 
                                         <button
-                                            className="btn btn-danger w-25 btn-block m-3"
+                                            className="btn btn-danger btn-block m-3"
                                             onClick={(e) => {
                                              let modalContainer = document.getElementById('modal-container');
 
                                              // return the previous modal and pass out state to share the information
-                                                return ReactDOM.render(<CreateRecipeTime  recipe={props} />, modalContainer);
-                                            }}
-
-                                        >
+                                                return ReactDOM.render(<CreateRecipeTime
+                                                    recipeIngredients={props.recipeIngredients}
+                                                    recipeSummary={props.recipeSummary}
+                                                    nutritionalFacts={props.nutritionalFacts}/>, modalContainer);
+                                            }}>
                                             Back
                                         </button>
 
 
                                         <button onClick={
                                             (e) => {
-                                                handleFinalize();
+
+                                                // some validation check before we move on
+                                                const instructionData = instructions;
+
+                                                if (instructionData.length > 0) {
+                                                    // reset the errorContainer
+                                                    let errorContainer = document.getElementById('recipeInstructionsError');
+                                                    ReactDOM.unmountComponentAtNode(errorContainer);
+                                                    handleFinalize();
+                                                } else {
+                                                    const errorContainer = document.getElementById('recipeInstructionsError');
+                                                    // trigger a bootstrap alert in order to notify the user that the ingredients
+                                                    // we must have at least one ingredents
+                                                    ReactDOM.render((<div class="alert alert-danger mt-2"> <b> Error: </b> Please add at least one instruction. </div>), errorContainer);
+                                                }
+
                                             }
                                         }
-                                            className="btn btn-message w-25 btn-block m-3"
-                                        >
+                                            className="btn btn-message btn-block m-3">
                                             Next
                                         </button>
 

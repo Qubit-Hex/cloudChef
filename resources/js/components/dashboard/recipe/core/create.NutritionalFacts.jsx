@@ -57,7 +57,7 @@ export const CreateNutritionalFacts = (props) => {
                 let name = modalInputs[i].name;
                 const errorContainer = document.getElementById(name+"Error");
                 inputValidationState.push(false);
-                ReactDOM.render((<div class="alert alert-danger"> <b> Error: </b> {name} cannot be empty. </div>), errorContainer);
+                ReactDOM.render((<div class="alert alert-danger mt-2"> <b> Error: </b> {name} cannot be empty. </div>), errorContainer);
             } else {
                 let name = modalInputs[i].name;
                 const errorContainer = document.getElementById(name+"Error");
@@ -68,16 +68,16 @@ export const CreateNutritionalFacts = (props) => {
                     if (isNaN(modalInputs[i].value)) {
                         // check the name of modal input
                         inputValidationState.push(false);
-                        ReactDOM.render((<div class="alert alert-danger"> <b> Error: </b> {name} must be a number. </div>), errorContainer);
+                        ReactDOM.render((<div class="alert alert-danger mt-2"> <b> Error: </b> {name} must be a number. </div>), errorContainer);
                     } else {
                         // check the name of modal input
                         inputValidationState.push(true);
-                        ReactDOM.render((<div class="alert alert-success"> <b> Success: </b> {name} is valid. </div>), errorContainer);
+                        ReactDOM.render((<div class="alert alert-success mt-2"> <b> Success: </b> {name} is valid. </div>), errorContainer);
                     }
                 } else {
                     // invalid type error boundary
                     inputValidationState.push(false);
-                    ReactDOM.render((<div class="alert alert-danger"> <b> Error: </b> {name} must be a number. </div>), errorContainer);
+                    ReactDOM.render((<div class="alert alert-danger mt-2"> <b> Error: </b> {name} must be a number. </div>), errorContainer);
                 }
             }
         }
@@ -119,7 +119,6 @@ export const CreateNutritionalFacts = (props) => {
         // next we will
         ReactDOM.render(<CreateRecipeTime   recipeIngredients={props.recipeIngredients}
                                             recipeSummary={props.recipeSummary}
-                                            nutritionalFacts={inputObject}
                                             nutritionalFacts={inputObject}/>, container);
     }
 
