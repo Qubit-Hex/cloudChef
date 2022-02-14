@@ -147,9 +147,19 @@ export const CreateRecipeModal = (props) => {
             return {...result, ...input}
         }, {});
 
-        // we will pass the state of the object into each component. This will be used to update the state of the application
-        // wrap this in setTimeout to wait for the file to be ready
-            return ReactDOM.render(<AddRecipeIngredients  recipeSummary={userInputsObject}/>, container);
+        // get the result of the  file upload ? 
+            userInputsObject.recipeImage.then(result => {
+                // preform a render based on the response that we get from the server
+                if (result.error) {
+                    let errorContainer = document.getElementById("recipeImage-error");
+                    // now lets render the error message to the dom
+                    ReactDOM.render(<div class="alert alert-danger">{result.error}</div>, errorContainer);
+                } else {
+                    // we will pass the state of the object into each component. This will be used to update the state of the application
+                    // wrap this in setTimeout to wait for the file to be ready
+                    return ReactDOM.render(<AddRecipeIngredients  recipeSummary={userInputsObject}/>, container);
+                }
+            });
     }
 
     // create our modal the will store the recipe information

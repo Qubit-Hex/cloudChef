@@ -25,10 +25,10 @@ class recipes extends Controller
     public function file(Request $request)
     {
 
-        $uploadDirectory = '/image/recipe/';
+        $uploadDirectory = '/user-content/recipe/';
         // file upload function here
         $file = $request->file('file');
-        $uploaded = $file->store('public/uploads');
+        $uploaded = $file->store('public/uploads/recipeImage/');
          $file_name = basename($uploaded);
         // create a closure to check if the file is an image
 
@@ -38,7 +38,6 @@ class recipes extends Controller
             $allowedFileTypes = [
                 'jpg' => 'image/jpeg',
                 'png' => 'image/png',
-                'gif' => 'image/gif',
                 'svg' => 'image/svg+xml',
             ];
 
@@ -77,15 +76,15 @@ class recipes extends Controller
 
         // triggers
         if (!validateFile($file)) {
-            return response()->json(['error' => 'Invalid file type.']);
+            return response()->json(['error' => 'Invalid file type. only svg, png, jpg files are allowed.']);
         }
 
         if (!checkFileAllowed($file_name, $allowed)) {
-            return response()->json(['error' => 'Invalid file type.']);
+            return response()->json(['error' => 'Invalid file type. only svg, png, jpg files are allowed.']);
         }
 
         if (!checkFileSize($file)) {
-            return response()->json(['error' => 'File size is too large.']);
+            return response()->json(['error' => 'File size is too large. max size is 5mb.']);
         }
 
         // next we need to  get the hash value of the file
@@ -134,7 +133,9 @@ class recipes extends Controller
             ]);
 
 
-        return response()->json(['success' => true, 'file' => $hash,  'path' => $newFileLocation], 200);
+        // WE WILL be sending a honey pot to the client side
+        // check check later one if the file hash matches the honey pot hash
+        return response()->json(['success' => true, 'file' => $hash, 'key' => $randomBytes,  'path' => $newFileLocation], 200);
     }
 
     /**

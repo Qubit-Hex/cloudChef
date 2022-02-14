@@ -43,17 +43,21 @@ import { CreateNutritionalFacts } from "./create.NutritionalFacts";
     // handle the nutritional facts for the ingredients
     const handleNutritionalFacts = () => {
         let modalContainer = document.getElementById('modal-container');
-        return ReactDOM.render(<CreateNutritionalFacts recipeSummary={props.recipeSummary} recipeIngredients={ingredient} />, modalContainer);
+        // does the ingredient list have any ingredients?
+        if (ingredient.length === 0) {
+            let errorWrapper = document.getElementById('recipeIngredientsError');
+            // render error message to the screen
+            return ReactDOM.render((<div class="alert alert-danger"> <b> Error: </b> Your Recipe Must contain at least one ingredient. </div>), errorWrapper);
+        } else {
+            // if the list is not empty render our next page that will handle the nutritional facts
+            return ReactDOM.render(<CreateNutritionalFacts recipeSummary={props.recipeSummary} recipeIngredients={ingredient} />, modalContainer);
+        }
     }
 
     return (
         <div className="modal apply-modal-animation recipe-modal">
         <div
-            className="modal-dialog"
-            style={{
-                maxWidth: "80%",
-            }}
-        >
+            className="modal-dialog">
             <div class="modal-content w-75">
                 <div class="modal-header">
                     <h5 class="modal-title "> Add Recipe </h5>
@@ -76,14 +80,15 @@ import { CreateNutritionalFacts } from "./create.NutritionalFacts";
         <div className='container'>
         <div className="row">
         <div className="col">
-            <h4 className='header-subtitle'> Ingredients </h4>
+            <h4 className='header-subtitle text-center'> Ingredients </h4>
             <div className="form-group">
-            <div className='col-md-6'>
+            <div className='col-md-10 mx-auto d-block'>
+                <div id='modal-alert-container'></div>
                 <label htmlFor="recipe-ingredents">Add Ingredient </label>
                 <small className='text-muted'> Example: 6oz of demi glaze. </small>
                 <input type='text' className="form-control mt-2 mb-2" id="recipe-ingredents" placeholder="Enter ingredents" />
-
-                <button className='btn btn-message mt-2 w-25 mx-auto d-block' onClick={(e) => {
+                <span  id='recipeIngredientsError' className='text-danger'></span>
+                <button className='btn btn-message mt-2 mx-auto d-block' onClick={(e) => {
                 // append the the ingredents to the ingredents array
                 let ingredents = document.getElementById("recipe-ingredents").value;
                 // append the ingredents to the ingredents array
@@ -93,6 +98,7 @@ import { CreateNutritionalFacts } from "./create.NutritionalFacts";
                     setIngredient([...ingredient, ingredents]);
                     document.getElementById("recipe-ingredents").value = "";
                 } else {
+
                     // we will trigger a bootstrap alert to notify the user that the ingredents were added
                     // we will also clear the input field
 
@@ -114,7 +120,7 @@ import { CreateNutritionalFacts } from "./create.NutritionalFacts";
                             }
                             aria-label="close">&times;</button>
                             <span>
-                                <strong>Warning!</strong> Please enter an ingredient field cannot be empty.
+                                <strong>Warning:</strong> Your recipe must contain one ingredient.
                             </span>
                         </div>
 
@@ -126,14 +132,16 @@ import { CreateNutritionalFacts } from "./create.NutritionalFacts";
         </div>
         </div>
 
-        <div className='row'>
-            {/** here we will render a table with the new ingrednets that we are going to add to the recipe */}
-            {/** refactor this into a componet that we will pass out state into,  */}
+        <div className='row mt-4'>
+            {/** here we will render a table with the new ingredents that we are going to add to the recipe */}
+            {/** refactor this into a component that we will pass out state into,  */}
 
             {
                 // check our length of our render then render the table
                 checkLength(ingredient) ?  (
-                    <table className='table mt-lg-3'>
+                <div>
+                    <h3 className='header-subtitle text-center'>Ingredient List </h3>
+                    <table className='table mt-4'>
                 <thead>
                     <tr>
                         <th> Ingredient </th>
@@ -150,7 +158,7 @@ import { CreateNutritionalFacts } from "./create.NutritionalFacts";
                     return (
                         <tr key={index}>
                             <td> {item} </td>
-                            <td> <button className='btn btn-danger w-25 mx-auto d-block' data-key={index} onClick={
+                            <td> <button className='btn btn-danger mx-auto d-block' data-key={index} onClick={
                                 // remove an item from the ingredents array
                                 (e) => {
                                     // this is our clean up operation in the ingredents array
@@ -174,36 +182,29 @@ import { CreateNutritionalFacts } from "./create.NutritionalFacts";
                 })
                 }
                 </tbody>
-            </table>
+            </table> </div>
                 ) : false
 
             }
         </div>
-                            <div className="row mt-4 mx-auto d-block">
-                                    {/** next and back buttons for the dialog  */}
+                            <div className="row mt-4 ml-4 mx-auto">
+                                { /** make back and next buttons in same row side by side  */}
 
-                                        <button
-                                            className="btn btn-danger w-25 btn-block m-3"
-                                            onClick={(e) => {
-                                                // render the prevoius dialog
-                                                const container = document.getElementById("modal-container");
-                                                return ReactDOM.render(<CreateRecipeModal />, container);
-                                            }}
+                                <div className='col mt-2'>
+                                    <button className='btn btn-danger mx-auto d-block' onClick={(e) => {
+                                        // handle the nutritional facts for the ingredients
+                                        const container = document.getElementById("modal-container");
+                                                    return ReactDOM.render(<CreateRecipeModal />, container);
+                                    }}> Back </button>
+                                </div>
 
-                                        >
-                                            Back
-                                        </button>
+                                <div className='col mt-2'>
+                                    <button className='btn btn-message mx-auto d-block' onClick={(e) => {
+                                        // handle the nutritional facts for the ingredients
+                                        handleNutritionalFacts();
+                                    }}> Next </button>
+                                </div>
 
-
-                                        <button onClick={
-                                            (e) => {
-                                                handleNutritionalFacts();
-                                            }
-                                        }
-                                            className="btn btn-message w-25 btn-block m-3"
-                                        >
-                                            Next
-                                        </button>
 
                                 </div>
                             </div>
