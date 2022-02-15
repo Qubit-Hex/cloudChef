@@ -178,19 +178,175 @@ class recipes extends Controller
             return response()->json(['error' => 'Invalid file token']);
         }
 
-        // next lets insert some of the data
+        // implement the solution for the database relationship here
 
-        // OK I  JUST FIGURED OUT THAT THE DATABASE IS KIND OF MESSED UP
-        // I NEED TO REFACTOR THE TABLES INORDER FOR THE TABLE RELATIONSHIPS TO WORK
-        // BE I LITTERALLY HAVE a recipe concencry deadlock problem
+        // @ stub for the database relationship
+        // table storeRecipes  highest order table to access data
+        // table recipe         child
 
-        
+        // sub tables
+        // recipeSummary    sub component of the recipe
+        // NutritionalData  sub component of the recipe
+        // recipeSteps    a sub component of the recipe
+        // recipeIngredients s
+
+        // unit tests for testing that data base relationships are working
+
+        // OUR FUNCTION TO CREATE OUR TABLES
+
+        // all of our structured quetys will be stored in the database
 
 
+
+
+        /**
+         *
+         *  @function createTableEntry
+         *
+         *
+         *  @purpose: inorder to create a table entry and the return the id assocated with that entty. this is a helper function
+         *
+         */
+
+        function createTableEntry($table, $data)
+        {
+            $DB = DB::table($table)->insert($data);
+
+            // check did the table get created ?
+            $table = DB::table($table)->latest()->first();
+            // return a factory object
+            return $table ? $table->id : false;
+        }
+
+        // main store entry for recipes table
+        $createRecipeEntry = createTableEntry('store_recipes', [
+            'store_id' => 1,
+            'token' =>  bin2hex(random_bytes(25)),
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
+
+
+        // perform our check on the store recipes
+        if (!$createRecipeEntry) {
+            return response()->json(['error' => 'Unable to create recipe entry']);
+        }
+
+
+        // recipe allergy object
+        $createRecipeAllergenEntry =  createTableEntry('recipe_allergens', [
+            'recipe_id' => $createRecipeEntry, // returns the id of the
+            'recipe_allergens' => json_encode([
+            'eggs' => $recipeSummary['eggFree'],
+            'fish' => $recipeSummary['fishFree'],
+            'dairy' => $recipeSummary['dairyFree'],
+            'gluten' => $recipeSummary['glutenFree'],
+            'nut' => $recipeSummary['nutFree'],
+        ]),
+
+        'created_at' => date('Y-m-d H:i:s'),
+        'updated_at' => date('Y-m-d H:i:s')
+    ]);
+
+
+         if (!$createRecipeAllergenEntry) {
+             return response()->json(['error' => 'Failed to create recipe allergens']);
+         }
+
+         // recipe cooking time object
+         $createRecipeCookingTime = createTableEntry('recipe_cooking_time', [
+            'recipe_id' =>  $createRecipeEntry,
+            'recipe_cooking_time' => json_encode($recipeCookingTime),
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+         ]);
+
+         if (!$createRecipeCookingTime) {
+             return response()->json(['error' => 'Failed to create recipe cooking time']);
+         }
+
+
+         // create recipe flavour profile
+         $createRecipeFlavourProfile = createTableEntry('recipe_flavor_profile', [
+            'recipe_id' =>  $createRecipeEntry,
+            'recipe_flavor_profile' => json_encode([
+                'savory' => $recipeSummary['savory'],
+                'sweet' => $recipeSummary['sweet'],
+                'spicy' => $recipeSummary['spicy']
+            ]),
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+         ]);
+
+         if (!$createRecipeFlavourProfile) {
+             return response()->json(['error' => 'Failed to create recipe flavour profile']);
+         }
+         // store the recipe ingredients
+
+         $createRecipeIngredients = createTableEntry('recipe_ingredents', [
+            'recipe_id' =>  $createRecipeEntry,
+            'recipe_ingredients' => json_encode($recipeIngredients),
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+         ]);
+
+        if (!$createRecipeIngredients) {
+                return response()->json(['error' => 'Failed to create recipe ingredients']);
+        }
+
+
+        $recipeNutritionalFacts = createTableEntry('recipe_nutritional_facts',
+        [
+            'recipe_id' =>  $createRecipeEntry,
+            'recipe_nutritional_facts' => json_encode($nutritionalFacts),
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
+
+        // check did the operation get completed correctly
+        if (!$recipeNutritionalFacts) {
+            return response()->json(['error' => 'Failed to create recipe nutritional facts']);
+        }
+
+        // recipe steps
+
+        $recipeSteps = createTableEntry('recipe_steps', [
+            'recipe_id' =>  $createRecipeEntry,
+            'recipe_steps' => json_encode($recipeInstructions),
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
+
+        // check did the operation get completed correctly.
+        if (!$recipeSteps) {
+            return response()->json(['error' => 'Failed to create recipe steps']);
+        }
+
+        // check the recipe entry that the front end will interact with
+
+        $createRecipe = createTableEntry('recipe', [
+            'store_id' => 1,
+            'recipe_id' => $createRecipeEntry,
+            'recipe_name' => $recipeSummary['recipeName'],
+            'recipe_description' => 'some value',
+            'catagory' => $recipeSummary['recipeCatagory'],
+            'recipe_image' => $recipeSummary['recipeImage'],
+            'hash' => $recipeSummary['key'],
+            'recipe_ingredient_id' => $createRecipeIngredients,
+            'recipe_allergens_id' => $createRecipeAllergenEntry,
+            'recipe_cooking_time' => $createRecipeCookingTime,
+            'recipe_steps_id' => $recipeSteps,
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
+
+        if (!$createRecipe) {
+            return response()->json(['error' => 'Failed to create recipe']);
+        }
 
         // return the response to the client side.
-        return response()->json(['status' => 200, 'data' => $data,
-         'message' => 'Recipe added successfully', 'result' => $fileToken()]);
+        return response()->json(['status' => 200, 'data' => $recipeSummary,
+         'message' => 'Recipe added successfully']);
 
      }
 

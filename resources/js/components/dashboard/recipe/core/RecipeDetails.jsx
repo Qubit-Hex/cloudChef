@@ -23,7 +23,7 @@ import { ReactDOM } from "react-dom";
             return "";
         }
         // now lets check if input is equal to true or false
-        return input === true ? "Yes" : "No";
+        return input === "true" ? "Yes" : "No";
     }
 
     return (
@@ -59,7 +59,7 @@ import { ReactDOM } from "react-dom";
                 <div className='col-md-4 m-1'>
                     <small className='text-muted text-center p-2'>
                         {/** brown bread color for bread icon */}
-                        Gluten Free:  <span className='text-danger bold'> { parseInput(props.glutenFree) }</span><br />
+                        Gluten Free:  <span className='text-success bold'> { parseInput(props.glutenFree) }</span><br />
                     </small>
                 </div>
                 <div className='col-md-4 m-1'>
@@ -75,7 +75,7 @@ import { ReactDOM } from "react-dom";
                 <div className='col-md-4 m-1'>
                     <small className='text-muted text-center p-2'>
 
-                        Nut Free: <span className='text-danger' > { parseInput(props.nutFree) } </span>  <br />
+                        Nut Free: <span className='text-success' > { parseInput(props.nutFree) } </span>  <br />
                     </small>
                 </div>
                 <div className='col-md-4 m-1'>
@@ -100,13 +100,13 @@ import { ReactDOM } from "react-dom";
             <div className='row'>
                 <div className='col m-1'>
                     <small className='text-muted text-center p-2'>
-                        Spicy: <span className='text-danger'> { parseInput(props.spicy) } </span>  <br />
+                        Spicy: <span className='text-success '> { parseInput(props.spicy) } </span>  <br />
                     </small>
                 </div>
 
                     <div className='col m-1'>
                         <small className='text-muted text-center p-2'>
-                            Sweet:   <span className='text-danger'> { parseInput(props.sweet)} </span><br />
+                            Sweet:   <span className='text-success'> { parseInput(props.sweet)} </span><br />
                         </small>
                     </div>
 

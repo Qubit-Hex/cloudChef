@@ -175,7 +175,7 @@ export const RecipeModal = (props) => {
 
     }, []);
 
-
+    { console.log(recipeAllergies)}
 // check did the informtion load to the state of the component
 
     return (
@@ -201,7 +201,7 @@ export const RecipeModal = (props) => {
 
                         {/* recipe modal to show the user the recipe details */}
                          <div className='d-flex flex-column justify-content-center align-items-center'>
-                                <h2 className='text-center mt-4 text-center'> <strong>Sliced Steak</strong>  </h2>
+                                <h2 className='text-center mt-4 text-center'> <strong> { recipe.recipe_name } </strong>  </h2>
 
                                 <img src={recipe.recipe_image} width="400px" height="400px" alt="recipe" className='img-fluid modal-recipe-img rounded-2 desktop-view' />
                             </div>

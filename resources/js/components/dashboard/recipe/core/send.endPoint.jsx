@@ -63,11 +63,7 @@ const TemplateModal = (props) => {
     return (
         <div className="modal apply-modal-animation recipe-modal">
         <div
-            className="modal-dialog"
-            style={{
-                maxWidth: "80%",
-            }}
-        >
+            className="modal-dialog">
             <div class="modal-content w-75">
                 <div class="modal-header">
                     <h5 class="modal-title "> { props.title } </h5>
@@ -82,14 +78,33 @@ const TemplateModal = (props) => {
                     ></button>
                 </div>
                 <div
-                    class="modal-body d-flex"
+                    class="modal-body"
                     style={{
                         padding: "10px",
                     }}>
-                        {props.body }  </div>
+                        {props.body }
+
+                    <div
+                        class="modal-footer d-flex justify-content-center"
+                        style={{
+                            'marginTop' : '10px',
+                            'padding': '10px'
+                        }}>
+                            
+                        <button
+                            type="button"
+                            class="btn-transparent btn-sm btn-danger"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                closeWindow();
+                            }}>
+                            Close
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
     );
 
 }
@@ -144,21 +159,45 @@ export const SendEndPoint = (props) => {
     React.useEffect(() => {
 
         sendData().then(res => {
-            console.log(res);
+            if (res.error) {
+                setError(true);
+                setApiMessage(res.error);
+            } else {
+                setApiMessage(res.message);
+            }
         });
     }, []);
 
-    // return a success message to the user or a faliure message to the user
-    return (
-       <TemplateModal title="Recipe Submitted" body={
-              <div>
-                  <button className='btn btn-success' onClick={
-                      (e) => {
-                          return sendData();
-                      }
-                  }>Send Data </button>
-            </div>
-       } />
-    );
+    // create and conditionally error modal if an error occurs
 
+    if (error == true) {
+
+        return (
+            <TemplateModal title="Error" body={
+                <div className='success-message-wrapper'>
+                <img src='/img/errors/cancel.svg' alt='request failed' width={250} height={250} className='img-fluid success-message-icon'/>
+                <br/><br/>
+                <i class="fas fa-hand-paper text-danger"></i>
+                <span className='success-message'> <b className="text-danger"> Request Failed:</b></span>
+                <p className='text-muted mt-4'> <b> Reason:</b>  <span className='text-muted text-danger' > { apiMesssage } </span>  </p>
+
+
+                </div>
+            } />
+
+        );
+    } else {
+        // render the success modal
+        return (
+            <TemplateModal title="Success" body={
+                <div className='success-message-wrapper'>
+                 <img src='/img/SVG/network_outline.svg' class='img-fluid success-message-icon' />
+                 <br/><br/>
+                <i className="fas fa-check-circle text-success"></i>
+                <span className='success-message ml-4'> { apiMesssage }</span>
+
+                </div>
+            } />
+        );
+    }
 }

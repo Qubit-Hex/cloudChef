@@ -2428,6 +2428,7 @@ existing classes or even new classes with specific responsibilities.</val>
 <ref refid="c0c5d85c-8d74-11ec-a2fa-794469808d77"/>
 <ref refid="7cc435b5-8d75-11ec-a629-794469808d77"/>
 <ref refid="c175a0e0-8d75-11ec-ae92-794469808d77"/>
+<ref refid="c49cec90-8d78-11ec-9e81-794469808d77"/>
 <ref refid="8a7e0557-8d72-11ec-a234-794469808d77"/>
 <ref refid="4c7d48c9-8d74-11ec-92dd-794469808d77"/>
 <ref refid="5eb9a552-8d74-11ec-a5f0-794469808d77"/>
@@ -2443,7 +2444,7 @@ existing classes or even new classes with specific responsibilities.</val>
 </Diagram>
 <Class id="5314fd6f-8d72-11ec-8d62-794469808d77">
 <name>
-<val>storeRecipeID</val>
+<val>storeRecipes</val>
 </name>
 <ownedAttribute>
 <reflist>
@@ -2464,7 +2465,7 @@ existing classes or even new classes with specific responsibilities.</val>
 </Class>
 <ClassItem id="5315320f-8d72-11ec-b2e8-794469808d77">
 <matrix>
-<val>(1.0, 0.0, 0.0, 1.0, 189.0, 41.0)</val>
+<val>(1.0, 0.0, 0.0, 1.0, 190.0, 41.0)</val>
 </matrix>
 <width>
 <val>239.0</val>
@@ -3133,7 +3134,7 @@ existing classes or even new classes with specific responsibilities.</val>
 </NodeItem>
 <Comment id="c1759511-8d75-11ec-a7c0-794469808d77">
 <body>
-<val>System to contain stuff such as menu performence, customer satification rating,  reviews etc... </val>
+<val>System to contains stuff such as menu performence, customer satifications ratings, reviews, platecost, food inflation</val>
 </body>
 <presentation>
 <reflist>
@@ -3143,19 +3144,46 @@ existing classes or even new classes with specific responsibilities.</val>
 </Comment>
 <CommentItem id="c175a0e0-8d75-11ec-ae92-794469808d77">
 <matrix>
-<val>(1.0, 0.0, 0.0, 1.0, 660.0, 555.0120040082077)</val>
+<val>(1.0, 0.0, 0.0, 1.0, 584.5, 449.0)</val>
 </matrix>
 <width>
-<val>294.0</val>
+<val>197.0</val>
 </width>
 <height>
-<val>172.0</val>
+<val>184.0</val>
 </height>
 <diagram>
 <ref refid="43db24c2-8d72-11ec-aae4-794469808d77"/>
 </diagram>
 <subject>
 <ref refid="c1759511-8d75-11ec-a7c0-794469808d77"/>
+</subject>
+</CommentItem>
+<Comment id="c49cdc57-8d78-11ec-9257-794469808d77">
+<body>
+<val>the marketing module will be a seperate but this will allow owners to quickly post to social media and easily run marketing canpaigns and promations</val>
+</body>
+<presentation>
+<reflist>
+<ref refid="c49cec90-8d78-11ec-9e81-794469808d77"/>
+</reflist>
+</presentation>
+</Comment>
+<CommentItem id="c49cec90-8d78-11ec-9e81-794469808d77">
+<matrix>
+<val>(1.0, 0.0, 0.0, 1.0, 707.5, 698.5)</val>
+</matrix>
+<width>
+<val>222.5</val>
+</width>
+<height>
+<val>150.48799599179233</val>
+</height>
+<diagram>
+<ref refid="43db24c2-8d72-11ec-aae4-794469808d77"/>
+</diagram>
+<subject>
+<ref refid="c49cdc57-8d78-11ec-9257-794469808d77"/>
 </subject>
 </CommentItem>
 </gaphor>
