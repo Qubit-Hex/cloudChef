@@ -222,7 +222,7 @@ export const CreateInstructions = (props) => {
                                     {/** next and back buttons for the dialog  */}
 
                                         <button
-                                            className="btn btn-danger btn-block m-3"
+                                            className="btn btn-danger btn-block mt-1"
                                             onClick={(e) => {
                                              let modalContainer = document.getElementById('modal-container');
 
@@ -256,7 +256,7 @@ export const CreateInstructions = (props) => {
 
                                             }
                                         }
-                                            className="btn btn-message btn-block m-3">
+                                            className="btn btn-message btn-block mt-1">
                                             Next
                                         </button>
 

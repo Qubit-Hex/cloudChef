@@ -373,6 +373,26 @@ $navbar-color-dashboard:  #cc5656;
         background-color: #5c0000;
     }
 
+    .btn-warning {
+        border: none !important;
+        background-color: #f8c74acc; /* fallback for old browsers */
+        border-radius: 10px;
+        padding: 10px;
+        padding-left: 15px;
+        padding-right: 15px;
+        width: auto;
+        color: rgb(33, 33, 33);
+        font-size: 0.8em;
+        font-weight: bold;
+        width: 100%;
+        margin: auto;
+    }
+
+    .btn-warning:hover {
+        cursor: pointer;
+        background-color: #fcd450;
+    }
+
     /* Message box styling for our application  */
 
     .modal-title {

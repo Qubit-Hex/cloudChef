@@ -42,13 +42,43 @@ import { RecipeIngredients} from './core/RecipeIngredients'
 
 const RecipeCookingTime = (props) => {
 
+
+    const output = JSON.parse(props.data.recipe_cooking_time);
+
+    function convertMinutesToTime(time) {
+        let minutes = time % 60;
+        let hours = (time - minutes) / 60;
+        return hours + " hours " + minutes + " minutes";
+    }
+
     return (
         <div className='recipe-cookingTime'>
         <h5 className='text-center'>
-            {/** cooking time for the recipe selected  */}
-            <i className="fas fa-clock"></i>
-            Cooking Time: <span className='text-success'> {props.time} minutes </span>
         </h5>
+
+        {/** display all of our data in a table to display to the user.  */}
+        <table className='mt-4 table table-bordered'>
+                <thead>
+                    <tr>
+                        <th>
+                            <b> Cooking Time </b>
+                        </th>
+                        <th>
+                            Prep Time
+                        </th>
+                        <th>
+                            Total Time
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td> <b> { convertMinutesToTime(output.cookTime) }</b>   </td>
+                        <td> <b> { convertMinutesToTime(output.prepTime) }</b></td>
+                        <td> <b> { convertMinutesToTime(Number(output.cookTime) + Number(output.prepTime))  }</b></td>
+                    </tr>
+                </tbody>
+            </table>
     </div>
     );
 }
@@ -119,6 +149,7 @@ export const RecipeModal = (props) => {
     const [recipeIngredients, setRecipeIngredients] = React.useState({});
     const [recipeSteps, setRecipeSteps] = React.useState({});
     const [nutritionalFacts, setNutritionalFacts] = React.useState({});
+    const [cookingTime, setCookingTime] = React.useState({});
 
     // close the window when the user clicks on the close button
     const closeWindow = () => {
@@ -157,6 +188,10 @@ export const RecipeModal = (props) => {
             let ingredients = JSON.parse(response.data.recipe_ingredients.recipe_ingredients);
             let recipeSteps = JSON.parse(response.data.recipe_steps.recipe_steps);
             let nutritionalData = JSON.parse(response.data.recipe_nutritional_facts.recipe_nutritional_facts);
+            let cookingTime = response.data.recipe_cooking_time;
+
+            console.log(response);
+
             // set all the infomation that we need inorder to the display the recipe information.
 
             // tood make sure that we are setting the data correctly
@@ -169,13 +204,13 @@ export const RecipeModal = (props) => {
             setRecipe(response.data.recipe);
             setRecipeSteps(recipeSteps);
             setNutritionalFacts(nutritionalData);
-
+            setCookingTime(cookingTime);
         });
 
 
     }, []);
 
-    { console.log(recipeAllergies)}
+    { console.log(nutritionalFacts)}
 // check did the informtion load to the state of the component
 
     return (
@@ -248,7 +283,7 @@ export const RecipeModal = (props) => {
 
 
                                                         return ReactDOM.render(
-                                                         <RecipeCookingTime time={30} /> , contentContainer);
+                                                         <RecipeCookingTime data={cookingTime} /> , contentContainer);
                                                     }
                                                 }>
                                                     <a className='nav-link' href='#'>

@@ -13,6 +13,7 @@ import ReactDOM from "react-dom"
 import { RecipeModal } from "../components/dashboard/recipe/recipeModal";
 import FetchServiceProvider from "../lib/fetchServiceProvider";
 import { CreateRecipeModal } from "../components/dashboard/recipe/CreateRecipeModal";
+import { RecipeModifyModal } from "../components/dashboard/recipe/recipeModifyModal";
 
 export const DashboardRecipies = (props) => {
 
@@ -51,16 +52,36 @@ export const DashboardRecipies = (props) => {
     // generator function to create the table rows
 
     const generateTablesRows = () => {
+
+        // add an error boundry to check if the tables rows are empty
+
+        if (recipes.length === 0) {
+            return (
+                <tr>
+                    {/** error icon  */}
+                    <td colSpan="5" className="text-center">
+                        {/** no  recipes found icon */}
+                        <img src='/img/SVG/empty_inbox.svg' alt="no recipes found" width='200px' height='200px'/>
+                        <h3 className="text-danger" style={{
+                            fontWeight: 'bold'
+                        }}>No Recipes found</h3>
+                    </td>
+                </tr>
+            )
+        }
+
         return Object.keys(recipes).map((item, index ) => {
             // auto generate the tables rows for each of the recipes in the database
+
+            console.log(recipes[item]);
             return (
                     <tr key={index}>
                     <td> { recipes[item].recipe_name }</td>
                     <td> { recipes[item].catagory } </td>
-                    <td>  { recipes[item].recipe_create_at }</td>
-                    <td> { recipes[item].recipe_update_at }</td>
-                    <td>
-                        <button className='btn btn-message w-25 m-2' data-toggle="modal" data-target="#editRecipeModal"  onClick={
+                    <td>  { recipes[item].created_at }</td>
+                    <td> { recipes[item].updated_at }</td>
+                    <td className='d-flex'>
+                        <button className='btn btn-message m-2' data-toggle="modal" data-target="#viewRecipeModal"  onClick={
                             (e) => {
                                 const modalContainer = document.getElementById('modal-container');
                                 // we will create a rough draft of what the card will look like,
@@ -76,8 +97,8 @@ export const DashboardRecipies = (props) => {
                             View<i className="fas fa-eye m-2"></i>
                         </button>
 
-                        {/** addd a modifiy button to the table inorder to edit the recipes at will  */}
-                        <button className='btn btn-message w-25 m-2 ' data-toggle="modal" data-target="#editRecipeModal"  onClick={
+                        {/** add a modifiy button to the table inorder to edit the recipes at will  */}
+                        <button className='btn btn-warning m-2 ' data-toggle="modal" data-target="#editRecipeModal"  onClick={
                             (e) => {
                                 const modalContainer = document.getElementById('modal-container');
                                 // we will create a rough draft of what the card will look like,
@@ -86,10 +107,22 @@ export const DashboardRecipies = (props) => {
 
                                 // for the code to be reusable though out our application
                                 // we will use the modal container to render the modal component
-                                return ReactDOM.render(<RecipeModal id={ recipes[item].recipe_id  }/>, modalContainer);
+                                return ReactDOM.render(<RecipeModifyModal id={ recipes[item].recipe_id  }/>, modalContainer);
                             }}>
                             Edit<i className="fas fa-edit m-2"></i>
                         </button>
+
+
+                        {/** addd a delete button to the table inorder to delete the recipes at will  */}
+                        <button className='btn btn-danger m-2' data-toggle="modal" data-target="#deleteRecipeModal"  onClick={
+                            (e) => {
+                                const modalContainer = document.getElementById('modal-container');
+                                // this will contain the delete modal for delete a recipe from the database
+
+                            }}>
+                            Delete<i className="fas fa-trash-alt m-2"></i>
+                        </button>
+
                     </td>
                 </tr>
             )

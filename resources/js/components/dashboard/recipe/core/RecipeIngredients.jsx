@@ -20,7 +20,7 @@
         <div className='recipe-ingredients'>
         {/** ingedent list for the recipe selected  */}
         <h2 className='text-center' style={{fontWeight: '700'}}> Ingredients </h2>
-        <span> Required Ingredients for this recipe. </span>
+        <p className='text-center text-muted'> Required Ingredients for this recipe. </p>
         <ol className='list-group list-group-flush m-4'>
 
             {/** now we are going to list the ingredients of the item we are displaying */}

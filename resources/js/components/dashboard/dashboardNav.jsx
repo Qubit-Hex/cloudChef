@@ -158,7 +158,12 @@ export class DashboardNav extends Component {
                         <a href="/dashboard/recipie/" className="nav-link">
                             {/**  food management pat for cloud recipes etcc... */}
                             <i className="fas fa-hamburger"></i>
-                            <span className="nav-link-text">Recipies</span>
+                            <span className="nav-link-text">Recipes</span>
+                        </a>
+
+                        <a href='/dashboard/advertising/' className="nav-link">
+                            <i className="fas fa-bullhorn"></i>
+                            <span className="nav-link-text">Advertising</span>
                         </a>
 
                         <a href='/dashboard/analytics/' className="nav-link">
@@ -188,7 +193,7 @@ export class DashboardNav extends Component {
                             <i class="fas fa-power-off"></i>
                             <span className="nav-link-text">Logout</span>
                         </a>
-                        
+
                     </div>
                 </nav>{" "}
             </div>
