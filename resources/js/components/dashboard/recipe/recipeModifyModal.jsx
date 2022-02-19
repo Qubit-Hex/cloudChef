@@ -16,16 +16,19 @@ import ReactDOM  from "react-dom";
 // sub components / libraries
 import FetchServiceProvider from "../../../lib/fetchServiceProvider";
 import { ModifyRecipeIngredients } from "./core/modify.recipeIngredients";
-import { ModifyRecipeSummary } from "./core/modify.RecipeModal";
-
+import { ModifyRecipeSummary } from "./core/modify.RecipeSummary";
+import { ModifyRecipeInstructions } from "./core/modify.recipeInstructions";
 import { TemplateModal } from "./core/template.modal";
+import { ModifyNutritionalFacts } from "./core/modify.nutritionalFacts";
 
 export const RecipeModifyModal = (props) => {
 
     return (
-        <TemplateModal title='Modify a current recipe' body={
+        <TemplateModal title='Update a current Recipe' body={
             <div className='_content_'>
-                <h1 className='header-subtitle'> Edit a recipe </h1>
+                <h1 className='header-subtitle' style={{
+                    fontSize: '1.5rem'
+                }}> Edit a recipe </h1>
                 <small className='text-subtitle'> Please choose a section of the recipe that you would like to modify</small>
 
                 {/** create a drop down with all the sections available to modify  */}
@@ -58,12 +61,26 @@ export const RecipeModifyModal = (props) => {
                             const recipeDetails = 4;
                             const container = document.getElementById('_subContent_');
 
-                            if (selectedOption === recipeDetails) {
-                                // open the ingredients section
-                                {/** we will be changing the recipe Summary.  */}
-                                return ReactDOM.render(<ModifyRecipeSummary />, container );
-                            } else if (selectedOption === ingredients) {
-                               return ReactDOM.render(<ModifyRecipeIngredients />, container)
+
+                            // check the value of the selected option
+                            // and render the correct section
+                        
+                            switch (selectedOption) {
+                                case ingredients:
+                                    ReactDOM.render(<ModifyRecipeIngredients id={props.id} />, container);
+                                break;
+                                case instructions:
+                                    ReactDOM.render(<ModifyRecipeInstructions id={props.id} />, container);
+                                break;
+                                case nutritionalFacts:
+                                    ReactDOM.render(<ModifyNutritionalFacts id={props.id} />, container);
+                                break;
+                                case recipeDetails:
+                                    ReactDOM.render(<ModifyRecipeSummary id={props.id} />, container);
+                                break;
+                                default:
+                                    ReactDOM.render(<ModifyRecipeSummary id={props.id} />, container);
+                                break;
                             }
 
                         }}>

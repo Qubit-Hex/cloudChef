@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Services\recipes\core\validation;
 use Illuminate\Support\Facades\DB;
 
 
@@ -440,4 +441,70 @@ class recipes extends Controller
 
         return response()->json(['data' => $result], 200);
     }
+
+    /**
+     *
+     *  @method: update
+     *
+     *
+     *  @purpose: inorder to update a recipe
+     *
+     */
+
+     public function update(Request $request) {
+
+        // @stub
+        // implieent a resource update on a given recipe
+
+        // reciope ID
+
+        $recipe = $request->header('recipeId');
+        $accessToken = $request->header('accessToken');
+
+        // check if the recipe id is provided.
+        $recipeData = $request->all();
+
+
+        if ($recipe == null) {
+            return response()->json(['message' => 'Please provide a recipe id'], 400);
+        }
+
+        // perform some validation check on the token that was provided
+
+        // 1. validate the users account
+        // 2. validate the users access token
+
+
+        $validate  = new Validation();
+
+        // validate the users account
+        if ($validate->validateUser($accessToken) == false) {
+            return response()->json(['message' => 'Invalid access token'], 401);
+        }
+
+        // next validate the users permissions
+
+
+        // next lets validate the recipe id that was provided.
+        //  lets update the recipe ingredients in the database
+
+        function updateRecipe($recipeId, $recipeIngredients) {
+            // update the recipe ingredients in the database
+            $updateRecipeIngredients = DB::table('recipe_ingredents')->where('recipe_id', $recipeId)->update([
+                'recipe_ingredients' => $recipeIngredients,
+                'updated_at' => date('Y-m-d H:i:s')
+            ]);
+            // check if the recipe ingredients were updated successfully
+            if ($updateRecipeIngredients === false) {
+                return response()->json(['message' => 'Failed to update recipe ingredients'], 500);
+            } else {
+                return response()->json(['message' => 'Recipe ingredients updated successfully'], 200);
+            }
+        }
+
+        // update the recipe ingredients in the database
+        $updateRecipeIngredients = updateRecipe($recipe, $recipeData);
+        // check if the recipe ingredients were updated successfully
+        return $updateRecipeIngredients;
+     }
 }

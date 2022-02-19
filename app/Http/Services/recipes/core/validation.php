@@ -58,7 +58,7 @@ class Validation {
         $user = DB::table('users')->where('remember_token', $token)->first();
 
         if ($user) {
-            $store_member = DB::table('store_members')->where('userID', $user->id)->first();
+            $store_member = DB::table('store_members')->where('userID', $user->userID)->first();
             // catch the store member
                 if (!$store_member) {
                     return false;
@@ -73,7 +73,7 @@ class Validation {
         }
         return false;
     }
-    
+
 }
 
 

@@ -11,9 +11,11 @@
 
 @import 'mobile.scss';
 
+@import 'components/punch-card.scss';
+
 $navbar-bg-color: linear-gradient(to right, #fd9494, rgb(208, 68, 52) );
 $bg-color: linear-gradient(to right, #e1eec398, #e1eec398);
-$modal-bg-color: linear-gradient(to right, #fd9494e7, #d04434d9);
+$modal-bg-color: linear-gradient(to right, #2a5280, #154297c9);  /* Chrome 10-25, Safari 5.1-6 */
 
 $navbar-color-dashboard:  #cc5656;
 
@@ -89,7 +91,7 @@ $navbar-color-dashboard:  #cc5656;
 }
 
 .dashboard-horizontal-nav::-webkit-scrollbar-thumb {
-    background-color: rgba(121, 46, 46, 0.522); /* color of the scroll thumb */
+    background-color: rgba(5, 74, 163, 0.522); /* color of the scroll thumb */
     border-radius: 20px; /* roundness of the scroll thumb */
 }
 
@@ -119,8 +121,8 @@ $navbar-color-dashboard:  #cc5656;
     }
 
     .nav-link {
-        padding: 10px;
-        width: 50%;
+        padding: px;
+        width: 80%;
         border-radius: 10px;
         -webkit-border-radius: 10px;
         -moz-border-radius: 10px;
@@ -1013,7 +1015,7 @@ thead
 
 .recipe-nav {
 
-    background-color: transparent;
+    background-color: #52566621 !important;
 
    .nav-link {
        color: black;
@@ -1025,12 +1027,20 @@ thead
 
     .nav-item {
         width: 100%;
-        background-color:rgba(9, 33, 119, 0.076);
+        background-color: transparent;
+        border-radius: 20px;
+
     }
+
     .nav-item:hover {
-        background-color: #bdccfd9e;
+        background-color: #a3a3a321 !important;
         color: #fff;
+        // add the boxshadow
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+            rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+        cursor: pointer;
     }
+
 }
 
 

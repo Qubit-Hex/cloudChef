@@ -5,10 +5,8 @@ body {
 }
 
 nav {
-    background-color: rgba(174, 40, 40, 0.761);
     font-weight: 800;
 }
-
 
 /*  MEDIA QUERYS   */
 
@@ -48,15 +46,18 @@ nav>* {
     text-decoration: none;
 }
 
+
 .nav-link {
+    padding: 10px;
     color: white;
     font-size: 15px;
     width: auto;
     margin: 30px;
 }
 
+
 .nav-link:hover {
-    color: rgba(53, 129, 206, 0.213);
+    color: rgb(67, 140, 212);
 }
 
 .img-round {
@@ -84,7 +85,6 @@ nav>* {
 .hero:nth-child(even) {
     padding: 20px;
     box-sizing: border-box;
-    ;
     background-color: #407cfcc0;
     border-radius: 25px;
     clip-path: ellipse(300% 100% at -120% 0%);
@@ -114,11 +114,13 @@ nav>* {
 }
 
 .header-action-no-margin {
-    background-color: salmon;
+    background-color: #4a7bd65b;
     border: none;
     border-radius: 25px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 25px;
+    padding-right: 25px;
     font-weight: bold;
     width: auto;
     position: relative;
@@ -126,7 +128,7 @@ nav>* {
 }
 
 .header-action-no-margin:hover {
-    background-color: #8c2f2fd4;
+    background-color: #0a316e;
     color: white;
     font-weight: bold;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.795) 0px 8px 16px -8px;
@@ -294,9 +296,12 @@ nav>* {
 footer {
     color: white;
     box-shadow: rgba(253, 127, 127, 0.583) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
-    background-color: #1a1818d0;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 100px -5px, rgba(0, 17, 53, 0.04) 0px 10px 10px -5px;
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #141E30;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #243B55, #141E30);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #243B55, #141E30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    padding: 20px;
+    margin-top: 100px;
 }
 
 .md {
@@ -331,7 +336,7 @@ footer {
 /* footer list stylings  */
 
 .footer-section-title {
-    color: rgb(142, 159, 245);
+    color: rgb(233, 233, 233);
     font-size: 24px;
     font-weight: 1000;
 }
@@ -340,6 +345,7 @@ footer {
     color: whitesmoke;
     font-size: 18px;
     font-weight: 600;
+    margin-left: 50px;
 }
 
 .footer-section-divider {
@@ -349,7 +355,7 @@ footer {
 }
 
 .footer-section-link>a {
-    margin-left: 40px;
+    margin-left: 200px;
     text-decoration: none;
     color: whitesmoke;
     font-weight: 800;

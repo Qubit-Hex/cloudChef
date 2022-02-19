@@ -45,7 +45,7 @@ const RecipeCookingTime = (props) => {
 
     const output = JSON.parse(props.data.recipe_cooking_time);
 
-    function convertMinutesToTime(time) {
+    const convertMinutesToTime = (time) => {
         let minutes = time % 60;
         let hours = (time - minutes) / 60;
         return hours + " hours " + minutes + " minutes";
@@ -316,7 +316,7 @@ export const RecipeModal = (props) => {
                                                 }>
                                                     <a className='nav-link'>
                                                         <i className='fas fa-list-ol'></i>
-                                                        <span className='nav-link-text'> Directions </span>
+                                                        <span className='nav-link-text'> Instructions </span>
                                                     </a>
                                                 </li>
                                             </ul>

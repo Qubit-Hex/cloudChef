@@ -16,7 +16,7 @@ import React from "react";
 export class Footer extends React.Component {
     render() {
       return (
-        <footer className="">
+        <footer>
         {" "}
 
             <div className='container footer'>
@@ -33,7 +33,7 @@ export class Footer extends React.Component {
                       <li className="list-group-item footer-section-title"> Solutions </li>
                       <li className='list-group-item footer-section-subtitle'>  How We Help</li>
                       <li className='list-group item footer-section-divider'> </li>
-                      <li className='list-group-item footer-section-link'> <a href='#'>Automated Outdated Proccesses </a></li>
+                      <li className='list-group-item footer-section-link'> <a href='#'>Automated Outdated procedures</a></li>
                       <li className='list-group-item footer-section-link'> <a href='#'>Access Information from anywhere </a></li>
                       <li className='list-group-item footer-section-link'> <a href='#'>Easily Integrate Data Across System </a></li>
                       <li className='list-group-item footer-section-link'> <a href='#'> Discover Data-Driven Insights </a></li>

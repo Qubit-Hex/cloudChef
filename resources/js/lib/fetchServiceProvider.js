@@ -157,7 +157,7 @@ export default class FetchServiceProvider {
      *  @method: upload
      *
      *  @purpose: to upload a file to an api using a post request
-     * 
+     *
      */
 
     async upload(url, data, headers) {
@@ -179,128 +179,31 @@ export default class FetchServiceProvider {
             });
     }
 
-
     /**
      *
-     * @method: put
+     *  @method patch
      *
-     * @purpose: to fetch data from an api using a put request
-     *   *            PLEASE NOTE THE CALLBACK IS WHATEVER YOU DESIRE TO DO WITH THE DATA
-         *             SO IT GIVES YOU CONTROL IMPLIMENT YOUR PROBLEM RATHER THAN WORRYING ABOUT
-         *             FETCH REQUESTS IN YOUR MAIN CODE :)
+     *
+     *  @purpose: to preform a  update to the api using a patch request
+     *
      */
+    async patch(url, data, headers) {
+        
+        let request = new Request(url, {
+            method: 'PATCH',
+            body: JSON.stringify(data),
+            headers: headers
+        });
 
-
-    $put(url, data, headers, callback) {
-
-            let request = new Request(url, {
-                method: 'PUT',
-                body: JSON.stringify(data),
-                headers: headers
+        return fetch(request)
+            .then(response => {
+                return new Promise((resolve, reject) => {
+                    response.json().then(data => {
+                        resolve(data);
+                    });
+                });
+            }).catch(error => {
+                console.log(error);
             });
-
-            fetch(request)
-                .then(response => {
-                    return response.json();
-                })
-                .then(data => {
-                    callback(data);
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-
-        }
-
-        /**
-         *
-         * @method: delete
-         *
-         * @purpose: to fetch data from an api using a delete request
-         *            PLEASE NOTE THE CALLBACK IS WHATEVER YOU DESIRE TO DO WITH THE DATA
-         *             SO IT GIVES YOU CONTROL IMPLIMENT YOUR PROBLEM RATHER THAN WORRYING ABOUT
-         *             FETCH REQUESTS IN YOUR MAIN CODE :)
-         *
-         *
-         */
-
-        $delete(url, headers, callback) {
-
-                let request = new Request(url, {
-                    method: 'DELETE',
-                    headers: headers
-                });
-
-                fetch(request)
-                    .then(response => {
-                        return response.json();
-                    })
-                    .then(data => {
-                        callback(data);
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    });
-
-        }
-
-        /**
-         *
-         * @method: delete
-         *
-         *
-         *  @purpose: to send a delete request to the api without a callback
-         *
-         */
-
-
-        delete(url, headers) {
-
-                    let request = new Request(url, {
-                        method: 'DELETE',
-                        headers: headers
-                    });
-                return fetch(request)
-                .then(response => {
-                    return new Promise((resolve, reject) => {
-                        response.json().then(data => {
-                            resolve(data);
-                        });
-                    });
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-        }
-
-
-        /**
-         *
-         *  @method: $put
-         *
-         *  @purpose: to fetch data from an api using a put request
-         *
-         */
-
-        $patch(url, data, headers, callback) {
-
-                    let request = new Request(url, {
-                        method: 'PATCH',
-                        body: JSON.stringify(data),
-                        headers: headers
-                    });
-
-                    fetch(request)
-                        .then(response => {
-                            return response.json();
-                        })
-                        .then(data => {
-                            callback(data);
-                        })
-                        .catch(error => {
-                            console.log(error);
-                        });
-
-            }
-
+    }
 }

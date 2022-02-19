@@ -11,12 +11,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-
+// sub imports
+import FetchServiceProvider from "../../../../lib/fetchServiceProvider";
 
 export const ModifyRecipeIngredients = (props) => {
 
-    // check if the data is being passed to the component
-    console.log(props);
     // the state where we will hold the ingredients
     const [ingredient, setIngredient] = React.useState([]);
 
@@ -36,6 +35,45 @@ export const ModifyRecipeIngredients = (props) => {
             return false;
         }
     }
+
+    // get the ingredients for the recipe
+     const getIngredients =  async () => {
+         // covert to async call
+         let api = new FetchServiceProvider();
+         let route = '/api/store/recipes/find/' + props.id;
+
+         const headers = {
+                'Content-Type': 'application/json',
+                'accessToken': api.getCookie('accessToken')
+         }
+
+         // make the call
+        const response = await api.get(route, headers);
+
+        return response;
+    }
+
+
+
+    //  now send the request to the server for proccessing
+    const sendRequest = async (data) => {
+        const api = new FetchServiceProvider();
+        const route = '/api/store/recipes/update/ingredients/';
+
+        //  set the headers of the recioe
+        const headers = {
+            'Content-Type': 'application/json',
+            'accessToken': api.getCookie('accessToken'),
+            'recipeId': props.id
+        }
+
+        // make the call
+        const response = await api.patch(route, data, headers).then(response => {
+            console.log(response);
+        });
+    }
+
+
     // handle the nutritional facts for the ingredients
     const handleNutritionalFacts = () => {
         let modalContainer = document.getElementById('modal-container');
@@ -46,10 +84,25 @@ export const ModifyRecipeIngredients = (props) => {
             return ReactDOM.render((<div class="alert alert-danger"> <b> Error: </b> Your Recipe Must contain at least one ingredient. </div>), errorWrapper);
         } else {
             // if the list is not empty render our next page that will handle the nutritional facts
-            return ReactDOM.render(<CreateNutritionalFacts recipeSummary={props.recipeSummary} recipeIngredients={ingredient} />, modalContainer);
+           // our function that will update the recipe goes here.
+           // send the request to the server
+            sendRequest(ingredient);
         }
     }
 
+
+    // build the ingredient list
+    React.useEffect(() => {
+        // get the ingredients for the recipe
+        getIngredients().then(response => {
+            // set the ingredients to the state
+            let recipe = response.data.recipe_ingredients.recipe_ingredients;
+            setIngredient(JSON.parse(recipe));
+        });
+
+    }, []);
+
+        console.log(ingredient);
     return (
         <div className='container'>
         <div className="row">
@@ -72,15 +125,10 @@ export const ModifyRecipeIngredients = (props) => {
                     setIngredient([...ingredient, ingredents]);
                     document.getElementById("recipe-ingredents").value = "";
                 } else {
-
                     // we will trigger a bootstrap alert to notify the user that the ingredents were added
                     // we will also clear the input field
-
                     let createAlert = document.getElementById("modal-alert-container");
-
                     // render our alert to the screen to let the user know that the ingredents were added
-
-
                     ReactDOM.render( <div className="alert-container" role="alert">
                         {/* make a modern looking alert message */}
 
