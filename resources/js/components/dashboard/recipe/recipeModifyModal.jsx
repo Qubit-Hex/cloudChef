@@ -35,7 +35,9 @@ export const RecipeModifyModal = (props) => {
 
                 <div className='form-group mt-4'>
                     <label htmlFor='recipe-modify-select'>Select a section to modify</label>
-                    <select className='form-control mt-2 ' id='recipe-modify-select'>
+                    <select className='form-control mt-2' style={{
+                        fontWeight: 'bold'
+                    }} id='recipe-modify-select'>
                         <option value={0}>Select a section</option>
                         <option  value={1}>Ingredients</option>
                         <option value={2}> Instructions </option>
@@ -64,7 +66,7 @@ export const RecipeModifyModal = (props) => {
 
                             // check the value of the selected option
                             // and render the correct section
-                        
+
                             switch (selectedOption) {
                                 case ingredients:
                                     ReactDOM.render(<ModifyRecipeIngredients id={props.id} />, container);

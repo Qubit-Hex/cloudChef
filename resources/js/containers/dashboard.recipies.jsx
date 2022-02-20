@@ -216,6 +216,7 @@ export const DashboardRecipies = (props) => {
                 </div>
             </div>
         </div>
+        
 
             {/** add a component inorder to dynamically search the recipes  in the database */}
             <div className="row">

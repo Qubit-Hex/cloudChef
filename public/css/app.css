@@ -12,53 +12,39 @@
 
     @purpose: this file contains the styles for the punch card component
 */
-.punchcard-container {
-  color: white;
-  padding: 50px;
-  box-shadow: 9px 9px 20px 0 rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
-  background: #606c88;
-  /* fallback for old browsers */
-  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to bottom, #3f4c6b, #606c88);
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+.punch-card-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
 }
-
-.card-punch-container {
-  background-color: beige;
-  padding: 100px;
-  box-shadow: 9px 9px 20px 0 rgba(0, 0, 0, 0.2);
-  color: black;
-  border-radius: 10px;
-}
-
-.card-punch-container-body .center {
-  position: relative;
-}
-.card-punch-container-body button {
-  padding: 25px;
-  background-color: #0d1b3d;
-  color: white;
+.punch-card-container button {
+  width: 100%;
+  height: 100%;
   border: none;
-  border-radius: 10px;
-  font-size: 20px;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  outline: none;
+  font-size: 1rem;
   font-weight: bold;
-  position: relative;
-  left: 50%;
-}
-.card-punch-container-body button:hover {
-  background-color: #2d54af;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.punch-tile {
-  background-color: rgba(82, 137, 255, 0.993);
+  color: #000;
+  text-align: center;
+  padding: 20px;
+  transition: all 0.2s ease-in-out;
   margin: 5px;
-  padding: 50px;
+}
+props.punchInNumber .punch-card-container button:hover {
+  background-color: #e5e5e5;
+}
+.punch-card-container button:active {
+  background-color: #8bb4ff;
 }
 
 /* Chrome 10-25, Safari 5.1-6 */
@@ -1056,6 +1042,11 @@ body {
 }
 
 nav {
+  background: #3c6eca;
+  /* fallback for old browsers */
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #2b6fbd, #1b2e53);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   font-weight: 800;
 }
 

@@ -5,8 +5,12 @@ body {
 }
 
 nav {
+    background: #3c6eca;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #498edd, #2a4d92);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #2b6fbd, #1b2e53); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     font-weight: 800;
 }
+
 
 /*  MEDIA QUERYS   */
 
