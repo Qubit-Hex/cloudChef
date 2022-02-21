@@ -38,7 +38,7 @@ export const SchedulePickup = (props) => {
                 height='300PX'
             />
 
-                <h3 className="header-subtitle text-center mt-4"> Current shifts in shift shop. </h3>
+                <h3 className="header-subtitle text-center mt-4"> Current Shifts Dropped. </h3>
                 <br />
 
                 <ShiftPickupTable />
