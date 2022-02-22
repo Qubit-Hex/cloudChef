@@ -418,7 +418,7 @@ $navbar-color-dashboard:  #cc5656;
             font-size: 2em !important;
             background: transparent;
             padding: 0px;
-            color: white !important;
+            color: rgba(29, 104, 201, 0.72) !important;
         }
 
         .modal-close:hover {
@@ -427,7 +427,7 @@ $navbar-color-dashboard:  #cc5656;
                 rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
             background-color: rgb(231, 109, 109);
             border-radius: 50%;
-            color: #fff;
+            color: rgb(0, 0, 0);
         }
 
         btn-close:active {
@@ -454,14 +454,14 @@ $navbar-color-dashboard:  #cc5656;
 
     .modal-header {
         padding: 25px;
-        background: $modal-bg-color;
+        background: white;
         text-align: center !important;
         border-radius: 20px 20px 0px 0px;
         padding: 25px;
-        color: white !important;
+        color: rgb(15, 90, 175) !important;
 
         button {
-            color: #cccccc !important; /* fallback for old browsers */
+            color: #000000 !important; /* fallback for old browsers */
         }
     }
 
@@ -471,7 +471,7 @@ $navbar-color-dashboard:  #cc5656;
     }
 
     .bg-blue {
-        background-color: #0c29a888;
+        background-color: #ffffff88;
     }
 
     .success-message-wrapper {
@@ -1066,7 +1066,7 @@ thead
 
 
     .modal-header {
-        background: #32416d;
+        background: #ffffff;
         border-bottom: none;
     }
 

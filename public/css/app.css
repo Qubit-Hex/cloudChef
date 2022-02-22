@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);
+@import url(https://fonts.googleapis.com/css2?family=Changa:wght@500&display=swap);
 /*
 
  @file: dashboard.css
@@ -184,23 +185,161 @@
     @file: KitchenOrders.scss
 
 
-    @purpose: Kitchen Orders stylesheet
+    @purpose: Kitchen Orders stylesheet / for a our virtual kds system
 
 */
-.kitchen-orders-container .card-container {
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-  width: 250px;
-}
-.kitchen-orders-container .card-container .card-header {
-  background-color: #f5f5f5;
+.kitchen-display-unit .kitchen-ticket-container {
   padding: 10px;
-  font-weight: 600;
+  max-height: -webkit-fit-content;
+  max-height: -moz-fit-content;
+  max-height: fit-content;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  grid-gap: 10px;
+  background-color: rgba(110, 156, 255, 0.076);
+  cursor: pointer;
 }
-.kitchen-orders-container .card-container .card-body-content-left-header {
-  font-weight: 600;
+.kitchen-display-unit .kitchen-ticket-container * {
+  font-family: "Changa", sans-serif;
+  font-size: 10px;
 }
-.kitchen-orders-container .card-container .card-body-content-right-header {
-  font-weight: 600;
+.kitchen-display-unit .kitchen-ticket {
+  width: auto;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  border-radius: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: all 0.5s ease;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+.kitchen-display-unit .kitchen-ticket .kitchen-ticket-header {
+  padding: 10px;
+  font-weight: bold;
+}
+.kitchen-display-unit .kitchen-ticket .kitchen-ticket-header * {
+  text-align: center;
+  text-shadow: 0.5px 0.5px 0.5px black;
+  font-weight: 700;
+  color: white;
+  font-size: 16px !important;
+}
+.kitchen-display-unit .kitchen-ticket .kitchen-ticket-header ul {
+  list-style-type: none;
+}
+@-webkit-keyframes fadeOut {
+  0% {
+    opacity: 1;
+    filter: grayscale(0);
+  }
+  100% {
+    opacity: 0;
+    filter: grayscale(100%);
+  }
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    filter: grayscale(0);
+  }
+  100% {
+    opacity: 0;
+    filter: grayscale(100%);
+  }
+}
+.kitchen-display-unit .kitchen-ticket .kitchen-order-type {
+  padding: 0px;
+  font-weight: bold;
+  text-align: center;
+  border-bottom: 0.5px solid slateblue;
+}
+.kitchen-display-unit .kitchen-ticket .kitchen-order-type * {
+  color: white;
+  font-size: 16px !important;
+  font-weight: 700;
+}
+.kitchen-display-unit .kitchen-ticket .kitchen-order-type .kitchen-order-stripe {
+  margin: 10px;
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.111);
+}
+.kitchen-display-unit .kitchen-ticket .kitchen-order-type .takeout, .kitchen-display-unit .kitchen-ticket .kitchen-order-type * {
+  background-color: white;
+  color: black !important;
+}
+.kitchen-display-unit .kitchen-ticket .kitchen-order {
+  padding: 10px;
+  font-weight: bold;
+  background-color: rgba(36, 34, 37, 0.083);
+}
+.kitchen-display-unit .kitchen-ticket .kitchen-order * {
+  color: #001aff;
+  font-size: 16px !important;
+  font-weight: 700;
+}
+.kitchen-display-unit .kitchen-ticket .kitchen-order .popText {
+  color: black;
+  font-size: 18px !important;
+  font-weight: 1000;
+}
+.kitchen-display-unit .kitchen-ticket .kitchen-order ul {
+  background-color: rgba(255, 173, 200, 0.124);
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+}
+.kitchen-display-unit .kitchen-ticket .kitchen-order ul * {
+  margin-left: 26px;
+  color: red;
+  font-size: 16px !important;
+  font-weight: 700;
+}
+.kitchen-display-unit .kitchen-ticket .kitchen-ticket-footer * {
+  margin: 25px;
+  font-size: 16px;
+  font-weight: 700;
+}
+.kitchen-display-unit .kitchen-bump-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  background-color: rgba(67, 86, 255, 0.761);
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  z-index: 9999;
+}
+.kitchen-display-unit .kitchen-bump-bar button {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: #fdfbfbd9;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px 2px rgba(73, 73, 73, 0.2);
+  cursor: pointer;
+  outline: none;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #000;
+  text-align: center;
+  padding: 15px;
+  transition: all 0.2s ease-in-out;
+  margin: 5px;
+}
+.kitchen-display-unit .kitchen-bump-bar button:hover {
+  color: white;
+  background: #5895f0d9;
+  /* Old browsers */
+}
+.kitchen-display-unit .kitchen-bump-bar button:active {
+  background: #5895f0d9;
+  /* Old browsers */
+  transform: translateY(5px);
+  color: white;
 }
 
 /* Chrome 10-25, Safari 5.1-6 */
@@ -579,13 +718,13 @@
   font-size: 2em !important;
   background: transparent;
   padding: 0px;
-  color: white !important;
+  color: rgba(29, 104, 201, 0.72) !important;
 }
 .dashboard-content .modal .modal-close:hover {
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
   background-color: #e76d6d;
   border-radius: 50%;
-  color: #fff;
+  color: black;
 }
 .dashboard-content .modal btn-close:active {
   background-color: #f82f2f;
@@ -606,14 +745,14 @@
 }
 .dashboard-content .modal-header {
   padding: 25px;
-  background: linear-gradient(to right, #2a5280, #154297c9);
+  background: white;
   text-align: center !important;
   border-radius: 20px 20px 0px 0px;
   padding: 25px;
-  color: white !important;
+  color: #0f5aaf !important;
 }
 .dashboard-content .modal-header button {
-  color: #cccccc !important;
+  color: #000000 !important;
   /* fallback for old browsers */
 }
 .dashboard-content .modal-body {
@@ -621,7 +760,7 @@
   border-radius: 0px 0px 20px 20px;
 }
 .dashboard-content .bg-blue {
-  background-color: #0c29a888;
+  background-color: #ffffff88;
 }
 .dashboard-content .success-message-wrapper i {
   font-size: 2em;
@@ -1161,7 +1300,7 @@
   max-height: auto;
 }
 .recipe-modal .modal-header {
-  background: #32416d;
+  background: #ffffff;
   border-bottom: none;
 }
 .recipe-modal .modal-body {

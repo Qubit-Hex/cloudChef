@@ -31,7 +31,7 @@ import { MessagePage } from "./dashboard.message";
 import { DashboardRecipies } from "./dashboard.recipies";
 import { DashboardAnalytics } from "./dashboard.analytics";
 import { PunchCard } from "../components/punchCard/punchCard";
-import { KitchenOrders } from "../components/dashboard/printer/kitchenOrders";
+import { DashboardOrders } from "./dashboard.orders";
 
 /**
  *
@@ -188,7 +188,7 @@ export default class DashboardContainer extends Component {
             <Route path='/dashboard/messages/' component={MessagePage} />
             <Route path='/dashboard/analytics/' component={DashboardAnalytics} />
             <Route path='/dashboard/punchCard/' component={PunchCard} />
-            <Route path='/dashboard/orders/'   component={KitchenOrders} />
+            <Route path='/dashboard/orders/'   component={DashboardOrders} />
           </Switch>
         </Router>
 

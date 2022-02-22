@@ -3,34 +3,196 @@
     @file: KitchenOrders.scss
 
 
-    @purpose: Kitchen Orders stylesheet
+    @purpose: Kitchen Orders stylesheet / for a our virtual kds system
 
 */
 
 
-.kitchen-orders-container {
+// color codes for the kitchen orders
 
-    .card-container {
 
-        box-shadow:  0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-        width: 250px;
+// custom fonts
+@import url('https://fonts.googleapis.com/css2?family=Changa:wght@500&display=swap');
 
-        .card-header {
-            background-color: #f5f5f5;
+
+// main wrapper for the kitchen orders component    //
+.kitchen-display-unit {
+
+    .kitchen-ticket-container {
+        padding: 10px;
+        max-height: fit-content;
+
+        * {
+            font-family: 'Changa', sans-serif;
+            font-size: 10px;
+        }
+       // grid 6 by 6
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        grid-template-rows: repeat(6, 1fr);
+        grid-gap: 10px;
+        background-color: rgba(110, 156, 255, 0.076);
+        cursor: pointer;
+    }
+
+    .kitchen-ticket {
+        width: auto;
+        height: fit-content;
+        border-radius: 5px;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: all 0.5s ease;
+
+        // box shadow
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        .kitchen-ticket-header {
             padding: 10px;
-            font-weight: 600;
+            font-weight: bold;
+            // add a box shadow to the header
+            * {
+                // out line the text to make it pop
+                text-align: center;
+                text-shadow: 0.5px 0.5px 0.5px black;
+                font-weight: 700;
+                color: rgb(255, 255, 255);
+                font-size: 16px !important;
+            }
+
+            ul {
+                list-style-type: none;
+            }
+
+            // slow fade out
+            @keyframes fadeOut {
+                0% {
+                    opacity: 1;
+                    filter: grayscale(0);
+                }
+                100% {
+                    opacity: 0;
+                    filter: grayscale(100%);
+                }
+
+            }
+
+
         }
 
+        .kitchen-order-type {
+            padding: 0px;
 
-        // for displaying the seat on the ticket
-        .card-body-content-left-header {
-            font-weight: 600;
+            font-weight: bold;
+            text-align: center;
+            // add a box shadow to the header
+            border-bottom:   0.5px solid slateblue;
+            * {
+                color: white;
+                font-size: 16px !important;
+                font-weight: 700;
+            }
+
+            // make a striped border to separate the order type
+            .kitchen-order-stripe {
+                margin: 10px;
+                border-bottom: 0.5px solid rgba(255, 255, 255, 0.111);
+            }
+
+
+            .takeout, * {
+                background-color: white;
+                color: black !important;
+            }
         }
 
+        .kitchen-order {
+            padding: 10px;
+            font-weight: bold;
+            // add a box shadow to the header
+            background-color: rgba(36, 34, 37, 0.083);
 
-        // next is for displaying the order the customer has made
-        .card-body-content-right-header {
-            font-weight: 600;
+            * {
+                color: rgb(0, 26, 255);
+                font-size: 16px !important;
+                font-weight: 700;
+            }
+
+            .popText {
+                color: rgb(0, 0, 0);
+                font-size: 18px !important;
+                font-weight: 1000;
+            }
+
+            ul {
+                background-color: rgba(255, 173, 200, 0.124);
+                list-style: none;
+                padding: 0px;
+                margin: 0px;
+                * {
+                    margin-left: 26px;
+                    color: red;
+                    font-size: 16px !important;
+                    font-weight: 700;
+                }
+            }
         }
+
+        .kitchen-ticket-footer {
+            * {
+                margin: 25px;
+                font-size: 16px;
+                font-weight: 700;
+            }
+        }
+
+    }
+
+
+    /// virtuak bump bar stylings
+
+    .kitchen-bump-bar {
+        // fit the bump bar to the bottom of the screen
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+        background-color: rgba(67, 86, 255, 0.761);
+        color: white;
+        font-size: 16px;
+        font-weight: 700;
+        text-align: center;
+        z-index: 9999;
+
+
+        // make some nice button styling
+        button {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background-color: #fdfbfbd9;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px 2px rgba(73, 73, 73, 0.2);
+            cursor: pointer;
+            outline: none;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #000;
+            text-align: center;
+            padding: 15px;
+            transition: all 0.2s ease-in-out;
+            margin: 5px;
+
+            &:hover {
+                color: white;
+                background: #5895f0d9; /* Old browsers */
+            }
+
+            &:active {
+                background: #5895f0d9; /* Old browsers */
+                transform: translateY(5px);
+                color: white;
+            }
+
+            }
     }
 }

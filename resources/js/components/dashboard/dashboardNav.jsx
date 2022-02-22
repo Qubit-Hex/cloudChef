@@ -188,6 +188,12 @@ export class DashboardNav extends Component {
                             <span className="nav-link-text">Settings</span>
                         </a>
 
+                        {/** plugins */}
+                        <a href="/dashboard/plugins/" className="nav-link">
+                            <i className="fas fa-plug"></i>
+                            <span className="nav-link-text">Plugins</span>
+                        </a>
+
                         {/** LOGOUT BUTTON  WITH A POWER BUTTON*/}
                         <a href="/dashboard/logout/" className="nav-link">
                             <i class="fas fa-power-off"></i>

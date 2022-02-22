@@ -260,7 +260,9 @@ export const RecipeModal = (props) => {
 
                             <div className='col'>
 
-                                    <nav className='navbar navbar-expand-lg recipe-nav'>
+                                    <nav className='navbar navbar-expand-lg recipe-nav' style={{
+                                        background: 'transparent',
+                                    }}>
                                         <div className='col'>
                                             <ul className='navbar-nav'>
                                                 <li className='nav-item'>
