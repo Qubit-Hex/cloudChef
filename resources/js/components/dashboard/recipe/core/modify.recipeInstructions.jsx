@@ -12,7 +12,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-
+import FetchServiceProvider from "../../../../lib/fetchServiceProvider";
+import { TemplateModal } from "./template.modal";
 
 export const ModifyRecipeInstructions = (props) => {
 
@@ -20,6 +21,9 @@ export const ModifyRecipeInstructions = (props) => {
 
     // the state where we will hold the instructions
     const [instructions, setInstructions] = React.useState([]);
+
+    // this is the state where we will control the error boundry
+    const [status, setStatus] = React.useState(null);
     const [image, setImage] = React.useState(null);
 
     // close the modal window
@@ -41,29 +45,135 @@ export const ModifyRecipeInstructions = (props) => {
 
 
     // handle the nutritional facts for the instructionss
-    const handleFinalize = () => {
-        let modalContainer = document.getElementById('modal-container');
-        // the last component inorder to set the data to our api endpoint.
+    const handleFinalize =  async (data) => {
 
-        let messageQuery = {
-            recipeSummary: props.recipeSummary,
-            recipeIngredients: props.recipeIngredients,
-            recipeInstructions: instructions,
-            recipeCookingTime: props.recipeCookingTime,
-            nutritionalFacts: props.nutritionalFacts
+        const api = new FetchServiceProvider();
+        const route = '/api/store/recipes/update/recipeInstructions/';
+
+        //  set the headers of the recioe
+        const headers = {
+            'Content-Type': 'application/json',
+            'accessToken': api.getCookie('accessToken'),
+            'recipeId': props.id
         }
+        // return the promise
 
-        messageQuery.recipeSummary.recipeImage = image;
-
-
-        return ReactDOM.render(<SendEndPoint query={messageQuery} />, modalContainer);
+        return await api.patch(route, data, headers);
     }
 
+    // this is just tood some error checking
+    const updateData = (data) => {
+        // check if the state is not empty
+        const container = document.getElementById('modal-container');
+
+        if (instructions.length === 0) {
+            // return an error message
+            // since the state is empty
+            return false;
+        }
+            // our promise function is placed here
+            const patchRequest = handleFinalize(instructions);
 
 
+            patchRequest.then(res => {
+                if (res.status === 200) {
+                    setStatus(true);
+                } else {
+                    setStatus(false);
+                }
+            })
 
 
+    }
 
+    const getCurrentInstructions = async () => {
+        // covert to async call
+        let api = new FetchServiceProvider();
+        let route = '/api/store/recipes/find/' + props.id;
+
+        const headers = {
+            'Content-Type': 'application/json',
+            'accessToken': api.getCookie('accessToken')
+        }
+
+        // make the call
+        const response = await api.get(route, headers);
+
+        return response;
+
+    }
+    // the the previous ingredients for the recipe
+
+    React.useEffect(() => {
+            console.log(getCurrentInstructions());
+            let currentInstructions = getCurrentInstructions();
+
+            currentInstructions.then(response => {
+                console.log(response);
+                setInstructions(JSON.parse(response.data.recipe_steps.recipe_steps));
+            });
+    }, []);
+
+    //  check the state of our application.
+    //  if the state is true then we will render the success message
+    //  if the state is false then we will render the error message
+
+    if (status === true) {
+        return (
+            <div>
+                <TemplateModal title="Success" body={
+                    <div>
+                    <img src='/img/SVG/Call waiting.svg'
+                         className='img-fluid' style={{
+                             animation: 'grow 3s both',
+                         }}
+                         width={350}
+                         height={350}
+                         alt='success' />
+                        {/** font awesome check circle */}
+                         <i className="fas fa-check-circle fa-5x text-success"></i>
+                         <span className='text-success  text-center'>
+                            <b> Success </b>
+                            <br />
+                            <span className='text-muted'>
+                                Your recipe instructions have been updated
+                            </span>
+                         </span>
+                    </div>
+                } />
+            </div>
+        )
+
+    } else if (status === false) {
+        return (
+            <div>
+                <TemplateModal
+                    title="Error"
+                    body={
+                        <div>
+                            <img src='/img/SVG/Call waiting.svg'
+                         className='img-fluid' style={{
+                             animation: 'grow 3s both',
+                         }}
+                         width={350}
+                         height={350}
+                         alt='success' />
+                        {/** font awesome error circle */}
+                        <i className="fas fa-exclamation-circle fa-5x text-danger"></i>
+                         <span className='text-danger  text-center'>
+                            <b style={{fontSize: '2rem'}}> Error </b>
+                            <br />
+
+                            <span className='text-muted'>
+                                Your recipe has failed to update. Please try again
+                            </span>
+                         </span>
+                        </div>
+                    } />
+            </div>
+        );
+
+    }
     return (
         <div className='container'>
         <div className="row">
@@ -86,7 +196,7 @@ export const ModifyRecipeInstructions = (props) => {
                 if (ingredents !== "") {
                     // check the input fields is not empty then set the state to render the ingredents list
                     setInstructions([...instructions, ingredents]);
-                    document.getElementById("recipe-ingredents").value = "";
+                    // run the handle function inorder to handle our request
                 } else {
                     // we will trigger a bootstrap alert to notify the user that the ingredents were added
                     // we will also clear the input field
@@ -116,7 +226,7 @@ export const ModifyRecipeInstructions = (props) => {
 
                 </div>, createAlert);
                 }
-            }}> Modify </button>
+            }}> Add </button>
             </div>
 
             </div>
@@ -124,15 +234,16 @@ export const ModifyRecipeInstructions = (props) => {
         </div>
 
         <div className='row'>
-            {/** here we will render a table with the new ingrednets that we are going to add to the recipe */}
-            {/** refactor this into a componet that we will pass out state into,  */}
+            {/** here we will render a table with the new Ingredents that we are going to add to the recipe */}
+            {/** refactor this into a component that we will pass out state into,  */}
 
             {
                 // check our length of our render then render the table
                 checkLength(instructions) ?  (
                     <table className='table mt-lg-3'>
                 <thead>
-                    <tr>_
+                    <tr>
+                        <th> Instructions </th>
                         <th> Action </th>
                     </tr>
                 </thead>
@@ -174,6 +285,15 @@ export const ModifyRecipeInstructions = (props) => {
                 ) : false
 
             }
+        </div>
+
+        <div className='row'>
+            <button className='btn btn-message' onClick={
+                (e) => {
+                    // update the data and preform some validation checks
+                    updateData(instructions);
+                }
+            }> Modify  </button>
         </div>
                             </div>);
 }

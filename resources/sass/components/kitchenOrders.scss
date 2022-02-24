@@ -19,21 +19,24 @@
 .kitchen-display-unit {
 
     .kitchen-ticket-container {
-        padding: 10px;
         max-height: fit-content;
 
         * {
             font-family: 'Changa', sans-serif;
             font-size: 10px;
         }
-       // grid 6 by 6
-        display: grid;
-        grid-template-columns: repeat(6, 1fr);
-        grid-template-rows: repeat(6, 1fr);
-        grid-gap: 10px;
+        // flex layout
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        align-items: center;
+
         background-color: rgba(110, 156, 255, 0.076);
         cursor: pointer;
     }
+
+    
 
     .kitchen-ticket {
         width: auto;

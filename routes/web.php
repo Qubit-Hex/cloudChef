@@ -37,6 +37,7 @@ Route::get('/solutions/', [home::class, 'index']);
 Route::get('/pricing/', [home::class, 'index']);
 Route::get('/features/', [home::class, 'index']);
 
+
 /**
  *      Routes: Authentication routes
  *

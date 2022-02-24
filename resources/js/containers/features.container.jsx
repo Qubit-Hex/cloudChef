@@ -1,14 +1,14 @@
 /***
- * 
- * 
+ *
+ *
  *  name: features
- *  
+ *
  *  type: container
- * 
- * 
- *  purpose: to glue all the compents together 
- * 
- * 
+ *
+ *
+ *  purpose: to glue all the compents together
+ *
+ *
  */
 
 
@@ -37,7 +37,7 @@ export default function FeaturesContainer(props) {
 
                 <div className='col-sm header-section-space-md'>
                   <h1 className='header-subtitle'>EXPLORE THE PLATFORM  </h1>
-                  <h2 className='header-title'> Do less, earn more.</h2>
+                  <h2 className='header-title'>  Browse our ECOSYSTEM.</h2>
                 </div>
 
             </div>
@@ -63,11 +63,11 @@ export default function FeaturesContainer(props) {
                   <img className='img-fluid hero-image' src='/img/savings.svg' />
 
                 </div>
-                
+
                 <div className='col-sm header-section-space-md'>
                     <h1 className='header-subtitle'>  FOOD COST MANAGEMENT  </h1>
                     <h2 className='header-title'>  INCREASE YOUR BOTTOM LINE   </h2>
-                    <p className='header-description'>  Track you food cost, and waste easily figure where you are wasting money 
+                    <p className='header-description'>  Track you food cost, and waste easily figure where you are wasting money
                     using data driven technolgy   </p>
                 </div>
 
@@ -99,12 +99,14 @@ export default function FeaturesContainer(props) {
                     <h1 className='header-subtitle'>  COMMUNICATION  </h1>
                     <h2 className='header-title'>  KNOW WHAT GOING ON IN REAL TIME   </h2>
                     <p className='header-description'> Connect your whole orginization together and get updates in realtime!
-                    we connect you to your customers, and employee so you can roll out changes in real time hyper-focus on the customer experience and 
+                    we connect you to your customers, and employee so you can roll out changes in real time hyper-focus on the customer experience and
                     increase your profit!.  </p>
 
                 </div>
 
                 </div>
+
+                
 
             </div>
 

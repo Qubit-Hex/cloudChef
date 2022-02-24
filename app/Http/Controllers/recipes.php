@@ -483,8 +483,6 @@ class recipes extends Controller
         }
 
         // next validate the users permissions
-
-
         // next lets validate the recipe id that was provided.
         //  lets update the recipe ingredients in the database
 
@@ -502,9 +500,48 @@ class recipes extends Controller
             }
         }
 
-        // update the recipe ingredients in the database
-        $updateRecipeIngredients = updateRecipe($recipe, $recipeData);
+        // update the recipes step in the database
+        function updateRecipeSteps($recipeId, $recipeSteps) {
+            // update the recipe ingredients in the database
+            $updateRecipeSteps = DB::table('recipe_steps')->where('recipe_id', $recipeId)->update([
+                'recipe_steps' => $recipeSteps,
+                'updated_at' => date('Y-m-d H:i:s')
+            ]);
+            // check if the recipe ingredients were updated successfully
+            if ($updateRecipeSteps === false) {
+                return response()->json([
+                    'status' => 500,
+                    'message' => 'Failed to update recipe steps'], 500);
+            } else {
+                return response()->json([
+                        'status' => 200,
+                        'message' => 'Recipe steps updated successfully'], 344);
+            }
+        }
+
+        // update the recipe nutritional facts.
+        function updateNutritionalFacts($recipeId, $nutritionalFacts) {
+            // update the recipe ingredients in the database
+            $updateNutritionalFacts = DB::table('recipe_nutritional_facts')->where('recipe_id', $recipeId)->update([
+                'recipe_nutritional_facts' => $nutritionalFacts,
+                'updated_at' => date('Y-m-d H:i:s')
+            ]);
+            // check if the recipe ingredients were updated successfully
+            if ($updateNutritionalFacts === false) {
+                return response()->json([
+                    'status' => 500,
+                    'message' => 'Failed to update recipe nutritional facts'], 500);
+            } else {
+                return response()->json([
+                        'status' => 200,
+                        'message' => 'Recipe nutritional facts updated successfully'], 344);
+            }
+
+        }
+        
+      $updatedNutritionalData = updateNutritionalFacts($recipe, $recipeData);
+       // $updateRecipeIngredients = updateRecipe($recipe, $recipeData);
         // check if the recipe ingredients were updated successfully
-        return $updateRecipeIngredients;
+        return $updatedNutritionalData;
      }
 }

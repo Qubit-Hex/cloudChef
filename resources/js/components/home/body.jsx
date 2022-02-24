@@ -32,16 +32,34 @@ import React from 'react';
         <div className="container header-section-space">
         <div className="row">
           <div className="col-sm">
+
+            <div className='intro-image-grid shadow' style={{
+
+            }}>
+
+            <img src='/img/intro-header.jpg' className="img-fluid" width="590px" height="500px" />
+
+            </div>
+
+
+            <div className='intro-text-grid shadow'>
+                
+
             <img
-              src="/img/undraw_Chef_cu0r.svg"
-              className="img-fluid"
+              src="/img/clams.jpg"
+              className="img-fluid shadow"
               width="590px"
               height="500px"
             />
+            </div>
+
+
           </div>
 
-          <div className="col-sm header-section-space-md">
+          <div className="col-sm header-section-space-md intro-second-title">
             <h1 className="header-subtitle"> Cloud Chef </h1>
+
+
 
             <h2 className="header-title"> The Secret Ingredient </h2>
             <h3 className="header-title"> Manage consistency effortlessly </h3>
@@ -67,7 +85,7 @@ import React from 'react';
         </div>
       </div>
         <div className="container">
-          <div className="row">
+          <div className="row mt-4 bg-white">
             <div className="col-sm mb-3 blob-lg">
               <img src="/img/food-phone.jpg" className="img-fluid" alt="" />
             </div>
@@ -88,7 +106,7 @@ import React from 'react';
             </div>
           </div>
 
-          <div className="row mt-4">
+          <div className="row mt-4 bg-white ">
             <div className="col-sm blob-lg">
               <img src="/img/burger-present.jpg" className="img-fluid" alt="" />
             </div>
@@ -109,8 +127,8 @@ import React from 'react';
             </div>
           </div>
 
-          <div className="row mt-4 header-section-space-md">
-            <div className="col-sm">
+          <div className="row mt-4 p-2 bg-white header-section-space-md">
+            <div className="col-sm bg-white">
               <img src="/img/baker-image.jpg" className="img-fluid hero sepia" />
             </div>
 

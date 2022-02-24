@@ -1,19 +1,29 @@
 body {
     font: 18px "Century Gothic", Futura, sans-serif;
     background-color: #ffffff00;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23d7cee7' fill-opacity='0.08' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
 }
 
 nav {
-    background: #3c6eca;  /* fallback for old browsers */
+    background: #f7faff;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #498edd, #2a4d92);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #2b6fbd, #1b2e53); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     font-weight: 800;
 }
 
 
-/*  MEDIA QUERYS   */
+.intro-image-grid {
+    background-color: #2167d854;
+    border-radius: 50%;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.459);
+}
 
+.intro-text-grid {
+    background-color: #ff525254;
+    border-radius: 50%;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.459);
+}
+
+/*  MEDIA QUERYS   */
 
 /* On screens that are 992px or less, set the background color to blue */
 

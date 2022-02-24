@@ -7,21 +7,60 @@
  */
 
 
-import react from "react";
+import React from "react";
 import ReactDOM from "react-dom";
+
+import FetchServiceProvider from "../../../../lib/fetchServiceProvider";
+import { TemplateModal } from "./template.modal";
+
 
 
 
 export const ModifyNutritionalFacts = (props) => {
 
-    console.log(props);
-    // close the modal
+ // name for the facts that will fetched from our api
+    const [facts, setFacts] = React.useState([]);
+    const [status, setStatus] = React.useState(null);
+
 
     const closeWindow = () => {
         const container = document.getElementById('modal-container');
 
         return ReactDOM.unmountComponentAtNode(container);
     }
+
+
+
+    const getNutritionalFacts = async () => {
+        const api = new FetchServiceProvider();
+
+        const route = `/api/store/recipes/find/${props.id}`;
+
+        const headers = {
+            'Content-Type': 'application/json',
+            'accessToken': api.getCookie('accessToken')
+        };
+        // return the promise to the user.
+        return await api.get(route, headers);
+    }
+
+
+    // update the nutritional facts of the recipe
+    const updateNutritionalFacts = async (data) => {
+
+        const api = new FetchServiceProvider();
+        const route = '/api/store/recipes/update/nutritionalFacts';
+
+        const headers = {
+            'Content-Type': 'application/json',
+            'accessToken': api.getCookie('accessToken'),
+            'recipeId': props.id
+
+        }
+
+        return await api.patch(route, data, headers);
+    }
+
 
 
     // validate the users inputs and if they are valid then render the next page
@@ -31,8 +70,7 @@ export const ModifyNutritionalFacts = (props) => {
 
         // loop through the inputs and check if they are empty
 
-        // check the inputs and if they are empty then return a error message to user via the dom
-
+         // check the inputs and if they are empty then return a error message to user via the d
 
         let inputValidationState = [];
 
@@ -104,10 +142,102 @@ export const ModifyNutritionalFacts = (props) => {
             }
         }, {});
 
-        // next we will
-        ReactDOM.render(<CreateRecipeTime   recipeIngredients={props.recipeIngredients}
-                                            recipeSummary={props.recipeSummary}
-                                            nutritionalFacts={inputObject}/>, container);
+        const request = updateNutritionalFacts(inputObject);
+
+        // perform the error handling of the request;
+       return request.then(response => {
+            if (response.status === 200) {
+                setStatus(true);
+            } else {
+                setStatus(false);
+            }
+        });
+    }
+
+
+
+    React.useEffect(() => {
+
+        console.log(facts);
+
+        // facts objects not empty ?
+        if(facts.length === 0) {
+            getNutritionalFacts().then(res => {
+                setFacts(JSON.parse(res.data.recipe_nutritional_facts.recipe_nutritional_facts));
+            })
+        }
+
+        // change all inputs to the values of the state object
+        // this will be used to update the inputs
+        const container = document.getElementById('modal-container');
+        const modalInputs = container.querySelectorAll('input');
+
+        // loop through the inputs and check if they are empty
+        for (let i = 0; i < modalInputs.length; i++) {
+            // check the name of modal input
+            let name = modalInputs[i].name;
+            let value = facts[name];
+            modalInputs[i].value = value;
+        }
+    }, [facts]);
+
+
+    // PERFORM SOME ERROR HANDLING WITH OUR REQUEST HERE
+    if (status === true) {
+        return (
+            <div>
+                <TemplateModal title="Success" body={
+                    <div>
+                    <img src='/img/SVG/Call waiting.svg'
+                         className='img-fluid' style={{
+                             animation: 'grow 3s both',
+                         }}
+                         width={350}
+                         height={350}
+                         alt='success' />
+                        {/** font awesome check circle */}
+                         <i className="fas fa-check-circle fa-5x text-success"></i>
+                         <span className='text-success  text-center'>
+                            <b> Success </b>
+                            <br />
+                            <span className='text-muted'>
+                                Your recipe Nutritional Facts have been updated
+                            </span>
+                         </span>
+                    </div>
+                } />
+            </div>
+        )
+
+    } else if (status === false) {
+        return (
+            <div>
+                <TemplateModal
+                    title="Error"
+                    body={
+                        <div>
+                            <img src='/img/SVG/Call waiting.svg'
+                         className='img-fluid' style={{
+                             animation: 'grow 3s both',
+                         }}
+                         width={350}
+                         height={350}
+                         alt='success' />
+                        {/** font awesome error circle */}
+                        <i className="fas fa-exclamation-circle fa-5x text-danger"></i>
+                         <span className='text-danger  text-center'>
+                            <b style={{fontSize: '2rem'}}> Error </b>
+                            <br />
+
+                            <span className='text-muted'>
+                                Your recipe has failed to update. Please try again
+                            </span>
+                         </span>
+                        </div>
+                    } />
+            </div>
+        );
+
     }
 
     return (

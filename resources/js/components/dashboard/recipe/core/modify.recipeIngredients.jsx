@@ -13,11 +13,13 @@ import ReactDOM from "react-dom";
 
 // sub imports
 import FetchServiceProvider from "../../../../lib/fetchServiceProvider";
+import { TemplateModal } from "./template.modal";
 
 export const ModifyRecipeIngredients = (props) => {
 
     // the state where we will hold the ingredients
     const [ingredient, setIngredient] = React.useState([]);
+    const [status, setStatus] = React.useState(null);
 
     // close the modal window
     const closeWindow = () => {
@@ -70,6 +72,11 @@ export const ModifyRecipeIngredients = (props) => {
         // make the call
         const response = await api.patch(route, data, headers).then(response => {
             console.log(response);
+            if (response.status === 200) {
+                setStatus(true);
+            } else {
+                setStatus(false);
+            }
         });
     }
 
@@ -102,7 +109,68 @@ export const ModifyRecipeIngredients = (props) => {
 
     }, []);
 
-        console.log(ingredient);
+        //  check the state of our application.
+    //  if the state is true then we will render the success message
+    //  if the state is false then we will render the error message
+
+    if (status === true) {
+        return (
+            <div>
+                <TemplateModal title="Success" body={
+                    <div>
+                    <img src='/img/SVG/Call waiting.svg'
+                         className='img-fluid' style={{
+                             animation: 'grow 3s both',
+                         }}
+                         width={350}
+                         height={350}
+                         alt='success' />
+                        {/** font awesome check circle */}
+                         <i className="fas fa-check-circle fa-5x text-success"></i>
+                         <span className='text-success  text-center'>
+                            <b> Success </b>
+                            <br />
+                            <span className='text-muted'>
+                                Your recipe ingredients have been updated
+                            </span>
+                         </span>
+                    </div>
+                } />
+            </div>
+        )
+
+    } else if (status === false) {
+        return (
+            <div>
+                <TemplateModal
+                    title="Error"
+                    body={
+                        <div>
+                            <img src='/img/SVG/Call waiting.svg'
+                         className='img-fluid' style={{
+                             animation: 'grow 3s both',
+                         }}
+                         width={350}
+                         height={350}
+                         alt='success' />
+                        {/** font awesome error circle */}
+                        <i className="fas fa-exclamation-circle fa-5x text-danger"></i>
+                         <span className='text-danger  text-center'>
+                            <b style={{fontSize: '2rem'}}> Error </b>
+                            <br />
+
+                            <span className='text-muted'>
+                                Your recipe has failed to update. Please try again
+                            </span>
+                         </span>
+                        </div>
+                    } />
+            </div>
+        );
+
+    }
+
+
     return (
         <div className='container'>
         <div className="row">
@@ -211,14 +279,6 @@ export const ModifyRecipeIngredients = (props) => {
         </div>
                             <div className="row mt-4 ml-4 mx-auto">
                                 { /** make back and next buttons in same row side by side  */}
-
-                                <div className='col mt-2'>
-                                    <button className='btn btn-danger mx-auto d-block' onClick={(e) => {
-                                        // handle the nutritional facts for the ingredients
-                                        const container = document.getElementById("modal-container");
-                                                    return ReactDOM.render(<CreateRecipeModal />, container);
-                                    }}> Back </button>
-                                </div>
 
                                 <div className='col mt-2'>
                                     <button className='btn btn-message mx-auto d-block' onClick={(e) => {

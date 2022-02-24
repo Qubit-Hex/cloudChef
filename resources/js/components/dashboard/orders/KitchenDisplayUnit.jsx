@@ -287,7 +287,7 @@ export const KitchenDisplayUnit = (props) => {
         },
         1: {
             item: "60Z STEAK",
-            subItems: ["COOK MEDIUM", "FRIES", "ALASKA SALAD"],
+            subItems: ["COOK MEDIUM", "FRIES", "ALASKA SALAD", "ALASKA SALAD"],
             amount: "1",
         },
 

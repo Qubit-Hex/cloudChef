@@ -28,6 +28,7 @@
  import FeaturesContainer from './containers/features.container';
  import PricingContainer from './containers/pricing.container';
  import DashboardContainer from "./containers/dashboard.container";
+ import { DashboardOrders } from "./containers/dashboard.orders";
 
  export default function AppRoutes() {
     return (
@@ -58,6 +59,8 @@
         <Route path='/dashboard/'>
             <DashboardContainer />
           </Route>
+
+          <Route path='/orders/' component={DashboardOrders} />
 
           <Route path="/">
              <HomeContainer />
