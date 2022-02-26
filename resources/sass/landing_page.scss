@@ -8,13 +8,14 @@ nav {
     background: -webkit-linear-gradient(to right, #498edd, #2a4d92);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #2b6fbd, #1b2e53); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     font-weight: 800;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.527);
 }
 
 
 .intro-image-grid {
     background-color: #2167d854;
     border-radius: 50%;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.459);
+    box-shadow: 0px 0px 10px 19px rgba(0, 0, 0, 0.459);
 }
 
 .intro-text-grid {
@@ -64,14 +65,15 @@ nav>* {
 .nav-link {
     padding: 10px;
     color: white;
-    font-size: 15px;
+    font-size: 20px;
     width: auto;
-    margin: 30px;
+    margin: 40px;
 }
 
 
 .nav-link:hover {
-    color: rgb(67, 140, 212);
+    color: salmon;
+    font-weight: 1000;
 }
 
 .img-round {
@@ -79,12 +81,26 @@ nav>* {
 }
 
 .header-subtitle {
+    font-size: 3em;
     font-weight: 1000;
-    color: rgb(16, 99, 177);
+    color: rgb(17, 112, 201);
+    // add a slide in animation
+    animation: slideInText 1s ease-in-out;
+}
+
+@keyframes slideInText {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
 }
 
 .header-title {
-    font-size: 32px;
+    font-size: 1.75em;
     font-weight: 800;
     color: black;
 }
@@ -93,7 +109,7 @@ nav>* {
     margin-top: 20px;
     font-size: 18px;
     color: slategray;
-    font-style: italic;
+    font-weight: 600;
 }
 
 .hero:nth-child(even) {
@@ -110,17 +126,18 @@ nav>* {
     box-sizing: border-box;
     ;
     border-radius: 10px;
-    clip-path: ellipse(300% 100% at -120% 0%);
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////;//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    clip-path: ellipse(300% 100% at -120% 0%);
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 50px -5px, rgba(0, 0, 0, 0.795) 0px 8px 16px -8px;
 }
 
 .header-action {
     margin-top: 5vh;
-    background-color: salmon;
+    background: #2f50e6ce;  /* fallback for old browsers */
     border: none;
     border-radius: 25px;
     padding: 15px;
     font-weight: bold;
+    color: white;
 
    * {
        color: white !important;
@@ -133,16 +150,17 @@ nav>* {
     border-radius: 25px;
     padding-top: 10px;
     padding-bottom: 10px;
-    padding-left: 25px;
-    padding-right: 25px;
+    padding-left: 50px;
+    padding-right: 50px;
     font-weight: bold;
     width: auto;
     position: relative;
-    top: -10px;
+    margin-top: -1vh;
+    text-align: center;
 }
 
 .header-action-no-margin:hover {
-    background-color: #0a316e;
+    background-color: #062557e3;
     color: white;
     font-weight: bold;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.795) 0px 8px 16px -8px;
@@ -209,7 +227,7 @@ nav>* {
 .blob-lg>img {
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 40px -5px, rgba(0, 0, 0, 0.795) 0px 8px 16px -8px;
     border-radius: 20px;
-}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          }
 
 .blob>img {
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 60px -2px, rgba(0, 0, 0, 0.795) 0px 8px 16px -8px;

@@ -14,8 +14,6 @@ import FetchServiceProvider from "../../../../lib/fetchServiceProvider";
 import { TemplateModal } from "./template.modal";
 
 
-
-
 export const ModifyNutritionalFacts = (props) => {
 
  // name for the facts that will fetched from our api

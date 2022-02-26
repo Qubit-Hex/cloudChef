@@ -360,8 +360,86 @@ class recipes extends Controller
 
     public function delete(Request $request)
     {
-        // here we will delete a recipe from the system.
+        // get the recipe id
+        $recipeId = $request->header('recipeId');
+
+        // perform our checkson the store recipe?
+
+        // check if the recipe id is empty
+        if (empty($recipeId)) {
+            return response()->json(['error' => 'Recipe id is empty']);
+        }
+
+        // check if the recipe id is a number
+        if (!is_numeric($recipeId)) {
+            return response()->json(['error' => 'Recipe id is not a number']);
+        }
+
+        // check if the recipe id is a number
+        if (strlen($recipeId) > 10) {
+            return response()->json(['error' => 'Recipe id is too long']);
+        }
+
+        // check if the recipe id is a number
+        if (strlen($recipeId) < 1) {
+            return response()->json(['error' => 'Recipe id is too short']);
+        }
+
+        // check if the recipe id is a number
+        if (!is_int($recipeId)) {
+            return response()->json(['error' => 'Recipe id is not an integer']);
+        }
+
+        // check if the recipe id is a number
+        if ($recipeId < 1) {
+            return response()->json(['error' => 'Recipe id is less than 1']);
+        }
+
+        // check if the recipe id is a number
+        if ($recipeId > 1000000) {
+            return response()->json(['error' => 'Recipe id is greater than 1 million']);
+        }
+
+        // check if the recipe id is a number
+        if (!is_numeric($recipeId)) {
+            return response()->json(['error' => 'Recipe id is not a number']);
+        }
+
+        // check if the recipe id is a number
+        if (strlen($recipeId) > 10) {
+            return response()->json(['error' => 'Recipe id is too long']);
+        }
+
+        // check if the recipe id is a number
+        if (strlen($recipeId) < 1) {
+            return response()->json(['error' => 'Recipe id is too short']);
+        }
+
+        // all of our checks have passed so now lets delete the recipe
+
+        // delete the recipe
+        $deleteRecipe = DB::table('recipe')->where('recipe_id', $recipeId);
+
+
+        // delete the following entries from the database inorder to delete the recipe.
+        
+        $recipe = DB::table('recipe')->where('recipe_id', $recipeId)->delete();
+        $recipe_allergens = DB::table('recipe_allergens')->where('recipe_id', $recipeId)->delete();
+        $recipe_cooking_time = DB::table('recipe_cooking_time')->where('recipe_id', $recipeId)->delete();
+        $recipe_flavour_profile = DB::table('recipe_flavour_profile')->where('recipe_id', $recipeId)->delete();
+        $recipe_ingredients = DB::table('recipe_ingredents')->where('recipe_id', $recipeId)->delete();
+        $recipe_nutritional_facts = DB::table('recipe_nutritional_facts')->where('recipe_id', $recipeId)->delete();
+        $recipe_steps = DB::table('recipe_steps')->where('recipe_id', $recipeId)->delete();
+
+        // check if the recipe was deleted
+        if (!$recipe) {
+            return response()->json(['error' => 'Failed to delete recipe']);
+        }
+
+        // return the response to the client side.
+        return response()->json(['status' => 200, 'message' => 'Recipe deleted successfully']);
     }
+
 
 
     /**
@@ -486,7 +564,7 @@ class recipes extends Controller
         // next lets validate the recipe id that was provided.
         //  lets update the recipe ingredients in the database
 
-        function updateRecipe($recipeId, $recipeIngredients) {
+        function updateRecipeIngredients($recipeId, $recipeIngredients) {
             // update the recipe ingredients in the database
             $updateRecipeIngredients = DB::table('recipe_ingredents')->where('recipe_id', $recipeId)->update([
                 'recipe_ingredients' => $recipeIngredients,
@@ -538,7 +616,14 @@ class recipes extends Controller
             }
 
         }
-        
+
+
+        // update the recipes general information
+        function updateRecipeSummary($recipeId, $recipeData)
+        {
+
+        }
+
       $updatedNutritionalData = updateNutritionalFacts($recipe, $recipeData);
        // $updateRecipeIngredients = updateRecipe($recipe, $recipeData);
         // check if the recipe ingredients were updated successfully

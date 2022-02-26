@@ -11,10 +11,63 @@
 
 import react from "react";
 import { ReactDOM } from "react";
-
+import FetchServiceProvider from "../../../../lib/fetchServiceProvider";
 
 
 export const ModifyRecipeSummary = (props) => {
+
+    // our states that will hold the recipe information.
+    const [ recipeSummary, setRecipeSummary ] = react.useState(null);
+    const [ recipeAllergies, setRecipeAllergies ] = react.useState(null);
+    const [ recipeFlavourProfile, setRecipeFlavourProfile ] = react.useState(null);
+    const [ updatedRecipe, setUpdatedRecipe ] = react.useState(null);
+
+    /**
+     * @function: fetchRecipe
+     *
+     * @param {string} recipeId
+     *
+     * @returns {Promise}
+     *
+     * @purpose: This function is used to fetch the recipe information from our api.
+     * 
+     */
+
+    const fetchRecipe = async (id) => {
+        const api = new FetchServiceProvider();
+        const route = '/api/store/recipes/find/' + props.id;
+
+        const headers = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'accessToken': api.getCookie('accessToken')
+    };
+
+    const response = await api.get(route, headers);
+    return response;
+}
+
+/**
+ *  @blueprint validation
+ *
+ *  @purpose: inorder to validate the form and, auto fill the forms with the data from the database.
+ */
+
+    const validationCheck = () => {
+        fetchRecipe(props.id).then(response => {
+            // set our states to hold all of the recipe data from the database.
+            console.log(response);
+            // please note that these states we set are not the same as the states that we use in the form.
+            setRecipeSummary(response.data.recipe);
+            setRecipeAllergies(response.data.allergy_info.recipe_allergens);
+            setRecipeFlavourProfile(response.data.flavour_profile.recipe_flavor_profile);
+        });
+    }
+
+    // console.log the states
+    console.log(recipeSummary);
+    console.log(recipeAllergies);
+    console.log(recipeFlavourProfile);
 
     return (
         <div className="container">
