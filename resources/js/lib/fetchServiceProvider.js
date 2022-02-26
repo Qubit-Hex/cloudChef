@@ -37,6 +37,21 @@ export default class FetchServiceProvider {
         return null;
     }
 
+    /**
+     * @method: covertToJWT
+     *
+     *  @purpose: to convert a cookie to a jwt token
+     */
+    convertToJWT(cookie) {
+        // change this later inorder to convert our cookie into a jwt token
+        // the server will always return a token, but once server decodes it it will
+        // detrmine if it is valid or not... if it is valid it will return the user
+        // if it is not valid it will return a 401 error
+        return {
+            'accessToken': this.getCookie('accessToken'),
+        }
+    }
+
 
     /**
      *
@@ -188,7 +203,7 @@ export default class FetchServiceProvider {
      *
      */
     async patch(url, data, headers) {
-        
+
         let request = new Request(url, {
             method: 'PATCH',
             body: JSON.stringify(data),

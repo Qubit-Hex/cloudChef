@@ -57,15 +57,13 @@ export class QRCode extends react.Component {
      *  @purpose : inorder to generate a review token for the user to rate their experience
      *
      */
-    
+
     static generateReviewToken(customerToken, reviewToken) {
 
                 return (
                     <QR value={customerToken + "," + reviewToken} includeMargin={true} size={400} />
                 )
     }
-
-
-    }
+}
 
 
