@@ -546,6 +546,9 @@
   font-style: italic;
   font-weight: 800;
 }
+.dashboard-content .header-subtitle {
+  font-size: 24px;
+}
 .dashboard-content .card {
   border: none;
   padding: 50px;
@@ -1359,6 +1362,7 @@ nav {
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   font-weight: 800;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.527);
+  padding: 0px;
 }
 
 .intro-image-grid {
@@ -1409,11 +1413,10 @@ nav > * {
 }
 
 .nav-link {
-  padding: 10px;
   color: white;
-  font-size: 20px;
+  font-size: 18px;
   width: auto;
-  margin: 40px;
+  margin: 25px;
 }
 
 .nav-link:hover {
@@ -1504,8 +1507,8 @@ nav > * {
   border-radius: 25px;
   padding-top: 10px;
   padding-bottom: 10px;
-  padding-left: 50px;
-  padding-right: 50px;
+  padding-left: 25px;
+  padding-right: 25px;
   font-weight: bold;
   width: auto;
   position: relative;

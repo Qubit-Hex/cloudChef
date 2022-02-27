@@ -37,13 +37,13 @@ import React from 'react';
 
             }}>
 
-            <img src='/img/intro-header.jpg' className="img-fluid" width="590px" height="500px" />
+            <img src='/img/intro-header.jpg' className="img-fluid" width="600px" height="500px" />
 
             </div>
 
 
             <div className='intro-text-grid shadow'>
-                
+
 
             <img
               src="/img/clams.jpg"

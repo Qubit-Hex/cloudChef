@@ -30,7 +30,7 @@ export const ModifyRecipeSummary = (props) => {
      * @returns {Promise}
      *
      * @purpose: This function is used to fetch the recipe information from our api.
-     * 
+     *
      */
 
     const fetchRecipe = async (id) => {
@@ -51,26 +51,155 @@ export const ModifyRecipeSummary = (props) => {
  *  @blueprint validation
  *
  *  @purpose: inorder to validate the form and, auto fill the forms with the data from the database.
+ *
  */
 
     const validationCheck = () => {
-        fetchRecipe(props.id).then(response => {
+      fetchRecipe(props.id).then(response => {
             // set our states to hold all of the recipe data from the database.
-            console.log(response);
             // please note that these states we set are not the same as the states that we use in the form.
             setRecipeSummary(response.data.recipe);
             setRecipeAllergies(response.data.allergy_info.recipe_allergens);
             setRecipeFlavourProfile(response.data.flavour_profile.recipe_flavor_profile);
         });
+
+        // check did fetchRecipe finish?
+        if (recipeSummary !== null && recipeAllergies !== null && recipeFlavourProfile !== null) {
+            // if yes, then we can now render the form.
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    // console.log the states
-    console.log(recipeSummary);
-    console.log(recipeAllergies);
-    console.log(recipeFlavourProfile);
+
+    // check if we can render the form.
+    // but first we will pre enter all of the form fields inside of the forms.
+    const autoFillForm = () => {
+        const container = document.getElementById('recipeSummaryContainer');
+        const formInputs = container.querySelectorAll('input');
+
+        formInputs.forEach(input => {
+
+            const allergy = JSON.parse(recipeAllergies);
+            const flavourProfile = JSON.parse(recipeFlavourProfile);
+
+            console.log(recipeSummary);
+        // select the input field and set the value to the value of the state.
+            switch(input.name) {
+                case 'recipeName':
+                    input.value = recipeSummary.recipe_name;
+                break;
+                case 'recipeCatagory':
+                    input.value = recipeSummary.catagory;
+                break;
+                // now lets update all the allergen fields.
+                case 'glutenFree':
+                // check what the value of the state is.
+                    if (allergy.gluten === true) {
+                        if (input.value === 'true') {
+                            input.checked = true;
+                        }
+                    } else {
+                        if (input.value === 'false') {
+                            input.checked = true;
+                        }
+                      }
+                break;
+                case 'dairyFree':
+                    if (allergy.dairy === true) {
+                        if (input.value === 'true') {
+                            input.checked = true;
+                        }
+                    } else {
+                        if (input.value === 'false') {
+                            input.checked = true;
+                        }
+                    }
+                break;
+                case 'eggFree':
+                    if (allergy.egg === true) {
+                        if (input.value === 'true') {
+                            input.checked = true;
+                        }
+                    } else {
+                        if (input.value === 'false') {
+                            input.checked = true;
+                        }
+                    }
+                break;
+                case 'nutFree':
+                    if (allergy.nut === true) {
+                        if (input.value === 'true') {
+                            input.checked = true;
+                        }
+                    } else {
+                        if (input.value === 'false') {
+                            input.checked = true;
+                        }
+                    }
+                break;
+                case 'fishFree':
+                    if (allergy.fish === true) {
+                        if (input.value === 'true') {
+                            input.checked = true;
+                        }
+                    } else {
+                        if (input.value === 'false') {
+                            input.checked = true;
+                        }
+                    }
+                break;
+
+                case 'sweet':
+                    if (flavourProfile.sweet === true) {
+                        if (input.value === 'true') {
+                            input.checked = true;
+                        }
+                    } else {
+                        if (input.value === 'false') {
+                            input.checked = true;
+                        }
+                    }
+                break;
+
+                //  now lets update all the flavour profile fields.
+
+                case 'sour':
+                    if (flavourProfile.sour === true) {
+                        if (input.value === 'true') {
+                            input.checked = true;
+                        }
+                    } else {
+                        if (input.value === 'false') {
+                            input.checked = true;
+                        }
+                    }
+                break;
+                case 'savory':
+                    if (flavourProfile.savory === true) {
+                        if (input.value === 'true') {
+                            input.checked = true;
+                        }
+                    } else {
+                        if (input.value === 'true') {
+                            input.checked = true;
+                        }
+                    }
+                break;
+            }
+        });
+
+    }
+
+    // perorm all of our pre checks before we render the form.
+    React.useEffect( () => {
+        // after we finishing test we will place our function inside of here.
+    }, [])
+
 
     return (
-        <div className="container">
+        <div className="container" id='recipeSummaryContainer'>
         <h4 className="header-subtitle"> Recipe Details  </h4>
             <div className="row">
                 <div class="form-group">
@@ -453,7 +582,10 @@ export const ModifyRecipeSummary = (props) => {
                         (e) => {
 
                             // we need to preform validation checks here before we can proceed
-                            validationCheck(e);
+                            if (validationCheck(e) === true) {
+                                // execute our function that will handle the auto filling of the forms fields in the page
+                                autoFillForm(e);
+                            }
                         }
                     }
                         className="btn btn-message w-50 btn-block m-3"

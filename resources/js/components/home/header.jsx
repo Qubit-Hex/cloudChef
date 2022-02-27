@@ -46,7 +46,7 @@
       <div className="_header_">
         <nav className="navbar navbar-expand-lg navbar-transparent ml-auto mt-auto">
                   <a className='navbar-brand' href='/'>
-                  <img className="img-fluid" width='150px' height='150px' src="/img/logo/Cloud Chef-logos_white.png"  alt=""/>
+                  <img className="img-fluid" width='125px' height='125px' src="/img/logo/Cloud Chef-logos_white.png"  alt=""/>
             </a>
 
 
@@ -56,7 +56,9 @@
 
 
             <button  onClick={this.handleToggle} className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon icon-large"><i className={this.getIconClass(this.state.hamToggle)}></i></span>
+                <span className="navbar-toggler-icon icon-large"><i className={this.getIconClass(this.state.hamToggle)} style={{
+                    color: 'white'
+                }}></i></span>
             </button>
             <div className="collapse navbar-collapse" id="navbar">
               <div className="navbar-nav">
