@@ -188,8 +188,8 @@ class recipes extends Controller
         // sub tables
         // recipeSummary    sub component of the recipe
         // NutritionalData  sub component of the recipe
-        // recipeSteps    a sub component of the recipe
-        // recipeIngredients s
+                // recipeSteps    a sub component of the recipe
+                // recipeIngredients s
 
         // unit tests for testing that data base relationships are working
 
@@ -329,7 +329,6 @@ class recipes extends Controller
             'store_id' => 1,
             'recipe_id' => $createRecipeEntry,
             'recipe_name' => $recipeSummary['recipeName'],
-            'recipe_description' => 'some value',
             'catagory' => $recipeSummary['recipeCatagory'],
             'recipe_image' => $recipeSummary['recipeImage'],
             'hash' => $recipeSummary['key'],
@@ -371,11 +370,6 @@ class recipes extends Controller
         }
 
         // check if the recipe id is a number
-        if (!is_numeric($recipeId)) {
-            return response()->json(['error' => 'Recipe id is not a number']);
-        }
-
-        // check if the recipe id is a number
         if (strlen($recipeId) > 10) {
             return response()->json(['error' => 'Recipe id is too long']);
         }
@@ -383,36 +377,11 @@ class recipes extends Controller
         // check if the recipe id is a number
         if (strlen($recipeId) < 1) {
             return response()->json(['error' => 'Recipe id is too short']);
-        }
-
-        // check if the recipe id is a number
-        if (!is_int($recipeId)) {
-            return response()->json(['error' => 'Recipe id is not an integer']);
-        }
-
-        // check if the recipe id is a number
-        if ($recipeId < 1) {
-            return response()->json(['error' => 'Recipe id is less than 1']);
         }
 
         // check if the recipe id is a number
         if ($recipeId > 1000000) {
             return response()->json(['error' => 'Recipe id is greater than 1 million']);
-        }
-
-        // check if the recipe id is a number
-        if (!is_numeric($recipeId)) {
-            return response()->json(['error' => 'Recipe id is not a number']);
-        }
-
-        // check if the recipe id is a number
-        if (strlen($recipeId) > 10) {
-            return response()->json(['error' => 'Recipe id is too long']);
-        }
-
-        // check if the recipe id is a number
-        if (strlen($recipeId) < 1) {
-            return response()->json(['error' => 'Recipe id is too short']);
         }
 
         // all of our checks have passed so now lets delete the recipe
@@ -422,11 +391,11 @@ class recipes extends Controller
 
 
         // delete the following entries from the database inorder to delete the recipe.
-        
+
         $recipe = DB::table('recipe')->where('recipe_id', $recipeId)->delete();
         $recipe_allergens = DB::table('recipe_allergens')->where('recipe_id', $recipeId)->delete();
         $recipe_cooking_time = DB::table('recipe_cooking_time')->where('recipe_id', $recipeId)->delete();
-        $recipe_flavour_profile = DB::table('recipe_flavour_profile')->where('recipe_id', $recipeId)->delete();
+        $recipe_flavour_profile = DB::table('recipe_flavor_profile')->where('recipe_id', $recipeId)->delete();
         $recipe_ingredients = DB::table('recipe_ingredents')->where('recipe_id', $recipeId)->delete();
         $recipe_nutritional_facts = DB::table('recipe_nutritional_facts')->where('recipe_id', $recipeId)->delete();
         $recipe_steps = DB::table('recipe_steps')->where('recipe_id', $recipeId)->delete();
@@ -435,6 +404,31 @@ class recipes extends Controller
         if (!$recipe) {
             return response()->json(['error' => 'Failed to delete recipe']);
         }
+
+        if (!$recipe_allergens) {
+            return response()->json(['error' => 'Failed to delete recipe allergens']);
+        }
+
+        if (!$recipe_cooking_time) {
+            return response()->json(['error' => 'Failed to delete recipe cooking time']);
+        }
+
+        if (!$recipe_flavour_profile) {
+            return response()->json(['error' => 'Failed to delete recipe flavour profile']);
+        }
+
+        if (!$recipe_ingredients) {
+            return response()->json(['error' => 'Failed to delete recipe ingredients']);
+        }
+
+        if (!$recipe_nutritional_facts) {
+            return response()->json(['error' => 'Failed to delete recipe nutritional facts']);
+        }
+
+        if (!$recipe_steps) {
+            return response()->json(['error' => 'Failed to delete recipe steps']);
+        }
+
 
         // return the response to the client side.
         return response()->json(['status' => 200, 'message' => 'Recipe deleted successfully']);
@@ -621,10 +615,38 @@ class recipes extends Controller
         // update the recipes general information
         function updateRecipeSummary($recipeId, $recipeData)
         {
+            // update the recipe table
+            $recipeTable = DB::table('recipe')->where('recipe_id', $recipeId)->update([
+                'recipe_name' => $recipeData['recipeSummary']['recipe_name'],
+                'catagory' => $recipeData['recipeSummary']['catagory'],
+                'updated_at' => date('Y-m-d H:i:s')
+            ]);
 
+            // now update the recipe flavour profile
+            $recipeFlavourProfile = DB::table('recipe_flavor_profile')->where('recipe_id', $recipeId)->update([
+                'recipe_flavor_profile' =>  $recipeData['recipeFlavourProfile'],
+                'updated_at' => date('Y-m-d H:i:s')
+            ]);
+
+            // now lets update the recipe allergens
+            $recipeAllergens = DB::table('recipe_allergens')->where('recipe_id', $recipeId)->update([
+                'recipe_allergens' => $recipeData['recipeAllergies'],
+                'updated_at' => date('Y-m-d H:i:s')
+            ]);
+
+            // check to make sure that the recipe was updated successfully
+            if ($recipeTable === false || $recipeFlavourProfile === false || $recipeAllergens === false) {
+                return response()->json([
+                    'status' => 500,
+                    'message' => 'Failed to update recipe'], 500);
+            } else {
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'Recipe updated successfully'], 344);
+            }
         }
 
-      $updatedNutritionalData = updateNutritionalFacts($recipe, $recipeData);
+      $updatedNutritionalData = updateRecipeSummary($recipe, $recipeData);
        // $updateRecipeIngredients = updateRecipe($recipe, $recipeData);
         // check if the recipe ingredients were updated successfully
         return $updatedNutritionalData;

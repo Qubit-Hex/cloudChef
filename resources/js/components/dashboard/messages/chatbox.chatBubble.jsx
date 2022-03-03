@@ -1,9 +1,9 @@
 /**
- * 
- *  @file  chatbox.chatMessages 
- * 
- *  @purpose: to render the chat bubble of the active converstation 
- * 
+ *
+ *  @file  chatbox.chatMessages
+ *
+ *  @purpose: to render the chat bubble of the active converstation
+ *
  */
 
 
@@ -28,7 +28,7 @@ export class ChatboxMessageBubble extends react.Component {
 
     /**
      *   @method: componentDidMount
-     * 
+     *
      *   @purpose: to get the user name of the user who sent the message
      */
 
@@ -46,17 +46,17 @@ export class ChatboxMessageBubble extends react.Component {
             <div className="chat-buble-container">
 
                 <div className="row mt-2">
-                
-                 
+
+
                     <div className="convo-user m-1" style={{backgroundColor: this.props.color}}>
                       <img width={50} height={50} src={this.props.profileImg} alt={this.props.user}/>
-                      <span className='text-muted'> { 
+                      <span className='text-muted'> {
                           this.state.name
                       }</span> <br/><br/>
                        <span> {this.props.message } </span> <br /><br/>
 
-                    </div>   
-                    </div>                  
+                    </div>
+                    </div>
             </div>
         );
     }

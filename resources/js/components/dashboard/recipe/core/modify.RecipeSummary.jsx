@@ -5,13 +5,14 @@
  *
  *  @purpose: This component is used to display and modify the recipe Summary.
  *
+ *
  */
 
 
-
 import react from "react";
-import { ReactDOM } from "react";
+import ReactDOM  from "react-dom";
 import FetchServiceProvider from "../../../../lib/fetchServiceProvider";
+import { TemplateModal } from "./template.modal";
 
 
 export const ModifyRecipeSummary = (props) => {
@@ -21,6 +22,7 @@ export const ModifyRecipeSummary = (props) => {
     const [ recipeAllergies, setRecipeAllergies ] = react.useState(null);
     const [ recipeFlavourProfile, setRecipeFlavourProfile ] = react.useState(null);
     const [ updatedRecipe, setUpdatedRecipe ] = react.useState(null);
+    const [ status, setStatus ] = react.useState(null);
 
     /**
      * @function: fetchRecipe
@@ -55,6 +57,7 @@ export const ModifyRecipeSummary = (props) => {
  */
 
     const validationCheck = () => {
+
       fetchRecipe(props.id).then(response => {
             // set our states to hold all of the recipe data from the database.
             // please note that these states we set are not the same as the states that we use in the form.
@@ -73,6 +76,7 @@ export const ModifyRecipeSummary = (props) => {
     }
 
 
+
     // check if we can render the form.
     // but first we will pre enter all of the form fields inside of the forms.
     const autoFillForm = () => {
@@ -83,10 +87,9 @@ export const ModifyRecipeSummary = (props) => {
 
             const allergy = JSON.parse(recipeAllergies);
             const flavourProfile = JSON.parse(recipeFlavourProfile);
-
-            console.log(recipeSummary);
         // select the input field and set the value to the value of the state.
             switch(input.name) {
+
                 case 'recipeName':
                     input.value = recipeSummary.recipe_name;
                 break;
@@ -165,8 +168,8 @@ export const ModifyRecipeSummary = (props) => {
 
                 //  now lets update all the flavour profile fields.
 
-                case 'sour':
-                    if (flavourProfile.sour === true) {
+                case 'spicy':
+                    if (flavourProfile.spicy === true) {
                         if (input.value === 'true') {
                             input.checked = true;
                         }
@@ -189,33 +192,179 @@ export const ModifyRecipeSummary = (props) => {
                 break;
             }
         });
-
     }
 
-    // perorm all of our pre checks before we render the form.
-    React.useEffect( () => {
-        // after we finishing test we will place our function inside of here.
-    }, [])
+    // validate Request first we are going to validate the request before sending it to the database. use a patch request.
+    const validateForm  = () => {
+        const container = document.getElementById('recipeSummaryContainer');
+        const formInputs = container.querySelectorAll('input');
 
+
+        const triggerError = (input) => {
+            let error = document.getElementById(input.name + '-error');
+            if (input.value === '') {
+                ReactDOM.render(<div class="alert alert-danger">Please fill out all the fields</div>, error);
+                return false;
+            } else {
+                ReactDOM.render(<div class="alert alert-success">Form is valid</div>, error);
+                return true;
+            }
+        }
+
+        // verify a value is entered in the input field.
+        const verifyValue = (input) => {
+            if (input.value === 'true') {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        const RequestObject = {
+            recipeSummary: new Object(),
+            recipeAllergies: new Object(),
+            recipeFlavourProfile: new Object(),
+        }
+
+
+        const stateCheck = [];
+
+        // here we are going to validate the forms inputs and make sure that they are all filled out.
+        formInputs.forEach(input => {
+            // select the input field and set the value to the value of the state.
+            switch(input.name) {
+                case 'recipeName':
+                    triggerError(input) === true ? stateCheck.push(true ) : stateCheck.push(false);
+                    RequestObject.recipeSummary.recipe_name = input.value;
+                break;
+                case 'recipeCatagory':
+                    triggerError(input) === true ? stateCheck.push(true ) : stateCheck.push(false);
+                    RequestObject.recipeSummary.catagory = input.value;
+                break;
+                // now lets update all the allergen fields.
+                case 'glutenFree':
+                    RequestObject.recipeAllergies.gluten = verifyValue(input);
+                break;
+                case 'dairyFree':
+                    RequestObject.recipeAllergies.dairy = verifyValue(input);
+                break;
+                case 'eggFree':
+                    RequestObject.recipeAllergies.egg = verifyValue(input);
+                break;
+                case 'nutFree':
+                    RequestObject.recipeAllergies.nut = verifyValue(input);
+                break;
+                case 'fishFree':
+                    RequestObject.recipeAllergies.fish = verifyValue(input);
+                break;
+
+                case 'sweet':
+                    RequestObject.recipeFlavourProfile.sweet = verifyValue(input);
+                break;
+
+                //  now lets update all the flavour profile fields.
+                case 'sour':
+                    RequestObject.recipeFlavourProfile.sour = verifyValue(input);
+                break;
+                case 'spicy':
+                    RequestObject.recipeFlavourProfile.spicy = verifyValue(input);
+                break;
+            }
+        });
+
+
+        // handle our network request.
+        const performRequest = async (data) => {
+            const api = new FetchServiceProvider();
+            const route = '/api/store/recipes/update/recipeSummary';
+
+            const headers = {
+                'Content-Type': 'application/json',
+                'accessToken': api.getCookie('accessToken'),
+                'recipeId': props.id
+            }
+
+            const response = await api.patch(route, data, headers);
+
+            return response;
+        }
+
+         // check if the state contains false value
+         if (stateCheck.includes(false)) {
+            return false;
+         }
+
+         // if everything is valid then we are going to send the request to the database.
+        performRequest(RequestObject).then(response => {
+            if (response.status === 200) {
+                // re render the modal with the new data.
+                setStatus(true);
+            } else {
+                setStatus(false);
+            }
+        })
+    }
+
+        // trigger our conditional rendering messages
+        if (status === true) {
+            return (
+                <div>
+                    <TemplateModal title="Success" body={
+                        <div>
+                        <img src='/img/SVG/Call waiting.svg'
+                             className='img-fluid' style={{
+                                 animation: 'grow 3s both',
+                             }}
+                             width={350}
+                             height={350}
+                             alt='success' />
+                            {/** font awesome check circle */}
+                             <i className="fas fa-check-circle fa-5x text-success"></i>
+                             <span className='text-success  text-center'>
+                                <b> Success </b>
+                                <br />
+                                <span className='text-muted'>
+                                    Your recipe has been updated!
+                                </span>
+                             </span>
+                        </div>
+                    } />
+                </div>
+            )
+
+        } else if (status === false) {
+            return (
+                <div>
+                    <TemplateModal
+                        title="Error"
+                        body={
+                            <div>
+                                <img src='/img/SVG/Call waiting.svg'
+                             className='img-fluid' style={{
+                                 animation: 'grow 3s both',
+                             }}
+                             width={350}
+                             height={350}
+                             alt='success' />
+                            {/** font awesome error circle */}
+                            <i className="fas fa-exclamation-circle fa-5x text-danger"></i>
+                             <span className='text-danger  text-center'>
+                                <b style={{fontSize: '2rem'}}> Error </b>
+                                <br />
+
+                                <span className='text-muted'>
+                                    Your recipe has failed to update. Please try again
+                                </span>
+                             </span>
+                            </div>
+                        } />
+                </div>
+            );
+}
 
     return (
         <div className="container" id='recipeSummaryContainer'>
         <h4 className="header-subtitle"> Recipe Details  </h4>
-            <div className="row">
-                <div class="form-group">
-                    <label for="exampleFormControlFile1">
-                        Recipe Image
-                    </label>
-                    <span id='recipeImage-error'></span>
-                    <input
-                        type="file"
-                        class="form-control mt-2 mb-2"
-                        name='recipeImage'
-                        id="createrecipe-uploadimage"
-                    />
-                </div>
-            </div>
-
 
             <div className='row'>
                 {/** recipe name  */}
@@ -580,11 +729,8 @@ export const ModifyRecipeSummary = (props) => {
 
                     <button onClick={
                         (e) => {
-
-                            // we need to preform validation checks here before we can proceed
-                            if (validationCheck(e) === true) {
-                                // execute our function that will handle the auto filling of the forms fields in the page
-                                autoFillForm(e);
+                            if (validationCheck() === true) {
+                                validateForm();
                             }
                         }
                     }

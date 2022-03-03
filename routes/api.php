@@ -243,7 +243,7 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
 
               Route::get('/find/{id}', [recipes::class, 'find'])->name('recipes/find/{id}');
 
-              Route::get('/delete', [recipes::class, 'delete'])->name('recipes/delete');
+              Route::delete('/delete', [recipes::class, 'delete'])->name('recipes/delete');
 
             // group route for updating the reicpes in the system
                 Route::group(['prefix' => '/update'], function () {
@@ -256,7 +256,6 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
                     Route::patch('/recipeInstructions/', [recipes::class, 'update'])->name('recipes/update/recipeInstructions');
 
                     Route::patch('/nutritionalFacts/', [recipes::class, 'update'])->name('recipes/update/nutritionalFacts');
-
                 });
 
 

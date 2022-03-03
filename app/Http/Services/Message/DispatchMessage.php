@@ -1,10 +1,10 @@
 <?php
 
 /**
- * 
+ *
  *  @class: DispatchMessage
- * 
- *  @purpose: this class is used to dispatch message to the user    
+ *
+ *  @purpose: this class is used to dispatch message to the user
  */
 
 
@@ -22,7 +22,7 @@ class DispatchMessage implements MessageInterface
 {
 
 
-    // we will impliment a encryption pipelines for the users in the coverstations 
+    // we will impliment a encryption pipelines for the users in the coverstations
     const PrivateMessageKey = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     // TODO inpliment encapuslation for this class to make it more secure
     // and hide the details of how the message is send/received/deleted
@@ -37,18 +37,18 @@ class DispatchMessage implements MessageInterface
 
     public function __construct()
     {
-        // initilize are event dispatcher here 
+        // initilize are event dispatcher here
 
         // we will use this accross class to verify the requests of the message
         $this->initMessageKey = openssl_random_pseudo_bytes(32);
 
     }
 
-   
+
     /**
-     * 
+     *
      * @function: getAllMessages
-     * 
+     *
      *  @purpose: this function is used to get all the messages
      *
      */
@@ -61,11 +61,11 @@ class DispatchMessage implements MessageInterface
     }
 
     /**
-     *  
+     *
      *  @function: getMessageById
-     * 
+     *
      *  @purpose: this function is used to get the message by id
-     * 
+     *
      */
 
     public function getMessageById($id)
@@ -75,8 +75,8 @@ class DispatchMessage implements MessageInterface
         // check if the message is found in the database
 
         if ($db) {
-            return Response()->json(['message' => 'message found', 
-                                     'data' => $db]);
+            return Response()->json(['message' => 'message found',
+                                     'data' => $db, 'id' => $id]);
         }
 
         return Response()->Json(['message' => 'message not found'], 404);
@@ -84,7 +84,7 @@ class DispatchMessage implements MessageInterface
 
     /**
      *  @method: deleteMessage
-     * 
+     *
      * @purpose: this function is used to detach the message
      */
 
@@ -112,8 +112,8 @@ class DispatchMessage implements MessageInterface
 
     public function createMessage($data)
     {
-        # make a structure for sending messages 
-        
+        # make a structure for sending messages
+
         $message = [
             'storeID' => $data['storeID'],
             'token' => $data['token'],
@@ -127,10 +127,10 @@ class DispatchMessage implements MessageInterface
 
 
     /**
-     *   @method: sendMessage 
+     *   @method: sendMessage
      *
      *
-     *  @HTTP_METHOD: POST 
+     *  @HTTP_METHOD: POST
      *
      *  @purpose: this function is used to send the message
      */
@@ -138,23 +138,23 @@ class DispatchMessage implements MessageInterface
 
     static function sendMessage($data)
     {
-            // add message structure for store messsages 
+            // add message structure for store messsages
 
 
             /**
-             *  @blueprint: 
-             * 
-             *   storeID -> users store 
-             *   token -> the unique access token for the user 
-             *   userID -> the recipient of the user 
-             *   requestTime -> time of the request  
-             *   Message -> the message we are going to send to the user 
-             * 
+             *  @blueprint:
+             *
+             *   storeID -> users store
+             *   token -> the unique access token for the user
+             *   userID -> the recipient of the user
+             *   requestTime -> time of the request
+             *   Message -> the message we are going to send to the user
+             *
              */
 
 
 
-             // form request object to send to the server 
+             // form request object to send to the server
              // TODO: add validation for the message
              $requestObject = [
                  'storeID' => $data['storeID'],
@@ -166,7 +166,7 @@ class DispatchMessage implements MessageInterface
 
 
 
-             // check if the user message is empty ? 
+             // check if the user message is empty ?
              if (strlen($requestObject['message']) ===  0) {
                  return Response()->json(['error' => 'Message cannot be empty',
                                          'inputError' => true,
@@ -180,7 +180,7 @@ class DispatchMessage implements MessageInterface
 
 
 
-             // check if im trying to send a message to myself 
+             // check if im trying to send a message to myself
              if ($currentUser == $requestObject['userID']) {
                  return response()->json([
                      'status' => 'error',
@@ -224,7 +224,7 @@ class DispatchMessage implements MessageInterface
                 }
 
                 // check if the user is blocked by the current user
-            
+
 
              // debug json response for REST API  REMOVE THIS LATER
              return Response()->json([
@@ -244,11 +244,11 @@ class DispatchMessage implements MessageInterface
 
 
 
-        
+
     }
     /*
-      * @method: getMessages 
-      * 
+      * @method: getMessages
+      *
       * @HTTP_METHOD: GET
       *
       * @purpose: this function is used to get the messages
@@ -258,7 +258,7 @@ class DispatchMessage implements MessageInterface
     static function getMessages($data)
     {
 
-        // form our response message 
+        // form our response message
         $response = [
             'storeID' => $data['storeID'],
             'token' => $data['token'],
@@ -269,12 +269,12 @@ class DispatchMessage implements MessageInterface
         // user id of the user logged in
         $currentUser = DB::table('users')->where('remember_token', $data['token'])->first()->userID;
 
-        // load profiles from our store 
+        // load profiles from our store
         $user_profiles = DB::table('user_profile')->where('storeID', $data['storeID'])->where('userID', $data['userID'])->get();
 
         // check if we are talking to our selfs
         if ($response['userID'] === $currentUser) {
-            // we are talking to ourself 
+            // we are talking to ourself
             $response['message'] = 'You cannot send a message to yourself';
             $response['status'] = 'error';
 
@@ -304,14 +304,14 @@ class DispatchMessage implements MessageInterface
                 // check if a key exists in both arrays
                 $switched = false;
                 $convoGroupID = null;
-                // check we already have a converstation with the user 
+                // check we already have a converstation with the user
                 for ($i = 0; $i < count($recipientGroups); $i++) {
                     // now check if the user has a conversation with the current user
                     if (in_array($recipientGroups[$i], $userGroups)) {
                         $switched = true;
                         $convoGroupID = $recipientGroups[$i];
                         break;
-                    } 
+                    }
                     // change this later inorder to properly fetch the new messages
                     for ($i = 0; $i < count($userGroups); $i++) {
                         // now check if the user has a conversation with the current user
@@ -319,10 +319,10 @@ class DispatchMessage implements MessageInterface
                             $switched = true;
                             $convoGroupID = $recipientGroups[$i];
                             break;
-                        } 
+                        }
                     }
-                        
-                    
+
+
                     // make sure we are not messaging ourself
                     if ($currentUser === $user_profiles[$i]->userID) {
                         return Response()->json(['error' => $user_profiles], 401);
@@ -338,11 +338,11 @@ class DispatchMessage implements MessageInterface
                         'message' => json_decode(json_encode($userConverstation, true), true)
                     ], 200);
                 } else {
-                    // create a new conversation group one doesnt exist 
+                    // create a new conversation group one doesnt exist
                     return Self::createConversation($data['storeID'], $currentUser, $data['userID']);
                 }
             } else {
-                // create a new conversation group one doesnt exist 
+                // create a new conversation group one doesnt exist
                 return Self::createConversation($data['storeID'], $currentUser, $data['userID']);
             }
         } else {
@@ -355,19 +355,19 @@ class DispatchMessage implements MessageInterface
 
     /**
      *  @method: createConversation
-     * 
+     *
      *  @purpose: this function is used to create a new converstation
-     *  
+     *
      */
 
     static function createConversation($storeID, $userID, $recipientID) {
         /**
          *  @blueprint:
-         * 
+         *
          *  $storeID -> the storeID of the user
          *  $userID -> the userID of the user
          *  $recipientID -> the userID of the recipient
-         * 
+         *
          */
 
          if ($userID === $recipientID) {
@@ -388,12 +388,12 @@ class DispatchMessage implements MessageInterface
     }
 
     /**
-     * 
+     *
      *  @method: createGroup
-     * 
-     * 
+     *
+     *
      *  @purpose: this function is used to create a new group,
-     * 
+     *
      */
 
      static function createGroup($storeID, $userID, $recipientID)
@@ -411,19 +411,19 @@ class DispatchMessage implements MessageInterface
 
 
     /**
-     *  @method: addUserToGroup 
+     *  @method: addUserToGroup
      *
-     *  @purpose: inorder to add a user to the group 
+     *  @purpose: inorder to add a user to the group
      */
 
     static function addUserToGroup($groupID, $userID, $recipientID) {
         /**
          *  @blueprint:
-         * 
+         *
          *  $groupID -> the groupID of the user
          *  $userID -> the userID of the user
          *  $recipientID -> the userID of the recipient
-         * 
+         *
          */
 
          /**
@@ -438,7 +438,7 @@ class DispatchMessage implements MessageInterface
         if ($db && $db_recipient) {
             return true;
         } else {
-            // check if the users exist in the datbase ?   
+            // check if the users exist in the datbase ?
             $user_group_member = DB::table('user_group_member')->where('groupID', $groupID)->where('userID', $userID)->first();
             $user_group_member_recipient = DB::table('user_group_member')->where('groupID', $groupID)->where('userID', $recipientID)->first();
 
@@ -446,7 +446,7 @@ class DispatchMessage implements MessageInterface
             if (!$user_group_member) {
                 // run cleanup function
                 return Response()->json(['error' => 'User is not in the group'], 401);
-            } 
+            }
 
             if (!$user_group_member_recipient) {
                 // run cleanup function
@@ -458,9 +458,9 @@ class DispatchMessage implements MessageInterface
 
     /**
      *  @method: removeUserFromGroup
-     * 
+     *
      *  @purpose: inorder to remove a user from the group / also acts as a clean up function if something goes wrong with our inserts :/
-     * 
+     *
      */
 
     public function removeUserFromGroup($groupID, $userID, $recipientID)
@@ -471,7 +471,7 @@ class DispatchMessage implements MessageInterface
         if ($db && $db_recipient) {
             return true;
         } else {
-            // check if the users exist in the datbase ?   
+            // check if the users exist in the datbase ?
             $user_group_member = DB::table('user_group_member')->where('groupID', $groupID)->where('userID', $userID)->first();
             $user_group_member_recipient = DB::table('user_group_member')->where('groupID', $groupID)->where('userID', $recipientID)->first();
 
@@ -479,7 +479,7 @@ class DispatchMessage implements MessageInterface
             if (!$user_group_member) {
                 // run cleanup function
                 return Response()->json(['error' => 'User is not in the group'], 401);
-            } 
+            }
 
             if (!$user_group_member_recipient) {
                 // run cleanup function
@@ -490,13 +490,13 @@ class DispatchMessage implements MessageInterface
 
 
     /**
-     * 
-     * 
+     *
+     *
      *  @method: generateSignature
-     * 
+     *
      *  @purpose: this function is used to generate a signature for the message
-     * 
-     * 
+     *
+     *
      */
 
      public function generateSignature($message, $rounds = 5)
@@ -504,20 +504,20 @@ class DispatchMessage implements MessageInterface
          $message;
 
 
-         #iterate through the rounds seems to better than using recursion 
-         # for speed bottle necks   
-         
+         #iterate through the rounds seems to better than using recursion
+         # for speed bottle necks
+
         for ($i = 0; $i < $rounds; $i++) {
             $message = hash('sha256', $message);
         }
-        # we will use this a key for each user to encrypt/decrypt the message  
+        # we will use this a key for each user to encrypt/decrypt the message
         return $message;
      }
 
     /**
-     * 
-     *  @method: dispatcherPrivateState 
-     * 
+     *
+     *  @method: dispatcherPrivateState
+     *
      *  @purpose: this function is used to dispatch the private state of the user
      */
 
@@ -528,8 +528,8 @@ class DispatchMessage implements MessageInterface
     }
 
     /**
-     * 
-     *  @method: dispatcher 
+     *
+     *  @method: dispatcher
      *
      *  @purpose: this function is used to dispatch the correct message to the user
      *
@@ -537,7 +537,7 @@ class DispatchMessage implements MessageInterface
 
     public function dispatcher($data)
     {
-        // simple state machine for accepting messages from the user using event broadcasting 
+        // simple state machine for accepting messages from the user using event broadcasting
 
 
     }

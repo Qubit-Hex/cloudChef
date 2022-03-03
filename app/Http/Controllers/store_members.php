@@ -104,9 +104,11 @@ class store_members extends Controller
     public function find(Request $request)
     {
 
+        $idRequest = $request->input('id');
+
         $userData = DB::table('users')->where('remember_token', $request->header('accessToken'))->first();
 
-        if ($userData == null) {
+        if (!$userData) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'You are not logged in',
@@ -114,7 +116,6 @@ class store_members extends Controller
         }
 
         $currentUserID = $userData->userID;
-
         $storeOwnership = DB::table('store_members')->where('userID', $currentUserID)->first()->storeID;
 
         if ($storeOwnership == null) {
@@ -125,12 +126,22 @@ class store_members extends Controller
         }
 
         // return the users nam
+        $storeMember = DB::table('user_profile')->where('storeID', $storeOwnership)->where('userID', $idRequest)->first();
 
-        $storeMember = DB::table('user_profile')->where('storeID', $storeOwnership)->where('userID', $userData->userID)->first()->name;
+        if (!$storeMember) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'The user is not a member of the store'
+            ]);
+        }
 
-        return response()->json(['data' => $storeMember,
-                                 'username' => $storeMember,
-                                'status' => true], 200);
+        // function to generate a pgp key
+        $randomRequest = bin2hex((string)random_bytes(16));
 
+        return response()->json(['data' => $storeMember->name,
+                                 'username' => $storeMember->name,
+                                'status' => true,
+                                'requestKey' => $randomRequest], 200);
+                                
     }
 }

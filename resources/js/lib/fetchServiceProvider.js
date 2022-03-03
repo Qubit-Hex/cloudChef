@@ -221,4 +221,29 @@ export default class FetchServiceProvider {
                 console.log(error);
             });
     }
+
+    /**
+     *
+     *  @method: delete
+     *
+     *  @purpose inorder to delete data from an api using a delete request
+     */
+    async delete(url, headers) {
+
+            let request = new Request(url, {
+                method: 'DELETE',
+                headers: headers
+            });
+
+            return fetch(request)
+                .then(response => {
+                    return new Promise((resolve, reject) => {
+                        response.json().then(data => {
+                            resolve(data);
+                        });
+                    });
+                }).catch(error => {
+                    console.log(error);
+                });
+    }
 }
