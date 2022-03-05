@@ -161,6 +161,11 @@ export class DashboardNav extends Component {
                             <span className="nav-link-text">Recipes</span>
                         </a>
 
+                        <a href='/dashboard/orders/' className="nav-link">
+                            <i className="fas fa-shopping-cart"></i>
+                            <span className="nav-link-text">Orders</span>
+                        </a>
+
                         <a href='/dashboard/advertising/' className="nav-link">
                             <i className="fas fa-bullhorn"></i>
                             <span className="nav-link-text">Advertising</span>
