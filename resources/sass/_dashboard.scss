@@ -12,6 +12,7 @@
 @import 'mobile.scss';
 
 @import 'components/punch-card.scss';
+@import 'components/orderSystem.scss';
 @import 'components/kitchenOrders.scss';
 
 $navbar-bg-color: linear-gradient(to right, #fd9494, rgb(208, 68, 52) );
@@ -101,7 +102,7 @@ $navbar-color-dashboard:  #cc5656;
 .dashboard-horizontal-nav {
     background-color: $navbar-color-dashboard;
     position: fixed;
-    opacity: 0;
+    display: none;
     height: 100%;
     width: 300px;
     box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px,

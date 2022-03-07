@@ -288,12 +288,12 @@ export const DashboardAnalytics = (props) => {
                                 chartType="Line"
                                 data={[
                                     ["Period", "Sales"],
-                                    ["Jan", 20000],
-                                    ["Feb", 30000],
-                                    ["Mar", 25000],
-                                    ["Apr", 10000],
-                                    ["May", 40000],
-                                    ["Jun", 50000],
+                                    ["7am", 500],
+                                    ["10am", 1000],
+                                    ["1pm", 1200],
+                                    ["5pm",  1500],
+                                    ["8pm", 500],
+                                    ["12pm", 300],
                                 ]}
                                 width="100%"
                                 height="400px"

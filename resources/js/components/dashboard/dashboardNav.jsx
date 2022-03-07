@@ -106,12 +106,17 @@ export class DashboardNav extends Component {
                                 let navbarState = sidenav.classList.toggle("displayState");
 
                                 if (navbarState === true) {
+                                    sidenav.style.display = "block";
                                     sidenav.classList.remove("slideOutFade");
                                     sidenav.classList.toggle("slideInFade");
                                 } else {
                                     // remove the class if the navbar is closed
                                     sidenav.classList.remove("slideInFade");
                                     sidenav.classList.toggle("slideOutFade");
+                                    // set time out for the animation to finish 1.5 seconds
+                                    setTimeout(() => {
+                                        sidenav.style.display = "none";
+                                    }, 1500);
                                 }
                             }}
                         >
