@@ -27,7 +27,7 @@ const TicketItem = (props) => {
     const orderItems = Object.keys(order).map((key, index) => {
         // return all the elements of the array
         return (
-            <li className="list-group-item">
+            <li className="list-group-item" key={index}>
                 <h1>
                     {" "}
                     <span style={{
@@ -47,7 +47,8 @@ const TicketItem = (props) => {
                                 <li style={{
                                     fontWeight: "300",
                                     fontStyle: "italic",
-                                }}>
+                                }}
+                                key={index}>
                                    { order[key].subItems[index] }
                                 </li>)
                         })}

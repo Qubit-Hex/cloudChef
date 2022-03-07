@@ -15,6 +15,7 @@
 import React from "react";
 import ReactDOM from 'react-dom';
 import { AuthController } from "../core/AuthController";
+import { KitchenDisplayUnit } from "./KitchenDisplayUnit";
 
 
 // button for the pos system to clean up the some of the code to make it more readable
@@ -24,6 +25,7 @@ import { AuthController } from "../core/AuthController";
 // so we can use the same component for the pos and the dashboard
 const POS_Button = (props) => {
     return (
+        <div className='col-md-2'>
         <div className='card pos-button'  onClick={props.handleClick}>
             <div className='card-header'>
                 <h3 className='card-title'>{ props.title }</h3>
@@ -32,6 +34,7 @@ const POS_Button = (props) => {
             <div className='card-body'>
                 <i className={ props.icon }></i>
             </div>
+        </div>
         </div>
     )
 }
@@ -64,7 +67,24 @@ export const OrderSystemProvider = (props) => {
             }}>
                 {/** create 3 modern tiles for adding a order, editing an order, and deleting an order */}
                 <div className="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
-                    <div className="card pos-button">
+                    <div className="card pos-button" onClick={
+                        (e) => {// render our options inorder to display the orders of the system.
+                            const container = document.getElementById('pos-container');
+                            ReactDOM.render(        <POSContainer>
+                                <POS_Button title='Go Back' icon='fas fa-arrow-left fa-4x' handleClick={ (e) => {
+                                    const container = document.getElementById('pos-container');
+                                    // now clear the container and render the dashboard again
+                                    ReactDOM.render(<div></div>, container);
+                                }}/>
+                                <POS_Button title='Beverage' icon='fa-solid fa-champagne-glasses fa-4x' handleClick={props.handleClick}/>
+                                 <POS_Button title='Appetizer' icon='fa-solid fa-utensils fa-4x' handleClick={props.handleClick}/>
+                                <POS_Button title='Entree' icon='fas fa-pizza-slice fa-4x' handleClick={props.handleClick}/>
+                                <POS_Button title='Dessert' icon='fas fa-ice-cream fa-4x' handleClick={props.handleClick}/>
+                                <POS_Button title='Side' icon='fas fa-utensils fa-4x' handleClick={props.handleClick}/>
+                                <POS_Button title='Salad' icon='fas fa-leaf fa-4x' handleClick={props.handleClick}/>
+                            </POSContainer>, container);
+                        }
+                    }>
                         <div className='card-header'>
                             <h5 className="card-title">Add Order</h5>
                         </div>
@@ -78,6 +98,30 @@ export const OrderSystemProvider = (props) => {
                         </div>
                     </div>
                 </div>
+
+                {/** view current orders in queue   */}
+                <div className="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+                    <div className="card pos-button" onClick={
+                        (e) => {
+                            // display the kitchen orders in the dashboard
+                            let container = document.getElementById('pos-container');
+                            ReactDOM.render(<KitchenDisplayUnit />, container);
+                        }
+                    }>
+                        <div className='card-header'>
+                            <h5 className="card-title">View Orders</h5>
+                        </div>
+                        <div className="card-body">
+                            <div className="d-flex flex-row">
+                                <div className="p-2">
+                                    {/** add cart icon font awesome */}
+                                    <i className="fas fa-shopping-cart fa-3x"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 
                 {/** edit order section */}
                 <div className="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
@@ -124,96 +168,7 @@ export const OrderSystemProvider = (props) => {
                 */}
 
                 {/** add order section with sections such as beverage, appetizer, entree, dessert, and side */}
-                <POSContainer>
-                    <POS_Button title='Beverage' icon='fas fa-wine-bottle fa-3x' handleClick={() => { alert('hellp ')} } />
-                    <div className='container pos'>
-                    <div className="row">
-                        {/** create threes for our initial screwen in the pos system */}
-                        <div className='col'>
-                            <div className="card pos-button">
-                                <div className='card-header'>
-                                    <h5 className='card-title'> Go Back</h5>
-                                </div>
-                                <div className='card-body'>
-                                    {/** back button font awesome */}
-                                    <i className="fas fa-arrow-left fa-4x"></i>
-                                </div>
-                            </div>
 
-                        </div>
-                        <div className="col">
-                            <div className="card pos-button">
-                                <div className='card-header'>
-                                    <h5 className='card-title'>Beverage</h5>
-                                </div>
-                                <div className='card-body'>
-                                    {/** champne glasess font awesome */}
-                                    <i className="fa-solid fa-champagne-glasses fa-4x"></i>
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="col">
-                            <div className='card pos-button'>
-                                <div className='card-header'>
-                                    <h5 className='card-title'>Appetizer's</h5>
-                                </div>
-                                <div className='card-body'>
-                                    <i className="fas fa-utensils fa-4x"></i>
-
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div className='col'>
-                            <div className='card pos-button'>
-                                <div className='card-header'>
-                                    <h5 className='card-title'>Entree's</h5>
-                                </div>
-                                <div className='card-body'>
-                                {/** pizza slice icon */}
-                                    <i className="fas fa-pizza-slice fa-4x"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div className='col'>
-                            <div className='card pos-button'>
-                                <div className='card-header'>
-                                    <h5 className='card-title'>Desserts</h5>
-                                </div>
-                                <div className='card-body'>
-                                    <i className="fas fa-ice-cream fa-4x"></i>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="col">
-                            <div className='card pos-button'>
-                                <div className='card-header'>
-                                    <h5 className='card-title'>Salads</h5>
-                                </div>
-                                <div className='card-body'>
-                                    <i className="fa-solid fa-leaf fa-4x"></i>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className='col'>
-                            <div className='card pos-button'>
-                                <div className='card-header'>
-                                    <h5 className='card-title'>Sides</h5>
-                                </div>
-                            <div className='card-body'>
-                                {/** icon for sides */}
-                                <i className="fas fa-utensils fa-4x"></i>
-                            </div>
-                        </div>
-                   </div>
-                    </div>
-            </div>
-                </POSContainer>
         </div>
     </div>);
 }
