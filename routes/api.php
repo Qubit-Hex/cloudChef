@@ -265,14 +265,19 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
 
           });
 
-
           // all of the menu routes for creating menus and updating menus
           Route::group(['prefix' => '/menu'], function () {
+
                 Route::post('/add', [menu::class, 'add'])->name('menu/add');
                 Route::get('/get', [menu::class, 'get'])->name('menu/get');
-
                 // route for adding a menu item to the menu
-                Route::post('/item/add', [menu::class, 'addMenuItem'])->name('menu/item/add');
+
+                // groups the items together
+                Route::group(['prefix' => '/item'], function () {
+                    Route::post('/add', [menu::class, 'addMenuItem'])->name('menu/item/add');
+                    Route::get('/get', [menu::class, 'get'])->name('menu/item/get');
+                    Route::delete('/delete', [menu::class, 'delete'])->name('menu/item/delete');
+                });
           });
 
      });
