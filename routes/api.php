@@ -270,6 +270,9 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
           Route::group(['prefix' => '/menu'], function () {
                 Route::post('/add', [menu::class, 'add'])->name('menu/add');
                 Route::get('/get', [menu::class, 'get'])->name('menu/get');
+
+                // route for adding a menu item to the menu
+                Route::post('/item/add', [menu::class, 'addMenuItem'])->name('menu/item/add');
           });
 
      });

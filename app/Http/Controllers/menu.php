@@ -117,4 +117,52 @@ class menu extends Controller
                                 'status' => 200,
                                 'menus' => $menus], 200);
     }
+
+    /**
+     *
+     *  @method: addMenuItem
+     *
+     *  @purpose: inorder to add a menu item to the system
+     */
+
+     public function addMenuItem(Request $request)
+     {
+
+        // first lets check the users permissions
+        $userStore = $this->validation($request);
+
+        if (!$userStore) {
+            return response()->json(['message' => 'You are not a member of any store'], 401);
+        }
+
+        // does the menuID store number match the users store number
+        $menuID = $request->input('menuID');
+
+        $menu = DB::table('store_menu')->where('store_id', $userStore)->where('id', $menuID)->first();
+
+        // verify the permissions of the user.
+        if (!$menu) {
+            return response()->json(['message' => 'You are not a member of this store'], 401);
+        }
+
+
+        // now lets perform the insert into the system
+        $menuItem = DB::table('store_menu_item')->insert([
+            'store_menu_id' => $request->input('menuID'),
+            'name' => $request->input('name'),
+            'price' => $request->input('price'),
+            'catagory' => $request->input('catagory'),
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+            'active' => 1
+        ]);
+
+        // was the insert successful ?
+        if ($menuItem) {
+            return response()->json(['message' => 'Menu item added successfully',
+                                    'status' => 200], 200);
+        } else {
+            return response()->json(['message' => 'Menu item could not be added'], 401);
+        }
+    }
 }

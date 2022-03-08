@@ -77,14 +77,42 @@ const getStoreMenus = () => {
  *
  *  @purpose: to add a menu item to the store.
  *
- *  @param {  menuItem }
+ *  @param {  menuID }
  *
  *
  *  @returns {Promise}
  */
-const addMenuItem = (menuItem) => {
+const addMenuItem = (...menu) => {
 
+    const requestStructure = {
+        menuID: menu[0],
+        name: menu[1],
+        price: menu[2],
+        catagory: menu[3],
+    }
 
+    const request = (requestStructure) => {
+        const api = new FetchServiceProvider();
+        const url = `/api/store/menu/item/add`;
+
+        const data = {
+            menuID: requestStructure.menuID,
+            name: requestStructure.name,
+            price: requestStructure.price,
+            catagory: requestStructure.catagory,
+        };
+
+        const headers = {
+            'Content-Type': 'application/json',
+            'accessToken': api.getCookie('accessToken'),
+        };
+
+        return api.post(url, data, headers);
+
+    }
+
+    // new the promise to the user inorder to handle the response
+    return request(requestStructure);
 }
 
 
@@ -240,7 +268,89 @@ export const DashboardMenu = (props) => {
                                              * select form of the menus */}
                                             <div className='form-group'>
                                                 <label htmlFor='menu-name mt-2'>Menu Name</label>
-                                                <select className='form-control mt-2' id='menu-name'>
+                                                <select className='form-control mt-2' id='menu-name'
+                                                onClick={
+                                                    (e) => {
+                                                        // we are now going to call this menu and validate it.
+                                                        let menuID = e.target.value;
+                                                        // next we are going to call the server to check if we
+                                                        // have the correct permissions inorder to edit the menu
+
+                                                        // now lets return a new modal with the form inorder to add a item
+                                                        // to the menu
+                                                        // we will also pass the menuID to the server when submitting the field
+
+                                                        // now we will render the modal
+                                                        ReactDOM.render(
+                                                            <TemplateModal title='Add Item' body={
+                                                                <div>
+                                                                    <div className='form-group'>
+                                                                        <label htmlFor='item-name'>Item Name</label>
+                                                                        <input type='text' className='form-control mt-1' id='item-name' placeholder='Enter the item name' />
+                                                                    </div>
+                                                                    <div className='form-group'>
+                                                                        <label htmlFor='item-price'>Item Price</label>
+                                                                        <input type='number' className='form-control mt-1' id='item-price' placeholder='Enter the item price' />
+                                                                    </div>
+                                                                    <div className='form-group'>
+                                                                        {/** catagory
+                                                                         */}
+                                                                        <label htmlFor='item-catagory'>Item Catagory</label>
+                                                                        <input className='form-control mt-1' id='item-catagory' placeholder='Enter the item catagory' />
+                                                                    </div>
+                                                                    <div className='form-group mt-2'>
+                                                                        {/** button on the form */}
+                                                                        <button className='btn btn-message'
+                                                                        onClick={
+                                                                            (e) => {
+
+                                                                                // send the request to the server
+                                                                                const itemName = document.getElementById('item-name').value;
+                                                                                const itemPrice = document.getElementById('item-price').value;
+                                                                                const itemCatagory = document.getElementById('item-catagory').value;
+
+
+
+                                                                                // now lets send the value to the function that will handle the request
+                                                                                return addMenuItem(menuID, itemName, itemPrice, itemCatagory).then(response => {
+                                                                                    if (response.status === 200) {
+                                                                                        return ReactDOM.render(
+                                                                                            <TemplateModal title='Success' body={
+                                                                                                <div>
+                                                                                                    <img src='/img/SVG/store.svg' className='mx-auto' width={350} height={350} />
+                                                                                                    <h3 className='text-success text-bold text-center'>{response.message}</h3>
+                                                                                                    <button className='btn btn-message' onClick={
+                                                                                                        (e) => {
+                                                                                                            ReactDOM.unmountComponentAtNode(container);
+                                                                                                        }
+                                                                                                    }>Close</button>
+                                                                                                </div>
+                                                                                            } />, container);
+                                                                                    } else {
+                                                                                        return ReactDOM.render(
+                                                                                            <TemplateModal title='Error' body={
+                                                                                                <div>
+                                                                                                    <img src='/img/SVG/store.svg' className='mx-auto' width={350} height={350} />
+                                                                                                    <h3 className='text-danger text-bold text-center'>{response.message}</h3>
+                                                                                                    <button className='btn btn-message' onClick={
+                                                                                                        (e) => {
+                                                                                                            ReactDOM.unmountComponentAtNode(container);
+                                                                                                        }
+                                                                                                    }>Close</button>
+                                                                                                </div>
+                                                                                            } />, container);
+                                                                                    }
+                                                                                });
+
+                                                                            }
+                                                                        }>
+                                                                            <i  className="fas fa-plus-circle"></i>
+                                                                             Add Item </button>
+                                                                    </div>
+                                                                </div>
+                                                            }  />, container)
+                                                    }
+                                                }>
                                                     <option>Select a menu</option>
                                                     {
 
@@ -253,14 +363,7 @@ export const DashboardMenu = (props) => {
                                                             :
                                                             menuContent.map((menu, index) => {
                                                                 return menu.map((item, index) => {
-                                                                    return <option key={index} id={item.id} onClick={
-                                                                        (e) => {
-                                                                            // we are now going to call this menu and validate it.
-                                                                            let menuID = e.target.id;
-                                                                            // next we are going to call the server to check if we
-                                                                            // have the correct permissions inorder to edit the menu
-                                                                        }
-                                                                    }>{item.name}</option>
+                                                                    return <option key={index} value={item.id}>{item.name}</option>
                                                                 })
                                                             })
                                                     }
