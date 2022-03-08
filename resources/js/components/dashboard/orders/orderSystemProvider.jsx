@@ -23,7 +23,7 @@ import { KitchenDisplayUnit } from "./KitchenDisplayUnit";
 
 // but i also might change this into a class and use factorys intead of the prop components.
 // so we can use the same component for the pos and the dashboard
-const POS_Button = (props) => {
+export const POS_Button = (props) => {
     return (
         <div className='col-md-2'>
         <div className='card pos-button'  onClick={props.handleClick}>
@@ -52,6 +52,7 @@ const POSContainer = (props) => {
 }
 
 
+
 export const OrderSystemProvider = (props) => {
 
         return (
@@ -70,14 +71,15 @@ export const OrderSystemProvider = (props) => {
                     <div className="card pos-button" onClick={
                         (e) => {// render our options inorder to display the orders of the system.
                             const container = document.getElementById('pos-container');
-                            ReactDOM.render(        <POSContainer>
+                            ReactDOM.render(
+
+                            <POSContainer>
                                 <POS_Button title='Go Back' icon='fas fa-arrow-left fa-4x' handleClick={ (e) => {
-                                    const container = document.getElementById('pos-container');
                                     // now clear the container and render the dashboard again
                                     ReactDOM.render(<div></div>, container);
                                 }}/>
                                 <POS_Button title='Beverage' icon='fa-solid fa-champagne-glasses fa-4x' handleClick={props.handleClick}/>
-                                 <POS_Button title='Appetizer' icon='fa-solid fa-utensils fa-4x' handleClick={props.handleClick}/>
+                                <POS_Button title='Appetizer' icon='fa-solid fa-utensils fa-4x' handleClick={props.handleClick}/>
                                 <POS_Button title='Entree' icon='fas fa-pizza-slice fa-4x' handleClick={props.handleClick}/>
                                 <POS_Button title='Dessert' icon='fas fa-ice-cream fa-4x' handleClick={props.handleClick}/>
                                 <POS_Button title='Side' icon='fas fa-utensils fa-4x' handleClick={props.handleClick}/>
@@ -167,7 +169,6 @@ export const OrderSystemProvider = (props) => {
                  *   need this like catagories, items, and orders
                 */}
 
-                {/** add order section with sections such as beverage, appetizer, entree, dessert, and side */}
 
         </div>
     </div>);

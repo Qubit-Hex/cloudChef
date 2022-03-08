@@ -160,6 +160,28 @@ export class DashboardNav extends Component {
                             <span className="nav-link-text">Schedule</span>
                         </a>
 
+
+                        {/** clock in button */}
+                        <a href="/dashboard/punchcard/" className="nav-link">
+                            <i className="fas fa-clock"></i>
+                            <span className="nav-link-text">Clock In</span>
+                        </a>
+
+
+                        {/** menu */}
+                        <a href="/dashboard/menu/" className="nav-link">
+                            <i className="fas fa-utensils"></i>
+                            <span className="nav-link-text">Menu</span>
+                        </a>
+
+
+                        {/** employees */}
+                        <a href="/dashboard/employees/" className="nav-link">
+                            {/** employee tie icon */}
+                            <i className="fas fa-users"></i>
+                            <span className="nav-link-text">Employees</span>
+                        </a>
+
                         <a href="/dashboard/recipie/" className="nav-link">
                             {/**  food management pat for cloud recipes etcc... */}
                             <i className="fas fa-hamburger"></i>
@@ -196,12 +218,6 @@ export class DashboardNav extends Component {
                             {/** font awesome gear icon */}
                             <i class="fas fa-cog"></i>
                             <span className="nav-link-text">Settings</span>
-                        </a>
-
-                        {/** plugins */}
-                        <a href="/dashboard/plugins/" className="nav-link">
-                            <i className="fas fa-plug"></i>
-                            <span className="nav-link-text">Plugins</span>
                         </a>
 
                         {/** LOGOUT BUTTON  WITH A POWER BUTTON*/}

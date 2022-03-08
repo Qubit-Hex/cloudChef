@@ -18,6 +18,8 @@ import { KitchenDisplayUnit } from "../components/dashboard/orders/KitchenDispla
 const KitchenDisplayContainer = (props) => {
 
 
+    {/** this will our component that will do the heavy lifting add a large level of abstraction
+        in order to hide the complex logic  */}
     return (
         <div className='container-fluid'>
             <KitchenDisplayUnit />

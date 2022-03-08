@@ -10,6 +10,7 @@ use App\Http\Controllers\store;
 use App\Http\Controllers\schedule;
 use App\Http\Controllers\employee;
 use App\Http\Controllers\recipes;
+use App\Http\Controllers\menu;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -262,6 +263,13 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
               // this is a route we will use to verify uploaded files
               Route::post('/file', [recipes::class, 'file'])->name('recipes/file');
 
+          });
+
+
+          // all of the menu routes for creating menus and updating menus
+          Route::group(['prefix' => '/menu'], function () {
+                Route::post('/add', [menu::class, 'add'])->name('menu/add');
+                Route::get('/get', [menu::class, 'get'])->name('menu/get');
           });
 
      });
