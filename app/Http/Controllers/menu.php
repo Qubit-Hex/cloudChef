@@ -165,4 +165,59 @@ class menu extends Controller
             return response()->json(['message' => 'Menu item could not be added'], 401);
         }
     }
+
+
+    /**
+     *
+     *  @method: deleteMenu
+     *
+     *  @purpose: inorder to delete a menu and all the menu items
+     *
+     */
+    public function deleteMenu(Request $request)
+    {
+        // first lets check the users permissions
+        $userStore = $this->validation($request);
+
+        if (!$userStore) {
+            return response()->json(['message' => 'You are not a member of any store'], 401);
+        }
+
+        // does the menuID store number match the users store number
+        $menuID = $request->header('menuID');
+
+        $menu = DB::table('store_menu')->where('store_id', $userStore)->where('id', $menuID)->first();
+
+        // verify the permissions of the user.
+        if (!$menu) {
+            return response()->json(['message' => 'You are not a member of this store'], 401);
+        }
+
+        // now lets delete the menu and all the menu items
+        $menu = DB::table('store_menu')->where('store_id', $userStore)->where('id', $menuID)->delete();
+
+        $menuItems = DB::table('store_menu_item')->where('store_menu_id', $menuID)->delete();
+
+        // was the delete successful ?
+        if ($menu && $menuItems) {
+            return response()->json(['message' => 'Menu deleted successfully',
+                                    'status' => 200], 200);
+        } else {
+            // check with one of the two queries failed
+            // or did both fail ?
+            if (!$menu && !$menuItems) {
+                return response()->json(['message' => 'Menu could not be deleted and the menuItems'], 401);
+            } else if (!$menu) {
+                return response()->json(['message' => 'Menu could not be deleted'], 401);
+            } else if (!$menuItems) {
+                return response()->json(['message' => 'Menu items could not be deleted'], 401);
+            } else {
+                // something else went wrong
+                return response()->json(['message' => 'Something went wrong'], 401);
+            }
+        }
+
+    }
+
+
 }

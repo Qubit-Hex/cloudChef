@@ -270,6 +270,8 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
 
                 Route::post('/add', [menu::class, 'add'])->name('menu/add');
                 Route::get('/get', [menu::class, 'get'])->name('menu/get');
+                Route::delete('/delete', [menu::class, 'deleteMenu'])->name('menu/delete');
+
                 // route for adding a menu item to the menu
 
                 // groups the items together

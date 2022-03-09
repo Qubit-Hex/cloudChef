@@ -18,7 +18,6 @@ import ReactDOM from "react-dom";
 import { TemplateModal } from "../components/dashboard/recipe/core/template.modal";
 import FetchServiceProvider from "../lib/fetchServiceProvider";
 
-
 /**
  *
  *  @function: addMenu
@@ -113,6 +112,36 @@ const addMenuItem = (...menu) => {
 
     // new the promise to the user inorder to handle the response
     return request(requestStructure);
+}
+
+
+
+/**
+ *
+ *  @function: deleteMenu
+ *
+ *  @purpose: inorder to delete a menu from the store in our system
+ *
+ *  @param { menuID }
+ */
+
+const deleteMenu = (menuID) => {
+
+
+    const request = (menuID) => {
+        const api = new FetchServiceProvider();
+        const url = `/api/store/menu/delete`;
+
+        const headers = {
+            'Content-Type': 'application/json',
+            'accessToken': api.getCookie('accessToken'),
+            'menuID': menuID,
+        };
+
+        return api.delete(url, headers);
+    }
+
+    return request(menuID);
 }
 
 
@@ -386,7 +415,110 @@ export const DashboardMenu = (props) => {
                 </div>
 
                 <div className='col'>
-                    <div className='card pos-button'>
+                    <div className='card pos-button' onClick={
+                        (e) => {
+                            let container = document.getElementById('modal-container');
+                            let menu = getStoreMenus();
+                            let menuContent = [];
+
+                            menu.then(response => {
+
+                                // set timeout to get the menus of the store
+                                    if (response.menus) {
+                                        menuContent.push(response.menus);
+                                    }
+                            });
+
+                            // wait for our data before the render begins
+                            setTimeout(() => {
+                                ReactDOM.render(<TemplateModal title='Delete Menu' body={
+                                    <div>
+                                        {/** create a select from inorder to delete the menu that is selected.  */}
+                                        <div className='form-group'>
+                                            <label htmlFor='menu-name'>Menu Name</label> <br />
+                                            <small className='text-muted'>Select the menu you want to delete</small>
+                                            <select className='form-control m-1' id='menu-name' onClick={
+                                                (e) => {
+                                                    // get the menu id
+                                                    const menuID = document.getElementById('menu-name').value;
+
+
+                                                    // trigger a cofirmation because this action is irreversible
+                                                    ReactDOM.render(<TemplateModal title='Confirm' body={
+                                                        <div>
+                                                            <h3 className='text-center text-danger' style={{
+                                                                fontWeight: '600',
+                                                                fontSize: '1.5rem'
+
+                                                            }}>Are you sure you want to delete this menu?</h3>
+                                                            <small className='text-muted text-center'> Please note that this action is irreversible </small>
+                                                            <button className='btn btn-danger m-1' onClick={
+                                                                (e) => {
+                                                                    // send the request to the server
+                                                                    return deleteMenu(menuID).then(response => {
+                                                                        if (response.status === 200) {
+                                                                            return ReactDOM.render(
+                                                                                <TemplateModal title='Success' body={
+                                                                                    <div>
+                                                                                        <img src='/img/SVG/store.svg' className='mx-auto' width={350} height={350} />
+                                                                                        <h3 className='text-success text-bold text-center'>{response.message}</h3>
+                                                                                        <button className='btn btn-message' onClick={
+                                                                                            (e) => {
+                                                                                                ReactDOM.unmountComponentAtNode(container);
+                                                                                            }
+                                                                                        }>Close</button>
+                                                                                    </div>
+                                                                                } />, container);
+                                                                        } else {
+                                                                            return ReactDOM.render(
+                                                                                <TemplateModal title='Error' body={
+                                                                                    <div>
+                                                                                        <img src='/img/SVG/store.svg' className='mx-auto' width={350} height={350} />
+                                                                                        <h3 className='text-danger text-bold text-center'>{response.message}</h3>
+                                                                                        <button className='btn btn-message' onClick={
+                                                                                            (e) => {
+                                                                                                ReactDOM.unmountComponentAtNode(container);
+                                                                                            }
+                                                                                        }>Close</button>
+                                                                                    </div>
+                                                                                } />, container);
+                                                                        }
+                                                                    });
+
+                                                                }
+                                                            }>
+                                                                <i  className="fas fa-trash-alt"></i>
+                                                                    Delete Menu </button>
+                                                            <button className='btn btn-message m-1' onClick={
+                                                                (e) => {
+                                                                    ReactDOM.unmountComponentAtNode(container);
+                                                                }
+                                                            }>Cancel</button>
+                                                        </div>
+                                                    } />, container);
+
+
+                                                    // now lets send the value to the function that will handle the request
+                                                }
+                                            }>
+                                                {
+                                                    menuContent.length === 0 ?
+                                                        <option>No menus available</option>
+                                                        :
+                                                        menuContent.map((menu, index) => {
+                                                            return menu.map((element, index) => {
+                                                                return <option key={index} value={element.id}> { element.name }</option>
+                                                            })
+                                                        })
+                                                }
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                } />, container);
+                            }, 1500);
+                        }
+                    }>
                         <div className='card-header'>
                             <h3 className='card-title'>Remove Menu</h3>
                         </div>
