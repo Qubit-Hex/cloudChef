@@ -118,6 +118,52 @@ class menu extends Controller
                                 'menus' => $menus], 200);
     }
 
+
+    /**
+     *
+     * @method: getMenuItems
+     *
+     *
+     *  @purpose: inorder to fetch the menu items of the store.
+     *
+     */
+
+     public function getMenuItems(Request $request)
+     {
+        // validate the user
+
+        // users can only add menu to their store
+
+        $userStore = $this->validation($request);
+
+        if (!$userStore) {
+            return response()->json(['message' => 'You are not a member of any store'], 401);
+        }
+
+        // create a sql query todo the following
+        // 1. grab the content in table 'store_menu_items'
+        // 2. check if the store_menu_id matches any records
+        // 3. query store_menu with that id number and check if the store_id matches
+
+        // now query the store_menu table to check if the store_id matches
+        $menu = DB::table('store_menu')->where('store_id', $userStore)->where('id', $request->header('menuID'))->first();
+
+        if ($menu) {
+            // now query the store_menu_items table to check if the store_menu_id matches
+
+            // now fetch the data and return the data to the user.
+            $menuItems = DB::table('store_menu_item')->where('store_menu_id', $request->header('menuID'))->get();
+
+            return response()->json(['message' => 'Menu items fetched successfully',
+                                    'status' => 200,
+                                    'menuItems' => $menuItems], 200);
+        } else {
+            // something went wrong so trigger an error.
+            return response()->json(['message' => 'Menu items could not be fetched'], 401);
+        }
+
+     }
+
     /**
      *
      *  @method: addMenuItem
@@ -217,6 +263,46 @@ class menu extends Controller
             }
         }
 
+    }
+
+    /**
+     *
+     *  @method: deleteMenuItem
+     *
+     *
+     *  @purpose: Inorder to delete a menu item from the system.
+     */
+    public function deleteMenuItem(Request $request)
+    {
+        // first lets check the users permissions
+        $userStore = $this->validation($request);
+
+        if (!$userStore) {
+            return response()->json(['message' => 'You are not a member of any store'], 401);
+        }
+
+        // grab the menu item from the server
+        $menuItemID = $request->header('menuItemID');
+
+        $menuRecord = DB::table('store_menu_item')->where('id', $menuItemID)->first();
+
+        // verify the permissions of the user.
+        $storeMenu = DB::table('store_menu')->where('store_id', $userStore)->where('id', $menuRecord->store_menu_id)->first();
+
+        if (!$storeMenu) {
+            return response()->json(['message' => 'You are not a member of this store'], 401);
+        }
+
+        // now lets delete the menu item
+        $menuItem = DB::table('store_menu_item')->where('id', $menuItemID)->delete();
+
+        // was the delete successful ?
+        if ($menuItem) {
+            return response()->json(['message' => 'Menu item deleted successfully',
+                                    'status' => 200], 200);
+        } else {
+            return response()->json(['message' => 'Menu item could not be deleted'], 401);
+        }
     }
 
 

@@ -13,7 +13,7 @@
  */
 
 
-import react from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 import { TemplateModal } from "../components/dashboard/recipe/core/template.modal";
 import FetchServiceProvider from "../lib/fetchServiceProvider";
@@ -50,6 +50,17 @@ const addMenu = (menuName) => {
     return request();
 }
 
+/**
+ *
+ *  @function: getStoreMenus
+ *
+ *  @purpose: to get the store menus
+ *
+ *
+ *  @parm { <EMPTY> }
+ *
+ *  @returns {Promise}
+ */
 
 
 const getStoreMenus = () => {
@@ -144,12 +155,80 @@ const deleteMenu = (menuID) => {
     return request(menuID);
 }
 
+/**
+ *
+ *  @function: fetchMenuItems
+ *
+ *  @purpose: inorder to fetch the menu items from the store
+ *
+ *  @param { menuID }
+ *
+ *  @returns {Promise}
+ *
+ *
+ */
+
+const fetchMenuItems = (menuID) => {
+
+    const request = (menuID) => {
+        const api = new FetchServiceProvider();
+        const url = `/api/store/menu/item/get`;
+
+        const headers = {
+            'Content-Type': 'application/json',
+            'accessToken': api.getCookie('accessToken'),
+            'menuID': menuID,
+        };
+
+        return api.get(url, headers);
+    }
+
+    return request(menuID);
+}
+
+/**
+ *
+ *  @function: deleteMenuItem
+ *
+ *
+ *  @purpose: inorder to delete a menu item from the store
+ *
+ *
+ *  @param { menuItemID }
+ *
+ */
+
+ const deleteMenuItem = (menuItemID) => {
+
+        const request = (menuItemID) => {
+            const api = new FetchServiceProvider();
+            const url = `/api/store/menu/item/delete`;
+
+            const headers = {
+                'Content-Type': 'application/json',
+                'accessToken': api.getCookie('accessToken'),
+                'menuItemID': menuItemID,
+            };
+
+            return api.delete(url, headers);
+        }
+
+        return request(menuItemID);
+    }
+
+
 
 export const DashboardMenu = (props) => {
 
+    const [storeMenu, setStoreMenu] = React.useState([]);
+
+    React.useEffect(() => {
+        getStoreMenus().then((response) => {
+            setStoreMenu(response.menus);
+        })
+    }, []);
+
     return (
-
-
 
         <div className='container-fluid rm-pm dashboard-content'>
 
@@ -159,7 +238,7 @@ export const DashboardMenu = (props) => {
                     <div className='col-md-12'>
                         <h1 className='header-title'>Menu</h1>
                         <h2 className="header-subtitle text-center">Add, Edit, and Remove Menus</h2>
-                        <img src='/img/SVG/Dog call.svg' className='mx-auto' width={350} height={350} />
+                        <img src='/img/SVG/cooking.svg' className='mx-auto w-100 mt-2 mb-' width={400} height={400} />
                         <small className='text-muted text-center'> Add Menu's edit existing menus and menu items</small>
 
                     </div>
@@ -402,7 +481,7 @@ export const DashboardMenu = (props) => {
 
                                     } />, container);
 
-                                }, 3000);
+                                }, 1500);
                             }
                         }>
                         <div className='card-header'>
@@ -537,27 +616,137 @@ export const DashboardMenu = (props) => {
                 <div className='row'>
                     {/** create a table for displaying menu items */}
                     <div className='col-md'>
-                        <table className='table'>
-                            {/** table structure item, catagory, price  */}
-                            <thead>
-                                <tr>
-                                    <th>Item</th>
-                                    <th>Category</th>
-                                    <th>Price</th>
-                                    <th> Action </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <td> Flank Steak</td>
-                                <td> Entree </td>
-                                <td> $12.00 </td>
-                                <td className='d-flex'>
-                                    <button className='btn btn-message m-1'> Edit </button>
-                                    <button className='btn btn-danger m-1'> Delete </button>
+                        <div className='card'>
+                            <div className='card-header' style={{
+                                backgroundColor: 'transparent',
+                            }}>
+                                {/** clip board  icon */}
+                                <h3 className='card-title'>Menu Items    <span className='fas fa-clipboard-list fa-2x ml-2 mr-2'></span></h3>
+                            </div>
+                            <div className='card-body'>
+                                {/** get the user to select a menu   */}
+                                <div>
+                                    <img src='/img/SVG/tasting.svg'width={400} height={400} className='mx-auto w-100'  />
+                                </div>
+                                <div className='form-group'>
+                                    <label htmlFor='menu-name'>Menu Name</label> <br />
+                                    <small className='text-muted'>Select the menu you want to view</small>
+                                    <select className='form-control m-1' id='menu-name' onClick={
+                                        (e) => {
+                                            // get the menu id
+                                            const menuID = document.getElementById('menu-name').value;
+                                            const menuItems = fetchMenuItems(menuID);
+                                            let  menuItemsContent = [];
 
-                                </td>
-                            </tbody>
-                        </table>
+                                            menuItems.then(response => {
+                                                if (response.menuItems) {
+                                                    menuItemsContent.push(response.menuItems);
+                                                }
+                                            });
+
+
+                                            const tableContainer = document.getElementById('menu-table-container');
+
+                                            // wait for our data before the render begins
+                                            setTimeout(() => {
+                                               // render our table here
+
+
+                                                ReactDOM.render(
+                                                    <div>
+                                                        <table className='table table-striped table-hover'>
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Name</th>
+                                                                    <th>Price</th>
+                                                                    <th>Description</th>
+                                                                    <th>Action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {
+
+
+                                                                    // check is menu items is empty
+                                                                    menuItemsContent[0].length === 0 ?
+
+                                                                        <tr>
+                                                                            <td colSpan={4}>
+                                                                                <img src='/img/SVG/store.svg' className='mx-auto' width={350} height={350} />
+                                                                                No menu items available
+                                                                                </td>
+                                                                        </tr>
+                                                                        :
+                                                                        menuItemsContent.map((menuItem, index) => {
+                                                                            return menuItem.map((element, index) => {
+                                                                                return <tr key={index} >
+                                                                                    <td>{element.name}</td>
+                                                                                    <td>{element.price}</td>
+                                                                                    <td>{element.catagory}</td>
+                                                                                    <td className='d-flex'>
+                                                                                        <button className='btn btn-danger m-1' value={element.id} onClick={
+                                                                                            (e) => {
+                                                                                                const menuItemID = e.target.value;
+
+
+                                                                                                return deleteMenuItem(menuItemID).then(response => {
+                                                                                                    if (response.status === 200)  {
+                                                                                                        // render a modal to show the user that the menu item has been deleted
+                                                                                                        const container = document.getElementById('modal-container');
+                                                                                                        ReactDOM.render(<TemplateModal title="Delete Menu Item" body={
+                                                                                                            <div className='text-center'>
+                                                                                                                <h3>Menu Item Deleted</h3>
+                                                                                                                <p>The menu item has been deleted</p>
+                                                                                                                <button className='btn btn-message m-1' onClick={
+                                                                                                                    (e) => {
+                                                                                                                        ReactDOM.unmountComponentAtNode(container);
+                                                                                                                    }
+                                                                                                                }>
+                                                                                                                    Close </button>
+                                                                                                            </div>
+                                                                                                        } />, container);
+
+                                                                                                        }
+                                                                                                });
+                                                                                            }
+                                                                                        }>
+                                                                                            <i className='fas fa-trash-alt'></i>
+                                                                                        </button>
+                                                                                        <button className='btn btn-warning m-1' value={element.id} onClick={
+                                                                                            (e) => {
+                                                                                                const menuItemID = e.target.value;
+                                                                                                // trigger  A MODAL INORDER TO EDIT THE MENU ITEM
+
+                                                                                            }
+                                                                                        }>
+                                                                                            <i className='fas fa-edit'></i>
+                                                                                        </button>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            })
+                                                                        })
+                                                                }
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    , tableContainer);
+                                        }, 1000);
+
+                                    }
+                                    }>
+                                        <option>Select a menu</option>
+                                        {
+                                            storeMenu.map((menu, index) => {
+                                                return <option key={index} value={menu.id}> { menu.name }</option>
+                                            })
+                                        }
+                                    </select>
+                                </div>
+
+
+                                <div id='menu-table-container' className='mt-4'></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
         </div>

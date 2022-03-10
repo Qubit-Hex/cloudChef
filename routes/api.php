@@ -277,8 +277,9 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
                 // groups the items together
                 Route::group(['prefix' => '/item'], function () {
                     Route::post('/add', [menu::class, 'addMenuItem'])->name('menu/item/add');
-                    Route::get('/get', [menu::class, 'get'])->name('menu/item/get');
-                    Route::delete('/delete', [menu::class, 'delete'])->name('menu/item/delete');
+                    Route::get('/get', [menu::class, 'getMenuItems'])->name('menu/item/get');
+                    Route::delete('/delete', [menu::class, 'deleteMenuItem'])->name('menu/item/delete');
+                    Route::patch('/update', [menu::class, 'update'])->name('menu/item/update');
                 });
           });
 
