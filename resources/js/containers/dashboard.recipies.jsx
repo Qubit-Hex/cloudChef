@@ -180,43 +180,8 @@ export const DashboardRecipies = (props) => {
                             </div>
                     </div>
                 </div>
-
-
-                <div className='col-md-6 mx-auto d-block'>
-                    <div className='card p-0'>
-                        {/** font awesome add button */}
-                        <div className='modal-header'>
-                            <h4 className='text-center ' style={{
-                            }}> <i className="fas fa-search"></i> Search Recipe</h4>
-                        </div>
-
-                        <div className='modal-body'>
-                            <div className='row'>
-                                <div className='col-md-12'>
-                                    <h1 className='header-subtitle' style={{
-                                        fontSize: '1.5rem',
-                                        fontWeight: '600'
-                                    }}> Search a Recipe </h1>
-                                    <small className='text-muted'> Search for a recipe by name, category, or ingredients. </small>
-                                    <img src='/img/SVG/toast_out.svg' width={300} height={300} className='img-fluid mx-auto d-block' alt='search' />
-
-                                    <div className='form-group'>
-
-                                        <input type='text' className='form-control' id='search' placeholder='Search for a recipe' />
-                                        {/** search button */}
-                                        <button className='btn btn-message w-25 mx-auto d-block mt-2'>
-                                            {/** search icon */}
-                                             Search
-                                             <i className="fas fa-search m-2"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                      </div>
-                </div>
-            </div>
         </div>
-        
+
 
             {/** add a component inorder to dynamically search the recipes  in the database */}
             <div className="row">

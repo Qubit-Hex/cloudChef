@@ -18,6 +18,9 @@ class menu extends Controller
 
     public function validation(Request $request) {
         // perform the necessary validations
+
+        // extend this if in future you need more validation or sanitization
+        // as this same is used throughout the controller.
         $token = $request->header('accessToken');
 
         $user = DB::table('users')->where('remember_token', $token)->first();
@@ -242,27 +245,43 @@ class menu extends Controller
         // now lets delete the menu and all the menu items
         $menu = DB::table('store_menu')->where('store_id', $userStore)->where('id', $menuID)->delete();
 
-        $menuItems = DB::table('store_menu_item')->where('store_menu_id', $menuID)->delete();
+        // check the length of menu items to delete
+        $menuItems = DB::table('store_menu_item')->where('store_menu_id', $menuID)->get();
 
-        // was the delete successful ?
-        if ($menu && $menuItems) {
-            return response()->json(['message' => 'Menu deleted successfully',
-                                    'status' => 200], 200);
-        } else {
-            // check with one of the two queries failed
-            // or did both fail ?
-            if (!$menu && !$menuItems) {
-                return response()->json(['message' => 'Menu could not be deleted and the menuItems'], 401);
-            } else if (!$menu) {
-                return response()->json(['message' => 'Menu could not be deleted'], 401);
-            } else if (!$menuItems) {
-                return response()->json(['message' => 'Menu items could not be deleted'], 401);
+        // check if the length of the menu items is 0
+        // this was a werid edge case so make sure we properly validate this one too
+
+        if (count($menuItems) > 0) {
+            // now lets delete the menu items
+            $menuItems = DB::table('store_menu_item')->where('store_menu_id', $menuID)->delete();
+
+            if ($menu && $menuItems) {
+                return response()->json(['message' => 'Menu deleted successfully',
+                                        'status' => 200], 200);
             } else {
-                // something else went wrong
-                return response()->json(['message' => 'Something went wrong'], 401);
+                // check with one of the two queries failed
+                // or did both fail ?
+                if (!$menu && !$menuItems) {
+                    return response()->json(['message' => 'Menu could not be deleted and the menuItems'], 401);
+                } else if (!$menu) {
+                    return response()->json(['message' => 'Menu could not be deleted'], 401);
+                } else if (!$menuItems) {
+                    return response()->json(['message' => 'Menu items could not be deleted'], 401);
+                } else {
+                    // something else went wrong
+                    return response()->json(['message' => 'Something went wrong'], 401);
+                }
+            }
+
+        } else {
+            // menu items where not greater than 0 so just delete the menu
+            if ($menu) {
+                return response()->json(['message' => 'Menu deleted successfully',
+                                        'status' => 200], 200);
+            } else {
+                return response()->json(['message' => 'Menu could not be deleted'], 401);
             }
         }
-
     }
 
     /**
@@ -305,5 +324,64 @@ class menu extends Controller
         }
     }
 
+    /**
+     *  @method: update
+     *
+     *  @purpose: Inorder to update a menu item
+     *
+     */
+
+    public function update(Request $request)
+    {
+        // first lets check the users permissions
+        $userStore = $this->validation($request);
+
+        $userInputs = $request->all();
+
+        // user
+
+        if (!$userStore) {
+            return response()->json(['message' => 'You are not a member of any store'], 401);
+        }
+
+        // now lets modify the resource based on the parameters that where passed to us.
+
+        $menuItemRecord = DB::table('store_menu_item')->where('id', $userInputs['menuItemID'])->first();
+
+        // verify the permissions of the use .
+        $storeMenu = DB::table('store_menu')->where('store_id', $userStore)->where('id', $menuItemRecord->store_menu_id)->first();
+
+
+        // does the record even exist ?
+        if (!$menuItemRecord) {
+            return response()->json(['message' => 'Menu item does not exist'], 401);
+        }
+
+        // does the user have permission to edit this record ? and is the record apart of the users store ?
+        if (!$storeMenu) {
+            return response()->json(['message' => 'You are not a member of this store'], 401);
+        }
+
+        // now that we validated the request lets update the `record`
+        $menuItem = DB::table('store_menu_item')->where('id', $userInputs['menuItemID'])->update([
+            'name' => $userInputs['name'],
+            'price' => $userInputs['price'],
+            'catagory' => $userInputs['catagory'],
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
+
+
+        // was the update successful ?
+        if ($menuItem) {
+            return response()->json(['message' => 'Menu item updated successfully',
+                                    'status' => 201], 200);
+        } else {
+            return response()->json(['message' => 'Menu item could not be updated'], 401);
+        }
+
+
+        // something else went wrong
+        return response()->json(['message' => 'Something went wrong'], 401);
+    }
 
 }

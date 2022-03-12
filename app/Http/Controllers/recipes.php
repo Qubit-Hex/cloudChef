@@ -7,6 +7,7 @@ use App\Http\Services\recipes\core\validation;
 use Illuminate\Support\Facades\DB;
 
 
+
 class recipes extends Controller
 {
     public function __construct()
@@ -37,6 +38,7 @@ class recipes extends Controller
         // validate that the file is actaully an image and not a fake file or scriot of some sort
         function validateFile($file) {
             $allowedFileTypes = [
+                'jpeg' => 'image/jpeg',
                 'jpg' => 'image/jpeg',
                 'png' => 'image/png',
                 'svg' => 'image/svg+xml',
@@ -66,14 +68,15 @@ class recipes extends Controller
 
         // check the file size of the image is less than 5mb
         // limit the file size of the image to 5mb
+        // @hotefix: we need to check the file size of the image here and either reject the
+        // image or allow it for now its ok... but we need to check the file size of the image
         function checkFileSize($file)
         {
-            if ($file->getSize() > 5000000) {
+            if ($file->getSize() > 250000000) {
                 return false;
             }
             return true;
         }
-
 
         // triggers
         if (!validateFile($file)) {
@@ -514,29 +517,21 @@ class recipes extends Controller
         return response()->json(['data' => $result], 200);
     }
 
+
     /**
      *
-     *  @method: update
+     *  @method: updateValidation
      *
-     *
-     *  @purpose: inorder to update a recipe
+     *  @purpose: inorder to validate the data that the user is trying to update.
      *
      */
 
-     public function update(Request $request) {
-
-        // @stub
-        // implieent a resource update on a given recipe
-
-        // reciope ID
-
+     private function updateValidation(Request $request)
+     {
         $recipe = $request->header('recipeId');
         $accessToken = $request->header('accessToken');
 
         // check if the recipe id is provided.
-        $recipeData = $request->all();
-
-
         if ($recipe == null) {
             return response()->json(['message' => 'Please provide a recipe id'], 400);
         }
@@ -546,33 +541,41 @@ class recipes extends Controller
         // 1. validate the users account
         // 2. validate the users access token
 
-
         $validate  = new Validation();
 
         // validate the users account
         if ($validate->validateUser($accessToken) == false) {
+            false;
+        } else {
+            return true;
+        }
+        // something else has went wrong
+        return false;
+     }
+
+
+    /**
+     *
+     *  @method: updateRecipeSteps ( PATCH )
+     *
+     *  @purpose: inorder to update the recipe steps
+     *
+     */
+
+     public function updateRecipeInstructions(Request $request)
+     {
+
+        $recipe = $request->header('recipeId');
+        $accessToken = $request->header('accessToken');
+
+        // check if the recipe id is provided.
+        $recipeData = $request->all();
+
+
+        if (!$this->updateValidation($request)) {
             return response()->json(['message' => 'Invalid access token'], 401);
         }
 
-        // next validate the users permissions
-        // next lets validate the recipe id that was provided.
-        //  lets update the recipe ingredients in the database
-
-        function updateRecipeIngredients($recipeId, $recipeIngredients) {
-            // update the recipe ingredients in the database
-            $updateRecipeIngredients = DB::table('recipe_ingredents')->where('recipe_id', $recipeId)->update([
-                'recipe_ingredients' => $recipeIngredients,
-                'updated_at' => date('Y-m-d H:i:s')
-            ]);
-            // check if the recipe ingredients were updated successfully
-            if ($updateRecipeIngredients === false) {
-                return response()->json(['message' => 'Failed to update recipe ingredients'], 500);
-            } else {
-                return response()->json(['message' => 'Recipe ingredients updated successfully'], 200);
-            }
-        }
-
-        // update the recipes step in the database
         function updateRecipeSteps($recipeId, $recipeSteps) {
             // update the recipe ingredients in the database
             $updateRecipeSteps = DB::table('recipe_steps')->where('recipe_id', $recipeId)->update([
@@ -591,29 +594,75 @@ class recipes extends Controller
             }
         }
 
-        // update the recipe nutritional facts.
-        function updateNutritionalFacts($recipeId, $nutritionalFacts) {
+        return updateRecipeSteps($recipe, $recipeData);
+     }
+
+
+
+     /**
+      * @method: updateRecipeIngredients ( PATCH )
+      *
+      * @purpose: inorder to update the recipe ingredients
+      *
+      */
+
+      public function updateRecipeIngredients(Request $request)
+      {
+        $recipe = $request->header('recipeId');
+        $accessToken = $request->header('accessToken');
+
+        // check if the recipe id is provided.
+        $recipeData = $request->all();
+
+        if (!$this->updateValidation($request)) {
+            return response()->json(['message' => 'Invalid access token'], 401);
+        }
+
+        function updateIngredients($recipeId, $recipeIngredients) {
             // update the recipe ingredients in the database
-            $updateNutritionalFacts = DB::table('recipe_nutritional_facts')->where('recipe_id', $recipeId)->update([
-                'recipe_nutritional_facts' => $nutritionalFacts,
+            $updateRecipeIngredients = DB::table('recipe_ingredents')->where('recipe_id', $recipeId)->update([
+                'recipe_ingredients' => $recipeIngredients,
                 'updated_at' => date('Y-m-d H:i:s')
             ]);
             // check if the recipe ingredients were updated successfully
-            if ($updateNutritionalFacts === false) {
-                return response()->json([
-                    'status' => 500,
-                    'message' => 'Failed to update recipe nutritional facts'], 500);
+            if ($updateRecipeIngredients === false) {
+                return response()->json(['message' => 'Failed to update recipe ingredients'], 500);
             } else {
                 return response()->json([
-                        'status' => 200,
-                        'message' => 'Recipe nutritional facts updated successfully'], 344);
+                    'status' => 200,
+                    'message' => 'Recipe ingredients updated successfully'], 200);
             }
-
         }
 
 
-        // update the recipes general information
-        function updateRecipeSummary($recipeId, $recipeData)
+        // update the recipe ingredients in the database
+        return updateIngredients($recipe, $recipeData);
+      }
+
+
+    /**
+     *
+     *  @method: updateRecipeSummary
+     *
+     *
+     * @purpose: inorder to update the recipe summary
+     *
+     */
+
+    public function updateRecipeSummary(Request $request)
+    {
+        $recipe = $request->header('recipeId');
+        $accessToken = $request->header('accessToken');
+
+        // check if the recipe id is provided.
+        $recipeData = $request->all();
+
+
+        if (!$this->updateValidation($request)) {
+            return response()->json(['message' => 'Invalid access token'], 401);
+        }
+
+        function updateSummary($recipeId, $recipeData)
         {
             // update the recipe table
             $recipeTable = DB::table('recipe')->where('recipe_id', $recipeId)->update([
@@ -646,9 +695,53 @@ class recipes extends Controller
             }
         }
 
-      $updatedNutritionalData = updateRecipeSummary($recipe, $recipeData);
-       // $updateRecipeIngredients = updateRecipe($recipe, $recipeData);
-        // check if the recipe ingredients were updated successfully
-        return $updatedNutritionalData;
-     }
+
+        // run our closure function
+        return updateSummary($recipe, $recipeData);
+    }
+
+    /**
+     *
+     *  @method: updateRecipeNutritionalFacts
+     *
+     *  @purpose: inorder to update the recipe nutritional facts
+     *
+     */
+
+    public function updateRecipeNutritionalFacts(Request $request)
+    {
+        $recipe = $request->header('recipeId');
+        $accessToken = $request->header('accessToken');
+
+        // check if the recipe id is provided.
+        $recipeData = $request->all();
+
+
+        if (!$this->updateValidation($request)) {
+            return response()->json(['message' => 'Invalid access token'], 401);
+        }
+
+
+        function updateNutritional($recipeId, $nutritionalFacts) {
+            // update the recipe ingredients in the database
+            $updateNutritionalFacts = DB::table('recipe_nutritional_facts')->where('recipe_id', $recipeId)->update([
+                'recipe_nutritional_facts' => $nutritionalFacts,
+                'updated_at' => date('Y-m-d H:i:s')
+            ]);
+            // check if the recipe ingredients were updated successfully
+            if ($updateNutritionalFacts === false) {
+                return response()->json([
+                    'status' => 500,
+                    'message' => 'Failed to update recipe nutritional facts'], 500);
+            } else {
+                return response()->json([
+                        'status' => 200,
+                        'message' => 'Recipe nutritional facts updated successfully'], 344);
+            }
+
+        }
+
+        // run our closure function
+        return updateNutritional($recipe, $recipeData);
+    }
 }

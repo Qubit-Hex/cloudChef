@@ -250,13 +250,13 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
                 Route::group(['prefix' => '/update'], function () {
                     // the following route for updating the recipe summary, recipe ingredients, recipe steps, recipe instructions
                     // and the nutritional facts.
-                    Route::patch('/recipeSummary/', [recipes::class, 'update'])->name('recipes/update/recipeSummary');
+                    Route::patch('/recipeSummary/', [recipes::class, 'updateRecipeSummary'])->name('recipes/update/recipeSummary');
 
-                    Route::patch('/ingredients/', [recipes::class, 'update'])->name('recipes/update/recipeIngredients');
+                    Route::patch('/ingredients/', [recipes::class, 'updateRecipeIngredients'])->name('recipes/update/recipeIngredients');
 
-                    Route::patch('/recipeInstructions/', [recipes::class, 'update'])->name('recipes/update/recipeInstructions');
+                    Route::patch('/recipeInstructions/', [recipes::class, 'updateRecipeInstructions'])->name('recipes/update/recipeInstructions');
 
-                    Route::patch('/nutritionalFacts/', [recipes::class, 'update'])->name('recipes/update/nutritionalFacts');
+                    Route::patch('/nutritionalFacts/', [recipes::class, 'updateRecipeNutritionalFacts'])->name('recipes/update/nutritionalFacts');
                 });
 
 

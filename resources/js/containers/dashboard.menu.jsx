@@ -214,7 +214,53 @@ const fetchMenuItems = (menuID) => {
         }
 
         return request(menuItemID);
+
+}
+
+/**
+ *
+ *  @function: editMenuItem
+ *
+ *
+ *  @purpose: inorder to edit a menu item from the store. this function will be used to edit the menu item name, price, and catagory
+ *
+ *
+ * @param {*} menuItemID
+ * @param {*} name
+ * @param {*} price
+ * @param {*} catagory
+ */
+
+
+const editMenuItem = (menuItemID, name, price, catagory) => {
+
+
+    console.log(menuItemID, name, price, catagory);
+    const request = (menuItemID, name, price, catagory) => {
+        const api = new FetchServiceProvider();
+        const url = `/api/store/menu/item/update`;
+
+        const data = {
+            menuItemID: menuItemID,
+            name: name,
+            price: price,
+            catagory: catagory,
+        };
+
+        const headers = {
+            'Content-Type': 'application/json',
+            'accessToken': api.getCookie('accessToken'),
+        };
+
+        return api.patch(url, data, headers);
     }
+
+    return request(menuItemID, name, price, catagory);
+}
+
+
+// REFACTOR THIS COMPONENT INORDER FOR IT TO BE MORE MODULAR AND EASIER TO READ.
+
 
 
 
@@ -260,6 +306,7 @@ export const DashboardMenu = (props) => {
                                          */}
                                         <div className='form-group'>
                                             <label htmlFor='menu-name mt-2'>Menu Name</label>
+                                            <small className='text-muted'> Example eg: (" Dinner Menu ")</small>
                                             <input type='text' className='form-control mt-2' id='menu-name' placeholder='Menu Name' />
                                         </div>
 
@@ -287,12 +334,13 @@ export const DashboardMenu = (props) => {
                                                             if (response.status === 200) {
                                                                 return ReactDOM.render(
                                                                     <TemplateModal title='Success' body={
-                                                                        <div>
-                                                                            <img src='/img/SVG/store.svg' className='mx-auto' width={350} height={350} />
-                                                                            <h3 className='header-subtitle text-center'>Successfully added the menu</h3>
-                                                                            <h4 className='header-title'>
-                                                                                Please enjoy you new menu!
-                                                                            </h4>
+                                                                        <div className='text-center'>
+                                                                            <img src='/img/SVG/store.svg' className='mx-auto' width={300} height={300} />
+                                                                            <h3 className='header-subtitle'>Successfully added the menu</h3>
+                                                                            <p>
+                                                                                {/** menu icon  */}
+                                                                                Please enjoy your new menu!
+                                                                            </p>
                                                                             <button className='btn btn-message' onClick={
                                                                                 (e) => {
                                                                                     ReactDOM.unmountComponentAtNode(container);
@@ -303,9 +351,9 @@ export const DashboardMenu = (props) => {
                                                             } else {
                                                                 return ReactDOM.render(
                                                                     <TemplateModal title='Error' body={
-                                                                        <div>
-                                                                            <img src='/img/SVG/store.svg' className='mx-auto' width={350} height={350} />
-                                                                            <h3 className='text-danger text-bold text-center'>{response.message}</h3>
+                                                                        <div className='text-center'>
+                                                                            <img src='/img/SVG/store.svg' className='mx-auto' width={300} height={300} />
+                                                                            <h3 className='text-danger text-bold'>{response.message}</h3>
                                                                             <button className='btn btn-message' onClick={
                                                                                 (e) => {
                                                                                     ReactDOM.unmountComponentAtNode(container);
@@ -316,9 +364,10 @@ export const DashboardMenu = (props) => {
                                                             }
                                                         });
                                                     } else {
-                                                        // if the name is not valid then we will show an error message
-                                                        // to the user
-                                                        alert('The name must be at least 3 characters long and can only contain aphabets and numbers');
+                                                        // display an alert to the user and log the error
+                                                        alert('The name must be at least 3 characters long and can only contain a-z A-z and numbers');
+                                                        // log the error
+                                                        console.error('The name must be at least 3 characters long and can only contain a-z A-z and numbers');
                                                     }
 
                                                 }
@@ -357,7 +406,6 @@ export const DashboardMenu = (props) => {
                                     if (response.menus) {
                                         // wait one second before rendering the modal
                                         setTimeout(() => {
-
                                             menuContent.push(response.menus);
                                         }, 1000);
 
@@ -376,6 +424,7 @@ export const DashboardMenu = (props) => {
                                              * select form of the menus */}
                                             <div className='form-group'>
                                                 <label htmlFor='menu-name mt-2'>Menu Name</label>
+
                                                 <select className='form-control mt-2' id='menu-name'
                                                 onClick={
                                                     (e) => {
@@ -417,7 +466,38 @@ export const DashboardMenu = (props) => {
                                                                                 const itemPrice = document.getElementById('item-price').value;
                                                                                 const itemCatagory = document.getElementById('item-catagory').value;
 
+                                                                                // perform some validation here
+                                                                                // before sending the request
 
+                                                                                const inputTests = {
+                                                                                    itemName: itemName.length >= 3,
+                                                                                    itemPrice: itemPrice.length >= 1,
+                                                                                    itemCatagory: itemCatagory.length >= 3
+
+                                                                                };
+
+                                                                                if (inputTests.itemName === false ) {
+                                                                                    // display an alert to the user and log the error
+                                                                                    alert('The name must be at least 3 characters long and can only contain a-z A-z and numbers');
+                                                                                    // cancel all execution
+                                                                                    return;
+                                                                                }
+
+                                                                                if (inputTests.itemPrice === false ) {
+                                                                                    // display an alert to the user and log the error
+                                                                                    alert('The price must be at least 1 characters long and can only contain a-z A-z and numbers');
+                                                                                    // cancel all execution
+                                                                                    return;
+                                                                                }
+
+                                                                                if (inputTests.itemCatagory === false) {
+                                                                                    // display an alert to the user and log the error
+                                                                                    alert('The catagory must be at least 3 characters long and can only contain a-z A-z and numbers');
+                                                                                    // cancel all execution
+                                                                                    return;
+                                                                                }
+
+                                                                                // if all the guards are true then continue. the execution
 
                                                                                 // now lets send the value to the function that will handle the request
                                                                                 return addMenuItem(menuID, itemName, itemPrice, itemCatagory).then(response => {
@@ -524,13 +604,19 @@ export const DashboardMenu = (props) => {
 
                                                     // trigger a cofirmation because this action is irreversible
                                                     ReactDOM.render(<TemplateModal title='Confirm' body={
-                                                        <div>
-                                                            <h3 className='text-center text-danger' style={{
-                                                                fontWeight: '600',
-                                                                fontSize: '1.5rem'
-
-                                                            }}>Are you sure you want to delete this menu?</h3>
+                                                        <div className='text-center'>
+                                                            <img src='/img/errors/cancel.svg' width={300} height={300} />
+                                                            <h3 className='text-center text-danger mt-3'>Are you sure you want to delete this menu?</h3>
                                                             <small className='text-muted text-center'> Please note that this action is irreversible </small>
+                                                            <div className='form-group d-flex mt-3'>
+
+                                                            <button className='btn btn-message m-1' onClick={
+                                                                (e) => {
+                                                                    ReactDOM.unmountComponentAtNode(container);
+                                                                }
+                                                            }>Cancel</button>
+
+
                                                             <button className='btn btn-danger m-1' onClick={
                                                                 (e) => {
                                                                     // send the request to the server
@@ -538,9 +624,9 @@ export const DashboardMenu = (props) => {
                                                                         if (response.status === 200) {
                                                                             return ReactDOM.render(
                                                                                 <TemplateModal title='Success' body={
-                                                                                    <div>
-                                                                                        <img src='/img/SVG/store.svg' className='mx-auto' width={350} height={350} />
-                                                                                        <h3 className='text-success text-bold text-center'>{response.message}</h3>
+                                                                                    <div className='text-center'>
+                                                                                        <img src='/img/SVG/store.svg' className='mx-auto' width={300} height={300} />
+                                                                                        <h3>{response.message}</h3>
                                                                                         <button className='btn btn-message' onClick={
                                                                                             (e) => {
                                                                                                 ReactDOM.unmountComponentAtNode(container);
@@ -559,6 +645,7 @@ export const DashboardMenu = (props) => {
                                                                                                 ReactDOM.unmountComponentAtNode(container);
                                                                                             }
                                                                                         }>Close</button>
+
                                                                                     </div>
                                                                                 } />, container);
                                                                         }
@@ -566,13 +653,9 @@ export const DashboardMenu = (props) => {
 
                                                                 }
                                                             }>
-                                                                <i  className="fas fa-trash-alt"></i>
+                                                                <i className='fas fa-trash-alt'></i>
                                                                     Delete Menu </button>
-                                                            <button className='btn btn-message m-1' onClick={
-                                                                (e) => {
-                                                                    ReactDOM.unmountComponentAtNode(container);
-                                                                }
-                                                            }>Cancel</button>
+                                                            </div>
                                                         </div>
                                                     } />, container);
 
@@ -679,6 +762,10 @@ export const DashboardMenu = (props) => {
                                                                         :
                                                                         menuItemsContent.map((menuItem, index) => {
                                                                             return menuItem.map((element, index) => {
+
+
+                                                                                let elementValues = element;
+
                                                                                 return <tr key={index} >
                                                                                     <td>{element.name}</td>
                                                                                     <td>{element.price}</td>
@@ -713,10 +800,109 @@ export const DashboardMenu = (props) => {
                                                                                             <i className='fas fa-trash-alt'></i>
                                                                                         </button>
                                                                                         <button className='btn btn-warning m-1' value={element.id} onClick={
-                                                                                            (e) => {
-                                                                                                const menuItemID = e.target.value;
-                                                                                                // trigger  A MODAL INORDER TO EDIT THE MENU ITEM
+                                                                                            // we will pass an aditional parameter to the function inorder to share the access of the resource.
+                                                                                            (e, elementValues) => {
 
+                                                                                                const menuItemID = e.target.value;
+
+                                                                                                // trigger  A MODAL INORDER TO EDIT THE MENU
+
+                                                                                                const elementContent = element;
+                                                                                                const container = document.getElementById('modal-container');
+                                                                                                // trigger a modal to have the following ? contnent
+
+                                                                                                ReactDOM.render(<TemplateModal title="Edit Menu Item" menuID={menuItemID} body={
+                                                                                                    <div className='text-center'>
+                                                                                                        <h3 style={{fontWeight: 700, textAlign: 'center'}}>Edit Menu Item</h3>
+                                                                                                        {/** need the following fields is recipe name, recipe price
+                                                                                                         * and  the recipe catagory
+                                                                                                         */}
+                                                                                                        <form onSubmit={
+                                                                                                            (e, id = menuItemID) => {
+                                                                                                                e.preventDefault();
+                                                                                                                const name = document.getElementById('menu-item-name').value;
+                                                                                                                const price = document.getElementById('menu-item-price').value;
+                                                                                                                const catagory = document.getElementById('menu-item-catagory').value;
+
+                                                                                                                console.log(id);
+                                                                                                                // update the menu item
+                                                                                                                // send the request to the server and get a response
+                                                                                                                // and render a modal to show the user that the menu item has been updated < based on response >
+
+                                                                                                                editMenuItem(id, name, price, catagory).then(response => {
+                                                                                                                    if (response.status === 200) {
+                                                                                                                        // render a modal to show the user that the menu item has been deleted
+                                                                                                                        const container = document.getElementById('modal-container');
+                                                                                                                        ReactDOM.render(<TemplateModal title="Edit Menu Item" body={
+                                                                                                                            <div className='text-center'>
+                                                                                                                                <img src='/img/SVG/store.svg' width={300} height={300} />
+                                                                                                                                {/** font awesome success icon */}
+                                                                                                                                <h3>
+                                                                                                                                    <i className='fas fa-check-circle fa-1x' style={{color: 'green'}}></i>
+                                                                                                                                    Menu Item Updated
+                                                                                                                                </h3>
+                                                                                                                                <p style={{fontWeight: 600}}>The menu item has been updated</p>
+                                                                                                                                <button className='btn btn-message m-1' onClick={
+                                                                                                                                    (e) => {
+                                                                                                                                        ReactDOM.unmountComponentAtNode(container);
+                                                                                                                                    }
+                                                                                                                                }>
+                                                                                                                                    Close </button>
+                                                                                                                            </div>
+                                                                                                                        } />, container);
+
+                                                                                                                    } else {
+                                                                                                                        // trigger a error modal
+                                                                                                                        const container = document.getElementById('modal-container');
+                                                                                                                        ReactDOM.render(<TemplateModal title="Edit Menu Item" body={
+                                                                                                                            <div className='text-center'>
+                                                                                                                                <img src='/img/SVG/store.svg' width={300} height={300} />
+                                                                                                                                <h3 className='text-danger'>
+                                                                                                                                    {/** errror icon font awesome */}
+                                                                                                                                    <i className='fas fa-exclamation-circle fa-1x' style={{color: 'red'}}></i>
+                                                                                                                                    Menu Item Update Failed
+                                                                                                                                </h3>
+                                                                                                                                <p>The menu item has not been updated</p>
+                                                                                                                                <button className='btn btn-message m-1' onClick={
+                                                                                                                                    (e) => {
+                                                                                                                                        ReactDOM.unmountComponentAtNode(container);
+                                                                                                                                    }
+                                                                                                                                }>
+                                                                                                                                    Close </button>
+                                                                                                                            </div>
+                                                                                                                        } />, container);
+
+                                                                                                                    }
+                                                                                                                });
+                                                                                                            }
+                                                                                                        }>
+                                                                                                            <div className='form-group'>
+                                                                                                                <label htmlFor='menu-item-name'>Menu Item Name</label>
+                                                                                                                <input type='text' className='form-control mt-1' id='menu-item-name' defaultValue={elementContent.name} />
+                                                                                                            </div>
+                                                                                                            <div className='form-group'>
+                                                                                                                <label htmlFor='menu-item-price'>Menu Item Price</label>
+                                                                                                                <input type='number' className='form-control mt-1' id='menu-item-price' defaultValue={elementContent.price} />
+                                                                                                            </div>
+                                                                                                            <div className='form-group'>
+                                                                                                                <label htmlFor='menu-item-catagory'>Menu Item Catagory</label>
+                                                                                                                <input type='text' className='form-control mt-1' id='menu-item-catagory' defaultValue={elementContent.catagory} />
+                                                                                                            </div>
+                                                                                                            <div className='d-flex'>
+                                                                                                            <button className='btn btn-danger m-1' onClick={
+                                                                                                                (e) => {
+                                                                                                                    ReactDOM.unmountComponentAtNode(container);
+                                                                                                                }
+                                                                                                            }>
+                                                                                                                Close </button>
+                                                                                                            <button className='btn btn-message m-1' type='submit'>
+                                                                                                                Update
+                                                                                                            </button>
+                                                                                                        </div>
+
+                                                                                                        </form>
+                                                                                                    </div>
+                                                                                                } />, container);
                                                                                             }
                                                                                         }>
                                                                                             <i className='fas fa-edit'></i>

@@ -9,9 +9,6 @@
  *
  */
 
-
-
-
 import React from "react";
 import ReactDOM from "react-dom";
 import FetchServiceProvider from "../../../lib/fetchServiceProvider";
@@ -26,9 +23,7 @@ export const AuthController = (props) => {
     const [error, setError] = React.useState(null);
     const [authorized, setAuthorized] = React.useState(false);
     const [isAdmin, setIsAdmin] = React.useState(false);
-
     const fetchService = new FetchServiceProvider();
-
 
     // check the current users permissions
     // this will be an api call to check if the user has the correct permission and if they do then
@@ -62,7 +57,7 @@ export const AuthController = (props) => {
             return props.children;
         }
     }
-    
+
     // if our component is not authorized then we will return nothing
     // ie the user doesn't  have the correct permissions to view this resource.
     return null;
