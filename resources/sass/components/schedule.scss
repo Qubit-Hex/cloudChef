@@ -22,37 +22,4 @@
     cursor: pointer;
     -webkit-transition: all .3s ease;
     transition: all .3s ease;
-
-    .tile-icon {
-        font-size: 3em;
-        color: rgb(68, 68, 68);
-        text-align: center;
-        padding: 10px;
-        box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
-        border-radius: 25px;
-        width: 200px;
-        margin: auto;
-        margin-top: 10px;
-        margin-bottom: 10px;
-
-        .sub-button {
-            // fade animation
-            display: none;
-            font-size: 15px;
-        }
-
-        &:hover > .sub-button {
-            font-weight: 700;
-            display: block;
-            animation: fade 2.5s ease-in-out;
-        }
-
-        &:hover {
-            // trigger animation for the element to scale a little
-            color: white !important;
-            animation: scaleUpFade 3s ease-in-out;
-            color: transparent;
-            background-color: rgba(19, 67, 140, 0.755);
-        }
-    }
 }

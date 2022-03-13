@@ -447,7 +447,7 @@ export const DashboardMenu = (props) => {
                                                                     </div>
                                                                     <div className='form-group'>
                                                                         <label htmlFor='item-price'>Item Price</label>
-                                                                        <input type='number' className='form-control mt-1' id='item-price' placeholder='Enter the item price' />
+                                                                        <input type='number' step='0.01' min='0' className='form-control mt-1' id='item-price' placeholder='Enter the item price' />
                                                                     </div>
                                                                     <div className='form-group'>
                                                                         {/** catagory
@@ -498,8 +498,8 @@ export const DashboardMenu = (props) => {
                                                                                 }
 
                                                                                 // if all the guards are true then continue. the execution
-
                                                                                 // now lets send the value to the function that will handle the request
+
                                                                                 return addMenuItem(menuID, itemName, itemPrice, itemCatagory).then(response => {
                                                                                     if (response.status === 200) {
                                                                                         return ReactDOM.render(
@@ -882,7 +882,7 @@ export const DashboardMenu = (props) => {
                                                                                                             </div>
                                                                                                             <div className='form-group'>
                                                                                                                 <label htmlFor='menu-item-price'>Menu Item Price</label>
-                                                                                                                <input type='number' className='form-control mt-1' id='menu-item-price' defaultValue={elementContent.price} />
+                                                                                                                <input type='number' step='0.01' min='0' className='form-control mt-1' id='menu-item-price' defaultValue={elementContent.price} />
                                                                                                             </div>
                                                                                                             <div className='form-group'>
                                                                                                                 <label htmlFor='menu-item-catagory'>Menu Item Catagory</label>

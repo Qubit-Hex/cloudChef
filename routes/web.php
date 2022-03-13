@@ -60,6 +60,7 @@ Route::post('/authentication/register/', [authentication::class, 'register'])->n
 Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
     Route::get('/', [dashboard::class, 'index'])->name('dashboard');
     Route::get('/{page}', [dashboard::class, 'index']);
+    Route::get('/{page}/{subApplication}', [dashboard::class, 'index']);
 });
 
 
