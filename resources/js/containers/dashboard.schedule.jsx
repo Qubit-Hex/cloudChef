@@ -203,6 +203,9 @@ export class SchedulePage extends Component {
                 <h2 className='ml-4'> <b>Schedule</b> <small className='sub-caption ' > Welcome (
                { this.state.user } ) <br /><span className='text-center'>View, edit, and drop shifts!</span> </small></h2>
 
+               <h3 className='header-subtitle text-center'> Please select an option </h3>
+               <small className='text-muted text-center'> Help us make a better schedule for you. </small>
+
 
 
                     {/* make a tile with add. edit, and delete buttons */}
@@ -216,10 +219,153 @@ export class SchedulePage extends Component {
 
                 {/**  container for the schedule components   */}
 
-                {/* refactor into an component that i CAN LOOP THOUGH  THE
-                    THE SCHEDULE DATA AND RENDER IT */}
+                {/* refactor into an component that i CAN LOOP THOUGH  THE THE SCHEDULE DATA AND RENDER IT */}
 
+                    {/** this may be a container now but not too sure yet on how to impliment it */}
+
+                <div className='row'></div>
+
+                {/** add some quick access navigation buttons  */}
+                <div className='row'>
+                    {/** add three buttons one for adding a schedule, editing a current schedule and  on for viewing current schedule */}
+                    <div className='col-md-4'>
+                        {/** add schedule tile */}
+                        <div className='tile'>
+                            <div className='tile-content'>
+                                <img src='/img/SVG/time_flatline.svg' width={300} height={300} />
+                                <h2 className='text-center m-2 header-subtitle'> Add Schedule </h2>
+                                <small className='text-center text-muted'> Add a new schedule to your store</small>
+                                    <div className='tile-icon btn-message text-center'>
+                                        <i className='fa fa-plus'></i>
+                                        <span> Create Schedule</span>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/** view schedule button */}
+                    <div className='col-md-4'>
+                        <div className='tile'>
+                            <div className='tile-content'>
+                                <img src='/img/SVG/schedule_icon_alt.svg' width={300} height={300} />
+                                <h2 className='text-center m-2 header-subtitle'> View Schedule </h2>
+                                <small className='text-center text-muted'> View the current schedule for your store</small>
+                                <div className='tile-icon btn-message text-center'>
+                                    <i className='fa fa-eye'></i>
+                                    <span> View Schedule</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/** edit a schedule  */}
+                    <div className='col-md-4'>
+                        <div className='tile'>
+                            <div className='tile-content'>
+                                <img src='/img/SVG/schedule_event.svg' width={300} height={300} />
+                                <h2 className='text-center m-2 header-subtitle'> Edit Schedule </h2>
+                                <small className='text-center text-muted'> Edit the current schedule for your store</small>
+                                <div className='tile-icon btn-message text-center'>
+                                    <i className='fa fa-edit'></i>
+                                    <span> Edit Schedule</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/** delete a schedule  */}
+
+                    <div className='col-md-4'>
+                        <div className='tile'>
+                            <div className='tile-content'>
+                                <img src='/img/errors/empty_schedule.svg' width={300} height={300} />
+                                <h2 className='text-center m-2 header-subtitle'> Delete Schedule </h2>
+                                <small className='text-center text-muted'> Delete the current schedule for your store</small>
+                                <div className='tile-icon btn-message text-center'>
+                                    <i className='fa fa-trash'></i>
+                                    <span> Delete Schedule</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div className='col-md-4'>
+                        {/* add a labour cost tile */}
+                        <div className='tile'>
+                            <div className='tile-content'>
+                                <img src='/img/SVG/money.svg' width={300} height={300} />
+                                <h2 className='text-center m-2 header-subtitle'> Labour Cost </h2>
+                                <small className='text-center text-muted'> View your store's labour cost </small>
+                                <div className='tile-icon btn-message text-center'>
+                                    <i className='fa fa-plus'></i>
+                                    <span> VLabour Cost</span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    
+                <div className='col-md-4'>
+                    <div className='tile'>
+                        <div className='tile-content'>
+                            <img src='/img/SVG/employee_card.svg' width={300} height={300} />
+                            <h2 className='text-center m-2 header-subtitle'> Schedule Requests </h2>
+                            <small className='text-center text-muted'> View employees schedule requests </small>
+                            <div className='tile-icon btn-message text-center'>
+                                <i className='fa fa-eye'></i>
+                                <span> Schedule Requests</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                </div>
+
+                <div className='row'>
+                    <div className='card'>
+                        <div className='card-header' style={{
+                            backgroundColor: 'transparent'
+                        }}>
+
+                            <h4 className='card-title'>
+                                {/** calender icon  */}
+                                <i className="fa fa-calendar-alt" aria-hidden="true"></i>
+                                Add Schedule
+                            </h4>
+                        </div>
+                        <div className='card-body'>
+                            <div className='row text-center'>
+                                    <img src='/img/SVG/time_flatline.svg' width={300} height={300} />
+                                <div className='col'>
+                                     {/* section to add a schedule to the current store  */}
+                                     <div className='row'>
+                                         <div className='form-group'>
+                                             <label htmlFor="select-schedule-date" style={{
+                                                    fontSize: '1.2em',
+                                                    fontWeight: 'bold',
+                                                    margin: '10px'
+                                             }}>Select a week </label>
+                                               <input type='week' id='select-schedule-date' className='form-control w-50 mx-auto'/>
+                                         </div>
+                                         <div className='form-group mt-4 '>
+                                             <button className='btn btn-message w-50' onClick={this.updateScheduleState}>
+                                                    {/** add calender button icon  */}
+                                                    <i className="fa fa-calendar-plus-o" aria-hidden="true"></i>
+                                                    Add
+                                             </button>
+                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
                 <div className="row">   {/* row for the schedule components */}
+
+                {/* add a section for the ability to add a new schedule */}
+
 
                 <div className="col">
                     <div className="col card fit-table">
