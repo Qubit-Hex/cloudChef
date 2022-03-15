@@ -51,7 +51,7 @@ const generateTableRows = () => {
     for (let i = 0; i < 7; i++) {
         employeeRows.push(
 
-        <td>
+        <td key={i}>
             <div className='container'>
 
             <div className='row'>
@@ -64,7 +64,7 @@ const generateTableRows = () => {
                             </b>
                         </small>
                         {/** 12 hour format time  */}
-                        <input type='time' className='form-control' />
+                        <input type='time' className='form-control mt-1' />
                     </div>
                 </div>
                 {/** employee end time */}
@@ -75,7 +75,7 @@ const generateTableRows = () => {
                                 End Time
                             </b>
                         </small>
-                        <input type='time' className='form-control' />
+                        <input type='time' className='form-control mt-1' />
                     </div>
                 </div>
 
@@ -87,7 +87,35 @@ const generateTableRows = () => {
                                 Off
                             </b>
                         </small>
-                        <input type='checkbox' className='m-2' />
+                        <input type='checkbox' className='m-2' onClick={
+                            (e) => {
+                                // get the parent parent container
+                                // this is hacky but it works might change it to something else later..
+                                const parent = e.target.parentNode.parentNode.parentNode;
+
+                                const checkbox = e.target;
+
+                                // check if the check box is checks
+                                if (checkbox.checked) {
+                                    // if it is checked then add the class
+                                    let inputsDate = parent.querySelectorAll('input[type="time"]');
+                                        // disable the inputs
+                                        inputsDate.forEach(input => {
+                                            input.disabled = true;
+                                        }
+                                    );
+                                } else {
+                                    // if it is not checked then remove the class
+                                    let inputsDate = parent.querySelectorAll('input[type="time"]');
+                                        // enable the inputs
+                                        inputsDate.forEach(input => {
+                                            input.disabled = false;
+                                        }
+                                    );
+                                }
+                            }
+
+                        } />
                     </div>
                 </div>
             </div>
@@ -98,6 +126,71 @@ const generateTableRows = () => {
     }
 
     return employeeRows;
+}
+
+
+
+
+/**
+ *
+ * @component: Post Schedule
+ *
+ * @purpose: This component is used to add a new schedule to the database.
+ *
+ */
+
+const PostSchedule = async (employeeID, ScheduleMap) => {
+
+    // validation function
+    const validation = (MAP) => {
+        // check if the map is empty
+        if (Object.keys(MAP).length === 0) {
+            return false;
+        }
+        // check if the map is valid
+        for (let key in MAP) {
+           // check if it is employees off day ?
+
+                if (MAP[key].off !== true) {
+                    // check if the value is empty
+                    if (MAP[key].start === '' || MAP[key].end === '') {
+                        return false;
+                    }
+                }
+        }
+
+        return true;
+    }
+
+
+    /// closure to preform our api call
+    const request = (MAP) => {
+        const api = new FetchServiceProvider();
+        const route = '/api/store/schedule/add';
+        const body = {
+            employeeID: employeeID,
+            schedule: MAP
+        };
+
+        const headers = {
+            "Content-Type": "application/json",
+            accessToken: api.getCookie("accessToken"),
+        };
+
+        return api.post(route, body, headers);
+    }
+    // if the request is valid then post the schedule
+    if (validation(ScheduleMap) === true) {
+        request(ScheduleMap).then(response => {
+            console.log(response);
+        }).catch(error => {
+            console.log(error);
+        });
+    } else {
+        // if the request is invalid then return false
+        alert('Invalid Request');
+        return false;
+    }
 }
 
 
@@ -120,7 +213,6 @@ export const AddSchedule = (props) => {
     React.useEffect(() => {
         getEmployees().then((response) => {
             setEmployees(response.data);
-            console.log(response);
         });
     }, []);
 
@@ -238,8 +330,80 @@ export const AddSchedule = (props) => {
                                             </p>
                                         </td>
                                         {
+                                            // this will be used to generate the tables for creating the schedules
                                             generateTableRows()
                                         }
+                                        <td>
+                                            <div className='form-group d-flex'>
+                                                <button className='btn btn-warning m-2' value={employee.id}>
+                                                    <i className="fas fa-pencil-alt"></i>
+                                                    Modify
+                                                </button>
+                                                <button className='btn btn-message m-2' value={employee.id} onClick={
+                                                    (e) => {
+                                                        /// get the parent container
+                                                        const btnNode = e.target.value;
+                                                        const parent = e.target.parentNode.parentNode.parentNode.querySelectorAll('td');
+
+
+                                                        // closure to convert the 24 time into 12 time
+
+                                                        const ScheduleMap = {
+                                                            'Monday': {
+                                                                'start': parent[1].querySelectorAll('input[type="time"]')[0].value,
+                                                                'end': parent[1].querySelectorAll('input[type="time"]')[1].value,
+                                                                'off': parent[1].querySelectorAll('input[type="checkbox"]')[0].checked ? true : false
+                                                            },
+
+                                                            'Tuesday': {
+                                                                'start': parent[2].querySelectorAll('input[type="time"]')[0].value,
+                                                                'end': parent[2].querySelectorAll('input[type="time"]')[1].value,
+                                                                'off': parent[2].querySelectorAll('input[type="checkbox"]')[0].checked ? true : false
+                                                            },
+
+                                                            'Wednesday': {
+                                                                'start': parent[3].querySelectorAll('input[type="time"]')[0].value,
+                                                                'end': parent[3].querySelectorAll('input[type="time"]')[1].value,
+                                                                'off': parent[3].querySelectorAll('input[type="checkbox"]')[0].checked ? true : false
+                                                            },
+
+                                                            'Thursday': {
+                                                                'start': parent[4].querySelectorAll('input[type="time"]')[0].value,
+                                                                'end': parent[4].querySelectorAll('input[type="time"]')[1].value,
+                                                                'off': parent[4].querySelectorAll('input[type="checkbox"]')[0].checked ? true : false
+                                                            },
+
+                                                            'Friday': {
+                                                                'start': parent[5].querySelectorAll('input[type="time"]')[0].value,
+                                                                'end': parent[5].querySelectorAll('input[type="time"]')[1].value,
+                                                                'off': parent[5].querySelectorAll('input[type="checkbox"]')[0].checked ? true : false
+                                                            },
+
+                                                            'Saturday': {
+                                                                'start': parent[6].querySelectorAll('input[type="time"]')[0].value,
+                                                                'end': parent[6].querySelectorAll('input[type="time"]')[1].value,
+                                                                'off': parent[6].querySelectorAll('input[type="checkbox"]')[0].checked ? true : false
+                                                            },
+
+                                                            'Sunday': {
+                                                                'start': parent[7].querySelectorAll('input[type="time"]')[0].value,
+                                                                'end': parent[7].querySelectorAll('input[type="time"]')[1].value,
+                                                                'off': parent[7].querySelectorAll('input[type="checkbox"]')[0].checked ? true : false
+                                                            }
+                                                        }
+
+                                                        // return the schedule map to our function
+                                                        // that will validate the rwquest and post the new information
+                                                        // to the database
+
+                                                        return PostSchedule(btnNode, ScheduleMap);
+                                                    }
+                                                }>
+                                                    <i className="fas fa-check"></i>
+                                                    Add
+                                                </button>
+                                            </div>
+                                        </td>
                                     </tr>
                                 )
                         })

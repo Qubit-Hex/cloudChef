@@ -14,7 +14,6 @@
 
 import React from "react";
 import ReactDOM from 'react-dom';
-import { AuthController } from "../core/AuthController";
 import { KitchenDisplayUnit } from "./KitchenDisplayUnit";
 
 

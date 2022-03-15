@@ -21,6 +21,20 @@ use Illuminate\Support\Facades\DB;
 class ScheduleService
 {
 
+    /**
+     *
+     * @method: add
+     *
+     * @purpose: inorder to add a new schedule into the system
+     *
+     */
+
+    static function add($payload) {
+
+
+        return response()->json($payload);
+    }
+
 
     /**
      *

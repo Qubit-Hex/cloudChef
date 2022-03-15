@@ -25,6 +25,27 @@ class schedule extends Controller
 
     }
 
+
+    /**
+     *  @method: add
+     *
+     *  @purpose: inorder to add a new schedule into the system
+     *
+     */
+
+    public function add(Request $request) {
+
+        $query = [
+            'time' => time(),
+            'unique_id' => uniqid(),
+            'payload' => $request->all()
+        ];
+
+        return ScheduleService::add($query);
+    }
+
+
+
     /**
      *   @method: get
      *
@@ -120,5 +141,21 @@ class schedule extends Controller
             ];
 
             return ScheduleService::postShiftPickupRequest($query);
+        }
+
+
+        /**
+         *
+         *  @method: addSchedule
+         *
+         *
+         *  @purpose; inorder to add a schedule to the system.
+         *
+         */
+        public function addSchedule(Request $request)
+        {
+
+            // all come back to this later once i figure a structure
+            // out for the schedule
         }
 }

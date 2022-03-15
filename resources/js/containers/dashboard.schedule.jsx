@@ -14,6 +14,12 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
+// authentication]
+
+// this is the bouncer that will check the current users permissions
+
+
+
 // main components of the schedule
 import { AddSchedule } from "../components/dashboard/schedule/schedule.add";
 import { ScheduleDrop } from "../components/dashboard/schedule/schedule.dropShift";
@@ -98,15 +104,15 @@ export class SchedulePage extends Component {
             <div className="container-xl dashboard-content">
                 <h2 className="ml-4">
                     <b style={{
-                        fontSize: '1.5em'
+                        fontSize: '1.25em'
                     }}>
                         Schedule
                     </b> <br/>
 
                             <span className="text-center" style={{
-                                fontSize: '1em',
-                         
-                                fontWeight: '700',
+                                fontSize: '0.75em',
+
+                                fontWeight: '500',
                                 marginLeft: '20px'
                             }}>
                                 View, edit, and drop shifts!
@@ -136,6 +142,7 @@ export class SchedulePage extends Component {
                         <Route exact path="/dashboard/schedule/">
                             <ScheduleGridMenu />
                         </Route>
+
                     </Switch>
                 </Router>
 
