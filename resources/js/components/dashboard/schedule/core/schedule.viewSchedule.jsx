@@ -176,10 +176,8 @@ export const DisplaySchedule = (props) => {
                                                     data-year={schedule.year}
                                                     data-week={schedule.week}
                                                 >
-                                                    {"Schedule #" + schedule.id}
-                                                    {
-                                                        getDates(schedule.year, schedule.week
-                                                    )}
+                                                    {"Schedule # " + schedule.id + " - " + getDates(schedule.year, schedule.week)}
+                    
                                                 </option>
                                             );
                                         }

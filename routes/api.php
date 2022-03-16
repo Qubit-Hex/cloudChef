@@ -221,6 +221,9 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
             Route::get ('/get', [schedule::class, 'get'])->name('/schedule/get/');
             Route::post('/add', [schedule::class, 'add'])->name('/schedule/add');
             Route::get('/find', [schedule::class, 'find'])->name('/schedule/find');
+            Route::post('/create', [schedule::class, 'create'])->name('/schedule/create');
+
+
             Route::get('/dropshift', [schedule::class, 'dropshift'])->name('/schedule/dropshift');
             Route::get('/dropshift/get', [schedule::class, 'getDroppedShifts'])->name('/schedule/dropshift/get');
             Route::get('/pickup', [schedule::class, 'postShiftPickupRequest'])->name('/schedule/pickup/');

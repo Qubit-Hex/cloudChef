@@ -27,6 +27,30 @@ class schedule extends Controller
 
 
     /**
+     *  @method: createScheduleEntry
+     *
+     *  @purpose: inorder to create a schedule entry for the store
+     *
+     */
+
+     public function create(Request $request) {
+         // this will be the method that will create a schedule entry for the store
+         // based on the year and week number.
+
+
+         $query = [
+             'payload' => $request->all(),
+             'accessToken' => $request->header('accessToken'),
+             'method' => 'POST'
+         ];
+
+         // issue the request to the service layer.
+         // inorder to create a schedule entry for the store
+         return ScheduleService::createScheduleEntry($query);
+     }
+
+
+    /**
      *  @method: add
      *
      *  @purpose: inorder to add a new schedule into the system

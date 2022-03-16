@@ -166,11 +166,10 @@ class ScheduleService
             }
         }
 
-        return [
-            'status' => 'success',
-            'message' => 'Schedule has been added successfully',
-            'results' => $groupInsert,
-        ];
+       return response()->json([
+           'status' => 201,
+           'message' => 'Schedule successfully added.'
+       ]);
     }
 
 
@@ -295,6 +294,82 @@ class ScheduleService
         }
     }
 
+    /**
+     *
+     *  @method: createScheduleEntry
+     *
+     *  @purpose: to create a new schedule entry for a store
+     *
+     */
+
+     static function createScheduleEntry ($request) {
+        // this method will be responsible for creating a new schedule entry for a store.
+
+        /// first check if the user is a store member
+        $user = DB::table('users')->where('remember_token', $request['accessToken'])->first();
+
+        if ($user) {
+            $member = DB::table('store_members')->where('userID', $user->userID)->first();
+
+            if ($member) {
+                // check if the store has a schedule entry for the given year and week
+                $schedule = DB::table('store_schedule')->where('storeID', $member->storeID)->where('year', $request['payload']['year'])->where('week', $request['payload']['week'])->first();
+
+                if ($schedule) {
+                    return response()->json([
+                        'status' => 'error',
+                        'message' => 'Schedule already exists for this year and week'
+                    ]);
+                } else {
+                    // create a new schedule entry
+                    $schedule = DB::table('store_schedule')->insert([
+                        'storeID' => $member->storeID,
+                        'year' => $request['payload']['year'],
+                        'week' => $request['payload']['week']
+                    ]);
+
+                    // if the schedule entry was created successfully
+                    if ($schedule) {
+
+                        // retunr the schedule id for the newly created schedule entry
+
+                        $getScheduleID = DB::table('store_schedule')->where('storeID', $member->storeID)->where('year', $request['payload']['year'])->where('week', $request['payload']['week'])->first();
+
+
+                        // return this response to the client for us to create the schedule entries
+                        // for employees belonging to this store. 
+                        return response()->json([
+                            'status' => 'success',
+                            'scheduleID' => $getScheduleID->id,
+                            'message' => 'Schedule successfully created'
+                        ]);
+                    } else {
+                        return response()->json([
+                            'status' => 'error',
+                            'message' => 'Schedule could not be created'
+                        ]);
+                    }
+                }
+            } else {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'You are not a member of any store'
+                ], 401);
+            }
+        } else {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Invalid token'
+            ], 401);
+        }
+
+        /// unknown error occured
+        // none of our edge cases where met
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Unknown error occured'
+        ], 500);
+     }
 
 
     /**

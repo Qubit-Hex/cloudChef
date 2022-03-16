@@ -72,7 +72,7 @@ export const ScheduleGridMenu = (props) => {
             <div className='tile'>
                 <div className='tile-content'>
                     <img src='/img/SVG/schedule_event.svg' width={300} height={300} />
-                    <h2 className='text-center m-2 header-subtitle'> Delete Schedule </h2>
+                    <h2 className='text-center m-2 header-subtitle'> Edit Schedule </h2>
                     <p className='text-center text-muted'> Edit the current schedule for your store</p>
                     <div className='tile-icon  text-center'>
                     <a  className='btn btn-message btn-lg m-4 mx-auto w-50'
