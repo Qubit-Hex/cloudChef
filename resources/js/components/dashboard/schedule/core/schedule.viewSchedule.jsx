@@ -199,6 +199,10 @@ export const DisplaySchedule = (props) => {
                                     setYear(year);
                                     setWeek(week);
 
+                                    setTimeout(() => {
+                                      //  window.location.reload();
+                                    }, 1000);
+
                                 }}>
                                     Choose
                             </button>

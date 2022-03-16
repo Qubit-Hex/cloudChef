@@ -181,11 +181,7 @@ const PostSchedule = async (employeeID, ScheduleMap) => {
     }
     // if the request is valid then post the schedule
     if (validation(ScheduleMap) === true) {
-        request(ScheduleMap).then(response => {
-            console.log(response);
-        }).catch(error => {
-            console.log(error);
-        });
+        return request(ScheduleMap);
     } else {
         // if the request is invalid then return false
         alert('Invalid Request');

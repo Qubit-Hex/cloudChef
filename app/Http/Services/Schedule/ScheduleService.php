@@ -15,6 +15,7 @@ namespace App\Http\Services\Schedule;
 
 use Facade\FlareClient\Http\Response;
 use Illuminate\Support\Facades\DB;
+use App\Http\Services\Schedule\core\_LOGGER;
 
 
 
@@ -29,10 +30,147 @@ class ScheduleService
      *
      */
 
+
+    static function getUsersStore($accessToken) {
+        // lets validate the access token and return the users store
+
+        $user = DB::table('users')
+            ->where('remember_token', $accessToken)
+            ->first();
+
+        if ($user) {
+            $storeMembers = DB::table('store_members')
+                ->where('userID', $user->userID)
+                ->first();
+
+            return $storeMembers->storeID;
+        }
+    }
+
+    /**
+     *
+     *  @method: add
+     *
+     *
+     *  @purpose: inorder to add a new schedule into the system
+     *
+     */
+
     static function add($payload) {
 
+        // todo implement the add method
+        // for adding scheudle data.
+        $LOG = new _LOGGER();
 
-        return response()->json($payload);
+        $LOG->log($payload);
+
+        $scheduleID = 1;
+        $employeeID = $payload['payload']['employeeID'];
+        $schedule = $payload['payload']['schedule'];
+
+        $storeID = self::getUsersStore($payload['access_token']);
+
+
+        // perform the insert into the database for the current user.
+
+
+        $groupInsert = [];
+
+
+        // we need to loop through the schedule and insert it into the database.
+        // we require 7 inserts for each day of the week.
+
+        foreach ($schedule as $day => $daySchedule) {
+
+            // function to convert the day into a number
+            // closure to convert the day into a number
+            $dayNumber = function ($day) {
+
+                $day = strtolower($day);
+                switch ($day) {
+                    case 'monday':
+                        return 1;
+                        break;
+                    case 'tuesday':
+                        return 2;
+                        break;
+                    case 'wednesday':
+                        return 3;
+                        break;
+                    case 'thursday':
+                        return 4;
+                        break;
+                    case 'friday':
+                        return 5;
+                        break;
+                    case 'saturday':
+                        return 6;
+                        break;
+                    case 'sunday':
+                        return 7;
+                        break;
+                }
+            };
+
+
+            $convertTimeToInt = function ($time) {
+
+                // check if value is null
+                if ($time == null) {
+                    return null;
+                } else {
+                    // split the time into hours and minutes
+                    $time = explode(':', $time);
+                    return $time[0];
+                }
+
+            };
+
+            $groupInsert[] = [
+                'employeeID' => $employeeID,
+                'storeID' => $storeID,
+                'store_schedule' =>$scheduleID,
+                'day' => $dayNumber($day),
+                'start_time' => $convertTimeToInt($daySchedule['start']),
+                'end_time' => $convertTimeToInt($daySchedule['end']),
+                'is_open' => 1,
+                'is_off_day' => $daySchedule['off'] === true ? 1 : 0
+            ];
+        }
+
+        // was all the inserts successful?
+        // if so return a success message. to the client side.
+
+
+        // loop through the group insert and insert into the database.
+        foreach ($groupInsert as $insert) {
+
+            // update or insert if the record exists or not
+            $exists = DB::table('employee_shift')
+                ->where('employeeID', $insert['employeeID'])
+                ->where('storeID', $insert['storeID'])
+                ->where('store_schedule', $insert['store_schedule'])
+                ->where('day', $insert['day'])
+                ->first();
+
+            if ($exists) {
+                DB::table('employee_shift')
+                    ->where('employeeID', $insert['employeeID'])
+                    ->where('storeID', $insert['storeID'])
+                    ->where('store_schedule', $insert['store_schedule'])
+                    ->where('day', $insert['day'])
+                    ->update($insert);
+            } else {
+                DB::table('employee_shift')
+                    ->insert($insert);
+            }
+        }
+
+        return [
+            'status' => 'success',
+            'message' => 'Schedule has been added successfully',
+            'results' => $groupInsert,
+        ];
     }
 
 

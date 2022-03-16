@@ -36,9 +36,9 @@ class schedule extends Controller
     public function add(Request $request) {
 
         $query = [
-            'time' => time(),
-            'unique_id' => uniqid(),
-            'payload' => $request->all()
+            'payload' => $request->all(),
+            'access_token' => $request->header('accessToken'),
+            'method' => 'POST'
         ];
 
         return ScheduleService::add($query);
