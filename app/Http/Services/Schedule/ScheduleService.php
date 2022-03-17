@@ -64,7 +64,7 @@ class ScheduleService
 
         $LOG->log($payload);
 
-        $scheduleID = 1;
+        $scheduleID = $payload['payload']['scheduleID'];
         $employeeID = $payload['payload']['employeeID'];
         $schedule = $payload['payload']['schedule'];
 
@@ -142,6 +142,8 @@ class ScheduleService
         // if so return a success message. to the client side.
 
 
+        $insertChecker = [];
+
         // loop through the group insert and insert into the database.
         foreach ($groupInsert as $insert) {
 
@@ -153,23 +155,39 @@ class ScheduleService
                 ->where('day', $insert['day'])
                 ->first();
 
-            if ($exists) {
-                DB::table('employee_shift')
+            if ($exists) { // modify the resource
+             $query =   DB::table('employee_shift')
                     ->where('employeeID', $insert['employeeID'])
                     ->where('storeID', $insert['storeID'])
                     ->where('store_schedule', $insert['store_schedule'])
                     ->where('day', $insert['day'])
                     ->update($insert);
-            } else {
-                DB::table('employee_shift')
+                if ($query) {
+                    $insertChecker[] = true;
+                }
+
+            } else { // create a brandnew resource
+              $query =  DB::table('employee_shift')
                     ->insert($insert);
+                if ($query) {
+                    $insertChecker[] = true;
+                }
             }
         }
 
-       return response()->json([
-           'status' => 201,
-           'message' => 'Schedule successfully added.'
-       ]);
+        // check the array if any entries of false exist
+        // and return the correct message to the client side.
+        if (in_array(false, $insertChecker)) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'An error occurred while adding the schedule'
+            ]);
+        } else {
+            return response()->json([
+                'status' => 200,
+                'message' => 'Schedule added successfully'
+            ]);
+        }
     }
 
 
@@ -316,8 +334,12 @@ class ScheduleService
                 $schedule = DB::table('store_schedule')->where('storeID', $member->storeID)->where('year', $request['payload']['year'])->where('week', $request['payload']['week'])->first();
 
                 if ($schedule) {
+
+                    $getScheduleID = DB::table('store_schedule')->where('storeID', $member->storeID)->where('year', $request['payload']['year'])->where('week', $request['payload']['week'])->first();
+
                     return response()->json([
-                        'status' => 'error',
+                        'status' => 200,
+                        'scheduleID' => $getScheduleID->id,
                         'message' => 'Schedule already exists for this year and week'
                     ]);
                 } else {
@@ -331,15 +353,15 @@ class ScheduleService
                     // if the schedule entry was created successfully
                     if ($schedule) {
 
-                        // retunr the schedule id for the newly created schedule entry
+                        // return the schedule id for the newly created schedule entry
 
                         $getScheduleID = DB::table('store_schedule')->where('storeID', $member->storeID)->where('year', $request['payload']['year'])->where('week', $request['payload']['week'])->first();
 
 
                         // return this response to the client for us to create the schedule entries
-                        // for employees belonging to this store. 
+                        // for employees belonging to this store.
                         return response()->json([
-                            'status' => 'success',
+                            'status' => 200,
                             'scheduleID' => $getScheduleID->id,
                             'message' => 'Schedule successfully created'
                         ]);

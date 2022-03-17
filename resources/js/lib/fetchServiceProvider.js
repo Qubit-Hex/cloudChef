@@ -38,15 +38,14 @@ export default class FetchServiceProvider {
     }
 
     /**
-     * @method: covertToJWT
+     * @method: generateJWT
      *
-     *  @purpose: to convert a cookie to a jwt token
+     *  @purpose: generate a  jwt token based on the cookie recived from the server
      */
     convertToJWT(cookie) {
-        // change this later inorder to convert our cookie into a jwt token
-        // the server will always return a token, but once server decodes it it will
-        // detrmine if it is valid or not... if it is valid it will return the user
-        // if it is not valid it will return a 401 error
+        //
+
+
         return {
             'accessToken': this.getCookie('accessToken'),
         }

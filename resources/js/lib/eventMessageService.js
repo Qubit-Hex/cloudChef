@@ -55,6 +55,7 @@ export class EventMessageService  {
      *  @purpose: to send a message to the server
      *
      */
+    
     send(message) {
         // send the message to the server
         return fetch(`${this.baseUrl}/event-stream`, {
@@ -66,14 +67,13 @@ export class EventMessageService  {
         });
     }
 
-
     /**
      *  @method: close
      *
      * @purpose: to close the connection to the server
      *
      */
-    
+
     close() {
         // close the connection to the server
         this.eventSource.close();

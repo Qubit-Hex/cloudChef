@@ -28,6 +28,7 @@ import { SchedulePickup } from "../components/dashboard/schedule/schedule.pickup
 import { ScheduleGridMenu } from "../components/dashboard/schedule/core/schedule.gridMenu";
 import { DisplaySchedule } from "../components/dashboard/schedule/core/schedule.viewSchedule";
 import FetchServiceProvider from "../lib/fetchServiceProvider";
+import { ScheduleEdit } from "../components/dashboard/schedule/schedule.edit";
 
 export class SchedulePage extends Component {
     constructor(props) {
@@ -132,6 +133,9 @@ export class SchedulePage extends Component {
                         </Route>
                         <Route path="/dashboard/schedule/view">
                             <DisplaySchedule />
+                        </Route>
+                        <Route path="/dashboard/schedule/edit/">
+                            <ScheduleEdit />
                         </Route>
                         <Route path="/dashboard/schedule/drop/">
                             <ScheduleDrop />
