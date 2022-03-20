@@ -10,6 +10,7 @@
 
 
 
+import { resolve } from "path-browserify";
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import FetchServiceProvider from "../../../../lib/fetchServiceProvider";
@@ -36,6 +37,33 @@ import FetchServiceProvider from "../../../../lib/fetchServiceProvider";
     return response;
 }
 
+/**
+ *
+ *  @function: getStoreSchedule
+ *
+ *  @purpose: This function is responsible for getting the schedules of a store based on the store schedule ID
+ *
+ *
+ */
+    const getStoreSchedule =  async (scheduleId) => {
+
+        // first lets check that our schedule id and employee id are not empty
+
+        if (scheduleId === '' || scheduleId === null || scheduleId === undefined) {
+            return false;
+        }
+
+        const api = new FetchServiceProvider();
+        const route = '/api/store/schedule/show';
+
+        const headers = {
+            "Content-Type": "application/json",
+            accessToken: api.getCookie("accessToken"),
+            scheduleID: scheduleId
+        };
+
+        return api.get(route, headers);
+    }
 
 
 
@@ -46,110 +74,251 @@ import FetchServiceProvider from "../../../../lib/fetchServiceProvider";
  *
  */
 
- const generateTableRows = (scheduleID, employeeID) => {
+ const GenerateTableRows = (props) => {
 
+    // map the employees data via employee id
+    const mapSchedule = (schedule) => {
+        let map = {};
+        for (let i = 0; i < schedule.length; i++) {
+            if (map[schedule[i].employeeID] === undefined) {
+                map[schedule[i].employeeID] = [];
+                // push or value
+                map[schedule[i].employeeID].push(schedule[i]);
+            } else {
+                map[schedule[i].employeeID].push(schedule[i]);
+            }
 
-    const request = (scheduleID, employeeID) => {
-        const api = new FetchServiceProvider();
-        const route = '/api/store/schedule/';
-        const body = {
-            scheduleID: scheduleID,
-            employeeID: employeeID
-        };
-
-        const headers = {
-            "Content-Type": "application/json",
-            accessToken: api.getCookie("accessToken"),
-        };
-
-        return api.post(route, body, headers);
+        }
+        return JSON.stringify(map);
     }
 
 
+    const generateRows = (schedule, employeeID) => {
 
-    const employeeRows = [];
+
+        const formatInt = (int) => {
+            // format a date hh::ss
+
+            if (int < 10) {
+                return `0${int}:00`;
+            } else {
+                return `${int}:00`;
+            }
+        }
 
 
-    // we will use this loop inorder to enumerate the employees
+        // FORM OUT OBJECT
+        let map = JSON.parse(schedule);
 
-    for (let i = 0; i < 7; i++) {
-        employeeRows.push(
+        const formatTime = (time) => {
+            // take a number and covert it to either am or pm
+            // the number input is a int 0- 24
 
-        <td key={i}>
-            <div className='container'>
+            if (time < 12) {
+                if (time > 9) {
+                    return "0" + time + ":00" + "AM";
+                } else {
+                    return time + ":00" + "AM";
+                }
+            }
+            // our conversion.
+            let tn = time - 12;
 
-            <div className='row'>
-                {/** employee start time */}
-                <div className='row'>
-                    <div className='form-group'>
-                        <small className='text-muted'>
-                            <b>
-                                Start Time
-                            </b>
-                        </small>
-                        {/** 12 hour format time  */}
-                        <input type='time' className='form-control mt-1' />
-                    </div>
-                </div>
-                {/** employee end time */}
-                <div className='row'>
-                    <div className='form-group'>
-                        <small className='text-muted'>
-                            <b>
-                                End Time
-                            </b>
-                        </small>
-                        <input type='time' className='form-control mt-1' />
-                    </div>
-                </div>
+            if (tn < 12) {
+                return "0" + tn + ":00" + "PM";
+            } else {
+                return tn + ":00" + "PM"
+            }
+        }
 
-                {/** employee off */}
-                <div className='row'>
-                    <div className='form-group'>
-                        <small className='text-muted'>
-                            <b>
-                                Off
-                            </b>
-                        </small>
-                        <input type='checkbox' className='m-2' onClick={
-                            (e) => {
-                                // get the parent parent container
-                                // this is hacky but it works might change it to something else later..
-                                const parent = e.target.parentNode.parentNode.parentNode;
+        //  generate time format
+        const timeFormat = (time) => {
+            if (time > 12) {
+                return time + ":00:00";
+            }
 
-                                const checkbox = e.target;
+            return "0" + time + ":00:00";
+        }
 
-                                // check if the check box is checks
-                                if (checkbox.checked) {
-                                    // if it is checked then add the class
-                                    let inputsDate = parent.querySelectorAll('input[type="time"]');
-                                        // disable the inputs
-                                        inputsDate.forEach(input => {
-                                            input.disabled = true;
+        const isChecked = (state) => {
+            if (state === 1) {
+                return 'true';
+            }
+                return 'false';
+        }
+
+
+
+        let employeeRows = [];
+
+        for (let i = 0; i < 7; i++) {
+            // we need to perform some validation on the data returned from the server
+        
+            try {
+
+
+
+                if (map[employeeID][i] !== undefined) {
+                    employeeRows.push(
+
+                        <td key={i}>
+                            <div className='container'>
+
+                            <div className='row'>
+                                {/** employee start time */}
+                                <div className='row'>
+
+                                    <div className='form-group'>
+                                        <small className='text-muted'>
+                                            <b>
+                                                Start Time {  formatTime(map[employeeID][i].start_time) }
+                                            </b>
+                                        </small>
+                                        {/** 12 hour format time  */}
+                                        <input type='time' className='form-control mt-1' defaultValue={timeFormat(map[employeeID][i].start_time)}  />
+                                    </div>
+                                </div>
+                                {/** employee end time */}
+                                <div className='row'>
+                                    <div className='form-group'>
+                                        <small className='text-muted'>
+                                            <b>
+                                                End Time {  formatTime(map[employeeID][i].end_time) }
+                                            </b>
+                                        </small>
+                                        <input type='time' className='form-control mt-1' defaultValue={timeFormat(map[employeeID][i].end_time)} />
+                                    </div>
+                                </div>
+
+                                {/** employee off */}
+                                <div className='row'>
+                                    <div className='form-group'>
+                                        <small className='text-muted'>
+                                            <b>
+                                                Off { map[employeeID][i].is_off_day === 1 ? "OFF" : "" }
+                                            </b>
+                                        </small>
+                                        <input type='checkbox' className='m-2'  onClick={
+                                            (e) => {
+                                                // get the parent parent container
+                                                // this is hacky but it works might change it to something else later..
+                                                const parent = e.target.parentNode.parentNode.parentNode;
+
+                                                const checkbox = e.target;
+
+                                                // check if the check box is checks
+                                                if (checkbox.checked) {
+                                                    // if it is checked then add the class
+                                                    let inputsDate = parent.querySelectorAll('input[type="time"]');
+                                                        // disable the inputs
+                                                        inputsDate.forEach(input => {
+                                                            input.disabled = true;
+                                                        }
+                                                    );
+                                                } else {
+                                                    // if it is not checked then remove the class
+                                                    let inputsDate = parent.querySelectorAll('input[type="time"]');
+                                                        // enable the inputs
+                                                        inputsDate.forEach(input => {
+                                                            input.disabled = false;
+                                                        }
+                                                    );
+                                                }
+                                            }
+                                        }  />
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </td>);
+                }
+
+            } catch (e) {
+
+                // push the default form.
+                employeeRows.push(
+
+                    <td key={i}>
+                        <div className='container'>
+
+                        <div className='row'>
+                            {/** employee start time */}
+                            <div className='row'>
+                                <div className='form-group'>
+                                    <small className='text-muted'>
+                                        <b>
+                                            Start Time
+                                        </b>
+                                    </small>
+                                    {/** 12 hour format time  */}
+                                    <input type='time' className='form-control mt-1'  />
+                                </div>
+                            </div>
+                            {/** employee end time */}
+                            <div className='row'>
+                                <div className='form-group'>
+                                    <small className='text-muted'>
+                                        <b>
+                                            End Time
+                                        </b>
+                                    </small>
+                                    <input type='time' className='form-control mt-1'  />
+                                </div>
+                            </div>
+
+                            {/** employee off */}
+                            <div className='row'>
+                                <div className='form-group'>
+                                    <small className='text-muted'>
+                                        <b>
+                                            Off
+                                        </b>
+                                    </small>
+                                    <input type='checkbox' className='m-2' onClick={
+                                        (e) => {
+                                            // get the parent parent container
+                                            // this is hacky but it works might change it to something else later..
+                                            const parent = e.target.parentNode.parentNode.parentNode;
+
+                                            const checkbox = e.target;
+
+                                            // check if the check box is checks
+                                            if (checkbox.checked) {
+                                                // if it is checked then add the class
+                                                let inputsDate = parent.querySelectorAll('input[type="time"]');
+                                                    // disable the inputs
+                                                    inputsDate.forEach(input => {
+                                                        input.disabled = true;
+                                                    }
+                                                );
+                                            } else {
+                                                // if it is not checked then remove the class
+                                                let inputsDate = parent.querySelectorAll('input[type="time"]');
+                                                    // enable the inputs
+                                                    inputsDate.forEach(input => {
+                                                        input.disabled = false;
+                                                    }
+                                                );
+                                            }
                                         }
-                                    );
-                                } else {
-                                    // if it is not checked then remove the class
-                                    let inputsDate = parent.querySelectorAll('input[type="time"]');
-                                        // enable the inputs
-                                        inputsDate.forEach(input => {
-                                            input.disabled = false;
-                                        }
-                                    );
-                                }
-                            }
+                                    } />
+                                </div>
+                            </div>
+                        </div>
 
-                        } />
                     </div>
-                </div>
-            </div>
+                </td>);
 
-        </div>
-    </td>
-       );
+
+            }
+        }
+
+        return employeeRows;
     }
 
-    return employeeRows;
+    // RETURN THE TABLE ROWS
+    return generateRows(mapSchedule(props.schedule), props.employeeID);
 }
 
 
@@ -225,19 +394,40 @@ const PostSchedule = async (employeeID, ScheduleMap, scheduleID) => {
  *     scheduleID: <INT>,
  *     TITLE: <STRING>
  *     TYPE: "EDIT" || "ADD" (default: "ADD") optional
- * }
+ *
  */
 
 export const ScheduleEntries = (props) => {
 
 
     const [employees, setEmployees] = React.useState([]);
+    const [schedule, setSchedule] = React.useState([]);
 
+    /*
+        @blueprint :  POSSIBLE SOLUTION.
+
+        1.  CHANGE THE REQUEST LOGIC SO WE ONLY NEED ONE REQUEST TO GET THE ENTIRE SCHEDULE.
+            BECAUSE IF THE STORE HAS 100 EMPLOYEES WE ARE PREFORMING 100 REQUESTS TO GET THE SCHEDULE
+            THIS IS NOT A GOOD PRACTICE.
+
+        2. MAP THE DATA TO A HASH MAP LIKE STRUCTURE INORDER FOR US TO EASILY SORT THE SCHEDULE BY EMPLOYEE ID
+
+        3. IF THE SCHEDULE DAY HAS DATA THEN WE WILL PRE FILL THE FIELDS WETHER THAT DAY IS OFF OR NOT
+            IF IT DOES NOT HAVE DATA THEN WE WILL NOTHING SO THE USER IS GOING TO BE ABLE TO ADD THE SCHEDULE
+
+    */
     React.useEffect(() => {
-        getEmployees().then((response) => {
-            setEmployees(response.data);
-        });
-    }, []);
+
+           return  getEmployees().then((response) => {
+                setEmployees(response.data);
+                setTimeout( () => null, 1000);
+            }).then(getStoreSchedule(props.scheduleID).then((response) => {
+                setSchedule(response.data);
+            }));
+
+        }, []);
+
+
 
 
     return (
@@ -325,12 +515,8 @@ export const ScheduleEntries = (props) => {
                                         </p>
                                     </td>
                                     {
-                                        // we need to crea  te a new function that will fetch the schedule for each employee...
-
-
-
-
-                                        generateTableRows(props.scheduleID, employee.id)
+                                        /** map the schedule and display them in the table */
+                                        <GenerateTableRows schedule={schedule} employeeID={employee.id} />
                                     }
                                     <td>
                                         <div className='form-group d-flex'>
@@ -400,6 +586,24 @@ export const ScheduleEntries = (props) => {
                                                         const container = parent[8].appendChild(div);
 
 
+                                                        const activateAnimation = (container) => {
+                                                            container.classList.add('slideInFade');
+
+                                                            // wait 5 seconds first
+                                                            setTimeout( () => {
+                                                                container.classList.remove('slideInFade');
+                                                                container.classList.add('slideOutFade');
+
+                                                                setTimeout( () => {
+                                                                    ReactDOM.unmountComponentAtNode(container);
+                                                                }, 2000)
+                                                            }, 3500);
+
+
+
+                                                        }
+
+
                                                         if (response.status === 200) {
 
 
@@ -414,6 +618,10 @@ export const ScheduleEntries = (props) => {
                                                                     </div>
                                                                 </div>
                                                                 , container);
+
+                                                                activateAnimation(container);
+
+
                                                         } else {
                                                             ReactDOM.render(
                                                                 <div>
@@ -423,7 +631,11 @@ export const ScheduleEntries = (props) => {
                                                                             Error updating schedule
                                                                         </span>
                                                                     </div>
-                                                                </div>,  container);
+                                                                </div>,  container)
+
+                                                                activateAnimation(container);
+
+
                                                         }
                                                     })
                                                 }

@@ -47,6 +47,44 @@ class ScheduleService
         }
     }
 
+
+    /**
+     *
+     *  @method: isAdmin
+     *
+     *  @purpose: inorder to check if the user is an admin
+     *
+     *
+     *  @parms: $accessToken
+     */
+
+    static function isAdmin($accessToken) {
+        // lets validate the access token and return the users store
+
+        if (empty($accessToken)) {
+            return false;
+        }
+
+        // our access token is valid so the user is an admin
+        $user = DB::table('users')
+            ->where('remember_token', $accessToken)
+            ->first();
+
+        if ($user) {
+            $storeMembers = DB::table('store_members')
+                ->where('userID', $user->userID)
+                ->first();
+
+            if ($storeMembers->store_role == 'admin') {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        // something else went wrong ? ......
+        return false;
+    }
+
     /**
      *
      *  @method: add
@@ -58,8 +96,7 @@ class ScheduleService
 
     static function add($payload) {
 
-        // todo implement the add method
-        // for adding scheudle data.
+
         $LOG = new _LOGGER();
 
         $LOG->log($payload);
@@ -70,10 +107,30 @@ class ScheduleService
 
         $storeID = self::getUsersStore($payload['access_token']);
 
+        // WE NEED TO VALIDATE EACH EMPLOYEE ID AND MAKE SURE THAT THAT EMPLOYEE IS A PART OF THE STORE
+        // INORDER TO PREVENT UNAUTHORIZATION ATTACKS. TO THE SCHEDULES IN OUR DATABASE.
 
-        // perform the insert into the database for the current user.
+        $employee = DB::table('employee')
+            ->where('id', $employeeID)
+            ->where('storeID', $storeID)
+            ->first();
 
+        if (!$employee) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Employee not found in store'
+            ], 401);
+        }
 
+        if (!Self::isAdmin($payload['access_token'])) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'You are not authorized to perform this action'
+            ], 401);
+
+        }
+
+        //
         $groupInsert = [];
 
 
@@ -393,51 +450,57 @@ class ScheduleService
         ], 500);
      }
 
+     /**
+      *  @method: showEmployeeSchedule
+      *
+      *  @purpose: to show the schedule of an employee based on schedule id and employee id
+      */
 
-    /**
-     *
-     *
-     *  @method: postSchedule
-     *
-     *
-     *  @purpose: to create a new schedule for a given user
-     *
-     */
+      static function showEmployeeSchedule($request)
+      {
+            // @STUB: this method will be responsible for showing the schedule of an employee
+            // based on the schedule id
 
-    static function createSchedule($request)
-    {
+            $access_token = $request['token'];
+            $schedule_id = $request['scheduleId'];
 
-        // validate the request
+            // check if the user is a store member
+            $user = DB::table('users')->where('remember_token', $access_token)->first();
 
-    }
+            if ($user) {
+                $member = DB::table('store_members')->where('userID', $user->userID)->first();
+                // check if the user is a member of the store
+                if ($member) {
+                    $schedule = DB::table('store_schedule')->where('id', $schedule_id)->
+                                    where('storeID', $member->storeID)->first();
+                    if ($schedule) {
+                        // now lets get the entire store schedule
+                        $shifts = DB::table('employee_shift')->where('store_schedule', $schedule->id)->get();
+                        // lets return the data to the user
+                        return response()->json([
+                            'status' => 200,
+                            'data' => $shifts
+                        ]);
+                    } else {
+                        return response()->json([
+                            'status' => 'error',
+                            'message' => 'Schedule does not exist'
+                        ]);
+                    }
+                } else {
+                    return response()->json([
+                        'status' => 'error',
+                        'message' => 'You are not a member of any store'
+                    ], 401);
+                }
 
-
-    /**
-     *
-     *  @method: deleteSchedule
-     *
-     *   @purpose: to delete a schedule for a given user
-     *
-     */
-
-    static function deleteSchedule($request)
-    {
-        // validate the request`
-
-    }
-
-
-    /**
-     *  @method: updateSchedule
-     *
-     * @purpose: to update a schedule for a given user
-     *
-     */
-
-    static function updateSchedule($request)
-    {
-        // validate the request
-    }
+            } else {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Invalid token'
+                ], 401);
+            }
+      }
 
 
 

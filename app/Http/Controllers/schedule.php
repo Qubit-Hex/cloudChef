@@ -109,6 +109,25 @@ class schedule extends Controller
             return ScheduleService::findSchedule($query);
       }
 
+      /**
+       *
+       *  @method: showEmployeeSchedule
+       *
+       *
+       *  @purpose: inorder to get the schedule of a specific employee & a specific schedule
+       */
+
+       public function showEmployeeSchedule (Request $request)
+       {
+           $query = [
+                'token' => $request->header('accessToken'),
+                'time' => $request->header('time'),
+                'scheduleId' => $request->header('scheduleId')
+              ];
+
+            return ScheduleService::showEmployeeSchedule($query);
+       }
+
 
       /**
        *
