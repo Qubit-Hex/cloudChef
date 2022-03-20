@@ -223,8 +223,9 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
             Route::get('/find', [schedule::class, 'find'])->name('/schedule/find');
             Route::post('/create', [schedule::class, 'create'])->name('/schedule/create');
             Route::get('/show', [schedule::class, 'showEmployeeSchedule'])->name('/schedule/show');
+            Route::delete('/delete', [schedule::class, 'delete'])->name('/schedule/delete');
 
-
+            // sub routes for other scheduling services we need to interact with. 
             Route::get('/dropshift', [schedule::class, 'dropshift'])->name('/schedule/dropshift');
             Route::get('/dropshift/get', [schedule::class, 'getDroppedShifts'])->name('/schedule/dropshift/get');
             Route::get('/pickup', [schedule::class, 'postShiftPickupRequest'])->name('/schedule/pickup/');

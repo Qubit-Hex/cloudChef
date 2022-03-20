@@ -201,4 +201,25 @@ class schedule extends Controller
             // all come back to this later once i figure a structure
             // out for the schedule
         }
+
+
+        /**
+         *
+         *  @method: delete
+         *
+         *  @purpose: inorder to delete a schedule from the system
+         */
+
+         public function delete(Request $request)
+        {
+
+            $query = [
+                'token' => $request->header('accessToken'),
+                'command' => $request->header('command'),
+                'scheduleID' => $request->header('scheduleID'),
+            ];
+
+            return ScheduleService::deleteSchedule($query);
+        }
+
 }

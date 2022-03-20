@@ -72,6 +72,84 @@
         return response;
     }
 
+
+    /**
+     *
+     * @component : DeleteRequest
+     *
+     *
+     *  @purpose : inorder to send a request inorder to delete a schedule.
+     *
+     */
+
+    const DeleteRequest = async (scheduleID) => {
+
+        let request = new FetchServiceProvider();
+
+        let headers = {
+            "Content-Type": "application/json",
+            accessToken: request.getCookie("accessToken"),
+            'scheduleID': scheduleID
+        };
+
+        const apiRoute = "/api/store/schedule/delete";
+
+        const response = await request.delete(apiRoute, headers);
+
+        return response;
+    }
+
+
+
+
+    /**
+     *
+     *  @component : SuccessModal
+     *
+     *
+     *  @purpose : This component is responsible for rendering the success modal.
+     *
+     */
+
+    const SuccessModal = (props) => {
+
+        // render the success modal for the user
+        return (
+            <TemplateModal title="Success" body={
+                <div className='text-success'>
+                    <i className="fas fa-check-circle fa-3x"></i>
+                    <span>The schedule has been deleted successfully.</span>
+                </div>
+            } />
+        );
+    }
+
+
+
+    /**
+     *
+     *  @component : ErrorModal
+     *
+     *
+     *  @purpose : This component is responsible for rendering the error modal.
+     *
+     */
+
+    const ErrorModal = (props) => {
+
+        return (
+            <TemplateModal title="Error" body={
+                <div className='text-danger'>
+                    {/** font awesome error icon */}
+                    <i className="fas fa-exclamation-triangle fa-3x"></i>
+                    <span>The schedule could not be deleted at this time.</span>
+                </div>
+            } />
+        );
+    }
+
+
+
     /**
      *
      *  @component: ScheduleDelete
@@ -210,23 +288,38 @@ export const ScheduleDelete  = (props) => {
                                     ReactDOM.render(<TemplateModal title={" Please Confirm "} body={
                                         <div>
                                             <div className="row">
-                                                <div className="col">
-                                                    <h3 className="text-center">
+                                                    <h3 className="text-center" style={{
+                                                        fontWeight: 600,
+                                                    }}>
                                                         {"Are you sure you want to delete this schedule?"}
                                                     </h3>
-                                                </div>
+
+                                                    <img src="/img/errors/cancel.svg" alt="schedule icon"
+                                                    width="300px" height="300px" className="mx-auto"/>
                                             </div>
 
                                             <div className="row">
-                                                <div className='form-group d-flex'>
-                                                <button className="btn-danger m-2 btn-sm" onClick={(e) => {
+                                                <div className='form-group d-flex mx-auto'>
+                                                <button className="btn-danger m-2 w-50" onClick={(e) => {
                                                         // now lets render the schedule Deelte modal and pass the schedule ref to it.
                                                         //
+                                                        let container = document.getElementById('modal-container');
+
+                                                        ReactDOM.unmountComponentAtNode(container);
                                                     }}> No </button>
 
-                                                    <button className="btn-message m-2 btn-sm" onClick={(e) => {
-                                                        // now lets render the schedule Deelte modal and pass the schedule ref to it.
-                                                        //
+                                                    <button className="btn-message m-2 w-50" onClick={(e) => {
+                                                        // now lets render the schedule Deelte modal and pass the schedule ref to it.'
+
+                                                        return DeleteRequest(scheduleRef).then((response) => {
+                                                                if (response.status === 200) {
+                                                                    // success message
+                                                                    ReactDOM.render(<SuccessModal />, container);
+                                                                } else {
+                                                                    // TRIGGER AN ERRROR MESSAGE.
+                                                                    ReactDOM.render(<ErrorModal />, container);
+                                                                }
+                                                        });
                                                     }}> Yes </button>
                                                 </div>
 

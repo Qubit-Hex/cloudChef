@@ -776,4 +776,77 @@ class ScheduleService
             ], 401);
         }
     }
+
+
+    /**
+     *
+     *  @method: deleteSchedule
+     *
+     *  @purpose : inorder to delete a schedule inside of our system.
+     *
+     */
+
+     static function deleteSchedule ($query)
+     {
+        // validate the user
+        $user = DB::table('users')->where('remember_token', $query['token'])->first();
+
+        if ($user) {
+            $member = DB::table('store_members')->where('userID', $user->userID)->first();
+            // check the members permission
+            if ($member->store_role === 'admin') {
+                // get the schedule that we want to delete
+
+                // get the store that the schedule belongs to
+                $storeSchedule = DB::table('store_schedule')->where('id', $query['scheduleID'])->first();
+
+
+                // check if the schedule belongs to the store
+                if ($member->storeID == $storeSchedule->storeID) {
+                    // delete the schedule
+                    // delete the employee shift fragments too
+                    $shifts = DB::table('employee_shift')->where('store_schedule', $query['scheduleID'])->get();
+
+                    if ($shifts) {
+                        // delete all the shifts and the schedule entry in the store_schedule table
+                        DB::table('store_schedule')->where('id', $query['scheduleID'])->delete();
+                        foreach($shifts as $shift) {
+                            DB::table('employee_shift')->where('id', $shift->id)->delete();
+                        }
+                        // was the delete successful?
+                        return response()->json([
+                            'status' => 200,
+                            'message' => 'schedule deleted'
+                        ]);
+                    } else {
+                        return response()->json([
+                            'status' => 'error',
+                            'message' => 'no shifts found'
+                        ]);
+                    }
+                } else {
+                    return response()->json([
+                        'status' => 'error',
+                        'message' => 'you are not a member of this store'
+                    ]);
+                }
+
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'you are not allowed to delete a schedule'
+                ]);
+            } else {
+                // deny any delete requests
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'you are not an admin of this store'
+                ]);
+            }
+        } else {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'invalid token'
+            ], 401);
+        }
+     }
 }
