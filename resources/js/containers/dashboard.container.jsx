@@ -27,12 +27,7 @@ import { DashboardNav } from "../components/dashboard/dashboardNav";
 // store all the pages for our api calls here
 import { ContactsPage } from "./dashboard.contacts";
 import { SchedulePage } from "./dashboard.schedule";
-import { MessagePage } from "./dashboard.message";
 import { DashboardRecipies } from "./dashboard.recipies";
-import { DashboardAnalytics } from "./dashboard.analytics";
-import { PunchCard } from "../components/punchCard/punchCard";
-import { DashboardAdvertising } from "./dashboard.advertising";
-import { OrderSystemProvider } from "../components/dashboard/orders/orderSystemProvider";
 import { EmployeesPage } from "./dashboard.employees";
 import { DashboardMenu } from "./dashboard.menu";
 
@@ -190,11 +185,6 @@ export default class DashboardContainer extends Component {
             <Route path='/dashboard/schedule/' component={SchedulePage} />
             <Route path='/dashboard/employees/' component={EmployeesPage} />
             <Route path='/dashboard/menu' component={DashboardMenu} />
-            <Route path='/dashboard/messages/' component={MessagePage} />
-            <Route path='/dashboard/analytics/' component={DashboardAnalytics} />
-            <Route path='/dashboard/advertising/' component={DashboardAdvertising} />
-            <Route path='/dashboard/punchcard/' component={PunchCard} />
-            <Route path='/dashboard/orders/'   component={OrderSystemProvider} />
           </Switch>
         </Router>
 

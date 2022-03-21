@@ -26,12 +26,13 @@ import { ScheduleDrop } from "../components/dashboard/schedule/schedule.dropShif
 import { SchedulePickup } from "../components/dashboard/schedule/schedule.pickupshift";
 
 
-// schedule components 
+// schedule components
 import { ScheduleGridMenu } from "../components/dashboard/schedule/core/schedule.gridMenu";
 import { DisplaySchedule } from "../components/dashboard/schedule/core/schedule.viewSchedule";
 import FetchServiceProvider from "../lib/fetchServiceProvider";
 import { ScheduleEdit } from "../components/dashboard/schedule/schedule.edit";
 import { ScheduleDelete } from "../components/dashboard/schedule/schedule.delete";
+import { ScheduleLabour } from "../components/dashboard/schedule/schedule.labour";
 
 export class SchedulePage extends Component {
     constructor(props) {
@@ -149,10 +150,12 @@ export class SchedulePage extends Component {
                         <Route path='/dashboard/schedule/pickup/'>
                             <SchedulePickup />
                         </Route>
+                        <Route path='/dashboard/schedule/labour/'>
+                            <ScheduleLabour />
+                        </Route>
                         <Route exact path="/dashboard/schedule/">
                             <ScheduleGridMenu />
                         </Route>
-
                     </Switch>
                 </Router>
 

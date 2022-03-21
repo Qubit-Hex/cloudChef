@@ -161,13 +161,6 @@ export class DashboardNav extends Component {
                         </a>
 
 
-                        {/** clock in button */}
-                        <a href="/dashboard/punchcard/" className="nav-link">
-                            <i className="fas fa-clock"></i>
-                            <span className="nav-link-text">Clock In</span>
-                        </a>
-
-
                         {/** menu */}
                         <a href="/dashboard/menu/" className="nav-link">
                             <i className="fas fa-utensils"></i>
@@ -186,27 +179,6 @@ export class DashboardNav extends Component {
                             {/**  food management pat for cloud recipes etcc... */}
                             <i className="fas fa-hamburger"></i>
                             <span className="nav-link-text">Recipes</span>
-                        </a>
-
-                        <a href='/dashboard/orders/' className="nav-link">
-                            <i className="fas fa-shopping-cart"></i>
-                            <span className="nav-link-text">Orders</span>
-                        </a>
-
-                        <a href='/dashboard/advertising/' className="nav-link">
-                            <i className="fas fa-bullhorn"></i>
-                            <span className="nav-link-text">Advertising</span>
-                        </a>
-
-                        <a href='/dashboard/analytics/' className="nav-link">
-                            <i className="fas fa-chart-line"></i>
-                            <span className="nav-link-text">Analytics</span>
-                        </a>
-
-                        <a href="/dashboard/messages/" className="nav-link">
-                            {/** font awesome chat icon */}
-                            <i class="fas fa-comments"></i>
-                            <span className="nav-link-text">Messages</span>
                         </a>
 
                         <a href="/dashboard/contacts/" className="nav-link">

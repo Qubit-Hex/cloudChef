@@ -26,7 +26,6 @@
      *                this is done inorder to update the schedule when the user selects a different
      *                schedule from the dropdown.
      *
-     *
      */
 
      function updateScheduleState(props) {
