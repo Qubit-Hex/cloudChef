@@ -60,64 +60,6 @@ use App\Http\Controllers\menu;
     Route::post('auth/logout/', [authentication::class, 'logout'])->name('auth/logout');
 
 
-     /**
- *
- *  Group Route: messsages
- *
- *  @putpose: to route the messages route api , for sending and receiving messages
- *             only if authorized to sendthe message belonging to the store
- */
-
-
-
-Route::group(['prefix' => 'messages', 'middleware' => 'auth'], function () {
-
-    /**
-     *
-     *  @Route: /messages/get/
-     *
-     *  @purpose: to get messages from the user to the store
-     *
-     */
-    Route::get('/get', [message::class,  'get'])->name('messages/get');
-
-
-
-    /**
-     *
-     *  @Route: /messages/send/
-     *
-     *  @purpose: to send messages from the user to the store
-     *
-     */
-     Route::get('/send', [message::class, 'send'])->name('messages/send');
-
-
-
-
-     /**
-      *  @route: /messages/delete
-      *
-      *  @purpose: inorder order to delete messages from the store to the user
-      */
-
-      Route::delete('/delete', [message::class, 'delete'])->name('messages/delete');
-
-
-
-      /**
-       *
-       *  @route: /messages/update
-       *
-       *  @purpose: inorder to update the message status from the store to the user
-       */
-
-       Route::patch('/update', [message::class, 'update'])->name('messages/update');
-
-
-});
-
-
 /**
  *
  *  @route: /contacts/
@@ -185,10 +127,6 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
         */
 
             Route::get('/employee/get/{id}', [employee::class, 'get'])->name('store/employee/get/{id}');
-
-
-
-
 
 
         /**
