@@ -83,6 +83,7 @@ export default class DashboardContainer extends Component {
         return c.substring(name.length, c.length);
       }
     }
+    // might change this as a later time inorder to handle the error
     return "";
   }
 

@@ -48,6 +48,37 @@ export const ScheduleLabour = (props) => {
                 className="mx-auto img-fluid"
             />
             <div className="schedule_pill">
+                {/** chart to show the daily labour cost of our store */}
+
+                <Chart
+                    width={'100%'}
+                    height={'400px'}
+                    chartType="Bar"
+                    loader={<div>Loading Chart</div>}
+                    data={[
+                        ['Day', 'Labour Cost'],
+                        ['Mon', 200],
+                        ['Tue', 600],
+                        ['Wed', 700],
+                        ['Thu', 500],
+                        ['Fri', 0],
+                        ['Sat', 0],
+                        ['Sun', 0],
+                    ]}
+                    options={{
+                        hAxis: {
+                            title: 'Day',
+                        },
+                        vAxis: {
+                            title: 'Labour Cost',
+                        },
+                        legend: {
+                            position: 'bottom',
+                        },
+                    }}
+                    rootProps={{ 'data-testid': '1' }}
+
+                />
 
 
 
