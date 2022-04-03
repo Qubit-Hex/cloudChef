@@ -32,7 +32,8 @@ import { DisplaySchedule } from "../components/dashboard/schedule/core/schedule.
 import FetchServiceProvider from "../lib/fetchServiceProvider";
 import { ScheduleEdit } from "../components/dashboard/schedule/schedule.edit";
 import { ScheduleDelete } from "../components/dashboard/schedule/schedule.delete";
-import { ScheduleLabour } from "../components/dashboard/schedule/schedule.labour";
+import { ScheduleRequests } from "../components/dashboard/schedule/schedule.requests";
+import { ScheduleLabour } from "../components/dashboard/schedule/schedule.labour";1
 
 export class SchedulePage extends Component {
     constructor(props) {
@@ -155,6 +156,10 @@ export class SchedulePage extends Component {
                         </Route>
                         <Route exact path="/dashboard/schedule/">
                             <ScheduleGridMenu />
+                        </Route>
+
+                        <Route path='/dashboard/schedule/request/'>
+                            <ScheduleRequests />
                         </Route>
                     </Switch>
                 </Router>
