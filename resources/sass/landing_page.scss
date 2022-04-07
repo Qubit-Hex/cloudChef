@@ -579,3 +579,136 @@ footer {
 .sidebar_menu * {
     color: black;
 }
+
+ /* Message box styling for our application  */
+
+ .modal-title {
+    font-weight: bold;
+    font-size: 1.5em;
+    text-emphasis: bold;
+    text-align: center;
+}
+
+.modal {
+    display: block;
+    animation: fadeIn 2s;
+    padding: 20px;
+    background-color: #0a0a167c !important;
+    z-index: 1;
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+
+    .modal-close {
+        border: none;
+        font-size: 2em !important;
+        background: transparent;
+        padding: 0px;
+        color: rgba(255, 255, 255, 0.72) !important;
+    }
+
+    .modal-close:hover {
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+            rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+            rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+        background-color: rgb(231, 109, 109);
+        border-radius: 50%;
+        color: rgb(0, 0, 0);
+    }
+
+    btn-close:active {
+        background-color: rgb(248, 47, 47);
+        border-radius: 50%;
+        color: #fff;
+    }
+}
+
+.modal-dialog {
+    border: none;
+    position: relative;
+    top: 12.5%;
+    max-height: 300px;
+}
+
+.modal-content {
+    border: none !important;
+    border-radius: 20px;
+    width: 100% !important;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+        rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+
+.modal-header {
+    padding: 25px;
+    text-align: center !important;
+    border-radius: 20px 20px 0px 0px;
+    padding: 25px;
+    color: rgb(255, 255, 255) !important;
+    background-color: rgba(46, 97, 192, 0.7);
+    button {
+        color: #000000 !important; /* fallback for old browsers */
+    }
+}
+
+.modal-body {
+    padding: 50px;
+    border-radius: 0px 0px 20px 20px;
+}
+
+
+
+
+/** contact form */
+.background-img-popup {
+
+
+    img {
+        // add a box shadow to the image
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        // curve the bottom corners
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+
+    h1 {
+        position: absolute;
+        top: 50%;
+        left: 100px;
+        transform: translateY(-50%);
+        font-size: 2em;
+        font-weight: bold;
+        color: #fff;
+        text-align: center;
+        text-shadow: 0px 2px 8px rgba(5, 5, 5, 0.724);
+    }
+
+}
+
+.contact-form-popup {
+    h1 {
+        font-size: 28px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    label {
+        margin: 5px;
+        font-size: 1em;
+        color:rgb(29, 35, 70);
+    }
+
+    input {
+        margin: 5px;
+    }
+
+    button {
+        // center the button
+        margin: auto;
+        display: block;
+        margin-top: 20px;
+        padding: 10px;
+        font-size: 1.2em;
+        font-weight: bold;
+        color: #fff;
+
+    }
+}

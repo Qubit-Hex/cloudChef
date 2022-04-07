@@ -153,7 +153,7 @@ import FetchServiceProvider from "../../../../lib/fetchServiceProvider";
 
         for (let i = 0; i < 7; i++) {
             // we need to perform some validation on the data returned from the server
-        
+
             try {
 
 
@@ -164,9 +164,9 @@ import FetchServiceProvider from "../../../../lib/fetchServiceProvider";
                         <td key={i}>
                             <div className='container'>
 
-                            <div className='row'>
+                            <div className='row m-0'>
                                 {/** employee start time */}
-                                <div className='row'>
+                                <div className='row m-0'>
 
                                     <div className='form-group'>
                                         <small className='text-muted'>
@@ -175,11 +175,11 @@ import FetchServiceProvider from "../../../../lib/fetchServiceProvider";
                                             </b>
                                         </small>
                                         {/** 12 hour format time  */}
-                                        <input type='time' className='form-control mt-1' defaultValue={timeFormat(map[employeeID][i].start_time)}  />
+                                        <input type='time' className='form-control mt-1 w-100' defaultValue={timeFormat(map[employeeID][i].start_time)}  />
                                     </div>
                                 </div>
                                 {/** employee end time */}
-                                <div className='row'>
+                                <div className='row m-0'>
                                     <div className='form-group'>
                                         <small className='text-muted'>
                                             <b>
@@ -191,7 +191,7 @@ import FetchServiceProvider from "../../../../lib/fetchServiceProvider";
                                 </div>
 
                                 {/** employee off */}
-                                <div className='row'>
+                                <div className='row m-0'>
                                     <div className='form-group'>
                                         <small className='text-muted'>
                                             <b>
@@ -240,7 +240,7 @@ import FetchServiceProvider from "../../../../lib/fetchServiceProvider";
                 employeeRows.push(
 
                     <td key={i}>
-                        <div className='container'>
+                        <div className='container w-80'>
 
                         <div className='row'>
                             {/** employee start time */}
@@ -358,6 +358,9 @@ const PostSchedule = async (employeeID, ScheduleMap, scheduleID) => {
     const request = (MAP) => {
         const api = new FetchServiceProvider();
         const route = '/api/store/schedule/add';
+
+        console.log(MAP);
+
         const body = {
             employeeID: employeeID,
             schedule: MAP,
@@ -403,19 +406,7 @@ export const ScheduleEntries = (props) => {
     const [employees, setEmployees] = React.useState([]);
     const [schedule, setSchedule] = React.useState([]);
 
-    /*
-        @blueprint :  POSSIBLE SOLUTION.
 
-        1.  CHANGE THE REQUEST LOGIC SO WE ONLY NEED ONE REQUEST TO GET THE ENTIRE SCHEDULE.
-            BECAUSE IF THE STORE HAS 100 EMPLOYEES WE ARE PREFORMING 100 REQUESTS TO GET THE SCHEDULE
-            THIS IS NOT A GOOD PRACTICE.
-
-        2. MAP THE DATA TO A HASH MAP LIKE STRUCTURE INORDER FOR US TO EASILY SORT THE SCHEDULE BY EMPLOYEE ID
-
-        3. IF THE SCHEDULE DAY HAS DATA THEN WE WILL PRE FILL THE FIELDS WETHER THAT DAY IS OFF OR NOT
-            IF IT DOES NOT HAVE DATA THEN WE WILL NOTHING SO THE USER IS GOING TO BE ABLE TO ADD THE SCHEDULE
-
-    */
     React.useEffect(() => {
 
            return  getEmployees().then((response) => {
@@ -434,8 +425,8 @@ export const ScheduleEntries = (props) => {
 
     <div className='row'>
     {/** create table inorder to modify the schedule for the employees   */}
-    <div className="col">
-        <div className="col card fit-table">
+    <div className="col fit-table">
+        <div className="col">
             <h2 className="header-subtitle text-center mt-4 ">
                 { props.title }
             </h2>

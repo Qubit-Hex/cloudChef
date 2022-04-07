@@ -4,7 +4,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\authentication;
 use App\Http\Controllers\dashboard;
-use App\Http\Controllers\Message;
 use App\Http\Controllers\store_members;
 use App\Http\Controllers\store;
 use App\Http\Controllers\schedule;
@@ -169,6 +168,7 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
             Route::get('/dropshift', [schedule::class, 'dropshift'])->name('/schedule/dropshift');
             Route::get('/dropshift/get', [schedule::class, 'getDroppedShifts'])->name('/schedule/dropshift/get');
             Route::get('/pickup', [schedule::class, 'postShiftPickupRequest'])->name('/schedule/pickup/');
+            Route::get('/requests/' , [schedule::class, 'getRequests'])->name('/schedule/requests/');
 
         });
 

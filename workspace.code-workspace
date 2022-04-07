@@ -9,6 +9,7 @@
 			"app/Http/Services/Message/modules/eventMessageBus": true,
 			"resources/js/lib/scheduler/proccessScheduler.js": true
 		},
-		"workspace.isHidden": true
+		"workspace.isHidden": true,
+		"cSpell.words": []
 	}
 }

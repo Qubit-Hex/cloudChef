@@ -17,6 +17,9 @@ import FetchServiceProvider from '../../../lib/fetchServiceProvider';
 
 
 
+
+
+
 /**
  *
  *  @function: dropShiftRequest
@@ -47,11 +50,6 @@ import FetchServiceProvider from '../../../lib/fetchServiceProvider';
     return response;
 }
 
-
-// build me  a component
-
-
-
 /**
  *
  *   @function: SuccessNotification
@@ -77,11 +75,11 @@ const SuccessNotification = (props) => {
             <div class="modal">
                 <div class="modal-dialog fade-enter-active">
                     <div class="modal-content">
-                        <div class="modal-header bg-blue">
+                        <div class="modal-header">
                             <h5 class="modal-title"> <i class="fas fa-info-circle mr-4"></i> Information </h5>
                             <button
                                     type="button"
-                                    class="btn-transparent modal-close far fa-times-circle"
+                                    class="modal-close far fa-times-circle"
                                     data-bs-dismiss="modal"
                                     aria-label="Close"
                                  onClick={ (e) => {

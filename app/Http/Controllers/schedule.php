@@ -170,6 +170,25 @@ class schedule extends Controller
 
         /**
          *
+         * @method: getRequests
+         *
+         * @purpose: inorder to get the requests for the given store inorder to accept or reject them
+         */
+
+         public function getRequests(Request $request)
+         {
+             $query = [
+                'token' => $request->header('accessToken'),
+                'command' => $request->header('command'),
+                'time' => $request->header('time'),
+             ];
+
+             return ScheduleService::getRequests($query);
+         }
+
+
+        /**
+         *
          *  @method: postShiftPickupRequest
          *
          *  @purpose: inorder for a employee to send a shift pickup request to the server

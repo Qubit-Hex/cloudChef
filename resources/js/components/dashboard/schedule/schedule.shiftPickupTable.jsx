@@ -160,7 +160,7 @@ const ShiftRequestSuccess = (props) => {
             <div class="modal">
                 <div class="modal-dialog fade-enter-active">
                     <div class="modal-content">
-                        <div class="modal-header bg-blue">
+                        <div class="modal-header">
                             <h5 class="modal-title"> <i class="fas fa-info-circle mr-4"></i> Information </h5>
                             <button
                                     type="button"
@@ -279,17 +279,26 @@ const ShiftPickupContent = (props) => {
 
     const droppedShiftsList = droppedShifts.map((shift, index) => {
 
+        // purpose inorder to convert the 24 hours time to 12 hours time format.
+        const convertTime = (time) => {
+            // we be take an int as an argument and convert it to 12 hours format
+            if (time > 12) {
+                return time - 12 + ":00" + ' PM';
+            } else {
+                return time + ":00" + ' AM';
+            }
+        }
 
         {/** check and see if the shift has been approved by management */}
-        if (shift.is_approved === 1) {
+        if (shift.is_approved === 0) {
 
             return (
                 <tr key={index}>
                 <td> {shift.employee} </td>
                 <td> {shift.dropShiftDate } </td>
                 <td> { shift.role }</td>
-                <td> { shift.start_time }</td>
-                <td> { shift.end_time }</td>
+                <td> { convertTime(shift.start_time) }</td>
+                <td> { convertTime(shift.end_time) }</td>
                 <td>{shift.reason} </td>
                 <td>
                     <button className="btn btn-message"

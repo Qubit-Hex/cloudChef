@@ -231,7 +231,7 @@ const RenderSchedule = (props) => {
                 {
                     Object.keys(scheduleByEmployee).map((key, index) => {
                         // calculate the total hours for each user.
-                        if (index === 1) {
+                        if (index === 0) {
                             let totalHours = 0;
                             scheduleByEmployee[key].forEach((item) => {
                                 if (item.is_off_day === 0) {

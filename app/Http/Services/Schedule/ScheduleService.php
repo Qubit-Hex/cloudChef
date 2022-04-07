@@ -849,4 +849,44 @@ class ScheduleService
             ], 401);
         }
      }
+
+     /**
+      *  @method: getRequests
+      *
+      *  @purpose: to get all the requests for a store
+      *
+      */
+
+      static function getRequests($requestObject)
+      {
+
+        // authenticate the request and get the store id of the user
+        $user = DB::table('users')->where('remember_token', $requestObject['token'])->first();
+
+        if (!$user) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'invalid token'
+            ], 401);
+
+        }
+
+        // get the store id of the user
+        $storeID = DB::table('store_members')->where('userID', $user->userID)->first();
+
+        if (!$storeID) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'you are not a member of this store'
+            ]);
+        }
+        // show all the requests for the store.
+        $scheduleRequests = DB::table('employee_pickup_shift')->where('storeID', $storeID->storeID)->get();
+
+          return response()->json([
+              'status' => 200,
+              'message' => 'success',
+              'data' => $scheduleRequests
+          ]);
+      }
 }

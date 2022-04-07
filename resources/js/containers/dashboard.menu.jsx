@@ -284,7 +284,7 @@ export const DashboardMenu = (props) => {
                     <div className='col-md-12'>
                         <h1 className='header-title'>Menu</h1>
                         <h2 className="header-subtitle text-center">Add, Edit, and Remove Menus</h2>
-                        <img src='/img/SVG/cooking.svg' className='mx-auto w-100 mt-2 mb-' width={400} height={400} />
+                        <img src='/img/SVG/cooking.svg' className='mx-auto w-100 mt-2 mb-' width={200} height={200} />
                         <small className='text-muted text-center'> Add Menu's edit existing menus and menu items</small>
 
                     </div>

@@ -136,5 +136,4 @@ class employee extends Controller
          return response()->json($DB);
      }
 
-
 }

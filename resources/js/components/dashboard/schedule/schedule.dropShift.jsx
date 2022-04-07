@@ -92,7 +92,7 @@ export function ScheduleDrop(props)
 
                             <small className="text-muted text-center">
                             {/* --something about team work and restaurants */}
-                                Help us make a better schedule for you.
+
 
                             </small>
                     <img

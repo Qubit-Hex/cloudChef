@@ -10,7 +10,7 @@
  *
  */
 
-import react from "react";
+import React from "react";
 import ReactDOM  from "react-dom";
 
  export const TemplateModal = (props) => {

@@ -190,8 +190,6 @@ export const RecipeModal = (props) => {
             let nutritionalData = JSON.parse(response.data.recipe_nutritional_facts.recipe_nutritional_facts);
             let cookingTime = response.data.recipe_cooking_time;
 
-            console.log(response);
-
             // set all the infomation that we need inorder to the display the recipe information.
 
             // tood make sure that we are setting the data correctly
@@ -210,7 +208,6 @@ export const RecipeModal = (props) => {
 
     }, []);
 
-    { console.log(nutritionalFacts)}
 // check did the informtion load to the state of the component
 
     return (
