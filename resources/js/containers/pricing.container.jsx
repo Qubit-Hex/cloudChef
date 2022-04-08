@@ -13,7 +13,6 @@ import ReactDOM from "react-dom";
 
 import { Header } from "../components/home/header";
 import { Footer } from "../components/home/footer";
-import { TemplateModal }  from "../components/dashboard/recipe/core/template.modal";
 import FetchServiceProvider from "../lib/fetchServiceProvider";
 
 /**
@@ -102,13 +101,14 @@ return (
 
                             <div className='background-img-popup'>
                                {/** 4x4 image grid  */}
-                               <img src='/img/SVG/schedule_event.svg' className='img-fluid' />
+                               <img src='/img/SVG/teamup.svg' className='img-fluid' />
 
                             </div>
                         </div>
 
                         <div className='col-md-6 p-4 contact-form-popup'>
-                        <h1> Please Fill out form </h1>
+                        <h1> Contact US </h1>
+                        <span className='text-muted'>  Please fill out the form inorder to contact us, about our corporate plans. </span>
                             <form onSubmit={
                                 (e) => {
                                     e.preventDefault();
@@ -226,7 +226,6 @@ export default class PricingContainer extends Component {
                                     </button>
                                 </div>
                             </div>
-                                        Sign Up
                         </div>
 
                         <div class="col-sm m-2">

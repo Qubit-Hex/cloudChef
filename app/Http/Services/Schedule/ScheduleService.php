@@ -16,8 +16,7 @@ namespace App\Http\Services\Schedule;
 use Facade\FlareClient\Http\Response;
 use Illuminate\Support\Facades\DB;
 use App\Http\Services\Schedule\core\_LOGGER;
-
-
+use PhpParser\Node\Expr\Cast\Object_;
 
 class ScheduleService
 {
@@ -880,13 +879,43 @@ class ScheduleService
                 'message' => 'you are not a member of this store'
             ]);
         }
-        // show all the requests for the store.
-        $scheduleRequests = DB::table('employee_pickup_shift')->where('storeID', $storeID->storeID)->get();
+
+        // some vars
+        $pickup = DB::table('employee_pickup_shift')->where('storeID', $storeID->storeID)->get();
+        $drop = DB::table('employee_drop_shifts')->where('storeID', $storeID->storeID)->get();
+        $employee = DB::table('employee')->where('storeID', $storeID->storeID)->get();
+
+        // loop though the drop shifts and lets get the shifts datw
+        $container = [];
+
+        foreach ($drop as $shift) {
+            // first let get the employee shift id
+            $employeeShift = DB::table('employee_shift')->where('id', $shift->employee_shift_id)->first();
+            // now lets get the store schedule
+            $day = $employeeShift->day;
+            $storeSchedule = DB::table('store_schedule')->where('id', $employeeShift->store_schedule)->first();
+
+            // push day and schedule to the container
+            array_push($container, [
+                'shiftID' => $shift->employee_shift_id,
+                'day' => $day,
+                'year' => $storeSchedule->year,
+                'week' => $storeSchedule->week
+            ]);
+
+        }
+
+        $employeeRequests = [
+            'pickup' => DB::table('employee_pickup_shift')->where('storeID', $storeID->storeID)->get(),
+            'drop' => DB::table('employee_drop_shifts')->where('storeID', $storeID->storeID)->get(),
+            'employee' => DB::table('employee')->where('storeID', $storeID->storeID)->get(),
+            'schedule' => $container
+        ];
 
           return response()->json([
               'status' => 200,
               'message' => 'success',
-              'data' => $scheduleRequests
+              'data' => $employeeRequests
           ]);
       }
 }

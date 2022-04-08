@@ -48,7 +48,7 @@ import React from 'react';
             <img
               src="/img/clams.jpg"
               className="img-fluid shadow"
-              width="590px"
+              width="600px"
               height="500px"
             />
             </div>
@@ -128,8 +128,8 @@ import React from 'react';
           </div>
 
           <div className="row mt-4 p-2 bg-white header-section-space-md">
-            <div className="col-sm img-crop">
-              <img src="/img/baker-image.jpg" className="img-fluid" />
+            <div className="col-sm crop-image">
+              <img src="/img/baker-image.jpg" className="img-fluid shadow" />
             </div>
 
             <div className="col-sm header-section-space-md">

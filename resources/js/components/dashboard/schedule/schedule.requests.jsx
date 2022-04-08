@@ -21,6 +21,7 @@ import { SchedulePickup } from "./schedule.pickupshift";
  *  @function: ScheduleRequests
  *
  *  @purpose: this function is responsible for making the schedule requests for the given store
+ *
  */
 
 const storeRequests = () => {
@@ -36,32 +37,6 @@ const storeRequests = () => {
     return api.get(route, headers);
 }
 
-
-
-/**
- *
- *  @function: getEmployeeInfo
- *
- *
- *  @purpose: this function is responsible for getting the employee information
- *
- */
-
-  const getEmployeeInfo = (id) => {
-      const api = new FetchServiceProvider();
-      const route = '/api/store/employees/';
-
-
-      const headers = {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'accessToken': api.getCookie('accessToken'),
-            'employeeID': id
-      }
-
-      return api.get(route, headers);
-  }
-
 /**
  *
  *  @function: DisplayScheduleRequests
@@ -75,9 +50,6 @@ const storeRequests = () => {
 
     const req = storeRequests();
     const [data, setData] = React.useState([]);
-    const [employees, setEmployees] = React.useState([]);
-    const [employeeID, setEmployeeID] = React.useState('');
-
 
     // set the data to the data from the api
     React.useEffect(() => {
@@ -87,63 +59,146 @@ const storeRequests = () => {
                 setData(response.data);
             }
         })
-        // get the employees for the store
-        getEmployeeInfo().then(response => {
-            if (response.status === 'success') {
-                setEmployees(response.data);
-            }
-        });
     }, [])
 
-    // this function is resposible for getting the employee id and grabbing the employee information and setting it to the table we are
-    // displaying to the user.
 
-    const getEmployee = (id) => {
-        // get the employee information based on the id number
-        const employee = employees.find(employee => employee.id === id);
+    const renderError = () => {
 
-        return new Object(employee);
+        return (
+            <div className="alert alert-danger" role="alert">
+                <strong>Oh snap!</strong>
+                <p>Something went wrong. Please try again later.</p>
+            </div>
+        )
     }
 
-    // this function is responsible for displaying the table with the schedule information
-    const DisplayEmployeeData = (data) => {
-        // if the data is empty then display a message to the user
-        if (data.length === 0) {
-            return (
-                <tr>
-                    <td colSpan="5">
-                        <h3 style={{ fontWeight: 700}}>No Schedule Requests</h3>
-                    </td>
-                </tr>
-            )
-        } else {
-         // here we are going to render the table with the schedule information
-           return data.map((item, index) => {
 
-                let fetchEmployee = getEmployee(item.employee_id);
+    // lets pass our data onto our sorter inorder for us to work with the data more cleanly and easily
+    // the easier the better no complex code.
 
-                let convertTime = (time) => {
-                    return new Date(time * 1000).toLocaleDateString('en-US')
+    const sorter = (data) => {
+        // first lets layout what we need to achieve with this function
+        // first let check if drop shifts = 0 or 1 inorder for us to narrow down the map
+
+        // our structure of our element
+        const pickupShifts = data.pickup;
+        const dropShifts = data.drop;
+        const employees = data.employee;
+
+        // function to retrive the employees name when provided with an employee id.
+        const getEmployeeName = (id, employees) => {
+            for (const employee in employees) {
+                if (employees[employee].id === id) {
+                    return employees[employee].first_name + ' ' + employees[employee].last_name;
                 }
-
-                return (
-                    <tr key={index}>
-                        <td>{fetchEmployee.name}</td>
-                        <td> { convertTime(item.date_picked_up) } </td>
-                        <td></td>
-                        <td>
-                            <div className='form-control d-flex'>
-                                <button className='btn btn-danger m-1'> Deny</button>
-                                <button className='btn btn-message m-1'> Accept</button>
-                            </div>
-                        </td>
-                    </tr>
-                )
-            })
+            }
         }
+
+
+        // function to retrive the shift when provides with 4 parms
+        // the shift id, the year, week, and day
+
+        const getShift = (id, shiftData = data.schedule) => {
+            for (const shift in shiftData) {
+                if (shiftData[shift].shiftID === id) {
+
+                    // now lets convert day, week, and year into a shift date
+                    const shiftDate = new Date(shiftData[shift].year, shiftData[shift].week, shiftData[shift].day);
+                    // now lets return the shift
+                    return {
+                        shiftID: shiftData[shift].shiftID,
+                        shiftDate: shiftDate,
+                    }
+                }
+            }
+        }
+        
+        // get the shift id
+
+        // loop through the drop shifts
+        for (const shifts in dropShifts) {
+            if (dropShifts[shifts].length === 0) {
+                // if the length is 0 then we need to remove the element from the array
+                dropShifts.splice(shifts, 1);
+            }
+
+            // check if the drop shifts approved is true or false
+            if (dropShifts[shifts].approved === 1) {
+                // if the approved is true then we need to remove the element from the array
+                dropShifts.splice(shifts, 1);
+            }
+        }
+
+        // next we need to check if the pickup shifts is 0 or 1 inorder for us to narrow down the map
+        for (const shifts in pickupShifts) {
+            if (pickupShifts[shifts].length === 0) {
+                // if the length is 0 then we need to remove the element from the array
+                pickupShifts.splice(shifts, 1);
+            }
+
+            // check if the drop shifts approved is true or false
+            if (pickupShifts[shifts].approved === 1) {
+                // if the approved is true then we need to remove the element from the array
+                pickupShifts.splice(shifts, 1);
+            }
+        }
+
+
+        // next lets loop though the dropped shifts
+
+
+        let map = {};
+
+        for (const shifts in dropShifts) {
+
+            let final = {
+                reason: dropShifts[shifts].reason,
+                dateDropped: new Date(dropShifts[shifts].date_dropped * 1000),
+                shiftID: dropShifts[shifts].employee_shift_id,
+                employeeID: dropShifts[shifts].employee_id,
+                employeeName: getEmployeeName(dropShifts[shifts].employee_id, employees),
+                approved: dropShifts[shifts].approved,
+                type: 'drop'
+            }
+
+
+
+            // now lets search pickup shifts for the employee
+            for (const employee in pickupShifts) {
+                // check for the employee id
+                if (final.pickupEmployeeID === undefined) {
+                    // set the employee id
+                    final.pickupEmployeeID = pickupShifts[employee].employee_id;
+                    // set the employee name
+                    final.pickupEmployeeName = getEmployeeName(pickupShifts[employee].employee_id, employees);
+                    final.pickupDate = new Date(pickupShifts[employee].date_picked_up * 1000);
+                }
+            }
+
+            // check if the map has the key of the employee id
+            if (map[dropShifts[shifts].employee_id] === undefined) {
+                // if the map does not have the key of the employee id then we need to create it
+                map[dropShifts[shifts].employee_id] = [];
+            }
+
+            // now we need to push the drop shift into the map
+            map[dropShifts[shifts].employee_id].push(final);
+        }
+
+
+
+        console.log(data.schedule);
+
+
+        return (
+            <div className="schedule-requests">
+                {/** put our logic here */}
+            </div>
+        )
     }
 
-        return ( DisplayEmployeeData(data))
+    // return our sorted data
+    return sorter(data);
  }
 
 
@@ -164,6 +219,7 @@ export const ScheduleRequests = (props) => {
                 {"Weekly Schedule Requests"}
             </h2>
 
+            <span className='text-center text-muted'> Accept and deny shift changes </span>
             <img
                 src="/img/SVG/schedule_event.svg"
                 alt="schedule icon"
@@ -185,23 +241,24 @@ export const ScheduleRequests = (props) => {
                             <tr>
                                 <th>
                                     <h5>
-                                        {"Requested By"}
+                                        Shift Dropped By
                                     </h5>
                                 </th>
                                 <th>
                                     <h5>
-                                        {"Requested Date"}
+                                        Shift Picked up By
                                     </h5>
                                 </th>
                                 <th>
                                     <h5>
-                                        {"Requested Shift"}
+                                        Shift Date
                                     </h5>
                                 </th>
                                 <th>
-                                    <h5>
-                                        {"Action"}
-                                    </h5>
+                                    <h5> Reason </h5>
+                                </th>
+                                <th>
+                                    <h5> Action </h5>
                                 </th>
                             </tr>
                         </thead>

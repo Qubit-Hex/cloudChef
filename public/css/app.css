@@ -1403,7 +1403,17 @@
 }
 body {
   font: 18px "Century Gothic", Futura, sans-serif;
-  background-color: #ffffff00;
+  background-color: #0704280f;
+}
+
+.bg-white {
+  background-color: #fff;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.06);
+  border-radius: 5px;
+}
+
+.bg-white:hover {
+  background-color: #c79292ce;
 }
 
 nav {
@@ -1541,6 +1551,7 @@ nav > * {
   font-size: 3em;
   font-weight: 1000;
   color: #1170c9;
+  text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.527);
   -webkit-animation: slideInText 1s ease-in-out;
           animation: slideInText 1s ease-in-out;
 }
@@ -1575,8 +1586,9 @@ nav > * {
 .header-description {
   margin-top: 20px;
   font-size: 18px;
-  color: slategray;
-  font-weight: 600;
+  font-weight: 500;
+  color: rgba(13, 34, 54, 0.774);
+  font-style: italic;
 }
 
 .hero:nth-child(even) {
@@ -1645,7 +1657,7 @@ nav > * {
 }
 
 .header-section-space-md {
-  margin-top: 20vh;
+  margin-top: 5vh;
 }
 
 .header-section-space-lg {
@@ -2101,6 +2113,15 @@ footer {
   font-size: 1.2em;
   font-weight: bold;
   color: #fff;
+}
+
+.crop-image {
+  border-radius: 50%;
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 5vw));
+          clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 5vw));
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
 }
 
 @-webkit-keyframes ImgCrop {
