@@ -1417,6 +1417,63 @@ nav {
   padding: 0px;
 }
 
+@media screen and (max-width: 768px) {
+  ._header_ {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    background: #f7faff;
+    /* fallback for old browsers */
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #2b6fbd, #1b2e53);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    font-weight: 800;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.527);
+    padding: 0px;
+  }
+}
+@-webkit-keyframes slide {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes slide {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@-webkit-keyframes slideout {
+  0% {
+    opacity: 0;
+    transform: translateY(0%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(-80%);
+  }
+}
+@keyframes slideout {
+  0% {
+    opacity: 0;
+    transform: translateY(0%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(-80%);
+  }
+}
 .intro-image-grid {
   background-color: #2167d854;
   border-radius: 50%;
@@ -1801,6 +1858,11 @@ footer {
   font-size: 16px;
 }
 
+@media screen and (max-width: 1000px) {
+  .footer-section-link > a {
+    margin-left: 0px;
+  }
+}
 .footer-section-link > a:hover {
   color: salmon;
 }
@@ -1829,23 +1891,6 @@ footer {
   -webkit-animation: rollDropDown 2s ease 0s 1 normal forwards;
 }
 
-@-webkit-keyframes rollDropDown {
-  0% {
-    transform: translateY(100%);
-  }
-  100% {
-    transform: translateY(0%);
-  }
-}
-
-@keyframes rollDropDown {
-  0% {
-    transform: translateY(100%);
-  }
-  100% {
-    transform: translateY(0%);
-  }
-}
 /* animation rolling Drop Down */
 /*  end of form login screen  */
 /* end of form login screen  */
@@ -1870,16 +1915,6 @@ footer {
           animation: rollDropDown 2s ease 0s 1 normal forwards;
 }
 
-@keyframes rollDropDown {
-  0% {
-    opacity: 0;
-    transform: scale(0);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
 .payment-card:hover {
   cursor: pointer;
   background-color: rgba(253, 241, 246, 0.193);
@@ -2068,6 +2103,23 @@ footer {
   color: #fff;
 }
 
+@-webkit-keyframes ImgCrop {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
+}
+
+@keyframes ImgCrop {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
+}
 /*
 
  file: login.scss
@@ -2096,7 +2148,7 @@ footer {
 
 .image-badge {
   height: auto;
-  background-image: linear-gradient(45deg, #8baaaabb 0% rgba(174, 139, 156, 0.727) 9c 100%);
+  background-image: linear-gradient(45deg, #8baaaabb 0% rgba(174, 139, 156, 0.727) 100%);
 }
 
 .form-login {
@@ -2182,7 +2234,6 @@ footer {
 }
 
 /*  MEDIA QUERYS   */
-/* On screens that are 992px or less, set the background color to blue */
 @media screen and (max-width: 992px) {
   nav {
     height: auto;
@@ -2193,7 +2244,6 @@ footer {
     margin: 0px !important;
   }
 }
-/* On screens that are 600px or less, set the background color to olive */
 @media screen and (max-width: 600px) {
   nav {
     height: auto;
@@ -2202,9 +2252,5 @@ footer {
   .dropdown-menu {
     width: 90vw !important;
     margin: 0px !important;
-  }
-
-  img {
-    width: 100vw;
   }
 }

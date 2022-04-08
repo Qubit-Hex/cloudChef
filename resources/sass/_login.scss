@@ -27,7 +27,7 @@
 
 .image-badge {
     height: auto;
-    background-image: linear-gradient(45deg, #8baaaabb 0%rgba(174, 139, 156, 0.727)9c 100%);
+    background-image: linear-gradient(45deg, #8baaaabb 0% rgba(174, 139, 156, 0.727) 100%);
 }
 
 .form-login {
@@ -116,7 +116,6 @@
 /*  MEDIA QUERYS   */
 
 
-/* On screens that are 992px or less, set the background color to blue */
 
 @media screen and (max-width: 992px) {
     nav {
@@ -129,7 +128,6 @@
 }
 
 
-/* On screens that are 600px or less, set the background color to olive */
 
 @media screen and (max-width: 600px) {
     nav {
@@ -139,7 +137,5 @@
         width: 90vw !important;
         margin: 0px !important;
     }
-    img {
-        width: 100vw;
-    }
+
 }

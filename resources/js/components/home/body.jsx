@@ -128,8 +128,8 @@ import React from 'react';
           </div>
 
           <div className="row mt-4 p-2 bg-white header-section-space-md">
-            <div className="col-sm bg-white">
-              <img src="/img/baker-image.jpg" className="img-fluid hero sepia" />
+            <div className="col-sm img-crop">
+              <img src="/img/baker-image.jpg" className="img-fluid" />
             </div>
 
             <div className="col-sm header-section-space-md">

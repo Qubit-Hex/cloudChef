@@ -12,6 +12,56 @@ nav {
     padding: 0px;
 }
 
+// add media query for mobile so that navbar is stacked on top of the page
+@media screen and (max-width: 768px) {
+    ._header_ {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1;
+        background: #f7faff;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #498edd, #2a4d92);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #2b6fbd, #1b2e53); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        font-weight: 800;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.527);
+        padding: 0px;
+    }
+}
+
+
+// add a animation for the navbar when we toggle it
+
+@keyframes slide {
+    0% {
+        // add opacity to the navbar
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+    100% {
+        // remove opacity from the navbar
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// animation for the menu to slowly slide in and out
+@keyframes slideout {
+    0% {
+        // add opacity to the navbar
+        opacity: 0;
+        transform: translateY(0%);
+    }
+    100% {
+        // remove opacity from the navbar
+        opacity: 1;
+        transform: translateY(-80%);
+    }
+}
+
+// slowly adjust the height of the navbar when we toggle it
+
+
 
 .intro-image-grid {
     background-color: #2167d854;
@@ -392,6 +442,15 @@ footer {
     font-size: 16px;
 }
 
+
+// add media quey to fix the link
+
+@media screen and (max-width: 1000px) {
+    .footer-section-link>a {
+        margin-left: 0px;
+    }
+}
+
 .footer-section-link>a:hover {
     color: salmon;
 }
@@ -419,18 +478,6 @@ footer {
     display: block;
     animation: rollDropDown 2.0s ease 0s 1 normal forwards;
     -webkit-animation: rollDropDown 2.0s ease 0s 1 normal forwards;
-}
-
-
-// animation for dropping the drop down menu
-@keyframes rollDropDown {
-    0% {
-        transform: translateY(100%);
-    }
-
-    100% {
-        transform: translateY(0%);
-    }
 }
 
 
@@ -462,17 +509,6 @@ footer {
     border-width: 20px;
     padding: 20px;
     animation: rollDropDown 2.0s ease 0s 1 normal forwards;
-}
-
-@keyframes rollDropDown {
-    0% {
-        opacity: 0;
-        transform: scale(0.0);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1.0);
-    }
 }
 
 .payment-card:hover {
@@ -710,5 +746,16 @@ footer {
         font-weight: bold;
         color: #fff;
 
+    }
+}
+
+// add a image crop effect
+
+@keyframes ImgCrop {
+    0% {
+        transform: rotateY(-0deg);
+    }
+    100% {
+        transform: rotateY(360deg);
     }
 }
