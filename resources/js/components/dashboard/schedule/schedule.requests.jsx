@@ -61,7 +61,8 @@ const storeRequests = () => {
         })
     }, [])
 
-
+    // trigger our error messsage if the data is empty.
+    // we will use the same format that we use for the store requests
     const renderError = () => {
 
         return (
@@ -71,6 +72,8 @@ const storeRequests = () => {
             </div>
         )
     }
+
+
 
 
     // lets pass our data onto our sorter inorder for us to work with the data more cleanly and easily
@@ -93,8 +96,6 @@ const storeRequests = () => {
                 }
             }
         }
-
-
         // function to retrive the shift when provides with 4 parms
         // the shift id, the year, week, and day
 
@@ -102,19 +103,44 @@ const storeRequests = () => {
             for (const shift in shiftData) {
                 if (shiftData[shift].shiftID === id) {
 
-                    // now lets convert day, week, and year into a shift date
-                    const shiftDate = new Date(shiftData[shift].year, shiftData[shift].week, shiftData[shift].day);
-                    // now lets return the shift
+                    // convert our int into a 12 hour time
+                    const formate24HoursTime = (int) => {
+                        // convert our int into 24 hour time
+                       const hours = Math.floor(int);
+                       // first check if our number is less than 10
+                       if (hours < 10) {
+                           return '0' + hours + ':00' + "AM";
+                       } else {
+                           // check is hours more than 12 ?
+                           if (hours > 12 ) {
+                                 return (hours - 12) + ':00 PM';
+                           } else {
+                                 return hours + ':00 AM';
+                           }
+                       }
+                    }
+                    // lets get the shift date by using the year, week, and day
+                    // TODO FINSIH THIS TOMMORROW A FUNCTION
+                    // THAT TAKES IN THE YEAR, WEEK, AND DAY AND RETURNS THE DATE ....
+                    const shiftDate = (year, week, day) => {
+                        // get the date of by using the week number and the day
+                        const date = new Date(year, 0, (week * 7) + day);
+                        // return the date in a readable format
+                        return date;
+                    }
+
+                    console.log(shiftData[shift]);
                     return {
                         shiftID: shiftData[shift].shiftID,
-                        shiftDate: shiftDate,
+                        shiftDate: shiftDate(shiftData[shift].year, shiftData[shift].week, shiftData[shift].day),
+                        shiftTime: formate24HoursTime(shiftData[shift].start),
+                        shiftEndTime: formate24HoursTime(shiftData[shift].end),
                     }
                 }
             }
         }
-        
-        // get the shift id
 
+        // get the shift id
         // loop through the drop shifts
         for (const shifts in dropShifts) {
             if (dropShifts[shifts].length === 0) {
@@ -143,10 +169,7 @@ const storeRequests = () => {
             }
         }
 
-
-        // next lets loop though the dropped shifts
-
-
+        // next lets loop though the dropped shift
         let map = {};
 
         for (const shifts in dropShifts) {
@@ -158,9 +181,10 @@ const storeRequests = () => {
                 employeeID: dropShifts[shifts].employee_id,
                 employeeName: getEmployeeName(dropShifts[shifts].employee_id, employees),
                 approved: dropShifts[shifts].approved,
-                type: 'drop'
-            }
+                type: 'drop',
+                shiftTime: getShift(dropShifts[shifts].employee_shift_id)
 
+            }
 
 
             // now lets search pickup shifts for the employee
@@ -174,20 +198,15 @@ const storeRequests = () => {
                     final.pickupDate = new Date(pickupShifts[employee].date_picked_up * 1000);
                 }
             }
-
             // check if the map has the key of the employee id
             if (map[dropShifts[shifts].employee_id] === undefined) {
                 // if the map does not have the key of the employee id then we need to create it
                 map[dropShifts[shifts].employee_id] = [];
             }
-
             // now we need to push the drop shift into the map
             map[dropShifts[shifts].employee_id].push(final);
         }
-
-
-
-        console.log(data.schedule);
+        console.log(map);
 
 
         return (

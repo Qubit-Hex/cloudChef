@@ -900,7 +900,9 @@ class ScheduleService
                 'shiftID' => $shift->employee_shift_id,
                 'day' => $day,
                 'year' => $storeSchedule->year,
-                'week' => $storeSchedule->week
+                'week' => $storeSchedule->week,
+                'start' => $employeeShift->start_time,
+                'end' => $employeeShift->end_time
             ]);
 
         }
