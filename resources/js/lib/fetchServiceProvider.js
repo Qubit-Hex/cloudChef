@@ -6,9 +6,7 @@
  *  purpose: inorder to fetch data from api in various ways and request types
  *           -- note that this class is not meant to be used directly, but rather
  *         -- to be extended by other classes that need to fetch data from an api
- *         -- please note this is a helper class and prevent chaining helll :/
  *
- *  @author Oliver Shwaba  Qubit-hEx
  */
 
 
@@ -36,21 +34,6 @@ export default class FetchServiceProvider {
         }
         return null;
     }
-
-    /**
-     * @method: generateJWT
-     *
-     *  @purpose: generate a  jwt token based on the cookie recived from the server
-     */
-    convertToJWT(cookie) {
-        //
-
-
-        return {
-            'accessToken': this.getCookie('accessToken'),
-        }
-    }
-
 
     /**
      *
@@ -86,9 +69,7 @@ export default class FetchServiceProvider {
      *  @method: $get
      *
      *  @purpose: to fetch data from an api using a get request
-     *   *            PLEASE NOTE THE CALLBACK IS WHATEVER YOU DESIRE TO DO WITH THE DATA
-         *             SO IT GIVES YOU CONTROL IMPLIMENT YOUR PROBLEM RATHER THAN WORRYING ABOUT
-         *             FETCH REQUESTS IN YOUR MAIN CODE :)
+     *
      */
 
     $get(url, headers, callback) {
