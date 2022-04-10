@@ -4,7 +4,7 @@ CloudChef
 
 @purpose:   Cloud chef is a business tool inorder to store recipes and create employee schedules
             this application was meant to be used a single page application. 
-            for employees and employees to have readly access to information about their said
+            for employees and employees to have instant access to information about their said
             working organisation. 
 
 
