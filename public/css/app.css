@@ -1383,6 +1383,18 @@
   z-index: 9999;
   margin: 0;
 }
+.alert-container .close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 1.5em;
+  color: #000d2f;
+  padding: 5px;
+  cursor: pointer;
+}
+.alert-container .close:hover {
+  color: #6a6a6a;
+}
 
 @-webkit-keyframes grow {
   0% {

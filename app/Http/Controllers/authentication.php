@@ -98,6 +98,6 @@ class authentication extends Controller
 
     public function checkPermissions(Request $request)
     {
-
+        
     }
 }

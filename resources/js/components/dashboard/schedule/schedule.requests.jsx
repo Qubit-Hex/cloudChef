@@ -77,7 +77,7 @@ export const ScheduleRequests = (props) => {
                                 </th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id='schedule-requests-table'>
                             <DisplayScheduleRequests />
                         </tbody>
                     </table>

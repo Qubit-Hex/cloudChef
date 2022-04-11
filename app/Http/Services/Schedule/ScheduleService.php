@@ -16,7 +16,7 @@ namespace App\Http\Services\Schedule;
 use Facade\FlareClient\Http\Response;
 use Illuminate\Support\Facades\DB;
 use App\Http\Services\Schedule\core\_LOGGER;
-use PhpParser\Node\Expr\Cast\Object_;
+use App\Http\Services\Schedule\core\ValidationServiceInterface;
 
 class ScheduleService
 {
@@ -920,4 +920,61 @@ class ScheduleService
               'data' => $employeeRequests
           ]);
       }
+
+
+      /**
+       *
+       *  @method: declineRequest
+       *
+       *
+       *  @purpose: to decline a  shift request for a store
+       *
+       */
+
+      static function declineShiftRequest ($request)
+      {
+
+        // check was our request was successful ?
+        if (ValidationServiceInterface::validateAdmin($request)) {
+            // preform the decline request.
+            return response()->json([
+                'status' => 200,
+                'message' => 'success'
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'invalid token',
+                'debug' => $request
+            ], 401);
+        }
+      }
+
+      /**
+       *
+       *  @method: acceptRequest
+       *
+       *  @purpose: to accept a shift request for a store and preform a swap request
+       *
+       */
+
+       static function acceptShiftRequest ($request)
+       {
+
+           // check was our request was successful ?
+            if (ValidationServiceInterface::validateAdmin($request))
+            {
+                // swap the shifts....
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'success'
+                ]);
+            } else {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'invalid token',
+                    'debug' => $request
+                ], 401);
+            }
+       }
 }

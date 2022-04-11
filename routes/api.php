@@ -170,6 +170,11 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
             Route::get('/pickup', [schedule::class, 'postShiftPickupRequest'])->name('/schedule/pickup/');
             Route::get('/requests/' , [schedule::class, 'getRequests'])->name('/schedule/requests/');
 
+            // shift requests routes
+
+            // decline the shift request
+            Route::post('/shift/decline', [schedule::class, 'declineShiftRequest'])->name('/schedule/shift/decline');
+
         });
 
 

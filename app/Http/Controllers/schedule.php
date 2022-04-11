@@ -240,5 +240,44 @@ class schedule extends Controller
 
             return ScheduleService::deleteSchedule($query);
         }
+        /**
+         *
+         *  @method: declineShiftRequest
+         *
+         *  @purpose: inorder to decline a shift request
+         *
+         */
+
+
+        public function declineShiftRequest (Request $request)
+        {
+            $query = [
+                'token' => $request->header('accessToken'),
+                'command' => $request->header('command'),
+                'shift' => $request->header('shift'),
+            ];
+
+            return ScheduleService::declineShiftRequest($query);
+        }
+
+
+        /**
+         *
+         *  @method: acceptShiftRequest
+         *
+         *
+         *  @purpose: inorder to accept a shift request
+         */
+
+        public function acceptShiftRequest (Request $request)
+        {
+            $query = [
+                'token' => $request->header('accessToken'),
+                'command' => $request->header('command'),
+                'shift' => $request->header('shift'),
+            ];
+
+            return ScheduleService::acceptShiftRequest($query);
+        }
 
 }

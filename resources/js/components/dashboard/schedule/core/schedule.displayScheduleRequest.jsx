@@ -10,7 +10,12 @@ import React from "react";
 import ReactDOM from 'react-dom';
 import FetchServiceProvider from "../../../../lib/fetchServiceProvider";
 
-import {ShiftRequestInterface } from "./modules/shiftRequestInterface";
+import { ShiftRequestInterface } from "./modules/shiftRequestInterface";
+
+
+
+// sub imports libs, components, and interfaces
+import * as Notes from "../../../../base/notification";
 
 
 /**
@@ -46,11 +51,12 @@ import {ShiftRequestInterface } from "./modules/shiftRequestInterface";
     const RenderError = (props) => {
 
     return (
-        <tr className="alert alert-danger" colSpan={5} role="alert">
-            <td>
-                <strong>Oh snap!</strong>
-                {/** add our error image here inorder to show that no data was returned from the server. */}
-                <p>Something went wrong. Please try again later.</p>
+        <tr className="alert alert-danger" role="alert">
+            <td colSpan={5}>
+                <img src='/img/SVG/empty_inbox.svg' alt='empty inbox' width='100px' height='100px' />
+                <h5 className="text-center">
+                    No Schedule Requests
+                </h5>
             </td>
         </tr>
     )
@@ -105,7 +111,7 @@ import {ShiftRequestInterface } from "./modules/shiftRequestInterface";
                 console.log(shift);
 
                 return (
-                    <tr key={index}>
+                    <tr key={index} id={ "_tr_" + shift.shiftID }>
                         <td> { shift.employeeName } </td>
                         <td>  { shift.pickupEmployeeName }</td>
                         <td>
@@ -127,17 +133,49 @@ import {ShiftRequestInterface } from "./modules/shiftRequestInterface";
                                 <button className='btn-danger m-2' onClick={
                                     (e) => {
                                         // send the deny request to the server.
-                                        let RequestEndPoint = SRI.denyRequest(shift.shiftID);
-                                        RequestEndPoint.denyRequest();
+
+                                        SRI.denyRequest(shift.shiftID).then(response => {
+                                            if (response.status === 'error') {
+                                                // let re render the tr element with a fade
+                                                let tr = document.getElementById("_tr_" + shift.shiftID);
+                                                let notification = document.getElementById("notification-container");
+                                                // remove the tr element
+                                                tr.parentNode.removeChild(tr);
+                                                // post the notification
+                                                // show the notificATION
+                                                notification.style.display = 'block';
+                                                ReactDOM.render(<Notes.SuccessNotification   message="Thank you the shift has been successfully dropped." />, notification);
+                                            }
+
+                                            // check the tbody if it is empty ? if it is empty then render the error message
+                                            if (document.getElementsByTagName('tbody')[0].childNodes.length === 0) {
+                                                // render our error message
+                                                ReactDOM.render(<RenderError />, document.getElementById('schedule-requests-table'));
+                                            }
+                                        })
                                     }
                                 }> Deny </button>
                                 <button className='btn btn-message m-2' onClick={
                                     (e) => {
-                                        // send the accept request to the server.
-                                       let RequestEndPoint = SRI.acceptRequest(shift.shiftID);
-                                        /// send our request and wait for a response from the server
-                                       RequestEndPoint.acceptRequest(shift.shiftID);
 
+                                        SRI.acceptRequest(shift.shiftID).then(response => {
+                                            if (response.status === 'success') {
+                                                // let re render the tr element with a fade
+                                                let tr = document.getElementById("_tr_" + shift.shiftID);
+                                                let notification = document.getElementById("notification-container");
+                                                // remove the tr element
+                                                tr.parentNode.removeChild(tr);
+                                                // post the notification
+                                                // show the notificATION
+                                                notification.style.display = 'block';
+                                                ReactDOM.render(<Notes.SuccessNotification   message="Thank you the shift has been successfully accepted." />, notification);
+                                            }
+
+                                            if (document.getElementsByTagName('tbody')[0].childNodes.length === 0) {
+                                                // render our error message
+                                                ReactDOM.render(<RenderError />, document.getElementById('schedule-requests-table'));
+                                            }
+                                        });
                                     }
                                 }> Accept</button>
                             </div>

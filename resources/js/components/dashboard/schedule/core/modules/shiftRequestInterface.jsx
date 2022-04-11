@@ -14,10 +14,7 @@
 
 import React from "react";
 import ReactDOM from 'react-dom';
-
-import  { ScheduleRequestHandler } from "./handler/scheduleRequestHandler";
-
-
+import FetchServiceProvider from "../../../../../lib/fetchServiceProvider";
 
 export class ShiftRequestInterface  {
 
@@ -29,6 +26,7 @@ export class ShiftRequestInterface  {
         this.dropShifts = data.drop;
         this.employees = data.employee;
         this.schedule = data.schedule;
+        this.api = new FetchServiceProvider();
 
         // the shift request that we are going to be working with
         this.mem = data;
@@ -222,16 +220,6 @@ export class ShiftRequestInterface  {
 
     /**
      *
-     * @method: buildRequestHandler
-     *
-     * @purpose: to build the request handler
-     *
-     */
-
-    buildRequestHandler = (id) => new ScheduleRequestHandler(this.mem, id)
-
-    /**
-     *
      *
      *  @method: AcceptRequest
      *
@@ -241,13 +229,21 @@ export class ShiftRequestInterface  {
      */
     acceptRequest = (id) => {
 
-        const generateRequest = (id) => {
-            return this.buildRequestHandler(id);
-        }
-
         // now lets interact with the request handlers
 
-        return generateRequest(id);
+        let ROUTE = '/api/store/schedule/shift/accept';
+
+        let headers = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'accessToken': this.api.getCookie('accessToken')
+        }
+
+        let data = {
+            'shiftID': id
+        }
+
+       return this.api.post(ROUTE, data, headers)
     }
 
 
@@ -259,11 +255,21 @@ export class ShiftRequestInterface  {
      */
 
     denyRequest = (id) => {
-        const generateRequest = (id) => {
-            return this.buildRequestHandler(id);
+
+        let ROUTE = '/api/store/schedule/shift/decline';
+
+        let headers = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'accessToken': this.api.getCookie('accessToken')
         }
-        // send the decline request over and see if it can handle it
-        return generateRequest(id);
+        // the data we are going to send to the server
+
+        let data = {
+            'shiftID': id
+        }
+
+        return this.api.post(ROUTE, data, headers)
     }
 
 }

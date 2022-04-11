@@ -5,14 +5,17 @@
  *  @class: ScheduleRequest
  *
  *
- *  @purpose: inorder to perform schedule actions based on the request
+ *  @purpose: inorder to perform schedule actions based on the The ScheduleServiceInterface
+ *
  */
 
 
 
- class ScheduleRequest {
-     
- }
+ namespace App\Http\Services\Schedule;
 
+
+ class ScheduleRequests {
+
+ }
 
 ?>

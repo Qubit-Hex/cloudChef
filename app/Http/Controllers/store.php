@@ -36,4 +36,44 @@ class store extends Controller
     }
 
 
+    /**
+     *
+     *  @method: makeStore
+     *
+     *
+     *  @purpose: inorder to make a store
+     */
+
+    public function makeStore(Request $request)
+    {
+
+    }
+
+    /**
+     *
+     *  @method: updateStore
+     *
+     *  @purpose: inorder to update a store
+     *
+     */
+    public function updateStore(Request $request)
+    {
+
+    }
+
+    /**
+     *
+     *  @method: deleteStore
+     *
+     *
+     * @purpose: inorder to delete a store
+     *
+     */
+
+     public function deleteStore(Request $request)
+     {
+        
+     }
+
+
 }
