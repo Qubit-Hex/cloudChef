@@ -135,7 +135,21 @@ import * as Notes from "../../../../base/notification";
                                         // send the deny request to the server.
 
                                         SRI.denyRequest(shift.shiftID).then(response => {
+
                                             if (response.status === 'error') {
+                                                // let re render the tr element with a fade
+                                                let tr = document.getElementById("_tr_" + shift.shiftID);
+                                                let notification = document.getElementById("notification-container");
+                                                // remove the tr element
+                                                tr.parentNode.removeChild(tr);
+                                                // post the notification
+                                                // show the notificATION
+                                                notification.style.display = 'block';
+                                                ReactDOM.render(<Notes.SuccessNotification   message="Something Went Wrong we were unable to drop the shift." />, notification);
+
+                                            }
+                                            // do the render if the success
+                                            if (response.status === 'success') {
                                                 // let re render the tr element with a fade
                                                 let tr = document.getElementById("_tr_" + shift.shiftID);
                                                 let notification = document.getElementById("notification-container");
@@ -170,6 +184,10 @@ import * as Notes from "../../../../base/notification";
                                                 notification.style.display = 'block';
                                                 ReactDOM.render(<Notes.SuccessNotification   message="Thank you the shift has been successfully accepted." />, notification);
                                             }
+                                            // if the response returns and error. 
+                                             if (response.status === 'error') {
+
+                                             }
 
                                             if (document.getElementsByTagName('tbody')[0].childNodes.length === 0) {
                                                 // render our error message

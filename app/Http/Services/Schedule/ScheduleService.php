@@ -13,10 +13,10 @@
 
 namespace App\Http\Services\Schedule;
 
-use Facade\FlareClient\Http\Response;
 use Illuminate\Support\Facades\DB;
 use App\Http\Services\Schedule\core\_LOGGER;
 use App\Http\Services\Schedule\core\ValidationServiceInterface;
+use App\Http\Services\Schedule\ScheduleRequests;
 
 class ScheduleService
 {
@@ -937,15 +937,24 @@ class ScheduleService
         // check was our request was successful ?
         if (ValidationServiceInterface::validateAdmin($request)) {
             // preform the decline request.
-            return response()->json([
-                'status' => 200,
-                'message' => 'success'
-            ]);
+
+            // lets relay the request and deny the shifts request
+            // and store a message to be retrieve by the employee
+            $req = new ScheduleRequests();
+
+            if ($req->declineShiftRequest($request['shift']))
+            {
+                // send the message to the server
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'success'
+                ]);
+            }
+
         } else {
             return response()->json([
                 'status' => 'error',
-                'message' => 'invalid token',
-                'debug' => $request
+                'message' => 'invalid token'
             ], 401);
         }
       }
@@ -964,17 +973,20 @@ class ScheduleService
            // check was our request was successful ?
             if (ValidationServiceInterface::validateAdmin($request))
             {
+
                 // swap the shifts....
                 return response()->json([
                     'status' => 200,
                     'message' => 'success'
                 ]);
+
             } else {
                 return response()->json([
+                    // display message for a invalid permissions error
                     'status' => 'error',
-                    'message' => 'invalid token',
-                    'debug' => $request
-                ], 401);
+                    'message' => 'not authorized to access this resource'
+                ]);
             }
+
        }
 }

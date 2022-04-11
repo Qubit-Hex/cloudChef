@@ -254,7 +254,7 @@ class schedule extends Controller
             $query = [
                 'token' => $request->header('accessToken'),
                 'command' => $request->header('command'),
-                'shift' => $request->header('shift'),
+                'shift' => $request->input('shiftID'),
             ];
 
             return ScheduleService::declineShiftRequest($query);
@@ -274,7 +274,7 @@ class schedule extends Controller
             $query = [
                 'token' => $request->header('accessToken'),
                 'command' => $request->header('command'),
-                'shift' => $request->header('shift'),
+                'shift' => $request->input('shiftID'),
             ];
 
             return ScheduleService::acceptShiftRequest($query);
