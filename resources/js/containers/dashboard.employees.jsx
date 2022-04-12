@@ -40,7 +40,11 @@ export const EmployeesPage = (props) => {
                         <div className='card button-tiles'>
                             <div className='card-header text-center bg-transparent'>
                                 <img src='/img/SVG/user_status.svg' width={200} height={200} className='mx-auto' />
-                                <h3 className='card-title'>Add Employee</h3>
+                                <h3 className='card-title'>Add</h3>
+                                {/** brief description about what this option does */}
+                                <p className='card-text text-muted'>
+                                    Add an employee to the system
+                                </p>
                                 {/** font awesome add person icon */}
                             </div>
                             <div className='card-body'>
@@ -57,7 +61,10 @@ export const EmployeesPage = (props) => {
                         <div className='card button-tiles'>
                             <div className='card-header text-center bg-transparent'>
                                 <img src='/img/SVG/network_outline.svg' width={200} height={200} className='mx-auto' />
-                                <h3 className='card-title'>Edit Employee</h3>
+                                <h3 className='card-title'>Edit</h3>
+                                <p className='card-text text-muted'>
+                                    Edit an employee's details
+                                </p>
                                 {/** font awesome edit icon */}
                             </div>
                             <div className='card-body'>
@@ -71,7 +78,10 @@ export const EmployeesPage = (props) => {
                         <div className='card button-tiles'>
                             <div className='card-header text-center bg-transparent'>
                                 <img src='/img/SVG/employee_card.svg' width={200} height={200} className='mx-auto' />
-                                <h3 className='card-title'>Delete Employee</h3>
+                                <h3 className='card-title'>Delete </h3>
+                                <p className='card-text text-muted'>
+                                    Remove an employee from the system
+                                </p>
                                 {/** font awesome delete icon */}
                             </div>
                             <div className='card-body'>
@@ -90,7 +100,6 @@ export const EmployeesPage = (props) => {
                             <img src='/img/SVG/current_employees.svg' width={200} height={200} className='mx-auto' />
                             <h3 className='card-title'>Current Employees</h3>
                             {/** font awesome table icon */}
-                            <i className="fas fa-table fa-2x"></i>
                         </div>
                         <div className='card-body'>
                             {/** table to display the current employees */}

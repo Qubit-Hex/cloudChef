@@ -18,18 +18,17 @@ import { TemplateModal } from "../recipe/core/template.modal";
 // perform fetch request inorder to add the employeee to the system
 /**
  *
- *  @function : addEmployee
- *
+ *  @function : createEmployee
  *
  *  @purpose: this function is used to preform the request to add an employee to the database.
  *
  *
  */
 
-const addEmployee =  async (request) => {
+const createEmployee =  async (request) => {
 
     const api = new FetchServiceProvider();
-    const url = '/api/store/employee/add';
+    const url = '/api/store/employees/add';
 
     // PLEASE NOTE THAT A PARMAETER CONTAINS THE DATA THAT IS BEING SENT TO THE SERVER
     // JUST IN CASE YOU WANT TO SEE WHAT IS BEING SENT TO THE SERVER, YOU CAN SEE IT IN THE CONSOLE
@@ -66,11 +65,15 @@ const validateForm = (e) => {
         // closure to auth generate a password
 
     const generatePassword = () => {
-        // auto generate a password to be used that will be enter to the employees email.
+        // generate a random password
+        // but just this function isnt a "TRUE" random password generator
+        // it is subject to probability attacks
+        // we set a expiration date for the password
+        // to prevent the password from being used again
         const password = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
         return password;
     }
-
+    
     // validate any textual elements that are required
     const validateTextInput = (el) => {
         if (el.value === '' || el.value < 5) {
@@ -106,12 +109,14 @@ const validateForm = (e) => {
             }
             return true;
         } else {
+
             el.classList.add('is-invalid');
             let spawnElement = el.parentElement.appendChild(document.createElement('div'));
             // check do we already have a error message if we dont one then we will span a new element
             if (!el.parentElement.querySelector('.invalid-feedback')) {
             spawnElement.classList.add('invalid-feedback');
             spawnElement.innerHTML = 'Please enter a valid email';
+
             }
             return false;
         }
@@ -143,7 +148,7 @@ const validateForm = (e) => {
         }
     }
 
-    // todo
+    // todo * needs to be done *
     // add a send email function to send the password to the employee and invite link
     // add a sms function to send the password to the employee and invite link to the employee
 
@@ -186,7 +191,7 @@ const validateForm = (e) => {
 
         // send the request to the server
         createEmployee(request).then((response) => {
-            console.log(response);
+            //
         });
     } else {
         e.preventDefault();
@@ -268,10 +273,8 @@ export const EmployeeAddModal = (props) => {
                             <label htmlFor='salary'>Salary</label>
                             <input type='text' className='form-control  mt-2 mb-2' id='salary' placeholder='Enter salary' />
                         </div>
-                        {/** password fields will be auto generated
-                         */}
+                        {/** password fields will be auto generated */}
 
-                        {/** submit button */}
                         <button type='submit' className='btn btn-message mx-auto mt-4'>Submit</button>
                         </form>
                     </div>

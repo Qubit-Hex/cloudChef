@@ -145,12 +145,49 @@ class employee extends Controller
      */
     public function add(Request $request)
     {
+      // @steps:
+      // 1. create a new user inside of the database
+      // 2. create a entry in the employee member table;
+      // 3. create a entry in the employee table;
+      // 4. preform our tests to see if everything went well if so then we will return a success message to the client.
+      // 5. else we will preform a clean up function to delete the user and the employee entry ( if it exists conditionally undeer some extra checks to prevent a sql delete of critical data )
+        // FREE TYRONE WE MISS YOU GUYS 25 YEARS IS A LONG TIME
+        
 
         // add the employee logic here
         return response()->json([
             // route not yet created
             'status' => 'success',
-            'message' => 'route is not yet created'
+            'message' => 'route is not yet created',
+            'debug' => $request->all()
         ]);
+    }
+
+    /**
+     *
+     *  @method: edit ( employee )
+     *
+     *
+     * @purpose: inorder to edit an existing employee of the store.
+     *
+     *
+     */
+
+    public function edit(Request $request)
+    {
+
+    }
+
+    /**
+     *
+     *  @method: delete <DELETE>
+     *
+     *  @purpose: inorder to delete an existing employee of the store.
+     *
+     */
+
+    public function delete(Request $request)
+    {
+
     }
 }

@@ -142,6 +142,6 @@ class store_members extends Controller
                                  'username' => $storeMember->name,
                                 'status' => true,
                                 'requestKey' => $randomRequest], 200);
-                                
+
     }
 }

@@ -134,12 +134,10 @@ const RenderSchedule = (props) => {
 
 
 
-    // @BUGIX:
-    // THE SCHEDULE IS ONLY RENDERING THE FIRST SCHEDULE ENTRY
-    // WHEN I NEED TO RENDER THE WHOLE THING.
-    /// MIGHT RECONSTRUCT THE BACKEND TO MAKE THE QUERY A LITTLE EASIER.
-
+    // INORDER TO FIX THE BUG USER A GENERATOR FUNCTION INORDER TO PARSE THE EMPLOYEES.
     
+
+
     const parseTimes = (start, end) => {
         // parse the time based on 12 hour clock
 
@@ -223,9 +221,6 @@ const RenderSchedule = (props) => {
                             } )
 
                             )
-
-
-
 
                     })
                 }
