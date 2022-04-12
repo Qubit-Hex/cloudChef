@@ -374,7 +374,7 @@ class menu extends Controller
         // was the update successful ?
         if ($menuItem) {
             return response()->json(['message' => 'Menu item updated successfully',
-                                    'status' => 201], 200);
+                                    'status' => 200], 200);
         } else {
             return response()->json(['message' => 'Menu item could not be updated'], 401);
         }

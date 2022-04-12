@@ -20,13 +20,6 @@
 import React, { Children, useState } from "react";
 import FetchServiceProvider from "../../../lib/fetchServiceProvider";
 
-
-/**
- *  @todo: in the future we will need to add the ability to edit the schedule.
- *         i also need to writes some tests for this component. inorder to make sure that the component works as expected.
- */
-
-
 /**
  *
  *  @function: getStoreSchedule
@@ -104,6 +97,7 @@ const RenderSchedule = (props) => {
         scheduleByEmployee[item.employeeID].push(item);
     });
 
+
     if (schedule.length === 0 ) {
         // display a message to the user that there is no schedule for the week.
         return (
@@ -125,11 +119,11 @@ const RenderSchedule = (props) => {
                         </small>
                         {/** font awesome error icon */}
 
+
                     </div>
                 </td>
             </tr>);
     }
-
 
     /**
      * @function: parseTimes
@@ -137,23 +131,37 @@ const RenderSchedule = (props) => {
      * @purpose: inorder to parse the times we need to get the start and end time from the schedule.
      *
      */
+
+
+
+    // @BUGIX:
+    // THE SCHEDULE IS ONLY RENDERING THE FIRST SCHEDULE ENTRY
+    // WHEN I NEED TO RENDER THE WHOLE THING.
+    /// MIGHT RECONSTRUCT THE BACKEND TO MAKE THE QUERY A LITTLE EASIER.
+
+    
     const parseTimes = (start, end) => {
         // parse the time based on 12 hour clock
+
+        if (start === null || end === null) {
+
+            return "OFF";
+        }
+
         start > 12 ? start = start - 12 + ":00" + " PM" : start = start + ":00" + " AM";
         end > 12 ? end = end - 12 + ":00" + " PM" : end = end + ":00" + " AM";
         return start + " - " + end;
     }
 
-
     return employees.map((employee, index) => {
+
         return (
             <tr key={index}>
                 <td>
                 {
-
                     Object.keys(employee).map((key, index) => {
                         // run through the employee object and return the employee name.
-                        if (index === 1) {
+                        if (index === 0) {
                             return (<div key={index}>
                                 <div className="col">
                                 <img
@@ -180,16 +188,10 @@ const RenderSchedule = (props) => {
                 }
                 </td>
 
-                {/** render the schedule here  */}
                 {
                     Object.keys(scheduleByEmployee).map((key, index) => {
-                        // run through the employee only once
-                        // ok there is a bug here, we need to fix this.
-                        // were if only table in the db isn't set from employee it will break. the table.
-                        // add some sort of check to check the lengths of the schedule and the employee id.
 
-                        if (index === 0) {
-                            return  scheduleByEmployee[key].map((item, index) => {
+                            return ( scheduleByEmployee[key].map((item, index) => {
                                 if (item.is_off_day === 1) {
                                     return (
                                         <td key={index} className="off-day">
@@ -199,7 +201,6 @@ const RenderSchedule = (props) => {
                                         </span>
                                         </td>
                                     );
-                                    return "OFF";
                                 } else if (item.is_open === 0) {
                                     return (
                                         <td key={index} className="closed-day">
@@ -209,47 +210,45 @@ const RenderSchedule = (props) => {
                                         </td>
                                     )
                                 }
-
                                 else {
                                     // this is temporary. we will be changing to float values inorder to get the hours + the minutes.
-                                    // of the schedule time.
                                     return (
                                         <td key={index} className="open-day">
                                         <span className="role-badge badge badge-success card-text-sub-text  bold">
-                                           { /** covert time into am or pm based on starr time and endtime  */}
                                             { parseTimes(item.start_time, item.end_time) }
                                         </span>
                                         </td>
                                     );
                                 }
-                            });
-                        }
+                            } )
+
+                            )
+
+
+
+
                     })
                 }
-
-                {/** calculate total hours for each user every week and display it */}
                 {
                     Object.keys(scheduleByEmployee).map((key, index) => {
                         // calculate the total hours for each user.
-                        if (index === 0) {
                             let totalHours = 0;
                             scheduleByEmployee[key].forEach((item) => {
                                 if (item.is_off_day === 0) {
                                     totalHours += item.end_time - item.start_time;
                                 }
                             });
+
                             return (
                                 <td key={index} className="total-hours">
-                                <span className="role-badge badge badge-success card-text-sub-text  bold">
-                                    {" "}
-                                    {totalHours}{" "}
-                                </span>
+                                    <span className="role-badge badge badge-success card-text-sub-text  bold">
+                                        { totalHours}
+                                    </span>
                                 </td>
                             );
-                        }
                     })
                 }
-            </tr>
+        </tr>
         )
     })
 }

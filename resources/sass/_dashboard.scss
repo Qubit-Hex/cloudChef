@@ -10,10 +10,6 @@
 // colors
 
 @import 'mobile.scss';
-
-@import 'components/punch-card.scss';
-@import 'components/orderSystem.scss';
-@import 'components/kitchenOrders.scss';
 @import 'components/schedule.scss';
 
 $navbar-bg-color: linear-gradient(to right, #fd9494, rgb(208, 68, 52) );
@@ -1146,3 +1142,8 @@ thead
         transform: scale(1.1);
     }
 }
+
+
+
+/** button tiles for the employee page */
+

@@ -133,34 +133,29 @@ import * as Notes from "../../../../base/notification";
                                 <button className='btn-danger m-2' onClick={
                                     (e) => {
                                         // send the deny request to the server.
-
                                         SRI.denyRequest(shift.shiftID).then(response => {
 
-                                            if (response.status === 'error') {
+                                            if (response.status === 'error' || response.status === 401) {
                                                 // let re render the tr element with a fade
                                                 let tr = document.getElementById("_tr_" + shift.shiftID);
                                                 let notification = document.getElementById("notification-container");
                                                 // remove the tr element
                                                 tr.parentNode.removeChild(tr);
                                                 // post the notification
-                                                // show the notificATION
                                                 notification.style.display = 'block';
                                                 ReactDOM.render(<Notes.SuccessNotification   message="Something Went Wrong we were unable to drop the shift." />, notification);
-
                                             }
                                             // do the render if the success
-                                            if (response.status === 'success') {
+                                            if (response.status === 200 || response.status === 'success') {
                                                 // let re render the tr element with a fade
                                                 let tr = document.getElementById("_tr_" + shift.shiftID);
                                                 let notification = document.getElementById("notification-container");
                                                 // remove the tr element
                                                 tr.parentNode.removeChild(tr);
                                                 // post the notification
-                                                // show the notificATION
                                                 notification.style.display = 'block';
-                                                ReactDOM.render(<Notes.SuccessNotification   message="Thank you the shift has been successfully dropped." />, notification);
+                                                ReactDOM.render(<Notes.WarningNotification   message="Thank you the shift request has been declined successfully." />, notification);
                                             }
-
                                             // check the tbody if it is empty ? if it is empty then render the error message
                                             if (document.getElementsByTagName('tbody')[0].childNodes.length === 0) {
                                                 // render our error message
@@ -173,22 +168,29 @@ import * as Notes from "../../../../base/notification";
                                     (e) => {
 
                                         SRI.acceptRequest(shift.shiftID).then(response => {
-                                            if (response.status === 'success') {
+                                            // check the response status from the server.
+                                            if (response.status === 'success' || response.status === true) {
                                                 // let re render the tr element with a fade
                                                 let tr = document.getElementById("_tr_" + shift.shiftID);
                                                 let notification = document.getElementById("notification-container");
                                                 // remove the tr element
                                                 tr.parentNode.removeChild(tr);
                                                 // post the notification
-                                                // show the notificATION
                                                 notification.style.display = 'block';
-                                                ReactDOM.render(<Notes.SuccessNotification   message="Thank you the shift has been successfully accepted." />, notification);
+                                                ReactDOM.render(<Notes.SuccessNotification   messaage="Thank you the shift has been successfully accepted." />, notification);
                                             }
-                                            // if the response returns and error. 
+                                            // if the response returns and error.
                                              if (response.status === 'error') {
-
-                                             }
-
+                                                // let re render the tr element with a fade
+                                                let tr = document.getElementById("_tr_" + shift.shiftID);
+                                                let notification = document.getElementById("notification-container");
+                                                // remove the tr element
+                                                tr.parentNode.removeChild(tr);
+                                                // post the notification
+                                                notification.style.display = 'block';
+                                                ReactDOM.render(<Notes.WarningNotification   message="Something went wrong we were unable to accept the shift." />, notification);
+                                            }
+                                            // is there no more shifts in our table? if so then render the empty table message.
                                             if (document.getElementsByTagName('tbody')[0].childNodes.length === 0) {
                                                 // render our error message
                                                 ReactDOM.render(<RenderError />, document.getElementById('schedule-requests-table'));

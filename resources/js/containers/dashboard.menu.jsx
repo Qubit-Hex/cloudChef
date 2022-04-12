@@ -293,7 +293,7 @@ export const DashboardMenu = (props) => {
 
                 <div className='row d-flex pos'>
                   <div className='col'>
-                    <div className='card pos-button' onClick={
+                    <div className='btn-message text-center' onClick={
                         (e) => {
                             const container = document.getElementById('modal-container');
 
@@ -379,7 +379,7 @@ export const DashboardMenu = (props) => {
                                 } />, container);
                         }
                     }>
-                        <div className='card-header'>
+                        <div>
                             <h3 className='card-title'>Add Menu</h3>
                         </div>
 
@@ -391,7 +391,7 @@ export const DashboardMenu = (props) => {
 
 
                     <div className='col'>
-                        <div className='card pos-button' onClick={
+                        <div className='btn btn-message text-center' onClick={
                             (e) => {
                                 const container = document.getElementById('modal-container');
 
@@ -564,7 +564,7 @@ export const DashboardMenu = (props) => {
                                 }, 1500);
                             }
                         }>
-                        <div className='card-header'>
+                        <div>
                             <h3 className='card-title'>Add Item</h3>
                         </div>
                         <div className='card-body'>
@@ -574,7 +574,7 @@ export const DashboardMenu = (props) => {
                 </div>
 
                 <div className='col'>
-                    <div className='card pos-button' onClick={
+                    <div className='btn btn-message text-center' onClick={
                         (e) => {
                             let container = document.getElementById('modal-container');
                             let menu = getStoreMenus();
@@ -681,7 +681,7 @@ export const DashboardMenu = (props) => {
                             }, 1500);
                         }
                     }>
-                        <div className='card-header'>
+                        <div>
                             <h3 className='card-title'>Remove Menu</h3>
                         </div>
 

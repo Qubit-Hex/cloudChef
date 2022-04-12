@@ -119,14 +119,20 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
 
         /**
          *
-         * @route: /store/employee/get
+         *  @route: /store/ <EMPLOYEE> (GROUP)
          *
-         *
-         *  @purpose: inorder to get the employee infomration of a specific employee of the store
-        */
+         *  @purpose: inorder to get the store of the user
+         */
 
-            Route::get('/employee/get/{id}', [employee::class, 'get'])->name('store/employee/get/{id}');
+         Route::group(['prefix' => '/employees', 'middleware' => 'auth'], function () {
 
+            // all of the employee routes here
+            Route::get('/get/{id}', [employee::class, 'get'])->name('store/employees/get/{id}');
+            Route::get('/', [employee::class, 'showCurrentEmployees'])->name('store/employee/get');
+
+            // add employee to the system
+            Route::post('/add', [employee::class, 'add'])->name('store/employee/add');
+         });
 
         /**
          *  @route: /user/store/get
@@ -134,16 +140,6 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
          *  @purpose: inorder to ge the store of the user
          */
             Route::get ('/get', [store::class, 'get'])->name('/store/get');
-
-        /**
-         *
-         *  @Route: /employees
-         *
-         *  @purpose: inorder to get the members of the store
-         *
-         */
-
-         Route::get('/employees', [employee::class, 'showCurrentEmployees'])->name('/store/employees');
 
          /**
           *   @route / schedule /
@@ -174,6 +170,7 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
 
             // decline the shift request
             Route::post('/shift/decline', [schedule::class, 'declineShiftRequest'])->name('/schedule/shift/decline');
+            Route::post('/shift/accept', [schedule::class, 'acceptShiftRequest'])->name('/schedule/shift/accept');
 
         });
 
@@ -187,13 +184,9 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
           Route::group(['prefix' => '/recipes'], function () {
 
               Route::get('/get', [recipes::class, 'get'])->name('recipes/get');
-
               // add a group of sub route for accessing certin information about the reicpes
-
               Route::post('/add', [recipes::class, 'add'])->name('recipes/add');
-
               Route::get('/find/{id}', [recipes::class, 'find'])->name('recipes/find/{id}');
-
               Route::delete('/delete', [recipes::class, 'delete'])->name('recipes/delete');
 
             // group route for updating the reicpes in the system
@@ -201,11 +194,8 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
                     // the following route for updating the recipe summary, recipe ingredients, recipe steps, recipe instructions
                     // and the nutritional facts.
                     Route::patch('/recipeSummary/', [recipes::class, 'updateRecipeSummary'])->name('recipes/update/recipeSummary');
-
                     Route::patch('/ingredients/', [recipes::class, 'updateRecipeIngredients'])->name('recipes/update/recipeIngredients');
-
                     Route::patch('/recipeInstructions/', [recipes::class, 'updateRecipeInstructions'])->name('recipes/update/recipeInstructions');
-
                     Route::patch('/nutritionalFacts/', [recipes::class, 'updateRecipeNutritionalFacts'])->name('recipes/update/nutritionalFacts');
                 });
 

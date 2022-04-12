@@ -1,5 +1,4 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);
-@import url(https://fonts.googleapis.com/css2?family=Changa:wght@500&display=swap);
 /*
 
  @file: dashboard.css
@@ -8,371 +7,6 @@
  @purpose: inorder to sryle the landing page of our dashboard application
 
 */
-/**
-    @file: punch-card.scss
-
-    @purpose: this file contains the styles for the punch card component
-*/
-.punch-card-container {
-  width: 50%;
-  padding: 50px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  background: #00042806;
-  /* fallback for old browsers */
-  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #004e9202, #00042817);
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  border-radius: 5px;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-}
-.punch-card-container button {
-  width: 100%;
-  height: 100%;
-  border: none;
-  background-color: #fdfbfbd9;
-  border-radius: 5px;
-  box-shadow: 0px 0px 10px 2px rgba(73, 73, 73, 0.2);
-  cursor: pointer;
-  outline: none;
-  font-size: 1rem;
-  font-weight: bold;
-  color: #000;
-  text-align: center;
-  padding: 15px;
-  transition: all 0.2s ease-in-out;
-  margin: 5px;
-}
-.punch-card-container button:hover {
-  color: white;
-  background: #5895f0d9;
-  /* Old browsers */
-}
-.punch-card-container button:active {
-  background: #5895f0d9;
-  /* Old browsers */
-  transform: translateY(5px);
-  color: white;
-}
-
-.btn-signin {
-  background-color: #3262ffbb !important;
-  color: white !important;
-}
-.btn-signin:hover {
-  background-color: #0229a9e5 !important;
-  color: white;
-}
-.btn-signin:active {
-  background-color: #1d2d6385 !important;
-  color: white;
-  transform: translateY(5px);
-}
-
-.btn-signout {
-  background-color: #eb6161cb !important;
-  color: white !important;
-}
-.btn-signout:hover {
-  background-color: #921f1fcb !important;
-  color: white;
-}
-.btn-signout:active {
-  background-color: #ff1515cb !important;
-  color: white;
-  transform: translateY(5px);
-}
-
-.employee-punch-code {
-  width: 100%;
-  height: 100%;
-  border: none;
-  background-color: #f5f5f5;
-  border-radius: 5px;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-  outline: none;
-  font-size: 1rem;
-  font-weight: bold;
-  color: #000;
-  text-align: center;
-  padding: 15px;
-  transition: all 0.2s ease-in-out;
-  margin: 5px;
-}
-
-@media (max-width: 768px) {
-  .punch-card-container {
-    flex-direction: column;
-  }
-}
-.loading-screen-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #00042885;
-  /* fallback for old browsers */
-  z-index: 999999;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  transition: all 0.2s ease-in-out;
-  color: white;
-  text-align: center;
-}
-.loading-screen-container h1 {
-  font-size: 3rem;
-  font-weight: bold;
-}
-.loading-screen-container i {
-  font-size: 4.5rem;
-}
-
-#qr-code-container {
-  padding: 20px;
-  margin: 100px;
-}
-
-.qrAnimation {
-  -webkit-animation: qrAnimation 2.5s both;
-          animation: qrAnimation 2.5s both;
-}
-
-.qrcode-subtext {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #000;
-  text-align: center;
-}
-
-@-webkit-keyframes qrAnimation {
-  0% {
-    opacity: 0;
-    transform: scale(0);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes qrAnimation {
-  0% {
-    opacity: 0;
-    transform: scale(0);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-.hide {
-  display: none;
-}
-
-.show {
-  display: block;
-}
-
-/*
-    @file: orderSystem.scss
-
-    @purpose: to provide the styling for the order system component
-*/
-.pos .card-header {
-  background-color: transparent;
-}
-.pos .card-header i {
-  text-align: center;
-}
-
-.pos-button {
-  padding: 25px !important;
-  margin: 10px;
-  background-color: transparent;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.pos-button:hover {
-  cursor: pointer;
-  background-color: #5274fd;
-  color: white !important;
-}
-.pos-button:hover .text-muted {
-  color: white !important;
-}
-
-/**
-
-    @file: KitchenOrders.scss
-
-
-    @purpose: Kitchen Orders stylesheet / for a our virtual kds system
-
-*/
-.kitchen-display-unit .kitchen-ticket-container {
-  max-height: -webkit-fit-content;
-  max-height: -moz-fit-content;
-  max-height: fit-content;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  align-items: center;
-  background-color: rgba(110, 156, 255, 0.076);
-  cursor: pointer;
-}
-.kitchen-display-unit .kitchen-ticket-container * {
-  font-family: "Changa", sans-serif;
-  font-size: 10px;
-}
-.kitchen-display-unit .kitchen-ticket {
-  width: auto;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
-  border-radius: 5px;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: all 0.5s ease;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-}
-.kitchen-display-unit .kitchen-ticket .kitchen-ticket-header {
-  padding: 10px;
-  font-weight: bold;
-}
-.kitchen-display-unit .kitchen-ticket .kitchen-ticket-header * {
-  text-align: center;
-  text-shadow: 0.5px 0.5px 0.5px black;
-  font-weight: 700;
-  color: white;
-  font-size: 16px !important;
-}
-.kitchen-display-unit .kitchen-ticket .kitchen-ticket-header ul {
-  list-style-type: none;
-}
-@-webkit-keyframes fadeOut {
-  0% {
-    opacity: 1;
-    filter: grayscale(0);
-  }
-  100% {
-    opacity: 0;
-    filter: grayscale(100%);
-  }
-}
-@keyframes fadeOut {
-  0% {
-    opacity: 1;
-    filter: grayscale(0);
-  }
-  100% {
-    opacity: 0;
-    filter: grayscale(100%);
-  }
-}
-.kitchen-display-unit .kitchen-ticket .kitchen-order-type {
-  padding: 0px;
-  font-weight: bold;
-  text-align: center;
-  border-bottom: 0.5px solid slateblue;
-}
-.kitchen-display-unit .kitchen-ticket .kitchen-order-type * {
-  color: white;
-  font-size: 16px !important;
-  font-weight: 700;
-}
-.kitchen-display-unit .kitchen-ticket .kitchen-order-type .kitchen-order-stripe {
-  margin: 10px;
-  border-bottom: 0.5px solid rgba(255, 255, 255, 0.111);
-}
-.kitchen-display-unit .kitchen-ticket .kitchen-order-type .takeout, .kitchen-display-unit .kitchen-ticket .kitchen-order-type * {
-  background-color: white;
-  color: black !important;
-}
-.kitchen-display-unit .kitchen-ticket .kitchen-order {
-  padding: 10px;
-  font-weight: bold;
-  background-color: rgba(36, 34, 37, 0.083);
-}
-.kitchen-display-unit .kitchen-ticket .kitchen-order * {
-  color: #001aff;
-  font-size: 16px !important;
-  font-weight: 700;
-}
-.kitchen-display-unit .kitchen-ticket .kitchen-order .popText {
-  color: black;
-  font-size: 18px !important;
-  font-weight: 1000;
-}
-.kitchen-display-unit .kitchen-ticket .kitchen-order ul {
-  background-color: rgba(255, 173, 200, 0.124);
-  list-style: none;
-  padding: 0px;
-  margin: 0px;
-}
-.kitchen-display-unit .kitchen-ticket .kitchen-order ul * {
-  margin-left: 26px;
-  color: red;
-  font-size: 16px !important;
-  font-weight: 700;
-}
-.kitchen-display-unit .kitchen-ticket .kitchen-ticket-footer * {
-  margin: 25px;
-  font-size: 16px;
-  font-weight: 700;
-}
-.kitchen-display-unit .kitchen-bump-bar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: auto;
-  background-color: rgba(67, 86, 255, 0.761);
-  color: white;
-  font-size: 16px;
-  font-weight: 700;
-  text-align: center;
-  z-index: 9999;
-}
-.kitchen-display-unit .kitchen-bump-bar button {
-  width: 100%;
-  height: 100%;
-  border: none;
-  background-color: #fdfbfbd9;
-  border-radius: 5px;
-  box-shadow: 0px 0px 10px 2px rgba(73, 73, 73, 0.2);
-  cursor: pointer;
-  outline: none;
-  font-size: 1rem;
-  font-weight: bold;
-  color: #000;
-  text-align: center;
-  padding: 15px;
-  transition: all 0.2s ease-in-out;
-  margin: 5px;
-}
-.kitchen-display-unit .kitchen-bump-bar button:hover {
-  color: white;
-  background: #5895f0d9;
-  /* Old browsers */
-}
-.kitchen-display-unit .kitchen-bump-bar button:active {
-  background: #5895f0d9;
-  /* Old browsers */
-  transform: translateY(5px);
-  color: white;
-}
-
 /**
    @file: schedule.scss
 
@@ -383,7 +17,7 @@
   display: inline-block;
   width: 100%;
   height: 100%;
-  margin: 10px;
+  margin: 40px;
   padding: 25px;
   border-radius: 0;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
@@ -392,6 +26,33 @@
   overflow: hidden;
   cursor: pointer;
   transition: all 0.3s ease;
+}
+
+.pos-button {
+  border-radius: 50%;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+.pos-button:hover {
+  background-color: rgba(34, 32, 138, 0.223);
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.pos-button .card-header {
+  background-color: transparent;
+}
+.pos-button .card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #000;
+  text-align: center;
+  background-color: transparent;
 }
 
 /* Chrome 10-25, Safari 5.1-6 */
@@ -1413,9 +1074,10 @@
     transform: scale(1.1);
   }
 }
+/** button tiles for the employee page */
 body {
   font: 18px "Century Gothic", Futura, sans-serif;
-  background-color: #0704280f;
+  background-color: #02001b00;
 }
 
 .bg-white {

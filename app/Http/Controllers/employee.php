@@ -29,7 +29,8 @@ class employee extends Controller
      *
      */
 
-    public function get(Request $request, $id) {
+    public function get(Request $request, $id)
+    {
 
         $clientToken = $request->header('accessToken');
 
@@ -60,7 +61,6 @@ class employee extends Controller
                         'department' => $department,
                         'url' => $userImg
                     ]);
-
                 } else {
                     return response()->json([
                         'status' => 'error',
@@ -81,59 +81,76 @@ class employee extends Controller
      *  @purpose: inorder to get the current employees of the store
      */
 
-     public function showCurrentEmployees(Request $request)
-     {
-         $DB = DB::table('employee')->get();
+    public function showCurrentEmployees(Request $request)
+    {
+        $DB = DB::table('employee')->get();
 
-         /**
-          *  @stub: result
-          *  name -> name of employee
-          *  id -> id of employee
-          * department -> department of employee
-          * phone -> phone number of employee
-          * email -> email of employee
-          * role -> role of the employee
-          */
+        /**
+         *  @stub: result
+         *  name -> name of employee
+         *  id -> id of employee
+         * department -> department of employee
+         * phone -> phone number of employee
+         * email -> email of employee
+         * role -> role of the employee
+         */
 
-          // authenticate the user before proceeding to the request
+        // authenticate the user before proceeding to the request
 
-          $user = DB::table('users')->where('remember_token', $request->header('accessToken'))->first();
+        $user = DB::table('users')->where('remember_token', $request->header('accessToken'))->first();
 
-          if ($user) {
-                $store_members = DB::table('store_members')->where('userID', $user->userID)->first();
+        if ($user) {
+            $store_members = DB::table('store_members')->where('userID', $user->userID)->first();
 
-                if ($store_members) {
-                    $employees = DB::table('employee')->where('storeID', $store_members->storeID)->get();
+            if ($store_members) {
+                $employees = DB::table('employee')->where('storeID', $store_members->storeID)->get();
 
-                    $result = [];
+                $result = [];
 
-                    foreach ($employees as $employee) {
-                        $result[] = [
-                            'name' => $employee->first_name . ' ' . $employee->last_name,
-                            'id' => $employee->id,
-                            'department' => DB::table('department')->where('id', $employee->department_id)->first()->name,
-                            'address' => $employee->address,
-                            'phone' => $employee->phone,
-                            'location' => $employee->location,
-                            'email' => $employee->email,
+                foreach ($employees as $employee) {
+                    $result[] = [
+                        'name' => $employee->first_name . ' ' . $employee->last_name,
+                        'id' => $employee->id,
+                        'department' => DB::table('department')->where('id', $employee->department_id)->first()->name,
+                        'address' => $employee->address,
+                        'phone' => $employee->phone,
+                        'location' => $employee->location,
+                        'email' => $employee->email,
 
-                        ];
-                    }
-
-                    return response()->json([
-                        'status' => 'success',
-                        'data' => $result
-                    ]);
+                    ];
                 }
+
                 return response()->json([
-                    'status' => 'error',
-                    'message' => 'user does not belong to the store'
-                ], 401);
-          }
+                    'status' => 'success',
+                    'data' => $result
+                ]);
+            }
+            return response()->json([
+                'status' => 'error',
+                'message' => 'user does not belong to the store'
+            ], 401);
+        }
 
 
 
-         return response()->json($DB);
-     }
+        return response()->json($DB);
+    }
 
+    /**
+     *  @method: add ( employee )
+     *
+     *
+     *  @purpose: inorder to add a new employee to the store.
+     *
+     */
+    public function add(Request $request)
+    {
+
+        // add the employee logic here
+        return response()->json([
+            // route not yet created
+            'status' => 'success',
+            'message' => 'route is not yet created'
+        ]);
+    }
 }

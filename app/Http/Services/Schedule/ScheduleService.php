@@ -218,13 +218,14 @@ class ScheduleService
                     ->where('store_schedule', $insert['store_schedule'])
                     ->where('day', $insert['day'])
                     ->update($insert);
+
                 if ($query) {
                     $insertChecker[] = true;
                 }
 
-            } else { // create a brandnew resource
-              $query =  DB::table('employee_shift')
-                    ->insert($insert);
+            } else {
+                // create a brand new resource.
+              $query =  DB::table('employee_shift')->insert($insert);
                 if ($query) {
                     $insertChecker[] = true;
                 }
@@ -241,7 +242,8 @@ class ScheduleService
         } else {
             return response()->json([
                 'status' => 200,
-                'message' => 'Schedule added successfully'
+                'message' => 'Schedule added successfully',
+                'debug' => $groupInsert
             ]);
         }
     }
@@ -937,17 +939,19 @@ class ScheduleService
         // check was our request was successful ?
         if (ValidationServiceInterface::validateAdmin($request)) {
             // preform the decline request.
-
             // lets relay the request and deny the shifts request
-            // and store a message to be retrieve by the employee
+            // use the validator to return the store of which the user does belong too.
             $req = new ScheduleRequests();
+            $store = ValidationServiceInterface::isStoreValid($request);
 
-            if ($req->declineShiftRequest($request['shift']))
+            if ($req->declineShiftRequest($request['shift'], $store))
             {
+                // make a insert into the notifications table to let orginal user know
+                // that status of their request.
                 // send the message to the server
                 return response()->json([
                     'status' => 200,
-                    'message' => 'success'
+                    'message' => 'success',
                 ]);
             }
 
@@ -969,17 +973,24 @@ class ScheduleService
 
        static function acceptShiftRequest ($request)
        {
-
            // check was our request was successful ?
             if (ValidationServiceInterface::validateAdmin($request))
             {
+                // preform our inilizations of vars that we needd to pass to the request interface.
+                $req = new ScheduleRequests();
+                $store = ValidationServiceInterface::isStoreValid($request);
+                if ($req->acceptShiftRequest($request['shift'], $store))
+                {
+                    // lets the user know of the status of their request
+                    // send the message to the server
 
-                // swap the shifts....
-                return response()->json([
-                    'status' => 200,
-                    'message' => 'success'
-                ]);
 
+                    
+                    return response()->json([
+                        'status' => 200,
+                        'message' => 'success'
+                    ]);
+                }
             } else {
                 return response()->json([
                     // display message for a invalid permissions error
@@ -987,6 +998,5 @@ class ScheduleService
                     'message' => 'not authorized to access this resource'
                 ]);
             }
-
        }
 }
