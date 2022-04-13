@@ -109,7 +109,6 @@ const validateForm = (e) => {
             }
             return true;
         } else {
-
             el.classList.add('is-invalid');
             let spawnElement = el.parentElement.appendChild(document.createElement('div'));
             // check do we already have a error message if we dont one then we will span a new element
@@ -125,7 +124,6 @@ const validateForm = (e) => {
     // validate a phone number
     const validatePhone = (el) => {
         let phone = el.value;
-
         // strip all non numeric characters from the phone number
         phone = phone.replace(/\D/g,'');
 
@@ -147,10 +145,6 @@ const validateForm = (e) => {
             return false;
         }
     }
-
-    // todo * needs to be done *
-    // add a send email function to send the password to the employee and invite link
-    // add a sms function to send the password to the employee and invite link to the employee
 
     // validate all the inputs and return true or false
     const validate = () => {

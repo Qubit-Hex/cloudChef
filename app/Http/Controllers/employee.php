@@ -167,7 +167,11 @@ class employee extends Controller
 
     public function edit(Request $request)
     {
-
+        return response()->json([
+            'status' => 'success',
+            'message' => 'employee edited successfully'
+        ]);
+    
     }
 
     /**

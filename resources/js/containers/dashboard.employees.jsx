@@ -15,7 +15,10 @@
 
 import React from "react";
 import ReactDOM from "react-dom";
-import { EmployeeAddModal } from "../components/dashboard/employee/employee.add";
+
+
+import { EmployeeAddModal} from "../components/dashboard/employee/employee.add";
+import { EmployeeEditDialog } from "../components/dashboard/employee/employee.edit";
 
 
 export const EmployeesPage = (props) => {
@@ -69,7 +72,11 @@ export const EmployeesPage = (props) => {
                             </div>
                             <div className='card-body'>
                                 {/** edit button */}
-                                <button className='btn btn-message' onClick={() => props.editEmployee()}>Edit Employee</button>
+                                <button className='btn btn-message' onClick={() =>{
+                                    const container = document.getElementById('modal-container');
+                                    ReactDOM.render(<EmployeeEditDialog />, container);
+
+                                }}>Edit Employee</button>
                             </div>
                         </div>
                     </div>

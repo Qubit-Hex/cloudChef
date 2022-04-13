@@ -127,9 +127,9 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
          Route::group(['prefix' => '/employees', 'middleware' => 'auth'], function () {
 
             // all of the route actions for the employee group....
-            
+
             Route::post('/add', [employee::class, 'add'])->name('store/employee/add');
-            Route::patch('/edit', [employee::class, 'edit'])->name('store/employee/edit');
+            Route::put('/edit', [employee::class, 'edit'])->name('store/employee/edit');
             Route::delete('/delete', [employee::class, 'delete'])->name('store/employee/delete');
             // all of the employee routes here
             Route::get('/get/{id}', [employee::class, 'get'])->name('store/employees/get/{id}');

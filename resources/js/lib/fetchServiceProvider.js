@@ -202,6 +202,35 @@ export default class FetchServiceProvider {
             });
     }
 
+
+    /*
+
+        @method: put
+
+        @purpose: to update data in an api using a put request
+    */
+
+    async put(url, data, headers) {
+
+            let request = new Request(url, {
+                method: 'PUT',
+                body: JSON.stringify(data),
+                headers: headers
+            });
+
+            return fetch(request)
+                .then(response => {
+                    return new Promise((resolve, reject) => {
+                        response.json().then(data => {
+                            resolve(data);
+                        });
+                    });
+                }).catch(error => {
+                    console.log(error);
+                });
+    }
+
+
     /**
      *
      *  @method: delete
