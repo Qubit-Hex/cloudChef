@@ -2,12 +2,12 @@
 
 
 /**
- * 
- * 
- *  @class: RegistrationRequest 
- * 
- * 
- *  @purpose: inorder to proccess the user registration for new accounts into the system 
+ *
+ *
+ *  @class: RegistrationRequest
+ *
+ *
+ *  @purpose: inorder to proccess the user registration for new accounts into the system
  */
 
 
@@ -23,44 +23,43 @@ class RegistrationRequest {
     // SET OUR THROTTLE LIMIT
     protected $rateLimit = 5;
     protected $rateLimitTableName = 'user_registration_log';
-    
-    // SET OUR THROTTLE TIMEOUT
 
+    // SET OUR THROTTLE TIMEOUT
     protected $requestLimit = 50;
 
     public function __construct(Array $data)
-    {   
+    {
         // load our encryption lib in our class
         $this->encryption = new encryption();
         $this->data = $data;
     }
 
     /**
-     *  
-     *  @method: registerUser 
-     *  
+     *
+     *  @method: registerUser
+     *
      *  @purpose: to register a new user into the system
      */
 
      public function registerUser(array $data) {
-        // generate our sql query for the user Registration 
+        // generate our sql query for the user Registration
         $SQL_QUERY = $this->generateSQLQuery($data);
 
-        // next we are going to look up how many users are registered with the same ip address 
+        // next we are going to look up how many users are registered with the same ip address
         // let set a rate limit to max of 5 accounts to prevent bots from registring
 
         if (!$this->checkRateLimit()) {
-            return response()->json(['status' => 'error', 'message' => 'You have met or successed number of accounts 
+            return response()->json(['status' => 'error', 'message' => 'You have met or successed number of accounts
             allowed by this IP Address!'], 401);
         }
 
         // check if user already exists in our system
         $db_user = DB::table('users')->where('email', $data['username'])->first();
-        
+
         if ($db_user) {
             return response()->json(['status' => 'error', 'message' => 'User already exists!'], 401);
         }
-        // insert our user into the database using our REQUEST THAT WE FORMED 
+        // insert our user into the database using our REQUEST THAT WE FORMED
         $user_id = DB::table('users')->insertGetId($SQL_QUERY);
 
         if (!$user_id) {
@@ -72,7 +71,7 @@ class RegistrationRequest {
             return response()->json(['status' => 'error', 'message' => 'Registration Failed!'], 401);
         }
 
-        // force the user to login for the first time after the registration is complete 
+        // force the user to login for the first time after the registration is complete
         // we will return the user to the login page
         return response()->json(['status' => 'success',
                                  'message' => 'User Registration Successful!',
@@ -80,7 +79,7 @@ class RegistrationRequest {
      }
 
      /**
-      *   @method: generateSQLQuery 
+      *   @method: generateSQLQuery
       *
       *   @purpose: to generate the query array for the registration request
       */
@@ -99,17 +98,17 @@ class RegistrationRequest {
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'), // we will update this later
                 'status' => true, // if false the account is disabled
-            ];          
+            ];
             return $userData;
         }
 
 
         /**
-         * 
-         * @method: checkRateLimit 
-         * 
+         *
+         * @method: checkRateLimit
+         *
          *  @purpose: inorder to add a rate throttle to the registration process
-         * 
+         *
          */
 
          public function checkRateLimit() {
@@ -121,8 +120,8 @@ class RegistrationRequest {
 
 
          /**
-          * 
-          *  @method: generateRegistrationLog 
+          *
+          *  @method: generateRegistrationLog
           *
           *  @purpose: inorder to create a entry in the registration log table
           *

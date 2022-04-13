@@ -44,6 +44,18 @@ use Illuminate\Support\Facades\DB;
         return Response()->json(['status' => 'failure']);
     }
 
+    /**
+     *
+     *  @method: makeStore
+     *
+     *  @purpose: this will create a new store for the user
+     */
+
+    public static function makeStore($request)
+    {
+        // some logic here to make a new store for the user.
+    }
+
  }
 
 

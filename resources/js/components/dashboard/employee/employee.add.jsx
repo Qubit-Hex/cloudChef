@@ -73,7 +73,7 @@ const validateForm = (e) => {
         const password = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
         return password;
     }
-    
+
     // validate any textual elements that are required
     const validateTextInput = (el) => {
         if (el.value === '' || el.value < 5) {
@@ -191,12 +191,41 @@ const validateForm = (e) => {
 
         // send the request to the server
         createEmployee(request).then((response) => {
-            //
-        });
-    } else {
-        e.preventDefault();
-    }
 
+            let container = document.getElementById('modal-container');
+            // the resonse from the server
+            if (response.status === 'success' || response.status === 200) {
+                // return the success message to the client
+                return ReactDOM.render(<TemplateModal title={"Success"}
+                body={
+                    <div>
+
+                        <img src='/img/SVG/employee_card.svg' width={300} height={300} alt='employee card' className='mx-auto'/>
+                        <p>
+                            <strong>
+                                {response.message}
+                            </strong>
+                        </p>
+                    </div>
+                } />, container);
+
+            } else {
+                // display the error message to the client
+                return ReactDOM.render(<TemplateModal title={"Error"}
+                body={
+                    <div>
+                        <p>
+                            <strong>
+                                {response.message}
+                            </strong>
+                        </p>
+                    </div>
+                } />, container);
+
+            }
+        });
+    }
+    e.preventDefault();
 
 }
 

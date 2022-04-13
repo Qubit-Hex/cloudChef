@@ -94,6 +94,8 @@
         *
         *  @purpose: to register a new user to the system
         *  @param: array $request
+            
+        *
         */
 
         static  function register(Request $request)

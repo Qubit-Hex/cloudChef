@@ -160,14 +160,6 @@ export class DashboardNav extends Component {
                             <span className="nav-link-text">Schedule</span>
                         </a>
 
-
-                        {/** menu */}
-                        <a href="/dashboard/menu/" className="nav-link">
-                            <i className="fas fa-utensils"></i>
-                            <span className="nav-link-text">Menu</span>
-                        </a>
-
-
                         {/** employees */}
                         <a href="/dashboard/employees/" className="nav-link">
                             {/** employee tie icon */}

@@ -22,7 +22,7 @@ export const DashboardRecipies = (props) => {
     const [recipes, setRecipes] = React.useState({});
 
 
-    // get the recipe information from the database
+    // get the recipe information from tAdd he database
     // and enumerate the table row inorder to get the recipes information
     const getRecipes = () => {
         const api = new FetchServiceProvider();
@@ -146,7 +146,7 @@ export const DashboardRecipies = (props) => {
                 {/** here we are going to add a component inorder to create a section to add recipes to the database  */}
 
                 <div className='col-md-6 mx-auto d-block'>
-                    <div className='card p-0'>
+                    <div className='card'>
                         {/** font awesome add button */}
                         <div className='modal-header'>
                             <h4 className='text-center ' style={{
