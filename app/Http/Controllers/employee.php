@@ -122,7 +122,8 @@ class employee extends Controller
 
                 return response()->json([
                     'status' => 'success',
-                    'data' => $result
+                    'data' => $result,
+                    'eData' => $employees
                 ]);
             }
             return response()->json([
@@ -167,11 +168,14 @@ class employee extends Controller
 
     public function edit(Request $request)
     {
-        return response()->json([
-            'status' => 'success',
-            'message' => 'employee edited successfully'
-        ]);
-    
+
+        $query = [
+            'token' => $request->header('accessToken'),
+            'data' => $request->all()
+        ];
+
+        // perform the edit operation on the said user.
+        return employeeServiceInterface::edit($query);
     }
 
     /**

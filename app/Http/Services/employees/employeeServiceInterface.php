@@ -100,7 +100,7 @@ class EmployeeServiceInterface {
                 ]);
 
               }
-              
+
 
                 return response()->json([
                     'status' => 'success',
@@ -119,6 +119,81 @@ class EmployeeServiceInterface {
                 ]);
          }
     }
+
+    /**
+     *
+     * @method: edit
+     *
+     * @purpose: inorder to edit an existing employee
+     *
+     */
+
+     static function edit($request)
+     {
+        // first lets validate the request and check if the user has permission inorder to preform that request
+
+        $validationCheck = Validation::validateUser($request['token']);
+
+        // check if the user has the correct permissions inorder to preform the task.
+        if (!$validationCheck) {
+            // check the validation of the user
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'You do not have permission to preform this request',
+                'data' => 12,
+                'ins' => '111'
+            ]);
+        }
+
+
+        $storeID = $validationCheck->storeID;
+
+        // next lets edit the information of the employee with that data that we have provided.
+        $employee = DB::table('employee')->where('userID', $request['data']['id'])->where('storeID', $storeID)->first();
+
+        // check if the employee exist and if the employee exist then we will update the information of the employee
+        if (!$employee) {
+
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Employee does not exist',
+                'data' => 12,
+                'ins' => '111'
+            ]);
+        }
+
+        // now update the employee information.
+        $updateEmployee = DB::table('employee')->where('userID', $request['data']['id'])->where('storeID', $storeID)->update([
+            'first_name' => $request['data']['first_name'],
+            'last_name' => $request['data']['last_name'],
+            'address' => $request['data']['address'],
+            'email' => $request['data']['email'],
+            'location' => $request['data']['location'],
+            'salary' => $request['data']['salary'],
+            'phone' => $request['data']['phone'],
+            'is_active' => $request['data']['is_active'],
+            'start_date' => $request['data']['start_date'],
+            'end_date' => $request['data']['end_date'] === null ? NULL : $request['data']['end_date']
+        ]);
+
+        // check if the employee was update successfully
+        if ($updateEmployee) {
+            // if the employee was updated successfully then we will return the response to the user
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Employee was updated successfully',
+            ]);
+        } else {
+            // if the employee was not updated successfully then we will return the response to the user
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Employee was not updated successfully',
+                'data' => 12,
+                'ins' => '111'
+            ]);
+        }
+
+     }
 }
 
 

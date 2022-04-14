@@ -78,11 +78,23 @@ const EditEmployeeForm = (props) => {
         }
     });
 
-    let name = data[0].name;
-    let email = data[0].email;
-    let location = data[0].location;
-    let phone = data[0].phone;
-    let address = data[0].address;
+    // all of the input fields for the edit form
+
+    let requestInput = {
+        first_name: data[0].first_name,
+        last_name: data[0].last_name,
+        address: data[0].address,
+        location: data[0].location,
+        phone: data[0].phone,
+        email: data[0].email,
+        phone: data[0].phone,
+        salary: data[0].salary,
+        is_active: data[0].is_active,
+        start_date: data[0].start_date,
+        end_date: data[0].end_date,
+    };
+
+
 
     return (
         <TemplateModal
@@ -93,14 +105,49 @@ const EditEmployeeForm = (props) => {
                         <h3>Edit Employee Information.</h3>
                     </div>
 
-                    <form className="form-group">
+                    <form className="form-group" onSubmit={
+                        (e) => {
+                            e.preventDefault();
+
+
+                            let inputs = {
+                                id: id,
+                                first_name: e.target.first_name.value,
+                                last_name: e.target.last_name.value,
+                                address: e.target.address.value,
+                                location: e.target.location.value,
+                                phone: e.target.phone.value,
+                                email: e.target.email.value,
+                                salary: e.target.salary.value,
+                                is_active: e.target.active.checked,
+                                start_date: e.target.start_date.value,
+                                end_date: e.target.end_date.value,
+                            };
+
+
+                            RequestEditEmployee(inputs).then((response) => {
+                                let container = document.getElementById('modal-container');
+
+                                if (response.status === 'success') {
+                                    // render the success message
+                                    ReactDOM.render(<TemplateModal title="Success"
+                                    body={
+                                    <div className="text-center">Employee information has been updated successfully.</div>} />, container);
+                                } else {
+                                    // render the error message.
+                                    ReactDOM.render(<TemplateModal title="Error" body={<div className="text-center">{response.message}</div>} />, container);
+                                }
+                            });
+                        }
+                    }   >
                         <div className="form-group">
                             <label htmlFor="first_name">First Name</label>
                             <input
                                 type="text"
+                                name='first_name'
                                 className="form-control mt-2 mb-2"
-                                value={data[0].name}
                                 id="first_name"
+                                defaultValue={requestInput.first_name}
                                 placeholder="First Name"
                             />
                         </div>
@@ -108,8 +155,10 @@ const EditEmployeeForm = (props) => {
                             <label htmlFor="last_name">Last Name</label>
                             <input
                                 type="text"
+                                name='last_name'
                                 className="form-control mt-2 mb-2"
                                 id="last_name"
+                                defaultValue={requestInput.last_name}
                                 placeholder="Last Name"
                             />
                         </div>
@@ -117,20 +166,34 @@ const EditEmployeeForm = (props) => {
                             <label htmlFor="address">Address</label>
                             <input
                                 type="text"
+                                name='address'
                                 className="form-control mt-2 mb-2"
                                 id="address"
-                                value={address}
+                                defaultValue={requestInput.address}
                                 placeholder="Address"
                             />
                         </div>
+
+                        <div className="form-group">
+                            <label htmlFor="location">Location</label>
+                            <input
+                                type="text"
+                                name='location'
+                                className="form-control mt-2 mb-2"
+                                id="location"
+                                defaultValue={requestInput.location}
+                                placeholder="Location"
+                            />
+                        </div>
+
                         <div className="form-group">
                             <label htmlFor="email">Email</label>
                             <input
                                 type="email"
                                 className="form-control mt-2 mb-2"
                                 id="email"
-                                value={email}
-                                placeholder="Email"
+                                defaultValue={requestInput.email}
+                                name='email'
                             />
                         </div>
                         <div className="form-group">
@@ -139,7 +202,8 @@ const EditEmployeeForm = (props) => {
                                 type="text"
                                 className="form-control mt-2 mb-2"
                                 id="phone"
-                                value={phone}
+                                name='phone'
+                                defaultValue={requestInput.phone}
                                 placeholder="Phone"
                             />
                         </div>
@@ -149,6 +213,8 @@ const EditEmployeeForm = (props) => {
                                 type="text"
                                 className="form-control mt-2 mb-2"
                                 id="salary"
+                                name='salary'
+                                defaultValue={requestInput.salary}
                                 placeholder="Salary"
                             />
                         </div>
@@ -164,6 +230,8 @@ const EditEmployeeForm = (props) => {
                             <input
                                 class="form-check-input"
                                 type="checkbox"
+                                name='active'
+                                defaultChecked={requestInput.is_active}
                                 id="flexSwitchCheckDefault"
                             />
                         </div>
@@ -172,8 +240,10 @@ const EditEmployeeForm = (props) => {
                             <label htmlFor="start_date">Start Date</label>
                             <input
                                 type="date"
+                                name='start_date'
                                 className="form-control mt-2 mb-2"
                                 id="start_date"
+                                defaultValue={requestInput.start_date}
                                 placeholder="Start Date"
                             />
                         </div>
@@ -181,8 +251,10 @@ const EditEmployeeForm = (props) => {
                             <label htmlFor="end_date">End Date</label>
                             <input
                                 type="date"
+                                name='end_date'
                                 className="form-control mt-2 mb-2"
                                 id="end_date"
+                                defaultValue={requestInput.end_date}
                                 placeholder="End Date"
                             />
                         </div>
@@ -209,9 +281,10 @@ export const EmployeeEditDialog = (props) => {
     React.useEffect(() => {
         // get the data inside of our state of our compoent.
         EmployeeRequest().then((response) => {
-            setEData(response.data);
+            setEData(response.eData);
         });
     }, []);
+
 
     return (
         <TemplateModal
@@ -266,7 +339,7 @@ export const EmployeeEditDialog = (props) => {
                                             key={employee.id}
                                             value={employee.id}
                                         >
-                                            {employee.name}
+                                            {employee.first_name + " " + employee.last_name }
                                         </option>
                                     );
                                 })}
