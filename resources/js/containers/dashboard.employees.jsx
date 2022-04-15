@@ -5,23 +5,55 @@
  *
  *  @purpose : this component is used to render the employees page
  *
- *
- *
- *  @functionaily : inorder to add employees, edit employee details, and remove employees from the store
- *
  */
 
 
 
 import React from "react";
 import ReactDOM from "react-dom";
-
+import FetchServiceProvider from "../lib/fetchServiceProvider";
 
 import { EmployeeAddModal} from "../components/dashboard/employee/employee.add";
 import { EmployeeEditDialog } from "../components/dashboard/employee/employee.edit";
+import { EmployeeDeleteDialog } from "../components/dashboard/employee/employee.delete";
+
+
+
+const RequestStoreEmployees = async () => {
+    const api = new FetchServiceProvider();
+    const route = "/api/store/employees/";
+
+
+    const headers = {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        accessToken: api.getCookie("accessToken"),
+    };
+    // return the promise for us to work with at a later time/
+    return await api.get(route, headers);
+}
+
 
 
 export const EmployeesPage = (props) => {
+
+
+    const [employees, setEmployees] = React.useState([]);
+    // femployee is the rest formated response.
+
+    React.useEffect(() => {
+        RequestStoreEmployees().then((response) => {
+            setEmployees(response.eData);
+        });
+    }, []);
+
+
+    // conver the yearly salary into a hourly rate
+    const calculateHoursRate = (salary) => {
+        // get the hourly rate of the employee of the store.
+        return Math.floor( salary / 52 / 5 / 8 ) + " / HR";
+    }
+
 
     return (
         <div className="container-fluid profile_card dashboard-content">
@@ -93,7 +125,13 @@ export const EmployeesPage = (props) => {
                             </div>
                             <div className='card-body'>
                                 {/** delete button */}
-                                <button className='btn btn-message' onClick={() => props.deleteEmployee()}>Delete Employee</button>
+                                <button className='btn btn-message' onClick={
+                                    (e) => {
+                                        const container = document.getElementById('modal-container');
+
+                                        ReactDOM.render(<EmployeeDeleteDialog />, container);
+                                    }
+                                }>Delete Employee</button>
                             </div>
                         </div>
                     </div>
@@ -106,6 +144,9 @@ export const EmployeesPage = (props) => {
                         <div className='card-header text-center bg-transparent'>
                             <img src='/img/SVG/current_employees.svg' width={200} height={200} className='mx-auto' />
                             <h3 className='card-title'>Current Employees</h3>
+                            <small className='text-center text-muted'>
+                                View your current roaster of employees
+                            </small>
                             {/** font awesome table icon */}
                         </div>
                         <div className='card-body'>
@@ -119,18 +160,34 @@ export const EmployeesPage = (props) => {
                                         <th>Email</th>
                                         <th>Phone</th>
                                         <th>Address</th>
-                                        <th>City</th>
-                                        <th>State</th>
-                                        <th>Zip</th>
-                                        <th>Hire Date</th>
-                                        <th>Salary</th>
-                                        <th>Commission</th>
-                                        <th>Manager</th>
-                                        <th>Department</th>
+                                        <th> Department </th>
+                                        <th> Location</th>
+                                        <th> Salary </th>
+                                        <th> Start Date. </th>
+                                        <th> End Date </th>
                                     </tr>
                                 </thead>
                                 <tbody>
-
+                                    {
+                                        employees.map((employee) => {
+                                        // render the information of the employee that we have
+                                        // recived from the api.
+                                            return (
+                                                <tr key={employee.id}>
+                                                    <td>{ employee.first_name}</td>
+                                                    <td>{ employee.last_name }</td>
+                                                    <td>{employee.email}</td>
+                                                    <td>{employee.phone}</td>
+                                                    <td>{employee.address}</td>
+                                                    <td>{ employee.department }</td>
+                                                    <td> { employee.location }</td>
+                                                    <td> { calculateHoursRate(employee.salary)} </td>
+                                                    <td> { employee.start_date } </td>
+                                                    <td> { employee.end_date === null ? "N/A" : employee.end_date } </td>
+                                                </tr>
+                                            )
+                                        })
+                                    }
                                 </tbody>
                             </table>
                         </div>

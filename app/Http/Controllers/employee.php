@@ -188,6 +188,12 @@ class employee extends Controller
 
     public function delete(Request $request)
     {
+        $query = [
+            'token' => $request->header('accessToken'),
+            'employeeID' => $request->header('employeeID')
+        ];
 
+
+        RETURN employeeServiceInterface::delete($query);
     }
 }

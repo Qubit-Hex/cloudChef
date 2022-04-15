@@ -128,14 +128,37 @@ const EditEmployeeForm = (props) => {
                             RequestEditEmployee(inputs).then((response) => {
                                 let container = document.getElementById('modal-container');
 
+
+                                console.log(response);
+
                                 if (response.status === 'success') {
                                     // render the success message
                                     ReactDOM.render(<TemplateModal title="Success"
                                     body={
-                                    <div className="text-center">Employee information has been updated successfully.</div>} />, container);
+                                    <div>
+                                        <div className="header-subtitle text-center">
+                                            <h3>Employee Information Updated Successfully.</h3>
+                                        </div>
+
+                                        <div className="text-center">
+                                            <img src='/img/SVG/Call waiting.svg' alt="" width={200} height={200} className='mx-auto'/>
+                                        </div>
+                                    </div>
+                                    } />, container);
                                 } else {
                                     // render the error message.
-                                    ReactDOM.render(<TemplateModal title="Error" body={<div className="text-center">{response.message}</div>} />, container);
+                                    ReactDOM.render(<TemplateModal title="Error" body={
+                                        <div>
+                                            <div className="header-subtitle text-center">
+                                                <h3> { response.message }.</h3>
+                                            </div>
+
+                                            <div className='text-center'>
+                                                <img src='/img/errors/cancel.svg' alt="" width={200} height={200} className='mx-auto'/>
+                                            </div>
+
+                                        </div>
+                                        } />, container);
                                 }
                             });
                         }
@@ -145,7 +168,7 @@ const EditEmployeeForm = (props) => {
                             <input
                                 type="text"
                                 name='first_name'
-                                className="form-control mt-2 mb-2"
+                                className="form-control mt-1 mb-1"
                                 id="first_name"
                                 defaultValue={requestInput.first_name}
                                 placeholder="First Name"
@@ -156,7 +179,7 @@ const EditEmployeeForm = (props) => {
                             <input
                                 type="text"
                                 name='last_name'
-                                className="form-control mt-2 mb-2"
+                                className="form-control mt-1 mb-1"
                                 id="last_name"
                                 defaultValue={requestInput.last_name}
                                 placeholder="Last Name"
@@ -167,7 +190,7 @@ const EditEmployeeForm = (props) => {
                             <input
                                 type="text"
                                 name='address'
-                                className="form-control mt-2 mb-2"
+                                className="form-control mt-1 mb-1"
                                 id="address"
                                 defaultValue={requestInput.address}
                                 placeholder="Address"
@@ -179,7 +202,7 @@ const EditEmployeeForm = (props) => {
                             <input
                                 type="text"
                                 name='location'
-                                className="form-control mt-2 mb-2"
+                                className="form-control mt-1 mb-1"
                                 id="location"
                                 defaultValue={requestInput.location}
                                 placeholder="Location"
@@ -190,7 +213,7 @@ const EditEmployeeForm = (props) => {
                             <label htmlFor="email">Email</label>
                             <input
                                 type="email"
-                                className="form-control mt-2 mb-2"
+                                className="form-control mt-1 mb-1"
                                 id="email"
                                 defaultValue={requestInput.email}
                                 name='email'
@@ -200,7 +223,7 @@ const EditEmployeeForm = (props) => {
                             <label htmlFor="phone">Phone</label>
                             <input
                                 type="text"
-                                className="form-control mt-2 mb-2"
+                                className="form-control mt-1 mb-1"
                                 id="phone"
                                 name='phone'
                                 defaultValue={requestInput.phone}
@@ -211,7 +234,7 @@ const EditEmployeeForm = (props) => {
                             <label htmlFor="salary">Salary</label>
                             <input
                                 type="text"
-                                className="form-control mt-2 mb-2"
+                                className="form-control mt-1 mb-1"
                                 id="salary"
                                 name='salary'
                                 defaultValue={requestInput.salary}
@@ -221,14 +244,14 @@ const EditEmployeeForm = (props) => {
                         {/** toggle switch for active account */}
                         <div class="form-check form-switch">
                             <label
-                                class="form-check-label mt-2 mb-2"
+                                class="form-check-label mt-1 mb-1"
                                 for="flexSwitchCheckDefault"
                             >
                                 {" "}
                                 Active{" "}
                             </label>
                             <input
-                                class="form-check-input"
+                                class="form-check-input mt-1 mb-1"
                                 type="checkbox"
                                 name='active'
                                 defaultChecked={requestInput.is_active}
@@ -241,7 +264,7 @@ const EditEmployeeForm = (props) => {
                             <input
                                 type="date"
                                 name='start_date'
-                                className="form-control mt-2 mb-2"
+                                className="form-control mt-1 mb-1"
                                 id="start_date"
                                 defaultValue={requestInput.start_date}
                                 placeholder="Start Date"
@@ -252,7 +275,7 @@ const EditEmployeeForm = (props) => {
                             <input
                                 type="date"
                                 name='end_date'
-                                className="form-control mt-2 mb-2"
+                                className="form-control mt-1 mb-1"
                                 id="end_date"
                                 defaultValue={requestInput.end_date}
                                 placeholder="End Date"
@@ -261,7 +284,7 @@ const EditEmployeeForm = (props) => {
 
                         <button
                             type="submit"
-                            className="btn btn-message mt-2 mb-2"
+                            className="btn btn-message mt-1 mb-1"
                         >
                             <i className="fas fa-save"></i> Save
                         </button>
@@ -295,6 +318,7 @@ export const EmployeeEditDialog = (props) => {
 
                     <div className="header-subtitle text-center">
                         <h3>Edit Employee Information.</h3>
+                        <img src='/img/SVG/employee_card.svg' width={200} height={200} className='mx-auto' />
                     </div>
 
                     <div className="form-group">
@@ -324,11 +348,15 @@ export const EmployeeEditDialog = (props) => {
                                 );
                             }}
                         >
-                            <label htmlFor="employee-select">
+                            <label htmlFor="employee-select" style={{
+                                fontSize: '1.5rem',
+                                fontWeight: 'bold',
+
+                            }}>
                                 Select Employee
                             </label>
                             <select
-                                className="form-control"
+                                className="form-control mt-2 mb-2"
                                 name="employee"
                                 id="employee-select"
                             >

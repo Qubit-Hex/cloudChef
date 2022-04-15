@@ -139,21 +139,16 @@ class EmployeeServiceInterface {
             // check the validation of the user
             return response()->json([
                 'status' => 'failed',
-                'message' => 'You do not have permission to preform this request',
-                'data' => 12,
-                'ins' => '111'
+                'message' => 'You do not have permission to preform this request'
             ]);
         }
 
-
         $storeID = $validationCheck->storeID;
-
         // next lets edit the information of the employee with that data that we have provided.
-        $employee = DB::table('employee')->where('userID', $request['data']['id'])->where('storeID', $storeID)->first();
+        $employee = DB::table('employee')->where('id', $request['data']['id'])->where('storeID', $storeID)->first();
 
         // check if the employee exist and if the employee exist then we will update the information of the employee
         if (!$employee) {
-
             return response()->json([
                 'status' => 'failed',
                 'message' => 'Employee does not exist',
@@ -162,38 +157,94 @@ class EmployeeServiceInterface {
             ]);
         }
 
-        // now update the employee information.
-        $updateEmployee = DB::table('employee')->where('userID', $request['data']['id'])->where('storeID', $storeID)->update([
-            'first_name' => $request['data']['first_name'],
-            'last_name' => $request['data']['last_name'],
-            'address' => $request['data']['address'],
-            'email' => $request['data']['email'],
-            'location' => $request['data']['location'],
-            'salary' => $request['data']['salary'],
-            'phone' => $request['data']['phone'],
-            'is_active' => $request['data']['is_active'],
-            'start_date' => $request['data']['start_date'],
-            'end_date' => $request['data']['end_date'] === null ? NULL : $request['data']['end_date']
-        ]);
+        // check if the content sent by the user is the same
+        // as thats in the database
 
-        // check if the employee was update successfully
-        if ($updateEmployee) {
-            // if the employee was updated successfully then we will return the response to the user
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Employee was updated successfully',
-            ]);
-        } else {
-            // if the employee was not updated successfully then we will return the response to the user
+        if ($employee->first_name == $request['data']['first_name'] &&
+            $employee->last_name == $request['data']['last_name'] &&
+            $employee->address == $request['data']['address'] &&
+            $employee->email == $request['data']['email'] &&
+            $employee->phone == $request['data']['phone'] &&
+            $employee->salary == $request['data']['salary']) {
             return response()->json([
                 'status' => 'failed',
-                'message' => 'Employee was not updated successfully',
+                'message' => 'No changes were made',
+                'data' => 12,
+                'ins' => '111'
+            ]);
+
+        } else {
+                // now update the employee information.
+            $updateEmployee = DB::table('employee')->where('id', $request['data']['id'])->where('storeID', $storeID)->update([
+                'first_name' => $request['data']['first_name'],
+                'last_name' => $request['data']['last_name'],
+                'address' => $request['data']['address'],
+                'email' => $request['data']['email'],
+                'location' => $request['data']['location'],
+                'salary' => $request['data']['salary'],
+                'phone' => $request['data']['phone'],
+                'is_active' => $request['data']['is_active'],
+                'start_date' => $request['data']['start_date'],
+                'end_date' => $request['data']['end_date'] === null ? NULL : $request['data']['end_date']
+            ]);
+
+
+            // check if the employee was updated
+            if ($updateEmployee) {
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Employee information was updated successfully',
+                    'data' => 12,
+                    'ins' => '111'
+                ]);
+            }
+
+        }
+
+     }
+
+
+
+     /**
+      *  @method: delete
+      *
+      * @purpose: inorder to delete an existing employee
+      *
+      */
+
+      static function delete($request)
+      {
+        // put the logic here inorder to preform the request.
+        // and the delete operatation on the current store.
+        $isUser = Validation::validateUser($request['token']);
+
+        $store = $isUser->storeID;
+
+        if (!$isUser) {
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'You do not have permission to preform this request',
                 'data' => 12,
                 'ins' => '111'
             ]);
         }
 
-     }
+        // if the user is a admin from the give the user permission to delete the employe
+        $employee = DB::table('employee')->where('id', $request['employeeID'])->where('storeID', $store)->delete();
+
+        // check if the employee was deleted from the system.
+        if ($employee) {
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Employee was deleted successfully'
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Employee was not deleted successfully'
+            ]);
+        }
+      }
 }
 
 
