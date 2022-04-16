@@ -3,7 +3,7 @@
 <img SRC='https://repository-images.githubusercontent.com/420335460/fd87b3eb-2068-4eda-b25c-31bf62c703fb' width='300px' height='300px' />
 
 
-<h3> A employee managment and recipe managment system </h3>
+<h3> An Employee managment and recipe managment system. </h3>
 
 
 <section>
@@ -30,9 +30,8 @@
 <section>
     <h4> install instructions </h4>
     <code>
-        run npm install!
-        run composer update!
-
+        run npm install
+        run composer update
     </code>   
 </section>
 
