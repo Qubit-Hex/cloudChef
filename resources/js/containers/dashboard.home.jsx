@@ -14,7 +14,6 @@ import reactDOM from "react-dom";
 
 import { ContactNavbar} from "../components/dashboard/contactsNavbar";
 import { ContactsTable } from "../components/dashboard/contacts/contact.table";
-import { WeatherWidget } from "../components/dashboard/weather/openWeatherWidget";
 import { ScheduleLabour } from "../components/dashboard/schedule/schedule.labour";
 
 
@@ -44,43 +43,26 @@ export const DashboardHome = (props) => {
 
                     {/** user welcome message goes here  */}
 
-                    <h1 className="h3 text-center">Welcome to the Dashboard</h1>
+                    <h1 className="h3 text-center">
+                     <span> Welcome </span>
+                    <i className="fa fa-home ml-2"></i>
+                    </h1>
 
                     <div className='row'>
-                        <div className='col-md-12 mx-auto'>
-                            <div className='card'>
-                                <div className='card-body'>
-                                    <h5 className='card-title'>
-                                        <span onClick={
-                                            (e) => {
-                                                let container = document.getElementById('message-box-container');
-
-                                                reactDOM.render(<TemplateModal />, container);
-                                            }
-                                        }> Weather Forecast </span>
-                                        <i className='fas fa-cloud-moon'></i>
-                                    </h5>
-                                    {/** add a weather icon font awesome */}
-                                    <p className='card-text'>
-                                        {/* weather forecast goes here */}
-                                        <WeatherWidget />
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className='col-md-12 mx-auto'>
+                        <div className='col-md-6 mx-auto'>
                                         <ScheduleLabour />
                         </div>
+                    </div>
 
-                        <div className="col-md-12 mx-auto">
-                            <div className="card">
-                                <div className="card-body">
-                                    <h5 className="card-title">Current Schedule</h5>
-                                    <p className="card-text">
-                                        {/* current employees goes here */}
-                                        <DisplaySchedule />
-                                    </p>
-                                </div>
+
+                    <div classNAme='row'>
+                        <div className="card">
+                            <div className="card-body">
+                                <h5 className="card-title">Current Schedule</h5>
+                                <p className="card-text">
+                                    {/* current employees goes here */}
+                                    <DisplaySchedule />
+                                </p>
                             </div>
                         </div>
                     </div>

@@ -229,6 +229,12 @@ class EmployeeServiceInterface {
             ]);
         }
 
+
+        // add a edge case foor a user to edit its onw employee information
+        // obviously the user can not delete its own employee information or
+        // modify information that is mangled by the admin.
+        
+
         // if the user is a admin from the give the user permission to delete the employe
         $employee = DB::table('employee')->where('id', $request['employeeID'])->where('storeID', $store)->delete();
 

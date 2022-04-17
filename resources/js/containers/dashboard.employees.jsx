@@ -160,7 +160,6 @@ export const EmployeesPage = (props) => {
                                         <th>Email</th>
                                         <th>Phone</th>
                                         <th>Address</th>
-                                        <th> Department </th>
                                         <th> Location</th>
                                         <th> Salary </th>
                                         <th> Start Date. </th>
@@ -179,7 +178,6 @@ export const EmployeesPage = (props) => {
                                                     <td>{employee.email}</td>
                                                     <td>{employee.phone}</td>
                                                     <td>{employee.address}</td>
-                                                    <td>{ employee.department }</td>
                                                     <td> { employee.location }</td>
                                                     <td> { calculateHoursRate(employee.salary)} </td>
                                                     <td> { employee.start_date } </td>

@@ -145,21 +145,22 @@ export const DashboardRecipies = (props) => {
 
                 {/** here we are going to add a component inorder to create a section to add recipes to the database  */}
 
-                <div className='col-md-6 mx-auto d-block'>
+                <div className='col-md-12 mx-auto d-block'>
                     <div className='card'>
                         {/** font awesome add button */}
-                        <div className='modal-header'>
-                            <h4 className='text-center ' style={{
-                                fontWeight: '600'
-                            }}> <i className="fas fa-plus-circle"></i> Add Recipe</h4>
+
+                        <div className='card-header bg-transparent'>
+                            <h5 className='card-title header-subtitle'>Add Recipe</h5>
+                            <small className='text-muted'> Make your team stronger by connecting all your information in one place. </small>
                         </div>
 
                         <div className='card-body p-lg-5'>
-                            <h5 className='card-title header-subtitle'>Add Recipe</h5>
-                            <small className='text-muted'> Make your team stronger by connecting all your information in one place. </small>
                             <img src='/img/SVG/chef_platter.svg' width={300} height={300} className='img-fluid mx-auto d-block' alt='chef-platter' />
                             <p className='card-text text-center'>
                                 Add a new recipe to your database
+                                <small className='text-muted'>
+                                    Bon Appetit!
+                                </small>
                             </p>
 
                             <button className='btn btn-message w-25 mx-auto d-block' data-toggle="modal" data-target="#addRecipeModal"  onClick={
@@ -211,7 +212,9 @@ export const DashboardRecipies = (props) => {
                                  *  @blueprint: add a component inorder to add recipes to the page current store
                                  *              and then update the view to reflect the changes on that datbase
                                  *
-                                 * */}
+                                 *
+                                 *
+                                 */}
                                 <table className='table mt-2 mb-2'>
                                     <thead>
                                         <tr>

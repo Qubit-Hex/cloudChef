@@ -30,6 +30,7 @@ import { SchedulePage } from "./dashboard.schedule";
 import { DashboardRecipies } from "./dashboard.recipies";
 import { EmployeesPage } from "./dashboard.employees";
 import { DashboardHome } from "./dashboard.home";
+import { DashboardSettings } from "../components/dashboard/settings/settings";
 
 /**
  *
@@ -185,6 +186,7 @@ export default class DashboardContainer extends Component {
             <Route path='/dashboard/contacts/' component={ContactsPage} />
             <Route path='/dashboard/schedule/' component={SchedulePage} />
             <Route path='/dashboard/employees/' component={EmployeesPage} />
+            <Route path='/dashboard/settings/' component={DashboardSettings} />
             <Route path='/dashboard/' component={DashboardHome} />
           </Switch>
         </Router>
