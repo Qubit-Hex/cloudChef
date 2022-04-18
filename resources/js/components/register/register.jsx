@@ -1,12 +1,12 @@
 /**
- * 
- * 
- *   file: register componet 
- * 
+ *
+ *
+ *   file: register componet
+ *
  *  type:  (compent )
- * 
- *  purpose: to render the registration form for the appplication  
- * 
+ *
+ *  purpose: to render the registration form for the appplication
+ *
  */
 
 
@@ -18,8 +18,8 @@ import fetchServiceProvider from '../../lib/fetchServiceProvider.js';
 
 
 export class RegisterPage extends React.Component {
-    
-    // do some form checks inorder to see if form is valid before even submiting 
+
+    // do some form checks inorder to see if form is valid before even submiting
     constructor(props) {
         super(props);
         this.fetchServiceProvider = new fetchServiceProvider
@@ -32,20 +32,20 @@ export class RegisterPage extends React.Component {
 
 
     validateForm (event) {
-        // loop though the events inorder to verify that form is actually validated 
-        
+        // loop though the events inorder to verify that form is actually validated
+
         event.preventDefault();
-        
+
         for (let i = 0; i < event.target.length - 2; i++) {
             const res = event.target[i].value.length !== 0? true : false;
-    
+
             if (res === false) {
                 // let the user know that the form is not valid
                 document.getElementsByClassName('error')[0].innerHTML = 'Please fill out all fields';
                 break;
             }
         }
-        
+
         let request = {
             email: event.target[0].value,
             fullname: event.target[1].value,
@@ -54,25 +54,25 @@ export class RegisterPage extends React.Component {
             password_confirm: event.target[4].value,
             _token: event.target[5].value
         }
-        
-        
+
+
         // if the form is valid then submit the form
         return this.register(request);
     }
 
 
     /**
-     *  @method: register 
-     * @prupose: to proccess the async registration compnent 
-     * 
-     * 
+     *  @method: register
+     * @prupose: to proccess the async registration compnent
+     *
+     *
      */
 
     register(request) {
         let headers = {
             'Content-type': 'application/json',
             'Accept': 'application/json',
-            'Authorization': 'Bearer ' + this.generateToken(),
+            'accessToken': this.generateToken(),
         }
         // logic once we get a response from our callbac;
        this.fetchServiceProvider.$post('/api/auth/register', request, headers, (response) => {
@@ -93,7 +93,7 @@ export class RegisterPage extends React.Component {
     });
 }
 
-    // generate our CSFR TOKEN FOR OUR APPLICATION 
+    // generate our CSFR TOKEN FOR OUR APPLICATION
     generateToken()
     {
         const token = document.getElementById('_token_').content;
@@ -124,28 +124,28 @@ export class RegisterPage extends React.Component {
             <div id='login-color-box'>
             <div className='container pannel'>
              <div className='row'>
- 
+
                  <div className='col form-login' id='registration-form' >
                  <form className='form-login' onSubmit={ (e) => { this.validateForm(e);}}>
-        
+
                  <div className='blob image-badge'>
                     <img className='img-fluid' src='/img/restaurant-outline.svg' width='50vh' height='50vw'/>
-                 </div> 
-        
-                 
+                 </div>
+
+
                      <h1 className='form-login-title text-center'> Registration </h1>
 
-                     <h3 className='form-login-title text-center' style={{'font-size': '18px', 'color': 'dodgerblue'}}> Please fill out information inorder to register for an account  </h3> 
- 
+                     <h3 className='form-login-title text-center' style={{'font-size': '18px', 'color': 'dodgerblue'}}> Please fill out information inorder to register for an account  </h3>
+
                      <h4 className='error text-danger text-center'>  </h4>
 
                      <h4 id='server_response_wrapper' class='error text-danger'></h4>
                  <div className="form-group">
-                   <label htmlFor="email">Email </label> 
+                   <label htmlFor="email">Email </label>
                    <span className='error-message text-center text-danger'></span>
                    <input name='email' type="email" onChange={ (e) => {this.validate(e, 0)} } className="form-control" aria-describedby="emailHelp" placeholder="Please enter your email" />
                  </div>
-                 
+
                 <div className='form-group'>
 
                     <label htmlFor='name'> Your Fullname </label>
@@ -177,11 +177,11 @@ export class RegisterPage extends React.Component {
                <div className='form-group'>
                <input type="hidden" name="_token" value={this.generateToken()} />
                </div>
- 
+
                  <button type="submit"  name='submit' className="btn-lg header-action" style={{'width': '100%'}}>Register </button>
                </form>
-                 </div> 
- 
+                 </div>
+
              </div>
             </div>
             </div>

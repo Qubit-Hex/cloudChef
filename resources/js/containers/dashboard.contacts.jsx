@@ -7,15 +7,11 @@
  *
  */
 
-
-
-
-import React, { Component } from 'react';
-import { ContactNavbar} from "../components/dashboard/contactsNavbar";
+import React, { Component } from "react";
+import { ContactNavbar } from "../components/dashboard/contactsNavbar";
 import { ContactsTable } from "../components/dashboard/contacts/contact.table";
 
 export class ContactsPage extends Component {
-
     constructor(props) {
         super(props);
 
@@ -26,31 +22,19 @@ export class ContactsPage extends Component {
 
     render() {
         return (
+            <div className="container-fluid rm-pm dashboard-content">
+                <div className="row">
+                    <div className="row">
+                        {/* contact navigation bar */}
 
-      <div className='container-fluid rm-pm dashboard-content'>
+                        <div id="message-box-container"> </div>
 
-
-
-
-      <div className='row'>
-
-        <div className="row">
-          {/* contact navigation bar */}
-
-        <div id='message-box-container'> </div>
-
-        <div className='table-contacts-container'>
-            <ContactsTable />
-        </div>
-    </div>
-
-
-      </div>
-
-
-      </div>
-
-            );
-        }
-
+                        <div className="table-contacts-container">
+                            <ContactsTable />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
     }
+}

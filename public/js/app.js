@@ -19838,14 +19838,14 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 /**
- * 
- * 
- *   file: register componet 
- * 
+ *
+ *
+ *   file: register componet
+ *
  *  type:  (compent )
- * 
- *  purpose: to render the registration form for the appplication  
- * 
+ *
+ *  purpose: to render the registration form for the appplication
+ *
  */
 
 
@@ -19857,7 +19857,7 @@ var RegisterPage = /*#__PURE__*/function (_React$Component) {
 
   var _super = _createSuper(RegisterPage);
 
-  // do some form checks inorder to see if form is valid before even submiting 
+  // do some form checks inorder to see if form is valid before even submiting
   function RegisterPage(props) {
     var _this;
 
@@ -19872,7 +19872,7 @@ var RegisterPage = /*#__PURE__*/function (_React$Component) {
   _createClass(RegisterPage, [{
     key: "validateForm",
     value: function validateForm(event) {
-      // loop though the events inorder to verify that form is actually validated 
+      // loop though the events inorder to verify that form is actually validated
       event.preventDefault();
 
       for (var i = 0; i < event.target.length - 2; i++) {
@@ -19897,10 +19897,10 @@ var RegisterPage = /*#__PURE__*/function (_React$Component) {
       return this.register(request);
     }
     /**
-     *  @method: register 
-     * @prupose: to proccess the async registration compnent 
-     * 
-     * 
+     *  @method: register
+     * @prupose: to proccess the async registration compnent
+     *
+     *
      */
 
   }, {
@@ -19909,7 +19909,7 @@ var RegisterPage = /*#__PURE__*/function (_React$Component) {
       var headers = {
         'Content-type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': 'Bearer ' + this.generateToken()
+        'accessToken': this.generateToken()
       }; // logic once we get a response from our callbac;
 
       this.fetchServiceProvider.$post('/api/auth/register', request, headers, function (response) {
@@ -19925,7 +19925,7 @@ var RegisterPage = /*#__PURE__*/function (_React$Component) {
           window.location.href = '/login/';
         }
       });
-    } // generate our CSFR TOKEN FOR OUR APPLICATION 
+    } // generate our CSFR TOKEN FOR OUR APPLICATION
 
   }, {
     key: "generateToken",
@@ -20302,54 +20302,49 @@ var DashboardContainer = function DashboardContainer(props) {
     var route = "/api/auth/verify";
     var header = {
       "Content-Type": "application/json",
-      "accessToken": '49da283617d82862a18f6b271dcde3eb68aa7d1ba577b961b747fe2516004b58'
+      "accessToken": api.getCookie("accessToken")
     };
     return api.get(route, header);
   };
 
   react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
-    requests().then(function (response) {
-      if (response.status === 200) {
-        setAuthenticated(true);
-      } else {
-        setAuthenticated(false);
-      }
-    });
-  }, []);
-
-  if (!authenticated) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(UnauthorizedPage, {});
-  } else {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
-      className: "content_container",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_dashboard_dashboardNav__WEBPACK_IMPORTED_MODULE_2__.DashboardNav, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.BrowserRouter, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Switch, {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
-            path: "/dashboard/recipie/",
-            component: _dashboard_recipies__WEBPACK_IMPORTED_MODULE_5__.DashboardRecipies
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
-            path: "/dashboard/contacts/",
-            component: _dashboard_contacts__WEBPACK_IMPORTED_MODULE_3__.ContactsPage
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
-            path: "/dashboard/schedule/",
-            component: _dashboard_schedule__WEBPACK_IMPORTED_MODULE_4__.SchedulePage
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
-            path: "/dashboard/employees/",
-            component: _dashboard_employees__WEBPACK_IMPORTED_MODULE_6__.EmployeesPage
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
-            path: "/dashboard/settings/",
-            component: _components_dashboard_settings_settings__WEBPACK_IMPORTED_MODULE_8__.DashboardSettings
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
-            path: "/dashboard/logout/",
-            children: " "
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
-            path: "/dashboard/",
-            component: _dashboard_home__WEBPACK_IMPORTED_MODULE_7__.DashboardHome
-          })]
-        })
-      })]
-    });
-  }
+    if (authenticated === false) {
+      requests().then(function (response) {
+        if (response.status === 200) {
+          setAuthenticated(true);
+        }
+      });
+    }
+  });
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
+    className: "content_container",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_dashboard_dashboardNav__WEBPACK_IMPORTED_MODULE_2__.DashboardNav, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.BrowserRouter, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Switch, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+          path: "/dashboard/recipie/",
+          component: _dashboard_recipies__WEBPACK_IMPORTED_MODULE_5__.DashboardRecipies
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+          path: "/dashboard/contacts/",
+          component: _dashboard_contacts__WEBPACK_IMPORTED_MODULE_3__.ContactsPage
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+          path: "/dashboard/schedule/",
+          component: _dashboard_schedule__WEBPACK_IMPORTED_MODULE_4__.SchedulePage
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+          path: "/dashboard/employees/",
+          component: _dashboard_employees__WEBPACK_IMPORTED_MODULE_6__.EmployeesPage
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+          path: "/dashboard/settings/",
+          component: _components_dashboard_settings_settings__WEBPACK_IMPORTED_MODULE_8__.DashboardSettings
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+          path: "/dashboard/logout/",
+          children: " "
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+          path: "/dashboard/",
+          component: _dashboard_home__WEBPACK_IMPORTED_MODULE_7__.DashboardHome
+        })]
+      })
+    })]
+  });
 };
 
 /***/ }),

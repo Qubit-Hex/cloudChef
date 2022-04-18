@@ -34,4 +34,5 @@ class store extends Controller
 
         return StoreServiceProvider::getStore($storeRequest);
     }
+    
 }

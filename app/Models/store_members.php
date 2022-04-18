@@ -18,10 +18,8 @@ class store_members extends Model
         'storeID',
         'userID',
         'store_role',
-        'member_start_date',
-        'member_end_date',
         'created_at',
-        'updated_at',
+        'updated_at'
     ];
 
        /**
@@ -39,6 +37,22 @@ class store_members extends Model
     }
 
 
+    /**
+     *
+     * @method: createMember
+     *
+     * @purpose: to create a new member
+     *
+     */
+
+     public function createMember($userID, $storeID, $role)
+     {
+         return $this->create([
+                'userID' => $userID,
+                'storeID' => $storeID,
+                'store_role' => $role,
+            ]);
+     }
 
 
     /**
@@ -81,6 +95,8 @@ class store_members extends Model
                 return false;
             }
         }
+
+
 
 
 }

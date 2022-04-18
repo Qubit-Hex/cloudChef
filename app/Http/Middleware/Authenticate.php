@@ -22,43 +22,56 @@ class Authenticate
 
     public function handle(Request $request, Closure $next, $guard = null)
     {
+        if (isset($_COOKIE['accessToken'])) {
+            // authentication the user
+            $user = DB::table('users')->where('remember_token', $_COOKIE['accessToken'])->first();
 
-        if (!empty($_COOKIE['accessToken'])) {
-            // check if the access token is valid
-            $userExist = DB::table('users')->where('remember_token', $_COOKIE['accessToken'])->exists();
-            if ($userExist) {
-                // access token is valid
+            if (!$user) {
+                // if the user is not authenticated
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'You are not authenticated'
+                ], 401);
+            }
+
+            $user_session = DB::table('user_sessions')->where('user_id', $user->userID)->first();
+
+            if ($user->remember_token === $user_session->token) {
+                // check when the user_session token was created after three hours
+                // destroy the session
+                if ($user_session->active === 0)  {
+                    return response()->json([
+                        'status' => 'error',
+                        'message' => 'session has expired'
+                    ], 401);
+                }
+
+                // check when session was created
+                $sessionTime = $user_session->updated_at;
+                $sessionTime = strtotime($sessionTime);
+
+                // check when the session was created after three hours
+                $sessionTime = $sessionTime + (3 * 60 * 60);
+
+                if ($sessionTime < time()) {
+                    // set the session to 0
+                     DB::table('user_sessions')->where('user_id', $user->userID)->update(['active' => 0]);
+
+                    return response()->json([
+                        'status' => 'error',
+                        'message' => 'session has expired'
+                    ], 401);
+                }
+                // might add a method to check if the user is a admin or not...
                 return $next($request);
             } else {
-                // access token is not valid
-                return response()->json([
-                    'authenticated' => false,
-                    'message' => 'Access Token is not valid', 'error' => 'Access Token is not valid'], 401);
+                return response()->json(['error' => 'unauthorized'], 401);
             }
-        } else {
-            // tood - add a check for the access token in the header
-            // check if the access token is valid
+
             return $next($request);
-    }
-}
-    /**
-     *
-     *  @method: getTokenFromHeader
-     *
-     *
-     *  @purpose: to get the token from the header TO AUTHENTICATE ANY REST API REQUESTS
-     *
-     */
-
-
-    private function getTokenFromHeader(Request $request, Closure $next, $guard = null)
-    {
-        $header = $request->header('Authorization');
-        if (!empty($header)) {
-            $token = explode(' ', $header)[1];
-            return $token;
+        } else {
+            return redirect('/');
         }
-        return null;
     }
-
 }
+

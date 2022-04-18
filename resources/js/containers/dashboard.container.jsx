@@ -59,25 +59,23 @@ export const DashboardContainer = (props) => { // the state of our component.
 
         const header = {
             "Content-Type": "application/json",
-            "accessToken": '49da283617d82862a18f6b271dcde3eb68aa7d1ba577b961b747fe2516004b58'
+            "accessToken": api.getCookie("accessToken")
         };
 
         return api.get(route, header);
     };
 
     React.useEffect(() => {
-        requests().then((response) => {
-            if (response.status === 200) {
-                setAuthenticated(true);
-            } else {
-                setAuthenticated(false);
-            }
-        });
-    }, []);
 
-    if (!authenticated) {
-        return <UnauthorizedPage/>;
-    } else {
+        if (authenticated === false) {
+            requests().then(response => {
+                if (response.status === 200) {
+                    setAuthenticated(true);
+                }
+            });
+        }
+    });
+
 
         return (
             <div className="content_container">
@@ -103,5 +101,4 @@ export const DashboardContainer = (props) => { // the state of our component.
                 </Router>
             </div>
         );
-    }
-};
+}

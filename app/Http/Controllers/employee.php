@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -151,7 +152,7 @@ class employee extends Controller
             'token' => $request->header('accessToken'),
             'data' => $request->all()
         ];
-            // get a time stamp of the request        ];
+        // get a time stamp of the request        ];
 
         return employeeServiceInterface::add($request);
     }
@@ -194,6 +195,6 @@ class employee extends Controller
         ];
 
 
-        RETURN employeeServiceInterface::delete($query);
+        return employeeServiceInterface::delete($query);
     }
 }

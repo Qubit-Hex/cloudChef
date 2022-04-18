@@ -70,6 +70,22 @@ class User extends Authenticatable
         return $this->where('email', $email)->first();
      }
 
+
+     /**
+      *  @method: createUser
+      *
+      * @purpose: inorder to create the user
+      */
+      public function createUser($name, $email, $password, $salt,) {
+        return $this->create([
+            'name' => $name,
+            'email' => $email,
+            'password' => $password,
+            'salt' => $salt,
+            'status' => 0,
+        ]);
+      }
+
      /**
       *  @method: getUserID
       *
