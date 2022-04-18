@@ -27,7 +27,7 @@
  import SolutionsContainer from './containers/solutions.container';
  import FeaturesContainer from './containers/features.container';
  import PricingContainer from './containers/pricing.container';
- import DashboardContainer from "./containers/dashboard.container";
+ import { DashboardContainer } from "./containers/dashboard.container";
 
  export default function AppRoutes() {
     return (

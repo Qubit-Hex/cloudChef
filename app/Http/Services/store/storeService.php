@@ -29,10 +29,14 @@ use Illuminate\Support\Facades\DB;
 
     public static function getStore($storeRequest) {
 
-        $user = DB::table('users')->where('remember_token', $storeRequest['token'])->first()->userID;
+        if ($storeRequest['token'] === null) {
+            return response()->json(['error' => 'token is required'], 401);
+        }
+
+        $user = DB::table('users')->where('remember_token', $storeRequest['token'])->first();
 
         if ($user) {
-            $storeMember = DB::table('store_members')->where('userID', $user)->first()->storeID;
+            $storeMember = DB::table('store_members')->where('userID', $user->userID)->first()->storeID;
 
             if ($storeMember) {
                 $store = DB::table('store')->where('storeID', $storeMember)->first()->name;

@@ -245,10 +245,7 @@ export default class PricingContainer extends Component {
                                         PLEASE CONTACT
                                     </h2>
                                     <p className="card-text">
-                                        For corporate account please contact us
-                                        for more information. Corporate account
-                                        is available for 100 people.
-                                        <p></p>
+                                        <p>For corporate account please contact us</p>
                                         <p> Unlimited Stores. </p>
                                         <p>Unlimited staff. </p>
                                         <p> Unlimited customers. </p>

@@ -7,22 +7,15 @@
  *
  */
 
-import { auto } from "@popperjs/core";
-import { nodeName } from "jquery";
+
 import React, { Component } from "react";
 
 import FetchServiceProvider from "../../lib/fetchServiceProvider";
 
 export class DashboardNav extends Component {
+
     constructor(props) {
         super(props);
-
-        /**
-         *
-         *  our state here we will be using to update store specific details of the
-         *  design of the dashboard!
-         *
-         */
 
         this.state = {
             isOpen: false,
@@ -36,6 +29,7 @@ export class DashboardNav extends Component {
      *
      *
      * @purpose: this method is used to get the cookie from the browser
+     * 
      */
 
     getCookie(name) {
@@ -64,7 +58,7 @@ export class DashboardNav extends Component {
 
             let headers = {
                 "Content-Type": "application/json",
-                Authorization: "Bearer " + this.getCookie("accessToken"),
+                accessToken: this.getCookie("accessToken"),
                 command: "getStoreName",
             };
 
@@ -75,12 +69,19 @@ export class DashboardNav extends Component {
             };
 
             return fetchRequest.$get(
-                `/api/store/get?token=${userInput.token}`,
+                `/api/store/get`,
                 headers,
                 (response) => {
-                    this.setState({
-                        storeName: response.store,
-                    });
+
+                    if (response.status === 'success') {
+                        this.setState({
+                            storeName: response.store,
+                        });
+                    } else {
+                        this.setState({
+                            storeName: "",
+                        });
+                    }
                 }
             );
         } else {

@@ -31,7 +31,7 @@ export default function SolutionsContainer(props) {
 
                     <div className='col-sm header-section-space-md'>
                         <h1 className='header-subtitle'>
-                            AUTOMATE OUTDATED PROCCESSES
+                            Employee Management System.
                         </h1>
                         <h2 className='header-title'>
                             Work Smarter, not Harder!
@@ -39,8 +39,7 @@ export default function SolutionsContainer(props) {
 
                         <section>
                             <p className='header-description'>
-                                Data driven technology eliminates manual data entry and associated labor costs, see how it can help with your
-                                                             bottom line. Elimate errrors and let automation take over.
+                                Cloud Chef is a cloud based employee management system that allows you to manage your employees and their schedules.
                             </p>
                         </section>
                     </div>
@@ -57,56 +56,39 @@ export default function SolutionsContainer(props) {
                     <div className='col-sm header-section-space-md'>
                         <section>
                             <h1 className='header-subtitle'>
-                                ANYWHERE ANYTIME
+                                Cloud Based.
                             </h1>
+
                             <h2 className='header-title'>
-                                No Matter Where Life Takes You</h2>
+                                Access Information, Everywhere.
+                            </h2>
+
                             <p className='header-description'>
-                                Get visibility into purchases and performance across locations and on any device,
-                                                        Access Information from any device no matter where you are.
+                                Access your employee information from anywhere, anytime. update your information from anywhere with an easy to use interface.
                             </p>
                         </section>
                     </div>
                 </div>
 
 
+
+
+
                 <div className='row header-section-space-md'>
-
-                    <div className='col-sm'>
-                        <img src='/img/prediction.svg' className='img-fluid'/>
-
+                    <div className='col blob-lg'>
+                        <img src='/img/chef_bottom.jpg' className='img-fluid' />
                     </div>
 
                     <div className='col-sm header-section-space-md'>
                         <h1 className='header-subtitle'>
-                            Data-Driven Business Insights</h1>
-                        <h2 className='header-title'>
-                            Putting Your Data to Good Use</h2>
-                        <p className='header-description'>
-                            Discover Data driven business insights.
-                                                Tap into an intelligent, marketing-driven customer data warehouse that can be leveraged
-                                                for marketing insights and business decisions.
-                        </p>
-
-                    </div>
-                </div>
-
-
-                <div className='row header-section-space-md'>
-                    <div className='col-sm blob-lg'>
-                        <img src='/img/service.jpg' className='img-fluid'/>
-                    </div>
-
-                    <div className='col-sm header-section-space-md'>
-                        <h1 className='header-subtitle'>
-                            REAL TIME COMMUNICATION
+                            Recipe Management System.
                         </h1>
                         <h2 className='header-title'>
                             Instant Data in your organization</h2>
 
                         <p className='header-description'>
-                            If you've ever had a bad experience with a restaurant, had to deal with high-turnover of employees, and an unhappy customer base, then we have the perfect solution for you.
-                                                We're an award-winning restaurant saas that helps restaurants manage everything from customer feedback and recipe management to employee management and marketing campaigns.
+                            Improve training, reduce training time, and save time by using our cloud based recipe management system.
+                            Have your employee's  access your stores information from anywhere. Instantly and fast.
                         </p>
                     </div>
                 </div>

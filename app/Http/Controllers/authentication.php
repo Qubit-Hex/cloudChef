@@ -8,7 +8,6 @@
  *  @purpose:  inorder to provide authentication services for the user that is connected to the system
  *
  *
- *  @author: oliver shwaba -> Qubit-hEx
  *
  */
 
@@ -17,7 +16,6 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Http\Request;
-use App\Http\Services\Auth\AuthService;
 
 
 
@@ -25,8 +23,7 @@ class authentication extends Controller
 {
     public function __construct()
     {
-      // initilize the authentication service
-      $this->auth = new AuthService();
+
     }
 
     /**
@@ -41,7 +38,6 @@ class authentication extends Controller
     public function login(Request $request)
     {
       // form our login request
-      return $this->auth::login($request);
     }
 
     /**
@@ -53,7 +49,6 @@ class authentication extends Controller
 
     public function register(Request $request)
     {
-     return  $this->auth::register($request);
 
     }
 
@@ -67,7 +62,7 @@ class authentication extends Controller
 
     public function logout(Request $request)
     {
-      return  $this->auth::logout($request);
+
     }
 
     /**
@@ -81,9 +76,9 @@ class authentication extends Controller
 
     public function verify(Request $request)
     {
-      return  $this->auth::verify($request);
-    }
 
+
+    }
 
     /**
      *
@@ -98,6 +93,6 @@ class authentication extends Controller
 
     public function checkPermissions(Request $request)
     {
-        
+
     }
 }

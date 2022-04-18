@@ -23,7 +23,7 @@ class store extends Controller
         // REDESIGN THIS DATA STRUCTURE TO FIT OUR NEW ARCHITECTURE DESIGN
         $storeRequest = [
             'storeID' => $request->input('storeID'),
-            'token' => $request->input('token'),
+            'token' => $request->header('accessToken'),
             'requestTime' => $request->input('time'),
             // here is where we will issue the command that the use has requested
             // image this a routing a network of requests in our api
@@ -34,46 +34,4 @@ class store extends Controller
 
         return StoreServiceProvider::getStore($storeRequest);
     }
-
-
-    /**
-     *
-     *  @method: makeStore
-     *
-     *
-     *  @purpose: inorder to make a store
-     */
-
-    public function makeStore(Request $request)
-    {
-
-    }
-
-    /**
-     *
-     *  @method: updateStore
-     *
-     *  @purpose: inorder to update a store
-     *
-     */
-    public function updateStore(Request $request)
-    {
-
-    }
-
-    /**
-     *
-     *  @method: deleteStore
-     *
-     *
-     * @purpose: inorder to delete a store
-     *
-     */
-
-     public function deleteStore(Request $request)
-     {
-        
-     }
-
-
 }

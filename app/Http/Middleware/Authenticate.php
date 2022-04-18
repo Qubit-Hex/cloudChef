@@ -22,11 +22,7 @@ class Authenticate
 
     public function handle(Request $request, Closure $next, $guard = null)
     {
-        // Auth HEADERS
 
-        // change this to be header instead of cookie for each request
-        // we will change this to be header instead of cookie for each request
-      
         if (!empty($_COOKIE['accessToken'])) {
             // check if the access token is valid
             $userExist = DB::table('users')->where('remember_token', $_COOKIE['accessToken'])->exists();

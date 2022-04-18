@@ -5823,11 +5823,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "DashboardNav": () => (/* binding */ DashboardNav)
 /* harmony export */ });
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../lib/fetchServiceProvider */ "./resources/js/lib/fetchServiceProvider.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../lib/fetchServiceProvider */ "./resources/js/lib/fetchServiceProvider.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -5862,8 +5860,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-
-
 var DashboardNav = /*#__PURE__*/function (_Component) {
   _inherits(DashboardNav, _Component);
 
@@ -5875,13 +5871,6 @@ var DashboardNav = /*#__PURE__*/function (_Component) {
     _classCallCheck(this, DashboardNav);
 
     _this = _super.call(this, props);
-    /**
-     *
-     *  our state here we will be using to update store specific details of the
-     *  design of the dashboard!
-     *
-     */
-
     _this.state = {
       isOpen: false,
       storeName: ""
@@ -5894,6 +5883,7 @@ var DashboardNav = /*#__PURE__*/function (_Component) {
    *
    *
    * @purpose: this method is used to get the cookie from the browser
+   * 
    */
 
 
@@ -5929,10 +5919,10 @@ var DashboardNav = /*#__PURE__*/function (_Component) {
       var _this2 = this;
 
       if (this.state.storeName === "") {
-        var fetchRequest = new _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_2__["default"]();
+        var fetchRequest = new _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_1__["default"]();
         var headers = {
           "Content-Type": "application/json",
-          Authorization: "Bearer " + this.getCookie("accessToken"),
+          accessToken: this.getCookie("accessToken"),
           command: "getStoreName"
         };
         var userInput = {
@@ -5940,10 +5930,16 @@ var DashboardNav = /*#__PURE__*/function (_Component) {
           token: this.getCookie("accessToken"),
           time: Date.now()
         };
-        return fetchRequest.$get("/api/store/get?token=".concat(userInput.token), headers, function (response) {
-          _this2.setState({
-            storeName: response.store
-          });
+        return fetchRequest.$get("/api/store/get", headers, function (response) {
+          if (response.status === 'success') {
+            _this2.setState({
+              storeName: response.store
+            });
+          } else {
+            _this2.setState({
+              storeName: ""
+            });
+          }
         });
       } else {
         return;
@@ -5952,12 +5948,12 @@ var DashboardNav = /*#__PURE__*/function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("nav", {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("nav", {
           className: "navbar p-2 shadow header-navbar-dashboard",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
             className: "navbar-brand header-title",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
               className: "btn header-action remove-hamburger-menu",
               style: {
                 backgroundColor: "transparent",
@@ -5983,99 +5979,99 @@ var DashboardNav = /*#__PURE__*/function (_Component) {
                   }, 1500);
                 }
               },
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
                 className: "fas fa-bars",
                 style: {
                   color: "#fff",
                   fontSize: "2rem"
                 }
               })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("span", {
               className: "dashboard-nav-title-sub nav-brand",
               style: {
                 fontSize: '1rem'
               },
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
                 src: "/img/logo/Cloud Chef-logos_white.png",
                 alt: "cloud chef logo",
                 className: "navbar-brand-img"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
                 className: "fas fa-store mr-2",
                 style: {
                   color: "#fff"
                 }
-              }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("b", {
+              }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("span", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("b", {
                   children: " Store / "
                 }), " ", this.state.storeName]
               })]
             })]
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("nav", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("nav", {
           className: "navbar dashboard-horizontal-nav",
           id: "expanding-nav",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
             className: "navbar ",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("a", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("a", {
               href: "/dashboard/",
               className: "nav-link",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
                 className: "fas fa-home"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
                 className: "nav-link-text",
                 children: "Home"
               })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("a", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("a", {
               href: "/dashboard/schedule/",
               className: "nav-link",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
                 className: "fas fa-calendar-week"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
                 className: "nav-link-text",
                 children: "Schedule"
               })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("a", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("a", {
               href: "/dashboard/employees/",
               className: "nav-link",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
                 className: "fas fa-users"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
                 className: "nav-link-text",
                 children: "Employees"
               })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("a", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("a", {
               href: "/dashboard/recipie/",
               className: "nav-link",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
                 className: "fas fa-hamburger"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
                 className: "nav-link-text",
                 children: "Recipes"
               })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("a", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("a", {
               href: "/dashboard/contacts/",
               className: "nav-link",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
                 className: "fas fa-user-tie"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
                 className: "nav-link-text",
                 children: "Contacts"
               })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("a", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("a", {
               href: "/dashboard/settings/",
               className: "nav-link",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
                 className: "fas fa-cog"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
                 className: "nav-link-text",
                 children: "Settings"
               })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("a", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("a", {
               href: "/authentication/logout/",
               className: "nav-link",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
                 className: "fas fa-power-off"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
                 className: "nav-link-text",
                 children: "Logout"
               })]
@@ -6087,7 +6083,7 @@ var DashboardNav = /*#__PURE__*/function (_Component) {
   }]);
 
   return DashboardNav;
-}(react__WEBPACK_IMPORTED_MODULE_1__.Component);
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
 /***/ }),
 
@@ -19263,12 +19259,6 @@ var Footer = /*#__PURE__*/function (_React$Component) {
                     className: "list-group-item footer-section-link",
                     children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
                       href: "#",
-                      children: "Automated Outdated procedures"
-                    })]
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("li", {
-                    className: "list-group-item footer-section-link",
-                    children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
-                      href: "#",
                       children: "Access Information from anywhere "
                     })]
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("li", {
@@ -19282,6 +19272,12 @@ var Footer = /*#__PURE__*/function (_React$Component) {
                     children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
                       href: "#",
                       children: " Discover Data-Driven Insights "
+                    })]
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("li", {
+                    className: "list-group-item footer-section-link",
+                    children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
+                      href: "#",
+                      children: "  Manage Your Data "
                     })]
                   })]
                 })
@@ -19308,19 +19304,13 @@ var Footer = /*#__PURE__*/function (_React$Component) {
                     className: "list-group-item footer-section-link",
                     children: ["  ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
                       href: "#",
-                      children: "  Inventory Management "
-                    }), " "]
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("li", {
-                    className: "list-group-item footer-section-link",
-                    children: ["  ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
-                      href: "#",
-                      children: "  Food Cost Management  "
-                    }), " "]
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("li", {
-                    className: "list-group-item footer-section-link",
-                    children: ["  ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
-                      href: "#",
                       children: "  Employee Management "
+                    }), " "]
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("li", {
+                    className: "list-group-item footer-section-link",
+                    children: ["  ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
+                      href: "#",
+                      children: "  Schedule Management "
                     }), " "]
                   })]
                 })
@@ -20218,51 +20208,31 @@ var ContactsPage = /*#__PURE__*/function (_Component) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ DashboardContainer)
+/* harmony export */   "DashboardContainer": () => (/* binding */ DashboardContainer)
 /* harmony export */ });
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
-/* harmony import */ var _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../lib/fetchServiceProvider */ "./resources/js/lib/fetchServiceProvider.js");
-/* harmony import */ var _components_dashboard_dashboardNav__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/dashboard/dashboardNav */ "./resources/js/components/dashboard/dashboardNav.jsx");
-/* harmony import */ var _dashboard_contacts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./dashboard.contacts */ "./resources/js/containers/dashboard.contacts.jsx");
-/* harmony import */ var _dashboard_schedule__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./dashboard.schedule */ "./resources/js/containers/dashboard.schedule.jsx");
-/* harmony import */ var _dashboard_recipies__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./dashboard.recipies */ "./resources/js/containers/dashboard.recipies.jsx");
-/* harmony import */ var _dashboard_employees__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./dashboard.employees */ "./resources/js/containers/dashboard.employees.jsx");
-/* harmony import */ var _dashboard_home__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./dashboard.home */ "./resources/js/containers/dashboard.home.jsx");
-/* harmony import */ var _components_dashboard_settings_settings__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/dashboard/settings/settings */ "./resources/js/components/dashboard/settings/settings.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/fetchServiceProvider */ "./resources/js/lib/fetchServiceProvider.js");
+/* harmony import */ var _components_dashboard_dashboardNav__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/dashboard/dashboardNav */ "./resources/js/components/dashboard/dashboardNav.jsx");
+/* harmony import */ var _dashboard_contacts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./dashboard.contacts */ "./resources/js/containers/dashboard.contacts.jsx");
+/* harmony import */ var _dashboard_schedule__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./dashboard.schedule */ "./resources/js/containers/dashboard.schedule.jsx");
+/* harmony import */ var _dashboard_recipies__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./dashboard.recipies */ "./resources/js/containers/dashboard.recipies.jsx");
+/* harmony import */ var _dashboard_employees__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./dashboard.employees */ "./resources/js/containers/dashboard.employees.jsx");
+/* harmony import */ var _dashboard_home__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./dashboard.home */ "./resources/js/containers/dashboard.home.jsx");
+/* harmony import */ var _components_dashboard_settings_settings__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/dashboard/settings/settings */ "./resources/js/components/dashboard/settings/settings.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 /**
  *
@@ -20273,12 +20243,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  *
  *
  */
- // import React Router
-
-
- // this stores our dashboard templkate and the dashboard componen....
-
- // store all the pages for our api calls here
 
 
 
@@ -20286,6 +20250,34 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
+
+
+/**
+ *
+ *  @component: UnAuthDashboard
+ *
+ *  @description: render the 401 page
+ *
+ */
+
+
+
+
+var UnauthorizedPage = function UnauthorizedPage() {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("h1", {
+      className: "header-subttile text-center",
+      children: "401"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("h2", {
+      className: "header-title text-center",
+      children: "You are not authorized to view this page"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("img", {
+      src: "/img/authentication.svg",
+      alt: "authentication"
+    })]
+  });
+};
 /**
  *
  * @function: DashboardContainer
@@ -20297,180 +20289,68 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  */
 
 
+var DashboardContainer = function DashboardContainer(props) {
+  // the state of our component.
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0__.useState(false),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      authenticated = _React$useState2[0],
+      setAuthenticated = _React$useState2[1]; // request the user's authentication status
 
 
-var DashboardContainer = /*#__PURE__*/function (_Component) {
-  _inherits(DashboardContainer, _Component);
-
-  var _super = _createSuper(DashboardContainer);
-
-  function DashboardContainer(props) {
-    var _this;
-
-    _classCallCheck(this, DashboardContainer);
-
-    _this = _super.call(this, props);
-
-    _defineProperty(_assertThisInitialized(_this), "parseCookieByName", function (cookieName) {
-      var name = cookieName + "=";
-      var decodedCookie = decodeURIComponent(document.cookie);
-      var ca = decodedCookie.split(';');
-
-      for (var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-
-        while (c.charAt(0) == ' ') {
-          c = c.substring(1);
-        }
-
-        if (c.indexOf(name) == 0) {
-          return c.substring(name.length, c.length);
-        }
-      } // might change this as a later time inorder to handle the error
-
-
-      return "";
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "checkAuthentication", function (cookieValue) {
-      var API_checkToken = function API_checkToken(cookieValue) {
-        var fetchServiceProvider = new _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_2__["default"](); /// set the token to the fetch service provider
-
-        var headers = {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-          "bearer": cookieValue
-        }; // send the request to the server to check if the user is authenticated
-
-        return fetchServiceProvider.$get('/api/auth/verify', headers, function (response) {
-          if (response.auth === true) {
-            _this.setState({
-              isAuthenticated: true
-            });
-          } else {
-            _this.setState({
-              isAuthenticated: false
-            });
-          }
-        });
-      };
-
-      var delayTime = 1000;
-
-      function didJobComplete() {
-        return _didJobComplete.apply(this, arguments);
-      }
-
-      function _didJobComplete() {
-        _didJobComplete = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-            while (1) {
-              switch (_context.prev = _context.next) {
-                case 0:
-                  return _context.abrupt("return", new Promise(function (resolve) {
-                    resolve(API_checkToken(cookieValue));
-                  }));
-
-                case 1:
-                case "end":
-                  return _context.stop();
-              }
-            }
-          }, _callee);
-        }));
-        return _didJobComplete.apply(this, arguments);
-      }
-
-      return didJobComplete();
-    });
-
-    _this.state = {
-      isAuthenticated: false,
-      // some information about the user
-      user: {
-        name: '',
-        userID: ''
-      }
+  var requests = function requests() {
+    var api = new _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_1__["default"]();
+    var route = "/api/auth/verify";
+    var header = {
+      "Content-Type": "application/json",
+      "accessToken": '49da283617d82862a18f6b271dcde3eb68aa7d1ba577b961b747fe2516004b58'
     };
-    _this.cookieValue = _this.parseCookieByName('accessToken');
-    _this.auth = _this.checkAuthentication(_this.cookieValue);
-    return _this;
+    return api.get(route, header);
+  };
+
+  react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
+    requests().then(function (response) {
+      if (response.status === 200) {
+        setAuthenticated(true);
+      } else {
+        setAuthenticated(false);
+      }
+    });
+  }, []);
+
+  if (!authenticated) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(UnauthorizedPage, {});
+  } else {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
+      className: "content_container",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_dashboard_dashboardNav__WEBPACK_IMPORTED_MODULE_2__.DashboardNav, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.BrowserRouter, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Switch, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+            path: "/dashboard/recipie/",
+            component: _dashboard_recipies__WEBPACK_IMPORTED_MODULE_5__.DashboardRecipies
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+            path: "/dashboard/contacts/",
+            component: _dashboard_contacts__WEBPACK_IMPORTED_MODULE_3__.ContactsPage
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+            path: "/dashboard/schedule/",
+            component: _dashboard_schedule__WEBPACK_IMPORTED_MODULE_4__.SchedulePage
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+            path: "/dashboard/employees/",
+            component: _dashboard_employees__WEBPACK_IMPORTED_MODULE_6__.EmployeesPage
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+            path: "/dashboard/settings/",
+            component: _components_dashboard_settings_settings__WEBPACK_IMPORTED_MODULE_8__.DashboardSettings
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+            path: "/dashboard/logout/",
+            children: " "
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+            path: "/dashboard/",
+            component: _dashboard_home__WEBPACK_IMPORTED_MODULE_7__.DashboardHome
+          })]
+        })
+      })]
+    });
   }
-  /**'
-   *
-   *
-   * @method: parseCookieByName
-   *
-   * @returns string
-   *
-   *
-   */
-
-
-  _createClass(DashboardContainer, [{
-    key: "componentDidUpdate",
-    value:
-    /**
-     *
-     *  @method: componentDidUpdate
-     *
-     *  @purpose: to check if the user is authenticated or not...
-     *
-     */
-    function componentDidUpdate(prevProps, prevState) {
-      // flags inorder to check if the user is authenticated or not
-      if (!this.state.isAuthenticated !== prevState.isAuthenticated) {
-        // if the user is authenticated then we will get their information
-        return react__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
-          children: " Not Authenticated "
-        }), document.getElementById('root'));
-      }
-
-      if (!this.state.isAuthenticated) {
-        // get the user information and store the information inside the application state
-        return react__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
-          children: " Not Authenticated "
-        }), document.getElementById('root'));
-      }
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
-        className: "content_container",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_dashboard_dashboardNav__WEBPACK_IMPORTED_MODULE_3__.DashboardNav, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.BrowserRouter, {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Switch, {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
-              path: "/dashboard/recipie/",
-              component: _dashboard_recipies__WEBPACK_IMPORTED_MODULE_6__.DashboardRecipies
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
-              path: "/dashboard/contacts/",
-              component: _dashboard_contacts__WEBPACK_IMPORTED_MODULE_4__.ContactsPage
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
-              path: "/dashboard/schedule/",
-              component: _dashboard_schedule__WEBPACK_IMPORTED_MODULE_5__.SchedulePage
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
-              path: "/dashboard/employees/",
-              component: _dashboard_employees__WEBPACK_IMPORTED_MODULE_7__.EmployeesPage
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
-              path: "/dashboard/settings/",
-              component: _components_dashboard_settings_settings__WEBPACK_IMPORTED_MODULE_9__.DashboardSettings
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
-              path: "/dashboard/logout/"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
-              path: "/dashboard/",
-              component: _dashboard_home__WEBPACK_IMPORTED_MODULE_8__.DashboardHome
-            })]
-          })
-        })]
-      });
-    }
-  }]);
-
-  return DashboardContainer;
-}(react__WEBPACK_IMPORTED_MODULE_1__.Component);
-
-
+};
 
 /***/ }),
 
@@ -21414,15 +21294,12 @@ function FeaturesContainer(props) {
             className: "img-fluid",
             src: "/img/team-hands.svg"
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
           className: "col-sm header-section-space-md",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
             className: "header-subtitle",
             children: "EXPLORE THE PLATFORM  "
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
-            className: "header-title",
-            children: "  Browse our ECOSYSTEM."
-          })]
+          })
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "row header-section-space-md",
@@ -21450,27 +21327,6 @@ function FeaturesContainer(props) {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
           className: "col-sm",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
-            className: "img-fluid hero-image",
-            src: "/img/savings.svg"
-          })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-          className: "col-sm header-section-space-md",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
-            className: "header-subtitle",
-            children: "  FOOD COST MANAGEMENT  "
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
-            className: "header-title",
-            children: "  INCREASE YOUR BOTTOM LINE   "
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
-            className: "header-description",
-            children: "  Track you food cost, and waste easily figure where you are wasting money using data driven technolgy   "
-          })]
-        })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-        className: "row header-section-space-md",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-          className: "col-sm",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
             src: "/img/employee-man-img.svg",
             className: "img-fluid"
           })
@@ -21478,34 +21334,10 @@ function FeaturesContainer(props) {
           className: "col-sm header-section-space-md",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
             className: "header-subtitle",
-            children: "  EMPLOYEE MANAGEMENT "
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
-            className: "header-title",
-            children: " A SYSTEM FOR YOUR EMPLOYEES   "
+            children: "  Employee Management System "
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
             className: "header-description",
-            children: " Manage schedules, time off, availibility, drop shifts and more!   "
-          })]
-        })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-        className: "row header-section-space-md",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-          className: "col-sm",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
-            src: "/img/com-img.svg",
-            className: "img-fluid"
-          })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-          className: "col-sm header-section-space-md",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
-            className: "header-subtitle",
-            children: "  COMMUNICATION  "
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
-            className: "header-title",
-            children: "  KNOW WHAT GOING ON IN REAL TIME   "
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
-            className: "header-description",
-            children: " Connect your whole orginization together and get updates in realtime! we connect you to your customers, and employee so you can roll out changes in real time hyper-focus on the customer experience and increase your profit!.  "
+            children: "cloud chef is a easy employee management system for make schedules and managing food items. cloud chef makes it easy to make schedules, add new employees and manage what food your store sells."
           })]
         })]
       })]
@@ -21951,7 +21783,9 @@ var PricingContainer = /*#__PURE__*/function (_Component) {
                     children: "PLEASE CONTACT"
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("p", {
                     className: "card-text",
-                    children: ["For corporate account please contact us for more information. Corporate account is available for 100 people.", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
+                      children: "For corporate account please contact us"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
                       children: " Unlimited Stores. "
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
                       children: "Unlimited staff. "
@@ -22070,14 +21904,14 @@ function SolutionsContainer(props) {
           className: "col-sm header-section-space-md",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
             className: "header-subtitle",
-            children: "AUTOMATE OUTDATED PROCCESSES"
+            children: "Employee Management System."
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
             className: "header-title",
             children: "Work Smarter, not Harder!"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("section", {
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
               className: "header-description",
-              children: "Data driven technology eliminates manual data entry and associated labor costs, see how it can help with your bottom line. Elimate errrors and let automation take over."
+              children: "Cloud Chef is a cloud based employee management system that allows you to manage your employees and their schedules."
             })
           })]
         })]
@@ -22094,56 +21928,35 @@ function SolutionsContainer(props) {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("section", {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
               className: "header-subtitle",
-              children: "ANYWHERE ANYTIME"
+              children: "Cloud Based."
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
               className: "header-title",
-              children: "No Matter Where Life Takes You"
+              children: "Access Information, Everywhere."
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
               className: "header-description",
-              children: "Get visibility into purchases and performance across locations and on any device, Access Information from any device no matter where you are."
+              children: "Access your employee information from anywhere, anytime. update your information from anywhere with an easy to use interface."
             })]
           })
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "row header-section-space-md",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-          className: "col-sm",
+          className: "col blob-lg",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
-            src: "/img/prediction.svg",
+            src: "/img/chef_bottom.jpg",
             className: "img-fluid"
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
           className: "col-sm header-section-space-md",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
             className: "header-subtitle",
-            children: "Data-Driven Business Insights"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
-            className: "header-title",
-            children: "Putting Your Data to Good Use"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
-            className: "header-description",
-            children: "Discover Data driven business insights. Tap into an intelligent, marketing-driven customer data warehouse that can be leveraged for marketing insights and business decisions."
-          })]
-        })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-        className: "row header-section-space-md",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-          className: "col-sm blob-lg",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
-            src: "/img/service.jpg",
-            className: "img-fluid"
-          })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-          className: "col-sm header-section-space-md",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
-            className: "header-subtitle",
-            children: "REAL TIME COMMUNICATION"
+            children: "Recipe Management System."
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
             className: "header-title",
             children: "Instant Data in your organization"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
             className: "header-description",
-            children: "If you've ever had a bad experience with a restaurant, had to deal with high-turnover of employees, and an unhappy customer base, then we have the perfect solution for you. We're an award-winning restaurant saas that helps restaurants manage everything from customer feedback and recipe management to employee management and marketing campaigns."
+            children: "Improve training, reduce training time, and save time by using our cloud based recipe management system. Have your employee's  access your stores information from anywhere. Instantly and fast."
           })]
         })]
       })]
@@ -22650,7 +22463,7 @@ function AppRoutes() {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_containers_register_container__WEBPACK_IMPORTED_MODULE_3__["default"], {})
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
         path: "/dashboard/",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_containers_dashboard_container__WEBPACK_IMPORTED_MODULE_7__["default"], {})
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_containers_dashboard_container__WEBPACK_IMPORTED_MODULE_7__.DashboardContainer, {})
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
         path: "/",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_containers_home_container__WEBPACK_IMPORTED_MODULE_1__["default"], {})
