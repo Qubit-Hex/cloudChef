@@ -91,7 +91,7 @@ export class DashboardNav extends Component {
     render() {
         return (
             <div>
-                <nav class="navbar p-2 shadow header-navbar-dashboard">
+                <nav className="navbar p-2 shadow header-navbar-dashboard">
                     <div className="navbar-brand header-title">
                         <button
                             className="btn header-action remove-hamburger-menu"
@@ -121,7 +121,7 @@ export class DashboardNav extends Component {
                             }}
                         >
                             <i
-                                class="fas fa-bars"
+                                className="fas fa-bars"
                                 style={{ color: "#fff", fontSize: "2rem" }}
                             ></i>
                             {/* arrow pointing down with animation  */}
@@ -156,7 +156,7 @@ export class DashboardNav extends Component {
                         </a>
 
                         <a href="/dashboard/schedule/" className="nav-link">
-                            <i class="fas fa-calendar-week"></i>
+                            <i className="fas fa-calendar-week"></i>
                             <span className="nav-link-text">Schedule</span>
                         </a>
 
@@ -174,19 +174,19 @@ export class DashboardNav extends Component {
                         </a>
 
                         <a href="/dashboard/contacts/" className="nav-link">
-                            <i class="fas fa-user-tie"></i>
+                            <i className="fas fa-user-tie"></i>
                             <span className="nav-link-text">Contacts</span>
                         </a>
 
                         <a href="/dashboard/settings/" className="nav-link">
                             {/** font awesome gear icon */}
-                            <i class="fas fa-cog"></i>
+                            <i className="fas fa-cog"></i>
                             <span className="nav-link-text">Settings</span>
                         </a>
 
                         {/** LOGOUT BUTTON  WITH A POWER BUTTON*/}
                         <a href="/dashboard/logout/" className="nav-link">
-                            <i class="fas fa-power-off"></i>
+                            <i className="fas fa-power-off"></i>
                             <span className="nav-link-text">Logout</span>
                         </a>
 

@@ -293,7 +293,7 @@ export const EmployeeAddModal = (props) => {
 
                         </div>
                         <div className='form-group'>
-                            <label htmlFor='salary'>Salary</label>
+                            <label htmlFor='salary'>Yearly Salary</label>
                             <input type='text' className='form-control  mt-2 mb-2' id='salary' placeholder='Enter salary' />
                         </div>
                         {/** password fields will be auto generated */}

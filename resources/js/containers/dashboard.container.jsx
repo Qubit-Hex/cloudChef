@@ -8,9 +8,6 @@
  *
  */
 
-
-import * as d3 from "d3";
-
 import React, { Component } from 'react';
 // import React Router
 
@@ -133,19 +130,6 @@ export default class DashboardContainer extends Component {
     return didJobComplete();
   }
 
-  /**
-   *   @method: getUserInformation
-   *
-   *
-   *  @purpose: to get the user information from the server and store it in the application state
-   */
-
-  getUserInformation = () => {
-
-  }
-
-
-
 
   /**
    *
@@ -156,24 +140,17 @@ export default class DashboardContainer extends Component {
    */
 
   componentDidUpdate(prevProps, prevState) {
-
-    if (this.state.isAuthenticated !== prevState.isAuthenticated) {
+    // flags inorder to check if the user is authenticated or not
+    if (!this.state.isAuthenticated !== prevState.isAuthenticated) {
       // if the user is authenticated then we will get their information
-      if (this.state.isAuthenticated === true) {
-        // get the user information and store the information inside the application state
-        this.getUserInformation();
-      } else {
-        // if the user is not authenticated then we will redirect them to the login page
-        // re render a blank screen
-
-        return React.render(<div> Not Authenticated </div>, document.getElementById('root'));
-      }
-    } else {
-        return React.render(<div> Not Authenticated </div>, document.getElementById('root'));
+        return React.render(<div> Not Authenticated </div>, document.getElementById('root'))
     }
 
+    if (!this.state.isAuthenticated) {
+        // get the user information and store the information inside the application state
+        return React.render(<div> Not Authenticated </div>, document.getElementById('root'));
+      }
   }
-
 
   render() {
     return (
@@ -187,6 +164,9 @@ export default class DashboardContainer extends Component {
             <Route path='/dashboard/schedule/' component={SchedulePage} />
             <Route path='/dashboard/employees/' component={EmployeesPage} />
             <Route path='/dashboard/settings/' component={DashboardSettings} />
+            <Route path='/dashboard/logout/'>
+                {/** logout the user   */}
+            </Route>
             <Route path='/dashboard/' component={DashboardHome} />
           </Switch>
         </Router>

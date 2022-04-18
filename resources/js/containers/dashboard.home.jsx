@@ -38,15 +38,6 @@ export const DashboardHome = (props) => {
                 <div id='message-box-container'> </div>
 
                 <div className='table-contacts-container'>
-                    {/** the code for the splash screen starts here */}
-                    {/** add tiles for weather forecast, current labour for today, and current employees in the store */}
-
-                    {/** user welcome message goes here  */}
-
-                    <h1 className="h3 text-center">
-                     <span> Welcome </span>
-                    <i className="fa fa-home ml-2"></i>
-                    </h1>
 
                     <div className='row'>
                         <div className='col-md-6 mx-auto'>

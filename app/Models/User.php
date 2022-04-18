@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Http\Services\Auth\modules\encryption;
 
 class User extends Authenticatable
 {
@@ -18,7 +19,7 @@ class User extends Authenticatable
      * @var string[]
      */
 
-    protected $primayKey = 'userID';
+    protected $primaryKey = 'userID';
 
     protected $fillable = [
         'name',
@@ -28,7 +29,7 @@ class User extends Authenticatable
         'status',
         'created_at',
         'updated_at',
-         
+
     ];
 
     /**
@@ -39,7 +40,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
-        
+
     ];
 
     /**
@@ -56,12 +57,12 @@ class User extends Authenticatable
 
 
     /**
-     * 
-     * 
+     *
+     *
      *  @method: getUserByEmail
-     * 
-     *  @purpose: inorder to user the by the email 
-     * 
+     *
+     *  @purpose: inorder to user the by the email
+     *
      */
 
 
@@ -72,7 +73,7 @@ class User extends Authenticatable
      /**
       *  @method: getUserID
       *
-      *  @purpose: inorder to get a user by the id number 
+      *  @purpose: inorder to get a user by the id number
 
         @param: $userID
       */
@@ -83,12 +84,12 @@ class User extends Authenticatable
       }
 
       /**
-       * 
+       *
        *  @method: getUserByRemeberToken
-       * 
-       * 
+       *
+       *
        *   @purpoise: inorder to get a user by the remember token
-       * 
+       *
        *  @param: $rememberToken
        */
 
@@ -98,11 +99,11 @@ class User extends Authenticatable
       }
 
       /**
-       *  
-       * @method: updateToken 
-       * 
+       *
+       * @method: updateToken
+       *
        *    @purpoose: inorder to update the token of the user
-       * 
+       *
        *  @return: vold
        */
        public function updateToken($tokenValue, $userID) {
@@ -119,13 +120,47 @@ class User extends Authenticatable
         }
 
 
+        /**
+         *
+         *  @method: changePassword
+         *
+         *  @purpose: inorder to change the password of the user
+         */
+
+         public function changePassword($userID, $currentPassword, $newPassword)
+         {
+                // change the password of the current user
+                $userModel = new User();
+
+                $user = $userModel->getUserByID($userID);
+                $enc = new encryption();
+
+                if ($user->password === $currentPassword) {
+
+                    if (strlen($newPassword) < 8) {
+                        return response()->json(['status' => 'error', 'message' => 'The new password must be at least 8 characters long' ], 400);
+                    }
+                        // make sure the password is not the same as the current password
+                    if ($enc->generatePasswordHash($newPassword, $user->salt, 'sha256') === $user->password) {
+                        return response()->json(['status' => 'error', 'message' => 'The new password must be different from the current password'], 400);
+                    }
+
+                    // if the password is different, update the password
+                    $userModel->where('userID', $userID)->update(['password' => $enc->generatePasswordHash($newPassword, $user->salt, 'sha256')]);
+                    return true;
+                }
+
+                return false;
+         }
 
 
 
 
 
 
-    
+
+
+
 
 
 }

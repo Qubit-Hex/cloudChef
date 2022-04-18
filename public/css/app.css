@@ -1224,8 +1224,7 @@ nav > * {
 .header-subtitle {
   font-size: 3em;
   font-weight: 1000;
-  color: #1170c9;
-  text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.527);
+  color: #126cc7;
   -webkit-animation: slideInText 1s ease-in-out;
           animation: slideInText 1s ease-in-out;
 }

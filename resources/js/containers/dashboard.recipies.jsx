@@ -135,7 +135,7 @@ export const DashboardRecipies = (props) => {
         <div className="container-fluid profile_card dashboard-content">
             <div className="row">
 
-            <h2 className='ml-4'> <b>Recipes</b> <small className='sub-caption ' > Welcome ()
+            <h2 className='ml-4'> <b>Recipes</b> <small className='sub-caption ' >
               <br /><span className='text-center'>View recipes, edit, and share</span> </small></h2><br/>
                     <small className="'text-center text-muted"> <i className="fas fa-info-circle"></i>Have your whole team on the same page! </small>
             </div>
@@ -155,12 +155,9 @@ export const DashboardRecipies = (props) => {
                         </div>
 
                         <div className='card-body p-lg-5'>
-                            <img src='/img/SVG/chef_platter.svg' width={300} height={300} className='img-fluid mx-auto d-block' alt='chef-platter' />
+                            <img src='/img/SVG/toast_out.svg' width={300} height={300} className='img-fluid mx-auto d-block' alt='chef-platter' />
                             <p className='card-text text-center'>
                                 Add a new recipe to your database
-                                <small className='text-muted'>
-                                    Bon Appetit!
-                                </small>
                             </p>
 
                             <button className='btn btn-message w-25 mx-auto d-block' data-toggle="modal" data-target="#addRecipeModal"  onClick={

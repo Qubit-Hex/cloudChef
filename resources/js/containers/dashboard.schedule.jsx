@@ -127,7 +127,6 @@ export class SchedulePage extends Component {
                             <p style={{
                                 marginLeft: '18em',
                             }}>
-                            Welcome ({this.state.user} )
                             </p>
                 </h2>
 

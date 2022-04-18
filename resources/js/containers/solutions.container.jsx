@@ -99,10 +99,10 @@ export default function SolutionsContainer(props) {
 
                     <div className='col-sm header-section-space-md'>
                         <h1 className='header-subtitle'>
-                            REAL TIME COMMINICATION
+                            REAL TIME COMMUNICATION
                         </h1>
                         <h2 className='header-title'>
-                            Instant Data in your organisation</h2>
+                            Instant Data in your organization</h2>
 
                         <p className='header-description'>
                             If you've ever had a bad experience with a restaurant, had to deal with high-turnover of employees, and an unhappy customer base, then we have the perfect solution for you.

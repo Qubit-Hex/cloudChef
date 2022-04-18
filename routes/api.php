@@ -10,6 +10,7 @@ use App\Http\Controllers\schedule;
 use App\Http\Controllers\employee;
 use App\Http\Controllers\recipes;
 use App\Http\Controllers\menu;
+use App\Http\Controllers\settings;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -225,6 +226,20 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
                     Route::delete('/delete', [menu::class, 'deleteMenuItem'])->name('menu/item/delete');
                     Route::patch('/update', [menu::class, 'update'])->name('menu/item/update');
                 });
+          });
+
+
+
+          // settings api routes
+          Route::group(['prefix' => '/settings'], function () {
+
+            // change password route
+            Route::patch('/changePassword', [settings::class, 'changePassword'])->name('settings/changePassword');
+            // change account settings route. this route will be used to change the store settings
+
+            // change the address of the user
+            Route::patch('/changeAddress', [settings::class, 'changeAddress'])->name('settings/changeAddress');
+
           });
 
      });
