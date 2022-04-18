@@ -82,6 +82,84 @@ const Error = (props) => {
            } />)
 }
 
+/**
+ *
+ *  @function: validate
+ *
+ *  @purpose: inorder to validate the form
+ *
+ */
+    const validate = (city, state) => {
+        if (city.value === '' || state.value === '' || city.value.length  === null || state.value.length === null) {
+            // add the error base cases
+            if (!city.classList.contains('is-invalid')) {
+                city.classList.add('is-invalid');
+                // add the error message
+                city.parentElement.appendChild(document.createElement('div')).classList.add('invalid-feedback');
+                city.parentElement.lastChild.innerHTML = 'Invalid field must contain at least 2 characters';
+
+                return new Promise((resolve, reject) => {
+                    reject({
+                        status: false,
+                        message: 'Invalid field must contain at least 2 characters'
+                    });
+                });
+            }
+
+            if (!state.classList.contains('is-invalid')) {
+                state.classList.add('is-invalid');
+                state.parentElement.appendChild(document.createElement('div')).classList.add('invalid-feedback');
+                state.parentElement.lastChild.innerHTML = 'Invalid field must contain at least 2 characters';
+
+                return new Promise((resolve, reject) => {
+                    reject({
+                        status: false,
+                        message: 'Invalid field must contain at least 2 characters'
+                    });
+                });
+            }
+        }
+
+        // REMOVE THE ERROR ELEMENTS
+        if (city.classList.contains('is-invalid')) {
+            city.classList.remove('is-invalid');
+            city.parentElement.lastChild.remove();
+        }
+
+        if (state.classList.contains('is-invalid')) {
+            state.classList.remove('is-invalid');
+            state.parentElement.lastChild.remove();
+        }
+
+        return request(city.value, state.value);
+    }
+
+
+    /**
+     *
+     *  @function: request
+     *
+     *  @purpose: inorder to send the request to the server
+     *
+     */
+
+    const request = (city, state) => {
+        const api = new FetchServiceProvider();
+        const route = '/api/store/settings/changeLocation';
+
+        const data = {
+            city: city,
+            state: state
+        }
+
+        const header = {
+            'Content-Type': 'application/json',
+            'accessToken': api.getCookie('accessToken')
+        }
+
+        return api.patch(route, data, header);
+    }
+
 
     return (
         <TemplateModal title="Change Location"
@@ -112,7 +190,17 @@ const Error = (props) => {
                             <div className='form-group'>
                                 <button className='btn btn-message mt-2 mb-2' onClick={
                                     (e) => {
+                                        const container = document.getElementById('modal-container');
+                                        const city = document.getElementById('city');
+                                        const state = document.getElementById('state');
 
+                                        return validate(city, state).then((response) => {
+                                            if (response.status === 'success')  {
+                                                ReactDOM.render(<Success message={response.message} />, container);
+                                            } else {
+                                                ReactDOM.render(<Error message={response.message} />, container);
+                                            }
+                                        });
                                     }
                                 }>
                                     Change Location

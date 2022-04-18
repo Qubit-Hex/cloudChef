@@ -6071,7 +6071,7 @@ var DashboardNav = /*#__PURE__*/function (_Component) {
                 children: "Settings"
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("a", {
-              href: "/dashboard/logout/",
+              href: "/authentication/logout/",
               className: "nav-link",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
                 className: "fas fa-power-off"
@@ -18055,6 +18055,79 @@ var ChangeLocation = function ChangeLocation(props) {
       })
     });
   };
+  /**
+   *
+   *  @function: validate
+   *
+   *  @purpose: inorder to validate the form
+   *
+   */
+
+
+  var validate = function validate(city, state) {
+    if (city.value === '' || state.value === '' || city.value.length === null || state.value.length === null) {
+      // add the error base cases
+      if (!city.classList.contains('is-invalid')) {
+        city.classList.add('is-invalid'); // add the error message
+
+        city.parentElement.appendChild(document.createElement('div')).classList.add('invalid-feedback');
+        city.parentElement.lastChild.innerHTML = 'Invalid field must contain at least 2 characters';
+        return new Promise(function (resolve, reject) {
+          reject({
+            status: false,
+            message: 'Invalid field must contain at least 2 characters'
+          });
+        });
+      }
+
+      if (!state.classList.contains('is-invalid')) {
+        state.classList.add('is-invalid');
+        state.parentElement.appendChild(document.createElement('div')).classList.add('invalid-feedback');
+        state.parentElement.lastChild.innerHTML = 'Invalid field must contain at least 2 characters';
+        return new Promise(function (resolve, reject) {
+          reject({
+            status: false,
+            message: 'Invalid field must contain at least 2 characters'
+          });
+        });
+      }
+    } // REMOVE THE ERROR ELEMENTS
+
+
+    if (city.classList.contains('is-invalid')) {
+      city.classList.remove('is-invalid');
+      city.parentElement.lastChild.remove();
+    }
+
+    if (state.classList.contains('is-invalid')) {
+      state.classList.remove('is-invalid');
+      state.parentElement.lastChild.remove();
+    }
+
+    return request(city.value, state.value);
+  };
+  /**
+   *
+   *  @function: request
+   *
+   *  @purpose: inorder to send the request to the server
+   *
+   */
+
+
+  var request = function request(city, state) {
+    var api = new _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_2__["default"]();
+    var route = '/api/store/settings/changeLocation';
+    var data = {
+      city: city,
+      state: state
+    };
+    var header = {
+      'Content-Type': 'application/json',
+      'accessToken': api.getCookie('accessToken')
+    };
+    return api.patch(route, data, header);
+  };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_recipe_core_template_modal__WEBPACK_IMPORTED_MODULE_3__.TemplateModal, {
     title: "Change Location",
@@ -18101,7 +18174,22 @@ var ChangeLocation = function ChangeLocation(props) {
             className: "form-group",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
               className: "btn btn-message mt-2 mb-2",
-              onClick: function onClick(e) {},
+              onClick: function onClick(e) {
+                var container = document.getElementById('modal-container');
+                var city = document.getElementById('city');
+                var state = document.getElementById('state');
+                return validate(city, state).then(function (response) {
+                  if (response.status === 'success') {
+                    react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(Success, {
+                      message: response.message
+                    }), container);
+                  } else {
+                    react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(Error, {
+                      message: response.message
+                    }), container);
+                  }
+                });
+              },
               children: "Change Location"
             })
           })]
@@ -18124,11 +18212,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ChangePhone": () => (/* binding */ ChangePhone)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../lib/fetchServiceProvider */ "./resources/js/lib/fetchServiceProvider.js");
-/* harmony import */ var _recipe_core_template_modal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../recipe/core/template.modal */ "./resources/js/components/dashboard/recipe/core/template.modal.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../lib/fetchServiceProvider */ "./resources/js/lib/fetchServiceProvider.js");
+/* harmony import */ var _recipe_core_template_modal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../recipe/core/template.modal */ "./resources/js/components/dashboard/recipe/core/template.modal.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 /**
  *
  *  @file: changePhone.jsx
@@ -18158,23 +18254,23 @@ var ChangePhone = function ChangePhone(props) {
   *
   */
   var Success = function Success(props) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_recipe_core_template_modal__WEBPACK_IMPORTED_MODULE_3__.TemplateModal, {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_recipe_core_template_modal__WEBPACK_IMPORTED_MODULE_4__.TemplateModal, {
       title: "Password changed successfully",
-      body: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      body: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "_success_",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("h1", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("h1", {
           className: "text-success h4",
-          children: ["Phone number was changed successfully", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
+          children: ["Phone number was changed successfully", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
             "class": "fas fa-check-circle m-2"
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
           className: "row",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("p", {
             className: "text-success",
-            children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("b", {
+            children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("b", {
               children: " Status: "
             }), " ", props.message, " "]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
             src: "/img/SVG/mobile_phone.svg",
             className: "d-block mx-auto",
             width: 300,
@@ -18194,23 +18290,23 @@ var ChangePhone = function ChangePhone(props) {
 
 
   var Error = function Error(props) {
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_recipe_core_template_modal__WEBPACK_IMPORTED_MODULE_3__.TemplateModal, {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_recipe_core_template_modal__WEBPACK_IMPORTED_MODULE_4__.TemplateModal, {
       title: "Password change failed",
-      body: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      body: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "_error_",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("h1", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("h1", {
           className: "text-danger h4",
-          children: ["Phone number change failed", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
+          children: ["Phone number change failed", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
             "class": "fas fa-check-circle m-2"
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
           className: "row",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("p", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("p", {
             className: "text-danger",
-            children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("b", {
+            children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("b", {
               children: " Status: "
             }), " ", props.message, " "]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
             src: "/img/SVG/mobile_phone.svg",
             className: "d-block mx-auto",
             width: 300,
@@ -18219,43 +18315,190 @@ var ChangePhone = function ChangePhone(props) {
         })]
       })
     });
-  }; // render the modal for changing the phone number.
+  };
+  /**
+   *
+   *
+   *  @async: changePhone
+   *
+   *
+   *  @purpose: This function is used to change the phone number of the user.
+   *
+   */
 
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_recipe_core_template_modal__WEBPACK_IMPORTED_MODULE_3__.TemplateModal, {
+  var request = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(phone) {
+      var api, route, data, headers;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              api = new _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_3__["default"]();
+              route = '/api/store/settings/changePhoneNumber';
+              data = {
+                phone: phone
+              };
+              headers = {
+                'Content-Type': 'application/json',
+                'accessToken': api.getCookie('accessToken')
+              };
+              _context.next = 6;
+              return api.patch(route, data, headers);
+
+            case 6:
+              return _context.abrupt("return", _context.sent);
+
+            case 7:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function request(_x) {
+      return _ref.apply(this, arguments);
+    };
+  }();
+  /**
+   *
+   *  @async: validate
+   *
+   *
+   *  @purpose: This function is used to validate the phone number.
+   *
+   */
+
+
+  var validate = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+      var phone;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              phone = document.getElementById('phone'); // validate phone make sure it is not empty only numberic characters
+              // and not longer than 11 characters and not less than 10
+
+              if (!(phone.value.length < 10 || phone.value.length > 11 || !phone.value.match(/^[0-9]+$/))) {
+                _context2.next = 11;
+                break;
+              }
+
+              if (phone.classList.contains('is-invalid')) {
+                _context2.next = 10;
+                break;
+              }
+
+              phone.classList.remove('is-valid');
+              phone.classList.add('is-invalid'); // next let display a error message to the user
+
+              if (phone.parentElement.querySelector('.invalid-feedback')) {
+                _context2.next = 9;
+                break;
+              }
+
+              phone.parentElement.appendChild(document.createElement('div')).classList.add('invalid-feedback');
+              phone.parentElement.lastChild.innerHTML = 'Invalid phone number format example (1234567890)';
+              return _context2.abrupt("return", new Promise(function (resolve, reject) {
+                // return status and message
+                resolve({
+                  status: false,
+                  message: 'Invalid phone number format example (1234567890)'
+                });
+              }));
+
+            case 9:
+              return _context2.abrupt("return", new Promise(function (resolve, reject) {
+                resolve({
+                  status: false,
+                  message: 'Invalid phone number format example (1234567890)'
+                });
+              }));
+
+            case 10:
+              return _context2.abrupt("return", new Promise(function (resolve, reject) {
+                resolve({
+                  status: false,
+                  message: 'Invalid phone number format example (1234567890)'
+                });
+              }));
+
+            case 11:
+              // else if the phone number is vali
+              if (phone.parentElement.querySelector('.invalid-feedback')) {
+                phone.parentElement.querySelector('.invalid-feedback').remove();
+                phone.classList.remove('is-invalid');
+                phone.classList.add('is-valid');
+              }
+
+              phone.classList.add('is-valid');
+              _context2.next = 15;
+              return request(phone.value);
+
+            case 15:
+              return _context2.abrupt("return", _context2.sent);
+
+            case 16:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+
+    return function validate() {
+      return _ref2.apply(this, arguments);
+    };
+  }(); // render the modal for changing the phone number.
+
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_recipe_core_template_modal__WEBPACK_IMPORTED_MODULE_4__.TemplateModal, {
     title: "Change Phone Number",
-    body: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+    body: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
       className: "_phone_",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h1", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h1", {
         className: "header-subtitle",
         children: "Change Phone Number"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
         src: "/img/SVG/mobile_phone.svg",
         width: 300,
         height: 300,
         className: "d-block mx-auto"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
         className: "_form_",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
           className: "form-group",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
             htmlFor: "phone",
             children: "Phone Number"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
             type: "text",
             className: "form-control mt-1 mb-1",
             id: "phone",
             placeholder: "Enter Phone Number"
           })]
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
         className: "form-group",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("button", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("button", {
           className: "btn btn-message mt-2 mb-2",
           onClick: function onClick(e) {
             var container = document.getElementById('modal-container');
+            return validate().then(function (response) {
+              if (response.status === 'success') {
+                react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(Success, {
+                  message: response.message
+                }), container);
+              } else {
+                react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(Error, {
+                  message: response.message
+                }), container);
+              }
+            });
           },
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("i", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
             "class": "fas fa-times-circle mr-2"
           }), "Change Phone Number"]
         })
@@ -18353,7 +18596,7 @@ var ChangePasswordModal = function ChangePasswordModal(props) {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("h1", {
           className: "text-success h4",
           children: ["Password was changed successfully", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("i", {
-            "class": "fas fa-check-circle m-2"
+            className: "fas fa-check-circle m-2"
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
           className: "row",
@@ -18389,7 +18632,7 @@ var ChangePasswordModal = function ChangePasswordModal(props) {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("h1", {
           className: "text-danger h4",
           children: ["Password change failed", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("i", {
-            "class": "fas fa-times-circle m-2"
+            className: "fas fa-times-circle m-2"
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
           className: "row",
@@ -18432,7 +18675,7 @@ var ChangePasswordModal = function ChangePasswordModal(props) {
         // first check does an error message already exist
 
         if (!element.parentElement.querySelector('.invalid-feedback')) {
-          element.parentElement.insertAdjacentHTML('beforeend', "<div class=\"invalid-feedback\"> This Field is required </div>");
+          element.parentElement.insertAdjacentHTML('beforeend', "<div className=\"invalid-feedback\"> This Field is required </div>");
         }
 
         return false;
@@ -18585,8 +18828,6 @@ var ChangeUserSettings = function ChangeUserSettings(props) {
         react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_modules_changeLocation__WEBPACK_IMPORTED_MODULE_5__.ChangeLocation, {}), container);
         break;
     }
-
-    console.log(selected.value);
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_recipe_core_template_modal__WEBPACK_IMPORTED_MODULE_3__.TemplateModal, {
@@ -18815,6 +19056,7 @@ var Body = /*#__PURE__*/function (_React$Component) {
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
                   src: "/img/intro-header.jpg",
                   className: "img-fluid",
+                  alt: "bartender",
                   width: "600px",
                   height: "500px"
                 })
@@ -18824,7 +19066,8 @@ var Body = /*#__PURE__*/function (_React$Component) {
                   src: "/img/clams.jpg",
                   className: "img-fluid shadow",
                   width: "600px",
-                  height: "500px"
+                  height: "500px",
+                  alt: "clam"
                 })
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
@@ -18835,15 +19078,12 @@ var Body = /*#__PURE__*/function (_React$Component) {
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h2", {
                 className: "header-title",
                 children: " The Secret Ingredient "
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h3", {
-                className: "header-title",
-                children: " Manage consistency effortlessly "
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("h3", {
                 className: "header-description",
-                children: [" ", "Cloudchef is a restaurant management solution that helps any establishment and its staff work smarter and more efficient. We put all the information you need in one place, so you can train your employees, assign them tasks, and make smarter business decisions. By sending out targeted promotions based on customer feedback, we help improve profitability", " "]
+                children: [" ", "Cloudchef is a restaurant management solution that helps any establishment and its staff work smarter and more efficient. We put all the information you need in one place, for when you need it the most."]
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h4", {
                 className: "header-description",
-                children: "Make employee training easy and simple by using our cloud based recipe management and training system."
+                children: "Make employee training easy and simple by using our cloud based recipe management system."
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("a", {
                 href: "/login/",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
@@ -18865,7 +19105,7 @@ var Body = /*#__PURE__*/function (_React$Component) {
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
                 src: "/img/food-phone.jpg",
                 className: "img-fluid",
-                alt: ""
+                alt: "food photo"
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
               className: "col-sm header-section-space-md",
@@ -18874,16 +19114,16 @@ var Body = /*#__PURE__*/function (_React$Component) {
                 children: " ALL OF YOUR RECIPES "
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("h1", {
                 className: "multi-color-section",
-                children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
                   children: "Available"
-                }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
                   children: "Anywhere."
-                }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
                   children: "Anytime."
-                }), " "]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("p", {
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
                 className: "header-description",
-                children: [" ", "Cloud-based platform can be accessed from a desktop or mobile device. Premium new recipe & menu management for culinary professionals."]
+                children: "Cloud-based platform can be accessed from a desktop or mobile device. Premium new recipe & menu management for culinary professionals."
               })]
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
@@ -18893,7 +19133,7 @@ var Body = /*#__PURE__*/function (_React$Component) {
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
                 src: "/img/burger-present.jpg",
                 className: "img-fluid",
-                alt: ""
+                alt: "burger present"
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
               className: "col-sm header-section-space-md",
@@ -18911,7 +19151,8 @@ var Body = /*#__PURE__*/function (_React$Component) {
               className: "col-sm crop-image",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
                 src: "/img/baker-image.jpg",
-                className: "img-fluid shadow"
+                className: "img-fluid shadow",
+                alt: "chef"
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
               className: "col-sm header-section-space-md",

@@ -94,7 +94,7 @@
         *
         *  @purpose: to register a new user to the system
         *  @param: array $request
-            
+
         *
         */
 
@@ -175,7 +175,7 @@
 
          static function logout(Request $request)
          {
-
+            return LogoutRequest::logout($request);
          }
 
          /**

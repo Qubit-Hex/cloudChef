@@ -16,7 +16,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="/lib/css/all.css" />
-    <link rel="stylesheet" href="/css/app.css" />
+    <link rel="stylesheet" href="/css/app.min.css" />
 
     <title>Cloud Chef - let the cloud to the heavy lifting </title>
   </head>
@@ -25,6 +25,7 @@
     <div id="root">
 
     </div>
-       <script src="{{ asset('js/app.js') }}"></script>
+
+       <script src="{{ asset('js/app.min.js') }}"></script>
   </body>
 </html>

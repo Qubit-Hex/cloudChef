@@ -37,7 +37,6 @@ Route::get('/solutions/', [home::class, 'index']);
 Route::get('/pricing/', [home::class, 'index']);
 Route::get('/features/', [home::class, 'index']);
 
-
 /**
  *      Routes: Authentication routes
  *
@@ -46,6 +45,7 @@ Route::get('/features/', [home::class, 'index']);
 
 Route::post('/authentication/login/', [authentication::class, 'login'])->name('auth/login/');
 Route::post('/authentication/register/', [authentication::class, 'register'])->name('register');
+Route::get('/authentication/logout/', [authentication::class, 'logout'])->name('logout');
 
 
 

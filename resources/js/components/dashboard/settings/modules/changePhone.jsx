@@ -79,6 +79,96 @@ export const ChangePhone = (props) => {
         }
 
 
+
+
+        /**
+         *
+         *
+         *  @async: changePhone
+         *
+         *
+         *  @purpose: This function is used to change the phone number of the user.
+         *
+         */
+
+        const request = async (phone) => {
+
+            const api = new FetchServiceProvider();
+            const route = '/api/store/settings/changePhoneNumber';
+
+            const data = {
+                phone: phone,
+            }
+
+            const headers = {
+                'Content-Type': 'application/json',
+                'accessToken': api.getCookie('accessToken')
+            }
+
+            return await api.patch(route, data, headers);
+        }
+
+
+        /**
+         *
+         *  @async: validate
+         *
+         *
+         *  @purpose: This function is used to validate the phone number.
+         *
+         */
+
+        const validate = async () => {
+            const phone = document.getElementById('phone');
+
+            // validate phone make sure it is not empty only numberic characters
+            // and not longer than 11 characters and not less than 10
+
+
+            if (phone.value.length < 10 || phone.value.length > 11 || !phone.value.match(/^[0-9]+$/)) {
+                // add error to input
+                if (!phone.classList.contains('is-invalid')) {
+                    phone.classList.remove('is-valid');
+                    phone.classList.add('is-invalid');
+                    // next let display a error message to the user
+
+                    if (!phone.parentElement.querySelector('.invalid-feedback')) {
+                        phone.parentElement.appendChild(document.createElement('div')).classList.add('invalid-feedback');
+                        phone.parentElement.lastChild.innerHTML = 'Invalid phone number format example (1234567890)';
+                        return new Promise((resolve, reject) => {
+                            // return status and message
+                            resolve({
+                                status: false,
+                                message: 'Invalid phone number format example (1234567890)'
+                            });
+                        });
+                    }
+                    return new Promise  ((resolve, reject) => {
+                           resolve({ status: false,
+                            message: 'Invalid phone number format example (1234567890)'
+                        });
+                    });
+                }
+                return new Promise((resolve, reject) => {
+                    resolve({
+                        status: false,
+                        message: 'Invalid phone number format example (1234567890)'
+                    });
+                });
+            }
+            // else if the phone number is vali
+            if (phone.parentElement.querySelector('.invalid-feedback')) {
+                phone.parentElement.querySelector('.invalid-feedback').remove();
+                phone.classList.remove('is-invalid');
+                phone.classList.add('is-valid');
+            }
+
+
+            phone.classList.add('is-valid');
+            return await request(phone.value);
+        }
+
+
     // render the modal for changing the phone number.
         return (
             <TemplateModal title={"Change Phone Number"}
@@ -103,6 +193,14 @@ export const ChangePhone = (props) => {
                         <button className='btn btn-message mt-2 mb-2' onClick={
                             (e) => {
                                 let container = document.getElementById('modal-container');
+
+                                return validate().then((response) => {
+                                    if (response.status === 'success') {
+                                        ReactDOM.render(<Success message={response.message} />, container);
+                                    } else {
+                                        ReactDOM.render(<Error message={response.message} />, container);
+                                    }
+                                });
                             }}>
                             <i class="fas fa-times-circle mr-2"></i>
                             Change Phone Number

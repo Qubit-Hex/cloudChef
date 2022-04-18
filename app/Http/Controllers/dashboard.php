@@ -22,6 +22,7 @@ class dashboard extends Controller
         // load user access control middleware inorder
         // to authentication users before they are allow access to the resource
         $this->middleware('auth');
+
     }
     //
 

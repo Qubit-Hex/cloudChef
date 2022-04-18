@@ -4,10 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class employee extends Model
 {
     use HasFactory;
+
+
+    protected $table = 'employee';
 
      protected $primaryKey = 'id';
 
@@ -21,6 +25,20 @@ class employee extends Model
         'phone',
     ];
 
+    /**
+     *
+     *  @method: getEmployeeByID
+     *
+     *  @purpose: inorder to get employee data by id
+     *
+     */
+
+    public function getEmployeeByID($id)
+    {
+        $employee = DB::table('employee')->where('userID', $id)->first();
+
+        return $employee;
+    }
 
 
     /**
@@ -31,17 +49,81 @@ class employee extends Model
      */
 
      public function changeEmployeeAddress($id, $address) {
+         // ONLY change the address of the employes
 
-        $employee = $this->where('userID', $id)
-                            ->first();
-        if($employee) {
-            $employee->address = $address;
-            $employee->save();
+         $employee = DB::table('employee')->where('userID', $id)->get();
+
+         // change all the information that the user is associated with
+            foreach ($employee as $employee) {
+               if(!DB::table('employee')->where('userID', $id)->update(['address' => $address]))  {
+                    //  if the update fails
+                    return false;
+               }
+            }
             return true;
-        }
-
-        return false;
     }
 
 
+    /**
+     *
+     *  @method: getEmployeeByAddress
+     *
+     *  @purpose: inorder to get the employee by the address
+     *
+     */
+
+    public function getEmployeeByAddress($address, $id)
+    {
+        $employee = DB::table('employee')->where('address', $address)->where('userID', '=', $id)->first();
+
+        return $employee;
+    }
+
+
+
+    /**
+     *
+     *  @method: changeEmployeePhoneNumber
+     *
+     *  @purpose: inorder to change the phone number of the employee
+     *
+     */
+
+     public function changeEmployeePhoneNumber($id, $phone) {
+         // ONLY change the phone number of the employes
+
+         $employee = DB::table('employee')->where('userID', $id)->get();
+
+         // change all the information that the user is associated with
+            foreach ($employee as $employee) {
+               if(!DB::table('employee')->where('userID', $id)->update(['phone' => $phone]))  {
+                    //  if the update fails
+                    return false;
+               }
+            }
+            return true;
+     }
+
+
+    /**
+     *
+     *  @method: changeEmployeeLocation
+     *
+     *  @purpose: inorder to change the location of the employee
+     *
+     */
+
+     public function changeEmployeeLocation($userID, $location)
+     {
+            $employee = DB::table('employee')->where('userID', $userID)->get();
+
+            // change all the information that the user is associated with
+            foreach ($employee as $employee) {
+                if(!DB::table('employee')->where('userID', $userID)->update(['location' => $location]))  {
+                        //  if the update fails
+                        return false;
+                }
+            }
+                return true;
+     }
 }

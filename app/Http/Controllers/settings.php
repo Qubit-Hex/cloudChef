@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\employee;
+use App\Models\store_members;
 use App\Http\Services\Auth\modules\encryption;
+use Faker\Core\Number;
 
 class settings extends Controller
 {
@@ -60,28 +62,88 @@ class settings extends Controller
     public function changeAddress(Request $request)
     {
         $employee = new employee();
-        $userData =  new User();
-        $input = $request->input('address');
+        $user = new User();
+        $member = new store_members();
 
-        $storeMember = $userData->getUserByRemeberToken($request->header('accessToken'));
+        // get all of the information about the user
+        $currentUser =  $user->getUserByRemeberToken($request->header('accessToken'));
 
-        // preform some checks first
-        if (empty($input)) {
-            return response()->json(['status' => 'error', 'message' => 'The address field is required'], 400);
+        // is the address the same as one that is already in the system?
+        // check if the address is already in the system
+
+        if ($employee->getEmployeeByAddress($request->input('address'), $currentUser->userID)) {
+            return response()->json(['status' => 'error', 'message' => 'The address you provided is already in the system'], 400);
         }
 
-        // cheeck if the address is a proper length
+        $currentEmployee = $employee->changeEmployeeAddress($currentUser->userID, $request->input('address'));
 
-        if (strlen($input) < 5) {
-            return response()->json(['status' => 'error', 'message' => 'The address must be at least 5 characters long'], 400);
+        if ($currentEmployee === true) {
+            return response()->json(['status' => 'success', 'message' => 'Address changed successfully'], 200);
+        } else {
+            return response()->json(['status' => 'error', 'message' => 'The address you provided is not valid'], 400);
         }
-        $employeeData = $employee->changeEmployeeAddress($storeMember->userID, $request->input('address'));
+    }
 
-        if ($employeeData) {
-            return response()->json(['status' => 200, 'message' => 'Address changed successfully'], 200);
+    /**
+     *
+     *  @method: changePhoneNumber
+     *
+     *  @purpose: inorder to change the phone number of the user
+     *
+     */
+
+    public function changePhoneNumber(Request $request)
+    {
+        $phone = (int) $request->input('phone');
+
+        // validate the phone number php validation
+        // make sure the input is a number and remove any non-numeric characters
+
+        $phone = preg_replace('/\D/', '', $phone);
+        // remove any dash characters
+        $phone = str_replace('-', '', $phone);
+        $phone = (int) $phone;
+
+        if (strlen($phone) > 12  || strlen($phone) < 10) {
+            return response()->json(['status' => 'error', 'message' => 'The phone number you provided is not valid'], 400);
         }
-        
-        // address could not be changed
-        return response()->json(['status' => 'error', 'message' => 'The address could not be changed'], 400);
+
+        // change the phone numebr of the current user
+        $user = new User();
+        $currentUser =  $user->getUserByRemeberToken($request->header('accessToken'));
+        $employee = new employee();
+
+        // is the phone the same as the only in the database
+        $currentEmployee = $employee->changeEmployeePhoneNumber($currentUser->userID, $phone);
+
+        return response()->json(['status' => 'success',
+         'message' => 'Phone number changed successfully'], 200);
+
+    }
+
+
+    /**
+     *
+     *  @method: changeLocation
+     *
+     *  @purpose: inorder to change the location of the user
+     *
+     */
+
+    public function changeLocation(Request $request)
+    {
+
+        $user = new User();
+        $emp = new employee();
+        $currentUser = $user->getUserByRemeberToken($request->header('accessToken'));
+        $userLocation = $request->input('state') . ', ' . $request->input('city');
+
+        $currentEmployee = $emp->changeEmployeeLocation($currentUser->userID, $userLocation);
+
+        if ($currentEmployee === true) {
+            return response()->json(['status' => 'success', 'message' => 'Location changed successfully'], 200);
+        } else {
+            return response()->json(['status' => 'error', 'message' => 'The location you provided is not valid'], 400);
+        }
     }
 }

@@ -75,7 +75,7 @@ const ChangePasswordModal = (props) => {
                         <h1 className='text-success h4'>
                             Password was changed successfully
                             {/** success icon font awesome */}
-                             <i class="fas fa-check-circle m-2"></i>
+                             <i className="fas fa-check-circle m-2"></i>
                         </h1>
                         <div className='row'>
                             <p className='text-success'> <b> Status: </b> { props.message } </p>
@@ -103,7 +103,7 @@ const ChangePasswordModal = (props) => {
                     <h1 className='text-danger h4'>
                         Password change failed
                         {/** error icon font awesome */}
-                        <i class="fas fa-times-circle m-2"></i>
+                        <i className="fas fa-times-circle m-2"></i>
                     </h1>
                     <div className='row'>
                         <p className='text-danger'> <b> Reason: </b> { props.message }</p>
@@ -139,7 +139,7 @@ const ChangePasswordModal = (props) => {
 
             // first check does an error message already exist
             if (!element.parentElement.querySelector('.invalid-feedback')) {
-                element.parentElement.insertAdjacentHTML('beforeend', `<div class="invalid-feedback"> This Field is required </div>`);
+                element.parentElement.insertAdjacentHTML('beforeend', `<div className="invalid-feedback"> This Field is required </div>`);
             }
             return false;
         }
@@ -272,7 +272,6 @@ const ChangeUserSettings = (props) => {
             break;
         }
 
-        console.log(selected.value);
     }
 
 

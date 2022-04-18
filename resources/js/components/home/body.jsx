@@ -37,7 +37,7 @@ import React from 'react';
 
             }}>
 
-            <img src='/img/intro-header.jpg' className="img-fluid" width="600px" height="500px" />
+            <img src='/img/intro-header.jpg' className="img-fluid" alt='bartender' width="600px" height="500px" />
 
             </div>
 
@@ -50,6 +50,7 @@ import React from 'react';
               className="img-fluid shadow"
               width="600px"
               height="500px"
+            alt="clam"
             />
             </div>
 
@@ -62,18 +63,16 @@ import React from 'react';
 
 
             <h2 className="header-title"> The Secret Ingredient </h2>
-            <h3 className="header-title"> Manage consistency effortlessly </h3>
 
             <h3 className="header-description">
               {" "}
               Cloudchef is a restaurant management solution that helps any establishment and its staff work smarter and more efficient.
-              We put all the information you need in one place, so you can train your employees, assign them tasks, and make smarter business decisions.
-              By sending out targeted promotions based on customer feedback, we help improve profitability{" "}
+              We put all the information you need in one place, for when you need it the most.
             </h3>
 
             <h4 className="header-description">
               Make employee training easy and simple by using our cloud based
-              recipe management and training system.
+              recipe management system.
             </h4>
 
              <a href='/login/'><button
@@ -87,18 +86,18 @@ import React from 'react';
         <div className="container">
           <div className="row mt-4 bg-white">
             <div className="col-sm mb-3 blob-lg">
-              <img src="/img/food-phone.jpg" className="img-fluid" alt="" />
+              <img src="/img/food-phone.jpg" className="img-fluid" alt="food photo" />
             </div>
             <div className="col-sm header-section-space-md">
               <h1 className="body-section-title"> ALL OF YOUR RECIPES </h1>
 
               <h1 className="multi-color-section">
-                {" "}
-                <span>Available</span> <span>Anywhere.</span>{" "}
-                <span>Anytime.</span>{" "}
+                <span>Available</span>
+                <span>Anywhere.</span>
+                <span>Anytime.</span>
               </h1>
               <p className="header-description">
-                {" "}
+
                 Cloud-based platform can be accessed from a desktop or mobile
                 device. Premium new recipe & menu management for culinary
                 professionals.
@@ -108,7 +107,7 @@ import React from 'react';
 
           <div className="row mt-4 bg-white ">
             <div className="col-sm blob-lg">
-              <img src="/img/burger-present.jpg" className="img-fluid" alt="" />
+              <img src="/img/burger-present.jpg" className="img-fluid" alt="burger present" />
             </div>
 
             <div className="col-sm header-section-space-md">
@@ -129,7 +128,7 @@ import React from 'react';
 
           <div className="row mt-4 p-2 bg-white header-section-space-md">
             <div className="col-sm crop-image">
-              <img src="/img/baker-image.jpg" className="img-fluid shadow" />
+              <img src="/img/baker-image.jpg" className="img-fluid shadow" alt="chef"/>
             </div>
 
             <div className="col-sm header-section-space-md">

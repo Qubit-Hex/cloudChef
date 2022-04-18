@@ -24,12 +24,16 @@ class LogoutRequest {
 
     static function logout($request) {
 
-        // query that hold our information....
-        $query = [
-            'token' => $request->header('accessToken'),
-            'data' => $request->all()
-        ];
+        // destroy all php sessions and cookies and redirect the user...
+        // destroy the session
+        session_start();
 
+        session_destroy();
+        // destroy the cookies
+        setcookie('accessToken', '', time() - 3600, '/');
+        setcookie('refreshToken', '', time() - 3600, '/');
+        // redirect the user to the login page
+        return redirect('/login');
     }
 }
 

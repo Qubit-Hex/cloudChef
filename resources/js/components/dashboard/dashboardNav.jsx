@@ -185,7 +185,7 @@ export class DashboardNav extends Component {
                         </a>
 
                         {/** LOGOUT BUTTON  WITH A POWER BUTTON*/}
-                        <a href="/dashboard/logout/" className="nav-link">
+                        <a href="/authentication/logout/" className="nav-link">
                             <i className="fas fa-power-off"></i>
                             <span className="nav-link-text">Logout</span>
                         </a>

@@ -24,13 +24,28 @@ class store_members extends Model
         'updated_at',
     ];
 
+       /**
+     *
+     *  @method: getMemberByID
+     *
+     *
+     *  @purpose: inorder to get employee data by id
+     *
+     */
+
+    public function getMembersByID($id)
+    {
+       return $this->where('userID', $id)->first();
+    }
+
+
 
 
     /**
      *  @method: verifyStoreMember
-     *  
+     *
      *  @purpose: This method is used to verify the ownership of the store
-     * 
+     *
      */
 
 
@@ -49,10 +64,10 @@ class store_members extends Model
 
         /**
          *  @method: storeMemberRole ?
-         * 
-         *  @purpose: to fetch the store role of the member  
-         * 
-         * 
+         *
+         *  @purpose: to fetch the store role of the member
+         *
+         *
          */
 
          public function storeMemberRole($storeID, $userID) {

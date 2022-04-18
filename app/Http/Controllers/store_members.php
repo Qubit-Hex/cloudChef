@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\DB;
 class store_members extends Controller
 {
 
+
+
     /**
      *   @method: get
      *
@@ -58,48 +60,6 @@ class store_members extends Controller
 
         return response()->json( ['data' => $members], 200);
     }
-
-    /**
-     *
-     *  @method: update
-     *
-     *
-     *
-     *  @purpose: inorder to update store profile data and store members data
-     *
-     */
-
-    public function update(Request $request, $id = null)
-    {
-
-
-    }
-
-
-
-    /**
-     *
-     * @method: add
-     *
-     * @purpose: inorder to add store profile data and store members data
-     *
-    */
-
-
-    public function add(Request $request)
-    {
-
-    }
-
-
-
-    /**
-     *
-     *  @method: find
-     *
-     *  @purpose: inorder to find a store member in the database
-     *
-     */
 
     public function find(Request $request)
     {

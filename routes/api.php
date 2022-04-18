@@ -11,6 +11,8 @@ use App\Http\Controllers\employee;
 use App\Http\Controllers\recipes;
 use App\Http\Controllers\menu;
 use App\Http\Controllers\settings;
+
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -21,6 +23,9 @@ use App\Http\Controllers\settings;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+
+
 
 
 /**
@@ -239,6 +244,12 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
 
             // change the address of the user
             Route::patch('/changeAddress', [settings::class, 'changeAddress'])->name('settings/changeAddress');
+
+            // change the address of the phone number of the user
+            Route::patch('/changePhoneNumber', [settings::class, 'changePhoneNumber'])->name('settings/changePhoneNumber');
+
+            // change the location
+            Route::patch('/changeLocation', [settings::class, 'changeLocation'])->name('settings/changeLocation');
 
           });
 
