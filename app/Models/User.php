@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Http\Services\Auth\modules\encryption;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -76,7 +77,7 @@ class User extends Authenticatable
       *
       * @purpose: inorder to create the user
       */
-      public function createUser($name, $email, $password, $salt,) {
+      public function createUser($name, $email, $password, $salt) {
         return $this->create([
             'name' => $name,
             'email' => $email,
@@ -128,7 +129,7 @@ class User extends Authenticatable
        *  @return: vold
        */
        public function updateToken($tokenValue, $userID) {
-            return $this->where('userID', $userID)->update(['remember_token' => $tokenValue]);
+            return DB::table('users')->where('userID', $userID)->update(['remember_token' => $tokenValue]);
        }
 
 

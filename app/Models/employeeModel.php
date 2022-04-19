@@ -25,6 +25,36 @@ class employeeModel extends Model
         'phone',
     ];
 
+
+    /**
+     *
+     *  @method: createEmployee
+     *
+     *  @purpose: to add an employee into the system.
+     *
+     */
+
+     public function createEmployee($userID, $storeID, $first, $last, $address, $location, $email, $phone, $salary)
+     {
+
+           return DB::table('employee')->insert([
+               'userID' => $userID,
+               'storeID' => $storeID,
+               'department_id' => 3, // this is temporary until we have a department system
+               'first_name' => $first,
+               'last_name' => $last,
+               'address' => $address,
+               'location' => $location,
+               'email' => $email,
+               'phone' => $phone,
+               'salary' => $salary,
+               'is_active' => 1,
+               'start_date' => date('Y-m-d'),
+               'end_date' => null
+           ]);
+     }
+
+
     /**
      *
      *  @method: getEmployeeByID

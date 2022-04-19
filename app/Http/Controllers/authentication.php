@@ -216,6 +216,7 @@ class authentication extends Controller
 
         // ok the email is available, lets create the user
         $salt = hash('sha256', bin2hex(random_bytes(64)));
+        $token = hash('sha256', bin2hex(random_bytes(64)));
 
         if ($userModel->createUser($fullname, $email,$password, $salt))
         {
@@ -232,7 +233,7 @@ class authentication extends Controller
                 {
                     // create a authentication cookie for the user
                     // since the users registration was successful
-                    $token = hash('sha256', bin2hex(random_bytes(64)));
+
                     $tokenRefresh = $userModel->updateToken($userID, $token);
                     // create the access token cookie
                     setcookie('accessToken', $token, time() + (86400 * 30), "/"); // 86400 = 1 day
@@ -331,7 +332,8 @@ class authentication extends Controller
 
     public function verify(Request $request)
     {
-        // use the auth middleware to verify the user
+        // the auth middleware is attached to this method in order to validate request
+        // so if the request goes though we will be sending this to the front end. 
 
         return response()->json([
             'authenticated' => true,

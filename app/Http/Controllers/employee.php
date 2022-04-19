@@ -138,7 +138,9 @@ class employee extends Controller
                     $result[] = [
                         'name' => $employee->first_name . ' ' . $employee->last_name,
                         'id' => $employee->id,
-                        'department' => DB::table('department')->where('id', $employee->department_id)->first()->name,
+                        'department' => DB::table('department')
+                            ->where('id', $employee->department_id)
+                            ->first()->name,
                         'address' => $employee->address,
                         'phone' => $employee->phone,
                         'location' => $employee->location,
@@ -171,7 +173,6 @@ class employee extends Controller
     public function add(Request $request)
     {
         // purpose of this method is to add a new employee to the store.
-
         $userModel = new User();
         $storeModel = new store();
         $storeMemberModel = new store_members();
@@ -210,9 +211,76 @@ class employee extends Controller
 
         # ===================== user input of the request =====================
 
+        $name = $request->input('name');
+        $email = $request->input('email');
+        $phone = $request->input('phone');
+        $address = $request->input('address');
+        $position = $request->input('position'); // this is the position of the employee
+        $salary = $request->input('salary');
+        $dob = $request->input('dob');
+        $location = $request->input('location');
+        $password = $request->input('password');
+        $salt = hash('sha256', bin2hex(openssl_random_pseudo_bytes(64)));
 
-        
 
+        // validate the user input before continuing the request.
+
+
+        // register the employee into the system.
+        $registerUser = $userModel->createUser($name, $email, $password, $salt);
+
+        if (!$registerUser) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'user registration failed'
+            ]);
+        }
+
+        // register the employee into the store.
+        $registerMember = $storeMemberModel->createMember(
+            $registerUser->userID,
+            $currentMember->storeID,
+            'employee'
+        );
+
+        // register the employee as a member into the system
+        if (!$registerMember) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'user registration failed'
+            ]);
+        }
+
+        // store the
+        $firstname = explode(' ', $name)[0];
+        $lastname = explode(' ', $name)[1];
+
+        // show success of fal of the registration
+        // of the new employee into the system.
+        $hireEmployee = $employeeMod->createEmployee(
+            $registerMember->userID,
+            $currentMember->storeID,
+            $firstname,
+            $lastname,
+            $address,
+            $location,
+            $email,
+            $phone,
+            $salary
+        );
+
+        if (!$hireEmployee) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'user registration failed'
+            ]);
+        }
+
+        // the user has been registered successfully
+        return response()->json([
+            'status' => 'success',
+            'message' => 'user has been registered successfully'
+        ]);
     }
 
     /**
