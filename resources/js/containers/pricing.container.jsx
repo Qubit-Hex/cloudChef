@@ -99,15 +99,17 @@ return (
                     <div className="row">
                         <div className="col-md-6">
 
-                            <div className='background-img-popup'>
+                            <div>
                                {/** 4x4 image grid  */}
-                               <img src='/img/SVG/teamup.svg' className='img-fluid' />
+                               <img src='/img/SVG/send-message-icon.svg' width={300} height={300} className='d-block mx-auto mt-4' />
+                               <h2 className="text-center header-subtitle" style={{
+                                   fontSize: '1.75rem',
+                               }}> Contact US </h2>
 
                             </div>
                         </div>
 
                         <div className='col-md-6 p-4 contact-form-popup'>
-                        <h1> Contact US </h1>
                         <span className='text-muted'>  Please fill out the form inorder to contact us, about our corporate plans. </span>
                             <form onSubmit={
                                 (e) => {

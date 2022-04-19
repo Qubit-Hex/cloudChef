@@ -34,35 +34,20 @@ use App\Http\Controllers\settings;
 *  @Route: /auth/login/
 */
 
- Route::post('auth/login/', [authentication::class, 'login'])->name('auth/login');
+ Route::group(['prefix' => 'auth'], function () {
 
+    // login api request
+    Route::post('login', [authentication::class, 'login'])->name('/auth/login');
+    // registration api request
+    Route::post('register', [authentication::class, 'register'])->name('/auth/register');
+    // logout api request
+    Route::post('logout', [authentication::class, 'logout'])->name('/auth/logout');
+    // verify logout request
+    Route::get('/verify', [authentication::class, 'verify'])->name('/auth/verify')->middleware('auth');
+    // attach auth middleware to the premission route
+    Route::get('/permissions', [authentication::class, 'permissions'])->name('/auth/permission')->middleware('auth');
 
- /**
-  * @purpose: inorder to register a user account into the syste
-  *
-  * @Route: /auth/register/
-  */
-
-
-  Route::post('auth/register/', [authentication::class, 'register'])->name('auth/register');
-
-
-  /**
-   * @purpose: inorder to check the login credintials of the user before issuing a token for our client to use.
-   *
-   * @Route: /auth/verify/
-   */
-
-   Route::get('auth/verify/', [authentication::class, 'verify'])->name('auth/verify');
-
-
-    /**
-     * @purpose: inorder to check the login credintials of the user before issuing a token for our client to use.
-     *
-     * @Route: /auth/logout/
-     */
-
-    Route::post('auth/logout/', [authentication::class, 'logout'])->name('auth/logout');
+ });
 
 
 /**

@@ -65,4 +65,18 @@ class store extends Model
       {
             return DB::table('store')->where('storeID', $storeID)->delete();
       }
+
+
+      /**
+       *
+       * @function: getStoreByID
+       *
+       *  @purpose: inorder to get the store by the storeID
+       *
+       */
+
+       public function getStoreByID($storeID)
+       {
+           return $this->where('storeID', $storeID)->first();
+       }
 }

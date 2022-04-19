@@ -46,4 +46,30 @@ class user_sessions extends Model
                 'active' => 1
             ]);
      }
+
+
+     /**
+      *   @method: deleteSession
+      *
+      *   @purpose: to delete a sesssion
+      *
+      */
+
+      public function deleteSession($id)
+      {
+          return $this->where('user_id', $id)->delete();
+      }
+
+      /**
+       *
+       * @method: getSessionByToken
+       *
+       *  @purpose: inorder to get the sessions by the access token that we have provided
+       *
+       */
+
+       public function getSessionByToken ($token)
+       {
+           return $this->where('token', $token)->first();
+       }
 }

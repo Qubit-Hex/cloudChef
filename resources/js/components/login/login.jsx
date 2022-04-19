@@ -81,10 +81,6 @@ export class LoginPage extends React.Component {
       if (response.message) {
         document.getElementById('error-response').innerHTML = response.message;
       }
-      // we are going to recieve a token so we are going to store it in a cookie
-      if (response.signature) {
-        document.cookie = 'api_public_key=' + response.signature + '; path=/';
-      }
 
       // check if user is authentication if so then we will
       // redirect the user to the dashboard

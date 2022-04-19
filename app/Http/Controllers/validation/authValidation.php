@@ -49,6 +49,26 @@ class authValidation extends Controller
 
     /**
      *
+     *  @method: validateStoreID
+     *
+     *  @purpose: inorder to validate the storeID of the request
+     *
+     */
+
+     static function validateStoreID($id)
+     {
+         // validate the store id it must be of a type int
+        if (filter_var($id, FILTER_VALIDATE_INT)) {
+            // store id is valid
+            return true;
+        } else {
+            // store id is not valid
+            return false;
+        }
+     }
+
+    /**
+     *
      *  @method: validateName
      *
      *  @purpose: inorder to validate the name of the request
@@ -131,4 +151,32 @@ class authValidation extends Controller
             $cookie = cookie('validation', $tokenValue, 60);
             return $cookie;
         }
+
+
+
+        /**
+         *
+         *  @method: loginHandShake
+         *
+         *  @purpose: inorder to validate the login request
+         *
+         */
+
+         static function loginHandShake($email, $password, $storeID)
+         {
+             // issue the handshake to the user of the applicatiom.
+                $hashGemerator = bin2hex(random_bytes(64));
+
+            // preform 4 rounds of hashing
+            $hash = hash('sha256', $email . $password . $storeID . $hashGemerator);
+            $hash = hash('sha256', $hash);
+            $hash = hash('sha256', $hash);
+            $hash = hash('sha256', $hash);
+
+            // return the handshake
+            return $hash;
+         }
+
+
+
 }

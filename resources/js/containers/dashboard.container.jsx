@@ -76,7 +76,10 @@ export const DashboardContainer = (props) => { // the state of our component.
         }
     });
 
-
+    // return the unauthenticated page if the user is not authenticated
+    if (authenticated === false) {
+        return <UnauthorizedPage/>;
+    }
         return (
             <div className="content_container">
                 <DashboardNav/>

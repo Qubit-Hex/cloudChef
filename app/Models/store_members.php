@@ -65,7 +65,7 @@ class store_members extends Model
 
      public function verifyStoreMembership($storeID, $userID) {
 
-        $store_member = store_members::where('store_memberID', $storeID)
+        $store_member = store_members::where('storeID', $storeID)
                                     ->where('userID', $userID)
                                     ->first();
 

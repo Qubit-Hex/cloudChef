@@ -17,7 +17,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\validation\authValidation;
-
+use App\Http\Services\Auth\AuthValidation as AuthAuthValidation;
 use App\Models\User;
 use App\Models\store_members;
 use App\Models\store;
@@ -46,10 +46,91 @@ class authentication extends Controller
     public function login(Request $request)
     {
       // form our login request
-      $email = $request->input('email');
+      $email = $request->input('username');
       $password = $request->input('password');
-      $storeID = $request->input('storeID');
+      $storeID =  (int) $request->input('clientId');
+      $token = $request->input('_token');
 
+      /// ------ MODELS -------------------------
+
+      $userModal = new User();
+      $storeMembers = new store_members();
+      $userStore = new store();
+      $currentUserSessions = new user_sessions();
+
+    // ------ VALIDATION -------------------------
+
+        // validate the email address
+        if (!authValidation::validateEmail($email)) {
+            // email is not valid
+            return response()->json(['status' => 'error', 'message' => 'email is not valid']);
+        }
+
+        // validate the password
+        if (!authValidation::validatePassword($password)) {
+            // password is not valid
+            return response()->json(['status' => 'error', 'message' => 'password is not valid']);
+        }
+
+        // validate the store id
+        if (!authValidation::validateStoreID($storeID)) {
+            // store id is not valid
+            return response()->json(['status' => 'error', 'message' => 'store id is not valid']);
+        }
+
+
+        // ------- Authentication =---------------
+
+        // issue the handshake that the validation did not fail
+        $handshake = authValidation::loginHandShake($email, $password, $storeID);
+        $currentUser = $userModal->getUserByEmail($email);
+        $password = hash('sha256', $password . $currentUser->salt);
+        $currentStore = $userStore->getStoreByID($storeID);
+        $currentStoreMember = $storeMembers->verifyStoreMembership($storeID, $currentUser->userID);
+
+        // does the user exist
+        if (!$currentUser) {
+            // user does not exist
+            return response()->json(['status' => 'error', 'message' => 'user does not exist']);
+        }
+
+        // check is the password that we were given is the same as the one in the databas
+
+        if ($currentUser->password != $password) {
+            // password is not valid
+            return response()->json(['status' => 'error', 'message' => 'password is not valid']);
+        }
+
+        // check does the store exist for the user.
+        if (!$currentStore) {
+            // store does not exist
+            return response()->json(['status' => 'error', 'message' => 'store does not exist']);
+        }
+
+        // next lets check if the user is a member of that store.
+        if (!$currentStoreMember) {
+            // user is not a member of the store
+            return response()->json(['status' => 'error', 'message' => 'user is not a member of the store']);
+        }
+
+
+
+        // ------------ start a session ---------------
+
+        // create the user sessions for the user
+        // out toke should only be valid for 3 hours
+        // delete the old session if exists
+
+        $currentUserSessions->deleteSession($currentUser->userID);
+        $userModal->updateToken($handshake, $currentUser->userID);
+        $accessToken  = setcookie('accessToken', $handshake, time() + (60 * 60 * 3), "/");
+        $currentUserSessions->createSession($currentUser->userID, $handshake, hash('sha256', $_SERVER['REMOTE_ADDR'] . $handshake));
+
+        // we are now logged into the system so lets redirect the user to the dashboard
+        return response()->json(['status' => 'success',
+                                 'authenticated' => true,
+                                'message' => 'user is logged in',
+                                'redirect' => '/dashboard/']);
 
     }
 
@@ -217,7 +298,27 @@ class authentication extends Controller
 
     public function logout(Request $request)
     {
+        // destroy all the tokens
+       $UserModal = new User();
+       $userSessions = new user_sessions();
 
+       // get the user id usign the access token cookie
+        $currentUser = $UserModal->getUserByRemeberToken($_COOKIE['accessToken']);
+
+
+        // does the user exists if so are they glued to a session?
+        if (!$currentUser) {
+            // user is not logged in
+            return response()->json([
+                'authenticated' => false,
+                'message' => 'User is not logged in', 'error' => 'User is not logged in'], 401);
+        }
+        // remove all of our stateless sessions from the database
+        $userSessions->deleteSession($currentUser->userID);
+        // remove the access token
+        setcookie('accessToken', '', time() - 3600, "/");
+        // redirect the user
+        return redirect('/');
     }
 
     /**
@@ -233,13 +334,10 @@ class authentication extends Controller
     {
         // use the auth middleware to verify the user
 
-        $this->middleware('auth');
-
-
         return response()->json([
             'authenticated' => true,
-            'status' => 200,
-            'message' => 'User is authenticated', 'error' => 'User is authenticated'], 200);
+            'status' => 'success',
+            'message' => 'User has been verified', 'error' => 'User has been verified'], 200);
 
     }
 
@@ -254,8 +352,54 @@ class authentication extends Controller
      *          a permission token that will be used to check the permissions of the user
      */
 
-    public function checkPermissions(Request $request)
+    public function permissions(Request $request)
     {
 
+        # modals
+        $userModel = new User();
+        $storeModal = new store();
+        $storeMemberModal = new store_members();
+        $userSessionsModal = new user_sessions();
+
+        // return the json response with the permissions of the user.
+        $currentUser = $userModel->getUserByRemeberToken($_COOKIE['accessToken']);
+
+        // does the user exists if so are they glued to a session?
+        if (!$currentUser) {
+            // user is not logged in
+            return response()->json([
+                'authenticated' => false,
+                'message' => 'User is not logged in', 'error' => 'User is not logged in'], 401);
+        }
+        // confirm the user is logged in with the stateless sessions that we have setup
+
+        $currentUserSession = $userSessionsModal->getSessionByToken($_COOKIE['accessToken']);
+
+        if (!$currentUserSession) {
+            // user is not logged in
+            return response()->json([
+                'authenticated' => false,
+                'message' => 'User is not logged in', 'error' => 'User is not logged in'], 401);
+        }
+
+        // lets get a store_member based on the information that we have so far
+
+        $storeMember = $storeMemberModal->getMembersByID($currentUser->userID);
+        // now lets we have our store members information.
+        // we now will check the permissions of the user.
+
+        if (!$storeMember) {
+            // user is not logged in
+            return response()->json([
+                'authenticated' => false,
+                'message' => 'User is not logged in', 'error' => 'User is not logged in'], 401);
+        }
+
+        // return the role of the user inside of our store
+        return response()->json([
+            'authenticated' => true,
+            'status' => 'success',
+            'message' => 'User has been verified', 'error' => 'User has been verified',
+            'permissions' => $storeMember->store_role], 200);
     }
 }

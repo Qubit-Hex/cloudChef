@@ -31,7 +31,7 @@ require 'domains.php';
 
 
 Route::get('/home/', [home::class, 'index']);
-Route::get('/login/', [home::class, 'loginPage'])->middleware('auth');
+Route::get('/login/', [home::class, 'loginPage']);
 Route::get('/register/', [home::class, 'index']);
 Route::get('/solutions/', [home::class, 'index']);
 Route::get('/pricing/', [home::class, 'index']);

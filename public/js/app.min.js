@@ -19625,11 +19625,6 @@ var LoginPage = /*#__PURE__*/function (_React$Component) {
       this.fetchServiceProvider.$post('/api/auth/login', request, headers, function (response) {
         if (response.message) {
           document.getElementById('error-response').innerHTML = response.message;
-        } // we are going to recieve a token so we are going to store it in a cookie
-
-
-        if (response.signature) {
-          document.cookie = 'api_public_key=' + response.signature + '; path=/';
         } // check if user is authentication if so then we will
         // redirect the user to the dashboard
 
@@ -21589,18 +21584,23 @@ var ContactPopup = function ContactPopup(props) {
             className: "row",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
               className: "col-md-6",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-                className: "background-img-popup",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
-                  src: "/img/SVG/teamup.svg",
-                  className: "img-fluid"
-                })
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
+                  src: "/img/SVG/send-message-icon.svg",
+                  width: 300,
+                  height: 300,
+                  className: "d-block mx-auto mt-4"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h2", {
+                  className: "text-center header-subtitle",
+                  style: {
+                    fontSize: '1.75rem'
+                  },
+                  children: " Contact US "
+                })]
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
               className: "col-md-6 p-4 contact-form-popup",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h1", {
-                children: " Contact US "
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
                 className: "text-muted",
                 children: "  Please fill out the form inorder to contact us, about our corporate plans. "
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("form", {

@@ -80,7 +80,7 @@ class User extends Authenticatable
         return $this->create([
             'name' => $name,
             'email' => $email,
-            'password' => $password,
+            'password' => hash('sha256', $password . $salt),
             'salt' => $salt,
             'status' => 0,
         ]);
@@ -111,6 +111,11 @@ class User extends Authenticatable
 
 
       public function getUserByRemeberToken($remember_token) {
+
+        if ($remember_token === null || $remember_token === '') {
+            return false;
+        }
+
         return $this->where('remember_token', $remember_token)->first();
       }
 
