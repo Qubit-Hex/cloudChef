@@ -23,10 +23,16 @@ class Authenticate
     public function handle(Request $request, Closure $next, $guard = null)
     {
 
-
         if (isset($_COOKIE['accessToken'])) {
+            $accessKey = $_COOKIE['accessToken'];
+        } else{
+            $accessKey = $request->header('accessToken');
+        }
+
+
+        if (isset($accessKey)) {
             // authentication the user
-            $user = DB::table('users')->where('remember_token', $_COOKIE['accessToken'])->first();
+            $user = DB::table('users')->where('remember_token', $accessKey)->first();
             $user_session = DB::table('user_sessions')->where('user_id', $user->userID)->first();
 
             if (!$user || !$user_session)  {

@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\validation\authValidation;
+use App\Models\employeeModel;
+use App\Models\User;
+use App\Models\store;
+use App\Models\user_sessions;
+use App\Models\store_members;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
-
 use App\Http\Services\employees\employeeServiceInterface;
 
 /**
@@ -34,7 +38,6 @@ class employee extends Controller
     {
         // refactor this later into a better format.
         $clientToken = $request->header('accessToken');
-
         // check if the user exists in the database
         $user = DB::table('users')->where('remember_token', $clientToken)->first();
 
@@ -84,7 +87,30 @@ class employee extends Controller
 
     public function showCurrentEmployees(Request $request)
     {
-        $DB = DB::table('employee')->get();
+
+        // modals for the method
+
+        $userModel = new User();
+        $storeModel = new store();
+        $storeMemberModel = new store_members();
+        $userSessionModel = new user_sessions();
+        $employeeMod = new employeeModel();
+
+
+
+        // check if the request is an api or cookie request
+        if (isset($_COOKIE['accessToken'])) {
+            $clientToken = $_COOKIE['accessToken'];
+        } else {
+            $clientToken = $request->header('accessToken');
+        }
+
+
+        // get the user id from the token
+
+        $currentUser = $userModel->getUserByRemeberToken($clientToken);
+        $currentMember = $storeMemberModel->getMembersByID($currentUser->userID);
+        $DB = DB::table('employee')->where('storeID', $currentMember->storeID)->get();
 
         /**
          *  @stub: result
@@ -98,7 +124,7 @@ class employee extends Controller
 
         // authenticate the user before proceeding to the request
 
-        $user = DB::table('users')->where('remember_token', $request->header('accessToken'))->first();
+        $user = DB::table('users')->where('remember_token', $clientToken)->first();
 
         if ($user) {
             $store_members = DB::table('store_members')->where('userID', $user->userID)->first();
@@ -132,9 +158,6 @@ class employee extends Controller
                 'message' => 'user does not belong to the store'
             ], 401);
         }
-
-
-
         return response()->json($DB);
     }
 
@@ -147,14 +170,49 @@ class employee extends Controller
      */
     public function add(Request $request)
     {
+        // purpose of this method is to add a new employee to the store.
 
-        $query = [
-            'token' => $request->header('accessToken'),
-            'data' => $request->all()
-        ];
-        // get a time stamp of the request        ];
+        $userModel = new User();
+        $storeModel = new store();
+        $storeMemberModel = new store_members();
+        $userSessionModel = new user_sessions();
+        $employeeMod = new employeeModel();
 
-        return employeeServiceInterface::add($request);
+        // first lets findout if the user we are talking to is a admin of the store or not \
+        $currentUser = $userModel->getUserByRemeberToken($request->header('accessToken'));
+        // not lets find out what store this user belongs to
+        $currentMember = $storeMemberModel->getMembersByID($currentUser->userID);
+
+        // does the user exist?
+        if (!$currentUser) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'user does not exist'
+            ], 401);
+        }
+
+        // is the member a part of any store in the system ?
+        if (!$currentMember) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'user does not belong to the store'
+            ], 401);
+        }
+
+        // next lets check if the user is a admin of the store
+        if ($currentMember->store_role !== 'admin') {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'user is not a admin of the store'
+            ], 401);
+        }
+
+
+        # ===================== user input of the request =====================
+
+
+        
+
     }
 
     /**

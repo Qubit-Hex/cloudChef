@@ -21,6 +21,7 @@ import FetchServiceProvider from "../../../lib/fetchServiceProvider";
  *  @purpose: to guard any resources that required admin access
  *
  *  props: cargo: -> ANY component that requires admin access
+ * 
  *
  */
 
@@ -70,6 +71,7 @@ export const AdminGuard = (props) => {
  *  @purpose: to guard any resources that required user access
  *
  *  cargo: -> ANY component that requires user access
+ *
  */
 
 export const UserGuard = (props) => {
@@ -89,10 +91,9 @@ export const UserGuard = (props) => {
         return api.get(route, headers);
     }
 
-
     React.useEffect(() => {
         dial().then(res => {
-            if (res.status === 'success' && res.authenticated === true && res.permissions === 'employee' || res.permissions === 'user') {
+            if (res.status === 'success' && res.authenticated === true && res.permissions === 'employee' || res.permissions === 'admin' || res.permissions === 'user') {
                 setAuth(true);
             }
         })

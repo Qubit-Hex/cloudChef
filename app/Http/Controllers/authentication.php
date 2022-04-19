@@ -17,7 +17,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\validation\authValidation;
-use App\Http\Services\Auth\AuthValidation as AuthAuthValidation;
 use App\Models\User;
 use App\Models\store_members;
 use App\Models\store;
