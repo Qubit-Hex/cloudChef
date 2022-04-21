@@ -6191,7 +6191,8 @@ var validateForm = function validateForm(e) {
   var address = document.getElementById('address');
   var position = document.getElementById('department');
   var salary = document.getElementById('salary');
-  var dob = document.getElementById('dob'); // closure to auth generate a password
+  var dob = document.getElementById('dob');
+  var location = document.getElementById('location'); // closure to auth generate a password
 
   var generatePassword = function generatePassword() {
     // generate a random password
@@ -6320,6 +6321,7 @@ var validateForm = function validateForm(e) {
       phone: phone.value,
       address: address.value,
       position: position.value,
+      location: location.value,
       salary: salary.value,
       dob: dob.value,
       password: generatePassword()
@@ -6445,6 +6447,17 @@ var EmployeeAddModal = function EmployeeAddModal(props) {
                 className: "form-control mt-2 mb-2",
                 id: "phone",
                 placeholder: "Enter phone"
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+              className: "form-group",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
+                htmlFor: "location",
+                children: "Location"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
+                type: "text",
+                className: "form-control mt-2 mb-2",
+                id: "location",
+                placeholder: "Enter location"
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
               className: "form-group",
@@ -6688,11 +6701,7 @@ var EmployeeDeleteDialog = function EmployeeDeleteDialog(props) {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
           className: "header-title text-center",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h3", {
-            className: "text-center",
-            style: {
-              fontWeight: 600,
-              color: '#f44336'
-            },
+            className: "header-subtitle text-center",
             children: "Delete Employee "
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
             src: "/img/SVG/trash.svg",
@@ -6714,7 +6723,7 @@ var EmployeeDeleteDialog = function EmployeeDeleteDialog(props) {
               }, employee.id);
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
-            className: "btn btn-danger mt-1 mb-1",
+            className: "btn btn-danger mt-2 mb-2",
             children: "Delete"
           })]
         })]
@@ -6754,8 +6763,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
@@ -6852,8 +6859,6 @@ var RequestEditEmployee = function RequestEditEmployee(data) {
 
 
 var EditEmployeeForm = function EditEmployeeForm(props) {
-  var _requestInput;
-
   var id = props.employeeID;
   var employee = props.employeeData;
   var data = employee.filter(function (person) {
@@ -6862,14 +6867,18 @@ var EditEmployeeForm = function EditEmployeeForm(props) {
     }
   }); // all of the input fields for the edit form
 
-  var requestInput = (_requestInput = {
+  var requestInput = {
     first_name: data[0].first_name,
     last_name: data[0].last_name,
     address: data[0].address,
     location: data[0].location,
     phone: data[0].phone,
-    email: data[0].email
-  }, _defineProperty(_requestInput, "phone", data[0].phone), _defineProperty(_requestInput, "salary", data[0].salary), _defineProperty(_requestInput, "is_active", data[0].is_active), _defineProperty(_requestInput, "start_date", data[0].start_date), _defineProperty(_requestInput, "end_date", data[0].end_date), _requestInput);
+    email: data[0].email,
+    salary: data[0].salary,
+    is_active: data[0].is_active,
+    start_date: data[0].start_date,
+    end_date: data[0].end_date
+  };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_recipe_core_template_modal__WEBPACK_IMPORTED_MODULE_4__.TemplateModal, {
     title: "Edit Employee",
     body: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {

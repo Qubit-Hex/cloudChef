@@ -7,12 +7,10 @@
  *
  */
 
-
 import React from "react";
 import ReactDOM from "react-dom";
 import FetchServiceProvider from "../../../lib/fetchServiceProvider";
 import { TemplateModal } from "../recipe/core/template.modal";
-
 
 
 /**
@@ -123,10 +121,7 @@ export const EmployeeDeleteDialog = (props) => {
                         }
                     }>
                     <div className='header-title text-center'>
-                        <h3 className='text-center' style={{
-                            fontWeight: 600,
-                            color: '#f44336'
-                        }}>Delete Employee </h3>
+                        <h3 className='header-subtitle text-center'>Delete Employee </h3>
                         <img src='/img/SVG/trash.svg' width={200} height={200}  className={"mx-auto"} />
                     </div>
 
@@ -141,7 +136,7 @@ export const EmployeeDeleteDialog = (props) => {
                             })}
                         </select>
 
-                        <button className='btn btn-danger mt-1 mb-1'>
+                        <button className='btn btn-danger mt-2 mb-2'>
                             Delete
                         </button>
 

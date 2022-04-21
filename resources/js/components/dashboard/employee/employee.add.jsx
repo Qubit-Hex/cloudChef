@@ -61,6 +61,7 @@ const validateForm = (e) => {
     const position = document.getElementById('department');
     const salary = document.getElementById('salary');
     const dob = document.getElementById('dob');
+    const location = document.getElementById('location');
 
         // closure to auth generate a password
 
@@ -178,6 +179,7 @@ const validateForm = (e) => {
             phone: phone.value,
             address: address.value,
             position: position.value,
+            location: location.value,
             salary: salary.value,
             dob: dob.value,
             password: generatePassword()
@@ -276,6 +278,12 @@ export const EmployeeAddModal = (props) => {
                             <label htmlFor='phone'>Phone</label>
                             <input type='text' className='form-control mt-2 mb-2' id='phone' placeholder='Enter phone' />
                         </div>
+
+                        <div className='form-group'>
+                            <label htmlFor='location'>Location</label>
+                            <input type='text' className='form-control mt-2 mb-2' id='location' placeholder='Enter location' />
+                        </div>
+                        
                         <div className='form-group'>
                             <label htmlFor='address'>Address</label>
                             <input type='text' className='form-control mt-2 mb-2' id='address' placeholder='Enter address' />

@@ -142,6 +142,19 @@ class User extends Authenticatable
         }
 
 
+
+        /**
+         *
+         *  @method: deleteUser
+         *
+         *  @purpose: inorder to delete the user
+         *
+         */
+
+         public function deleteUser($userID) {
+            return $this->where('userID', $userID)->delete();
+         }
+
         /**
          *
          *  @method: changePassword

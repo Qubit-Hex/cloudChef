@@ -87,7 +87,6 @@ const EditEmployeeForm = (props) => {
         location: data[0].location,
         phone: data[0].phone,
         email: data[0].email,
-        phone: data[0].phone,
         salary: data[0].salary,
         is_active: data[0].is_active,
         start_date: data[0].start_date,

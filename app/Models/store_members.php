@@ -97,6 +97,53 @@ class store_members extends Model
         }
 
 
+        /**
+         *
+         *  @method: isUserAdmin
+         *
+         *  @purpose: to check if the user is an admin
+         *
+         */
+        public function storeMemberAdmin($storeID, $userID) {
+
+            $store_member = store_members::where('storeID', $storeID)
+                                        ->where('userID', $userID)
+                                        ->first();
+            if($store_member) {
+                if($store_member->store_role == 'admin') {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+
+
+        /**
+         *
+         *  @method: disableStoreMember
+         *
+         *  @purpose: to disable a store member
+         *
+         */
+
+         public function disableStoreMember($uid)
+         {
+                $store_member = store_members::where('userID', $uid)->first();
+
+                if($store_member) {
+                    $store_member->delete();
+                    return true;
+                } else {
+                    return false;
+                }
+         }
+
+
+
+
 
 
 }

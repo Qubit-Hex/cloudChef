@@ -15,6 +15,8 @@ import ReactDOM  from "react-dom";
 
  export const TemplateModal = (props) => {
 
+    
+
     // close the modal container is.
     const closeWindow = () => {
         let container = document.getElementById('modal-container');
