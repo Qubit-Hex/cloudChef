@@ -92,9 +92,9 @@ import React from 'react';
               <h1 className="body-section-title"> ALL OF YOUR RECIPES </h1>
 
               <h1 className="multi-color-section">
-                <span>Available</span>
-                <span>Anywhere.</span>
-                <span>Anytime.</span>
+                <span>Available </span>
+                <span>Anywhere </span>
+                <span>Anytime </span>
               </h1>
               <p className="header-description">
 

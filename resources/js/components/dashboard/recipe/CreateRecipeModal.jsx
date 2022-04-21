@@ -128,7 +128,8 @@ export const CreateRecipeModal = (props) => {
 
                     const headers = {
                         // headers for uploading the file
-                        "Accept": "application/json"
+                        "Accept": "application/json",
+                        'accessToken': api.getCookie("accessToken")
 
                     }
                     // get the raw binary data of the file

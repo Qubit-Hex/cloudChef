@@ -7314,7 +7314,8 @@ var CreateRecipeModal = function CreateRecipeModal(props) {
         var route = "/api/store/recipes/file";
         var headers = {
           // headers for uploading the file
-          "Accept": "application/json"
+          "Accept": "application/json",
+          'accessToken': api.getCookie("accessToken")
         }; // get the raw binary data of the file
 
         var data = new FormData();
@@ -12166,14 +12167,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
  *
  */
 
-/*  ____
- ____|    \
-(____|     `._____      00000000000
- ____|       _|___     ------               Send It, Send It, Send It
-(____|     .'           11111111111
-     |____/
- */
-
 /**
  *     @component TemplateModal
  *
@@ -12285,7 +12278,8 @@ var SendEndPoint = function SendEndPoint(props) {
               route = "/api/store/recipes/add";
               headers = {
                 "Content-Type": "application/json",
-                "Accept": "application/json"
+                "Accept": "application/json",
+                'accessToken': api.getCookie('accessToken')
               }; // might chage this to a paramater later
               // but i have to fix the bug first...
 
@@ -17878,7 +17872,7 @@ var ChangeAddress = function ChangeAddress(props) {
       className: "_address_",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h1", {
         className: "header-subtitle",
-        children: "Change Address"
+        children: "Where did you move to"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
         src: "/img/SVG/map.svg",
         width: 300,
@@ -19120,11 +19114,11 @@ var Body = /*#__PURE__*/function (_React$Component) {
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("h1", {
                 className: "multi-color-section",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
-                  children: "Available"
+                  children: "Available "
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
-                  children: "Anywhere."
+                  children: "Anywhere "
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
-                  children: "Anytime."
+                  children: "Anytime "
                 })]
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
                 className: "header-description",

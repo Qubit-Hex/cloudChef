@@ -32,13 +32,7 @@ import FetchServiceProvider from "../../../../lib/fetchServiceProvider";
  */
 
 
-/*  ____
- ____|    \
-(____|     `._____      00000000000
- ____|       _|___     ------               Send It, Send It, Send It
-(____|     .'           11111111111
-     |____/
- */
+
 
 /**
  *     @component TemplateModal
@@ -90,7 +84,7 @@ const TemplateModal = (props) => {
                             'marginTop' : '10px',
                             'padding': '10px'
                         }}>
-                            
+
                         <button
                             type="button"
                             class="btn-transparent btn-sm btn-danger"
@@ -136,7 +130,8 @@ export const SendEndPoint = (props) => {
         const route =  "/api/store/recipes/add";
         const headers = {
             "Content-Type": "application/json",
-            "Accept": "application/json"
+            "Accept": "application/json",
+            'accessToken': api.getCookie('accessToken')
         }
 
 

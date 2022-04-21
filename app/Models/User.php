@@ -168,7 +168,14 @@ class User extends Authenticatable
                 $userModel = new User();
 
                 $user = $userModel->getUserByID($userID);
-                $enc = new encryption();
+
+
+                function generatePasswordHash($password, $salt) {
+                    return hash('sha256', $password . $salt);
+                }
+
+
+
 
                 if ($user->password === $currentPassword) {
 
@@ -176,12 +183,12 @@ class User extends Authenticatable
                         return response()->json(['status' => 'error', 'message' => 'The new password must be at least 8 characters long' ], 400);
                     }
                         // make sure the password is not the same as the current password
-                    if ($enc->generatePasswordHash($newPassword, $user->salt, 'sha256') === $user->password) {
+                    if (generatePasswordHash($newPassword, $user->salt, 'sha256') === $user->password) {
                         return response()->json(['status' => 'error', 'message' => 'The new password must be different from the current password'], 400);
                     }
 
                     // if the password is different, update the password
-                    $userModel->where('userID', $userID)->update(['password' => $enc->generatePasswordHash($newPassword, $user->salt, 'sha256')]);
+                    $userModel->where('userID', $userID)->update(['password' => generatePasswordHash($newPassword, $user->salt, 'sha256')]);
                     return true;
                 }
 

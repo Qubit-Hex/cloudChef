@@ -5,28 +5,34 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 /**
- * 
- *  @controller: home 
- * 
- *  @purpose: inorder to render the landing page of our application 
- * 
+ *
+ *  @controller: home
+ *
+ *  @purpose: inorder to render the landing page of our application
+ *
  */
 
 
 class home extends Controller
 {
-  
-    // return the home page 
+
+    public function __construct()
+    {
+
+    }
+
+
+    // return the home page
     public function index($page = null) {
-        
+
         return view('index');
     }
 
     /**
-     * 
+     *
      *  @method: loginPage
-     * 
-     * 
+     *
+     *
      *  @purpoe: to check if the user is logged in and if so redirect to the dashboard
      */
 

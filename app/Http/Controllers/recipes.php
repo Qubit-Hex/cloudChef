@@ -7,12 +7,43 @@ use App\Http\Services\recipes\core\validation;
 use Illuminate\Support\Facades\DB;
 
 
+use App\Models\User;
+use App\Models\store_members;
 
 class recipes extends Controller
 {
-    public function __construct()
+    public function __construct(Request $request)
     {
         // load our default resources and libs here that we will use for our methods in this class
+
+        $this->user = new User();
+        $this->store_members = new store_members();
+
+
+        // get the store member of the store
+
+        $currentUser = $this->user->getUserByRemeberToken($request->header('accessToken'));
+
+        if (!$currentUser) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'You are not authorized to access this resource',
+                'data' => null
+            ], 401);
+        }
+
+        $this->store_member = $this->store_members->getMembersByID($currentUser->userID);
+
+        $this->storeID = $this->store_member->storeID;
+
+
+        if (empty($this->storeID)) {
+            // deny the request
+            return response()->json([
+                'status' => 'error',
+                'message' => 'You are not a member of any store',
+            ], 401);
+        }
 
     }
 
@@ -196,21 +227,7 @@ class recipes extends Controller
 
         // unit tests for testing that data base relationships are working
 
-        // OUR FUNCTION TO CREATE OUR TABLES
-
-        // all of our structured quetys will be stored in the database
-
-
-
-
-        /**
-         *
-         *  @function createTableEntry
-         *
-         *
-         *  @purpose: inorder to create a table entry and the return the id assocated with that entty. this is a helper function
-         *
-         */
+        // create table entry
 
         function createTableEntry($table, $data)
         {
@@ -224,7 +241,7 @@ class recipes extends Controller
 
         // main store entry for recipes table
         $createRecipeEntry = createTableEntry('store_recipes', [
-            'store_id' => 1,
+            'store_id' => $this->storeID,
             'token' =>  bin2hex(random_bytes(25)),
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')
@@ -329,7 +346,7 @@ class recipes extends Controller
         // check the recipe entry that the front end will interact with
 
         $createRecipe = createTableEntry('recipe', [
-            'store_id' => 1,
+            'store_id' => $this->storeID,
             'recipe_id' => $createRecipeEntry,
             'recipe_name' => $recipeSummary['recipeName'],
             'catagory' => $recipeSummary['recipeCatagory'],
@@ -390,8 +407,12 @@ class recipes extends Controller
         // all of our checks have passed so now lets delete the recipe
 
         // delete the recipe
-        $deleteRecipe = DB::table('recipe')->where('recipe_id', $recipeId);
+        $deleteRecipe = DB::table('recipe')->where('recipe_id', $recipeId)->where('store_id', $this->storeID);
 
+
+        if (!$deleteRecipe) {
+            return response()->json(['error' => 'No recipe found']);
+        }
 
         // delete the following entries from the database inorder to delete the recipe.
 
@@ -448,7 +469,7 @@ class recipes extends Controller
 
     public function get(Request $request)
     {
-        $recipeResponse = DB::table('recipe')->get();
+        $recipeResponse = DB::table('recipe')->where('store_id', $this->storeID)->get();
 
         if ($recipeResponse != null) {
             return response()->json(['status' => 'success', 'data' => $recipeResponse], 200);
@@ -477,18 +498,8 @@ class recipes extends Controller
         }
         // return the recipe data if the recipe id is found and the user is authenticated...
 
-        // @stub
-        // -- recipe data
-        //      -- recipe directions
-        //      -- recipe ingredients
-        //      -- recipe name
-        //      -- recipe id
-        //      -- recipe image
-        //      -- recipe description
-        //      -- recipe category
-        //      -- recipe type
 
-        $queryResult = DB::table('recipe')->where('recipe_id', $id)->first();
+        $queryResult = DB::table('recipe')->where('recipe_id', $id)->where('store_id', $this->storeID)->first();
 
         if ($queryResult == null) {
             return response()->json(['message' => 'Recipe not found'], 404);
@@ -662,14 +673,23 @@ class recipes extends Controller
             return response()->json(['message' => 'Invalid access token'], 401);
         }
 
-        function updateSummary($recipeId, $recipeData)
+        function updateSummary($recipeId, $recipeData, $storeID)
         {
             // update the recipe table
-            $recipeTable = DB::table('recipe')->where('recipe_id', $recipeId)->update([
+            $recipeTable = DB::table('recipe')->where('recipe_id', $recipeId)->where('store_id', $storeID)->update([
                 'recipe_name' => $recipeData['recipeSummary']['recipe_name'],
                 'catagory' => $recipeData['recipeSummary']['catagory'],
                 'updated_at' => date('Y-m-d H:i:s')
             ]);
+
+
+            if (!$recipeTable) {
+                return response()->json(['message' => 'Failed to update recipe summary'], 500);
+            } else {
+                return response()->json([
+                    'status' => 200,
+                    'message' => 'Recipe summary updated successfully'], 200);
+            }
 
             // now update the recipe flavour profile
             $recipeFlavourProfile = DB::table('recipe_flavor_profile')->where('recipe_id', $recipeId)->update([
@@ -697,7 +717,7 @@ class recipes extends Controller
 
 
         // run our closure function
-        return updateSummary($recipe, $recipeData);
+        return updateSummary($recipe, $recipeData, $this->storeID);
     }
 
     /**

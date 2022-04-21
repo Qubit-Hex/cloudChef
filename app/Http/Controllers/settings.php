@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\employee;
+use App\Models\employeeModel;
 use App\Models\store_members;
-use App\Http\Services\Auth\modules\encryption;
 use Faker\Core\Number;
 
 class settings extends Controller
@@ -23,11 +22,18 @@ class settings extends Controller
         // change the password of the current user
         $userModel = new User();
         $currentUser =  $userModel->getUserByRemeberToken($request->header('accessToken'));
-        $enc = new encryption();
+
+
+       function generatePasswordHash($password, $salt)
+       {
+            return hash('sha256', $password . $salt);
+       }
+
+
 
         // generate the new password hash for the user
-        $currentPassword = $enc->generatePasswordHash($request->input('oldPassword'), $currentUser->salt, 'sha256');
-        $newPassword = $enc->generatePasswordHash($request->input('newPassword'), $currentUser->salt, 'sha256');
+        $currentPassword = generatePasswordHash($request->input('oldPassword'), $currentUser->salt, 'sha256');
+        $newPassword = generatePasswordHash($request->input('newPassword'), $currentUser->salt, 'sha256');
         $newPasswordHash = $userModel->changePassword($currentUser->userID, $currentPassword, $request->input('newPassword'));
         // is the oldPassword correct?
 
@@ -61,7 +67,7 @@ class settings extends Controller
 
     public function changeAddress(Request $request)
     {
-        $employee = new employee();
+        $employee = new employeeModel();
         $user = new User();
         $member = new store_members();
 
@@ -111,7 +117,7 @@ class settings extends Controller
         // change the phone numebr of the current user
         $user = new User();
         $currentUser =  $user->getUserByRemeberToken($request->header('accessToken'));
-        $employee = new employee();
+        $employee = new employeeModel();
 
         // is the phone the same as the only in the database
         $currentEmployee = $employee->changeEmployeePhoneNumber($currentUser->userID, $phone);
@@ -134,7 +140,7 @@ class settings extends Controller
     {
 
         $user = new User();
-        $emp = new employee();
+        $emp = new employeeModel();
         $currentUser = $user->getUserByRemeberToken($request->header('accessToken'));
         $userLocation = $request->input('state') . ', ' . $request->input('city');
 
