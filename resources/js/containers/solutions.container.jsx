@@ -72,10 +72,8 @@ export default function SolutionsContainer(props) {
 
 
 
-
-
                 <div className='row header-section-space-md'>
-                    <div className='col blob-lg'>
+                    <div className='col crop-image'>
                         <img src='/img/chef_bottom.jpg' className='img-fluid' />
                     </div>
 

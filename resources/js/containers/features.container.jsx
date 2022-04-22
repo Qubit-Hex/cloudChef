@@ -70,11 +70,7 @@ export default function FeaturesContainer(props) {
 
                     </p>
                   </div>
-
               </div>
-
-
-
             </div>
 
           <Footer />

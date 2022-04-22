@@ -17,47 +17,12 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 // schedule components
 import { ScheduleGridMenu } from "../components/dashboard/schedule/schedule.gridMenu";
 import FetchServiceProvider from "../lib/fetchServiceProvider";
+import { AddScheduleEntry } from "../components/dashboard/schedule/schedule.add.entry";
 
 
 
+export const  SchedulePage = (props) => {
 
-
-export class SchedulePage extends Component {
-    constructor(props) {
-        super(props);
-
-        const date = new Date();
-
-        this.state = {
-            date: date.toLocaleDateString(),
-            user: ""
-        };
-    }
-
-    /**
-     *
-     * @method: getUsername - gets the username of the user
-     *
-     * @purpose: to get the username of the user
-     *
-     */
-
-    getUsername() {
-        const fetchService = new FetchServiceProvider();
-
-        let headers = {
-            "Content-Type": "application/json",
-            accessToken: fetchService.getCookie("accessToken"),
-        };
-
-        fetchService.$get("/api/members/find", headers, (response) => {
-            this.setState({ user: response.username });
-        });
-    }
-
-
-
-    render() {
         return (
             <div className="container-xl dashboard-content">
                 <h2 className="ml-4">
@@ -85,6 +50,7 @@ export class SchedulePage extends Component {
                 <Router>
                     <Switch>
                         <Route path='/dashboard/schedule/add/'>
+                            <AddScheduleEntry />
                         </Route>
                         <Route path="/dashboard/schedule/view">
                         </Route>
@@ -112,5 +78,4 @@ export class SchedulePage extends Component {
                 <div id="modal-container" className="modal-container"></div>
             </div>
         );
-    }
 }

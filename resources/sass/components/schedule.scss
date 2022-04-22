@@ -5,6 +5,110 @@
 
 */
 
+// this is class the schedule table will be wrapped inside of
+.schedule-table {
+    // use a light theme for this table
+
+    background-color: #ffffff;
+
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+    margin-bottom: 20px;
+    padding: 30px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+
+    thead {
+        // this is the header row
+        background-color: #5b81ff7d;
+        border-bottom: 1px solid #d3d3d3;
+        border-radius: 5px 5px 0 0;
+        color: #333;
+        font-size: 14px;
+        font-weight: bold;
+        padding: 10px;
+
+
+        th {
+            // this is the header cell
+            padding: 25px;
+            text-align: center;
+            font-weight: 700;
+            font-family: Arial, Helvetica, sans-serif;
+
+            &:hover {
+                cursor: pointer;
+                background-color: #18128c2b;
+                color: rgb(37, 37, 37);
+            }
+        }
+
+    }
+
+    tbody {
+        // this is the body of the table
+        border-bottom: 1px solid #d3d3d3;
+        color: #333;
+        font-size: 14px;
+        padding: 10px;
+    }
+
+     tr {
+        border-bottom: 1px solid #d3d3d3;
+
+     }
+
+     td {
+        padding: 15px;
+        text-align: center;
+
+        &:hover {
+            cursor: pointer;
+            background-color: #0013bd25;
+        }
+     }
+
+
+
+     th {
+        padding: 10px;
+        text-align: center;
+     }
+
+}
+
+
+.schedule-top-nav {
+    .nav-link {
+        color: #333;
+        font-size: 14px;
+        font-weight: bold;
+        padding: 10px;
+        text-align: center;
+
+        &:hover {
+            cursor: pointer;
+            background-color: #18128c2b;
+            color: rgb(37, 37, 37);
+        }
+    }
+}
+
+
+.schedule-modal {
+    background-color: #fafafa;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    padding: 20px;
+
+
+    .form-group {
+       label {
+           color:rgba(12, 11, 47, 0.845);
+       }
+    }
+}
+
+
+
 
 // make the tile system for the schedule page
 .tile {

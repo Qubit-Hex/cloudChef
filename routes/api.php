@@ -145,9 +145,19 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
 
 
          Route::group(['prefix' => '/schedule'], function () {
+            // add all the methods for schedules
 
-            
 
+            // add a store schedule entry group entry
+            Route::post('/add', [schedule::class, 'add'])->name('/schedule/add');
+
+
+
+            // the actions on a shift of the schedule
+            Route::group(['prefix' => 'shifts'], function () {
+
+
+            });
 
 
         });
