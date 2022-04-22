@@ -20,7 +20,7 @@ import { Modal } from '../base/Modal';
  *
  *
  *  @props:  Shift: <SHIFT OBJECT>
- * 
+ *
  */
 
  export const ModalAddShift = (props) => {
@@ -97,6 +97,12 @@ import { Modal } from '../base/Modal';
         <Modal title="Add Shift"
             body={
                 <div>
+
+                    <div className='_img_ mx-auto text-center'>
+                        <img src='/img/SVG/schedule_icon_alt.svg' width={250} height={250} />
+                        <h1 className='header-subtitle'> Add a shift. </h1>
+                    </div>
+
                     <div className="form-group mt-1">
                         <label htmlFor="In"> Start Time </label>
                         <input type="time" className="form-control mt-1" id="In" placeholder="In" />

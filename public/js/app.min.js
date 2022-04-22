@@ -5659,7 +5659,7 @@ var ContactsTable = function ContactsTable(props) {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
           className: "schedule_pill",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("table", {
-            className: "table",
+            className: "table table-responsive",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("thead", {
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
@@ -13372,7 +13372,7 @@ __webpack_require__.r(__webpack_exports__);
  *
  *
  *  @props:  Shift: <SHIFT OBJECT>
- * 
+ *
  */
 
 
@@ -13449,6 +13449,16 @@ var ModalAddShift = function ModalAddShift(props) {
     title: "Add Shift",
     body: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "_img_ mx-auto text-center",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+          src: "/img/SVG/schedule_icon_alt.svg",
+          width: 250,
+          height: 250
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
+          className: "header-subtitle",
+          children: " Add a shift. "
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "form-group mt-1",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
           htmlFor: "In",
@@ -13611,7 +13621,48 @@ var ModalDeleteShift = function ModalDeleteShift(props) {
     });
   };
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {});
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_base_Modal__WEBPACK_IMPORTED_MODULE_2__.Modal, {
+    title: "Delete Shift",
+    body: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "_img_ text-center mx-auto",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+          src: "/img/SVG/schedule_icon_alt.svg",
+          width: 300,
+          height: 300
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
+          className: "text-danger",
+          style: {
+            fontSize: '1rem',
+            fontWeight: 600
+          },
+          children: " Are you sure you want to delete this shift "
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "form-group d-flex",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("button", {
+          className: "btn btn-danger m-2",
+          onClick: function onClick(e) {
+            // close the modal of the application
+            var container = document.getElementById('modal-container');
+            react_dom__WEBPACK_IMPORTED_MODULE_1__.unmountComponentAtNode(container);
+          },
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
+            className: "fas fa-trash-alt"
+          }), "Cancel"]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("button", {
+          className: "btn btn-message m-2",
+          onClick: function onClick(e) {
+            var container = document.getElementById('modal-container');
+            react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(HandleSuccess, {}), container);
+          },
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
+            className: "far fa-calendar-alt"
+          }), "Delete Shift"]
+        })]
+      })]
+    })
+  });
 };
 
 /***/ }),
@@ -13709,7 +13760,87 @@ var ModalEditShift = function ModalEditShift(props) {
     });
   };
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {});
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_base_Modal__WEBPACK_IMPORTED_MODULE_2__.Modal, {
+    title: "Edit Shift",
+    body: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "_img_ text-center mx-auto",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
+          src: "/img/SVG/schedule_icon_alt.svg",
+          width: 300,
+          height: 300
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
+          className: "header-subtitle",
+          children: " Edit a shift "
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "text-center",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("b", {
+          children: " Current Shift "
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("b", {
+          children: " 9:00AM - 5:00PM "
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("hr", {})]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "form-group",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+          htmlFor: "shift_start_time",
+          children: "Start Time"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+          type: "time",
+          className: "form-control",
+          id: "shift_start_time",
+          placeholder: "Enter Start Time"
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "form-group",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+          htmlFor: "shift_end_time",
+          children: "End Time"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+          type: "time",
+          className: "form-control",
+          id: "shift_end_time",
+          placeholder: "Enter End Time"
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "form-group",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("label", {
+          htmlFor: "shift-off",
+          children: " OFF "
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("input", {
+          type: "checkbox",
+          id: "shift-off",
+          className: "form-check-input",
+          style: {
+            position: 'relative',
+            left: '10px'
+          }
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+        className: "form-group d-flex",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("button", {
+          className: "btn btn-danger m-2",
+          onClick: function onClick(e) {
+            // close the modal of the application
+            var container = document.getElementById('modal-container');
+            react_dom__WEBPACK_IMPORTED_MODULE_1__.unmountComponentAtNode(container);
+          },
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
+            className: "fas fa-trash-alt"
+          }), "Cancel"]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("button", {
+          className: "btn btn-message m-2",
+          onClick: function onClick(e) {
+            var container = document.getElementById('modal-container');
+            react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(HandleSuccess, {}), container);
+          },
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
+            className: "far fa-calendar-alt"
+          }), "Create Shift"]
+        })]
+      })]
+    })
+  });
 };
 
 /***/ }),
@@ -13725,13 +13856,34 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ScheduleTable": () => (/* binding */ ScheduleTable)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var _Modal_addShift__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Modal.addShift */ "./resources/js/components/dashboard/schedule/core/Modal.addShift.jsx");
-/* harmony import */ var _Modal_editShift__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Modal.editShift */ "./resources/js/components/dashboard/schedule/core/Modal.editShift.jsx");
-/* harmony import */ var _Modal_deleteShift__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Modal.deleteShift */ "./resources/js/components/dashboard/schedule/core/Modal.deleteShift.jsx");
-/* harmony import */ var _base_notification__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../base/notification */ "./resources/js/base/notification.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var _Modal_addShift__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Modal.addShift */ "./resources/js/components/dashboard/schedule/core/Modal.addShift.jsx");
+/* harmony import */ var _Modal_editShift__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Modal.editShift */ "./resources/js/components/dashboard/schedule/core/Modal.editShift.jsx");
+/* harmony import */ var _Modal_deleteShift__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Modal.deleteShift */ "./resources/js/components/dashboard/schedule/core/Modal.deleteShift.jsx");
+/* harmony import */ var _base_notification__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../base/notification */ "./resources/js/base/notification.jsx");
+/* harmony import */ var _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../lib/fetchServiceProvider */ "./resources/js/lib/fetchServiceProvider.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 /**
  *
  *  @file: ScheduleTable.jsx
@@ -13747,6 +13899,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 /***
  *
  *
@@ -13754,13 +13907,112 @@ __webpack_require__.r(__webpack_exports__);
  *
  *  @purpose: This is responsible for rendering the schedule table for the required component
  *
+ *
+ *  props: employeeID, shiftID
+ *
  */
 
 
 
 
 var GenerateTableData = function GenerateTableData(props) {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {});
+  // return any shifts data if they is some for this shift.
+  var request = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      var api, route, headers;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              api = new _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_7__["default"]();
+              route = '';
+              headers = {
+                'Content-Type': 'application/json',
+                'accessToken': api.getCookie('accesToken')
+              };
+              _context.next = 5;
+              return api.get(route, headers);
+
+            case 5:
+              return _context.abrupt("return", _context.sent);
+
+            case 6:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function request() {
+      return _ref.apply(this, arguments);
+    };
+  }(); // if there is no shifts data for this shift.
+  // just render as normal.
+
+
+  react__WEBPACK_IMPORTED_MODULE_1__.useEffect(function () {}, []);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("td", {
+    className: "text-center",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+      className: "row",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
+        className: "text-center",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("b", {
+          className: "p-2",
+          children: " 8:00 AM - 5:00 PM "
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("hr", {})]
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
+      className: "row p-0 m-0",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("span", {
+        className: "text-center mt-0",
+        children: " Action "
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("button", {
+        className: "text-center btn btn-outline-dark m-2 w-auto mx-auto",
+        title: "hide the controls for this shift",
+        onClick: function onClick(e) {
+          var controlsDiv = e.currentTarget.parentElement.querySelector("._controls_"); // toggle controlsDiv
+
+          if (controlsDiv.classList.contains("d-none")) {
+            e.currentTarget.innerText = "Show";
+            controlsDiv.classList.remove("d-none");
+          } else {
+            e.currentTarget.innerText = "Hide";
+            controlsDiv.classList.add("d-none");
+          }
+        },
+        children: [" ", "Hide", " "]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
+        className: "text-center d-flex _controls_",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("button", {
+          className: "btn btn-message m-2",
+          onClick: function onClick(e) {
+            var container = document.getElementById("modal-container"); // scheduleID, employeeID, day
+
+            react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_Modal_addShift__WEBPACK_IMPORTED_MODULE_3__.ModalAddShift, {}), container);
+          },
+          children: "Add"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("button", {
+          className: "btn btn-warning m-2",
+          onClick: function onClick(e) {
+            var container = document.getElementById("modal-container");
+            react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_Modal_editShift__WEBPACK_IMPORTED_MODULE_4__.ModalEditShift, {}), container);
+          },
+          children: [" ", "Edit", " "]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("button", {
+          className: "btn btn-danger m-2",
+          onClick: function onClick(e) {
+            // show a messsage on wether or not the shift for the user was deleted successfully
+            var container = document.getElementById("modal-container"); // add the delete modal to the system
+
+            react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_Modal_deleteShift__WEBPACK_IMPORTED_MODULE_5__.ModalDeleteShift, {}), container);
+          },
+          children: [" ", "Delete", " "]
+        })]
+      })]
+    })]
+  });
 };
 /**
  *
@@ -13769,110 +14021,88 @@ var GenerateTableData = function GenerateTableData(props) {
  *  @purpose: inorder to render active schedules of the organization inorder to edit or modify
  *            the schedule based on the date sent to the component
  *
+ *
+ *  @props: week, year, scheduleID, date
  */
 
 
 var ScheduleTable = function ScheduleTable(props) {
-  // get our dates from the props
-  var date = props.date;
-  var weekNumber = props.week;
-  var yearNumber = props.year;
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("table", {
-    className: "schedule-table",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("thead", {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("tr", {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("th", {
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_1__.useState([]),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      employees = _React$useState2[0],
+      setEmployees = _React$useState2[1];
+
+  var request = function request() {
+    var api = new _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_7__["default"]();
+    var route = "/api/store/employees/";
+    var headers = {
+      "Content-Type": "application/json",
+      accessToken: api.getCookie("accessToken")
+    }; // next request to the api to get the employees
+
+    return api.get(route, headers);
+  }; // get all the employees of the said store
+
+
+  react__WEBPACK_IMPORTED_MODULE_1__.useEffect(function () {
+    request().then(function (response) {
+      if (response.status === "success") {
+        setEmployees(response.eData);
+      }
+    });
+  }, []);
+  /**
+   *
+   *   @function: renderEmployees
+   *
+   *
+   *   @purpose: inorder to render the employees of the store
+   *
+   */
+
+  function renderEmployees(data) {
+    return Object.keys(data).map(function (employee, index) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("tr", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("td", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("span", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("i", {
+              className: "fa fa-user-tie fa-3x"
+            }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("b", {
+              children: [" ", data[employee].first_name + " " + data[employee].last_name, " "]
+            })]
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(GenerateTableData, {
+          employeeID: data[employee].id,
+          scheduleID: props.scheduleID
+        })]
+      }, index);
+    });
+  }
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("table", {
+    className: "schedule-table table-responsive",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("thead", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("tr", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("th", {
           children: "Employee"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("th", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("th", {
           children: "Monday"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("th", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("th", {
           children: "Tuesday"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("th", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("th", {
           children: "Wednesday"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("th", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("th", {
           children: "Thursday"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("th", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("th", {
           children: "Friday"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("th", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("th", {
           children: "Saturday"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("th", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("th", {
           children: "Sunday"
         })]
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("tbody", {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("tr", {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("td", {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("span", {
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
-                className: "fa fa-user-tie fa-3x"
-              }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("b", {
-                children: " John Doe "
-              })]
-            })
-          })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("td", {
-          className: "text-center",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-            className: "row",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-              className: "text-center",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("b", {
-                className: "p-2",
-                children: " 8:00 AM - 5:00 PM "
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("hr", {})]
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-            className: "row p-0 m-0",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
-              className: "text-center mt-0",
-              children: " Action "
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
-              className: "text-center btn btn-outline-dark m-2 w-auto mx-auto",
-              title: "hide the controls for this shift",
-              onClick: function onClick(e) {
-                var controlsDiv = document.getElementById('controls-pannel'); // toggle controlsDiv
-
-                if (controlsDiv.classList.contains('d-none')) {
-                  e.currentTarget.innerText = 'Show';
-                  controlsDiv.classList.remove('d-none');
-                } else {
-                  e.currentTarget.innerText = 'Hide';
-                  controlsDiv.classList.add('d-none');
-                }
-              },
-              children: " Hide "
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-              className: "text-center d-flex",
-              id: "controls-pannel",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
-                className: "btn btn-message m-2",
-                onClick: function onClick(e) {
-                  var container = document.getElementById('modal-container');
-                  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Modal_addShift__WEBPACK_IMPORTED_MODULE_2__.ModalAddShift, {}), container);
-                },
-                children: "Add"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
-                className: "btn btn-warning m-2",
-                onClick: function onClick(e) {
-                  var container = document.getElementById('modal-container');
-                  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Modal_addShift__WEBPACK_IMPORTED_MODULE_2__.ModalAddShift, {}), notifyContainer);
-                },
-                children: " Edit "
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
-                className: "btn btn-danger m-2",
-                onClick: function onClick(e) {
-                  // show a messsage on wether or not the shift for the user was deleted successfully
-                  var container = document.getElementById('modal-container'); // add the delete modal to the system
-
-                  react_dom__WEBPACK_IMPORTED_MODULE_1__.render('Shift Deleted', container);
-                },
-                children: " Delete  "
-              })]
-            })]
-          })]
-        })]
-      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("tbody", {
+      children: renderEmployees(employees)
     })]
   });
 };

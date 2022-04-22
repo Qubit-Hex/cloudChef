@@ -110,7 +110,7 @@ export const ContactsTable = (props) => {
                 <small className='text-small'>View all your contacts, for your store here </small>
                 </span>
                 <div className="schedule_pill">
-        <table className='table'>
+        <table className='table table-responsive'>
 
         <thead>
             <tr>
