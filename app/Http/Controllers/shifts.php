@@ -98,15 +98,32 @@ class shifts extends Controller
 
                 return response()->json([
                     'status' => 'success',
+                    'shifts' => true,
                     'message' => 'Shifts found',
                     'data' => $currentEmployeeShifts
                 ], 200);
            } else {
                 // not shifts found so we will create
                 return response()->json([
-                    'status' => 'error',
+                    'status' => 'success',
+                    'shifts' => false,
                     'message' => 'The employee does not have any shifts'
                 ], 400);
            }
+
+
     }
+
+    /**
+     *
+     *  @method: add
+     *
+     *  @purpose: inorder to add a shift to a specific employee
+     *
+     */
+
+     public function add(Request $request)
+     {
+            
+     }
 }

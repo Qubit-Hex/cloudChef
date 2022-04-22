@@ -88,6 +88,7 @@
                                 fontSize: '1rem',
                                 fontWeight: 600,
                             }}> Are you sure you want to delete this shift </h1>
+                            <b className='text-danger'> This cannot be reversed. </b>
                         </div>
 
                         <div className='form-group d-flex'>

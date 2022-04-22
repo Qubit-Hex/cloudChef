@@ -13637,6 +13637,9 @@ var ModalDeleteShift = function ModalDeleteShift(props) {
             fontWeight: 600
           },
           children: " Are you sure you want to delete this shift "
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("b", {
+          className: "text-danger",
+          children: " This cannot be reversed. "
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: "form-group d-flex",
@@ -13866,6 +13869,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _base_notification__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../base/notification */ "./resources/js/base/notification.jsx");
 /* harmony import */ var _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../../lib/fetchServiceProvider */ "./resources/js/lib/fetchServiceProvider.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -13877,12 +13886,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 /**
  *
@@ -13902,6 +13905,95 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /***
  *
+ *  @component: TableCell
+ *
+ *  @purpose: inorder to render the table cell for the required component
+ *
+ *  @props:  day, start_time, end_time, employeeID, scheduleID
+ *
+ *
+ */
+
+
+
+
+var TableCell = function TableCell(props) {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("td", {
+    className: "text-center",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+      className: "row",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
+        className: "text-center",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("b", {
+          className: "p-2",
+          children: [" ", props.start_time === undefined ? "" : props.start_time, " - ", props.end_time === undefined ? "" : props.end_time, " "]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("hr", {})]
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
+      className: "row p-0 m-0",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("span", {
+        className: "text-center mt-0",
+        children: " Action "
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("button", {
+        className: "text-center btn btn-outline-dark m-2 w-auto mx-auto",
+        title: "hide the controls for this shift",
+        onClick: function onClick(e) {
+          var controlsDiv = e.currentTarget.parentElement.querySelector("._controls_"); // toggle controlsDiv
+
+          if (controlsDiv.classList.contains("d-none")) {
+            e.currentTarget.innerText = "Show";
+            controlsDiv.classList.remove("d-none");
+          } else {
+            e.currentTarget.innerText = "Hide";
+            controlsDiv.classList.add("d-none");
+          }
+        },
+        children: [" ", "Hide", " "]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
+        className: "text-center d-flex _controls_",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("button", {
+          className: "btn btn-message m-2",
+          onClick: function onClick(e) {
+            var container = document.getElementById("modal-container"); // scheduleID, employeeID, day
+
+            react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_Modal_addShift__WEBPACK_IMPORTED_MODULE_3__.ModalAddShift, {
+              day: props.day,
+              employeeID: props.employeeID,
+              scheduleID: props.scheduleID
+            }), container);
+          },
+          children: "Add"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("button", {
+          className: "btn btn-warning m-2",
+          onClick: function onClick(e) {
+            var container = document.getElementById("modal-container");
+            react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_Modal_editShift__WEBPACK_IMPORTED_MODULE_4__.ModalEditShift, {
+              day: props.day,
+              employeeID: props.employeeID,
+              scheduleID: props.scheduleID
+            }), container);
+          },
+          children: [" ", "Edit", " "]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("button", {
+          className: "btn btn-danger m-2",
+          onClick: function onClick(e) {
+            // show a messsage on wether or not the shift for the user was deleted successfully
+            var container = document.getElementById("modal-container"); // add the delete modal to the system
+
+            react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_Modal_deleteShift__WEBPACK_IMPORTED_MODULE_5__.ModalDeleteShift, {
+              day: props.day,
+              employeeID: props.employeeID,
+              scheduleID: props.scheduleID
+            }), container);
+          },
+          children: [" ", "Delete", " "]
+        })]
+      })]
+    })]
+  }, props.day);
+};
+/***
+ *
  *
  *  @component: GenerateTableData
  *
@@ -13913,10 +14005,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
  */
 
 
-
-
 var GenerateTableData = function GenerateTableData(props) {
-  // return any shifts data if they is some for this shift.
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_1__.useState([]),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      shiftsData = _React$useState2[0],
+      setShiftsData = _React$useState2[1];
+
+  var _React$useState3 = react__WEBPACK_IMPORTED_MODULE_1__.useState(false),
+      _React$useState4 = _slicedToArray(_React$useState3, 2),
+      error = _React$useState4[0],
+      setError = _React$useState4[1]; // return any shifts data if they is some for this shift.
+
+
   var request = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
       var api, route, headers;
@@ -13955,70 +14055,51 @@ var GenerateTableData = function GenerateTableData(props) {
 
   react__WEBPACK_IMPORTED_MODULE_1__.useEffect(function () {
     request().then(function (response) {
-      console.log(response);
+      if (response.status === 'success') {
+        // render the table with a base of two
+        // option if we got shifts or if we didnt get any shifts
+        if (response.shifts === true) {
+          // we got shifts from the server
+          setShiftsData(response.data);
+        } // we didnt get any shifts from the server
+        // just render o
+
+      } else {
+        // render the error here
+        setError(true);
+      }
     });
-  }, []);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("td", {
-    className: "text-center",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
-      className: "row",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
-        className: "text-center",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("b", {
-          className: "p-2",
-          children: " 8:00 AM - 5:00 PM "
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("hr", {})]
+  }, []); //  error boundry
+
+  if (error) {
+    // this is temporary we will render a better looking errorr message later.
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h1", {
+        children: " Error "
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
-      className: "row p-0 m-0",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("span", {
-        className: "text-center mt-0",
-        children: " Action "
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("button", {
-        className: "text-center btn btn-outline-dark m-2 w-auto mx-auto",
-        title: "hide the controls for this shift",
-        onClick: function onClick(e) {
-          var controlsDiv = e.currentTarget.parentElement.querySelector("._controls_"); // toggle controlsDiv
+    });
+  }
 
-          if (controlsDiv.classList.contains("d-none")) {
-            e.currentTarget.innerText = "Show";
-            controlsDiv.classList.remove("d-none");
-          } else {
-            e.currentTarget.innerText = "Hide";
-            controlsDiv.classList.add("d-none");
-          }
-        },
-        children: [" ", "Hide", " "]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
-        className: "text-center d-flex _controls_",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("button", {
-          className: "btn btn-message m-2",
-          onClick: function onClick(e) {
-            var container = document.getElementById("modal-container"); // scheduleID, employeeID, day
+  if (shiftsData.length === 0) {
+    // new schedule since no shifts were returned
+    var tableData = [];
 
-            react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_Modal_addShift__WEBPACK_IMPORTED_MODULE_3__.ModalAddShift, {}), container);
-          },
-          children: "Add"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("button", {
-          className: "btn btn-warning m-2",
-          onClick: function onClick(e) {
-            var container = document.getElementById("modal-container");
-            react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_Modal_editShift__WEBPACK_IMPORTED_MODULE_4__.ModalEditShift, {}), container);
-          },
-          children: [" ", "Edit", " "]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("button", {
-          className: "btn btn-danger m-2",
-          onClick: function onClick(e) {
-            // show a messsage on wether or not the shift for the user was deleted successfully
-            var container = document.getElementById("modal-container"); // add the delete modal to the system
+    for (var i = 0; i < 7; i++) {
+      tableData.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(TableCell, {
+        day: i,
+        start_time: null,
+        end_time: null,
+        employeeID: props.employeeID,
+        scheduleID: props.scheduleID
+      }, i));
+    } // retunr the table data
 
-            react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_Modal_deleteShift__WEBPACK_IMPORTED_MODULE_5__.ModalDeleteShift, {}), container);
-          },
-          children: [" ", "Delete", " "]
-        })]
-      })]
-    })]
-  });
+
+    return tableData.map(function (data) {
+      return data;
+    });
+  } else {// render the table with the shifts data since the shifts were returned
+  }
 };
 /**
  *
@@ -14033,10 +14114,10 @@ var GenerateTableData = function GenerateTableData(props) {
 
 
 var ScheduleTable = function ScheduleTable(props) {
-  var _React$useState = react__WEBPACK_IMPORTED_MODULE_1__.useState([]),
-      _React$useState2 = _slicedToArray(_React$useState, 2),
-      employees = _React$useState2[0],
-      setEmployees = _React$useState2[1];
+  var _React$useState5 = react__WEBPACK_IMPORTED_MODULE_1__.useState([]),
+      _React$useState6 = _slicedToArray(_React$useState5, 2),
+      employees = _React$useState6[0],
+      setEmployees = _React$useState6[1];
 
   var request = function request() {
     var api = new _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_7__["default"]();
