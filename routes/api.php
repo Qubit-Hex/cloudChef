@@ -146,26 +146,9 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
 
          Route::group(['prefix' => '/schedule'], function () {
 
-            Route::get ('/get', [schedule::class, 'get'])->name('/schedule/get/');
-            Route::post('/add', [schedule::class, 'add'])->name('/schedule/add');
-            Route::get('/find', [schedule::class, 'find'])->name('/schedule/find');
-            Route::post('/create', [schedule::class, 'create'])->name('/schedule/create');
-            Route::get('/show', [schedule::class, 'showEmployeeSchedule'])->name('/schedule/show');
-            Route::delete('/delete', [schedule::class, 'delete'])->name('/schedule/delete');
+            
 
-            Route::get('/labourCost', [schedule::class, 'getLabourCost'])->name('/schedule/labourCost/get');
 
-            // sub routes for other scheduling services we need to interact with.
-            Route::get('/dropshift', [schedule::class, 'dropshift'])->name('/schedule/dropshift');
-            Route::get('/dropshift/get', [schedule::class, 'getDroppedShifts'])->name('/schedule/dropshift/get');
-            Route::get('/pickup', [schedule::class, 'postShiftPickupRequest'])->name('/schedule/pickup/');
-            Route::get('/requests/' , [schedule::class, 'getRequests'])->name('/schedule/requests/');
-
-            // shift requests routes
-
-            // decline the shift request
-            Route::post('/shift/decline', [schedule::class, 'declineShiftRequest'])->name('/schedule/shift/decline');
-            Route::post('/shift/accept', [schedule::class, 'acceptShiftRequest'])->name('/schedule/shift/accept');
 
         });
 
@@ -199,25 +182,6 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
               Route::post('/file', [recipes::class, 'file'])->name('recipes/file');
 
           });
-
-          // all of the menu routes for creating menus and updating menus
-          Route::group(['prefix' => '/menu'], function () {
-
-                Route::post('/add', [menu::class, 'add'])->name('menu/add');
-                Route::get('/get', [menu::class, 'get'])->name('menu/get');
-                Route::delete('/delete', [menu::class, 'deleteMenu'])->name('menu/delete');
-
-                // route for adding a menu item to the menu
-
-                // groups the items together
-                Route::group(['prefix' => '/item'], function () {
-                    Route::post('/add', [menu::class, 'addMenuItem'])->name('menu/item/add');
-                    Route::get('/get', [menu::class, 'getMenuItems'])->name('menu/item/get');
-                    Route::delete('/delete', [menu::class, 'deleteMenuItem'])->name('menu/item/delete');
-                    Route::patch('/update', [menu::class, 'update'])->name('menu/item/update');
-                });
-          });
-
 
 
           // settings api routes

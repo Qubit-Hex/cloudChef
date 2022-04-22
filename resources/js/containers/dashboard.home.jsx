@@ -14,10 +14,6 @@ import reactDOM from "react-dom";
 
 import { ContactNavbar} from "../components/dashboard/contactsNavbar";
 import { ContactsTable } from "../components/dashboard/contacts/contact.table";
-import { ScheduleLabour } from "../components/dashboard/schedule/schedule.labour";
-
-
-import { DisplaySchedule } from "../components/dashboard/schedule/core/schedule.viewSchedule";
 import { TemplateModal } from "../components/dashboard/recipe/core/template.modal";
 
 /**
@@ -41,7 +37,6 @@ export const DashboardHome = (props) => {
 
                     <div className='row'>
                         <div className='col-md-6 mx-auto'>
-                                        <ScheduleLabour />
                         </div>
                     </div>
 
@@ -52,7 +47,6 @@ export const DashboardHome = (props) => {
                                 <h5 className="card-title">Current Schedule</h5>
                                 <p className="card-text">
                                     {/* current employees goes here */}
-                                    <DisplaySchedule />
                                 </p>
                             </div>
                         </div>

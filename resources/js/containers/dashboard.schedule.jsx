@@ -14,26 +14,13 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-// authentication]
-
-// this is the bouncer that will check the current users permissions
-
-
-
-// main components of the schedule
-import { AddSchedule } from "../components/dashboard/schedule/schedule.add";
-import { ScheduleDrop } from "../components/dashboard/schedule/schedule.dropShift";
-import { SchedulePickup } from "../components/dashboard/schedule/schedule.pickupshift";
-
-
 // schedule components
-import { ScheduleGridMenu } from "../components/dashboard/schedule/core/schedule.gridMenu";
-import { DisplaySchedule } from "../components/dashboard/schedule/core/schedule.viewSchedule";
+import { ScheduleGridMenu } from "../components/dashboard/schedule/schedule.gridMenu";
 import FetchServiceProvider from "../lib/fetchServiceProvider";
-import { ScheduleEdit } from "../components/dashboard/schedule/schedule.edit";
-import { ScheduleDelete } from "../components/dashboard/schedule/schedule.delete";
-import { ScheduleRequests } from "../components/dashboard/schedule/schedule.requests";
-import { ScheduleLabour } from "../components/dashboard/schedule/schedule.labour";1
+
+
+
+
 
 export class SchedulePage extends Component {
     constructor(props) {
@@ -68,42 +55,7 @@ export class SchedulePage extends Component {
         });
     }
 
-    /**
-     *
-     * @method: calculateDate
-     *
-     * @purpose: to calculate the date range with only the year and week number
-     *
-     */
 
-    calculateDate(year, weekNumber) {
-        let date = new Date(year, 0, 1 + (weekNumber - 1) * 7);
-        let day = date.getDay();
-        let startDate = new Date(
-            date.getFullYear(),
-            date.getMonth(),
-            date.getDate() + (day === 0 ? -6 : 1) - date.getDay()
-        );
-        let endDate = new Date(
-            date.getFullYear(),
-            date.getMonth(),
-            date.getDate() + (day === 0 ? 0 : 7) - date.getDay()
-        );
-        let startDateString = startDate.toLocaleDateString();
-        let endDateString = endDate.toLocaleDateString();
-
-        // validation check to see if the date is valid
-        if (
-            year === null ||
-            weekNumber === null ||
-            year === "" ||
-            weekNumber === ""
-        ) {
-            return "No date selected";
-        }
-
-        return startDateString + " - " + endDateString;
-    }
 
     render() {
         return (
@@ -133,32 +85,24 @@ export class SchedulePage extends Component {
                 <Router>
                     <Switch>
                         <Route path='/dashboard/schedule/add/'>
-                            <AddSchedule />
                         </Route>
                         <Route path="/dashboard/schedule/view">
-                            <DisplaySchedule />
                         </Route>
                         <Route path="/dashboard/schedule/edit/">
-                            <ScheduleEdit />
                         </Route>
                         <Route path="/dashboard/schedule/delete">
-                            <ScheduleDelete />
                         </Route>
                         <Route path="/dashboard/schedule/drop/">
-                            <ScheduleDrop />
                         </Route>
                         <Route path='/dashboard/schedule/pickup/'>
-                            <SchedulePickup />
                         </Route>
                         <Route path='/dashboard/schedule/labour/'>
-                            <ScheduleLabour />
                         </Route>
                         <Route exact path="/dashboard/schedule/">
                             <ScheduleGridMenu />
                         </Route>
 
                         <Route path='/dashboard/schedule/request/'>
-                            <ScheduleRequests />
                         </Route>
                     </Switch>
                 </Router>
