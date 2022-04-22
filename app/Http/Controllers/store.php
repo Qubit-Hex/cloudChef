@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Services\store\StoreServiceProvider;
+use Illuminate\Support\Facades\DB;
 
 
 class store extends Controller
@@ -19,8 +19,6 @@ class store extends Controller
 
     public function get(Request $request)
     {
-
-        // REDESIGN THIS DATA STRUCTURE TO FIT OUR NEW ARCHITECTURE DESIGN
         $storeRequest = [
             'storeID' => $request->input('storeID'),
             'token' => $request->header('accessToken'),
@@ -32,7 +30,24 @@ class store extends Controller
 
         ];
 
-        return StoreServiceProvider::getStore($storeRequest);
+
+        if ($storeRequest['token'] === null) {
+            return response()->json(['error' => 'token is required'], 401);
+        }
+
+        $user = DB::table('users')->where('remember_token', $storeRequest['token'])->first();
+
+        if ($user) {
+            $storeMember = DB::table('store_members')->where('userID', $user->userID)->first()->storeID;
+
+            if ($storeMember) {
+                $store = DB::table('store')->where('storeID', $storeMember)->first()->name;
+
+                return Response()->json(['status' => 'success', 'store' => $store]);
+            }
+        }
+
+        return Response()->json(['status' => 'failure']);
     }
-    
+
 }

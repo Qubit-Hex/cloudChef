@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Services\recipes\core\validation;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\validation\Validation;
 
 
 use App\Models\User;

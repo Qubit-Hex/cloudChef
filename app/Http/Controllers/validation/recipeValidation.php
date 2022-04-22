@@ -9,8 +9,7 @@
  */
 
 
-namespace App\Http\Services\recipes\core;
-
+namespace App\Http\Controllers\validation;
 
 use Illuminate\Support\Facades\DB;
 
