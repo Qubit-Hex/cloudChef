@@ -31,14 +31,18 @@ import FetchServiceProvider from "../../../../lib/fetchServiceProvider";
 const GenerateTableData = (props) => {
 
 
+
+
     // return any shifts data if they is some for this shift.
     const request = async() => {
         const api = new FetchServiceProvider();
-        const route = '';
+        const route = '/api/store/schedule/shifts/get';
 
         const headers = {
             'Content-Type': 'application/json',
-            'accessToken': api.getCookie('accesToken')
+            'accessToken': api.getCookie('accessToken'),
+            'employeeID': props.employeeID,
+            'scheduleID': props.scheduleID
         };
 
         return  await api.get(route, headers);
@@ -47,7 +51,9 @@ const GenerateTableData = (props) => {
     // if there is no shifts data for this shift.
     // just render as normal.
     React.useEffect(() => {
-
+            request().then((response) => {
+                console.log(response);
+            })
     }, []);
 
 

@@ -70,6 +70,18 @@ class scheduleGroup extends Model
      }
 
 
+     /**
+      *  @method: getScheduleEntry
+      *
+      *  #purpose: to get a schedule entry
+      *
+      */
+
+      public function getScheduleEntry($id) {
+          return $this->where('id', $id)->first();
+      }
+
+
 
 
 }

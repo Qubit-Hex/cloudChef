@@ -13925,10 +13925,12 @@ var GenerateTableData = function GenerateTableData(props) {
           switch (_context.prev = _context.next) {
             case 0:
               api = new _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_7__["default"]();
-              route = '';
+              route = '/api/store/schedule/shifts/get';
               headers = {
                 'Content-Type': 'application/json',
-                'accessToken': api.getCookie('accesToken')
+                'accessToken': api.getCookie('accessToken'),
+                'employeeID': props.employeeID,
+                'scheduleID': props.scheduleID
               };
               _context.next = 5;
               return api.get(route, headers);
@@ -13951,7 +13953,11 @@ var GenerateTableData = function GenerateTableData(props) {
   // just render as normal.
 
 
-  react__WEBPACK_IMPORTED_MODULE_1__.useEffect(function () {}, []);
+  react__WEBPACK_IMPORTED_MODULE_1__.useEffect(function () {
+    request().then(function (response) {
+      console.log(response);
+    });
+  }, []);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("td", {
     className: "text-center",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {

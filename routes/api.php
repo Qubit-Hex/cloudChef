@@ -11,6 +11,7 @@ use App\Http\Controllers\employee;
 use App\Http\Controllers\recipes;
 use App\Http\Controllers\menu;
 use App\Http\Controllers\settings;
+use App\Http\Controllers\shifts;
 
 
 /*
@@ -155,7 +156,7 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
 
             // the actions on a shift of the schedule
             Route::group(['prefix' => 'shifts'], function () {
-
+                Route::get('/get', [shifts::class, 'get'])->name('/schedule/shifts/get');
 
             });
 

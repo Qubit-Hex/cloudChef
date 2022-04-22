@@ -32,8 +32,8 @@
     <div id="root">
 
     </div>
-
-    <!-- disk cache this script  !-->
     <script src='{{ asset("js/app.min.js") }}'></script>
+    <!-- disk cache this script  !-->
+
   </body>
 </html>
