@@ -65,7 +65,7 @@ class employeeModel extends Model
 
     public function getEmployeeByID($id)
     {
-        $employee = DB::table('employee')->where('userID', $id)->first();
+        $employee = DB::table('employee')->where('id', $id)->first();
 
         return $employee;
     }

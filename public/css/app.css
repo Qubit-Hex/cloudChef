@@ -15,40 +15,41 @@
 */
 .schedule-table {
   background-color: #fbfbfb73;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
   margin-bottom: 20px;
   padding: 30px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
 .schedule-table thead {
-  background-color: #5b81ff7d;
+  background-color: #5f9fffba;
   border-bottom: 1px solid #d3d3d3;
   border-radius: 5px 5px 0 0;
   color: #333;
   font-size: 14px;
   font-weight: bold;
-  padding: 10px;
+  padding: 25px;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
 }
 .schedule-table thead th {
+  font-size: 1.5em;
   padding: 25px;
   text-align: center;
   font-weight: 700;
   font-family: Arial, Helvetica, sans-serif;
+  padding: 20px;
 }
 .schedule-table thead th:hover {
   cursor: pointer;
-  background-color: #18128c2b;
-  color: #252525;
+  background-color: #092a5dc9;
+  color: white;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
 .schedule-table tbody {
   border-bottom: 1px solid #d3d3d3;
   color: #333;
   font-size: 14px;
   padding: 10px;
-}
-.schedule-table tr {
-  border-bottom: 1px solid #d3d3d3;
 }
 .schedule-table td {
   padding: 15px;
@@ -57,6 +58,9 @@
 .schedule-table td:hover {
   cursor: pointer;
   background-color: #9cc8e15b;
+  box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 .schedule-table th {
   padding: 10px;

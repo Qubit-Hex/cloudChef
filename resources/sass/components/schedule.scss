@@ -10,8 +10,7 @@
     // use a light theme for this table
 
     background-color: #fbfbfb73;
-
-    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
     margin-bottom: 20px;
     padding: 30px;
     border-top-left-radius: 10px;
@@ -19,26 +18,32 @@
 
     thead {
         // this is the header row
-        background-color: #5b81ff7d;
+        background-color: #5f9fffba;
         border-bottom: 1px solid #d3d3d3;
         border-radius: 5px 5px 0 0;
         color: #333;
         font-size: 14px;
         font-weight: bold;
-        padding: 10px;
+        padding:25px;
+        box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
 
 
         th {
             // this is the header cell
+            font-size: 1.5em;
             padding: 25px;
             text-align: center;
             font-weight: 700;
             font-family: Arial, Helvetica, sans-serif;
+            padding: 20px;
 
             &:hover {
                 cursor: pointer;
-                background-color: #18128c2b;
-                color: rgb(37, 37, 37);
+                background-color: #092a5dc9;
+                color: white;
+                // use a heavy box shadow to make the header pop up
+                box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+
             }
         }
 
@@ -53,7 +58,7 @@
     }
 
      tr {
-        border-bottom: 1px solid #d3d3d3;
+
 
      }
 
@@ -64,6 +69,11 @@
         &:hover {
             cursor: pointer;
             background-color: #9cc8e15b;
+            // make a box shadow that is a little darker than the background color
+            box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+
         }
      }
 

@@ -54,5 +54,36 @@ class employee_shifts extends Model
 
             return $innerJoin;
      }
-     
+
+
+     /**
+      *  @method: postEmployeeShifts
+      *
+      *  @purpose: to create a new shift for a specific employee
+      *
+      */
+
+      public function postEmployeeShifts($schedule_id, $employee_id, $start, $end, $day, $off)
+      {
+
+        // lets check if the schedule already exist if so then we will update the shift
+        // instead of creating a new one
+        $check = DB::table('employee_shifts')->where('schedule_id', $schedule_id)->where('employee_id', $employee_id)->
+                    where('day_of_week', $day)->first();
+
+        if ($check) {
+            return DB::table('employee_shifts')->where('schedule_id', $schedule_id)->where('employee_id', $employee_id)->
+                    where('day_of_week', $day)->update(['start_time' => $start, 'end_time' => $end, 'off' => $off]);
+        }
+        // no shift was found so lets create a new one
+          return $this->insert([
+              'schedule_id' => $schedule_id,
+              'employee_id' => $employee_id,
+              'start_time' => $start,
+              'end_time' => $end,
+              'day_of_week' => $day,
+              'off' => $off
+          ]);
+      }
+
 }

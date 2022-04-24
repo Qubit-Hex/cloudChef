@@ -30,7 +30,7 @@ export const ScheduleGridMenu = (props) => {
                     <h2 className='text-center m-2 header-subtitle'> Add Schedule </h2>
                     <p className='text-center text-muted'> Add a new schedule to your store</p>
                         <div className='tile-icon  text-center'>
-                                <a  className='btn btn-message btn-lg m-4 mx-auto w-50'
+                                <a  className='btn header-action btn-lg m-4 mx-auto w-50'
                                 style={ {
                                     color: 'white',
                                     textDecoration: 'none'
@@ -56,7 +56,7 @@ export const ScheduleGridMenu = (props) => {
                     <h2 className='text-center m-2 header-subtitle'> View Schedule </h2>
                     <p className='text-center text-muted'> View the current schedule for your store</p>
                     <div className='tile-icon  text-center'>
-                         <a  className='btn btn-message btn-lg m-4 mx-auto w-50'
+                         <a  className='btn header-action btn-lg m-4 mx-auto w-50'
                                 style={ {
                                     color: 'white',
                                     textDecoration: 'none'
@@ -81,7 +81,7 @@ export const ScheduleGridMenu = (props) => {
                     <h2 className='text-center m-2 header-subtitle'> Edit Schedule </h2>
                     <p className='text-center text-muted'> Edit existing schedule's for your store</p>
                     <div className='tile-icon  text-center'>
-                    <a  className='btn btn-message btn-lg m-4 mx-auto w-50'
+                    <a  className='btn header-action btn-lg m-4 mx-auto w-50'
                                 style={ {
                                     color: 'white',
                                     textDecoration: 'none'
@@ -107,7 +107,7 @@ export const ScheduleGridMenu = (props) => {
                     <h2 className='text-center m-2 header-subtitle'> Delete Schedule </h2>
                     <p className='text-center text-muted'> Delete the current schedule for your store</p>
                     <div className='tile-icon  text-center'>
-                    <a  className='btn btn-message btn-lg m-4 mx-auto w-50'
+                    <a  className='btn header-action btn-lg m-4 mx-auto w-50'
                                 style={ {
                                     color: 'white',
                                     textDecoration: 'none'
@@ -134,7 +134,7 @@ export const ScheduleGridMenu = (props) => {
                     <h2 className='text-center m-2 header-subtitle'> Labour Cost </h2>
                     <p className='text-center text-muted'> View your store's labour cost </p>
                     <div className='tile-icon  text-center'>
-                    <a  className='btn btn-message btn-lg m-4 mx-auto w-50'
+                    <a  className='btn header-action btn-lg m-4 mx-auto w-50'
                                 style={ {
                                     color: 'white',
                                     textDecoration: 'none'
@@ -147,8 +147,6 @@ export const ScheduleGridMenu = (props) => {
                         </div>
                 </div>
             </div>
-
-
         </div>
 
     <div className='col-md-4'>
@@ -160,7 +158,7 @@ export const ScheduleGridMenu = (props) => {
                 <h2 className='text-center m-2 header-subtitle'> Schedule Requests </h2>
                 <p className='text-center text-muted '> View employees schedule requests </p>
                         <div className='tile-icon  text-center'>
-                                <a className='btn btn-message btn-lg m-4 mx-auto w-50' style={ {
+                                <a className='btn header-action btn-lg m-4 mx-auto w-50' style={ {
                                     color: 'white',
                                     textDecoration: 'none'
                                 }} href='/dashboard/schedule/request/'>

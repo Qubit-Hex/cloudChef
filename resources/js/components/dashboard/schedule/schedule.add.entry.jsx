@@ -86,7 +86,7 @@ export const AddScheduleEntry = (props) => {
 
                     <div className='form-group mt-2'>
                         <button className="btn btn-message"  onClick={
-                            (e) => {
+                            async (e) => {
                                 const container = document.getElementById('schedule-table-container');
                                 const date = document.getElementById('date').value;
                                 const year = getYearNumber(date);
@@ -94,9 +94,11 @@ export const AddScheduleEntry = (props) => {
                                 const month = getMonthNumber(date) + 1;
 
                                 // now lets send the information to the server
-                                request(date, week, year, month).then(response => {
+                                return request(date, week, year, month).then(response => {
                                     if (response.status === 'success') {
                                         // now lets render the schedule table and return our group id to the component
+                                        // destory container
+                                        ReactDOM.unmountComponentAtNode(container);
                                         console.log(response);
                                         ReactDOM.render(<ScheduleTable scheduleID={response.schedule.id}/>, container);
                                     } else {

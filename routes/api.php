@@ -148,19 +148,23 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
          Route::group(['prefix' => '/schedule'], function () {
             // add all the methods for schedules
 
-
             // add a store schedule entry group entry
             Route::post('/add', [schedule::class, 'add'])->name('/schedule/add');
 
-
+            // delete the store schedule entry group entry
+            Route::delete('/delete', [schedule::class, 'delete'])->name('/schedule/delete');
 
             // the actions on a shift of the schedule
             Route::group(['prefix' => 'shifts'], function () {
+                // get any shifts if the user has any
                 Route::get('/get', [shifts::class, 'get'])->name('/schedule/shifts/get');
-
+                // add a shift to the schedule
+                Route::post('/add', [shifts::class, 'add'])->name('/schedule/shifts/add');
+                // edit a shift to the schedule
+                Route::put('/edit', [shifts::class, 'edit'])->name('/schedule/shifts/edit');
+                // delete a shift to the schedule
+                Route::delete('/delete', [shifts::class, 'delete'])->name('/schedule/shifts/delete');
             });
-
-
         });
 
 

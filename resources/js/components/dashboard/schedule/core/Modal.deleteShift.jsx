@@ -11,6 +11,7 @@
 
  import React from 'react';
  import ReactDOM from 'react-dom';
+import FetchServiceProvider from '../../../../lib/fetchServiceProvider';
  import { Modal } from '../base/Modal';
 
 
@@ -27,6 +28,26 @@
   */
 
  export const ModalDeleteShift = (props) => {
+
+
+    const request = async () => {
+        const api = new FetchServiceProvider();
+        const route = '/api/store/schedule/shifts/delete';
+
+        // we have to send the shift details inorder to the request to go through
+        const header = {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'accessToken': api.getCookie('accessToken'),
+            'day': props.day + 1,
+            'employee': props.employeeID,
+            'scheduleID': props.scheduleID
+        }
+
+        // send the request to the server
+        return await api.delete(route, header);
+    }
+
 
     const HandleSuccess = () => {
         return (
@@ -96,7 +117,9 @@
                             (e) => {
                                 // close the modal of the application
                                 const container = document.getElementById('modal-container');
-                                ReactDOM.unmountComponentAtNode(container);
+                                return request().then((response) => {
+                                    console.log(response);
+                                });
                             }
                         }>
                             <i className='fas fa-trash-alt'></i>

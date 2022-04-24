@@ -10,6 +10,7 @@
 
 import React from "react";
 import ReactDOM from "react-dom";
+import moment from 'moment';
 import { ModalAddShift } from "./Modal.addShift";
 import { ModalEditShift } from "./Modal.editShift";
 import { ModalDeleteShift } from "./Modal.deleteShift";
@@ -29,22 +30,43 @@ import FetchServiceProvider from "../../../../lib/fetchServiceProvider";
  */
 
 const TableCell = (props) => {
+
+    const validateTime = (start_time, end_time, off) => {
+        // convert military time to am or pm
+        const start_time_am_pm = moment(start_time, 'HH:mm').format('h:mm A');
+        const end_time_am_pm = moment(end_time, 'HH:mm').format('h:mm A');
+
+        if (off === 0) {
+            return start_time_am_pm + ' - ' + end_time_am_pm;
+        } else {
+            return "OFF";
+        }
+    }
+
+
+    const currentShiftTime = validateTime(props.start_time, props.end_time, props.off);
+
+
     return (
         <td className="text-center" key={props.day}>
         <div className="row">
             <div className="text-center">
-                <b className="p-2"> {
-                    props.start_time === undefined ? "" : props.start_time
-                } - {
-                    props.end_time === undefined ? "" : props.end_time
-                } </b>
+                <b className="p-2">
+
+                {/** we need to make these label reactive so when ever a value change these
+                 *   labels will change as well.
+                 *
+                 */}
+                {/** font awesome clock icon */}
+                <i className="fa fa-clock" aria-hidden="true"></i>
+                 { currentShiftTime }
+                </b>
                 <hr />
             </div>
         </div>
 
         <div className="row p-0 m-0">
             {/** calender icon */}
-            <span className="text-center mt-0"> Action </span>
             <button
                 className="text-center btn btn-outline-dark m-2 w-auto mx-auto"
                 title="hide the controls for this shift"
@@ -81,7 +103,7 @@ const TableCell = (props) => {
                     className="btn btn-warning m-2"
                     onClick={(e) => {
                         const container = document.getElementById("modal-container");
-                        ReactDOM.render(<ModalEditShift day={props.day} employeeID={props.employeeID} scheduleID={props.scheduleID} />, container);
+                        ReactDOM.render(<ModalEditShift  current={currentShiftTime} day={props.day} employeeID={props.employeeID} scheduleID={props.scheduleID} />, container);
                     }}
                 >
                     {" "}
@@ -105,9 +127,6 @@ const TableCell = (props) => {
     </td>
     )
 }
-
-
-
 
 /***
  *
@@ -195,7 +214,38 @@ const GenerateTableData = (props) => {
             });
     } else {
         // render the table with the shifts data since the shifts were returned
+        const tableData = [];
 
+        for (let i = 0; i < 7; i++) {
+            if (shiftsData[i] === undefined) {
+                tableData.push(
+                    <TableCell
+                        key={i}
+                        day={i}
+                        start_time={null}
+                        end_time={null}
+                        employeeID={props.employeeID}
+                        scheduleID={props.scheduleID}
+                    />
+                );
+            } else {
+                tableData.push(
+                    <TableCell
+                        key={i}
+                        day={i}
+                        start_time={shiftsData[i].start_time}
+                        end_time={shiftsData[i].end_time}
+                        off={shiftsData[i].off}
+                        employeeID={props.employeeID}
+                        scheduleID={props.scheduleID}
+                    />
+                );
+            }
+        }
+
+        return tableData.map((data) => {
+            return data;
+        });
     }
 
 

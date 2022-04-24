@@ -49,11 +49,12 @@
 <ref refid="5fd240a2-c1fe-11ec-9851-7bd69e59965a"/>
 <ref refid="1067990c-c1ff-11ec-9889-7bd69e59965a"/>
 <ref refid="1cd09014-c1ff-11ec-9620-7bd69e59965a"/>
+<ref refid="26892aa5-c26e-11ec-a9b5-7bd69e59965a"/>
 <ref refid="9b1bc384-c1fd-11ec-a22b-7bd69e59965a"/>
 <ref refid="b360e4ef-c1fd-11ec-bdad-7bd69e59965a"/>
 <ref refid="da2b69c6-c1fd-11ec-ac89-7bd69e59965a"/>
-<ref refid="f8e15b17-c1fe-11ec-b33f-7bd69e59965a"/>
 <ref refid="1908308c-c1ff-11ec-a976-7bd69e59965a"/>
+<ref refid="14e8a8af-c28d-11ec-be21-7bd69e59965a"/>
 </reflist>
 </ownedPresentation>
 </Diagram>
@@ -123,10 +124,10 @@ to make schedules,  for employees of the said store and for employees to drop sh
 <val>(1.0, 0.0, 0.0, 1.0, 301.8975210713902, 122.00000000000001)</val>
 </matrix>
 <width>
-<val>254.0</val>
+<val>447.9385002303054</val>
 </width>
 <height>
-<val>193.0</val>
+<val>192.99999999999994</val>
 </height>
 <diagram>
 <ref refid="77ba4243-c1fb-11ec-b949-7bd69e59965a"/>
@@ -193,6 +194,7 @@ to make schedules,  for employees of the said store and for employees to drop sh
 <ref refid="390e284c-c1fe-11ec-be37-7bd69e59965a"/>
 <ref refid="3b47360c-c1fe-11ec-910a-7bd69e59965a"/>
 <ref refid="3d356395-c1fe-11ec-bcf3-7bd69e59965a"/>
+<ref refid="f246b141-c26d-11ec-bd2d-7bd69e59965a"/>
 </reflist>
 </ownedAttribute>
 <ownedOperation>
@@ -200,6 +202,7 @@ to make schedules,  for employees of the said store and for employees to drop sh
 <ref refid="4b569fc5-c1fe-11ec-a173-7bd69e59965a"/>
 <ref refid="4cce8f6c-c1fe-11ec-8322-7bd69e59965a"/>
 <ref refid="4f5bc998-c1fe-11ec-a01b-7bd69e59965a"/>
+<ref refid="f8d286a8-c26d-11ec-860c-7bd69e59965a"/>
 </reflist>
 </ownedOperation>
 <package>
@@ -212,7 +215,7 @@ to make schedules,  for employees of the said store and for employees to drop sh
 </presentation>
 <supplierDependency>
 <reflist>
-<ref refid="fa66547f-c1fe-11ec-9b20-7bd69e59965a"/>
+<ref refid="1648e78b-c28d-11ec-a4ce-7bd69e59965a"/>
 </reflist>
 </supplierDependency>
 </Class>
@@ -221,14 +224,17 @@ to make schedules,  for employees of the said store and for employees to drop sh
 <val>(1.0, 0.0, 0.0, 1.0, 353.9536891063071, 688.7771654017963)</val>
 </matrix>
 <width>
-<val>334.40584570962295</val>
+<val>408.0226386030734</val>
 </width>
 <height>
-<val>242.8740053051148</val>
+<val>371.8489542224644</val>
 </height>
 <diagram>
 <ref refid="77ba4243-c1fb-11ec-b949-7bd69e59965a"/>
 </diagram>
+<note>
+<val></val>
+</note>
 <subject>
 <ref refid="7560cd28-c1fd-11ec-bd7a-7bd69e59965a"/>
 </subject>
@@ -407,7 +413,7 @@ to make schedules,  for employees of the said store and for employees to drop sh
 <ref refid="7560cd28-c1fd-11ec-bd7a-7bd69e59965a"/>
 </class_>
 <name>
-<val>date</val>
+<val>day_of_week</val>
 </name>
 </Property>
 <Operation id="4b569fc5-c1fe-11ec-a173-7bd69e59965a">
@@ -437,7 +443,7 @@ to make schedules,  for employees of the said store and for employees to drop sh
 <Class id="5fd205cd-c1fe-11ec-8a00-7bd69e59965a">
 <clientDependency>
 <reflist>
-<ref refid="fa66547f-c1fe-11ec-9b20-7bd69e59965a"/>
+<ref refid="1648e78b-c28d-11ec-a4ce-7bd69e59965a"/>
 </reflist>
 </clientDependency>
 <name>
@@ -464,13 +470,13 @@ to make schedules,  for employees of the said store and for employees to drop sh
 </Class>
 <ClassItem id="5fd240a2-c1fe-11ec-9851-7bd69e59965a">
 <matrix>
-<val>(1.0, 0.0, 0.0, 1.0, 831.2341758246137, 702.4104829908322)</val>
+<val>(1.0, 0.0, 0.0, 1.0, 1130.4749915462191, 572.1987617865931)</val>
 </matrix>
 <width>
-<val>254.46683799877735</val>
+<val>405.04987748604015</val>
 </width>
 <height>
-<val>215.60737012704317</val>
+<val>210.98381543634105</val>
 </height>
 <diagram>
 <ref refid="77ba4243-c1fb-11ec-b949-7bd69e59965a"/>
@@ -527,45 +533,6 @@ to make schedules,  for employees of the said store and for employees to drop sh
 <val>salary</val>
 </name>
 </Property>
-<DependencyItem id="f8e15b17-c1fe-11ec-b33f-7bd69e59965a">
-<diagram>
-<ref refid="77ba4243-c1fb-11ec-b949-7bd69e59965a"/>
-</diagram>
-<horizontal>
-<val>0</val>
-</horizontal>
-<subject>
-<ref refid="fa66547f-c1fe-11ec-9b20-7bd69e59965a"/>
-</subject>
-<matrix>
-<val>(1.0, 0.0, 0.0, 1.0, 813.4272296054509, 798.5007080340796)</val>
-</matrix>
-<points>
-<val>[(-194.03983024287373, 0.0), (0.2575091157987117, 0.0)]</val>
-</points>
-<head-connection>
-<ref refid="7560e4c3-c1fd-11ec-b995-7bd69e59965a"/>
-</head-connection>
-<tail-connection>
-<ref refid="5fd240a2-c1fe-11ec-9851-7bd69e59965a"/>
-</tail-connection>
-<auto_dependency>
-<val>1</val>
-</auto_dependency>
-</DependencyItem>
-<Dependency id="fa66547f-c1fe-11ec-9b20-7bd69e59965a">
-<client>
-<ref refid="5fd205cd-c1fe-11ec-8a00-7bd69e59965a"/>
-</client>
-<presentation>
-<reflist>
-<ref refid="f8e15b17-c1fe-11ec-b33f-7bd69e59965a"/>
-</reflist>
-</presentation>
-<supplier>
-<ref refid="7560cd28-c1fd-11ec-bd7a-7bd69e59965a"/>
-</supplier>
-</Dependency>
 <Actor id="10674a94-c1ff-11ec-9378-7bd69e59965a">
 <name>
 <val>admin</val>
@@ -640,4 +607,86 @@ to make schedules,  for employees of the said store and for employees to drop sh
 <ref refid="1cd0664e-c1ff-11ec-b8cc-7bd69e59965a"/>
 </subject>
 </ActionItem>
+<Property id="f246b141-c26d-11ec-bd2d-7bd69e59965a">
+<class_>
+<ref refid="7560cd28-c1fd-11ec-bd7a-7bd69e59965a"/>
+</class_>
+<name>
+<val>storeID</val>
+</name>
+</Property>
+<Operation id="f8d286a8-c26d-11ec-860c-7bd69e59965a">
+<class_>
+<ref refid="7560cd28-c1fd-11ec-bd7a-7bd69e59965a"/>
+</class_>
+<name>
+<val>add</val>
+</name>
+</Operation>
+<Comment id="268919a5-c26e-11ec-9395-7bd69e59965a">
+<body>
+<val>the employee object if we need to ever refernce anything that is specific for an employe inorder to create the shift. </val>
+</body>
+<presentation>
+<reflist>
+<ref refid="26892aa5-c26e-11ec-a9b5-7bd69e59965a"/>
+</reflist>
+</presentation>
+</Comment>
+<CommentItem id="26892aa5-c26e-11ec-a9b5-7bd69e59965a">
+<matrix>
+<val>(1.0, 0.0, 0.0, 1.0, 772.0804497676216, 356.98763775750444)</val>
+</matrix>
+<width>
+<val>468.07852367462215</val>
+</width>
+<height>
+<val>152.0696723203605</val>
+</height>
+<diagram>
+<ref refid="77ba4243-c1fb-11ec-b949-7bd69e59965a"/>
+</diagram>
+<subject>
+<ref refid="268919a5-c26e-11ec-9395-7bd69e59965a"/>
+</subject>
+</CommentItem>
+<DependencyItem id="14e8a8af-c28d-11ec-be21-7bd69e59965a">
+<diagram>
+<ref refid="77ba4243-c1fb-11ec-b949-7bd69e59965a"/>
+</diagram>
+<horizontal>
+<val>0</val>
+</horizontal>
+<subject>
+<ref refid="1648e78b-c28d-11ec-a4ce-7bd69e59965a"/>
+</subject>
+<matrix>
+<val>(1.0, 0.0, 0.0, 1.0, 1141.8654158384363, 825.9005256407992)</val>
+</matrix>
+<points>
+<val>[(-448.8612235824087, 70.37906865995342), (-28.939861395581147, -128.97474310666166)]</val>
+</points>
+<head-connection>
+<ref refid="7560e4c3-c1fd-11ec-b995-7bd69e59965a"/>
+</head-connection>
+<tail-connection>
+<ref refid="5fd240a2-c1fe-11ec-9851-7bd69e59965a"/>
+</tail-connection>
+<auto_dependency>
+<val>1</val>
+</auto_dependency>
+</DependencyItem>
+<Dependency id="1648e78b-c28d-11ec-a4ce-7bd69e59965a">
+<client>
+<ref refid="5fd205cd-c1fe-11ec-8a00-7bd69e59965a"/>
+</client>
+<presentation>
+<reflist>
+<ref refid="14e8a8af-c28d-11ec-be21-7bd69e59965a"/>
+</reflist>
+</presentation>
+<supplier>
+<ref refid="7560cd28-c1fd-11ec-bd7a-7bd69e59965a"/>
+</supplier>
+</Dependency>
 </gaphor>

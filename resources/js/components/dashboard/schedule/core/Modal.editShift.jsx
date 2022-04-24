@@ -10,7 +10,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import FetchServiceProvider from '../../../../lib/fetchServiceProvider';
 import { Modal } from '../base/Modal';
 
 
@@ -27,6 +27,44 @@ import { Modal } from '../base/Modal';
  */
 
 export const ModalEditShift = (props) => {
+
+
+
+    /**
+     *
+     *  @function: request
+     *
+     *  @purpose: request to our api inorder to send the shifts to the database
+     *
+     */
+
+    const request = async () => {
+        const api = new FetchServiceProvider();
+        const route = '/api/store/schedule/shifts/edit';
+
+
+        const start_time  = document.getElementById('shift_start_time').value;
+        const end_time = document.getElementById('shift_end_time').value;
+        const is_off = document.getElementById('shift-off').checked;
+
+        const data = {
+            start_time: start_time,
+            end_time: end_time,
+            is_off: is_off,
+            day: props.day + 1,
+            employee: props.employeeID,
+            scheduleID: props.scheduleID
+        }
+
+        const header = {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'accessToken': api.getCookie('accessToken'),
+        }
+
+        // send the request to the server
+        return await api.put(route, data, header);
+    }
 
     const HandleSuccess = () => {
         return (
@@ -88,7 +126,7 @@ export const ModalEditShift = (props) => {
                         <div className='text-center'>
                             {/** display the current shift  */}
                             <b> Current Shift </b>
-                            <b> 9:00AM - 5:00PM </b>
+                            <b> { props.current }</b>
                             <hr />
                         </div>
 
@@ -124,12 +162,22 @@ export const ModalEditShift = (props) => {
                         </button>
                         <button className='btn btn-message m-2' onClick={
                             (e) => {
+
                                 const container = document.getElementById('modal-container');
-                                ReactDOM.render(<HandleSuccess />, container);
+                               return request().then((response) => {
+                                   if (response.status === 'success') {
+                                       ReactDOM.unmountComponentAtNode(container);
+                                       return ReactDOM.render(<HandleSuccess />, container);
+                                   } else {
+                                        ReactDOM.unmountComponentAtNode(container);
+                                        return ReactDOM.render(<HandleError />, container);
+                                   }
+                               })
                             }
                         }>
-                            <i className="far fa-calendar-alt"></i>
-                            Create Shift
+                            {/** cog icon */}
+                            <i className="fa fa-cog" aria-hidden="true"></i>
+                            Edit Shift
                         </button>
                     </div>
                     </div>
