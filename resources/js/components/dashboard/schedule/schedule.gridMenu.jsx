@@ -18,7 +18,7 @@ import ReactDOM from 'react-dom';
 
 export const ScheduleGridMenu = (props) => {
     return (
-        <div className='row'>
+        <div className='row  mx-auto'>
         {/** add three buttons one for adding a schedule, editing a current schedule and  on for viewing current schedule */}
         <div className='col-md-4'>
             {/** add schedule tile */}

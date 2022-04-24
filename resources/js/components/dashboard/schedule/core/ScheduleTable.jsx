@@ -47,6 +47,27 @@ const TableCell = (props) => {
     const currentShiftTime = validateTime(props.start_time, props.end_time, props.off);
 
 
+    // is the shift modification turned off.
+    if (props.viewOnly === true) {
+        return (
+            <td className="text-center" key={props.day}>
+            <div className="row">
+                <div className="text-center">
+                    <b className="p-2" style={{
+                        fontSize: '1rem',
+                    }}>
+                    {/** font awesome clock icon */}
+                    <i className="fa fa-clock" aria-hidden="true"></i>
+                     { currentShiftTime }
+                    </b>
+                    <hr />
+                </div>
+            </div>
+        </td>
+        );
+    }
+
+
     return (
         <td className="text-center" key={props.day}>
         <div className="row">
@@ -136,11 +157,13 @@ const TableCell = (props) => {
  *  @purpose: This is responsible for rendering the schedule table for the required component
  *
  *
- *  props: employeeID, shiftID
+ *  props: scheduleID, employeeID
  *
  */
 
 const GenerateTableData = (props) => {
+
+
 
 
     const [shiftsData, setShiftsData] = React.useState([]);
@@ -205,6 +228,7 @@ const GenerateTableData = (props) => {
                     end_time={null}
                     employeeID={props.employeeID}
                     scheduleID={props.scheduleID}
+                    viewOnly={props.viewOnly}
                 />
             );
         }
@@ -226,6 +250,7 @@ const GenerateTableData = (props) => {
                         end_time={null}
                         employeeID={props.employeeID}
                         scheduleID={props.scheduleID}
+                        viewOnly={props.viewOnly}
                     />
                 );
             } else {
@@ -238,6 +263,7 @@ const GenerateTableData = (props) => {
                         off={shiftsData[i].off}
                         employeeID={props.employeeID}
                         scheduleID={props.scheduleID}
+                        viewOnly={props.viewOnly}
                     />
                 );
             }
@@ -315,6 +341,7 @@ export const ScheduleTable = (props) => {
                     <GenerateTableData
                         employeeID={data[employee].id}
                         scheduleID={props.scheduleID}
+                        viewOnly={props.viewOnly}
                     />
                 </tr>
             );

@@ -82,6 +82,21 @@ class scheduleGroup extends Model
       }
 
 
+      /**
+       *
+       *  @method: getSchedulesByStore
+       *
+       *  @purpose: to get all schedules by store
+       *
+       */
+
+       public function getSchedulesByStore ($storeID)
+       {
+            // sort from latest to oldest
+            return $this->where('storeID', $storeID)->orderBy('week', 'desc')->get();
+       }
+
+
 
 
 }

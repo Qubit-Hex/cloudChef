@@ -16,6 +16,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\store_members;
+use App\Models\employeeModel;
 use App\Models\scheduleGroup;
 
 class schedule extends Controller
@@ -29,11 +30,63 @@ class schedule extends Controller
         $this->userModel = new User();
         $this->scheduleGroupModel = new scheduleGroup();
         $this->store_membersModel = new store_members();
+        $this->employees = new employeeModel();
     }
+
+
 
     /**
      *
-     *  @method: add
+     *  @method:  get
+     *
+     *  @purpose: to get the schedule of the employee
+     *
+     */
+
+    public function get(Request $request)
+    {
+        // validate the request baseed on the users input...
+        $validateUser = $this->userModel->getUserByRemeberToken($request->header('accessToken'));
+        if (!$validateUser) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'unauthorized access'
+            ], 401);
+        }
+        // next get the store_member premissions
+        $storeMember = $this->store_membersModel->getMembersByID($validateUser->userID);
+        if (!$storeMember) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'unauthorized access'
+            ], 401);
+        }
+
+        $getSchedules = $this->scheduleGroupModel->getSchedulesByStore($storeMember->storeID);
+        $getEmployeeData = $this->employees->getEmployeeByStoreAndUserID($storeMember->storeID, $validateUser->userID);
+
+        if ($getSchedules)
+        {
+            return response()->json([
+                'status' => 'success',
+                'message' => 'schedule entries found',
+                'data' => $getSchedules,
+                'employee' => $getEmployeeData
+            ], 200);
+            
+        } else {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'no schedule entries found'
+            ], 404);
+        }
+    }
+
+
+
+
+     /**
+      *  @method: add
      *
      *  @purpose: inorder to add a schedule entry into the database so that we can link it a employees shifts.
      *           so this acts as a group entry. we can add multiple shifts to a single entry.

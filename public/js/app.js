@@ -14132,7 +14132,30 @@ var TableCell = function TableCell(props) {
     }
   };
 
-  var currentShiftTime = validateTime(props.start_time, props.end_time, props.off);
+  var currentShiftTime = validateTime(props.start_time, props.end_time, props.off); // is the shift modification turned off.
+
+  if (props.viewOnly === true) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("td", {
+      className: "text-center",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
+        className: "row",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
+          className: "text-center",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("b", {
+            className: "p-2",
+            style: {
+              fontSize: '1rem'
+            },
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("i", {
+              className: "fa fa-clock",
+              "aria-hidden": "true"
+            }), currentShiftTime]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("hr", {})]
+        })
+      })
+    }, props.day);
+  }
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("td", {
     className: "text-center",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
@@ -14216,7 +14239,7 @@ var TableCell = function TableCell(props) {
  *  @purpose: This is responsible for rendering the schedule table for the required component
  *
  *
- *  props: employeeID, shiftID
+ *  props: scheduleID, employeeID
  *
  */
 
@@ -14306,7 +14329,8 @@ var GenerateTableData = function GenerateTableData(props) {
         start_time: null,
         end_time: null,
         employeeID: props.employeeID,
-        scheduleID: props.scheduleID
+        scheduleID: props.scheduleID,
+        viewOnly: props.viewOnly
       }, i));
     } // retunr the table data
 
@@ -14325,7 +14349,8 @@ var GenerateTableData = function GenerateTableData(props) {
           start_time: null,
           end_time: null,
           employeeID: props.employeeID,
-          scheduleID: props.scheduleID
+          scheduleID: props.scheduleID,
+          viewOnly: props.viewOnly
         }, _i2));
       } else {
         _tableData.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(TableCell, {
@@ -14334,7 +14359,8 @@ var GenerateTableData = function GenerateTableData(props) {
           end_time: shiftsData[_i2].end_time,
           off: shiftsData[_i2].off,
           employeeID: props.employeeID,
-          scheduleID: props.scheduleID
+          scheduleID: props.scheduleID,
+          viewOnly: props.viewOnly
         }, _i2));
       }
     }
@@ -14403,7 +14429,8 @@ var ScheduleTable = function ScheduleTable(props) {
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(GenerateTableData, {
           employeeID: data[employee].id,
-          scheduleID: props.scheduleID
+          scheduleID: props.scheduleID,
+          viewOnly: props.viewOnly
         })]
       }, index);
     });
@@ -14621,6 +14648,380 @@ var AddScheduleEntry = function AddScheduleEntry(props) {
 
 /***/ }),
 
+/***/ "./resources/js/components/dashboard/schedule/schedule.delete.jsx":
+/*!************************************************************************!*\
+  !*** ./resources/js/components/dashboard/schedule/schedule.delete.jsx ***!
+  \************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DeleteSchedules": () => (/* binding */ DeleteSchedules)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var _base_notification__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../base/notification */ "./resources/js/base/notification.jsx");
+/* harmony import */ var _core_ScheduleTable__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./core/ScheduleTable */ "./resources/js/components/dashboard/schedule/core/ScheduleTable.jsx");
+/* harmony import */ var _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../lib/fetchServiceProvider */ "./resources/js/lib/fetchServiceProvider.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+/***
+ *
+ *
+ *  @file: schedule.delete.jsx
+ *
+ *  @purpose: inorder to delete current schedules in the system  and delete the details of the schedules '
+ *
+ */
+
+
+
+
+
+
+
+var DeleteSchedules = function DeleteSchedules(props) {
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_1__.useState([]),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      schedules = _React$useState2[0],
+      setSchedules = _React$useState2[1];
+
+  var _React$useState3 = react__WEBPACK_IMPORTED_MODULE_1__.useState([]),
+      _React$useState4 = _slicedToArray(_React$useState3, 2),
+      employee = _React$useState4[0],
+      setEmployee = _React$useState4[1];
+
+  var request = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      var api, route, headers;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              api = new _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_5__["default"]();
+              route = '/api/store/schedule/get';
+              headers = {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'accessToken': api.getCookie('accessToken')
+              };
+              _context.next = 5;
+              return api.get(route, headers);
+
+            case 5:
+              return _context.abrupt("return", _context.sent);
+
+            case 6:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function request() {
+      return _ref.apply(this, arguments);
+    };
+  }(); // format a date range by providing a week number and year
+
+
+  var formatDateRange = function formatDateRange(week, year) {
+    var date = new Date(year, 0, 1 + (week - 1) * 7);
+    var date2 = new Date(year, 0, 1 + week * 7);
+    var month = date.toLocaleString('default', {
+      month: 'long'
+    });
+    var month2 = date2.toLocaleString('default', {
+      month: 'long'
+    });
+    var day = date.toLocaleString('default', {
+      day: 'numeric'
+    });
+    var day2 = date2.toLocaleString('default', {
+      day: 'numeric'
+    });
+    var dateRange = "".concat(month, " ").concat(day, " - ").concat(month2, " ").concat(day2);
+    return dateRange;
+  }; // PREFORM the api call to get the schedules
+
+
+  react__WEBPACK_IMPORTED_MODULE_1__.useEffect(function () {
+    request().then(function (response) {
+      console.log(response);
+
+      if (response.status === 200 || response.status === 'success') {
+        setSchedules(response.data);
+        setEmployee(response.employee);
+      } else {
+        var container = document.getElementById('schedule-table');
+      }
+    });
+  }, []);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+    className: "container-fluid mt-4",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+      className: "row",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h2", {
+        className: "header-subtitle text-center",
+        children: "Delete Schedule"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
+        src: "/img/SVG/schedule_icon.svg",
+        width: 250,
+        height: 250
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
+        className: "text-center text-muted",
+        children: "Edit the current schedule for your store"
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+      className: "col-md-6 mx-auto",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+        className: "col-sm mx-auto",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("select", {
+          className: "form-select",
+          id: "datePicker",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("option", {
+            children: " Please Select a Schedule"
+          }), schedules.map(function (schedule, index) {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("option", {
+              value: schedule.id,
+              style: {
+                fontWeight: 500
+              },
+              children: schedule.year + "  " + formatDateRange(schedule.week, schedule.year)
+            }, index);
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("button", {
+          className: "btn header-action btn-lg w-100",
+          onClick: function onClick(e) {
+            var scheduleId = document.getElementById('datePicker').value;
+            var container = document.getElementById('schedule-table-container');
+            var employeeID = employee.id;
+          },
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
+            className: "fas fa-trash-alt"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
+            className: "ml-2",
+            children: "Delete Schedule"
+          })]
+        })]
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+      className: "row mt-4 mx-auto",
+      id: "schedule-table-container"
+    })]
+  });
+};
+
+/***/ }),
+
+/***/ "./resources/js/components/dashboard/schedule/schedule.edit.jsx":
+/*!**********************************************************************!*\
+  !*** ./resources/js/components/dashboard/schedule/schedule.edit.jsx ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "EditSchedules": () => (/* binding */ EditSchedules)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var _base_notification__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../base/notification */ "./resources/js/base/notification.jsx");
+/* harmony import */ var _core_ScheduleTable__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./core/ScheduleTable */ "./resources/js/components/dashboard/schedule/core/ScheduleTable.jsx");
+/* harmony import */ var _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../lib/fetchServiceProvider */ "./resources/js/lib/fetchServiceProvider.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+/**
+ *
+ *  @file: schedule.edit.jsx
+ *
+ * @purpose: inorder to edit current schedules in the system  and edit the details of the schedules '
+ *
+ *
+ */
+
+
+
+
+
+
+
+var EditSchedules = function EditSchedules(props) {
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_1__.useState([]),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      schedules = _React$useState2[0],
+      setSchedules = _React$useState2[1];
+
+  var _React$useState3 = react__WEBPACK_IMPORTED_MODULE_1__.useState([]),
+      _React$useState4 = _slicedToArray(_React$useState3, 2),
+      employee = _React$useState4[0],
+      setEmployee = _React$useState4[1];
+
+  var request = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      var api, route, headers;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              api = new _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_5__["default"]();
+              route = '/api/store/schedule/get';
+              headers = {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'accessToken': api.getCookie('accessToken')
+              };
+              _context.next = 5;
+              return api.get(route, headers);
+
+            case 5:
+              return _context.abrupt("return", _context.sent);
+
+            case 6:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function request() {
+      return _ref.apply(this, arguments);
+    };
+  }(); // format a date range by providing a week number and year
+
+
+  var formatDateRange = function formatDateRange(week, year) {
+    var date = new Date(year, 0, 1 + (week - 1) * 7);
+    var date2 = new Date(year, 0, 1 + week * 7);
+    var month = date.toLocaleString('default', {
+      month: 'long'
+    });
+    var month2 = date2.toLocaleString('default', {
+      month: 'long'
+    });
+    var day = date.toLocaleString('default', {
+      day: 'numeric'
+    });
+    var day2 = date2.toLocaleString('default', {
+      day: 'numeric'
+    });
+    var dateRange = "".concat(month, " ").concat(day, " - ").concat(month2, " ").concat(day2);
+    return dateRange;
+  }; // PREFORM the api call to get the schedules
+
+
+  react__WEBPACK_IMPORTED_MODULE_1__.useEffect(function () {
+    request().then(function (response) {
+      console.log(response);
+
+      if (response.status === 200 || response.status === 'success') {
+        setSchedules(response.data);
+        setEmployee(response.employee);
+      }
+    });
+  }, []);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+    className: "container-fluid mt-4",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+      className: "row",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h2", {
+        className: "header-subtitle text-center",
+        children: "Edit Schedule"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
+        src: "/img/SVG/schedule_icon.svg",
+        width: 250,
+        height: 250
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
+        className: "text-center text-muted",
+        children: "Edit the current schedule for your store"
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+      className: "col-md-6 mx-auto",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+        className: "col-sm mx-auto",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("select", {
+          className: "form-select",
+          id: "datePicker",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("option", {
+            children: " Please Select a Schedule"
+          }), schedules.map(function (schedule, index) {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("option", {
+              value: schedule.id,
+              style: {
+                fontWeight: 500
+              },
+              children: schedule.year + "  " + formatDateRange(schedule.week, schedule.year)
+            }, index);
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("button", {
+          className: "btn header-action btn-lg w-100",
+          onClick: function onClick(e) {
+            var scheduleId = document.getElementById('datePicker').value;
+            var container = document.getElementById('schedule-table-container');
+            react_dom__WEBPACK_IMPORTED_MODULE_2__.unmountComponentAtNode(container);
+            react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_core_ScheduleTable__WEBPACK_IMPORTED_MODULE_4__.ScheduleTable, {
+              scheduleID: scheduleId,
+              employeeID: employee.id
+            }), container);
+          },
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
+            className: "fas fa-edit"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
+            className: "ml-2",
+            children: "Edit Schedule"
+          })]
+        })]
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+      className: "row mt-4 mx-auto",
+      id: "schedule-table-container"
+    })]
+  });
+};
+
+/***/ }),
+
 /***/ "./resources/js/components/dashboard/schedule/schedule.gridMenu.jsx":
 /*!**************************************************************************!*\
   !*** ./resources/js/components/dashboard/schedule/schedule.gridMenu.jsx ***!
@@ -14649,7 +15050,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ScheduleGridMenu = function ScheduleGridMenu(props) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-    className: "row",
+    className: "row  mx-auto",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
       className: "col-md-4",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
@@ -14866,6 +15267,191 @@ var ScheduleGridMenu = function ScheduleGridMenu(props) {
           })]
         })
       })
+    })]
+  });
+};
+
+/***/ }),
+
+/***/ "./resources/js/components/dashboard/schedule/schedule.view.jsx":
+/*!**********************************************************************!*\
+  !*** ./resources/js/components/dashboard/schedule/schedule.view.jsx ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ViewSchedules": () => (/* binding */ ViewSchedules)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var _base_notification__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../base/notification */ "./resources/js/base/notification.jsx");
+/* harmony import */ var _core_ScheduleTable__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./core/ScheduleTable */ "./resources/js/components/dashboard/schedule/core/ScheduleTable.jsx");
+/* harmony import */ var _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../lib/fetchServiceProvider */ "./resources/js/lib/fetchServiceProvider.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+/**
+ *
+ *
+ *  @cfile: schedule.view.jsx
+ *
+ *
+ *  @purpose: inorder to view current schedules in the system  and view the details of the schedules '
+ *
+ */
+
+
+
+
+
+
+
+var ViewSchedules = function ViewSchedules(props) {
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_1__.useState([]),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      schedules = _React$useState2[0],
+      setSchedules = _React$useState2[1];
+
+  var _React$useState3 = react__WEBPACK_IMPORTED_MODULE_1__.useState([]),
+      _React$useState4 = _slicedToArray(_React$useState3, 2),
+      employee = _React$useState4[0],
+      setEmployee = _React$useState4[1];
+
+  var request = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      var api, route, headers;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              api = new _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_5__["default"]();
+              route = '/api/store/schedule/get';
+              headers = {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'accessToken': api.getCookie('accessToken')
+              };
+              _context.next = 5;
+              return api.get(route, headers);
+
+            case 5:
+              return _context.abrupt("return", _context.sent);
+
+            case 6:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function request() {
+      return _ref.apply(this, arguments);
+    };
+  }(); // format a date range by providing a week number and year
+
+
+  var formatDateRange = function formatDateRange(week, year) {
+    var date = new Date(year, 0, 1 + (week - 1) * 7);
+    var date2 = new Date(year, 0, 1 + week * 7);
+    var month = date.toLocaleString('default', {
+      month: 'long'
+    });
+    var month2 = date2.toLocaleString('default', {
+      month: 'long'
+    });
+    var day = date.toLocaleString('default', {
+      day: 'numeric'
+    });
+    var day2 = date2.toLocaleString('default', {
+      day: 'numeric'
+    });
+    var dateRange = "".concat(month, " ").concat(day, " - ").concat(month2, " ").concat(day2);
+    return dateRange;
+  }; // PREFORM the api call to get the schedules
+
+
+  react__WEBPACK_IMPORTED_MODULE_1__.useEffect(function () {
+    request().then(function (response) {
+      console.log(response);
+
+      if (response.status === 200 || response.status === 'success') {
+        setSchedules(response.data);
+        setEmployee(response.employee);
+      }
+    });
+  }, []);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+    className: "container-fluid mt-4",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+      className: "row",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h2", {
+        className: "header-subtitle text-center",
+        children: "View Schedule"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
+        src: "/img/SVG/schedule_icon.svg",
+        width: 250,
+        height: 250
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
+        className: "text-center text-muted",
+        children: "View the current schedule for your store"
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+      className: "col-md-6 mx-auto",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+        className: "col-sm mx-auto",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("select", {
+          className: "form-select",
+          id: "datePicker",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("option", {
+            children: " Please Select a Schedule"
+          }), schedules.map(function (schedule, index) {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("option", {
+              value: schedule.id,
+              style: {
+                fontWeight: 500
+              },
+              children: schedule.year + "  " + formatDateRange(schedule.week, schedule.year)
+            }, index);
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
+          className: "btn header-action btn-lg w-100",
+          onClick: function onClick(e) {
+            var scheduleId = document.getElementById('datePicker').value;
+            var container = document.getElementById('schedule-table-container');
+            react_dom__WEBPACK_IMPORTED_MODULE_2__.unmountComponentAtNode(container);
+            react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_core_ScheduleTable__WEBPACK_IMPORTED_MODULE_4__.ScheduleTable, {
+              scheduleID: scheduleId,
+              employeeID: employee.id,
+              viewOnly: true
+            }), container);
+          },
+          children: "View Schedule"
+        })]
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+      className: "row mt-4 mx-auto",
+      id: "schedule-table-container"
     })]
   });
 };
@@ -18200,12 +18786,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _components_dashboard_schedule_schedule_gridMenu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/dashboard/schedule/schedule.gridMenu */ "./resources/js/components/dashboard/schedule/schedule.gridMenu.jsx");
 /* harmony import */ var _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../lib/fetchServiceProvider */ "./resources/js/lib/fetchServiceProvider.js");
 /* harmony import */ var _components_dashboard_schedule_schedule_add_entry__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/dashboard/schedule/schedule.add.entry */ "./resources/js/components/dashboard/schedule/schedule.add.entry.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _components_dashboard_schedule_schedule_view__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/dashboard/schedule/schedule.view */ "./resources/js/components/dashboard/schedule/schedule.view.jsx");
+/* harmony import */ var _components_dashboard_schedule_schedule_edit__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/dashboard/schedule/schedule.edit */ "./resources/js/components/dashboard/schedule/schedule.edit.jsx");
+/* harmony import */ var _components_dashboard_schedule_schedule_delete__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/dashboard/schedule/schedule.delete */ "./resources/js/components/dashboard/schedule/schedule.delete.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /*
  *
  *
@@ -18226,17 +18815,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
 var SchedulePage = function SchedulePage(props) {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-    className: "container-xl dashboard-content",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("h2", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
+    className: "container dashboard-content mx-auto",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("h2", {
       className: "ml-4",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("b", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("b", {
         style: {
           fontSize: '1.25em'
         },
         children: "Schedule"
-      }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+      }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("span", {
         className: "text-center",
         style: {
           fontSize: '0.75em',
@@ -18244,40 +18836,43 @@ var SchedulePage = function SchedulePage(props) {
           marginLeft: '20px'
         },
         children: "View, edit, and drop shifts!"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("p", {
         style: {
           marginLeft: '18em'
         }
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_6__.BrowserRouter, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Switch, {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.BrowserRouter, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Switch, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
           path: "/dashboard/schedule/add/",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_dashboard_schedule_schedule_add_entry__WEBPACK_IMPORTED_MODULE_4__.AddScheduleEntry, {})
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
-          path: "/dashboard/schedule/view"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
-          path: "/dashboard/schedule/edit/"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
-          path: "/dashboard/schedule/delete"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_dashboard_schedule_schedule_add_entry__WEBPACK_IMPORTED_MODULE_4__.AddScheduleEntry, {})
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
+          path: "/dashboard/schedule/view",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_dashboard_schedule_schedule_view__WEBPACK_IMPORTED_MODULE_5__.ViewSchedules, {})
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
+          path: "/dashboard/schedule/edit/",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_dashboard_schedule_schedule_edit__WEBPACK_IMPORTED_MODULE_6__.EditSchedules, {})
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
+          path: "/dashboard/schedule/delete",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_dashboard_schedule_schedule_delete__WEBPACK_IMPORTED_MODULE_7__.DeleteSchedules, {})
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
           path: "/dashboard/schedule/drop/"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
           path: "/dashboard/schedule/pickup/"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
           path: "/dashboard/schedule/labour/"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
           exact: true,
           path: "/dashboard/schedule/",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components_dashboard_schedule_schedule_gridMenu__WEBPACK_IMPORTED_MODULE_2__.ScheduleGridMenu, {})
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_dashboard_schedule_schedule_gridMenu__WEBPACK_IMPORTED_MODULE_2__.ScheduleGridMenu, {})
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
           path: "/dashboard/schedule/request/"
         })]
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
       id: "notification-container",
       className: "row"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
       id: "modal-container",
       className: "modal-container"
     })]

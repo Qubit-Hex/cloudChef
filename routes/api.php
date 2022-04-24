@@ -151,6 +151,9 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
             // add a store schedule entry group entry
             Route::post('/add', [schedule::class, 'add'])->name('/schedule/add');
 
+            // get all the schedules for the store
+            Route::get('/get', [schedule::class, 'get'])->name('/schedule/get');
+
             // delete the store schedule entry group entry
             Route::delete('/delete', [schedule::class, 'delete'])->name('/schedule/delete');
 

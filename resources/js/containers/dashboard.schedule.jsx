@@ -18,13 +18,14 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { ScheduleGridMenu } from "../components/dashboard/schedule/schedule.gridMenu";
 import FetchServiceProvider from "../lib/fetchServiceProvider";
 import { AddScheduleEntry } from "../components/dashboard/schedule/schedule.add.entry";
-
-
+import { ViewSchedules } from "../components/dashboard/schedule/schedule.view";
+import { EditSchedules } from "../components/dashboard/schedule/schedule.edit";
+import { DeleteSchedules } from "../components/dashboard/schedule/schedule.delete";
 
 export const  SchedulePage = (props) => {
 
         return (
-            <div className="container-xl dashboard-content">
+            <div className="container dashboard-content mx-auto">
                 <h2 className="ml-4">
                     <b style={{
                         fontSize: '1.25em'
@@ -53,10 +54,13 @@ export const  SchedulePage = (props) => {
                             <AddScheduleEntry />
                         </Route>
                         <Route path="/dashboard/schedule/view">
+                            <ViewSchedules />
                         </Route>
                         <Route path="/dashboard/schedule/edit/">
+                            <EditSchedules />
                         </Route>
                         <Route path="/dashboard/schedule/delete">
+                            <DeleteSchedules />
                         </Route>
                         <Route path="/dashboard/schedule/drop/">
                         </Route>
