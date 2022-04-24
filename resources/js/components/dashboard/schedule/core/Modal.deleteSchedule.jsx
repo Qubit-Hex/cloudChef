@@ -1,53 +1,42 @@
 /**
  *
- *
- *  @file:  Modal.deleteShift.jsx
- *
+ *  @file: Modal.deleteScheduke.jsx
  *
  *
- *  @purpose: inorder to render the delete shift modal
+ *
+ *  @purpose: inorder to delete the schedules in the system
  *
  */
 
- import React from 'react';
- import ReactDOM from 'react-dom';
+
+import React from 'react';
+import ReactDOM from 'react-dom';
 import FetchServiceProvider from '../../../../lib/fetchServiceProvider';
- import { Modal } from '../base/Modal';
+import { Modal } from '../base/Modal';
 
 
- /**
-  *
-  *
-  *  @component: ModalDeleteShift
-  *
-  *
-  *  @purpose: This is responsible for rendering the delete shift functionality to the form. and delete the shift passed to the component
-  *
-  *  @props:  Shift: <SHIFT OBJECT>
-  *
-  */
-
- export const ModalDeleteShift = (props) => {
 
 
-    const request = async () => {
-        const api = new FetchServiceProvider();
-        const route = '/api/store/schedule/shifts/delete';
+export const ModalDeleteSchedule = (props) => {
 
-        // we have to send the shift details inorder to the request to go through
-        const header = {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'accessToken': api.getCookie('accessToken'),
-            'day': props.day + 1,
-            'employee': props.employeeID,
-            'scheduleID': props.scheduleID
-        }
+    // debug
+    console.log(props);
 
-        // send the request to the server
+    const request = async (scheduleID, employeeID) => {
+      // implement the api call inorder to delete the schedule and the details of the schedule form the database
+      const api = new FetchServiceProvider();
+      const route = '/api/store/schedule/delete';
+
+      const header = {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'accessToken': api.getCookie('accessToken'),
+        'scheduleID': scheduleID,
+        'employeeID': employeeID
+      }
+
         return await api.delete(route, header);
     }
-
 
     const HandleSuccess = () => {
         return (
@@ -97,25 +86,29 @@ import FetchServiceProvider from '../../../../lib/fetchServiceProvider';
      )
     }
 
-
-
-    return (
-        <Modal title='Delete Shift'
+        return (
+            <Modal title="Delete Schedule"
                 body={
                     <div>
-                        <div className='_img_ text-center mx-auto' >
+                            <div className='_img_ text-center mx-auto' >
                             <img src='/img/SVG/schedule_icon_alt.svg' width={300} height={300} />
+                            <h1 className='text-center text-danger'>
+                                <i className='fa fa-circle-xmark fa-beat'></i>
+                            </h1>
                             <h1 className='text-danger' style={{
                                 fontSize: '1rem',
                                 fontWeight: 600,
-                            }}> Are you sure you want to delete this shift </h1>
+                            }}>
+                            {/** add a danger iocn with fa-beat  */}
+
+                                 Are you sure you want to delete this schedule. </h1>
                             <b className='text-danger'> This cannot be reversed. </b>
                         </div>
+
 
                         <div className='form-group d-flex'>
                         <button className='btn btn-danger m-2' onClick={
                             (e) => {
-                                // close the modal of the application
                                 const container = document.getElementById('modal-container');
                                 return ReactDOM.unmountComponentAtNode(container);
                             }
@@ -125,28 +118,17 @@ import FetchServiceProvider from '../../../../lib/fetchServiceProvider';
                         </button>
                         <button className='btn btn-message m-2' onClick={
                             (e) => {
-                                const container = document.getElementById('modal-container');
-
-                                return request().then((response) => {
-                                    if (response.status === 'success') {
-                                        ReactDOM.render(<HandleSuccess />, container);
-                                    } else {
-                                         ReactDOM.render(<HandleError />, container);
-                                    }
-
+                                // send the request to the server
+                                return request(props.scheduleId, props.employeeID).then((response) => {
+                                    console.log(response);
                                 });
                             }
                         }>
-                            <i className="far fa-calendar-alt"></i>
-                            Delete Shift
+                            <i className='fas fa-trash-alt'></i>
+                            Delete Schedule
                         </button>
                     </div>
-
-
-
                     </div>
                 } />
-    )
-
-
- }
+        )
+}

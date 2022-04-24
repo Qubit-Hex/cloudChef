@@ -123,6 +123,22 @@ class store_members extends Model
 
         /**
          *
+         *  @method: getStoreAdmin
+         *
+         *  @purpose: to get the store admin
+         */
+
+         public function getStoreAdmin($storeID, $userID)
+         {
+            return $this->where('storeID', $storeID)
+                        ->where('store_role', 'admin')
+                        ->where('userID', $userID)
+                        ->first();
+         }
+
+
+        /**
+         *
          *  @method: disableStoreMember
          *
          *  @purpose: to disable a store member

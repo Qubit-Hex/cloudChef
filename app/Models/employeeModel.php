@@ -232,4 +232,7 @@ class employeeModel extends Model
             'end_date' => date('Y-m-d')
         ]);
     }
+
+
+    
 }

@@ -18,14 +18,17 @@ use App\Models\User;
 use App\Models\store_members;
 use App\Models\employeeModel;
 use App\Models\scheduleGroup;
+use App\Http\Services\schedule\SchedulePolicy;
+
 
 class schedule extends Controller
 {
 
-    public function __construct()
+    public function __construct(Request $request)
     {
 
         // load the models for the controller...
+        $this->service = new SchedulePolicy($request);
 
         $this->userModel = new User();
         $this->scheduleGroupModel = new scheduleGroup();
@@ -46,40 +49,31 @@ class schedule extends Controller
     public function get(Request $request)
     {
         // validate the request baseed on the users input...
-        $validateUser = $this->userModel->getUserByRemeberToken($request->header('accessToken'));
-        if (!$validateUser) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'unauthorized access'
-            ], 401);
-        }
-        // next get the store_member premissions
-        $storeMember = $this->store_membersModel->getMembersByID($validateUser->userID);
-        if (!$storeMember) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'unauthorized access'
-            ], 401);
-        }
+        $token = $request->header('accessToken');
+        $member  = $this->service->isUserMember($token, true);
 
-        $getSchedules = $this->scheduleGroupModel->getSchedulesByStore($storeMember->storeID);
-        $getEmployeeData = $this->employees->getEmployeeByStoreAndUserID($storeMember->storeID, $validateUser->userID);
+        if ($member) {
+            $getSchedules = $this->scheduleGroupModel->getSchedulesByStore($member->storeID);
+            $getEmployeeData = $this->employees->getEmployeeByStoreAndUserID($member->storeID, $member->userID);
+            if (!$getSchedules) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'No schedule found'
+                ], 404);
+            }
 
-        if ($getSchedules)
-        {
             return response()->json([
                 'status' => 'success',
                 'message' => 'schedule entries found',
                 'data' => $getSchedules,
                 'employee' => $getEmployeeData
             ], 200);
-            
-        } else {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'no schedule entries found'
-            ], 404);
+
         }
+        return response()->json([
+            'status' => 'error',
+            'message' => 'You are not a member of this store'
+        ], 404);
     }
 
 
@@ -114,32 +108,7 @@ class schedule extends Controller
                 ], 400);
          }
 
-        $doesUserExist = $this->userModel->getUserByRemeberToken($request->header('accessToken'));
-
-        if (!$doesUserExist) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'User does not exist'
-            ], 401);
-        }
-
-        $getMemberInfo = $this->store_membersModel->getMembersByID($doesUserExist->userID);
-
-        if (!$getMemberInfo) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'User does not exist'
-            ], 401);
-        }
-
-        $isStoreMemberAdmin = $this->store_membersModel->storeMemberAdmin($getMemberInfo->storeID, $doesUserExist->userID);
-
-        if (!$isStoreMemberAdmin) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'User does not have permission to perform this action'
-            ], 401);
-        }
+        $getMemberInfo = $this->service->isUserAdmin($request->header('accessToken'), true);
         // get check if the user is a admin of the store
 
         $year = $request->input('year');
@@ -176,4 +145,81 @@ class schedule extends Controller
             ], 200);
         }
      }
+
+
+
+     /**
+      *  @method: delete
+      *
+      *  @purpose: inorder to deleta a schedule entry from the databasse
+      *
+      */
+
+      public function delete(Request $request)
+      {
+          // check if a schedule first exists
+          // then once we have the schedule entry we can validate the request
+          // if that is the case then delete the schedule entry.
+          // return the response to the user based on the result of the delete operation.
+          // first check if the user is a admin before continuing
+
+          $isAdmin = $this->service->isUserAdmin($request->header('accessToken'), true);
+          if (!$isAdmin)  {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'You are not a admin of this store'
+                ], 401);
+          }
+
+          // now lets check if the schedule entry exists
+          $scheduleID = $request->header('scheduleID');
+          $employeeID = $request->header('employeeID');
+
+          // use a closure to validate the inputs
+            $validateInputs = function ($scheduleID, $employeeID) {
+                if (empty($scheduleID) || empty($employeeID)) {
+                    return false;
+                }
+                return true;
+            };
+                if($validateInputs)
+                {
+                    // check if the schedule entry
+                    $scheduleEntry = $this->scheduleGroupModel->findSchedule($scheduleID, $isAdmin->storeID);
+                    if ($scheduleEntry) {
+                        // the schedule exists so continue
+                        $currentEmployee = $this->employees->getEmployeeByStoreAndUserID($isAdmin->storeID, $employeeID);
+                        if ($currentEmployee)
+                        {
+                            // delete the schedule entry
+                            $deleteScheduleEntry = $this->scheduleGroupModel->deleteSchedule($scheduleID, $isAdmin->storeID);
+                            return response()->json([
+                                'status' => 'success',
+                                'message' => 'Schedule entry deleted successfully',
+                                'schedule' => $isAdmin
+                            ], 200);
+
+                        }
+                        // return employee doesnt exist
+                        return response()->json([
+                            'status' => 'error',
+                            'message' => 'Employee doesnt exist',
+                            'employee' => $currentEmployee
+                        ], 404);
+
+                    }
+                    // not schedule exists so return the error
+                    return response()->json([
+                        'status' => 'error',
+                        'message' => 'Schedule entry does not exist'
+                    ], 404);
+                }
+
+            // trigger error
+            return response()->json([
+                'status' => 'error',
+                'message' => 'empty input'
+            ]);
+        }
+
 }

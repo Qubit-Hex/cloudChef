@@ -13596,6 +13596,194 @@ var ModalAddShift = function ModalAddShift(props) {
 
 /***/ }),
 
+/***/ "./resources/js/components/dashboard/schedule/core/Modal.deleteSchedule.jsx":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/dashboard/schedule/core/Modal.deleteSchedule.jsx ***!
+  \**********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ModalDeleteSchedule": () => (/* binding */ ModalDeleteSchedule)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../lib/fetchServiceProvider */ "./resources/js/lib/fetchServiceProvider.js");
+/* harmony import */ var _base_Modal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../base/Modal */ "./resources/js/components/dashboard/schedule/base/Modal.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+/**
+ *
+ *  @file: Modal.deleteScheduke.jsx
+ *
+ *
+ *
+ *  @purpose: inorder to delete the schedules in the system
+ *
+ */
+
+
+
+
+
+
+var ModalDeleteSchedule = function ModalDeleteSchedule(props) {
+  // debug
+  console.log(props);
+
+  var request = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(scheduleID, employeeID) {
+      var api, route, header;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              // implement the api call inorder to delete the schedule and the details of the schedule form the database
+              api = new _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_3__["default"]();
+              route = '/api/store/schedule/delete';
+              header = {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'accessToken': api.getCookie('accessToken'),
+                'scheduleID': scheduleID,
+                'employeeID': employeeID
+              };
+              _context.next = 5;
+              return api["delete"](route, header);
+
+            case 5:
+              return _context.abrupt("return", _context.sent);
+
+            case 6:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function request(_x, _x2) {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  var HandleSuccess = function HandleSuccess() {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_base_Modal__WEBPACK_IMPORTED_MODULE_4__.Modal, {
+      title: "Success",
+      body: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+          className: "_img_ text-center mx-auto",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
+            src: "/img/SVG/schedule_icon_alt.svg",
+            width: 300,
+            height: 300
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+          className: "text-center",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
+            className: "fa fa-check-circle fa-4x text-success"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h3", {
+            children: "Shift Deleted Successfully"
+          })]
+        })]
+      })
+    });
+  };
+  /**
+   *
+   * @component: HandleError
+   *
+   *  @purpose: This is responsible for rendering the error modal
+   *
+   */
+
+
+  var HandleError = function HandleError() {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_base_Modal__WEBPACK_IMPORTED_MODULE_4__.Modal, {
+      title: "Error",
+      body: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+          className: "_img_ text-center mx-auto",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
+            src: "/img/SVG/schedule_icon_alt.svg",
+            width: 300,
+            height: 300
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+          className: "text-center",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
+            className: "fa fa-times-circle fa-4x text-danger"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h3", {
+            children: "Shift Not Delete please check the request and try again. "
+          })]
+        })]
+      })
+    });
+  };
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_base_Modal__WEBPACK_IMPORTED_MODULE_4__.Modal, {
+    title: "Delete Schedule",
+    body: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+        className: "_img_ text-center mx-auto",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
+          src: "/img/SVG/schedule_icon_alt.svg",
+          width: 300,
+          height: 300
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h1", {
+          className: "text-center text-danger",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
+            className: "fa fa-circle-xmark fa-beat"
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h1", {
+          className: "text-danger",
+          style: {
+            fontSize: '1rem',
+            fontWeight: 600
+          },
+          children: "Are you sure you want to delete this schedule. "
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("b", {
+          className: "text-danger",
+          children: " This cannot be reversed. "
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+        className: "form-group d-flex",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("button", {
+          className: "btn btn-danger m-2",
+          onClick: function onClick(e) {
+            var container = document.getElementById('modal-container');
+            return react_dom__WEBPACK_IMPORTED_MODULE_2__.unmountComponentAtNode(container);
+          },
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
+            className: "fas fa-trash-alt"
+          }), "Cancel"]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("button", {
+          className: "btn btn-message m-2",
+          onClick: function onClick(e) {
+            // send the request to the server
+            return request(props.scheduleId, props.employeeID).then(function (response) {
+              console.log(response);
+            });
+          },
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
+            className: "fas fa-trash-alt"
+          }), "Delete Schedule"]
+        })]
+      })]
+    })
+  });
+};
+
+/***/ }),
+
 /***/ "./resources/js/components/dashboard/schedule/core/Modal.deleteShift.jsx":
 /*!*******************************************************************************!*\
   !*** ./resources/js/components/dashboard/schedule/core/Modal.deleteShift.jsx ***!
@@ -13768,9 +13956,7 @@ var ModalDeleteShift = function ModalDeleteShift(props) {
           onClick: function onClick(e) {
             // close the modal of the application
             var container = document.getElementById('modal-container');
-            return request().then(function (response) {
-              console.log(response);
-            });
+            return react_dom__WEBPACK_IMPORTED_MODULE_2__.unmountComponentAtNode(container);
           },
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
             className: "fas fa-trash-alt"
@@ -14666,7 +14852,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _base_notification__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../base/notification */ "./resources/js/base/notification.jsx");
 /* harmony import */ var _core_ScheduleTable__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./core/ScheduleTable */ "./resources/js/components/dashboard/schedule/core/ScheduleTable.jsx");
 /* harmony import */ var _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../lib/fetchServiceProvider */ "./resources/js/lib/fetchServiceProvider.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _core_Modal_deleteSchedule__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./core/Modal.deleteSchedule */ "./resources/js/components/dashboard/schedule/core/Modal.deleteSchedule.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -14693,6 +14880,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
  *  @purpose: inorder to delete current schedules in the system  and delete the details of the schedules '
  *
  */
+
 
 
 
@@ -14777,32 +14965,32 @@ var DeleteSchedules = function DeleteSchedules(props) {
       }
     });
   }, []);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
     className: "container-fluid mt-4",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
       className: "row",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h2", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h2", {
         className: "header-subtitle text-center",
         children: "Delete Schedule"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("img", {
         src: "/img/SVG/schedule_icon.svg",
         width: 250,
         height: 250
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("p", {
         className: "text-center text-muted",
         children: "Edit the current schedule for your store"
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
       className: "col-md-6 mx-auto",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
         className: "col-sm mx-auto",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("select", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("select", {
           className: "form-select",
           id: "datePicker",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("option", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("option", {
             children: " Please Select a Schedule"
           }), schedules.map(function (schedule, index) {
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("option", {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("option", {
               value: schedule.id,
               style: {
                 fontWeight: 500
@@ -14810,22 +14998,27 @@ var DeleteSchedules = function DeleteSchedules(props) {
               children: schedule.year + "  " + formatDateRange(schedule.week, schedule.year)
             }, index);
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("button", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("button", {
           className: "btn header-action btn-lg w-100",
           onClick: function onClick(e) {
             var scheduleId = document.getElementById('datePicker').value;
-            var container = document.getElementById('schedule-table-container');
-            var employeeID = employee.id;
+            var container = document.getElementById('modal-container');
+            var employeeID = employee.id; // SENDS THE SCHEDULE ID TO THE MODAL
+
+            return react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_core_Modal_deleteSchedule__WEBPACK_IMPORTED_MODULE_6__.ModalDeleteSchedule, {
+              scheduleId: scheduleId,
+              employeeID: employeeID
+            }), container);
           },
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("i", {
             className: "fas fa-trash-alt"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
             className: "ml-2",
             children: "Delete Schedule"
           })]
         })]
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
       className: "row mt-4 mx-auto",
       id: "schedule-table-container"
     })]

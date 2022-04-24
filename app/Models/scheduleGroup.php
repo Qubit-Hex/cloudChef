@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+
 
 //fff
 class scheduleGroup extends Model
@@ -96,6 +98,38 @@ class scheduleGroup extends Model
             return $this->where('storeID', $storeID)->orderBy('week', 'desc')->get();
        }
 
+       /**
+        *  @METHOD: findSchedule
+        *
+        *  @purpose: inorder to find a schedule if it is in the system.
+        *
+        */
+
+        public function findSchedule($id, $storeID)
+        {
+            return $this->where('id', $id)->where('storeID', $storeID)->first();
+        }
+
+
+        /**
+         *
+         * @method: deleteSchedule
+         *
+         * @purpose: inorder to delete the schedule from the system if it exists in the system
+         *
+         */
+
+         public function deleteSchedule($id, $storeID)
+         {
+             // find the schedule entry and delete all the shifts associated with it
+             $schedule = $this->where('id', $id)->where('storeID', $storeID)->delete();
+             $shifts = DB::table('employee_shifts')->where("schedule_id", $id)->delete();
+
+             if (!$schedule || !$shifts) {
+                 return false;
+             }
+             return true;
+         }
 
 
 

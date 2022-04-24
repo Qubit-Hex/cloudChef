@@ -16,6 +16,7 @@
  import * as Alerts from "../../../base/notification";
  import { ScheduleTable } from "./core/ScheduleTable";
  import FetchServiceProvider from "../../../lib/fetchServiceProvider";
+ import { ModalDeleteSchedule } from "./core/Modal.deleteSchedule";
 
  export const DeleteSchedules = (props) => {
 
@@ -93,9 +94,11 @@
                  <button className='btn header-action btn-lg w-100' onClick={
                      (e) => {
                          const scheduleId = document.getElementById('datePicker').value;
-                         const container = document.getElementById('schedule-table-container');
+                         const container = document.getElementById('modal-container');
                          const employeeID = employee.id;
 
+                         // SENDS THE SCHEDULE ID TO THE MODAL
+                         return ReactDOM.render(<ModalDeleteSchedule scheduleId={scheduleId} employeeID={employeeID} />, container);
                      }
                  }>
                         <i className="fas fa-trash-alt"></i>
