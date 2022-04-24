@@ -61,7 +61,7 @@ import FetchServiceProvider from '../../../../lib/fetchServiceProvider';
                                 <div className='text-center'>
                                     {/** add a font awesome icon */}
                                     <i className='fa fa-check-circle fa-4x text-success'></i>
-                                    <h3>Shift Added Successfully</h3>
+                                    <h3>Shift Deleted Successfully</h3>
                                 </div>
                             </div>
                         } />
@@ -90,7 +90,7 @@ import FetchServiceProvider from '../../../../lib/fetchServiceProvider';
                                 <div className='text-center'>
                                     {/** add a font awesome icon */}
                                     <i className='fa fa-times-circle fa-4x text-danger'></i>
-                                    <h3>Shift Not Added</h3>
+                                    <h3>Shift Not Delete please check the request and try again. </h3>
                                 </div>
                             </div>
                         } />
@@ -128,7 +128,15 @@ import FetchServiceProvider from '../../../../lib/fetchServiceProvider';
                         <button className='btn btn-message m-2' onClick={
                             (e) => {
                                 const container = document.getElementById('modal-container');
-                                ReactDOM.render(<HandleSuccess />, container);
+
+                                return request().then((response) => {
+                                    if (response.status === 'success') {
+                                        ReactDOM.render(<HandleSuccess />, container);
+                                    } else {
+                                         ReactDOM.render(<HandleError />, container);
+                                    }
+
+                                });
                             }
                         }>
                             <i className="far fa-calendar-alt"></i>

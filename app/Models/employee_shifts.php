@@ -86,4 +86,23 @@ class employee_shifts extends Model
           ]);
       }
 
+
+      /**
+       *
+       *   @method: deleteEmployeeShift
+       *
+       *  @purpose: to delete a specific shift for a specific employee
+       *
+       */
+
+       public function deleteEmployeeShift($schedule_id, $employee_id, $day)
+       {
+          // delete shift
+            $check =  DB::table('employee_shifts')->where('schedule_id', $schedule_id)->where('employee_id', $employee_id)->
+                    where('day_of_week', $day)->first();
+
+    
+           return DB::table('employee_shifts')->where('id', $check->id)->delete();
+       }
+
 }

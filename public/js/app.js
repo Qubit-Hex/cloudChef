@@ -13703,7 +13703,7 @@ var ModalDeleteShift = function ModalDeleteShift(props) {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
             className: "fa fa-check-circle fa-4x text-success"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h3", {
-            children: "Shift Added Successfully"
+            children: "Shift Deleted Successfully"
           })]
         })]
       })
@@ -13734,7 +13734,7 @@ var ModalDeleteShift = function ModalDeleteShift(props) {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
             className: "fa fa-times-circle fa-4x text-danger"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h3", {
-            children: "Shift Not Added"
+            children: "Shift Not Delete please check the request and try again. "
           })]
         })]
       })
@@ -13779,7 +13779,13 @@ var ModalDeleteShift = function ModalDeleteShift(props) {
           className: "btn btn-message m-2",
           onClick: function onClick(e) {
             var container = document.getElementById('modal-container');
-            react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(HandleSuccess, {}), container);
+            return request().then(function (response) {
+              if (response.status === 'success') {
+                react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(HandleSuccess, {}), container);
+              } else {
+                react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(HandleError, {}), container);
+              }
+            });
           },
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
             className: "far fa-calendar-alt"

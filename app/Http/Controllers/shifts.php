@@ -649,14 +649,30 @@ class shifts extends Controller
             ], 400);
         }
 
-        
+
+        /// delete the shift from the database
+
+        $deleteShift = $this->employeeShifts->deleteEmployeeShift(
+            $scheduleID,
+            $employeeID,
+            $day
+        );
+
+        // did the employee shift get deleted
+        if ($deleteShift) {
+            return response()->json([
+                'status' => 'success',
+                'message' => 'The shift has been deleted successfully'
+            ], 200);
+        }
 
         return response()->json([
             'status' => 'error',
-            'message' => 'The shift could not be modified, Please check input and try again.'
+            'message' => 'The shift could not be deleted, Please check input and try again.',
+            'deleteShift' => $deleteShift
         ], 400);
+    }
 
 
-       }
 
 }
