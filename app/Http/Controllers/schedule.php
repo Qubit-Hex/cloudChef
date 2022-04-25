@@ -29,7 +29,6 @@ class schedule extends Controller
 
         // load the models for the controller...
         $this->service = new SchedulePolicy($request);
-
         $this->userModel = new User();
         $this->scheduleGroupModel = new scheduleGroup();
         $this->store_membersModel = new store_members();
@@ -163,63 +162,54 @@ class schedule extends Controller
           // return the response to the user based on the result of the delete operation.
           // first check if the user is a admin before continuing
 
-          $isAdmin = $this->service->isUserAdmin($request->header('accessToken'), true);
-          if (!$isAdmin)  {
+          $token = $request->header('accessToken');
+          $scheduleID = $request->header('scheduleID');
+          $employeeID = $request->header('employeeID');
+
+
+          // check if the headers are empty?
+          if (empty($token) || empty($scheduleID) || empty($employeeID)) {
+              return response()->json([
+                  'status' => 'error',
+                  'message' => 'empty input'
+              ], 400);
+          }
+
+          // check if the user is a admin of the store
+            $getMemberInfo = $this->service->isUserAdmin($token, true);
+
+            if (!$getMemberInfo) {
                 return response()->json([
                     'status' => 'error',
                     'message' => 'You are not a admin of this store'
                 ], 401);
-          }
+            }
 
-          // now lets check if the schedule entry exists
-          $scheduleID = $request->header('scheduleID');
-          $employeeID = $request->header('employeeID');
+            // check if the schedule entry exist
+            $scheduleEntry = $this->scheduleGroupModel->findSchedule($scheduleID, $getMemberInfo->storeID);
 
-          // use a closure to validate the inputs
-            $validateInputs = function ($scheduleID, $employeeID) {
-                if (empty($scheduleID) || empty($employeeID)) {
-                    return false;
-                }
-                return true;
-            };
-                if($validateInputs)
-                {
-                    // check if the schedule entry
-                    $scheduleEntry = $this->scheduleGroupModel->findSchedule($scheduleID, $isAdmin->storeID);
-                    if ($scheduleEntry) {
-                        // the schedule exists so continue
-                        $currentEmployee = $this->employees->getEmployeeByStoreAndUserID($isAdmin->storeID, $employeeID);
-                        if ($currentEmployee)
-                        {
-                            // delete the schedule entry
-                            $deleteScheduleEntry = $this->scheduleGroupModel->deleteSchedule($scheduleID, $isAdmin->storeID);
-                            return response()->json([
-                                'status' => 'success',
-                                'message' => 'Schedule entry deleted successfully',
-                                'schedule' => $isAdmin
-                            ], 200);
+            if (!$scheduleEntry) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Schedule entry does not exist'
+                ], 404);
+            }
 
-                        }
-                        // return employee doesnt exist
-                        return response()->json([
-                            'status' => 'error',
-                            'message' => 'Employee doesnt exist',
-                            'employee' => $currentEmployee
-                        ], 404);
+            // delete the schedule and all the shifts associated with it
+            // check if the schedule entry was deleted
 
-                    }
-                    // not schedule exists so return the error
-                    return response()->json([
-                        'status' => 'error',
-                        'message' => 'Schedule entry does not exist'
-                    ], 404);
-                }
+            if ($this->scheduleGroupModel->deleteSchedule($scheduleID, $getMemberInfo->storeID)) {
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Schedule entry deleted successfully'
+                ], 200);
+            }
+            
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Schedule entry could not be deleted'
+                ], 401);
 
-            // trigger error
-            return response()->json([
-                'status' => 'error',
-                'message' => 'empty input'
-            ]);
         }
 
 }

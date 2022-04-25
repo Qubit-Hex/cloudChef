@@ -196,7 +196,9 @@ class shifts extends Controller
         // now is the user a admin since this is a admin only priv
         $currentUserAdmin = $this->storeMembers->storeMemberAdmin($currentUserStore->storeID, $currentUser->userID);
 
-        if (!$currentUserAdmin) {      $currentUser = $this->user->getUserByRemeberToken($request->header('accessToken'));
+        if (!$currentUserAdmin) {
+
+            $currentUser = $this->user->getUserByRemeberToken($request->header('accessToken'));
 
             if (!$currentUser) {
                     return response()->json([

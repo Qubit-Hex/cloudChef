@@ -5467,238 +5467,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-/***/ "./resources/js/components/dashboard/contacts/contact.employeeCard.jsx":
-/*!*****************************************************************************!*\
-  !*** ./resources/js/components/dashboard/contacts/contact.employeeCard.jsx ***!
-  \*****************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "EmployeeCard": () => (/* binding */ EmployeeCard)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/**
- *
- *
- * @file: contact.employeeCard.jsx
- *
- *
- *
- * @purpose: to render the contacts to the table of the contacts page
- *
- *
- */
-
-
-/**
- *
- *  @function: EmployeeCard
- *
- *
- *  @purpose: inorder to render the employee card component to the table of our contacts page
- */
-
-
-var EmployeeCard = function EmployeeCard(props) {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("tr", {
-    style: {
-      fontWeight: 400,
-      fontSize: '1.0rem'
-    },
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("td", {
-      children: [" ", props.name, " "]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("td", {
-      children: [" ", props.address, " "]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("td", {
-      children: [" ", props.location, " "]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("td", {
-      children: [" ", props.phone, " "]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("td", {
-      children: ["  ", props.email, "  "]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("td", {
-      children: ["  ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("b", {
-        children: [props.role, "  "]
-      })]
-    })]
-  });
-};
-
-/***/ }),
-
-/***/ "./resources/js/components/dashboard/contacts/contact.table.jsx":
-/*!**********************************************************************!*\
-  !*** ./resources/js/components/dashboard/contacts/contact.table.jsx ***!
-  \**********************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ContactsTable": () => (/* binding */ ContactsTable)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _contact_employeeCard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./contact.employeeCard */ "./resources/js/components/dashboard/contacts/contact.employeeCard.jsx");
-/* harmony import */ var _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../lib/fetchServiceProvider */ "./resources/js/lib/fetchServiceProvider.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-/**
- *
- *  @file: contact.table.jsx
- *
- *
- *  @purpose: to render the contacts page
- *
- */
-
-/**
- *
- *  @function: ContactsTable
- *
- *
- * @purpose: inorder to render the contacts table component
- *
- */
-
-
-
-
-
-
-var ContactsTable = function ContactsTable(props) {
-  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0__.useState([]),
-      _React$useState2 = _slicedToArray(_React$useState, 2),
-      employees = _React$useState2[0],
-      setEmployees = _React$useState2[1];
-  /**
-   *
-   *  @function: fetchStoreContacts
-   *
-   *  @purpose: inorder to fetch the store contacts from the database
-   *
-   */
-
-
-  var fetchStoredContacts = function fetchStoredContacts() {
-    var api = new _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_2__["default"]();
-    var header = {
-      'Content-Type': 'application/json',
-      'accessToken': api.getCookie('accessToken')
-    }; // route for the information that we will be accessing
-
-    var route = '/api/store/employees'; // return the promise for us to work with in  another place
-
-    return api.get(route, header);
-  }; // form the response for something that we can pass to a component
-  // inorder to self render the data that we want to display.
-
-
-  react__WEBPACK_IMPORTED_MODULE_0__.useEffect(function () {
-    // fetch the data from the database
-    fetchStoredContacts().then(function (response) {
-      if (response.status === 'success') {
-        setEmployees(response.data);
-      } else {
-        // if the response is not successful
-        return new Error('Failed to fetch the data');
-      }
-    });
-  }, []);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-    className: "container-xl dashboard-content",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("h2", {
-      className: "ml-4",
-      children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("b", {
-        children: "Contacts"
-      }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("small", {
-        className: "sub-caption ",
-        children: [" Welcome ( ) ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
-          className: "text-center",
-          children: "View your teams contact information. "
-        }), " "]
-      })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-      id: "notification-container",
-      className: "row"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-      id: "modal-container",
-      className: "modal-container"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-      className: "row",
-      children: ["   ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-        className: "col card fit-table",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
-          className: "header-subtitle text-center mt-4 ",
-          children: " View your store contacts "
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("img", {
-          src: "/img/SVG/User Status_Outline.svg",
-          alt: "schedule icon",
-          width: "400px",
-          height: "400px",
-          className: "mx-auto img-fluid"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
-          className: "text-center",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("small", {
-            className: "text-small",
-            children: "View all your contacts, for your store here "
-          })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-          className: "schedule_pill",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("table", {
-            className: "table table-responsive",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("thead", {
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
-                  children: " Employee "
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
-                  children: " Address "
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
-                  children: " Location"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
-                  children: " Phone "
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
-                  children: " Email "
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
-                  children: " Role "
-                })]
-              })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("tbody", {
-              children: employees.map(function (employee, index) {
-                // MAP THROUGH THE EMPLOYEES AND RENDER THEM HERE
-                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_contact_employeeCard__WEBPACK_IMPORTED_MODULE_1__.EmployeeCard, {
-                  id: employee.id,
-                  name: employee.name,
-                  address: employee.address,
-                  location: employee.location,
-                  phone: employee.phone,
-                  email: employee.email,
-                  role: employee.department
-                }, index);
-              })
-            })]
-          })
-        })]
-      })]
-    })]
-  });
-};
-
-/***/ }),
-
 /***/ "./resources/js/components/dashboard/contactsNavbar.jsx":
 /*!**************************************************************!*\
   !*** ./resources/js/components/dashboard/contactsNavbar.jsx ***!
@@ -5883,7 +5651,7 @@ var DashboardNav = /*#__PURE__*/function (_Component) {
    *
    *
    * @purpose: this method is used to get the cookie from the browser
-   * 
+   *
    */
 
 
@@ -6034,7 +5802,7 @@ var DashboardNav = /*#__PURE__*/function (_Component) {
               href: "/dashboard/employees/",
               className: "nav-link",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
-                className: "fas fa-users"
+                className: "fas fa-user-tie"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
                 className: "nav-link-text",
                 children: "Employees"
@@ -6047,15 +5815,6 @@ var DashboardNav = /*#__PURE__*/function (_Component) {
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
                 className: "nav-link-text",
                 children: "Recipes"
-              })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("a", {
-              href: "/dashboard/contacts/",
-              className: "nav-link",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
-                className: "fas fa-user-tie"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-                className: "nav-link-text",
-                children: "Contacts"
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("a", {
               href: "/dashboard/settings/",
@@ -13675,7 +13434,7 @@ var ModalDeleteSchedule = function ModalDeleteSchedule(props) {
     };
   }();
 
-  var HandleSuccess = function HandleSuccess() {
+  var HandleSuccess = function HandleSuccess(props) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_base_Modal__WEBPACK_IMPORTED_MODULE_4__.Modal, {
       title: "Success",
       body: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
@@ -13691,7 +13450,7 @@ var ModalDeleteSchedule = function ModalDeleteSchedule(props) {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
             className: "fa fa-check-circle fa-4x text-success"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h3", {
-            children: "Shift Deleted Successfully"
+            children: "Schedule Deleted Successfully"
           })]
         })]
       })
@@ -13706,7 +13465,7 @@ var ModalDeleteSchedule = function ModalDeleteSchedule(props) {
    */
 
 
-  var HandleError = function HandleError() {
+  var HandleError = function HandleError(props) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_base_Modal__WEBPACK_IMPORTED_MODULE_4__.Modal, {
       title: "Error",
       body: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
@@ -13722,7 +13481,10 @@ var ModalDeleteSchedule = function ModalDeleteSchedule(props) {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
             className: "fa fa-times-circle fa-4x text-danger"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h3", {
-            children: "Shift Not Delete please check the request and try again. "
+            children: " Schedule Could not be deleted  "
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("b", {
+            className: "text-danger",
+            children: [" ", props.message]
           })]
         })]
       })
@@ -13769,8 +13531,15 @@ var ModalDeleteSchedule = function ModalDeleteSchedule(props) {
           className: "btn btn-message m-2",
           onClick: function onClick(e) {
             // send the request to the server
+            var container = document.getElementById('modal-container');
             return request(props.scheduleId, props.employeeID).then(function (response) {
-              console.log(response);
+              if (response.status === 'success') {
+                return react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(HandleSuccess, {}), container);
+              } else {
+                return react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(HandleError, {
+                  message: response.message
+                }), container);
+              }
             });
           },
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
@@ -14494,15 +14263,31 @@ var GenerateTableData = function GenerateTableData(props) {
         setError(true);
       }
     });
-  }, []); //  error boundry
+  }, []); // if there is an error render the error message
+
+  var RenderTableError = function RenderTableError(props) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
+      className: "text-center",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
+        className: "text-center m-4",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("h3", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("i", {
+            className: "fa fa-check-circle text-danger"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("span", {
+            style: {
+              fontWeight: 600
+            },
+            children: "No Schedule Found"
+          })]
+        })
+      })
+    });
+  }; //  error boundry
+
 
   if (error) {
     // this is temporary we will render a better looking errorr message later.
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("h1", {
-        children: " Error "
-      })
-    });
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(RenderTableError, {});
   }
 
   if (shiftsData.length === 0) {
@@ -15462,6 +15247,235 @@ var ScheduleGridMenu = function ScheduleGridMenu(props) {
       })
     })]
   });
+};
+
+/***/ }),
+
+/***/ "./resources/js/components/dashboard/schedule/schedule.labour.jsx":
+/*!************************************************************************!*\
+  !*** ./resources/js/components/dashboard/schedule/schedule.labour.jsx ***!
+  \************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ScheduleLabour": () => (/* binding */ ScheduleLabour)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../lib/fetchServiceProvider */ "./resources/js/lib/fetchServiceProvider.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+/**
+ *
+ *  @file: schedule.labour.jsx
+ *
+ *
+ *  @purpose: inorder to render the labour analytics of the organization.
+ *
+ */
+
+
+ // google charts
+
+
+/**
+ *
+ *  @component: getLabourCostWeekly
+ *
+ *
+ *  @purpose: inorder to get the labour cost of the organization for the week.
+ *
+ *
+ */
+
+
+
+
+var LabourCostWeekly = function LabourCostWeekly(props) {
+  // get the week cost of the labour for the store
+  var request = function request() {// preform the request to the database
+  }; // pass the data to the google chart for rendering of the information from the database.
+
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {});
+};
+
+var LabourCostMonthly = function LabourCostMonthly(props) {
+  var request = function request() {};
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {});
+};
+
+var TodaysLabourCost = function TodaysLabourCost(props) {
+  var request = function request() {};
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {});
+};
+
+var ScheduleLabour = function ScheduleLabour(props) {
+  // schedule state
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_1__.useState([]),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      schedule = _React$useState2[0],
+      setSchedule = _React$useState2[1]; // grab the required data from the props
+
+
+  var request = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      var api, route, headers;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              // some request
+              api = new _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_3__["default"]();
+              route = "/api/store/schedule/get";
+              headers = {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                accessToken: api.getCookie("accessToken")
+              };
+              _context.next = 5;
+              return api.get(route, headers);
+
+            case 5:
+              return _context.abrupt("return", _context.sent);
+
+            case 6:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function request() {
+      return _ref.apply(this, arguments);
+    };
+  }(); // set the data from the schedules.
+
+
+  react__WEBPACK_IMPORTED_MODULE_1__.useEffect(function () {
+    request().then(function (response) {
+      console.log(response);
+
+      if (response.status === 200 || response.status === "success") {
+        setSchedule(response.data);
+      }
+    });
+  }, []);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+    className: "_labour_",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      className: "row",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
+        className: "header-subtitle text-center",
+        children: "Labour Cost"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+        src: "/img/SVG/finance_analytics.svg",
+        width: 250,
+        height: 250
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+        className: "text-center text-muted",
+        children: "Current Labour cost of your store"
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      className: "row",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        className: "col-md-3 mx-auto chart-container",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h1", {
+          className: "text-center header-subtitle",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("b", {
+            children: " Today's Labour Cost "
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(TodaysLabourCost, {})
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        className: "col-md-3 chart-container mx-auto",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h1", {
+          className: "text-center header-subtitle",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("b", {
+            children: " Weekly Labour Cost "
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(LabourCostWeekly, {})
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        className: "col-md-3 mx-auto chart-container",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h1", {
+          className: "text-center header-subtitle",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("b", {
+            children: " Monthly Labour Cost "
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(LabourCostMonthly, {})
+        })]
+      })]
+    })]
+  });
+};
+
+/***/ }),
+
+/***/ "./resources/js/components/dashboard/schedule/schedule.request.jsx":
+/*!*************************************************************************!*\
+  !*** ./resources/js/components/dashboard/schedule/schedule.request.jsx ***!
+  \*************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ScheduleRequestPage": () => (/* binding */ ScheduleRequestPage)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../lib/fetchServiceProvider */ "./resources/js/lib/fetchServiceProvider.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/**
+ *
+ *  @file: schedule.request.jsx
+ *
+ *  @purpose: inorder to render the request page of the orginization.
+ *
+ *
+ */
+
+
+
+/**
+ *
+ *  @component: ScheduleRequestPage
+ *
+ *  @purpose: inorder to render the request page of the orginization.
+ *
+ */
+
+
+var ScheduleRequestPage = function ScheduleRequestPage(props) {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {});
 };
 
 /***/ }),
@@ -18053,99 +18067,6 @@ var RegisterPage = /*#__PURE__*/function (_React$Component) {
 
 /***/ }),
 
-/***/ "./resources/js/containers/dashboard.contacts.jsx":
-/*!********************************************************!*\
-  !*** ./resources/js/containers/dashboard.contacts.jsx ***!
-  \********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ContactsPage": () => (/* binding */ ContactsPage)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _components_dashboard_contactsNavbar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/dashboard/contactsNavbar */ "./resources/js/components/dashboard/contactsNavbar.jsx");
-/* harmony import */ var _components_dashboard_contacts_contact_table__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/dashboard/contacts/contact.table */ "./resources/js/components/dashboard/contacts/contact.table.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-/**
- *
- *  @file: dashboard.contacts.jsx
- *
- *
- *  @purpose: to render the contacts page
- *
- */
-
-
-
-
-
-var ContactsPage = /*#__PURE__*/function (_Component) {
-  _inherits(ContactsPage, _Component);
-
-  var _super = _createSuper(ContactsPage);
-
-  function ContactsPage(props) {
-    var _this;
-
-    _classCallCheck(this, ContactsPage);
-
-    _this = _super.call(this, props);
-    _this.state = {// add the components states here inorder to fetch the users profile in json format
-    };
-    return _this;
-  }
-
-  _createClass(ContactsPage, [{
-    key: "render",
-    value: function render() {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-        className: "container-fluid rm-pm dashboard-content",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-          className: "row",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-            className: "row",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-              id: "message-box-container",
-              children: " "
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-              className: "table-contacts-container",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_dashboard_contacts_contact_table__WEBPACK_IMPORTED_MODULE_2__.ContactsTable, {})
-            })]
-          })
-        })
-      });
-    }
-  }]);
-
-  return ContactsPage;
-}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
-
-/***/ }),
-
 /***/ "./resources/js/containers/dashboard.container.jsx":
 /*!*********************************************************!*\
   !*** ./resources/js/containers/dashboard.container.jsx ***!
@@ -18158,17 +18079,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "DashboardContainer": () => (/* binding */ DashboardContainer)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../lib/fetchServiceProvider */ "./resources/js/lib/fetchServiceProvider.js");
 /* harmony import */ var _components_dashboard_dashboardNav__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/dashboard/dashboardNav */ "./resources/js/components/dashboard/dashboardNav.jsx");
-/* harmony import */ var _dashboard_contacts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./dashboard.contacts */ "./resources/js/containers/dashboard.contacts.jsx");
-/* harmony import */ var _dashboard_schedule__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./dashboard.schedule */ "./resources/js/containers/dashboard.schedule.jsx");
-/* harmony import */ var _dashboard_recipies__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./dashboard.recipies */ "./resources/js/containers/dashboard.recipies.jsx");
-/* harmony import */ var _dashboard_employees__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./dashboard.employees */ "./resources/js/containers/dashboard.employees.jsx");
-/* harmony import */ var _dashboard_home__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./dashboard.home */ "./resources/js/containers/dashboard.home.jsx");
-/* harmony import */ var _components_dashboard_settings_settings__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/dashboard/settings/settings */ "./resources/js/components/dashboard/settings/settings.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _dashboard_schedule__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./dashboard.schedule */ "./resources/js/containers/dashboard.schedule.jsx");
+/* harmony import */ var _dashboard_recipies__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./dashboard.recipies */ "./resources/js/containers/dashboard.recipies.jsx");
+/* harmony import */ var _dashboard_employees__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./dashboard.employees */ "./resources/js/containers/dashboard.employees.jsx");
+/* harmony import */ var _dashboard_home__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./dashboard.home */ "./resources/js/containers/dashboard.home.jsx");
+/* harmony import */ var _components_dashboard_settings_settings__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/dashboard/settings/settings */ "./resources/js/components/dashboard/settings/settings.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -18199,7 +18119,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
 /**
  *
  *  @component: UnAuthDashboard
@@ -18212,14 +18131,14 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var UnauthorizedPage = function UnauthorizedPage() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("h1", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h1", {
       className: "header-subttile text-center",
       children: "401"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("h2", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("h2", {
       className: "header-title text-center",
       children: "You are not authorized to view this page"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("img", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("img", {
       src: "/img/authentication.svg",
       alt: "authentication"
     })]
@@ -18263,31 +18182,28 @@ var DashboardContainer = function DashboardContainer(props) {
       });
     }
   });
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
     className: "content_container",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_dashboard_dashboardNav__WEBPACK_IMPORTED_MODULE_2__.DashboardNav, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.BrowserRouter, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Switch, {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_dashboard_dashboardNav__WEBPACK_IMPORTED_MODULE_2__.DashboardNav, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.BrowserRouter, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Switch, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
           path: "/dashboard/recipie/",
-          component: _dashboard_recipies__WEBPACK_IMPORTED_MODULE_5__.DashboardRecipies
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
-          path: "/dashboard/contacts/",
-          component: _dashboard_contacts__WEBPACK_IMPORTED_MODULE_3__.ContactsPage
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+          component: _dashboard_recipies__WEBPACK_IMPORTED_MODULE_4__.DashboardRecipies
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
           path: "/dashboard/schedule/",
-          component: _dashboard_schedule__WEBPACK_IMPORTED_MODULE_4__.SchedulePage
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+          component: _dashboard_schedule__WEBPACK_IMPORTED_MODULE_3__.SchedulePage
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
           path: "/dashboard/employees/",
-          component: _dashboard_employees__WEBPACK_IMPORTED_MODULE_6__.EmployeesPage
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+          component: _dashboard_employees__WEBPACK_IMPORTED_MODULE_5__.EmployeesPage
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
           path: "/dashboard/settings/",
-          component: _components_dashboard_settings_settings__WEBPACK_IMPORTED_MODULE_8__.DashboardSettings
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+          component: _components_dashboard_settings_settings__WEBPACK_IMPORTED_MODULE_7__.DashboardSettings
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
           path: "/dashboard/logout/",
           children: " "
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
           path: "/dashboard/",
-          component: _dashboard_home__WEBPACK_IMPORTED_MODULE_7__.DashboardHome
+          component: _dashboard_home__WEBPACK_IMPORTED_MODULE_6__.DashboardHome
         })]
       })
     })]
@@ -18611,7 +18527,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var _components_dashboard_contactsNavbar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/dashboard/contactsNavbar */ "./resources/js/components/dashboard/contactsNavbar.jsx");
-/* harmony import */ var _components_dashboard_contacts_contact_table__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/dashboard/contacts/contact.table */ "./resources/js/components/dashboard/contacts/contact.table.jsx");
+Object(function webpackMissingModule() { var e = new Error("Cannot find module '../components/dashboard/contacts/contact.table'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 /* harmony import */ var _components_dashboard_recipe_core_template_modal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/dashboard/recipe/core/template.modal */ "./resources/js/components/dashboard/recipe/core/template.modal.jsx");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /**
@@ -18979,15 +18895,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _components_dashboard_schedule_schedule_gridMenu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/dashboard/schedule/schedule.gridMenu */ "./resources/js/components/dashboard/schedule/schedule.gridMenu.jsx");
 /* harmony import */ var _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../lib/fetchServiceProvider */ "./resources/js/lib/fetchServiceProvider.js");
 /* harmony import */ var _components_dashboard_schedule_schedule_add_entry__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/dashboard/schedule/schedule.add.entry */ "./resources/js/components/dashboard/schedule/schedule.add.entry.jsx");
 /* harmony import */ var _components_dashboard_schedule_schedule_view__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/dashboard/schedule/schedule.view */ "./resources/js/components/dashboard/schedule/schedule.view.jsx");
 /* harmony import */ var _components_dashboard_schedule_schedule_edit__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/dashboard/schedule/schedule.edit */ "./resources/js/components/dashboard/schedule/schedule.edit.jsx");
 /* harmony import */ var _components_dashboard_schedule_schedule_delete__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/dashboard/schedule/schedule.delete */ "./resources/js/components/dashboard/schedule/schedule.delete.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _components_dashboard_schedule_schedule_labour__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/dashboard/schedule/schedule.labour */ "./resources/js/components/dashboard/schedule/schedule.labour.jsx");
+/* harmony import */ var _components_dashboard_schedule_schedule_request__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/dashboard/schedule/schedule.request */ "./resources/js/components/dashboard/schedule/schedule.request.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /*
  *
  *
@@ -19011,17 +18929,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
 var SchedulePage = function SchedulePage(props) {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
     className: "container dashboard-content mx-auto",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("h2", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("h2", {
       className: "ml-4",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("b", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("b", {
         style: {
           fontSize: '1.25em'
         },
         children: "Schedule"
-      }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("span", {
+      }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
         className: "text-center",
         style: {
           fontSize: '0.75em',
@@ -19029,43 +18949,41 @@ var SchedulePage = function SchedulePage(props) {
           marginLeft: '20px'
         },
         children: "View, edit, and drop shifts!"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("p", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("p", {
         style: {
           marginLeft: '18em'
         }
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.BrowserRouter, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Switch, {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.BrowserRouter, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Switch, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
           path: "/dashboard/schedule/add/",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_dashboard_schedule_schedule_add_entry__WEBPACK_IMPORTED_MODULE_4__.AddScheduleEntry, {})
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_dashboard_schedule_schedule_add_entry__WEBPACK_IMPORTED_MODULE_4__.AddScheduleEntry, {})
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
           path: "/dashboard/schedule/view",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_dashboard_schedule_schedule_view__WEBPACK_IMPORTED_MODULE_5__.ViewSchedules, {})
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_dashboard_schedule_schedule_view__WEBPACK_IMPORTED_MODULE_5__.ViewSchedules, {})
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
           path: "/dashboard/schedule/edit/",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_dashboard_schedule_schedule_edit__WEBPACK_IMPORTED_MODULE_6__.EditSchedules, {})
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_dashboard_schedule_schedule_edit__WEBPACK_IMPORTED_MODULE_6__.EditSchedules, {})
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
           path: "/dashboard/schedule/delete",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_dashboard_schedule_schedule_delete__WEBPACK_IMPORTED_MODULE_7__.DeleteSchedules, {})
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
-          path: "/dashboard/schedule/drop/"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
-          path: "/dashboard/schedule/pickup/"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
-          path: "/dashboard/schedule/labour/"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_dashboard_schedule_schedule_delete__WEBPACK_IMPORTED_MODULE_7__.DeleteSchedules, {})
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
+          path: "/dashboard/schedule/labour/",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_dashboard_schedule_schedule_labour__WEBPACK_IMPORTED_MODULE_8__.ScheduleLabour, {})
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
           exact: true,
           path: "/dashboard/schedule/",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_dashboard_schedule_schedule_gridMenu__WEBPACK_IMPORTED_MODULE_2__.ScheduleGridMenu, {})
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.Route, {
-          path: "/dashboard/schedule/request/"
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_dashboard_schedule_schedule_gridMenu__WEBPACK_IMPORTED_MODULE_2__.ScheduleGridMenu, {})
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
+          path: "/dashboard/schedule/request/",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_dashboard_schedule_schedule_request__WEBPACK_IMPORTED_MODULE_9__.ScheduleRequestPage, {})
         })]
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
       id: "notification-container",
       className: "row"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
       id: "modal-container",
       className: "modal-container"
     })]

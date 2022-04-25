@@ -27,6 +27,7 @@
     },
     "dependencies": {
         "brain": "^1.0.0",
+        "chart.js": "^3.7.1",
         "d3": "^7.3.0",
         "d3.js": "^0.0.2-security",
         "laravel-mix-polyfill": "^3.0.1",
@@ -37,6 +38,7 @@
         "openpgp": "^5.2.1",
         "path-browserify": "^0.0.1",
         "qrcode.react": "^1.0.1",
+        "react-chartjs-2": "^4.1.0",
         "react-google-charts": "^4.0.0",
         "react-open-weather": "^1.2.0",
         "react-router": "^5.2.1",

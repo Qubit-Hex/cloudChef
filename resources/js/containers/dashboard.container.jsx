@@ -12,7 +12,6 @@ import React, {Component} from "react";
 import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
 import FetchServiceProvider from "../lib/fetchServiceProvider";
 import {DashboardNav} from "../components/dashboard/dashboardNav";
-import {ContactsPage} from "./dashboard.contacts";
 import {SchedulePage} from "./dashboard.schedule";
 import {DashboardRecipies} from "./dashboard.recipies";
 import {EmployeesPage} from "./dashboard.employees";
@@ -83,8 +82,6 @@ export const DashboardContainer = (props) => { // the state of our component.
                     <Switch>
                         <Route path="/dashboard/recipie/"
                             component={DashboardRecipies}/>
-                        <Route path="/dashboard/contacts/"
-                            component={ContactsPage}/>
                         <Route path="/dashboard/schedule/"
                             component={SchedulePage}/>
                         <Route path="/dashboard/employees/"

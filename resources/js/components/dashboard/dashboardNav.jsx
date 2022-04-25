@@ -29,7 +29,7 @@ export class DashboardNav extends Component {
      *
      *
      * @purpose: this method is used to get the cookie from the browser
-     * 
+     *
      */
 
     getCookie(name) {
@@ -164,7 +164,7 @@ export class DashboardNav extends Component {
                         {/** employees */}
                         <a href="/dashboard/employees/" className="nav-link">
                             {/** employee tie icon */}
-                            <i className="fas fa-users"></i>
+                            <i className='fas fa-user-tie'></i>
                             <span className="nav-link-text">Employees</span>
                         </a>
 
@@ -174,10 +174,6 @@ export class DashboardNav extends Component {
                             <span className="nav-link-text">Recipes</span>
                         </a>
 
-                        <a href="/dashboard/contacts/" className="nav-link">
-                            <i className="fas fa-user-tie"></i>
-                            <span className="nav-link-text">Contacts</span>
-                        </a>
 
                         <a href="/dashboard/settings/" className="nav-link">
                             {/** font awesome gear icon */}

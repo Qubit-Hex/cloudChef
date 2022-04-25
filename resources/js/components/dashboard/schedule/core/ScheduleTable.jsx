@@ -206,13 +206,29 @@ const GenerateTableData = (props) => {
             })
     }, []);
 
+
+    // if there is an error render the error message
+    const RenderTableError = (props) => {
+        return (
+            <div className='text-center'>
+                <div className='text-center m-4'>
+                    {/** add a font awesome icon */}
+                    <h3>
+                        <i className='fa fa-check-circle text-danger'></i>
+                        <span style={{
+                            fontWeight: 600,
+                        }}>No Schedule Found</span>
+                    </h3>
+                </div>
+            </div>
+        )
+    }
+
     //  error boundry
     if (error) {
 
         // this is temporary we will render a better looking errorr message later.
-        return (
-            <div><h1> Error </h1></div>
-        );
+        return (<RenderTableError />);
     }
 
     if (shiftsData.length === 0) {

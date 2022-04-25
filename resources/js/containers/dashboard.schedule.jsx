@@ -21,6 +21,10 @@ import { AddScheduleEntry } from "../components/dashboard/schedule/schedule.add.
 import { ViewSchedules } from "../components/dashboard/schedule/schedule.view";
 import { EditSchedules } from "../components/dashboard/schedule/schedule.edit";
 import { DeleteSchedules } from "../components/dashboard/schedule/schedule.delete";
+import { ScheduleLabour } from "../components/dashboard/schedule/schedule.labour";
+import { ScheduleRequestPage } from "../components/dashboard/schedule/schedule.request";
+
+
 
 export const  SchedulePage = (props) => {
 
@@ -62,17 +66,14 @@ export const  SchedulePage = (props) => {
                         <Route path="/dashboard/schedule/delete">
                             <DeleteSchedules />
                         </Route>
-                        <Route path="/dashboard/schedule/drop/">
-                        </Route>
-                        <Route path='/dashboard/schedule/pickup/'>
-                        </Route>
                         <Route path='/dashboard/schedule/labour/'>
+                            <ScheduleLabour />
                         </Route>
                         <Route exact path="/dashboard/schedule/">
                             <ScheduleGridMenu />
                         </Route>
-
                         <Route path='/dashboard/schedule/request/'>
+                            <ScheduleRequestPage />
                         </Route>
                     </Switch>
                 </Router>

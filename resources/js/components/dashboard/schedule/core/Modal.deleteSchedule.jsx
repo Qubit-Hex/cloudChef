@@ -38,7 +38,7 @@ export const ModalDeleteSchedule = (props) => {
         return await api.delete(route, header);
     }
 
-    const HandleSuccess = () => {
+    const HandleSuccess = (props) => {
         return (
             <Modal title='Success'
                         body={
@@ -50,7 +50,7 @@ export const ModalDeleteSchedule = (props) => {
                                 <div className='text-center'>
                                     {/** add a font awesome icon */}
                                     <i className='fa fa-check-circle fa-4x text-success'></i>
-                                    <h3>Shift Deleted Successfully</h3>
+                                    <h3>Schedule Deleted Successfully</h3>
                                 </div>
                             </div>
                         } />
@@ -65,7 +65,7 @@ export const ModalDeleteSchedule = (props) => {
      *  @purpose: This is responsible for rendering the error modal
      *
      */
-    const HandleError = () => {
+    const HandleError = (props) => {
 
         return (
             <Modal title='Error'
@@ -79,7 +79,8 @@ export const ModalDeleteSchedule = (props) => {
                                 <div className='text-center'>
                                     {/** add a font awesome icon */}
                                     <i className='fa fa-times-circle fa-4x text-danger'></i>
-                                    <h3>Shift Not Delete please check the request and try again. </h3>
+                                    <h3> Schedule Could not be deleted  </h3>
+                                    <b className='text-danger'> { props.message  }</b>
                                 </div>
                             </div>
                         } />
@@ -119,8 +120,15 @@ export const ModalDeleteSchedule = (props) => {
                         <button className='btn btn-message m-2' onClick={
                             (e) => {
                                 // send the request to the server
+                                const container = document.getElementById('modal-container');
+
                                 return request(props.scheduleId, props.employeeID).then((response) => {
-                                    console.log(response);
+
+                                    if (response.status === 'success')  {
+                                        return ReactDOM.render(<HandleSuccess />, container);
+                                    }  else {
+                                        return ReactDOM.render(<HandleError message={response.message}/>, container);
+                                    }
                                 });
                             }
                         }>

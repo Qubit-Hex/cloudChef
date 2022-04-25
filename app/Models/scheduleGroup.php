@@ -99,7 +99,7 @@ class scheduleGroup extends Model
        }
 
        /**
-        *  @METHOD: findSchedule
+        *  @method: findSchedule
         *
         *  @purpose: inorder to find a schedule if it is in the system.
         *
@@ -123,12 +123,20 @@ class scheduleGroup extends Model
          {
              // find the schedule entry and delete all the shifts associated with it
              $schedule = $this->where('id', $id)->where('storeID', $storeID)->delete();
-             $shifts = DB::table('employee_shifts')->where("schedule_id", $id)->delete();
+             $shifts = DB::table('employee_shifts')->where("schedule_id", $id)->get();
 
-             if (!$schedule || !$shifts) {
-                 return false;
+             // is there shift entries associated with the schedule
+             if (count($shifts) > 0) {
+                 // delete all the shifts associated with the schedule
+                 return DB::table('employee_shifts')->where("schedule_id", $id)->delete();
+             } else {
+                 // there are no shifts associated with the schedule
+                 // just delete the schedule entry since there are no shifts
+                 // associated with that id.
+                    return true;
              }
-             return true;
+
+
          }
 
 

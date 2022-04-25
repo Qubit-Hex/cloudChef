@@ -129,6 +129,18 @@
   background-color: transparent;
 }
 
+.chart-container {
+  background-color: #fafafa;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  border-radius: 10px;
+  padding: 50px;
+  margin: 50px;
+}
+
 /* Chrome 10-25, Safari 5.1-6 */
 .remove-spacing {
   max-width: 30%;
@@ -155,6 +167,7 @@
   top: 0;
   left: 0;
   z-index: 2;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
 }
 
 .dashboard-nav-color {
