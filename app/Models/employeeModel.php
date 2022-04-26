@@ -216,6 +216,20 @@ class employeeModel extends Model
 
     /**
      *
+     *  @method: getEmployeesSalaryByStoreID
+     *
+     *  @purpose: inorder to get the employees salary by their storeID
+     *
+     */
+    public function getEmployeesSalaryByStoreID($storeID)
+    {
+        // return the employees salary by their storeID
+        return DB::table('employee')->where('storeID', $storeID)->get();
+    }
+
+
+    /**
+     *
      *  @method: disableEmployee
      *
      *
@@ -234,5 +248,5 @@ class employeeModel extends Model
     }
 
 
-    
+
 }

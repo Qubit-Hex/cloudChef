@@ -15314,8 +15314,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../lib/fetchServiceProvider */ "./resources/js/lib/fetchServiceProvider.js");
-/* harmony import */ var react_google_charts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-google-charts */ "./node_modules/react-google-charts/dist/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_google_charts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-google-charts */ "./node_modules/react-google-charts/dist/index.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -15345,6 +15347,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
  // google charts
+
 
 
 /**
@@ -15400,28 +15403,34 @@ var LabourCostWeekly = function LabourCostWeekly(props) {
     });
   }, []); // pass the data to the google chart for rendering of the information from the database.
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_google_charts__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    chartType: "Bar",
-    data: [['Mon ', 'Labour Cost'], ['Tues', 0], ['Wed', 10], ['Thurs', 200], ['Fri', 300][('Sat', 400)][('Sun', 500)]],
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_google_charts__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    chartType: "BarChart",
+    width: '100%',
+    height: '400px',
+    data: [['Day', 'Labour Cost'], ['Monday', 100], ['Tuesday', 200], ['Wednesday', 300], ['Thursday', 400], ['Friday', 500], ['Saturday', 600], ['Sunday', 700]],
     options: {
       title: 'Labour Cost',
+      chartArea: {
+        width: '50%'
+      },
       hAxis: {
-        title: 'Week',
-        titleTextStyle: {
-          color: '#000'
-        }
+        title: 'Day',
+        minValue: 0
       },
       vAxis: {
+        title: 'Labour Cost',
         minValue: 0
       }
-    },
-    graph_id: "LabourCostWeekly",
-    width: "100%",
-    height: "400px"
+    }
   });
 };
 
 var TodaysLabourCost = function TodaysLabourCost(props) {
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_1__.useState(0),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      cost = _React$useState2[0],
+      setCost = _React$useState2[1];
+
   var request = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
       var api, route, header;
@@ -15430,7 +15439,7 @@ var TodaysLabourCost = function TodaysLabourCost(props) {
           switch (_context2.prev = _context2.next) {
             case 0:
               api = new _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_3__["default"]();
-              route = '/api/store/schedule/labour/today';
+              route = '/api/store/schedule/labour/daily';
               header = {
                 'Content-Type': 'application/json',
                 'accessToken': api.getCookie('accessToken')
@@ -15452,22 +15461,62 @@ var TodaysLabourCost = function TodaysLabourCost(props) {
     return function request() {
       return _ref2.apply(this, arguments);
     };
-  }();
+  }(); // get daily labour cost
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-    children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h1", {
-      className: "header-title",
-      children: " $ 500"
+
+  function getDailyLabourCost(response) {
+    var hours = 0;
+
+    for (var i = 0; i < response.data.length; i++) {
+      var start = response.data[i].start_time;
+      var endTime = response.data[i].end_time; // convert the time to a float
+
+      start = parseFloat(start.replace(':', '.'));
+      endTime = parseFloat(endTime.replace(':', '.'));
+      var total = endTime - start; // use the old school loop since map and filter run way slower...
+
+      for (var j = 0; j < response.employeeSalary.length; j++) {
+        if (response.employeeSalary[j].id === response.data[i].employee_id) {
+          var hourlyRate = Math.round(response.employeeSalary[j].salary / 52 / 40);
+          hours += total * hourlyRate;
+          console.log(hours);
+        }
+      }
+    }
+
+    return hours;
+  } // get the cost of the labour for the store
+
+
+  react__WEBPACK_IMPORTED_MODULE_1__.useEffect(function () {
+    request().then(function (response) {
+      console.log(response);
+
+      if (response.status === 200 || response.status === 'success') {
+        if (response.data.length > 0) {
+          // run the function inorder to get the labour cost
+          setCost(getDailyLabourCost(response));
+        } else {
+          // we go not data back
+          setCost("No Data");
+        }
+      }
+    });
+  }, []);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+    children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("h1", {
+      className: "header-title mt-4",
+      children: [" ", (0,lodash__WEBPACK_IMPORTED_MODULE_4__.isNumber)(cost) === true ? "$".concat(cost) : "No Data", " "]
     })]
   });
 };
 
 var ScheduleLabour = function ScheduleLabour(props) {
   // schedule state
-  var _React$useState = react__WEBPACK_IMPORTED_MODULE_1__.useState([]),
-      _React$useState2 = _slicedToArray(_React$useState, 2),
-      schedule = _React$useState2[0],
-      setSchedule = _React$useState2[1]; // grab the required data from the props
+  var _React$useState3 = react__WEBPACK_IMPORTED_MODULE_1__.useState([]),
+      _React$useState4 = _slicedToArray(_React$useState3, 2),
+      schedule = _React$useState4[0],
+      setSchedule = _React$useState4[1]; // grab the required data from the props
 
 
   var request = /*#__PURE__*/function () {
@@ -15535,54 +15584,72 @@ var ScheduleLabour = function ScheduleLabour(props) {
     return dateRange;
   };
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
     className: "_labour_",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
       className: "row",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h2", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h2", {
         className: "header-subtitle text-center",
         children: "Labour Cost"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("img", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
         src: "/img/SVG/finance_analytics.svg",
         width: 250,
         height: 250
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
         className: "text-center text-muted",
         children: "Current Labour cost of your store"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "col-md-6 d-block mx-auto text-center",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("select", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("select", {
           className: "form-select",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("option", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
             children: " Please Select an week "
           }), schedule.map(function (item, index) {
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("option", {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("option", {
               children: [formatDateRange(item.week, item.year), " "]
             }, index);
           })]
-        })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+          className: "row",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+            className: "col-md-12 mx-auto d-block text-center",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("button", {
+              className: "header-action btn-lg",
+              onClick: function onClick(e) {
+                var container = document.getElementById('labourWeekly');
+              },
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
+                className: "fas fa-chart-bar"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+                children: " Go "
+              })]
+            })
+          })
+        })]
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
       className: "row",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "col-md-3 mx-auto chart-container",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h1", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h1", {
           className: "text-center header-subtitle",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("b", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("b", {
             children: " Today's Labour Cost "
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(TodaysLabourCost, {})
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+          id: "labourDaily",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(TodaysLabourCost, {})
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "col-md-3 chart-container mx-auto",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h1", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h1", {
           className: "text-center header-subtitle",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("b", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("b", {
             children: " Weekly Labour Cost "
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(LabourCostWeekly, {})
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+          id: "labourWeekly",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(LabourCostWeekly, {})
         })]
       })]
     })]

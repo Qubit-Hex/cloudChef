@@ -12,6 +12,7 @@ import ReactDOM from "react-dom";
 import FetchServiceProvider from "../../../lib/fetchServiceProvider";
 // google charts
 import Chart from "react-google-charts";
+import { isNumber } from "lodash";
 
 /**
  *
@@ -48,32 +49,42 @@ const LabourCostWeekly = (props) => {
     }, []);
 
     // pass the data to the google chart for rendering of the information from the database.
-    return <Chart chartType="Bar"
+    return <Chart chartType='BarChart'
+        width={'100%'}
+        height={'400px'}
         data={[
-            ['Mon ', 'Labour Cost'],
-            ['Tues', 0],
-            ['Wed', 10],
-            ['Thurs', 200],
-            ['Fri', 300]
-            ['Sat', 400]
-            ['Sun', 500]
+            ['Day', 'Labour Cost'],
+            ['Monday', 100],
+            ['Tuesday', 200],
+            ['Wednesday', 300],
+            ['Thursday', 400],
+            ['Friday', 500],
+            ['Saturday', 600],
+            ['Sunday', 700]
         ]}
         options={{
             title: 'Labour Cost',
-            hAxis: { title: 'Week', titleTextStyle: { color: '#000' } },
-            vAxis: { minValue: 0 }
-            }}
-            graph_id="LabourCostWeekly"
-            width="100%"
-            height="400px"/>;
+            chartArea: { width: '50%' },
+            hAxis: {
+                title: 'Day',
+                minValue: 0
+            },
+            vAxis: {
+                title: 'Labour Cost',
+                minValue: 0
+            }
+        }} />
 }
 
 
 const TodaysLabourCost = (props) => {
+
+    const [cost, setCost] = React.useState(0);
+
     const request =  async() => {
 
         const api = new FetchServiceProvider();
-        const route = '/api/store/schedule/labour/today';
+        const route = '/api/store/schedule/labour/daily';
 
         const header = {
             'Content-Type': 'application/json',
@@ -84,7 +95,54 @@ const TodaysLabourCost = (props) => {
     }
 
 
-    return <div> <h1 className='header-title'> $ 500</h1></div>
+
+    // get daily labour cost
+
+    function getDailyLabourCost(response)
+    {
+        let hours = 0;
+        for (let i = 0; i < response.data.length; i++) {
+            let start = response.data[i].start_time;
+            let endTime = response.data[i].end_time;
+            // convert the time to a float
+            start = parseFloat(start.replace(':', '.'));
+            endTime = parseFloat(endTime.replace(':', '.'));
+            let total = endTime - start;
+
+            // use the old school loop since map and filter run way slower...
+            for (let j = 0; j < response.employeeSalary.length; j++)
+            {
+                if (response.employeeSalary[j].id === response.data[i].employee_id) {
+                   let hourlyRate = Math.round(response.employeeSalary[j].salary / 52 / 40);
+                   hours += total * hourlyRate;
+                   console.log(hours);
+                }
+            }
+        }
+
+        return hours;
+    }
+
+    // get the cost of the labour for the store
+    React.useEffect(() => {
+        request().then(response => {
+            console.log(response);
+
+            if (response.status === 200 || response.status === 'success') {
+
+                if (response.data.length > 0) {
+                    // run the function inorder to get the labour cost
+                    setCost(getDailyLabourCost(response));
+                } else {
+                    // we go not data back
+                    setCost("No Data");
+                }
+
+            }});
+
+
+    }, []);
+    return <div> <h1 className='header-title mt-4'> { isNumber(cost)  === true ? `\$${cost}` : "No Data" } </h1></div>
 
 }
 
@@ -157,6 +215,20 @@ export const ScheduleLabour = (props) => {
                             })
                         }
                     </select>
+
+
+                    <div className="row">
+                        <div className='col-md-12 mx-auto d-block text-center'>
+                            <button className='header-action btn-lg' onClick={
+                                (e) => {
+                                    const container = document.getElementById('labourWeekly');
+                                }
+                            }>
+                                <i className="fas fa-chart-bar"></i>
+                                <span> Go </span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -168,7 +240,7 @@ export const ScheduleLabour = (props) => {
 
                     </h1>
 
-                    <div>
+                    <div id='labourDaily'>
                         <TodaysLabourCost />
                     </div>
                 </div>
@@ -178,7 +250,7 @@ export const ScheduleLabour = (props) => {
                         <b> Weekly Labour Cost </b>
                     </h1>
 
-                    <div>
+                    <div id='labourWeekly'>
                         <LabourCostWeekly />
                     </div>
                 </div>
