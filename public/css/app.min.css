@@ -7,6 +7,17 @@
  @purpose: inorder to sryle the landing page of our dashboard application
 
 */
+@media only screen and (max-width: 767px) {
+  .header-image {
+    display: inline-flexbox;
+    width: auto;
+    height: 400px;
+  }
+
+  #image-header-hide {
+    display: none;
+  }
+}
 /**
    @file: schedule.scss
 
@@ -137,7 +148,7 @@
   transition: all 0.3s ease;
   text-align: center;
   border-radius: 10px;
-  padding: 50px;
+  padding: 25px;
   margin: 50px;
 }
 
@@ -1245,15 +1256,16 @@ nav {
   }
 }
 .intro-image-grid {
-  background-color: #2167d854;
+  background: #6190e8bc;
+  /* fallback for old browsers */
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #A7BFE8, #6190e8ac);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   border-radius: 50%;
-  box-shadow: 0px 0px 10px 19px rgba(0, 0, 0, 0.459);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
-
-.intro-text-grid {
-  background-color: #ff525254;
-  border-radius: 50%;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.459);
+.intro-image-grid img {
+  box-shadow: #26394d 0px 20px 30px -10px;
 }
 
 /*  MEDIA QUERYS   */

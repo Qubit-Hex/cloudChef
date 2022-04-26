@@ -13,7 +13,6 @@ import react from "react";
 import reactDOM from "react-dom";
 
 import { ContactNavbar} from "../components/dashboard/contactsNavbar";
-import { ContactsTable } from "../components/dashboard/contacts/contact.table";
 import { TemplateModal } from "../components/dashboard/recipe/core/template.modal";
 
 /**
@@ -35,23 +34,65 @@ export const DashboardHome = (props) => {
 
                 <div className='table-contacts-container'>
 
-                    <div className='row'>
-                        <div className='col-md-6 mx-auto'>
-                        </div>
-                    </div>
-
-
                     <div classNAme='row'>
                         <div className="card">
                             <div className="card-body">
-                                <h5 className="card-title">Current Schedule</h5>
+                                <h5 className="card-title">This Weeks schedule</h5>
                                 <p className="card-text">
                                     {/* current employees goes here */}
                                 </p>
                             </div>
                         </div>
                     </div>
+
+
+
+                    <div className='row'>
+                        <div className="card">
+                            <div className="card-body">
+                                <h5 className="card-title">Current Employees</h5>
+                                <p className="card-text">
+                                    {/* current employees goes here */}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                <div className='row'>
+                    <div className="card">
+                        <div className="card-body">
+                            <h5 className="card-title">Drop shifts </h5>
+                            <p className="card-text">
+                                {/* drop shifts goes here */}
+                            </p>
+                            </div>
+                        </div>
                 </div>
+
+
+                <div className='row'>
+                    <div className="card">
+                        <div className="card-body">
+                            <h5 className="card-title">Pick up shift store</h5>
+                            <p className="card-text">
+                                {/* pick up shifts goes here */}
+                            </p>
+                            </div>
+                        </div>
+                </div>
+
+                <div className='row'>
+                    <div className="card">
+                        <div className="card-body">
+                            <h5 className="card-title">Notification center</h5>
+                            <p className="card-text">
+                                {/* notification center goes here */}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+             </div>
         </div>
     </div>
 </div>

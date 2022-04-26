@@ -196,6 +196,35 @@ const GenerateTableData = (props) => {
                     if (response.shifts === true) {
                         // we got shifts from the server
                         setShiftsData(response.data);
+                        // preform long polling requests to update the table
+                        // when the user is editing their schedule.
+
+                        // if the load increases for the site use a socket server instead.
+                        // this will allow the user to edit their schedule without
+                        // having to refresh the page.
+                        //
+                        if (props.viewOnly === false || props.viewOnly === undefined) {
+                            const longPolling = setInterval(() => {
+                                request().then((response) => {
+                                    if (response.status === 'success') {
+                                        // render the table with a base of two
+                                        // option if we got shifts or if we didnt get any shifts
+                                        if (response.shifts === true) {
+                                            // we got shifts from the server
+                                            setShiftsData(response.data);
+                                        } else {
+                                            // we didnt get any shifts from the server
+                                            // clear the interval
+                                            clearInterval(longPolling);
+                                        }
+                                    } else {
+                                        // we got an error from the server
+                                        // clear the interval
+                                        clearInterval(longPolling);
+                                    }
+                                });
+                            }, 10000);
+                        }
                     }
                         // we didnt get any shifts from the server
                         // just render o

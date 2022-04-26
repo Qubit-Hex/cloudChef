@@ -314,15 +314,18 @@ export const DashboardSettings = (props) => {
     return (
     <div className='container-fluid rm-pm dashboard-content'>
         <div id='modal-container'></div>
-        <div className='row'>
-            <h1 className='header-subtitle' style={{
-                fontWeight:  'bold',
+        <div className='row mt-4'>
+            <h1 className='header-subtitle text-center' style={{
+                fontSize: '2.5rem'
             }}> Settings</h1>
-            <small className='text-muted'>
-                Change your account settings.
-            </small>
-            <img src='/img/SVG/data_settings.svg' width={300} height={300} className='center-block'/>
 
+            <small className='text-center text-muted'>
+                Change your settings
+            </small>
+
+            <div className='text-center d-block mx-auto mt-lg-4 mb-4'>
+                <img src='/img/SVG/settings_page.svg' width={250} height={250} className='center-block'/>
+            </div>
         </div>
 
         <div className='row'>

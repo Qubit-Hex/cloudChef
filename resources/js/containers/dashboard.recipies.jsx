@@ -7,9 +7,8 @@
  *  @purpose: to render the dashboard recipes page
  */
 
-
-import React from "react"
-import ReactDOM from "react-dom"
+import React from "react";
+import ReactDOM from "react-dom";
 import { RecipeModal } from "../components/dashboard/recipe/recipeModal";
 import FetchServiceProvider from "../lib/fetchServiceProvider";
 import { CreateRecipeModal } from "../components/dashboard/recipe/CreateRecipeModal";
@@ -17,43 +16,36 @@ import { RecipeModifyModal } from "../components/dashboard/recipe/recipeModifyMo
 import { DeleteRecipe } from "../components/dashboard/recipe/core/delete.recipe";
 
 export const DashboardRecipies = (props) => {
-
-
     const [recipes, setRecipes] = React.useState({});
-
 
     // get the recipe information from tAdd he database
     // and enumerate the table row inorder to get the recipes information
     const getRecipes = () => {
         const api = new FetchServiceProvider();
 
-        const route = '/api/store/recipes/get';
+        const route = "/api/store/recipes/get";
 
         const headers = {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'accessToken': api.getCookie('accessToken')
-        }
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            accessToken: api.getCookie("accessToken"),
+        };
 
         return api.get(route, headers);
-    }
+    };
 
     const dataTunnel = getRecipes();
 
-    React.useEffect( () => {
-
-    // get the data from our promise that holds our data
-        dataTunnel.then(response => {
+    React.useEffect(() => {
+        // get the data from our promise that holds our data
+        dataTunnel.then((response) => {
             setRecipes(response.data);
         });
     }, []);
 
-
-
     // generator function to create the table rows
 
     const generateTablesRows = () => {
-
         // add an error boundry to check if the tables rows are empty
 
         if (recipes.length === 0) {
@@ -62,157 +54,224 @@ export const DashboardRecipies = (props) => {
                     {/** error icon  */}
                     <td colSpan="5" className="text-center">
                         {/** no  recipes found icon */}
-                        <img src='/img/SVG/empty_inbox.svg' alt="no recipes found" width='200px' height='200px'/>
-                        <h3 className="text-danger" style={{
-                            fontWeight: 'bold'
-                        }}>No Recipes found</h3>
+                        <img
+                            src="/img/SVG/empty_inbox.svg"
+                            alt="no recipes found"
+                            width="200px"
+                            height="200px"
+                        />
+                        <h3
+                            className="text-danger"
+                            style={{
+                                fontWeight: "bold",
+                            }}
+                        >
+                            No Recipes found
+                        </h3>
                     </td>
                 </tr>
-            )
+            );
         }
 
-        return Object.keys(recipes).map((item, index ) => {
+        return Object.keys(recipes).map((item, index) => {
             // auto generate the tables rows for each of the recipes in the database
 
             console.log(recipes[item]);
             return (
-                    <tr key={index}>
-                    <td> { recipes[item].recipe_name }</td>
-                    <td> { recipes[item].catagory } </td>
-                    <td>  { recipes[item].created_at }</td>
-                    <td> { recipes[item].updated_at }</td>
-                    <td className='d-flex'>
-                        <button className='btn btn-message m-2' data-toggle="modal" data-target="#viewRecipeModal"  onClick={
-                            (e) => {
-                                const modalContainer = document.getElementById('modal-container');
+                <tr key={index}>
+                    <td> {recipes[item].recipe_name}</td>
+                    <td> {recipes[item].catagory} </td>
+                    <td> {recipes[item].created_at}</td>
+                    <td> {recipes[item].updated_at}</td>
+                    <td className="d-flex">
+                        <button
+                            className="btn btn-message m-2"
+                            data-toggle="modal"
+                            data-target="#viewRecipeModal"
+                            onClick={(e) => {
+                                const modalContainer =
+                                    document.getElementById("modal-container");
                                 // we will create a rough draft of what the card will look like,
                                 // and then we will pass it to the modal container
                                 // later we will use components inorder to achieve the same result
 
                                 // for the code to be reusable though out our application
                                 // we will use the modal container to render the modal component
-                                return ReactDOM.render(<RecipeModal id={ recipes[item].recipe_id  }/>, modalContainer);
-
-                            }
-                        }>
+                                return ReactDOM.render(
+                                    <RecipeModal
+                                        id={recipes[item].recipe_id}
+                                    />,
+                                    modalContainer
+                                );
+                            }}
+                        >
                             View<i className="fas fa-eye m-2"></i>
                         </button>
 
                         {/** add a modifiy button to the table inorder to edit the recipes at will  */}
-                        <button className='btn btn-warning m-2 ' data-toggle="modal" data-target="#editRecipeModal"  onClick={
-                            (e) => {
-                                const modalContainer = document.getElementById('modal-container');
+                        <button
+                            className="btn btn-warning m-2 "
+                            data-toggle="modal"
+                            data-target="#editRecipeModal"
+                            onClick={(e) => {
+                                const modalContainer =
+                                    document.getElementById("modal-container");
                                 // we will create a rough draft of what the card will look like,
                                 // and then we will pass it to the modal container
                                 // later we will use components inorder to achieve the same result
 
                                 // for the code to be reusable though out our application
                                 // we will use the modal container to render the modal component
-                                return ReactDOM.render(<RecipeModifyModal id={ recipes[item].recipe_id  }/>, modalContainer);
-                            }}>
+                                return ReactDOM.render(
+                                    <RecipeModifyModal
+                                        id={recipes[item].recipe_id}
+                                    />,
+                                    modalContainer
+                                );
+                            }}
+                        >
                             Edit<i className="fas fa-edit m-2"></i>
                         </button>
 
-
                         {/** addd a delete button to the table inorder to delete the recipes at will  */}
-                        <button className='btn btn-danger m-2' data-toggle="modal" data-target="#deleteRecipeModal"  onClick={
-                            (e) => {
-                                const modalContainer = document.getElementById('modal-container');
+                        <button
+                            className="btn btn-danger m-2"
+                            data-toggle="modal"
+                            data-target="#deleteRecipeModal"
+                            onClick={(e) => {
+                                const modalContainer =
+                                    document.getElementById("modal-container");
                                 // this will contain the delete modal for delete a recipe from the database
-                                return ReactDOM.render(<DeleteRecipe id={ recipes[item].recipe_id  }/>, modalContainer);
-                            }}>
+                                return ReactDOM.render(
+                                    <DeleteRecipe
+                                        id={recipes[item].recipe_id}
+                                    />,
+                                    modalContainer
+                                );
+                            }}
+                        >
                             Delete<i className="fas fa-trash-alt m-2"></i>
                         </button>
-
                     </td>
                 </tr>
-            )
+            );
         });
-    }
-
+    };
 
     return (
         <div className="container-fluid profile_card dashboard-content">
-            <div className="row">
+            <div id="modal-container"></div>
+            <div className="row mt-4 mb-4">
+                {/** display the title for the page.  */}
+                <h1
+                    className="header-subtitle text-center"
+                    style={{
+                        fontSize: "2em",
+                    }}
+                >
+                    Recipes
+                </h1>
 
-            <h2 className='ml-4'> <b>Recipes</b> <small className='sub-caption ' >
-              <br /><span className='text-center'>View recipes, edit, and share</span> </small></h2><br/>
-                    <small className="'text-center text-muted"> <i className="fas fa-info-circle"></i>Have your whole team on the same page! </small>
+                <small className="text-center text-muted mt-4 mb-4">
+                    Manage your recipes here. You can add, edit and delete
+                    recipes.
+                </small>
+
+                <img
+                    src="/img/SVG/cloud_recipe.svg"
+                    width={200}
+                    height={200}
+                    className="mx-auto"
+                />
             </div>
 
-
-            <div className='row'>
-
+            <div className="row">
                 {/** here we are going to add a component inorder to create a section to add recipes to the database  */}
 
-                <div className='col-md-12 mx-auto d-block'>
-                    <div className='card'>
+                <div className="col-md-6 mx-auto d-block">
+                    <div className="card">
                         {/** font awesome add button */}
 
-                        <div className='card-header bg-transparent'>
-                            <h5 className='card-title header-subtitle'>Add Recipe</h5>
-                            <small className='text-muted'> Make your team stronger by connecting all your information in one place. </small>
+                        <div className="card-header bg-transparent">
+                            <h5 className="card-title header-subtitle">
+                                Add Recipe
+                            </h5>
+                            <small className="text-muted">
+                                {" "}
+                                Make your team stronger by connecting all your
+                                information in one place.{" "}
+                            </small>
                         </div>
 
-                        <div className='card-body p-lg-5'>
-                            <img src='/img/SVG/toast_out.svg' width={300} height={300} className='img-fluid mx-auto d-block' alt='chef-platter' />
-                            <p className='card-text text-center'>
+                        <div className="card-body p-lg-5">
+                            <img
+                                src="/img/SVG/toast_out.svg"
+                                width={300}
+                                height={300}
+                                className="img-fluid mx-auto d-block"
+                                alt="chef-platter"
+                            />
+                            <p className="card-text text-center">
                                 Add a new recipe to your database
                             </p>
 
-                            <button className='btn btn-message w-25 mx-auto d-block' data-toggle="modal" data-target="#addRecipeModal"  onClick={
-                                (e) => {
-                                    const modalContainer = document.getElementById('modal-container');
+                            <button
+                                className="btn btn-message w-25 mx-auto d-block"
+                                data-toggle="modal"
+                                data-target="#addRecipeModal"
+                                onClick={(e) => {
+                                    const modalContainer =
+                                        document.getElementById(
+                                            "modal-container"
+                                        );
                                     // we will create a rough draft of what the card will look like,
                                     // and then we will pass it to the modal container
                                     // later we will use components inorder to achieve the same result
 
                                     // for the code to be reusable though out our application
                                     // we will use the modal container to render the modal component
-                                    return ReactDOM.render(<CreateRecipeModal id={ null  }/>, modalContainer);
-                                }
-                            }>
+                                    return ReactDOM.render(
+                                        <CreateRecipeModal id={null} />,
+                                        modalContainer
+                                    );
+                                }}
+                            >
                                 Add<i className="fas fa-plus-circle m-2"></i>
                             </button>
-
-                            </div>
+                        </div>
                     </div>
                 </div>
-        </div>
+            </div>
 
-
-            {/** add a component inorder to dynamically search the recipes  in the database */}
             <div className="row">
-                <div id='modal-container' className="modal-container"></div>
-                <div id="modal-alert-container"></div>
-                        <div className="col card fit-table">
+                <div className="col">
+                    <div id="modal-container" className="modal-container"></div>
+                    <div id="modal-alert-container"></div>
+                    <div className="card">
+                        <div className="card-header bg-transparent">
                             <h2 className="header-subtitle text-center mt-4 ">
-                            {"Current store recipes"}
+                                Current store recipes
                             </h2>
+                            <div className="_img_ d-block mx-auto text-center">
+                                <img
+                                    src="/img/SVG/recipie_header.svg"
+                                    alt="schedule icon"
+                                    width="300px"
+                                    height="300px"
+                                    className="mx-auto img-fluid"
+                                />
+                            </div>
 
-                            <img
-                                src="/img/SVG/recipie_header.svg"
-                                alt="schedule icon"
-                                width="300px"
-                                height="300px"
-                                className="mx-auto img-fluid" />
+                            <small className="text-center">
+                                {" "}
+                                All your recipes in one place, to make your life
+                                easier.{" "}
+                            </small>
+                        </div>
 
-                                <small className='text-center' style={{
-                                    fontWeight: '600'
-                                }}> All your recipes in one place,
-                                to make your life easier. </small>
-
-                                {/**
-                                 *
-                                 * add a component inorder to add recipes to the page current store
-                                 *
-                                 *  @blueprint: add a component inorder to add recipes to the page current store
-                                 *              and then update the view to reflect the changes on that datbase
-                                 *
-                                 *
-                                 *
-                                 */}
-                                <table className='table mt-2 mb-2'>
+                        <div className="card-body">
+                            <div className="table-responsive">
+                                <table className="table">
                                     <thead>
                                         <tr>
                                             <th> Recipe </th>
@@ -223,16 +282,13 @@ export const DashboardRecipies = (props) => {
                                         </tr>
                                     </thead>
 
-                                    <tbody>
-                                        {/** trigger the generator inorder to display our recipe data form the data
-                                         *  fetched from the database.
-                                         */}
-                                        {  generateTablesRows() }
-                                    </tbody>
+                                    <tbody>{generateTablesRows()}</tbody>
                                 </table>
-                            {/** modern recipe table for viewing recipes in a  */}
-                   </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-    )
-}
+        </div>
+    );
+};

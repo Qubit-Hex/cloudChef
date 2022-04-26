@@ -5,10 +5,17 @@
 <name>
 <val>scheduleInteraction</val>
 </name>
+<nestedPackage>
+<reflist>
+<ref refid="c3b9a3b4-c413-11ec-bc4e-0b157088c473"/>
+<ref refid="c7a3a96b-c413-11ec-b949-0b157088c473"/>
+</reflist>
+</nestedPackage>
 <ownedDiagram>
 <reflist>
 <ref refid="58d6c536-66f8-11ec-b4c8-0456e5e540ed"/>
 <ref refid="77ba4243-c1fb-11ec-b949-7bd69e59965a"/>
+<ref refid="cb51f432-c413-11ec-b69b-0b157088c473"/>
 </reflist>
 </ownedDiagram>
 <ownedType>
@@ -18,6 +25,8 @@
 <ref refid="7560cd28-c1fd-11ec-bd7a-7bd69e59965a"/>
 <ref refid="5fd205cd-c1fe-11ec-8a00-7bd69e59965a"/>
 <ref refid="10674a94-c1ff-11ec-9378-7bd69e59965a"/>
+<ref refid="dcddf92b-c413-11ec-902f-0b157088c473"/>
+<ref refid="0606557d-c414-11ec-aba7-0b157088c473"/>
 </reflist>
 </ownedType>
 </Package>
@@ -338,7 +347,7 @@ to make schedules,  for employees of the said store and for employees to drop sh
 <val>(1.0, 0.0, 0.0, 1.0, 462.3743125583849, 607.1745323808807)</val>
 </matrix>
 <points>
-<val>[(0.0, 4.97577309894848), (0.0, 72.82791446923397)]</val>
+<val>[(0.0, 0.18162722458635017), (0.0, 72.82791446923397)]</val>
 </points>
 <head-connection>
 <ref refid="b88443f1-c1fd-11ec-bc11-7bd69e59965a"/>
@@ -664,7 +673,7 @@ to make schedules,  for employees of the said store and for employees to drop sh
 <val>(1.0, 0.0, 0.0, 1.0, 1141.8654158384363, 825.9005256407992)</val>
 </matrix>
 <points>
-<val>[(-448.8612235824087, 70.37906865995342), (-28.939861395581147, -128.97474310666166)]</val>
+<val>[(-379.8890881290558, 70.37906865995342), (-11.390424292217176, -128.97474310666166)]</val>
 </points>
 <head-connection>
 <ref refid="7560e4c3-c1fd-11ec-b995-7bd69e59965a"/>
@@ -689,4 +698,159 @@ to make schedules,  for employees of the said store and for employees to drop sh
 <ref refid="7560cd28-c1fd-11ec-bd7a-7bd69e59965a"/>
 </supplier>
 </Dependency>
+<Package id="c3b9a3b4-c413-11ec-bc4e-0b157088c473">
+<name>
+<val>scheduleInteraction package</val>
+</name>
+<package>
+<ref refid="58d6c2e8-66f8-11ec-b4c8-0456e5e540ed"/>
+</package>
+</Package>
+<Package id="c7a3a96b-c413-11ec-b949-0b157088c473">
+<name>
+<val>scheduleInteraction package</val>
+</name>
+<package>
+<ref refid="58d6c2e8-66f8-11ec-b4c8-0456e5e540ed"/>
+</package>
+</Package>
+<Diagram id="cb51f432-c413-11ec-b69b-0b157088c473">
+<diagramType>
+<val></val>
+</diagramType>
+<element>
+<ref refid="58d6c2e8-66f8-11ec-b4c8-0456e5e540ed"/>
+</element>
+<name>
+<val>control service interface</val>
+</name>
+<ownedPresentation>
+<reflist>
+<ref refid="dcde1c37-c413-11ec-bbc1-0b157088c473"/>
+<ref refid="06067c60-c414-11ec-a270-0b157088c473"/>
+<ref refid="20b47efd-c414-11ec-b932-0b157088c473"/>
+</reflist>
+</ownedPresentation>
+</Diagram>
+<Class id="dcddf92b-c413-11ec-902f-0b157088c473">
+<name>
+<val>controller</val>
+</name>
+<ownedAttribute>
+<reflist>
+<ref refid="e33e3f5e-c413-11ec-b17c-0b157088c473"/>
+<ref refid="e66531bc-c413-11ec-ba8b-0b157088c473"/>
+</reflist>
+</ownedAttribute>
+<package>
+<ref refid="58d6c2e8-66f8-11ec-b4c8-0456e5e540ed"/>
+</package>
+<presentation>
+<reflist>
+<ref refid="dcde1c37-c413-11ec-bbc1-0b157088c473"/>
+</reflist>
+</presentation>
+</Class>
+<ClassItem id="dcde1c37-c413-11ec-bbc1-0b157088c473">
+<matrix>
+<val>(1.0, 0.0, 0.0, 1.0, 374.0, 76.0)</val>
+</matrix>
+<width>
+<val>262.5</val>
+</width>
+<height>
+<val>101.0</val>
+</height>
+<diagram>
+<ref refid="cb51f432-c413-11ec-b69b-0b157088c473"/>
+</diagram>
+<subject>
+<ref refid="dcddf92b-c413-11ec-902f-0b157088c473"/>
+</subject>
+</ClassItem>
+<Property id="e33e3f5e-c413-11ec-b17c-0b157088c473">
+<class_>
+<ref refid="dcddf92b-c413-11ec-902f-0b157088c473"/>
+</class_>
+<name>
+<val>method a</val>
+</name>
+</Property>
+<Property id="e66531bc-c413-11ec-ba8b-0b157088c473">
+<class_>
+<ref refid="dcddf92b-c413-11ec-902f-0b157088c473"/>
+</class_>
+<name>
+<val>method b</val>
+</name>
+</Property>
+<Class id="0606557d-c414-11ec-aba7-0b157088c473">
+<name>
+<val>Policy</val>
+</name>
+<ownedOperation>
+<reflist>
+<ref refid="10e0a08c-c414-11ec-a804-0b157088c473"/>
+<ref refid="13a23b5d-c414-11ec-909e-0b157088c473"/>
+</reflist>
+</ownedOperation>
+<package>
+<ref refid="58d6c2e8-66f8-11ec-b4c8-0456e5e540ed"/>
+</package>
+<presentation>
+<reflist>
+<ref refid="06067c60-c414-11ec-a270-0b157088c473"/>
+</reflist>
+</presentation>
+</Class>
+<ClassItem id="06067c60-c414-11ec-a270-0b157088c473">
+<matrix>
+<val>(1.0, 0.0, 0.0, 1.0, 491.75, 289.0)</val>
+</matrix>
+<width>
+<val>213.0</val>
+</width>
+<height>
+<val>98.0</val>
+</height>
+<diagram>
+<ref refid="cb51f432-c413-11ec-b69b-0b157088c473"/>
+</diagram>
+<subject>
+<ref refid="0606557d-c414-11ec-aba7-0b157088c473"/>
+</subject>
+</ClassItem>
+<Operation id="10e0a08c-c414-11ec-a804-0b157088c473">
+<class_>
+<ref refid="0606557d-c414-11ec-aba7-0b157088c473"/>
+</class_>
+<name>
+<val>validate</val>
+</name>
+</Operation>
+<Operation id="13a23b5d-c414-11ec-909e-0b157088c473">
+<class_>
+<ref refid="0606557d-c414-11ec-aba7-0b157088c473"/>
+</class_>
+<name>
+<val>verify</val>
+</name>
+</Operation>
+<InterfaceRealizationItem id="20b47efd-c414-11ec-b932-0b157088c473">
+<diagram>
+<ref refid="cb51f432-c413-11ec-b69b-0b157088c473"/>
+</diagram>
+<horizontal>
+<val>0</val>
+</horizontal>
+<matrix>
+<val>(1.0, 0.0, 0.0, 1.0, 485.25, 347.0)</val>
+</matrix>
+<points>
+<val>[(0.0, -170.0), (0.0, -58.0)]</val>
+</points>
+<tail-connection>
+<ref refid="06067c60-c414-11ec-a270-0b157088c473"/>
+</tail-connection>
+</InterfaceRealizationItem>
 </gaphor>

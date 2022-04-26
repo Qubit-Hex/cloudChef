@@ -1,0 +1,17 @@
+//  media query to remove the header-images on mobile
+
+
+
+@media only screen and (max-width: 767px) {
+  .header-image {
+    display: inline-flexbox;
+    width: auto;
+    height: 400px;
+  }
+
+  #image-header-hide {
+    display: none;
+  }
+}
+
+

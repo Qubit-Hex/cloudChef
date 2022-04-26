@@ -19,6 +19,20 @@ import ReactDOM from 'react-dom';
 export const ScheduleGridMenu = (props) => {
     return (
         <div className='row  mx-auto'>
+
+            <div className="row mb-4 mt-4">
+                    <h1 className="ml-4 header-subtitle text-center" style={{
+                        fontSize: "2em",
+                    }}>Schedule</h1>
+                    <small className='text-muted text-center'>
+                        Schedule your work, bring success to your team.
+                    </small>
+
+                    <div className='mx-auto d-block text-center'>
+                        <img src='/img/SVG/time_line.svg' width={300} height={300}/>
+                    </div>
+                </div>
+
         {/** add three buttons one for adding a schedule, editing a current schedule and  on for viewing current schedule */}
         <div className='col-md-4'>
             {/** add schedule tile */}

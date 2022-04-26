@@ -14254,7 +14254,35 @@ var GenerateTableData = function GenerateTableData(props) {
         // option if we got shifts or if we didnt get any shifts
         if (response.shifts === true) {
           // we got shifts from the server
-          setShiftsData(response.data);
+          setShiftsData(response.data); // preform long polling requests to update the table
+          // when the user is editing their schedule.
+          // if the load increases for the site use a socket server instead.
+          // this will allow the user to edit their schedule without
+          // having to refresh the page.
+          //
+
+          if (props.viewOnly === false || props.viewOnly === undefined) {
+            var longPolling = setInterval(function () {
+              request().then(function (response) {
+                if (response.status === 'success') {
+                  // render the table with a base of two
+                  // option if we got shifts or if we didnt get any shifts
+                  if (response.shifts === true) {
+                    // we got shifts from the server
+                    setShiftsData(response.data);
+                  } else {
+                    // we didnt get any shifts from the server
+                    // clear the interval
+                    clearInterval(longPolling);
+                  }
+                } else {
+                  // we got an error from the server
+                  // clear the interval
+                  clearInterval(longPolling);
+                }
+              });
+            }, 10000);
+          }
         } // we didnt get any shifts from the server
         // just render o
 
@@ -15029,7 +15057,26 @@ __webpack_require__.r(__webpack_exports__);
 var ScheduleGridMenu = function ScheduleGridMenu(props) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
     className: "row  mx-auto",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      className: "row mb-4 mt-4",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
+        className: "ml-4 header-subtitle text-center",
+        style: {
+          fontSize: "2em"
+        },
+        children: "Schedule"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("small", {
+        className: "text-muted text-center",
+        children: "Schedule your work, bring success to your team."
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        className: "mx-auto d-block text-center",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
+          src: "/img/SVG/time_line.svg",
+          width: 300,
+          height: 300
+        })
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
       className: "col-md-4",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
         className: "tile",
@@ -15267,13 +15314,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../lib/fetchServiceProvider */ "./resources/js/lib/fetchServiceProvider.js");
+/* harmony import */ var react_google_charts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-google-charts */ "./node_modules/react-google-charts/dist/index.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -15285,6 +15327,12 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 /**
  *
@@ -15314,50 +15362,21 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var LabourCostWeekly = function LabourCostWeekly(props) {
   // get the week cost of the labour for the store
-  var request = function request() {// preform the request to the database
-  }; // pass the data to the google chart for rendering of the information from the database.
-
-
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {});
-};
-
-var LabourCostMonthly = function LabourCostMonthly(props) {
-  var request = function request() {};
-
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {});
-};
-
-var TodaysLabourCost = function TodaysLabourCost(props) {
-  var request = function request() {};
-
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {});
-};
-
-var ScheduleLabour = function ScheduleLabour(props) {
-  // schedule state
-  var _React$useState = react__WEBPACK_IMPORTED_MODULE_1__.useState([]),
-      _React$useState2 = _slicedToArray(_React$useState, 2),
-      schedule = _React$useState2[0],
-      setSchedule = _React$useState2[1]; // grab the required data from the props
-
-
   var request = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-      var api, route, headers;
+      var api, route, header;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              // some request
               api = new _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_3__["default"]();
-              route = "/api/store/schedule/get";
-              headers = {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-                accessToken: api.getCookie("accessToken")
+              route = '/api/store/schedule/labour/weekly';
+              header = {
+                'Content-Type': 'application/json',
+                'accessToken': api.getCookie('accessToken')
               };
               _context.next = 5;
-              return api.get(route, headers);
+              return api.get(route, header);
 
             case 5:
               return _context.abrupt("return", _context.sent);
@@ -15373,6 +15392,116 @@ var ScheduleLabour = function ScheduleLabour(props) {
     return function request() {
       return _ref.apply(this, arguments);
     };
+  }();
+
+  react__WEBPACK_IMPORTED_MODULE_1__.useEffect(function () {
+    request().then(function (response) {
+      console.log(response);
+    });
+  }, []); // pass the data to the google chart for rendering of the information from the database.
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_google_charts__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    chartType: "Bar",
+    data: [['Mon ', 'Labour Cost'], ['Tues', 0], ['Wed', 10], ['Thurs', 200], ['Fri', 300][('Sat', 400)][('Sun', 500)]],
+    options: {
+      title: 'Labour Cost',
+      hAxis: {
+        title: 'Week',
+        titleTextStyle: {
+          color: '#000'
+        }
+      },
+      vAxis: {
+        minValue: 0
+      }
+    },
+    graph_id: "LabourCostWeekly",
+    width: "100%",
+    height: "400px"
+  });
+};
+
+var TodaysLabourCost = function TodaysLabourCost(props) {
+  var request = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+      var api, route, header;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              api = new _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_3__["default"]();
+              route = '/api/store/schedule/labour/today';
+              header = {
+                'Content-Type': 'application/json',
+                'accessToken': api.getCookie('accessToken')
+              };
+              _context2.next = 5;
+              return api.get(route, header);
+
+            case 5:
+              return _context2.abrupt("return", _context2.sent);
+
+            case 6:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+
+    return function request() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+    children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h1", {
+      className: "header-title",
+      children: " $ 500"
+    })]
+  });
+};
+
+var ScheduleLabour = function ScheduleLabour(props) {
+  // schedule state
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_1__.useState([]),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      schedule = _React$useState2[0],
+      setSchedule = _React$useState2[1]; // grab the required data from the props
+
+
+  var request = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+      var api, route, headers;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              // some request
+              api = new _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_3__["default"]();
+              route = "/api/store/schedule/get";
+              headers = {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                accessToken: api.getCookie("accessToken")
+              };
+              _context3.next = 5;
+              return api.get(route, headers);
+
+            case 5:
+              return _context3.abrupt("return", _context3.sent);
+
+            case 6:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3);
+    }));
+
+    return function request() {
+      return _ref3.apply(this, arguments);
+    };
   }(); // set the data from the schedules.
 
 
@@ -15384,7 +15513,28 @@ var ScheduleLabour = function ScheduleLabour(props) {
         setSchedule(response.data);
       }
     });
-  }, []);
+  }, []); // format a date range by providing a week number and year
+  // this is a rudimentary function to format the date range
+
+  var formatDateRange = function formatDateRange(week, year) {
+    var date = new Date(year, 0, 1 + (week - 1) * 7);
+    var date2 = new Date(year, 0, 1 + week * 7);
+    var month = date.toLocaleString('default', {
+      month: 'long'
+    });
+    var month2 = date2.toLocaleString('default', {
+      month: 'long'
+    });
+    var day = date.toLocaleString('default', {
+      day: 'numeric'
+    });
+    var day2 = date2.toLocaleString('default', {
+      day: 'numeric'
+    });
+    var dateRange = "".concat(month, " ").concat(day, " - ").concat(month2, " ").concat(day2);
+    return dateRange;
+  };
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
     className: "_labour_",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
@@ -15399,6 +15549,18 @@ var ScheduleLabour = function ScheduleLabour(props) {
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
         className: "text-center text-muted",
         children: "Current Labour cost of your store"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        className: "col-md-6 d-block mx-auto text-center",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("select", {
+          className: "form-select",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("option", {
+            children: " Please Select an week "
+          }), schedule.map(function (item, index) {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("option", {
+              children: [formatDateRange(item.week, item.year), " "]
+            }, index);
+          })]
+        })
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
       className: "row",
@@ -15421,16 +15583,6 @@ var ScheduleLabour = function ScheduleLabour(props) {
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(LabourCostWeekly, {})
-        })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-        className: "col-md-3 mx-auto chart-container",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h1", {
-          className: "text-center header-subtitle",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("b", {
-            children: " Monthly Labour Cost "
-          })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(LabourCostMonthly, {})
         })]
       })]
     })]
@@ -15474,6 +15626,12 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 
+{
+  /** function for accepting requests */
+}
+{
+  /** function for denying requests */
+}
 var ScheduleRequestPage = function ScheduleRequestPage(props) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {});
 };
@@ -16848,21 +17006,24 @@ var DashboardSettings = function DashboardSettings(props) {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
       id: "modal-container"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-      className: "row",
+      className: "row mt-4",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h1", {
-        className: "header-subtitle",
+        className: "header-subtitle text-center",
         style: {
-          fontWeight: 'bold'
+          fontSize: '2.5rem'
         },
         children: " Settings"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("small", {
-        className: "text-muted",
-        children: "Change your account settings."
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("img", {
-        src: "/img/SVG/data_settings.svg",
-        width: 300,
-        height: 300,
-        className: "center-block"
+        className: "text-center text-muted",
+        children: "Change your settings"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+        className: "text-center d-block mx-auto mt-lg-4 mb-4",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("img", {
+          src: "/img/SVG/settings_page.svg",
+          width: 250,
+          height: 250,
+          className: "center-block"
+        })
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
       className: "row",
@@ -17007,54 +17168,43 @@ var Body = /*#__PURE__*/function (_React$Component) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
         className: "body",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-          className: "container header-section-space",
+          className: "container header-section-space-md",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-            className: "row",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-              className: "col-sm",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-                className: "intro-image-grid shadow",
-                style: {},
+            className: "row container",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+              className: "col-md-6",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+                className: "intro-image-grid",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
                   src: "/img/intro-header.jpg",
-                  className: "img-fluid",
-                  alt: "bartender",
-                  width: "600px",
-                  height: "500px"
+                  className: "img-fluid header-image rounded",
+                  alt: "burger image",
+                  width: '500px'
                 })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-                className: "intro-text-grid shadow",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
-                  src: "/img/clams.jpg",
-                  className: "img-fluid shadow",
-                  width: "600px",
-                  height: "500px",
-                  alt: "clam"
-                })
-              })]
+              })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-              className: "col-sm header-section-space-md intro-second-title",
+              className: "col-md-6 header-section-space-md intro-second-title",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
                 className: "header-subtitle",
                 children: " Cloud Chef "
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h2", {
                 className: "header-title",
-                children: " The Secret Ingredient "
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("h3", {
+                children: " The Secret Ingredient"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h3", {
                 className: "header-description",
-                children: [" ", "Cloudchef is a restaurant management solution that helps any establishment and its staff work smarter and more efficient. We put all the information you need in one place, for when you need it the most."]
+                children: "Cloudchef is a restaurant management solution that helps any establishment and its staff work smarter and more efficient. We put all the information you need in one place, for when you need it the most."
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h4", {
                 className: "header-description",
                 children: "Make employee training easy and simple by using our cloud based recipe management system."
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("a", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
                 href: "/login/",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
                   className: "btn btn-primary header-action",
                   style: {
                     marginRight: "40px"
                   },
-                  children: " See it in Action"
-                }), " "]
+                  children: "See it in Action"
+                })
               })]
             })]
           })
@@ -17071,9 +17221,9 @@ var Body = /*#__PURE__*/function (_React$Component) {
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
               className: "col-sm header-section-space-md",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("h1", {
                 className: "body-section-title",
-                children: " ALL OF YOUR RECIPES "
+                children: [" ", "ALL OF YOUR RECIPES", " "]
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("h1", {
                 className: "multi-color-section",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
@@ -17372,16 +17522,14 @@ var Header = /*#__PURE__*/function (_React$Component) {
         this.setState({
           hamToggle: false
         }); // trigger the animations
-
-        navel.style.animation = 'slide 2s ease-in-out'; // show the menu and hide the toggle button
+        // show the menu and hide the toggle button
 
         navel.classList.add('show');
         navel.classList.add('hide');
       } else {
         this.setState({
           hamToggle: true
-        });
-        navel.style.animation = 'slideout 2s ease-in-out'; // add a 1.75 delay to the animation
+        }); // add a 1.75 delay to the animation
 
         navel.classList.add('hide');
         navel.classList.remove('show');
@@ -18324,13 +18472,16 @@ var EmployeesPage = function EmployeesPage(props) {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
       id: "modal-container"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-      className: "row",
+      className: "row mt-4 mb-4",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h1", {
         className: "header-subtitle text-center",
         style: {
-          fontSize: '2em'
+          fontSize: "2em"
         },
         children: "Employees"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("small", {
+        className: "text-center text-muted mt-4 mb-4",
+        children: "Manage your employees, add, edit, delete."
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("img", {
         src: "/img/SVG/employee_page.svg",
         width: 200,
@@ -18362,7 +18513,7 @@ var EmployeesPage = function EmployeesPage(props) {
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
               className: "btn btn-message",
               onClick: function onClick() {
-                var container = document.getElementById('modal-container');
+                var container = document.getElementById("modal-container");
                 react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_dashboard_employee_employee_add__WEBPACK_IMPORTED_MODULE_4__.EmployeeAddModal, {}), container);
               },
               children: "Add Employee"
@@ -18392,7 +18543,7 @@ var EmployeesPage = function EmployeesPage(props) {
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
               className: "btn btn-message",
               onClick: function onClick() {
-                var container = document.getElementById('modal-container');
+                var container = document.getElementById("modal-container");
                 react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_dashboard_employee_employee_edit__WEBPACK_IMPORTED_MODULE_5__.EmployeeEditDialog, {}), container);
               },
               children: "Edit Employee"
@@ -18422,7 +18573,7 @@ var EmployeesPage = function EmployeesPage(props) {
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("button", {
               className: "btn btn-message",
               onClick: function onClick(e) {
-                var container = document.getElementById('modal-container');
+                var container = document.getElementById("modal-container");
                 react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_dashboard_employee_employee_delete__WEBPACK_IMPORTED_MODULE_6__.EmployeeDeleteDialog, {}), container);
               },
               children: "Delete Employee"
@@ -18452,57 +18603,56 @@ var EmployeesPage = function EmployeesPage(props) {
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
             className: "card-body",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("table", {
-              className: "table table-striped table-hover",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("thead", {
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
-                    children: "First Name"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
-                    children: "Last Name"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
-                    children: "Email"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
-                    children: "Phone"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
-                    children: "Address"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
-                    children: " Location"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
-                    children: " Salary "
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
-                    children: " Start Date. "
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
-                    children: " End Date "
-                  })]
-                })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("tbody", {
-                children: employees.map(function (employee) {
-                  // render the information of the employee that we have
-                  // recived from the api.
-                  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-                      children: employee.first_name
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-                      children: employee.last_name
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-                      children: employee.email
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-                      children: employee.phone
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-                      children: employee.address
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("td", {
-                      children: [" ", employee.location]
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("td", {
-                      children: [" ", calculateHoursRate(employee.salary), " "]
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("td", {
-                      children: [" ", employee.start_date, " "]
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("td", {
-                      children: [" ", employee.end_date === null ? "N/A" : employee.end_date, " "]
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+              className: "table-responsive",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("table", {
+                className: "table table-striped table-hover",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("thead", {
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
+                      children: "First Name"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
+                      children: "Last Name"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
+                      children: "Email"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
+                      children: "Phone"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
+                      children: "Address"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
+                      children: " Location"
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
+                      children: " Start Date. "
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
+                      children: " End Date "
                     })]
-                  }, employee.id);
-                })
-              })]
+                  })
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("tbody", {
+                  children: employees.map(function (employee) {
+                    // render the information of the employee that we have
+                    // recived from the api.
+                    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                        children: employee.first_name
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                        children: employee.last_name
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                        children: employee.email
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                        children: employee.phone
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                        children: employee.address
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("td", {
+                        children: [" ", employee.location]
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("td", {
+                        children: [" ", employee.start_date, " "]
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("td", {
+                        children: [" ", employee.end_date === null ? "N/A" : employee.end_date, " "]
+                      })]
+                    }, employee.id);
+                  })
+                })]
+              })
             })
           })]
         })
@@ -18527,9 +18677,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var _components_dashboard_contactsNavbar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/dashboard/contactsNavbar */ "./resources/js/components/dashboard/contactsNavbar.jsx");
-Object(function webpackMissingModule() { var e = new Error("Cannot find module '../components/dashboard/contacts/contact.table'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
-/* harmony import */ var _components_dashboard_recipe_core_template_modal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/dashboard/recipe/core/template.modal */ "./resources/js/components/dashboard/recipe/core/template.modal.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _components_dashboard_recipe_core_template_modal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/dashboard/recipe/core/template.modal */ "./resources/js/components/dashboard/recipe/core/template.modal.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /**
  *
  *  @file: Dashboard.home.jsx
@@ -18538,7 +18687,6 @@ Object(function webpackMissingModule() { var e = new Error("Cannot find module '
  *  @purpose : inorder to render the home splash screen for the dashboard
  *
  */
-
 
 
 
@@ -18555,32 +18703,83 @@ Object(function webpackMissingModule() { var e = new Error("Cannot find module '
 
 
 var DashboardHome = function DashboardHome(props) {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
     className: "container-fluid rm-pm dashboard-content",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
       className: "row",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         className: "row",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
           id: "message-box-container",
           children: " "
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
           className: "table-contacts-container",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-            className: "row",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-              className: "col-md-6 mx-auto"
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
             classNAme: "row",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
               className: "card",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
                 className: "card-body",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h5", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h5", {
                   className: "card-title",
-                  children: "Current Schedule"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
+                  children: "This Weeks schedule"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+                  className: "card-text"
+                })]
+              })
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+            className: "row",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+              className: "card",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+                className: "card-body",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h5", {
+                  className: "card-title",
+                  children: "Current Employees"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+                  className: "card-text"
+                })]
+              })
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+            className: "row",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+              className: "card",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+                className: "card-body",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h5", {
+                  className: "card-title",
+                  children: "Drop shifts "
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+                  className: "card-text"
+                })]
+              })
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+            className: "row",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+              className: "card",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+                className: "card-body",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h5", {
+                  className: "card-title",
+                  children: "Pick up shift store"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+                  className: "card-text"
+                })]
+              })
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+            className: "row",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+              className: "card",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+                className: "card-body",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h5", {
+                  className: "card-title",
+                  children: "Notification center"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
                   className: "card-text"
                 })]
               })
@@ -18652,11 +18851,11 @@ var DashboardRecipies = function DashboardRecipies(props) {
 
   var getRecipes = function getRecipes() {
     var api = new _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_3__["default"]();
-    var route = '/api/store/recipes/get';
+    var route = "/api/store/recipes/get";
     var headers = {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'accessToken': api.getCookie('accessToken')
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      accessToken: api.getCookie("accessToken")
     };
     return api.get(route, headers);
   };
@@ -18684,7 +18883,7 @@ var DashboardRecipies = function DashboardRecipies(props) {
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h3", {
             className: "text-danger",
             style: {
-              fontWeight: 'bold'
+              fontWeight: "bold"
             },
             children: "No Recipes found"
           })]
@@ -18701,7 +18900,7 @@ var DashboardRecipies = function DashboardRecipies(props) {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("td", {
           children: [" ", recipes[item].catagory, " "]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("td", {
-          children: ["  ", recipes[item].created_at]
+          children: [" ", recipes[item].created_at]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("td", {
           children: [" ", recipes[item].updated_at]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("td", {
@@ -18711,7 +18910,7 @@ var DashboardRecipies = function DashboardRecipies(props) {
             "data-toggle": "modal",
             "data-target": "#viewRecipeModal",
             onClick: function onClick(e) {
-              var modalContainer = document.getElementById('modal-container'); // we will create a rough draft of what the card will look like,
+              var modalContainer = document.getElementById("modal-container"); // we will create a rough draft of what the card will look like,
               // and then we will pass it to the modal container
               // later we will use components inorder to achieve the same result
               // for the code to be reusable though out our application
@@ -18729,7 +18928,7 @@ var DashboardRecipies = function DashboardRecipies(props) {
             "data-toggle": "modal",
             "data-target": "#editRecipeModal",
             onClick: function onClick(e) {
-              var modalContainer = document.getElementById('modal-container'); // we will create a rough draft of what the card will look like,
+              var modalContainer = document.getElementById("modal-container"); // we will create a rough draft of what the card will look like,
               // and then we will pass it to the modal container
               // later we will use components inorder to achieve the same result
               // for the code to be reusable though out our application
@@ -18747,7 +18946,7 @@ var DashboardRecipies = function DashboardRecipies(props) {
             "data-toggle": "modal",
             "data-target": "#deleteRecipeModal",
             onClick: function onClick(e) {
-              var modalContainer = document.getElementById('modal-container'); // this will contain the delete modal for delete a recipe from the database
+              var modalContainer = document.getElementById("modal-container"); // this will contain the delete modal for delete a recipe from the database
 
               return react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_dashboard_recipe_core_delete_recipe__WEBPACK_IMPORTED_MODULE_6__.DeleteRecipe, {
                 id: recipes[item].recipe_id
@@ -18764,29 +18963,29 @@ var DashboardRecipies = function DashboardRecipies(props) {
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
     className: "container-fluid profile_card dashboard-content",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-      className: "row",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("h2", {
-        className: "ml-4",
-        children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("b", {
-          children: "Recipes"
-        }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("small", {
-          className: "sub-caption ",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("span", {
-            className: "text-center",
-            children: "View recipes, edit, and share"
-          }), " "]
-        })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("small", {
-        className: "'text-center text-muted",
-        children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("i", {
-          className: "fas fa-info-circle"
-        }), "Have your whole team on the same page! "]
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+      id: "modal-container"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+      className: "row mt-4 mb-4",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h1", {
+        className: "header-subtitle text-center",
+        style: {
+          fontSize: "2em"
+        },
+        children: "Recipes"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("small", {
+        className: "text-center text-muted mt-4 mb-4",
+        children: "Manage your recipes here. You can add, edit and delete recipes."
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("img", {
+        src: "/img/SVG/cloud_recipe.svg",
+        width: 200,
+        height: 200,
+        className: "mx-auto"
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
       className: "row",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-        className: "col-md-12 mx-auto d-block",
+        className: "col-md-6 mx-auto d-block",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
           className: "card",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
@@ -18794,9 +18993,9 @@ var DashboardRecipies = function DashboardRecipies(props) {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h5", {
               className: "card-title header-subtitle",
               children: "Add Recipe"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("small", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("small", {
               className: "text-muted",
-              children: " Make your team stronger by connecting all your information in one place. "
+              children: [" ", "Make your team stronger by connecting all your information in one place.", " "]
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
             className: "card-body p-lg-5",
@@ -18814,7 +19013,7 @@ var DashboardRecipies = function DashboardRecipies(props) {
               "data-toggle": "modal",
               "data-target": "#addRecipeModal",
               onClick: function onClick(e) {
-                var modalContainer = document.getElementById('modal-container'); // we will create a rough draft of what the card will look like,
+                var modalContainer = document.getElementById("modal-container"); // we will create a rough draft of what the card will look like,
                 // and then we will pass it to the modal container
                 // later we will use components inorder to achieve the same result
                 // for the code to be reusable though out our application
@@ -18831,51 +19030,63 @@ var DashboardRecipies = function DashboardRecipies(props) {
           })]
         })
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
       className: "row",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-        id: "modal-container",
-        className: "modal-container"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-        id: "modal-alert-container"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-        className: "col card fit-table",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h2", {
-          className: "header-subtitle text-center mt-4 ",
-          children: "Current store recipes"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("img", {
-          src: "/img/SVG/recipie_header.svg",
-          alt: "schedule icon",
-          width: "300px",
-          height: "300px",
-          className: "mx-auto img-fluid"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("small", {
-          className: "text-center",
-          style: {
-            fontWeight: '600'
-          },
-          children: " All your recipes in one place, to make your life easier. "
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("table", {
-          className: "table mt-2 mb-2",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("thead", {
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
-                children: " Recipe "
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
-                children: " Catagory "
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
-                children: " Date Added "
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
-                children: " Date Modified "
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
-                children: " Actions "
-              })]
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+        className: "col",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+          id: "modal-container",
+          className: "modal-container"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+          id: "modal-alert-container"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+          className: "card",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+            className: "card-header bg-transparent",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h2", {
+              className: "header-subtitle text-center mt-4 ",
+              children: "Current store recipes"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+              className: "_img_ d-block mx-auto text-center",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("img", {
+                src: "/img/SVG/recipie_header.svg",
+                alt: "schedule icon",
+                width: "300px",
+                height: "300px",
+                className: "mx-auto img-fluid"
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("small", {
+              className: "text-center",
+              children: [" ", "All your recipes in one place, to make your life easier.", " "]
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+            className: "card-body",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+              className: "table-responsive",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("table", {
+                className: "table",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("thead", {
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
+                      children: " Recipe "
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
+                      children: " Catagory "
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
+                      children: " Date Added "
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
+                      children: " Date Modified "
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
+                      children: " Actions "
+                    })]
+                  })
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("tbody", {
+                  children: generateTablesRows()
+                })]
+              })
             })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("tbody", {
-            children: generateTablesRows()
           })]
         })]
-      })]
+      })
     })]
   });
 };
@@ -18934,27 +19145,7 @@ __webpack_require__.r(__webpack_exports__);
 var SchedulePage = function SchedulePage(props) {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
     className: "container dashboard-content mx-auto",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("h2", {
-      className: "ml-4",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("b", {
-        style: {
-          fontSize: '1.25em'
-        },
-        children: "Schedule"
-      }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("span", {
-        className: "text-center",
-        style: {
-          fontSize: '0.75em',
-          fontWeight: '500',
-          marginLeft: '20px'
-        },
-        children: "View, edit, and drop shifts!"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("p", {
-        style: {
-          marginLeft: '18em'
-        }
-      })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.BrowserRouter, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.BrowserRouter, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Switch, {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
           path: "/dashboard/schedule/add/",
@@ -113780,6 +113971,790 @@ function _setPrototypeOf(o, p) {
 
   return _setPrototypeOf(o, p);
 }
+
+/***/ }),
+
+/***/ "./node_modules/react-google-charts/dist/index.js":
+/*!********************************************************!*\
+  !*** ./node_modules/react-google-charts/dist/index.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Chart": () => (/* binding */ Chart$1),
+/* harmony export */   "GoogleDataTableColumnRoleType": () => (/* binding */ GoogleDataTableColumnRoleType),
+/* harmony export */   "default": () => (/* binding */ Chart)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+
+/**
+ * Hook to load external script.
+ * @param src - Source url to load.
+ * @param onLoad - Success callback.
+ * @param onError - Error callback.
+ */ function useLoadScript(src, onLoad, onError) {
+    (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(()=>{
+        if (!document) {
+            return;
+        }
+        // Find script tag with same src in DOM.
+        const foundScript = document.querySelector("script[src=\"".concat(src, "\"]"));
+        // Call onLoad if script marked as loaded.
+        if (foundScript === null || foundScript === void 0 ? void 0 : foundScript.dataset.loaded) {
+            onLoad === null || onLoad === void 0 ? void 0 : onLoad();
+            return;
+        }
+        // Create or get existed tag.
+        const script = foundScript || document.createElement("script");
+        // Set src if no script was found.
+        if (!foundScript) {
+            script.src = src;
+        }
+        // Mark script as loaded on load event.
+        const onLoadWithMarker = ()=>{
+            script.dataset.loaded = "1";
+            onLoad === null || onLoad === void 0 ? void 0 : onLoad();
+        };
+        script.addEventListener("load", onLoadWithMarker);
+        if (onError) {
+            script.addEventListener("error", onError);
+        }
+        // Add to DOM if not yet added.
+        if (!foundScript) {
+            document.head.append(script);
+        }
+        return ()=>{
+            script.removeEventListener("load", onLoadWithMarker);
+            if (onError) {
+                script.removeEventListener("error", onError);
+            }
+        };
+    }, []);
+}
+
+/**
+ * Hook to load Google Charts JS API.
+ * @param params - Load parameters.
+ * @param [params.chartVersion] - Chart version to load.
+ * @param [params.chartPackages] - Packages to load.
+ * @param [params.chartLanguage] - Languages to load.
+ * @param [params.mapsApiKey] - Google Maps api key.
+ * @returns
+ */ function useLoadGoogleCharts(param) {
+    let { chartVersion ="current" , chartPackages =[
+        "corechart",
+        "controls"
+    ] , chartLanguage ="en" , mapsApiKey  } = param;
+    const [googleCharts, setGoogleCharts] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+    const [failed, setFailed] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+    useLoadScript("https://www.gstatic.com/charts/loader.js", ()=>{
+        // @ts-expect-error Getting object from global namespace.
+        const google = window === null || window === void 0 ? void 0 : window.google;
+        if (!google) {
+            return;
+        }
+        google.charts.load(chartVersion, {
+            packages: chartPackages,
+            language: chartLanguage,
+            mapsApiKey
+        });
+        google.charts.setOnLoadCallback(()=>{
+            setGoogleCharts(google);
+        });
+    }, ()=>{
+        setFailed(true);
+    });
+    return [
+        googleCharts,
+        failed
+    ];
+}
+/**
+ * Wrapper around useLoadGoogleCharts to use in legacy components.
+ */ function LoadGoogleCharts(param) {
+    let { onLoad , onError , ...params } = param;
+    const [googleCharts, failed] = useLoadGoogleCharts(params);
+    (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(()=>{
+        if (googleCharts && onLoad) {
+            onLoad(googleCharts);
+        }
+    }, [
+        googleCharts
+    ]);
+    (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(()=>{
+        if (failed && onError) {
+            onError();
+        }
+    }, [
+        failed
+    ]);
+    return null;
+}
+
+const chartDefaultProps = {
+    // <DEPRECATED_PROPS>
+    legend_toggle: false,
+    // </DEPRECATED_PROPS>
+    options: {},
+    legendToggle: false,
+    getChartWrapper: ()=>{},
+    spreadSheetQueryParameters: {
+        headers: 1,
+        gid: 1
+    },
+    rootProps: {},
+    chartWrapperParams: {}
+};
+
+let uniqueID = 0;
+const generateUniqueID = ()=>{
+    uniqueID += 1;
+    return "reactgooglegraph-".concat(uniqueID);
+};
+
+const DEFAULT_CHART_COLORS = [
+    "#3366CC",
+    "#DC3912",
+    "#FF9900",
+    "#109618",
+    "#990099",
+    "#3B3EAC",
+    "#0099C6",
+    "#DD4477",
+    "#66AA00",
+    "#B82E2E",
+    "#316395",
+    "#994499",
+    "#22AA99",
+    "#AAAA11",
+    "#6633CC",
+    "#E67300",
+    "#8B0707",
+    "#329262",
+    "#5574A6",
+    "#3B3EAC"
+];
+
+const loadDataTableFromSpreadSheet = async function(googleViz, spreadSheetUrl) {
+    let urlParams = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : {};
+    return new Promise((resolve, reject)=>{
+        const headers = "".concat(urlParams.headers ? "headers=".concat(urlParams.headers) : "headers=0");
+        const queryString = "".concat(urlParams.query ? "&tq=".concat(encodeURIComponent(urlParams.query)) : "");
+        const gid = "".concat(urlParams.gid ? "&gid=".concat(urlParams.gid) : "");
+        const sheet = "".concat(urlParams.sheet ? "&sheet=".concat(urlParams.sheet) : "");
+        const access_token = "".concat(urlParams.access_token ? "&access_token=".concat(urlParams.access_token) : "");
+        const urlQueryString = "".concat(headers).concat(gid).concat(sheet).concat(queryString).concat(access_token);
+        const urlToSpreadSheet = "".concat(spreadSheetUrl, "/gviz/tq?").concat(urlQueryString); //&tq=${queryString}`;
+        const query = new googleViz.visualization.Query(urlToSpreadSheet);
+        query.send((response)=>{
+            if (response.isError()) {
+                reject("Error in query:  ".concat(response.getMessage(), " ").concat(response.getDetailedMessage()));
+            } else {
+                resolve(response.getDataTable());
+            }
+        });
+    });
+};
+
+const { Provider , Consumer  } = /*#__PURE__*/ react__WEBPACK_IMPORTED_MODULE_0__.createContext(chartDefaultProps);
+const ContextProvider = (param)=>{
+    let { children , value  } = param;
+    return(/*#__PURE__*/ react__WEBPACK_IMPORTED_MODULE_0__.createElement(Provider, {
+        value: value
+    }, children));
+};
+const ContextConsumer = (param)=>{
+    let { render  } = param;
+    return(/*#__PURE__*/ react__WEBPACK_IMPORTED_MODULE_0__.createElement(Consumer, null, (context)=>{
+        return render(context);
+    }));
+};
+
+const GRAY_COLOR = "#CCCCCC";
+class GoogleChartDataTableInner extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
+    componentDidMount() {
+        this.draw(this.props);
+        window.addEventListener("resize", this.onResize);
+        if (this.props.legend_toggle || this.props.legendToggle) {
+            this.listenToLegendToggle();
+        }
+    }
+    componentWillUnmount() {
+        const { google , googleChartWrapper  } = this.props;
+        window.removeEventListener("resize", this.onResize);
+        google.visualization.events.removeAllListeners(googleChartWrapper);
+        if (googleChartWrapper.getChartType() === "Timeline") {
+            googleChartWrapper.getChart() && googleChartWrapper.getChart().clearChart();
+        }
+    }
+    componentDidUpdate() {
+        this.draw(this.props);
+    }
+    render() {
+        return null;
+    }
+    constructor(...args){
+        super(...args);
+        this.state = {
+            hiddenColumns: []
+        };
+        this.listenToLegendToggle = ()=>{
+            const { google , googleChartWrapper  } = this.props;
+            google.visualization.events.addListener(googleChartWrapper, "select", ()=>{
+                const chart = googleChartWrapper.getChart();
+                const selection = chart.getSelection();
+                const dataTable = googleChartWrapper.getDataTable();
+                if (selection.length === 0 || // We want to listen to when a whole row is selected. This is the case only when row === null
+                selection[0].row || !dataTable) {
+                    return;
+                }
+                const columnIndex = selection[0].column;
+                const columnID = this.getColumnID(dataTable, columnIndex);
+                if (this.state.hiddenColumns.includes(columnID)) {
+                    this.setState((state)=>({
+                            ...state,
+                            hiddenColumns: [
+                                ...state.hiddenColumns.filter((colID)=>colID !== columnID
+                                ), 
+                            ]
+                        })
+                    );
+                } else {
+                    this.setState((state)=>({
+                            ...state,
+                            hiddenColumns: [
+                                ...state.hiddenColumns,
+                                columnID
+                            ]
+                        })
+                    );
+                }
+            });
+        };
+        this.applyFormatters = (dataTable, formatters)=>{
+            const { google  } = this.props;
+            for (let formatter of formatters){
+                switch(formatter.type){
+                    case "ArrowFormat":
+                        {
+                            const vizFormatter = new google.visualization.ArrowFormat(formatter.options);
+                            vizFormatter.format(dataTable, formatter.column);
+                            break;
+                        }
+                    case "BarFormat":
+                        {
+                            const vizFormatter = new google.visualization.BarFormat(formatter.options);
+                            vizFormatter.format(dataTable, formatter.column);
+                            break;
+                        }
+                    case "ColorFormat":
+                        {
+                            const vizFormatter = new google.visualization.ColorFormat(formatter.options);
+                            const { ranges  } = formatter;
+                            for (let range of ranges){
+                                vizFormatter.addRange(...range);
+                            }
+                            vizFormatter.format(dataTable, formatter.column);
+                            break;
+                        }
+                    case "DateFormat":
+                        {
+                            const vizFormatter = new google.visualization.DateFormat(formatter.options);
+                            vizFormatter.format(dataTable, formatter.column);
+                            break;
+                        }
+                    case "NumberFormat":
+                        {
+                            const vizFormatter = new google.visualization.NumberFormat(formatter.options);
+                            vizFormatter.format(dataTable, formatter.column);
+                            break;
+                        }
+                    case "PatternFormat":
+                        {
+                            const vizFormatter = new google.visualization.PatternFormat(formatter.options);
+                            vizFormatter.format(dataTable, formatter.column);
+                            break;
+                        }
+                }
+            }
+        };
+        this.getColumnID = (dataTable, columnIndex)=>{
+            return dataTable.getColumnId(columnIndex) || dataTable.getColumnLabel(columnIndex);
+        };
+        this.draw = async (param)=>{
+            let { data , diffdata , rows , columns , options , legend_toggle , legendToggle , chartType , formatters , spreadSheetUrl , spreadSheetQueryParameters  } = param;
+            const { google , googleChartWrapper  } = this.props;
+            let dataTable;
+            let chartDiff = null;
+            if (diffdata) {
+                const oldData = google.visualization.arrayToDataTable(diffdata.old);
+                const newData = google.visualization.arrayToDataTable(diffdata.new);
+                chartDiff = google.visualization[chartType].prototype.computeDiff(oldData, newData);
+            }
+            if (data !== null) {
+                if (Array.isArray(data)) {
+                    dataTable = google.visualization.arrayToDataTable(data);
+                } else {
+                    dataTable = new google.visualization.DataTable(data);
+                }
+            } else if (rows && columns) {
+                dataTable = google.visualization.arrayToDataTable([
+                    columns,
+                    ...rows
+                ]);
+            } else if (spreadSheetUrl) {
+                dataTable = await loadDataTableFromSpreadSheet(google, spreadSheetUrl, spreadSheetQueryParameters);
+            } else {
+                dataTable = google.visualization.arrayToDataTable([]);
+            }
+            const columnCount = dataTable.getNumberOfColumns();
+            for(let i = 0; i < columnCount; i += 1){
+                const columnID = this.getColumnID(dataTable, i);
+                if (this.state.hiddenColumns.includes(columnID)) {
+                    const previousColumnLabel = dataTable.getColumnLabel(i);
+                    const previousColumnID = dataTable.getColumnId(i);
+                    const previousColumnType = dataTable.getColumnType(i);
+                    dataTable.removeColumn(i);
+                    dataTable.addColumn({
+                        label: previousColumnLabel,
+                        id: previousColumnID,
+                        type: previousColumnType
+                    });
+                }
+            }
+            const chart = googleChartWrapper.getChart();
+            if (googleChartWrapper.getChartType() === "Timeline") {
+                chart && chart.clearChart();
+            }
+            googleChartWrapper.setChartType(chartType);
+            googleChartWrapper.setOptions(options || {});
+            googleChartWrapper.setDataTable(dataTable);
+            googleChartWrapper.draw();
+            if (this.props.googleChartDashboard !== null) {
+                this.props.googleChartDashboard.draw(dataTable);
+            }
+            if (chartDiff) {
+                googleChartWrapper.setDataTable(chartDiff);
+                googleChartWrapper.draw();
+            }
+            if (formatters) {
+                this.applyFormatters(dataTable, formatters);
+                googleChartWrapper.setDataTable(dataTable);
+                googleChartWrapper.draw();
+            }
+            if (legendToggle === true || legend_toggle === true) {
+                this.grayOutHiddenColumns({
+                    options
+                });
+            }
+            return;
+        };
+        this.grayOutHiddenColumns = (param)=>{
+            let { options  } = param;
+            const { googleChartWrapper  } = this.props;
+            const dataTable = googleChartWrapper.getDataTable();
+            if (!dataTable) return;
+            const columnCount = dataTable.getNumberOfColumns();
+            const hasAHiddenColumn = this.state.hiddenColumns.length > 0;
+            if (hasAHiddenColumn === false) return;
+            const colors = Array.from({
+                length: columnCount - 1
+            }).map((dontcare, i)=>{
+                const columnID = this.getColumnID(dataTable, i + 1);
+                if (this.state.hiddenColumns.includes(columnID)) {
+                    return GRAY_COLOR;
+                } else if (options && options.colors) {
+                    return options.colors[i];
+                } else {
+                    return DEFAULT_CHART_COLORS[i];
+                }
+            });
+            googleChartWrapper.setOptions({
+                ...options,
+                colors
+            });
+            googleChartWrapper.draw();
+        };
+        this.onResize = ()=>{
+            const { googleChartWrapper  } = this.props;
+            googleChartWrapper.draw();
+        };
+    }
+}
+class GoogleChartDataTable extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
+    componentDidMount() {}
+    componentWillUnmount() {}
+    shouldComponentUpdate() {
+        return false;
+    }
+    render() {
+        const { google , googleChartWrapper , googleChartDashboard  } = this.props;
+        return(/*#__PURE__*/ react__WEBPACK_IMPORTED_MODULE_0__.createElement(ContextConsumer, {
+            render: (props)=>{
+                return(/*#__PURE__*/ react__WEBPACK_IMPORTED_MODULE_0__.createElement(GoogleChartDataTableInner, Object.assign({}, props, {
+                    google: google,
+                    googleChartWrapper: googleChartWrapper,
+                    googleChartDashboard: googleChartDashboard
+                })));
+            }
+        }));
+    }
+}
+
+class GoogleChartEvents extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
+    shouldComponentUpdate() {
+        return false;
+    }
+    listenToEvents(param) {
+        let { chartEvents , google , googleChartWrapper  } = param;
+        if (!chartEvents) {
+            return;
+        }
+        google.visualization.events.removeAllListeners(googleChartWrapper);
+        for (let event of chartEvents){
+            var _this = this;
+            const { eventName , callback  } = event;
+            google.visualization.events.addListener(googleChartWrapper, eventName, function() {
+                for(var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++){
+                    args[_key] = arguments[_key];
+                }
+                callback({
+                    chartWrapper: googleChartWrapper,
+                    props: _this.props,
+                    google: google,
+                    eventArgs: args
+                });
+            });
+        }
+    }
+    render() {
+        const { google , googleChartWrapper  } = this.props;
+        return(/*#__PURE__*/ react__WEBPACK_IMPORTED_MODULE_0__.createElement(ContextConsumer, {
+            render: (propsFromContext)=>{
+                this.listenToEvents({
+                    chartEvents: propsFromContext.chartEvents || null,
+                    google,
+                    googleChartWrapper
+                });
+                return null;
+            }
+        }));
+    }
+}
+
+let controlCounter = 0;
+class GoogleChart extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
+    componentDidMount() {
+        const { options , google , chartType , chartWrapperParams , toolbarItems , getChartEditor , getChartWrapper ,  } = this.props;
+        const chartConfig = {
+            chartType,
+            options,
+            containerId: this.getGraphID(),
+            ...chartWrapperParams
+        };
+        const googleChartWrapper = new google.visualization.ChartWrapper(chartConfig);
+        googleChartWrapper.setOptions(options || {});
+        if (getChartWrapper) {
+            getChartWrapper(googleChartWrapper, google);
+        }
+        const googleChartDashboard = new google.visualization.Dashboard(this.dashboard_ref);
+        const googleChartControls = this.addControls(googleChartWrapper, googleChartDashboard);
+        if (toolbarItems) {
+            google.visualization.drawToolbar(this.toolbar_ref.current, toolbarItems);
+        }
+        let googleChartEditor = null;
+        if (getChartEditor) {
+            googleChartEditor = new google.visualization.ChartEditor();
+            getChartEditor({
+                chartEditor: googleChartEditor,
+                chartWrapper: googleChartWrapper,
+                google
+            });
+        }
+        this.setState({
+            googleChartEditor,
+            googleChartControls: googleChartControls,
+            googleChartDashboard: googleChartDashboard,
+            googleChartWrapper,
+            isReady: true
+        });
+    }
+    componentDidUpdate() {
+        if (!this.state.googleChartWrapper) return;
+        if (!this.state.googleChartDashboard) return;
+        if (!this.state.googleChartControls) return;
+        const { controls  } = this.props;
+        if (controls) {
+            for(let i = 0; i < controls.length; i += 1){
+                const { controlType , options , controlWrapperParams  } = controls[i];
+                if (controlWrapperParams && "state" in controlWrapperParams) {
+                    this.state.googleChartControls[i].control.setState(controlWrapperParams["state"]);
+                }
+                this.state.googleChartControls[i].control.setOptions(options);
+                this.state.googleChartControls[i].control.setControlType(controlType);
+            }
+        }
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        return this.state.isReady !== nextState.isReady || nextProps.controls !== this.props.controls;
+    }
+    render() {
+        const { width , height , options , style  } = this.props;
+        const divStyle = {
+            height: height || options && options.height,
+            width: width || options && options.width,
+            ...style
+        };
+        if (this.props.render) {
+            return(/*#__PURE__*/ react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+                ref: this.dashboard_ref,
+                style: divStyle
+            }, /*#__PURE__*/ react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+                ref: this.toolbar_ref,
+                id: "toolbar"
+            }), this.props.render({
+                renderChart: this.renderChart,
+                renderControl: this.renderControl,
+                renderToolbar: this.renderToolBar
+            })));
+        } else {
+            return(/*#__PURE__*/ react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+                ref: this.dashboard_ref,
+                style: divStyle
+            }, this.renderControl((param)=>{
+                let { controlProp  } = param;
+                return controlProp.controlPosition !== "bottom";
+            }), this.renderChart(), this.renderControl((param)=>{
+                let { controlProp  } = param;
+                return controlProp.controlPosition === "bottom";
+            }), this.renderToolBar()));
+        }
+    }
+    constructor(...args1){
+        var _this1;
+        super(), _this1 = this;
+        this.state = {
+            googleChartWrapper: null,
+            googleChartDashboard: null,
+            googleChartControls: null,
+            googleChartEditor: null,
+            isReady: false
+        };
+        this.graphID = null;
+        this.dashboard_ref = /*#__PURE__*/ react__WEBPACK_IMPORTED_MODULE_0__.createRef();
+        this.toolbar_ref = /*#__PURE__*/ react__WEBPACK_IMPORTED_MODULE_0__.createRef();
+        this.getGraphID = ()=>{
+            const { graphID , graph_id  } = this.props;
+            let instanceGraphID;
+            if (!graphID && !graph_id) {
+                if (!this.graphID) {
+                    instanceGraphID = generateUniqueID();
+                } else {
+                    instanceGraphID = this.graphID;
+                }
+            } else if (graphID && !graph_id) {
+                instanceGraphID = graphID;
+            } else if (graph_id && !graphID) {
+                instanceGraphID = graph_id;
+            } else {
+                instanceGraphID = graphID;
+            }
+            this.graphID = instanceGraphID;
+            return this.graphID;
+        };
+        this.getControlID = (id, index)=>{
+            controlCounter += 1;
+            let controlID;
+            if (typeof id === "undefined") {
+                controlID = "googlechart-control-".concat(index, "-").concat(controlCounter);
+            } else {
+                controlID = id;
+            }
+            return controlID;
+        };
+        this.addControls = (googleChartWrapper, googleChartDashboard)=>{
+            const { google , controls  } = this.props;
+            const googleChartControls = !controls ? null : controls.map((control, i)=>{
+                const { controlID: controlIDMaybe , controlType , options: controlOptions , controlWrapperParams ,  } = control;
+                const controlID = this.getControlID(controlIDMaybe, i);
+                return {
+                    controlProp: control,
+                    control: new google.visualization.ControlWrapper({
+                        containerId: controlID,
+                        controlType,
+                        options: controlOptions,
+                        ...controlWrapperParams
+                    })
+                };
+            });
+            if (!googleChartControls) {
+                return null;
+            }
+            googleChartDashboard.bind(googleChartControls.map((param)=>{
+                let { control  } = param;
+                return control;
+            }), googleChartWrapper);
+            for (let chartControl of googleChartControls){
+                const { control , controlProp  } = chartControl;
+                const { controlEvents =[]  } = controlProp;
+                for (let event of controlEvents){
+                    var _this = this;
+                    const { callback , eventName  } = event;
+                    google.visualization.events.removeListener(control, eventName, callback);
+                    google.visualization.events.addListener(control, eventName, function() {
+                        for(var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++){
+                            args[_key] = arguments[_key];
+                        }
+                        callback({
+                            chartWrapper: googleChartWrapper,
+                            controlWrapper: control,
+                            props: _this.props,
+                            google: google,
+                            eventArgs: args
+                        });
+                    });
+                }
+            }
+            return googleChartControls;
+        };
+        this.renderChart = ()=>{
+            const { width , height , options , style , className , rootProps , google  } = this.props;
+            const divStyle = {
+                height: height || options && options.height,
+                width: width || options && options.width,
+                ...style
+            };
+            return(/*#__PURE__*/ react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", Object.assign({
+                id: this.getGraphID(),
+                style: divStyle,
+                className: className
+            }, rootProps), this.state.isReady && this.state.googleChartWrapper !== null ? /*#__PURE__*/ react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/ react__WEBPACK_IMPORTED_MODULE_0__.createElement(GoogleChartDataTable, {
+                googleChartWrapper: this.state.googleChartWrapper,
+                google: google,
+                googleChartDashboard: this.state.googleChartDashboard
+            }), /*#__PURE__*/ react__WEBPACK_IMPORTED_MODULE_0__.createElement(GoogleChartEvents, {
+                googleChartWrapper: this.state.googleChartWrapper,
+                google: google
+            })) : null));
+        };
+        this.renderControl = function() {
+            let filter = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : (param)=>{
+                return true;
+            };
+            return _this1.state.isReady && _this1.state.googleChartControls !== null ? /*#__PURE__*/ react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, _this1.state.googleChartControls.filter((param)=>{
+                let { controlProp , control  } = param;
+                return filter({
+                    control,
+                    controlProp
+                });
+            }).map((param)=>{
+                let { control , controlProp  } = param;
+                return(/*#__PURE__*/ react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+                    key: control.getContainerId(),
+                    id: control.getContainerId()
+                }));
+            })) : null;
+        };
+        this.renderToolBar = ()=>{
+            if (!this.props.toolbarItems) return null;
+            return(/*#__PURE__*/ react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+                ref: this.toolbar_ref
+            }));
+        };
+    }
+}
+
+class Chart$1 extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
+    render() {
+        const { chartLanguage , chartPackages , chartVersion , mapsApiKey , loader , errorElement ,  } = this.props;
+        return(/*#__PURE__*/ react__WEBPACK_IMPORTED_MODULE_0__.createElement(ContextProvider, {
+            value: this.props
+        }, this.state.loadingStatus === "ready" && this.state.google !== null ? /*#__PURE__*/ react__WEBPACK_IMPORTED_MODULE_0__.createElement(GoogleChart, Object.assign({}, this.props, {
+            google: this.state.google
+        })) : this.state.loadingStatus === "errored" && errorElement ? errorElement : loader, /*#__PURE__*/ react__WEBPACK_IMPORTED_MODULE_0__.createElement(LoadGoogleCharts, {
+            chartLanguage: chartLanguage,
+            chartPackages: chartPackages,
+            chartVersion: chartVersion,
+            mapsApiKey: mapsApiKey,
+            onLoad: this.onLoad,
+            onError: this.onError
+        })));
+    }
+    componentDidMount() {
+        this._isMounted = true;
+    }
+    componentWillUnmount() {
+        this._isMounted = false;
+    }
+    isFullyLoaded(google) {
+        const { controls , toolbarItems , getChartEditor  } = this.props;
+        return google && google.visualization && google.visualization.ChartWrapper && google.visualization.Dashboard && (!controls || google.visualization.ChartWrapper) && (!getChartEditor || google.visualization.ChartEditor) && (!toolbarItems || google.visualization.drawToolbar);
+    }
+    constructor(...args){
+        super(...args);
+        this._isMounted = false;
+        this.state = {
+            loadingStatus: "loading",
+            google: null
+        };
+        this.onLoad = (google1)=>{
+            if (this.props.onLoad) {
+                this.props.onLoad(google1);
+            }
+            if (this.isFullyLoaded(google1)) {
+                this.onSuccess(google1);
+            } else {
+                // IE11: window.google is not fully set, we have to wait
+                const id = setInterval(()=>{
+                    const google = window.google;
+                    if (this._isMounted) {
+                        if (google && this.isFullyLoaded(google)) {
+                            clearInterval(id);
+                            this.onSuccess(google);
+                        }
+                    } else {
+                        clearInterval(id);
+                    }
+                }, 1000);
+            }
+        };
+        this.onSuccess = (google)=>{
+            this.setState({
+                loadingStatus: "ready",
+                google
+            });
+        };
+        this.onError = ()=>{
+            this.setState({
+                loadingStatus: "errored"
+            });
+        };
+    }
+}
+Chart$1.defaultProps = chartDefaultProps;
+
+var GoogleDataTableColumnRoleType;
+(function(GoogleDataTableColumnRoleType) {
+    GoogleDataTableColumnRoleType["annotation"] = "annotation";
+    GoogleDataTableColumnRoleType["annotationText"] = "annotationText";
+    GoogleDataTableColumnRoleType["certainty"] = "certainty";
+    GoogleDataTableColumnRoleType["emphasis"] = "emphasis";
+    GoogleDataTableColumnRoleType["interval"] = "interval";
+    GoogleDataTableColumnRoleType["scope"] = "scope";
+    GoogleDataTableColumnRoleType["style"] = "style";
+    GoogleDataTableColumnRoleType["tooltip"] = "tooltip";
+    GoogleDataTableColumnRoleType["domain"] = "domain";
+})(GoogleDataTableColumnRoleType || (GoogleDataTableColumnRoleType = {}));
+
+var Chart = Chart$1;
+
+
+//# sourceMappingURL=index.js.map
+
 
 /***/ }),
 

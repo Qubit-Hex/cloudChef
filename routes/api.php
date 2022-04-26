@@ -9,9 +9,9 @@ use App\Http\Controllers\store;
 use App\Http\Controllers\schedule;
 use App\Http\Controllers\employee;
 use App\Http\Controllers\recipes;
-use App\Http\Controllers\menu;
 use App\Http\Controllers\settings;
 use App\Http\Controllers\shifts;
+use App\Http\Controllers\labour;
 
 
 /*
@@ -167,6 +167,20 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
                 Route::put('/edit', [shifts::class, 'edit'])->name('/schedule/shifts/edit');
                 // delete a shift to the schedule
                 Route::delete('/delete', [shifts::class, 'delete'])->name('/schedule/shifts/delete');
+            });
+
+
+            // the routess inorder to get the stores labour cost of the shifts
+            Route::group(['prefix' => 'labour'], function () {
+
+                // get the store labour cost of the shifts
+                Route::get('/daily', [labour::class, 'getDaily'])->name('/schedule/labour/daily');
+
+                // weekly labour cost
+                Route::get('/weekly', [labour::class, 'getWeekly'])->name('/schedule/labour/weekly');
+
+                // get the monthly labour cost
+
             });
         });
 

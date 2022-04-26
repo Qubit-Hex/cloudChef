@@ -30,28 +30,7 @@ export const  SchedulePage = (props) => {
 
         return (
             <div className="container dashboard-content mx-auto">
-                <h2 className="ml-4">
-                    <b style={{
-                        fontSize: '1.25em'
-                    }}>
-                        Schedule
-                    </b> <br/>
-
-                            <span className="text-center" style={{
-                                fontSize: '0.75em',
-
-                                fontWeight: '500',
-                                marginLeft: '20px'
-                            }}>
-                                View, edit, and drop shifts!
-                            </span>
-
-                            <p style={{
-                                marginLeft: '18em',
-                            }}>
-                            </p>
-                </h2>
-
+          
                 <Router>
                     <Switch>
                         <Route path='/dashboard/schedule/add/'>

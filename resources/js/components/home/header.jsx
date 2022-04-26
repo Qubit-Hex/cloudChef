@@ -34,7 +34,6 @@ export class Header extends React.Component {
                 hamToggle: false,
             });
             // trigger the animations
-            navel.style.animation = 'slide 2s ease-in-out';
             // show the menu and hide the toggle button
              navel.classList.add('show');
              navel.classList.add('hide');
@@ -42,7 +41,6 @@ export class Header extends React.Component {
             this.setState({
                 hamToggle: true,
             });
-            navel.style.animation = 'slideout 2s ease-in-out';
             // add a 1.75 delay to the animation
                 navel.classList.add('hide');
                 navel.classList.remove('show');

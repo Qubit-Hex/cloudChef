@@ -21,10 +21,28 @@ import FetchServiceProvider from "../../../lib/fetchServiceProvider";
  *
  */
 
+
+{/** function for accepting requests */}
+
+
+
+
+{/** function for denying requests */}
+
+
+
+
+
+
 export const  ScheduleRequestPage = (props) => {
 
     return (
         <div>
+
+            {/** header section for the request table */}
+
+
+            {/** request table */}
         </div>
     )
 }
