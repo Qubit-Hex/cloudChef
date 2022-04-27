@@ -163,26 +163,6 @@ export const ScheduleGridMenu = (props) => {
             </div>
         </div>
 
-    <div className='col-md-4'>
-        <div className='tile'>
-            <div className='tile-content'>
-                <div className='mx-auto text-center'>
-                    <img src='/img/SVG/employee_card.svg' className='mx-auto' width={300} height={300} />
-                </div>
-                <h2 className='text-center m-2 header-subtitle'> Schedule Requests </h2>
-                <p className='text-center text-muted '> View employees schedule requests </p>
-                        <div className='tile-icon  text-center'>
-                                <a className='btn header-action btn-lg m-4 mx-auto w-50' style={ {
-                                    color: 'white',
-                                    textDecoration: 'none'
-                                }} href='/dashboard/schedule/request/'>
-                                    <span> Schedule Requests</span>
-                                </a>
-                        </div>
-            </div>
-        </div>
-    </div>
-
     </div>
     )
 }

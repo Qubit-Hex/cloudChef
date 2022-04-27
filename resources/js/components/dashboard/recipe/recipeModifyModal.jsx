@@ -48,7 +48,7 @@ export const RecipeModifyModal = (props) => {
 
 
                     <button
-                        className='btn btn-message mt-2'
+                        className='btn btn-message mt-2 d-block mx-auto w-auto'
                         onClick={(e) => {
                             let inputElement = document.getElementById('recipe-modify-select');
 
@@ -90,7 +90,10 @@ export const RecipeModifyModal = (props) => {
                          Go </button>
 
                 </div>
-                <div id='_subContent_' className='mt-4'></div>
+                <div id='_subContent_' className='mt-4 p-2' style={{
+                    border: '0.5px solid #ccc',
+                    borderRadius: '5px'
+                }}></div>
                 {/** container for pusjing content to the page  */}
 
 

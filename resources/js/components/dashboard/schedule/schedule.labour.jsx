@@ -12,69 +12,7 @@ import ReactDOM from "react-dom";
 import FetchServiceProvider from "../../../lib/fetchServiceProvider";
 // google charts
 import Chart from "react-google-charts";
-import { isNumber } from "lodash";
-
-/**
- *
- *  @component: getLabourCostWeekly
- *
- *
- *  @purpose: inorder to get the labour cost of the organization for the week.
- *
- *
- */
-
-const LabourCostWeekly = (props) => {
-    // get the week cost of the labour for the store
-    const request = async () => {
-        const api = new FetchServiceProvider();
-        const route = '/api/store/schedule/labour/weekly';
-
-        const header = {
-            'Content-Type': 'application/json',
-            'accessToken': api.getCookie('accessToken')
-        }
-
-        return await api.get(route, header);
-        // preform the request to the database
-    };
-
-
-
-    React.useEffect(() => {
-        request().then(response => {
-            console.log(response);
-        });
-
-    }, []);
-
-    // pass the data to the google chart for rendering of the information from the database.
-    return <Chart chartType='BarChart'
-        width={'100%'}
-        height={'400px'}
-        data={[
-            ['Day', 'Labour Cost'],
-            ['Monday', 100],
-            ['Tuesday', 200],
-            ['Wednesday', 300],
-            ['Thursday', 400],
-            ['Friday', 500],
-            ['Saturday', 600],
-            ['Sunday', 700]
-        ]}
-        options={{
-            title: 'Labour Cost',
-            chartArea: { width: '50%' },
-            hAxis: {
-                title: 'Day',
-                minValue: 0
-            },
-            vAxis: {
-                title: 'Labour Cost',
-                minValue: 0
-            }
-        }} />
-}
+import { isNumber, isString } from "lodash";
 
 
 const TodaysLabourCost = (props) => {
@@ -115,7 +53,6 @@ const TodaysLabourCost = (props) => {
                 if (response.employeeSalary[j].id === response.data[i].employee_id) {
                    let hourlyRate = Math.round(response.employeeSalary[j].salary / 52 / 40);
                    hours += total * hourlyRate;
-                   console.log(hours);
                 }
             }
         }
@@ -126,7 +63,6 @@ const TodaysLabourCost = (props) => {
     // get the cost of the labour for the store
     React.useEffect(() => {
         request().then(response => {
-            console.log(response);
 
             if (response.status === 200 || response.status === 'success') {
 
@@ -135,16 +71,114 @@ const TodaysLabourCost = (props) => {
                     setCost(getDailyLabourCost(response));
                 } else {
                     // we go not data back
-                    setCost("No Data");
+                    setCost("No Data Available at this time");
                 }
 
             }});
 
-
     }, []);
-    return <div> <h1 className='header-title mt-4'> { isNumber(cost)  === true ? `\$${cost}` : "No Data" } </h1></div>
+    return <div> <h1 className='mt-4' style={{
+        fontSize: '4rem',
+    }}> { isNumber(cost)  === true ? `\$${cost}` : "No Data" } </h1></div>
 
 }
+
+
+/**
+ *
+ *  @component: weeklyLabourCost
+ *
+ *
+ *   @purpose: inorder to render the weekly labour cost of the organization.
+ *
+ *
+ *  @props: scheduleID
+ *
+ */
+
+const WeeklyLabourCost = (props) => {
+
+    // check if the props.ScheduleID is a number
+
+    const [error, setError] = React.useState(false);
+    const [labourData, setLabourData] = React.useState([]);
+
+
+    const request = async(scheduleID) => {
+        const api = new FetchServiceProvider();
+        const route = '/api/store/schedule/labour/weekly';
+
+        const header = {
+            'Content-Type': 'application/json',
+            'accessToken': api.getCookie('accessToken'),
+            'scheduleID': scheduleID
+        }
+
+        return api.get(route, header);
+    }
+
+
+    // send the request to the server.
+    React.useEffect(() => {
+        request(props.scheduleID).then(response => {
+            if (response.status === 200 || response.status === 'success') {
+                    setLabourData(response.data);
+            } else {
+                setError(true);
+            }
+        });
+    }, [])
+
+
+    if (error === true) {
+        return (
+            <div className='text-danger text-center mt-2'>
+                <h3>
+                    <span className="fas fa-exclamation-circle text-danger"></span>
+                    <span className='text-danger'> Error:  No data found for that week</span>
+                </h3>
+            </div>
+        )
+
+    }
+
+    const getWeeklyLabourCost = (labourCost) => {
+
+       return  Object.keys(labourCost).map((employee, index) => {
+           console.log(employee);
+            return [
+                labourCost[employee].first_name + ' ' + labourCost[employee].last_name,
+                labourCost[employee].totalHours,
+                " $" + Math.round(labourCost[employee].totalHours * labourCost[employee].salary),
+            ];
+        });
+    }
+
+
+
+    return (<Chart chartType="Bar"
+        width="100%"
+        height="400px"
+        data={[
+            ['employee', 'hours', 'LabourCost'],
+            ...getWeeklyLabourCost(labourData)
+            ]}
+            options={{
+                title: 'Weekly Labour Cost',
+                chartArea: { width: '50%' },
+                hAxis: {
+                    title: 'Hours',
+                    minValue: 0
+                    },
+                    vAxis: {
+                        title: 'Employee'
+                        },
+                        legend: { position: 'none' }
+                        }}
+                        legendToggle
+                        />)
+}
+
 
 
 export const ScheduleLabour = (props) => {
@@ -170,7 +204,6 @@ export const ScheduleLabour = (props) => {
     // set the data from the schedules.
     React.useEffect(() => {
         request().then((response) => {
-            console.log(response);
             if (response.status === 200 || response.status === "success") {
                 setSchedule(response.data);
             }
@@ -196,62 +229,90 @@ export const ScheduleLabour = (props) => {
         <div className="_labour_">
             <div className="row">
 
+                <div className='col-md-12'>
                     <h2 className="header-subtitle text-center">Labour Cost</h2>
-                    <img
-                        src="/img/SVG/finance_analytics.svg"
-                        width={250}
-                        height={250}
-                    />
-                    <p className="text-center text-muted">
-                        Current Labour cost of your store
-                    </p>
+                    <div className='_img_ d-block mx-auto text-center'>
+                        <img src="/img/SVG/finance_analytics.svg" width={250} height={250} />
+                    </div>
+                        <p className="text-center text-muted">
+                            Current Labour cost of your store
+                        </p>
+                </div>
 
-                <div className='col-md-6 d-block mx-auto text-center'>
-                    <select className='form-select'>
-                        <option> Please Select an week </option>
-                        {
-                            schedule.map((item, index) => {
-                                return <option key={index}>{formatDateRange(item.week, item.year) } </option>
-                            })
-                        }
-                    </select>
+                    <div className="col-md-6 d-block text-center mx-auto">
+                        <div className='form-group'>
+                            <label> Please select a week </label>
+                            <p id="error-container" className='text-danger'></p>
+                            <select className='form-select mt-4' id='schedule-id'>
+                            <option> Please select a week </option>
+                            {
+                                schedule.map((week, index) => {
+                                    return (
+                                        <option key={index} value={week.id}>
+                                            {formatDateRange(week.week, week.year)}
+                                        </option>
+                                    );
+                                })
+                            }
+                        </select>
+                        </div>
 
-
-                    <div className="row">
-                        <div className='col-md-12 mx-auto d-block text-center'>
-                            <button className='header-action btn-lg' onClick={
+                        <div className='form-group'>
+                            <button className='btn header-action w-75' onClick={
                                 (e) => {
-                                    const container = document.getElementById('labourWeekly');
+                                    const container = document.getElementById('weekly-labour-container');
+                                    const scheduleID = document.getElementById('schedule-id').value;
+                                    const errorContainer = document.getElementById('error-container');
+
+                                    if (scheduleID === 'Please select a week') {
+                                       return errorContainer.innerHTML = 'Please select a week';
+                                    }
+
+                                    errorContainer.innerHTML = '';
+                                    if (container.hasChildNodes()) {
+                                       ReactDOM.unmountComponentAtNode(container);
+                                    }
+
+                                    return ReactDOM.render(<WeeklyLabourCost scheduleID={scheduleID} />, container);
                                 }
                             }>
-                                <i className="fas fa-chart-bar"></i>
-                                <span> Go </span>
+                                <i className="fas fa-sync-alt"></i>
+                                GO
                             </button>
                         </div>
                     </div>
-                </div>
             </div>
 
             {/** three containers for the charts analytics  */}
             <div className="row">
-                <div className="col-md-3 mx-auto chart-container">
-                    <h1 className="text-center header-subtitle">
-                        <b> Today's Labour Cost </b>
 
+                <div className='col-md-5 mx-auto chart-container'>
+                    {/** section inorder to render the employees labour via the week selected */}
+                    <h1 className='text-center header-subtitle'>
+                        <b> Weekly Labour Cost</b>
                     </h1>
 
-                    <div id='labourDaily'>
-                        <TodaysLabourCost />
+                    <small className='text-center text-muted'>
+                        View your labour cost for the week selected.
+                    </small>
+
+                    <div id='weekly-labour-container'>
+
                     </div>
                 </div>
 
-                <div className="col-md-3 chart-container mx-auto">
-                    <h1 className="text-center header-subtitle">
-                        <b> Weekly Labour Cost </b>
-                    </h1>
 
-                    <div id='labourWeekly'>
-                        <LabourCostWeekly />
+
+                <div className="col-md-5 mx-auto chart-container">
+                    <h1 className="text-center header-subtitle">
+                        <b> Today's Labour Cost </b>
+                    </h1>
+                    <small className='text-center text-muted'>
+                            View your labour cost for today
+                        </small>
+
+                    <div id='labourDaily'>
+                        <TodaysLabourCost />
                     </div>
                 </div>
 

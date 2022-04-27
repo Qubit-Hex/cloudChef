@@ -18,9 +18,6 @@ import { CreateNutritionalFacts } from "./create.NutritionalFacts";
 
  export const AddRecipeIngredients = (props) => {
 
-
-    // check if the data is being passed to the component
-    console.log(props);
     // the state where we will hold the ingredients
     const [ingredient, setIngredient] = React.useState([]);
 
@@ -88,7 +85,7 @@ import { CreateNutritionalFacts } from "./create.NutritionalFacts";
                 <small className='text-muted'> Example: 6oz of demi glaze. </small>
                 <input type='text' className="form-control mt-2 mb-2" id="recipe-ingredents" placeholder="Enter ingredents" />
                 <span  id='recipeIngredientsError' className='text-danger'></span>
-                <button className='btn btn-message mt-2 mx-auto d-block' onClick={(e) => {
+                <button className='btn btn-message mt-2 mx-auto d-block w-auto' onClick={(e) => {
                 // append the the ingredents to the ingredents array
                 let ingredents = document.getElementById("recipe-ingredents").value;
                 // append the ingredents to the ingredents array
@@ -158,7 +155,7 @@ import { CreateNutritionalFacts } from "./create.NutritionalFacts";
                     return (
                         <tr key={index}>
                             <td> {item} </td>
-                            <td> <button className='btn btn-danger mx-auto d-block' data-key={index} onClick={
+                            <td> <button className='btn btn-danger mx-auto d-block w-auto' data-key={index} onClick={
                                 // remove an item from the ingredents array
                                 (e) => {
                                     // this is our clean up operation in the ingredents array
@@ -187,23 +184,23 @@ import { CreateNutritionalFacts } from "./create.NutritionalFacts";
 
             }
         </div>
-                            <div className="row mt-4 ml-4 mx-auto">
+                            <div className="row mt-4 ml-4 mx-auto d-flex" style={{
+                                border: "1px solid #ccc",
+                                borderRadius: "5px",
+                            }}>
                                 { /** make back and next buttons in same row side by side  */}
 
-                                <div className='col mt-2'>
-                                    <button className='btn btn-danger mx-auto d-block' onClick={(e) => {
+
+                                    <button className='btn btn-danger mx-auto d-block w-25 m-4' onClick={(e) => {
                                         // handle the nutritional facts for the ingredients
                                         const container = document.getElementById("modal-container");
                                                     return ReactDOM.render(<CreateRecipeModal />, container);
                                     }}> Back </button>
-                                </div>
 
-                                <div className='col mt-2'>
-                                    <button className='btn btn-message mx-auto d-block' onClick={(e) => {
+                                    <button className='btn btn-message mx-auto d-block w-25 m-4' onClick={(e) => {
                                         // handle the nutritional facts for the ingredients
                                         handleNutritionalFacts();
                                     }}> Next </button>
-                                </div>
 
 
                                 </div>

@@ -91,24 +91,90 @@ class labour extends Controller
      */
     public function getWeekly(Request $request)
     {
-        // @blueprint
-        // total cost of the weeks labour
-        // via each week to a point of 4 weeks.
+        // @blueprint calculate the labour cost
+        $token = $request->header('accessToken');
+        $scheduleID = $request->header('scheduleID');
+        $isUserAdmin = $this->policy->isUserAdmin($token, true);
 
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Weekly Labour',
-            'data' => [
-                'labour' => [
-                    'name' => 'John Doe',
-                    'date' => '2019-12-12',
-                    'time' => '12:00',
-                    'hours' => '8',
-                    'rate' => '10',
-                    'total' => '80'
-                ]
-            ]
-        ]);
+        // check if the user is a admin
+        if (!$isUserAdmin) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
+        // next lets get the store of the user
+        $storeID = $isUserAdmin->storeID;
+        $schedule = DB::table('schedule')->where('id', $scheduleID)->
+                    where('storeID', $storeID)->first();
+
+
+        if ($schedule)  {
+            // schedule was found so lets get the shifts
+
+            $shifts = DB::table('employee_shifts')->where('schedule_id', $scheduleID)->get();
+            $salary = $this->employee->getEmployeesSalaryByStoreID($storeID);
+
+            $employeeData = [];
+
+            for ($i = 0; $i < count($salary); $i++)  {
+                // loop through the shifts inorder to get the employees total hours
+
+                $employeeData[$salary[$i]->id] = [
+                    'id' => $salary[$i]->id,
+                    'salary' => floor($salary[$i]->salary / 52 / 40),
+                    'first_name' => $salary[$i]->first_name,
+                    'last_name' => $salary[$i]->last_name,
+                    'totalHours' => 0
+                ];
+
+                for ($j = 0; $j < count($shifts); $j++)  {
+                    // loop through the shifts inorder to get the employees total hours
+                    if ($shifts[$j]->employee_id === $salary[$i]->id)  {
+                        // convert time into float and add to total hours
+
+                        // replace the colon with a dot
+
+                        if ($shifts[$j]->start_time !== null)  {
+                            $start =  (float) str_replace(':', '.', $shifts[$j]->start_time);
+                        } else {
+                            $start = 0;
+                        }
+
+                        if ($shifts[$j]->end_time !== null)  {
+                            $end = (float) str_replace(':', '.', $shifts[$j]->end_time);
+                        } else {
+                            $end = 0;
+                        }
+
+                        // check if the start time is greater than the end time
+                        if ($start > $end)  {
+                            // add 24 hours to the end time
+                            $end += 24;
+                        }
+
+                        
+                        // always return a positive number
+                        $totalTime = $end - $start;
+                        // convert negitive to positive
+                        if ($totalTime < 0) {
+                            $totalTime = $totalTime * -1;
+                        }
+
+                        $employeeData[$salary[$i]->id]['totalHours'] += $totalTime;
+                    }
+                }
+            }
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'successfully got the weekly labour',
+                'data' => $employeeData,
+                'shifts' => $shifts
+
+            ], 200);
+        }
+
+        // return error
+        return response()->json(['error' => 'Schedule not found'], 404);
     }
 
 

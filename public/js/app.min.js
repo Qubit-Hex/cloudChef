@@ -8479,9 +8479,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var AddRecipeIngredients = function AddRecipeIngredients(props) {
-  // check if the data is being passed to the component
-  console.log(props); // the state where we will hold the ingredients
-
+  // the state where we will hold the ingredients
   var _React$useState = react__WEBPACK_IMPORTED_MODULE_0__.useState([]),
       _React$useState2 = _slicedToArray(_React$useState, 2),
       ingredient = _React$useState2[0],
@@ -8580,7 +8578,7 @@ var AddRecipeIngredients = function AddRecipeIngredients(props) {
                       id: "recipeIngredientsError",
                       className: "text-danger"
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
-                      className: "btn btn-message mt-2 mx-auto d-block",
+                      className: "btn btn-message mt-2 mx-auto d-block w-auto",
                       onClick: function onClick(e) {
                         // append the the ingredents to the ingredents array
                         var ingredents = document.getElementById("recipe-ingredents").value; // append the ingredents to the ingredents array
@@ -8648,7 +8646,7 @@ var AddRecipeIngredients = function AddRecipeIngredients(props) {
                           children: [" ", item, " "]
                         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("td", {
                           children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
-                            className: "btn btn-danger mx-auto d-block",
+                            className: "btn btn-danger mx-auto d-block w-auto",
                             "data-key": index,
                             onClick: // remove an item from the ingredents array
                             function onClick(e) {
@@ -8676,28 +8674,26 @@ var AddRecipeIngredients = function AddRecipeIngredients(props) {
                 }), " "]
               }) : false
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-              className: "row mt-4 ml-4 mx-auto",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-                className: "col mt-2",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
-                  className: "btn btn-danger mx-auto d-block",
-                  onClick: function onClick(e) {
-                    // handle the nutritional facts for the ingredients
-                    var container = document.getElementById("modal-container");
-                    return react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_CreateRecipeModal__WEBPACK_IMPORTED_MODULE_2__.CreateRecipeModal, {}), container);
-                  },
-                  children: " Back "
-                })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-                className: "col mt-2",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
-                  className: "btn btn-message mx-auto d-block",
-                  onClick: function onClick(e) {
-                    // handle the nutritional facts for the ingredients
-                    handleNutritionalFacts();
-                  },
-                  children: " Next "
-                })
+              className: "row mt-4 ml-4 mx-auto d-flex",
+              style: {
+                border: "1px solid #ccc",
+                borderRadius: "5px"
+              },
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+                className: "btn btn-danger mx-auto d-block w-25 m-4",
+                onClick: function onClick(e) {
+                  // handle the nutritional facts for the ingredients
+                  var container = document.getElementById("modal-container");
+                  return react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_CreateRecipeModal__WEBPACK_IMPORTED_MODULE_2__.CreateRecipeModal, {}), container);
+                },
+                children: " Back "
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+                className: "btn btn-message mx-auto d-block w-25 m-4",
+                onClick: function onClick(e) {
+                  // handle the nutritional facts for the ingredients
+                  handleNutritionalFacts();
+                },
+                children: " Next "
               })]
             })]
           })
@@ -8830,12 +8826,12 @@ var CreateInstructions = function CreateInstructions(props) {
               closeWindow();
             }
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
           "class": "modal-body d-flex",
           style: {
             padding: "50px"
           },
-          children: [console.log(instructions), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
             className: "container",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
               className: "row",
@@ -8863,7 +8859,7 @@ var CreateInstructions = function CreateInstructions(props) {
                       id: "recipe-ingredents",
                       placeholder: " Please Enter: instructions."
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
-                      className: "btn btn-message mt-2 mx-auto d-block",
+                      className: "btn btn-message mt-2 mx-auto d-block w-50",
                       onClick: function onClick(e) {
                         // append the the ingredents to the ingredents array
                         var ingredents = document.getElementById("recipe-ingredents").value; // append the ingredents to the ingredents array
@@ -8927,7 +8923,7 @@ var CreateInstructions = function CreateInstructions(props) {
                         children: [" ", item, " "]
                       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("td", {
                         children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
-                          className: "btn btn-danger mx-auto d-block",
+                          className: "btn btn-danger mx-auto d-block w-50",
                           "data-key": index,
                           onClick: // remove an item from the ingredents array
                           function onClick(e) {
@@ -8954,9 +8950,9 @@ var CreateInstructions = function CreateInstructions(props) {
                 })]
               }) : false
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-              className: "row mt-4 mx-auto d-block",
+              className: "row mt-4 mx-auto d-flex",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
-                className: "btn btn-danger btn-block mt-1",
+                className: "btn btn-danger btn-block mt-1 mx-auto w-25",
                 onClick: function onClick(e) {
                   var modalContainer = document.getElementById('modal-container'); // return the previous modal and pass out state to share the information
 
@@ -8990,11 +8986,11 @@ var CreateInstructions = function CreateInstructions(props) {
                     }), _errorContainer);
                   }
                 },
-                className: "btn btn-message btn-block mt-1",
+                className: "btn btn-message btn-block mt-1 mx-auto w-25",
                 children: "Next"
               })]
             })]
-          })]
+          })
         })]
       })
     })
@@ -9119,7 +9115,7 @@ var CreateRecipeTime = function CreateRecipeTime(props) {
               className: "col mx-auto d-block",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
                 type: "button",
-                className: "btn btn-danger btn-block m-4",
+                className: "btn btn-danger btn-block m-4 w-25 mx-auto",
                 onClick: function onClick(e) {
                   // go back to the last form
                   var container = document.getElementById("modal-container");
@@ -9135,7 +9131,7 @@ var CreateRecipeTime = function CreateRecipeTime(props) {
               className: "col mx-auto d-block",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
                 type: "button",
-                className: "btn btn-message btn-block m-4",
+                className: "btn btn-message btn-block m-4 w-25 mx-auto",
                 onClick: function onClick(e) {
                   // our elements to be validated
                   var container = document.getElementById("modal-container");
@@ -11207,8 +11203,6 @@ var ModifyRecipeIngredients = function ModifyRecipeIngredients(props) {
 
               _context2.next = 5;
               return api.patch(route, data, headers).then(function (response) {
-                console.log(response);
-
                 if (response.status === 200) {
                   setStatus(true);
                 } else {
@@ -11356,7 +11350,7 @@ var ModifyRecipeIngredients = function ModifyRecipeIngredients(props) {
               id: "recipeIngredientsError",
               className: "text-danger"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
-              className: "btn btn-message mt-2 mx-auto d-block",
+              className: "btn btn-message mt-2 mx-auto d-block w-auto",
               onClick: function onClick(e) {
                 // append the the ingredents to the ingredents array
                 var ingredents = document.getElementById("recipe-ingredents").value; // append the ingredents to the ingredents array
@@ -11424,7 +11418,7 @@ var ModifyRecipeIngredients = function ModifyRecipeIngredients(props) {
                   children: [" ", item, " "]
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("td", {
                   children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
-                    className: "btn btn-danger mx-auto d-block",
+                    className: "btn btn-danger mx-auto d-block w-auto",
                     "data-key": index,
                     onClick: // remove an item from the ingredents array
                     function onClick(e) {
@@ -11456,7 +11450,7 @@ var ModifyRecipeIngredients = function ModifyRecipeIngredients(props) {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
         className: "col mt-2",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
-          className: "btn btn-message mx-auto d-block",
+          className: "btn btn-message mx-auto d-block w-auto",
           onClick: function onClick(e) {
             // handle the nutritional facts for the ingredients
             handleNutritionalFacts();
@@ -11756,7 +11750,7 @@ var ModifyRecipeInstructions = function ModifyRecipeInstructions(props) {
               id: "recipe-ingredents",
               placeholder: " Please Enter: instructions."
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
-              className: "btn btn-message mt-2 mx-auto d-block",
+              className: "btn btn-message mt-2 mx-auto d-block w-auto",
               onClick: function onClick(e) {
                 // append the the ingredents to the ingredents array
                 var ingredents = document.getElementById("recipe-ingredents").value; // append the ingredents to the ingredents array
@@ -11819,7 +11813,7 @@ var ModifyRecipeInstructions = function ModifyRecipeInstructions(props) {
                 children: [" ", item, " "]
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("td", {
                 children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
-                  className: "btn btn-danger mx-auto d-block",
+                  className: "btn btn-danger mx-auto d-block w-auto",
                   "data-key": index,
                   onClick: // remove an item from the ingredents array
                   function onClick(e) {
@@ -11848,7 +11842,7 @@ var ModifyRecipeInstructions = function ModifyRecipeInstructions(props) {
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
       className: "row",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
-        className: "btn btn-message",
+        className: "btn btn-message w-auto mx-auto d-block",
         onClick: function onClick(e) {
           // update the data and preform some validation checks
           updateData(instructions);
@@ -11979,7 +11973,7 @@ var TemplateModal = function TemplateModal(props) {
             },
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
               type: "button",
-              "class": "btn-transparent btn-sm btn-danger",
+              "class": "btn-transparent btn-sm btn-danger mx-auto w-50 d-block",
               onClick: function onClick(e) {
                 e.preventDefault();
                 closeWindow();
@@ -12082,28 +12076,34 @@ var SendEndPoint = function SendEndPoint(props) {
       title: "Error",
       body: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
         className: "success-message-wrapper",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
-          src: "/img/errors/cancel.svg",
-          alt: "request failed",
-          width: 250,
-          height: 250,
-          className: "img-fluid success-message-icon"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
-          "class": "fas fa-hand-paper text-danger"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("span", {
-          className: "success-message",
-          children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("b", {
-            className: "text-danger",
-            children: " Request Failed:"
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+          className: "text-center mx-auto",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
+            src: "/img/errors/cancel.svg",
+            alt: "request failed",
+            width: 250,
+            height: 250,
+            className: "img-fluid success-message-icon"
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+          className: "text-center",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
+            "class": "fas fa-hand-paper text-danger"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("span", {
+            className: "success-message",
+            children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("b", {
+              className: "text-danger",
+              children: " Request Failed:"
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("p", {
+            className: "text-muted mt-4",
+            children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("b", {
+              children: " Reason:"
+            }), "  ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("span", {
+              className: "text-muted text-danger",
+              children: [" ", apiMesssage, " "]
+            }), "  "]
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("p", {
-          className: "text-muted mt-4",
-          children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("b", {
-            children: " Reason:"
-          }), "  ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("span", {
-            className: "text-muted text-danger",
-            children: [" ", apiMesssage, " "]
-          }), "  "]
         })]
       })
     });
@@ -12113,14 +12113,23 @@ var SendEndPoint = function SendEndPoint(props) {
       title: "Success",
       body: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
         className: "success-message-wrapper",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
-          src: "/img/SVG/network_outline.svg",
-          "class": "img-fluid success-message-icon"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
-          className: "fas fa-check-circle text-success"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("span", {
-          className: "success-message ml-4",
-          children: [" ", apiMesssage]
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+          className: "text-center mx-auto",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
+            src: "/img/SVG/recipe_added.svg",
+            alt: "request failed",
+            width: 250,
+            height: 250,
+            className: "img-fluid success-message-icon"
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+          className: "text-center",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
+            className: "fas fa-check-circle text-success"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("span", {
+            className: "success-message ml-4",
+            children: [" ", apiMesssage]
+          })]
         })]
       })
     });
@@ -12964,7 +12973,7 @@ var RecipeModifyModal = function RecipeModifyModal(props) {
             children: " Recipe Details "
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("button", {
-          className: "btn btn-message mt-2",
+          className: "btn btn-message mt-2 d-block mx-auto w-auto",
           onClick: function onClick(e) {
             var inputElement = document.getElementById('recipe-modify-select'); // find the value of the selected option
 
@@ -13016,7 +13025,11 @@ var RecipeModifyModal = function RecipeModifyModal(props) {
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
         id: "_subContent_",
-        className: "mt-4"
+        className: "mt-4 p-2",
+        style: {
+          border: '0.5px solid #ccc',
+          borderRadius: '5px'
+        }
       })]
     })
   });
@@ -15256,42 +15269,6 @@ var ScheduleGridMenu = function ScheduleGridMenu(props) {
           })]
         })
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-      className: "col-md-4",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-        className: "tile",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-          className: "tile-content",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-            className: "mx-auto text-center",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
-              src: "/img/SVG/employee_card.svg",
-              className: "mx-auto",
-              width: 300,
-              height: 300
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
-            className: "text-center m-2 header-subtitle",
-            children: " Schedule Requests "
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-            className: "text-center text-muted ",
-            children: " View employees schedule requests "
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-            className: "tile-icon  text-center",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("a", {
-              className: "btn header-action btn-lg m-4 mx-auto w-50",
-              style: {
-                color: 'white',
-                textDecoration: 'none'
-              },
-              href: "/dashboard/schedule/request/",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-                children: " Schedule Requests"
-              })
-            })
-          })]
-        })
-      })
     })]
   });
 };
@@ -15318,6 +15295,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -15329,12 +15320,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 /**
  *
@@ -15350,21 +15335,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
-/**
- *
- *  @component: getLabourCostWeekly
- *
- *
- *  @purpose: inorder to get the labour cost of the organization for the week.
- *
- *
- */
 
 
 
+var TodaysLabourCost = function TodaysLabourCost(props) {
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_1__.useState(0),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      cost = _React$useState2[0],
+      setCost = _React$useState2[1];
 
-var LabourCostWeekly = function LabourCostWeekly(props) {
-  // get the week cost of the labour for the store
   var request = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
       var api, route, header;
@@ -15373,7 +15352,7 @@ var LabourCostWeekly = function LabourCostWeekly(props) {
           switch (_context.prev = _context.next) {
             case 0:
               api = new _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_3__["default"]();
-              route = '/api/store/schedule/labour/weekly';
+              route = '/api/store/schedule/labour/daily';
               header = {
                 'Content-Type': 'application/json',
                 'accessToken': api.getCookie('accessToken')
@@ -15395,72 +15374,6 @@ var LabourCostWeekly = function LabourCostWeekly(props) {
     return function request() {
       return _ref.apply(this, arguments);
     };
-  }();
-
-  react__WEBPACK_IMPORTED_MODULE_1__.useEffect(function () {
-    request().then(function (response) {
-      console.log(response);
-    });
-  }, []); // pass the data to the google chart for rendering of the information from the database.
-
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_google_charts__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    chartType: "BarChart",
-    width: '100%',
-    height: '400px',
-    data: [['Day', 'Labour Cost'], ['Monday', 100], ['Tuesday', 200], ['Wednesday', 300], ['Thursday', 400], ['Friday', 500], ['Saturday', 600], ['Sunday', 700]],
-    options: {
-      title: 'Labour Cost',
-      chartArea: {
-        width: '50%'
-      },
-      hAxis: {
-        title: 'Day',
-        minValue: 0
-      },
-      vAxis: {
-        title: 'Labour Cost',
-        minValue: 0
-      }
-    }
-  });
-};
-
-var TodaysLabourCost = function TodaysLabourCost(props) {
-  var _React$useState = react__WEBPACK_IMPORTED_MODULE_1__.useState(0),
-      _React$useState2 = _slicedToArray(_React$useState, 2),
-      cost = _React$useState2[0],
-      setCost = _React$useState2[1];
-
-  var request = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-      var api, route, header;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              api = new _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_3__["default"]();
-              route = '/api/store/schedule/labour/daily';
-              header = {
-                'Content-Type': 'application/json',
-                'accessToken': api.getCookie('accessToken')
-              };
-              _context2.next = 5;
-              return api.get(route, header);
-
-            case 5:
-              return _context2.abrupt("return", _context2.sent);
-
-            case 6:
-            case "end":
-              return _context2.stop();
-          }
-        }
-      }, _callee2);
-    }));
-
-    return function request() {
-      return _ref2.apply(this, arguments);
-    };
   }(); // get daily labour cost
 
 
@@ -15479,7 +15392,6 @@ var TodaysLabourCost = function TodaysLabourCost(props) {
         if (response.employeeSalary[j].id === response.data[i].employee_id) {
           var hourlyRate = Math.round(response.employeeSalary[j].salary / 52 / 40);
           hours += total * hourlyRate;
-          console.log(hours);
         }
       }
     }
@@ -15490,33 +15402,144 @@ var TodaysLabourCost = function TodaysLabourCost(props) {
 
   react__WEBPACK_IMPORTED_MODULE_1__.useEffect(function () {
     request().then(function (response) {
-      console.log(response);
-
       if (response.status === 200 || response.status === 'success') {
         if (response.data.length > 0) {
           // run the function inorder to get the labour cost
           setCost(getDailyLabourCost(response));
         } else {
           // we go not data back
-          setCost("No Data");
+          setCost("No Data Available at this time");
         }
       }
     });
   }, []);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
     children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("h1", {
-      className: "header-title mt-4",
+      className: "mt-4",
+      style: {
+        fontSize: '4rem'
+      },
       children: [" ", (0,lodash__WEBPACK_IMPORTED_MODULE_4__.isNumber)(cost) === true ? "$".concat(cost) : "No Data", " "]
     })]
+  });
+};
+/**
+ *
+ *  @component: weeklyLabourCost
+ *
+ *
+ *   @purpose: inorder to render the weekly labour cost of the organization.
+ *
+ *
+ *  @props: scheduleID
+ *
+ */
+
+
+var WeeklyLabourCost = function WeeklyLabourCost(props) {
+  // check if the props.ScheduleID is a number
+  var _React$useState3 = react__WEBPACK_IMPORTED_MODULE_1__.useState(false),
+      _React$useState4 = _slicedToArray(_React$useState3, 2),
+      error = _React$useState4[0],
+      setError = _React$useState4[1];
+
+  var _React$useState5 = react__WEBPACK_IMPORTED_MODULE_1__.useState([]),
+      _React$useState6 = _slicedToArray(_React$useState5, 2),
+      labourData = _React$useState6[0],
+      setLabourData = _React$useState6[1];
+
+  var request = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2(scheduleID) {
+      var api, route, header;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              api = new _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_3__["default"]();
+              route = '/api/store/schedule/labour/weekly';
+              header = {
+                'Content-Type': 'application/json',
+                'accessToken': api.getCookie('accessToken'),
+                'scheduleID': scheduleID
+              };
+              return _context2.abrupt("return", api.get(route, header));
+
+            case 4:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+
+    return function request(_x) {
+      return _ref2.apply(this, arguments);
+    };
+  }(); // send the request to the server.
+
+
+  react__WEBPACK_IMPORTED_MODULE_1__.useEffect(function () {
+    request(props.scheduleID).then(function (response) {
+      if (response.status === 200 || response.status === 'success') {
+        setLabourData(response.data);
+      } else {
+        setError(true);
+      }
+    });
+  }, []);
+
+  if (error === true) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+      className: "text-danger text-center mt-2",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("h3", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+          className: "fas fa-exclamation-circle text-danger"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+          className: "text-danger",
+          children: " Error:  No data found for that week"
+        })]
+      })
+    });
+  }
+
+  var getWeeklyLabourCost = function getWeeklyLabourCost(labourCost) {
+    return Object.keys(labourCost).map(function (employee, index) {
+      console.log(employee);
+      return [labourCost[employee].first_name + ' ' + labourCost[employee].last_name, labourCost[employee].totalHours, " $" + Math.round(labourCost[employee].totalHours * labourCost[employee].salary)];
+    });
+  };
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_google_charts__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    chartType: "Bar",
+    width: "100%",
+    height: "400px",
+    data: [['employee', 'hours', 'LabourCost']].concat(_toConsumableArray(getWeeklyLabourCost(labourData))),
+    options: {
+      title: 'Weekly Labour Cost',
+      chartArea: {
+        width: '50%'
+      },
+      hAxis: {
+        title: 'Hours',
+        minValue: 0
+      },
+      vAxis: {
+        title: 'Employee'
+      },
+      legend: {
+        position: 'none'
+      }
+    },
+    legendToggle: true
   });
 };
 
 var ScheduleLabour = function ScheduleLabour(props) {
   // schedule state
-  var _React$useState3 = react__WEBPACK_IMPORTED_MODULE_1__.useState([]),
-      _React$useState4 = _slicedToArray(_React$useState3, 2),
-      schedule = _React$useState4[0],
-      setSchedule = _React$useState4[1]; // grab the required data from the props
+  var _React$useState7 = react__WEBPACK_IMPORTED_MODULE_1__.useState([]),
+      _React$useState8 = _slicedToArray(_React$useState7, 2),
+      schedule = _React$useState8[0],
+      setSchedule = _React$useState8[1]; // grab the required data from the props
 
 
   var request = /*#__PURE__*/function () {
@@ -15556,8 +15579,6 @@ var ScheduleLabour = function ScheduleLabour(props) {
 
   react__WEBPACK_IMPORTED_MODULE_1__.useEffect(function () {
     request().then(function (response) {
-      console.log(response);
-
       if (response.status === 200 || response.status === "success") {
         setSchedule(response.data);
       }
@@ -15588,119 +15609,104 @@ var ScheduleLabour = function ScheduleLabour(props) {
     className: "_labour_",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
       className: "row",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h2", {
-        className: "header-subtitle text-center",
-        children: "Labour Cost"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
-        src: "/img/SVG/finance_analytics.svg",
-        width: 250,
-        height: 250
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
-        className: "text-center text-muted",
-        children: "Current Labour cost of your store"
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+        className: "col-md-12",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h2", {
+          className: "header-subtitle text-center",
+          children: "Labour Cost"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+          className: "_img_ d-block mx-auto text-center",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("img", {
+            src: "/img/SVG/finance_analytics.svg",
+            width: 250,
+            height: 250
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
+          className: "text-center text-muted",
+          children: "Current Labour cost of your store"
+        })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-        className: "col-md-6 d-block mx-auto text-center",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("select", {
-          className: "form-select",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
-            children: " Please Select an week "
-          }), schedule.map(function (item, index) {
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("option", {
-              children: [formatDateRange(item.week, item.year), " "]
-            }, index);
+        className: "col-md-6 d-block text-center mx-auto",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+          className: "form-group",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
+            children: " Please select a week "
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
+            id: "error-container",
+            className: "text-danger"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("select", {
+            className: "form-select mt-4",
+            id: "schedule-id",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
+              children: " Please select a week "
+            }), schedule.map(function (week, index) {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
+                value: week.id,
+                children: formatDateRange(week.week, week.year)
+              }, index);
+            })]
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-          className: "row",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-            className: "col-md-12 mx-auto d-block text-center",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("button", {
-              className: "header-action btn-lg",
-              onClick: function onClick(e) {
-                var container = document.getElementById('labourWeekly');
-              },
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
-                className: "fas fa-chart-bar"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-                children: " Go "
-              })]
-            })
+          className: "form-group",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("button", {
+            className: "btn header-action w-75",
+            onClick: function onClick(e) {
+              var container = document.getElementById('weekly-labour-container');
+              var scheduleID = document.getElementById('schedule-id').value;
+              var errorContainer = document.getElementById('error-container');
+
+              if (scheduleID === 'Please select a week') {
+                return errorContainer.innerHTML = 'Please select a week';
+              }
+
+              errorContainer.innerHTML = '';
+
+              if (container.hasChildNodes()) {
+                react_dom__WEBPACK_IMPORTED_MODULE_2__.unmountComponentAtNode(container);
+              }
+
+              return react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(WeeklyLabourCost, {
+                scheduleID: scheduleID
+              }), container);
+            },
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
+              className: "fas fa-sync-alt"
+            }), "GO"]
           })
         })]
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
       className: "row",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-        className: "col-md-3 mx-auto chart-container",
+        className: "col-md-5 mx-auto chart-container",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h1", {
+          className: "text-center header-subtitle",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("b", {
+            children: " Weekly Labour Cost"
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("small", {
+          className: "text-center text-muted",
+          children: "View your labour cost for the week selected."
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+          id: "weekly-labour-container"
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+        className: "col-md-5 mx-auto chart-container",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h1", {
           className: "text-center header-subtitle",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("b", {
             children: " Today's Labour Cost "
           })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("small", {
+          className: "text-center text-muted",
+          children: "View your labour cost for today"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
           id: "labourDaily",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(TodaysLabourCost, {})
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-        className: "col-md-3 chart-container mx-auto",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h1", {
-          className: "text-center header-subtitle",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("b", {
-            children: " Weekly Labour Cost "
-          })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-          id: "labourWeekly",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(LabourCostWeekly, {})
-        })]
       })]
     })]
   });
-};
-
-/***/ }),
-
-/***/ "./resources/js/components/dashboard/schedule/schedule.request.jsx":
-/*!*************************************************************************!*\
-  !*** ./resources/js/components/dashboard/schedule/schedule.request.jsx ***!
-  \*************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ScheduleRequestPage": () => (/* binding */ ScheduleRequestPage)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../lib/fetchServiceProvider */ "./resources/js/lib/fetchServiceProvider.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/**
- *
- *  @file: schedule.request.jsx
- *
- *  @purpose: inorder to render the request page of the orginization.
- *
- *
- */
-
-
-
-/**
- *
- *  @component: ScheduleRequestPage
- *
- *  @purpose: inorder to render the request page of the orginization.
- *
- */
-
-
-{
-  /** function for accepting requests */
-}
-{
-  /** function for denying requests */
-}
-var ScheduleRequestPage = function ScheduleRequestPage(props) {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {});
 };
 
 /***/ }),
@@ -18531,7 +18537,7 @@ var EmployeesPage = function EmployeesPage(props) {
 
   var calculateHoursRate = function calculateHoursRate(salary) {
     // get the hourly rate of the employee of the store.
-    return Math.floor(salary / 52 / 5 / 8) + " / HR";
+    return Math.floor(salary / 52 / 40) + " / HR";
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
@@ -18741,11 +18747,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "DashboardHome": () => (/* binding */ DashboardHome)
 /* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var _components_dashboard_contactsNavbar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/dashboard/contactsNavbar */ "./resources/js/components/dashboard/contactsNavbar.jsx");
-/* harmony import */ var _components_dashboard_recipe_core_template_modal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/dashboard/recipe/core/template.modal */ "./resources/js/components/dashboard/recipe/core/template.modal.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var _components_dashboard_contactsNavbar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/dashboard/contactsNavbar */ "./resources/js/components/dashboard/contactsNavbar.jsx");
+/* harmony import */ var _components_dashboard_recipe_core_template_modal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/dashboard/recipe/core/template.modal */ "./resources/js/components/dashboard/recipe/core/template.modal.jsx");
+/* harmony import */ var _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../lib/fetchServiceProvider */ "./resources/js/lib/fetchServiceProvider.js");
+/* harmony import */ var _components_dashboard_schedule_core_ScheduleTable__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/dashboard/schedule/core/ScheduleTable */ "./resources/js/components/dashboard/schedule/core/ScheduleTable.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 /**
  *
  *  @file: Dashboard.home.jsx
@@ -18754,6 +18782,8 @@ __webpack_require__.r(__webpack_exports__);
  *  @purpose : inorder to render the home splash screen for the dashboard
  *
  */
+
+
 
 
 
@@ -18770,90 +18800,148 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var DashboardHome = function DashboardHome(props) {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-    className: "container-fluid rm-pm dashboard-content",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-      className: "row",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-        className: "row",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_1__.useState([]),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      employees = _React$useState2[0],
+      setEmployees = _React$useState2[1];
+
+  var RequestStoreEmployees = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      var api, route, headers;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              api = new _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_5__["default"]();
+              route = "/api/store/employees/";
+              headers = {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                accessToken: api.getCookie("accessToken")
+              }; // return the promise for us to work with at a later time/
+
+              _context.next = 5;
+              return api.get(route, headers);
+
+            case 5:
+              return _context.abrupt("return", _context.sent);
+
+            case 6:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function RequestStoreEmployees() {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  react__WEBPACK_IMPORTED_MODULE_1__.useEffect(function () {
+    RequestStoreEmployees().then(function (response) {
+      setEmployees(response.eData);
+    });
+  }, []);
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+    className: "container rm-pm dashboard-content",
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+      className: "row p-0 m-0",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+        className: "col-md-11",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
           id: "message-box-container",
           children: " "
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
           className: "table-contacts-container",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
             classNAme: "row",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
               className: "card",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
                 className: "card-body",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h5", {
-                  className: "card-title",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h5", {
+                  className: "card-title header-subtitle",
                   children: "This Weeks schedule"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
-                  className: "card-text"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                  className: "table-responsive border-dark",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_dashboard_schedule_core_ScheduleTable__WEBPACK_IMPORTED_MODULE_6__.ScheduleTable, {
+                    employeeID: 8,
+                    scheduleID: 8,
+                    viewOnly: true
+                  })
                 })]
               })
             })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-            className: "row",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-              className: "card",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-                className: "card-body",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h5", {
-                  className: "card-title",
-                  children: "Current Employees"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
-                  className: "card-text"
-                })]
-              })
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-            className: "row",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-              className: "card",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-                className: "card-body",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h5", {
-                  className: "card-title",
-                  children: "Drop shifts "
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
-                  className: "card-text"
-                })]
-              })
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-            className: "row",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-              className: "card",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-                className: "card-body",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h5", {
-                  className: "card-title",
-                  children: "Pick up shift store"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
-                  className: "card-text"
-                })]
-              })
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-            className: "row",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-              className: "card",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-                className: "card-body",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h5", {
-                  className: "card-title",
-                  children: "Notification center"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
-                  className: "card-text"
-                })]
-              })
-            })
-          })]
+          })
         })]
-      })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+        className: "col-md-11",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+          className: "card",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
+            className: "card-body",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h5", {
+              className: "card-title header-subtitle",
+              children: "Current Employees"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("p", {
+              className: "card-text",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+                className: "table-responsive",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("table", {
+                  className: "table ",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("thead", {
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
+                        children: "First Name"
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
+                        children: "Last Name"
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
+                        children: "Email"
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
+                        children: "Phone"
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
+                        children: "Address"
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
+                        children: " Location"
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
+                        children: " Start Date. "
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
+                        children: " End Date "
+                      })]
+                    })
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("tbody", {
+                    children: employees.map(function (employee) {
+                      // render the information of the employee that we have
+                      // recived from the api.
+                      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
+                        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                          children: employee.first_name
+                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                          children: employee.last_name
+                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                          children: employee.email
+                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                          children: employee.phone
+                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                          children: employee.address
+                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("td", {
+                          children: [" ", employee.location]
+                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("td", {
+                          children: [" ", employee.start_date, " "]
+                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("td", {
+                          children: [" ", employee.end_date === null ? "N/A" : employee.end_date, " "]
+                        })]
+                      }, employee.id);
+                    })
+                  })]
+                })
+              })
+            })]
+          })
+        })
+      })]
     })
   });
 };
@@ -19173,8 +19261,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
 /* harmony import */ var _components_dashboard_schedule_schedule_gridMenu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/dashboard/schedule/schedule.gridMenu */ "./resources/js/components/dashboard/schedule/schedule.gridMenu.jsx");
 /* harmony import */ var _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../lib/fetchServiceProvider */ "./resources/js/lib/fetchServiceProvider.js");
 /* harmony import */ var _components_dashboard_schedule_schedule_add_entry__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/dashboard/schedule/schedule.add.entry */ "./resources/js/components/dashboard/schedule/schedule.add.entry.jsx");
@@ -19182,8 +19270,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_dashboard_schedule_schedule_edit__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/dashboard/schedule/schedule.edit */ "./resources/js/components/dashboard/schedule/schedule.edit.jsx");
 /* harmony import */ var _components_dashboard_schedule_schedule_delete__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/dashboard/schedule/schedule.delete */ "./resources/js/components/dashboard/schedule/schedule.delete.jsx");
 /* harmony import */ var _components_dashboard_schedule_schedule_labour__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/dashboard/schedule/schedule.labour */ "./resources/js/components/dashboard/schedule/schedule.labour.jsx");
-/* harmony import */ var _components_dashboard_schedule_schedule_request__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../components/dashboard/schedule/schedule.request */ "./resources/js/components/dashboard/schedule/schedule.request.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /*
  *
  *
@@ -19208,40 +19295,36 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 var SchedulePage = function SchedulePage(props) {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)("div", {
     className: "container dashboard-content mx-auto",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.BrowserRouter, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Switch, {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.BrowserRouter, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Switch, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
           path: "/dashboard/schedule/add/",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_dashboard_schedule_schedule_add_entry__WEBPACK_IMPORTED_MODULE_4__.AddScheduleEntry, {})
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_dashboard_schedule_schedule_add_entry__WEBPACK_IMPORTED_MODULE_4__.AddScheduleEntry, {})
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
           path: "/dashboard/schedule/view",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_dashboard_schedule_schedule_view__WEBPACK_IMPORTED_MODULE_5__.ViewSchedules, {})
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_dashboard_schedule_schedule_view__WEBPACK_IMPORTED_MODULE_5__.ViewSchedules, {})
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
           path: "/dashboard/schedule/edit/",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_dashboard_schedule_schedule_edit__WEBPACK_IMPORTED_MODULE_6__.EditSchedules, {})
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_dashboard_schedule_schedule_edit__WEBPACK_IMPORTED_MODULE_6__.EditSchedules, {})
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
           path: "/dashboard/schedule/delete",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_dashboard_schedule_schedule_delete__WEBPACK_IMPORTED_MODULE_7__.DeleteSchedules, {})
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_dashboard_schedule_schedule_delete__WEBPACK_IMPORTED_MODULE_7__.DeleteSchedules, {})
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
           path: "/dashboard/schedule/labour/",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_dashboard_schedule_schedule_labour__WEBPACK_IMPORTED_MODULE_8__.ScheduleLabour, {})
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_dashboard_schedule_schedule_labour__WEBPACK_IMPORTED_MODULE_8__.ScheduleLabour, {})
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_11__.Route, {
           exact: true,
           path: "/dashboard/schedule/",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_dashboard_schedule_schedule_gridMenu__WEBPACK_IMPORTED_MODULE_2__.ScheduleGridMenu, {})
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_12__.Route, {
-          path: "/dashboard/schedule/request/",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)(_components_dashboard_schedule_schedule_request__WEBPACK_IMPORTED_MODULE_9__.ScheduleRequestPage, {})
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)(_components_dashboard_schedule_schedule_gridMenu__WEBPACK_IMPORTED_MODULE_2__.ScheduleGridMenu, {})
         })]
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
       id: "notification-container",
       className: "row"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_10__.jsx)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx)("div", {
       id: "modal-container",
       className: "modal-container"
     })]

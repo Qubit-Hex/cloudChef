@@ -22,7 +22,6 @@ import { ViewSchedules } from "../components/dashboard/schedule/schedule.view";
 import { EditSchedules } from "../components/dashboard/schedule/schedule.edit";
 import { DeleteSchedules } from "../components/dashboard/schedule/schedule.delete";
 import { ScheduleLabour } from "../components/dashboard/schedule/schedule.labour";
-import { ScheduleRequestPage } from "../components/dashboard/schedule/schedule.request";
 
 
 
@@ -30,7 +29,7 @@ export const  SchedulePage = (props) => {
 
         return (
             <div className="container dashboard-content mx-auto">
-          
+
                 <Router>
                     <Switch>
                         <Route path='/dashboard/schedule/add/'>
@@ -50,9 +49,6 @@ export const  SchedulePage = (props) => {
                         </Route>
                         <Route exact path="/dashboard/schedule/">
                             <ScheduleGridMenu />
-                        </Route>
-                        <Route path='/dashboard/schedule/request/'>
-                            <ScheduleRequestPage />
                         </Route>
                     </Switch>
                 </Router>

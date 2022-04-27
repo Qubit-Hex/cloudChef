@@ -99,9 +99,7 @@ export const CreateInstructions = (props) => {
                         padding: "50px",
                     }}
                 >
-                    {
-                        console.log(instructions)
-                    }
+                   
         <div className='container'>
         <div className="row">
         <div className="col">
@@ -115,7 +113,7 @@ export const CreateInstructions = (props) => {
                 <input type='text' className="form-control mt-2 mb-2" id="recipe-ingredents" placeholder="
                 Please Enter: instructions." />
 
-                <button className='btn btn-message mt-2 mx-auto d-block' onClick={(e) => {
+                <button className='btn btn-message mt-2 mx-auto d-block w-50' onClick={(e) => {
                 // append the the ingredents to the ingredents array
                 let ingredents = document.getElementById("recipe-ingredents").value;
                 // append the ingredents to the ingredents array
@@ -189,7 +187,7 @@ export const CreateInstructions = (props) => {
                     return (
                         <tr key={index}>
                             <td> {item} </td>
-                            <td> <button className='btn btn-danger mx-auto d-block' data-key={index} onClick={
+                            <td> <button className='btn btn-danger mx-auto d-block w-50' data-key={index} onClick={
                                 // remove an item from the ingredents array
                                 (e) => {
                                     // this is our clean up operation in the ingredents array
@@ -218,11 +216,11 @@ export const CreateInstructions = (props) => {
 
             }
         </div>
-                            <div className="row mt-4 mx-auto d-block">
+                            <div className="row mt-4 mx-auto d-flex">
                                     {/** next and back buttons for the dialog  */}
 
                                         <button
-                                            className="btn btn-danger btn-block mt-1"
+                                            className="btn btn-danger btn-block mt-1 mx-auto w-25"
                                             onClick={(e) => {
                                              let modalContainer = document.getElementById('modal-container');
 
@@ -256,7 +254,7 @@ export const CreateInstructions = (props) => {
 
                                             }
                                         }
-                                            className="btn btn-message btn-block mt-1">
+                                            className="btn btn-message btn-block mt-1 mx-auto w-25">
                                             Next
                                         </button>
 

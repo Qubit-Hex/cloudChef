@@ -41,7 +41,7 @@ export const EmployeesPage = (props) => {
     // conver the yearly salary into a hourly rate
     const calculateHoursRate = (salary) => {
         // get the hourly rate of the employee of the store.
-        return Math.floor(salary / 52 / 5 / 8) + " / HR";
+        return Math.floor(salary / 52 / 40) + " / HR";
     };
 
     return (

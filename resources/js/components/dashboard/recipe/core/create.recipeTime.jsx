@@ -80,7 +80,7 @@ export const CreateRecipeTime = (props) => {
                          *
                          */}
 
-                        <button type='button' className='btn btn-danger btn-block m-4' onClick={
+                        <button type='button' className='btn btn-danger btn-block m-4 w-25 mx-auto' onClick={
                             (e) => {
                                 // go back to the last form
                                 let container = document.getElementById("modal-container");
@@ -94,7 +94,7 @@ export const CreateRecipeTime = (props) => {
 
 
                         <div className='col mx-auto d-block'>
-                        <button type='button' className='btn btn-message btn-block m-4'
+                        <button type='button' className='btn btn-message btn-block m-4 w-25 mx-auto'
                         onClick={
                             (e) => {
 

@@ -87,7 +87,7 @@ const TemplateModal = (props) => {
 
                         <button
                             type="button"
-                            class="btn-transparent btn-sm btn-danger"
+                            class="btn-transparent btn-sm btn-danger mx-auto w-50 d-block"
                             onClick={(e) => {
                                 e.preventDefault();
                                 closeWindow();
@@ -170,14 +170,17 @@ export const SendEndPoint = (props) => {
         return (
             <TemplateModal title="Error" body={
                 <div className='success-message-wrapper'>
-                <img src='/img/errors/cancel.svg' alt='request failed' width={250} height={250} className='img-fluid success-message-icon'/>
+                    <div className='text-center mx-auto'>
+                        <img src='/img/errors/cancel.svg' alt='request failed' width={250} height={250} className='img-fluid success-message-icon'/>
+                    </div>
                 <br/><br/>
-                <i class="fas fa-hand-paper text-danger"></i>
-                <span className='success-message'> <b className="text-danger"> Request Failed:</b></span>
-                <p className='text-muted mt-4'> <b> Reason:</b>  <span className='text-muted text-danger' > { apiMesssage } </span>  </p>
 
-
+                <div className='text-center'>
+                    <i class="fas fa-hand-paper text-danger"></i>
+                    <span className='success-message'> <b className="text-danger"> Request Failed:</b></span>
+                    <p className='text-muted mt-4'> <b> Reason:</b>  <span className='text-muted text-danger' > { apiMesssage } </span>  </p>
                 </div>
+            </div>
             } />
 
         );
@@ -186,12 +189,15 @@ export const SendEndPoint = (props) => {
         return (
             <TemplateModal title="Success" body={
                 <div className='success-message-wrapper'>
-                 <img src='/img/SVG/network_outline.svg' class='img-fluid success-message-icon' />
-                 <br/><br/>
-                <i className="fas fa-check-circle text-success"></i>
-                <span className='success-message ml-4'> { apiMesssage }</span>
-
+                    <div className='text-center mx-auto'>
+                        <img src='/img/SVG/recipe_added.svg' alt='request failed' width={250} height={250} className='img-fluid success-message-icon'/>
+                    </div>
+                    <br/><br/>
+                <div className='text-center'>
+                    <i className="fas fa-check-circle text-success"></i>
+                    <span className='success-message ml-4'> { apiMesssage }</span>
                 </div>
+            </div>
             } />
         );
     }

@@ -188,7 +188,7 @@ export const ModifyRecipeInstructions = (props) => {
                 <input type='text' className="form-control mt-2 mb-2" id="recipe-ingredents" placeholder="
                 Please Enter: instructions." />
 
-                <button className='btn btn-message mt-2 mx-auto d-block' onClick={(e) => {
+                <button className='btn btn-message mt-2 mx-auto d-block w-auto' onClick={(e) => {
                 // append the the ingredents to the ingredents array
                 let ingredents = document.getElementById("recipe-ingredents").value;
                 // append the ingredents to the ingredents array
@@ -257,7 +257,7 @@ export const ModifyRecipeInstructions = (props) => {
                     return (
                         <tr key={index}>
                             <td> {item} </td>
-                            <td> <button className='btn btn-danger mx-auto d-block' data-key={index} onClick={
+                            <td> <button className='btn btn-danger mx-auto d-block w-auto' data-key={index} onClick={
                                 // remove an item from the ingredents array
                                 (e) => {
                                     // this is our clean up operation in the ingredents array
@@ -288,7 +288,7 @@ export const ModifyRecipeInstructions = (props) => {
         </div>
 
         <div className='row'>
-            <button className='btn btn-message' onClick={
+            <button className='btn btn-message w-auto mx-auto d-block' onClick={
                 (e) => {
                     // update the data and preform some validation checks
                     updateData(instructions);
