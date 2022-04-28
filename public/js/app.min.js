@@ -8880,7 +8880,7 @@ var CreateInstructions = function CreateInstructions(props) {
                               className: "alert alert-warning alert-dismissible fade-in",
                               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
                                 href: "#",
-                                className: "btn btn-transparent close ml-4 mr-4",
+                                className: "btn btn-transparent close ml-4 mr-4 w-50 mx-auto",
                                 "data-dismiss": "alert",
                                 onClick: function onClick(e) {
                                   // remove the alert from the screen
@@ -8905,54 +8905,57 @@ var CreateInstructions = function CreateInstructions(props) {
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
               className: "row",
               children: // check our length of our render then render the table
-              checkLength(instructions) ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("table", {
-                className: "table mt-lg-3",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("thead", {
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("tr", {
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("th", {
-                      children: " Step "
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("th", {
-                      children: " Action "
-                    })]
-                  })
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("tbody", {
-                  id: "recipe-ingredents-list-container",
-                  children: instructions.map(function (item, index) {
-                    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("tr", {
-                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("td", {
-                        children: [" ", item, " "]
-                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("td", {
-                        children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
-                          className: "btn btn-danger mx-auto d-block w-50",
-                          "data-key": index,
-                          onClick: // remove an item from the ingredents array
-                          function onClick(e) {
-                            // this is our clean up operation in the ingredents array
-                            var newState = instructions; // map all the ingredents in the array that does not equal our data key
-
-                            var newArray = newState.map(function (item, key) {
-                              if (index !== key) {
-                                return item;
-                              } // remove empty values
-
-                            }); // remove all the empty values from the array
-
-                            var cleanArray = newArray.filter(function (item) {
-                              return item;
-                            });
-                            setInstructions(cleanArray);
-                          },
-                          children: " Remove "
-                        })]
+              checkLength(instructions) ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                className: "table-responsive mt-4 mb-4",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("table", {
+                  className: "table mt-lg-3",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("thead", {
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("tr", {
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("th", {
+                        children: " Step "
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("th", {
+                        children: " Action "
                       })]
-                    }, index);
-                  })
-                })]
+                    })
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("tbody", {
+                    id: "recipe-ingredents-list-container",
+                    children: instructions.map(function (item, index) {
+                      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("tr", {
+                        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("td", {
+                          children: [" ", item, " "]
+                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("td", {
+                          children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+                            className: "btn btn-danger mx-auto d-block w-50",
+                            "data-key": index,
+                            onClick: // remove an item from the ingredents array
+                            function onClick(e) {
+                              // this is our clean up operation in the ingredents array
+                              var newState = instructions; // map all the ingredents in the array that does not equal our data key
+
+                              var newArray = newState.map(function (item, key) {
+                                if (index !== key) {
+                                  return item;
+                                } // remove empty values
+
+                              }); // remove all the empty values from the array
+
+                              var cleanArray = newArray.filter(function (item) {
+                                return item;
+                              });
+                              setInstructions(cleanArray);
+                            },
+                            children: " Remove "
+                          })]
+                        })]
+                      }, index);
+                    })
+                  })]
+                })
               }) : false
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
               className: "row mt-4 mx-auto d-flex",
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
-                className: "btn btn-danger btn-block mt-1 mx-auto w-25",
+                className: "btn btn-danger btn-block m-2 mx-auto w-25",
                 onClick: function onClick(e) {
                   var modalContainer = document.getElementById('modal-container'); // return the previous modal and pass out state to share the information
 
@@ -8986,7 +8989,7 @@ var CreateInstructions = function CreateInstructions(props) {
                     }), _errorContainer);
                   }
                 },
-                className: "btn btn-message btn-block mt-1 mx-auto w-25",
+                className: "btn btn-message btn-block m-2 mx-auto w-25",
                 children: "Next"
               })]
             })]
@@ -19597,60 +19600,49 @@ var ContactPopup = function ContactPopup(props) {
     return react_dom__WEBPACK_IMPORTED_MODULE_2__.unmountComponentAtNode(container);
   };
 
-  var sendInfo = function sendInfo() {
-    var container = document.getElementById('modal-container'); // unmount the component
+  var request = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      var api, route, data, headers;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              // send the request to the server
+              api = new _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_5__["default"]();
+              route = '/api/mailer/send_mail';
+              data = {
+                // the data that will be sent to the server.
+                email: document.getElementById('email').value,
+                name: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
+                company: document.getElementById('company').value
+              };
+              headers = {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+              }; // send the request to the server using a post command
 
-    var request = /*#__PURE__*/function () {
-      var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var api, route, data, headers;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                // send the request to the server
-                api = new _lib_fetchServiceProvider__WEBPACK_IMPORTED_MODULE_5__["default"]();
-                route = '/api/contact/send';
-                data = {// the data that will be sent to the server.
-                };
-                headers = {
-                  'Content-Type': 'application/json',
-                  'Accept': 'application/json'
-                }; // send the request to the server using a post command
+              return _context.abrupt("return", api.post(route, data, headers));
 
-                return _context.abrupt("return", api.post(route, data, headers));
-
-              case 5:
-              case "end":
-                return _context.stop();
-            }
+            case 5:
+            case "end":
+              return _context.stop();
           }
-        }, _callee);
-      }));
-
-      return function request() {
-        return _ref.apply(this, arguments);
-      };
-    }();
-
-    var sendMail = request(); // check the request status
-
-    react__WEBPACK_IMPORTED_MODULE_1__.useEffect(function () {
-      sendMail.then(function (response) {
-        if (response.status === 200) {
-          // close the modal
-          // trigger a succcess message to bind to the modal
-          closeWindow();
-        } else {// trigger a error message to bind to the modal
         }
-      });
-    }, []);
-  }; // handle the submit event for the page
+      }, _callee);
+    }));
+
+    return function request() {
+      return _ref.apply(this, arguments);
+    };
+  }(); // render the success  message tot the screen
 
 
-  var _onSubmit = function onSubmit(e) {
-    e.preventDefault();
-    alert('Thank you for your message. We will get back to you shortly.');
-  };
+  var Success = function Success() {}; // render the error message to the screen.
+
+
+  var Error = function Error() {}; // handle the submit event for the p
+
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
     className: "modal apply-modal-animation recipe-modal",
@@ -19700,52 +19692,62 @@ var ContactPopup = function ContactPopup(props) {
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("form", {
                 onSubmit: function onSubmit(e) {
                   e.preventDefault();
+                  request().then(function (response) {
+                    var container = document.getElementById('modal-container');
 
-                  _onSubmit(e);
+                    if (response.status === 200 || response.status === 'success') {
+                      //  render the success message of the page
+                      react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(Success, {}), container);
+                      closeWindow();
+                    } else {
+                      // render the error message of the page
+                      react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(Error, {}), container);
+                    }
+                  });
                 },
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
                   className: "form-group",
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
-                    "for": "exampleInputEmail1",
+                    htmlFor: "exampleInputEmail1",
                     children: "Email address"
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
                     type: "email",
                     "class": "form-control",
-                    id: "exampleInputEmail1",
+                    id: "email",
                     "aria-describedby": "emailHelp",
                     placeholder: "Enter email"
                   })]
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
                   className: "form-group",
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
-                    "for": "exampleInputPassword1",
+                    htmlFor: "exampleInputPassword1",
                     children: "Full Name"
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
                     type: "text",
                     "class": "form-control",
-                    id: "exampleInputPassword1",
+                    id: "name",
                     placeholder: "Full Name"
                   })]
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
                   className: "form-group",
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
-                    "for": "exampleInputPassword1",
+                    htmlFor: "exampleInputPassword1",
                     children: "Phone Number"
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
                     type: "text",
                     "class": "form-control",
-                    id: "exampleInputPassword1",
+                    id: "phone",
                     placeholder: "Phone Number"
                   })]
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
                   className: "form-group",
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
-                    "for": "exampleInputPassword1",
+                    htmlFor: "exampleInputPassword1",
                     children: "Company Name"
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("input", {
                     type: "text",
                     "class": "form-control",
-                    id: "exampleInputPassword1",
+                    id: "company",
                     placeholder: "Company Name"
                   })]
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("button", {
@@ -19837,15 +19839,18 @@ var PricingContainer = /*#__PURE__*/function (_Component) {
                     children: " Manage staff using our platform "
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
                     children: " And much more "
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
-                    type: "button",
-                    className: "header-action  md",
-                    onClick: function onClick(e) {
-                      // redirect the user to the registration plan
-                      e.preventDefault();
-                      window.location.href = "/register/";
-                    },
-                    children: "Sign Up"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+                    className: "text-center d-block mx-auto",
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
+                      type: "button",
+                      className: "header-action  md",
+                      onClick: function onClick(e) {
+                        // redirect the user to the registration plan
+                        e.preventDefault();
+                        window.location.href = "/register/";
+                      },
+                      children: "Sign Up"
+                    })
                   })]
                 })
               })
@@ -19856,9 +19861,9 @@ var PricingContainer = /*#__PURE__*/function (_Component) {
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
                   className: "card-body",
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h1", {
-                    children: " Corporate Resturant Plan "
+                    children: " Corporate Restaurant Plan "
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h2", {
-                    children: "(COMMING SOON) "
+                    children: "(Coming Soon) "
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
                     className: "image-center-icon",
                     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
@@ -19883,14 +19888,17 @@ var PricingContainer = /*#__PURE__*/function (_Component) {
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
                       children: " And Much more. "
                     })]
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
-                    type: "button",
-                    className: "header-action  md",
-                    onClick: function onClick(e) {
-                      var container = document.getElementById('modal-container');
-                      react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(ContactPopup, {}), container);
-                    },
-                    children: "Contact US"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+                    className: "mx-auto d-block text-center",
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
+                      type: "button",
+                      className: "header-action  md mx-auto",
+                      onClick: function onClick(e) {
+                        var container = document.getElementById('modal-container');
+                        react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(ContactPopup, {}), container);
+                      },
+                      children: "Contact US"
+                    })
                   })]
                 })
               })

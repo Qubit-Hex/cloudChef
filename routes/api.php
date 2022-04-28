@@ -12,6 +12,8 @@ use App\Http\Controllers\recipes;
 use App\Http\Controllers\settings;
 use App\Http\Controllers\shifts;
 use App\Http\Controllers\labour;
+use App\Http\Controllers\mailer;
+
 
 
 /*
@@ -25,12 +27,32 @@ use App\Http\Controllers\labour;
 |
 */
 
-
-
-
-
 /**
- * @purpose: inorder to check the login credintials of the user before issuing a token for our client to use.
+ *
+ *  Mailing; Route to send the contact form data to the admin
+ *
+ */
+
+
+Route::group(['prefix' => 'mailer'], function () {
+
+    // send the automated email that has to be send to the admin....
+    Route::post('send_mail', [mailer::class, 'contact_send']);
+
+    // forgot password routeMailer
+
+
+    // active account route
+
+
+    // new user registration route
+
+
+});
+
+
+/*
+* @purpose: inorder to check the login credintials of the user before issuing a token for our client to use.
 *
 *  @Route: /auth/login/
 */
@@ -49,6 +71,9 @@ use App\Http\Controllers\labour;
     Route::get('/permissions', [authentication::class, 'permissions'])->name('/auth/permission')->middleware('auth');
 
  });
+
+
+
 
 
 /**

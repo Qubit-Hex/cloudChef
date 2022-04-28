@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\home;
 use App\Http\Controllers\authentication;
 use App\Http\Controllers\dashboard;
+use App\Http\Controllers\mailer;
 
 
 
@@ -37,6 +38,8 @@ Route::get('/solutions/', [home::class, 'index']);
 Route::get('/pricing/', [home::class, 'index']);
 Route::get('/features/', [home::class, 'index']);
 
+
+
 /**
  *      Routes: Authentication routes
  *
@@ -62,6 +65,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
     Route::get('/{page}', [dashboard::class, 'index']);
     Route::get('/{page}/{subApplication}', [dashboard::class, 'index']);
 });
+
 
 
 

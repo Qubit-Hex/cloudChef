@@ -34,48 +34,43 @@ const ContactPopup = (props) => {
 }
 
 
-    const sendInfo = () => {
-        let container = document.getElementById('modal-container');
-        // unmount the component
-        const request = async () => {
-            // send the request to the server
-            const api = new FetchServiceProvider();
-            const route = '/api/contact/send';
+const request = async () => {
+    // send the request to the server
+    const api = new FetchServiceProvider();
+    const route = '/api/mailer/send_mail';
 
-            const data = {
-                // the data that will be sent to the server.
-            }
-
-            const headers = {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            };
-
-            // send the request to the server using a post command
-            return api.post(route, data, headers)
-        }
-
-        let sendMail =  request();
-        // check the request status
-        React.useEffect(() => {
-            sendMail.then((response) => {
-                if (response.status === 200) {
-                    // close the modal
-                    // trigger a succcess message to bind to the modal
-                    closeWindow();
-                } else {
-                    // trigger a error message to bind to the modal
-                }
-            });
-        }, []);
+    const data = {
+        // the data that will be sent to the server.
+        email: document.getElementById('email').value,
+        name: document.getElementById('name').value,
+        phone: document.getElementById('phone').value,
+        company: document.getElementById('company').value,
     }
 
+    const headers = {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+    };
 
-    // handle the submit event for the page
-    const onSubmit = (e) => {
-        e.preventDefault();
-        alert('Thank you for your message. We will get back to you shortly.');
-    }
+    // send the request to the server using a post command
+    return api.post(route, data, headers);
+}
+
+
+// render the success  message tot the screen
+const Success = () => {
+
+
+}
+
+
+// render the error message to the screen.
+const Error = () => {
+
+
+}
+
+    // handle the submit event for the p
 
 return (
     <div className="modal apply-modal-animation recipe-modal">
@@ -114,27 +109,39 @@ return (
                             <form onSubmit={
                                 (e) => {
                                     e.preventDefault();
-                                    onSubmit(e);
+                                    request().then((response) => {
+
+                                        const container = document.getElementById('modal-container');
+
+                                        if (response.status === 200 || response.status === 'success') {
+                                          //  render the success message of the page
+                                          ReactDOM.render(<Success />, container);
+                                            closeWindow();
+                                        } else {
+                                            // render the error message of the page
+                                            ReactDOM.render(<Error />, container);
+                                        }
+                                    });
                                 }
                             }>
                                 <div className="form-group">
-                                    <label for="exampleInputEmail1">Email address</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"/>
+                                    <label htmlFor="exampleInputEmail1">Email address</label>
+                                    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email"/>
                                 </div>
                                 <div className="form-group">
                                     {/** full name  */}
-                                    <label for="exampleInputPassword1">Full Name</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Full Name"/>
+                                    <label htmlFor="exampleInputPassword1">Full Name</label>
+                                    <input type="text" class="form-control" id="name" placeholder="Full Name"/>
                                 </div>
                                 <div className="form-group">
                                     {/** phone number */}
-                                    <label for="exampleInputPassword1">Phone Number</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Phone Number"/>
+                                    <label htmlFor="exampleInputPassword1">Phone Number</label>
+                                    <input type="text" class="form-control" id="phone" placeholder="Phone Number"/>
                                 </div>
                                 <div className="form-group">
                                     {/** company name */}
-                                    <label for="exampleInputPassword1">Company Name</label>
-                                    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Company Name"/>
+                                    <label htmlFor="exampleInputPassword1">Company Name</label>
+                                    <input type="text" class="form-control" id="company" placeholder="Company Name"/>
                                 </div>
                                 <button className='header-action md mx-auto'>
                                     <i className='fas fa-paper-plane'></i>
@@ -214,18 +221,20 @@ export default class PricingContainer extends Component {
                                     <p> Manage staff using our platform </p>
                                     <p> And much more </p>
 
-                                    <button
-                                        type="button"
-                                        className="header-action  md"
+                                    <div className='text-center d-block mx-auto'>
+                                        <button
+                                            type="button"
+                                            className="header-action  md"
 
-                                        onClick={
-                                            (e) => {
-                                            // redirect the user to the registration plan
-                                            e.preventDefault();
-                                            window.location.href = "/register/";
-                                        }}>
-                                        Sign Up
-                                    </button>
+                                            onClick={
+                                                (e) => {
+                                                // redirect the user to the registration plan
+                                                e.preventDefault();
+                                                window.location.href = "/register/";
+                                            }}>
+                                            Sign Up
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -233,8 +242,8 @@ export default class PricingContainer extends Component {
                         <div class="col-sm m-2">
                             <div className="card payment-card">
                                 <div className="card-body">
-                                    <h1> Corporate Resturant Plan </h1>
-                                    <h2>(COMMING SOON) </h2>
+                                    <h1> Corporate Restaurant Plan </h1>
+                                    <h2>(Coming Soon) </h2>
                                     <div className="image-center-icon">
                                         <img
                                             className="img-fluid"
@@ -254,21 +263,22 @@ export default class PricingContainer extends Component {
                                         <p> And Much more. </p>
                                     </p>
 
-                                    <button
-                                        type="button"
-                                        className="header-action  md"
-                                        onClick={
-                                            (e) => {
-                                                let container = document.getElementById('modal-container');
-                                                ReactDOM.render(<ContactPopup />, container);
+                                    <div className='mx-auto d-block text-center'>
+                                        <button
+                                            type="button" className="header-action  md mx-auto"
+                                            onClick={
+                                                (e) => {
+                                                    let container = document.getElementById('modal-container');
+                                                    ReactDOM.render(<ContactPopup />, container);
 
+                                                }
                                             }
-                                        }
-                                        >
-                                        Contact US
-                                    </button>
-                                </div>
+                                            >
+                                            Contact US
+                                        </button>
 
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

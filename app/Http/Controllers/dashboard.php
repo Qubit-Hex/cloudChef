@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 
 /**
  *
@@ -43,4 +44,7 @@ class dashboard extends Controller
     {
             return view('index');
     }
+
+
+   
 }

@@ -99,7 +99,7 @@ export const CreateInstructions = (props) => {
                         padding: "50px",
                     }}
                 >
-                   
+
         <div className='container'>
         <div className="row">
         <div className="col">
@@ -135,7 +135,7 @@ export const CreateInstructions = (props) => {
                         {/* make a modern looking alert message */}
 
                         <div className="alert alert-warning alert-dismissible fade-in">
-                            <button href="#" className="btn btn-transparent close ml-4 mr-4" data-dismiss="alert"
+                            <button href="#" className="btn btn-transparent close ml-4 mr-4 w-50 mx-auto" data-dismiss="alert"
                             onClick={
                                 (e) => {
                                     // remove the alert from the screen
@@ -170,6 +170,7 @@ export const CreateInstructions = (props) => {
             {
                 // check our length of our render then render the table
                 checkLength(instructions) ?  (
+                    <div className='table-responsive mt-4 mb-4'>
                     <table className='table mt-lg-3'>
                 <thead>
                     <tr>
@@ -212,6 +213,7 @@ export const CreateInstructions = (props) => {
                 }
                 </tbody>
             </table>
+            </div>
                 ) : false
 
             }
@@ -220,7 +222,7 @@ export const CreateInstructions = (props) => {
                                     {/** next and back buttons for the dialog  */}
 
                                         <button
-                                            className="btn btn-danger btn-block mt-1 mx-auto w-25"
+                                            className="btn btn-danger btn-block m-2 mx-auto w-25"
                                             onClick={(e) => {
                                              let modalContainer = document.getElementById('modal-container');
 
@@ -254,7 +256,7 @@ export const CreateInstructions = (props) => {
 
                                             }
                                         }
-                                            className="btn btn-message btn-block mt-1 mx-auto w-25">
+                                            className="btn btn-message btn-block m-2 mx-auto w-25">
                                             Next
                                         </button>
 
