@@ -16,9 +16,14 @@ class contact_send extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($info)
     {
-        //
+        $this->email = $info['email'];
+        $this->name = $info['name'];
+        $this->phone = $info['phone'];
+        $this->company = $info['company'];
+        $this->request_id = $info['request_id'];
+
     }
 
     /**
@@ -28,12 +33,15 @@ class contact_send extends Mailable
      */
     public function build()
     {
-        return $this->from('mail@example.com', 'Mailtrap')
-        ->subject('Mailtrap Confirmation')
-        ->markdown('email')
-        ->with([
-            'name' => 'New Mailtrap User',
-            'link' => '/inboxes/'
-        ]);
+        return $this->from('oshwaba@cloud-chef.ca', 'Cloud Chef')
+            ->subject('Contact Form Submission')
+            ->view('email/contact')
+            ->with([
+                'email' => $this->email,
+                'name' => $this->name,
+                'phone' => $this->phone,
+                'company' => $this->company,
+                'request_id' => $this->request_id,
+            ]);
     }
 }

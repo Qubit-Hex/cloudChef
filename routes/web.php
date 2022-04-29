@@ -5,9 +5,8 @@ use App\Http\Controllers\home;
 use App\Http\Controllers\authentication;
 use App\Http\Controllers\dashboard;
 use App\Http\Controllers\mailer;
-
-
-
+use App\Models\user_registration_log;
+use Illuminate\Http\Request;
 
 // auto loading our sub-routes
 require 'domains.php';
@@ -38,6 +37,15 @@ Route::get('/solutions/', [home::class, 'index']);
 Route::get('/pricing/', [home::class, 'index']);
 Route::get('/features/', [home::class, 'index']);
 
+
+Route::get('/email', function (Request $request) {
+
+    $obj = [
+        'email' => 'test@gmail.com'
+    ];
+
+    return view('email/reset_password', $obj);
+});
 
 
 /**

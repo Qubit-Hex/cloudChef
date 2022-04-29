@@ -21,6 +21,8 @@ use App\Models\User;
 use App\Models\store_members;
 use App\Models\store;
 use App\Models\user_sessions;
+use App\Http\Controllers\mailer;
+use App\Models\password_reset;
 
 
 
@@ -30,7 +32,7 @@ class authentication extends Controller
 
     public function __construct()
     {
-
+        $this->mail = new mailer();
     }
 
     /**
@@ -234,27 +236,24 @@ class authentication extends Controller
                     // create a authentication cookie for the user
                     // since the users registration was successful
 
-                    $tokenRefresh = $userModel->updateToken($userID, $token);
+                    $tokenRefresh = $userModel->updateToken($token, $userID);
                     // create the access token cookie
-                    setcookie('accessToken', $token, time() + (86400 * 30), "/"); // 86400 = 1 day
-                    $userSessions = new user_sessions();
 
-                    // hold our session entry.
-                    $userSessionEntry = $userSessions->createSession($userID, $token, hash('sha256',
-                                                                 $_SERVER['REMOTE_ADDR'] . $token));
 
-                    if ($userSessionEntry === false) {
-                        // failed to create the session
+
+
+                    if (!$this->mail->user_registration($email, $password, $storeID, $token)) {
                         return response()->json([
-                            'authenticated' => false,
-                            'message' => 'Failed to create session', 'error' => 'Failed to create session'], 401);
+                            'authenticated' => true,
+                            'status' => 'success',
+                            'message' => 'Registration was successful'], 200);
                     }
 
                     // we are now authenticated to redirect the user
                     return response()->json([
                         'authenticated' => true,
                         'status' => 'success',
-                        'message' => 'Registration was successful'], 200);
+                        'message' => 'Registration was successful, Please check email to activate account.'], 200);
 
                 } else {
                     return response()->json([
@@ -333,7 +332,7 @@ class authentication extends Controller
     public function verify(Request $request)
     {
         // the auth middleware is attached to this method in order to validate request
-        // so if the request goes though we will be sending this to the front end. 
+        // so if the request goes though we will be sending this to the front end.
 
         return response()->json([
             'authenticated' => true,
@@ -402,5 +401,56 @@ class authentication extends Controller
             'status' => 'success',
             'message' => 'User has been verified', 'error' => 'User has been verified',
             'permissions' => $storeMember->store_role], 200);
+    }
+
+
+    /***
+     *
+     *  @method: reset_password
+     *
+     *  @purpose: to reset the password of the user that is connected to the systen\
+     *
+     *
+     */
+
+    public function reset_password(Request $request)
+    {
+        // get the email of the user
+        $email = $request->input('email');
+
+        if (!$email) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Email is required', 'error' => 'Email is required'], 401);
+        }
+
+        // does the user exist in the system?
+        $user = User::where('email', $email)->first();
+
+        if (!$user) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'User does not exist', 'error' => 'User does not exist'], 401);
+        }
+
+
+        // generate a reset token
+        $random_paddings = openssl_random_pseudo_bytes(128);
+        // time stamp the token
+        // and hash it inorder to make it unique
+        $resetToken = hash('whirlpool', $user->userID . $user->email . $random_paddings . time());
+
+       // add an entry to our password reset table.
+       if (password_reset::add($user->email, $resetToken, $user->userID)) {
+           // send the email to the user of the password reset.
+            return $this->mail->password_reset($user->email, $resetToken, $user->userID);
+
+       }  else {
+           // couldn't  add the entry to the database
+              return response()->json([
+                'message' => 'Could not add the entry to the database',
+                'error' => 'Could not add the entry to the database'],
+                401);
+       }
     }
 }

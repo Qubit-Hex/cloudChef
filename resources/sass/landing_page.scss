@@ -268,7 +268,6 @@ nav>* {
     border: 10px solid rgba(0, 0, 0, 0.789);
     padding: 40px;
     mask-image: url('/images/blob-mask-header.svg');
-    mask-mode: alpha;
     mask-repeat: no-repeat;
     width: 350px;
     height: 350px;
@@ -277,14 +276,13 @@ nav>* {
 }
 
 .blob-lg {
-    border: 10px solid rgba(240, 152, 152, 0.2);
+
     padding: 40px;
     background-color: rgba(255, 162, 152, 0.118);
     padding: 50px;
     mask-image: url('/images/blob.svg');
-    mask-mode: luminance, alpha, match-source;
     mask-repeat: no-repeat;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
+    box-shadow: rgba(0, 0, 0, 0.872) 0px 60px 40px -7px;
 }
 
 .blob-lg>img {

@@ -69,7 +69,9 @@ Route::group(['prefix' => 'mailer'], function () {
     Route::get('/verify', [authentication::class, 'verify'])->name('/auth/verify')->middleware('auth');
     // attach auth middleware to the premission route
     Route::get('/permissions', [authentication::class, 'permissions'])->name('/auth/permission')->middleware('auth');
-
+    // reset the password route.
+    Route::post('/reset_password', [authentication::class, 'reset_password'])->name('/auth/reset_password');
+    
  });
 
 

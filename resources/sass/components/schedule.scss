@@ -18,9 +18,9 @@
 
     thead {
         // this is the header row
-        background-color: #5f9fffba;
+        background-color: #05367fda;
         border-radius: 5px 5px 0 0;
-        color: #333;
+        color: #fff;
         font-size: 14px;
         font-weight: bold;
         padding: 30px;
@@ -38,7 +38,7 @@
 
             &:hover {
                 cursor: pointer;
-                background-color: #092a5dc9;
+                background-color: #0c2b5acf;
                 color: white;
                 // use a heavy box shadow to make the header pop up
                 box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;

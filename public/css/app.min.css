@@ -33,9 +33,9 @@
   border-top-right-radius: 10px;
 }
 .schedule-table thead {
-  background-color: #5f9fffba;
+  background-color: #05367fda;
   border-radius: 5px 5px 0 0;
-  color: #333;
+  color: #fff;
   font-size: 14px;
   font-weight: bold;
   padding: 30px;
@@ -51,7 +51,7 @@
 }
 .schedule-table thead th:hover {
   cursor: pointer;
-  background-color: #092a5dc9;
+  background-color: #0c2b5acf;
   color: white;
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
@@ -1453,7 +1453,6 @@ nav > * {
   padding: 40px;
   -webkit-mask-image: url("/images/blob-mask-header.svg");
           mask-image: url("/images/blob-mask-header.svg");
-  mask-mode: alpha;
   -webkit-mask-repeat: no-repeat;
           mask-repeat: no-repeat;
   width: 350px;
@@ -1463,16 +1462,14 @@ nav > * {
 }
 
 .blob-lg {
-  border: 10px solid rgba(240, 152, 152, 0.2);
   padding: 40px;
   background-color: rgba(255, 162, 152, 0.118);
   padding: 50px;
   -webkit-mask-image: url("/images/blob.svg");
           mask-image: url("/images/blob.svg");
-  mask-mode: luminance, alpha, match-source;
   -webkit-mask-repeat: no-repeat;
           mask-repeat: no-repeat;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
+  box-shadow: rgba(0, 0, 0, 0.872) 0px 60px 40px -7px;
 }
 
 .blob-lg > img {

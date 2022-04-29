@@ -14,6 +14,8 @@ import ReactDOM from "react-dom";
 import { Header } from "../components/home/header";
 import { Footer } from "../components/home/footer";
 import FetchServiceProvider from "../lib/fetchServiceProvider";
+import { Modal} from "../components/dashboard/schedule/base/Modal";
+
 
 /**
  *
@@ -59,15 +61,78 @@ const request = async () => {
 
 // render the success  message tot the screen
 const Success = () => {
+    return <Modal title="Success" body={
+        <div>
+            {/** success icon font awesome  */}
+            <div className='text-center'>
+                <i className="fas fa-check-circle text-success fa-3x text-center"></i>
+            </div>
 
+            <div className='text-center mt-4'>
+                 <p> Your Message has been sent successfully.  </p>
+            </div>
+        </div>
+    } />
+}
 
+// render the error message to the screen.
+
+const Error = () => {
+    return <Modal title="Error" body={
+        <div>
+            <div className='text-center'>
+                <i className="fas fa-times-circle text-danger fa-3x text-center"></i>
+
+            </div>
+
+            <div className='text-center mt-4'>
+                <p> Your Message has not been sent, Please try again later.  </p>
+                <p> Error: { props.message } </p>
+            </div>
+        </div>
+    } />
 }
 
 
-// render the error message to the screen.
-const Error = () => {
+// validate the form
 
 
+
+const validate = (email, name, phone, company) => {
+    // make sure that the email is valid
+    if(!email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
+        return {
+            status: false,
+            message: 'Invalid Email'
+        }
+    }
+    // regex to value it an name and allow spaces
+    if(!name.match(/^[a-zA-Z ]+$/)) {
+        return {
+            status: false,
+            message: 'Invalid Name'
+        }
+    }
+
+    if (!phone.match(/^[0-9]+$/)) {
+        return {
+            status: false,
+            message: 'Invalid Phone Number'
+        }
+    }
+
+   // validate a company name allow spaces numbers and letters
+    if(!company.match(/^[a-zA-Z0-9 ]+$/)) {
+        return {
+            status: false,
+            message: 'Invalid Company Name'
+        }
+    }
+
+    return {
+        status: true,
+        message: 'Success'
+    }
 }
 
     // handle the submit event for the p
@@ -109,22 +174,44 @@ return (
                             <form onSubmit={
                                 (e) => {
                                     e.preventDefault();
+
+                                    // validate the form
+                                    const email = document.getElementById('email');
+                                    const name = document.getElementById('name');
+                                    const phone = document.getElementById('phone');
+                                    const company = document.getElementById('company');
+
+                                    const validation = validate(email.value, name.value, phone.value, company.value);
+                                    const errorMessage = document.getElementById('error-message');
+                                    const { status, message } = validation;
+
+
+                                    if (!status) {
+                                        // re render the error messsge
+                                        errorMessage.innerHTML = message;
+                                        return;
+                                    }
+                                    // reset the error nessage container
+                                        errorMessage.innerHTML = '';
+
+                                    // perform the request to the server
                                     request().then((response) => {
 
                                         const container = document.getElementById('modal-container');
 
                                         if (response.status === 200 || response.status === 'success') {
                                           //  render the success message of the page
-                                          ReactDOM.render(<Success />, container);
-                                            closeWindow();
+                                          return ReactDOM.render(<Success />, container);
                                         } else {
                                             // render the error message of the page
-                                            ReactDOM.render(<Error />, container);
+                                            return ReactDOM.render(<Error message={response.message}/>, container);
                                         }
                                     });
                                 }
                             }>
                                 <div className="form-group">
+                                    <b className='text-danger' id='error-message'>   </b>
+
                                     <label htmlFor="exampleInputEmail1">Email address</label>
                                     <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email"/>
                                 </div>
