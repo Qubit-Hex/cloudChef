@@ -10,7 +10,7 @@ use App\Models\user_sessions;
 use App\Models\store_members;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use App\Http\Controllers\mailer;
 
 /**
  *
@@ -43,6 +43,7 @@ class employee extends Controller
         $this->storeMembers = new store_members();
         $this->userSession = new user_sessions();
         $this->employee = new employeeModel();
+        $this->mail = new mailer();
 
     }
 
@@ -344,10 +345,32 @@ class employee extends Controller
             $salary
         );
 
+
         if (!$hireEmployee) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'user registration failed'
+            ]);
+        }
+
+
+        $token = hash('sha256', openssl_random_pseudo_bytes(64) . uniqid());
+        $updateToken = $userModel->updateToken($token ,$registerUser->userID);
+
+        if (!$updateToken) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'user registration failed'
+            ]);
+        }
+
+
+        // send a email to the said employee
+        if (!$this->mail->user_registration($email, $password, $currentMember->storeID, $token)) {
+            // the user has been registered successfully
+            return response()->json([
+                'status' => 'success',
+                'message' => 'user has been registered successfully'
             ]);
         }
 

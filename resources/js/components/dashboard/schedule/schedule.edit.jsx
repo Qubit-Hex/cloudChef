@@ -74,45 +74,48 @@
              <p className="text-center text-muted">Edit the current schedule for your store</p>
          </div>
 
-         <div className='col-md-6 mx-auto'>
-             {/** select schedule */}
-             <div className='col-sm mx-auto'>
-                 <select className='form-select' id='datePicker'>
-                     <option> Please Select a Schedule</option>
-                     {
-                         schedules.map((schedule, index) => {
-                             return (
-                                 <option key={index} value={schedule.id} style={{
-                                     fontWeight: 500,
-                                 }}>{ schedule.year + "  " + formatDateRange(schedule.week, schedule.year) }</option>
-                             )
-                         })
-                     }
-                 </select>
+         <div className='row'>
+            <div className='col-md-6 mx-auto'>
+                {/** select schedule */}
+                <div className='col-sm mx-auto'>
+                    <select className='form-select' id='datePicker'>
+                        <option> Please Select a Schedule</option>
+                        {
+                            schedules.map((schedule, index) => {
+                                return (
+                                    <option key={index} value={schedule.id} style={{
+                                        fontWeight: 500,
+                                    }}>{ schedule.year + "  " + formatDateRange(schedule.week, schedule.year) }</option>
+                                )
+                            })
+                        }
+                    </select>
 
-                 <button className='btn header-action btn-lg w-100' onClick={
-                     (e) => {
-                         const scheduleId = document.getElementById('datePicker').value;
-                         const container = document.getElementById('schedule-table-container');
+                    <button className='btn header-action btn-lg w-100' onClick={
+                        (e) => {
+                            const scheduleId = document.getElementById('datePicker').value;
+                            const container = document.getElementById('schedule-table-container');
 
 
-                         ReactDOM.unmountComponentAtNode(container);
-                         ReactDOM.render(<ScheduleTable scheduleID={scheduleId} employeeID={employee.id}  />, container);
-                     }
-                 }>
+                            ReactDOM.unmountComponentAtNode(container);
+                            ReactDOM.render(<ScheduleTable scheduleID={scheduleId} employeeID={employee.id}  />, container);
+                        }
+                    }>
 
-                        <i className="fas fa-edit"></i>
-                        <span className='ml-2'>Edit Schedule</span>
-                 </button>
-             </div>
+                            <i className="fas fa-edit"></i>
+                            <span className='ml-2'>Edit Schedule</span>
+                    </button>
+                </div>
+            </div>
          </div>
 
-         <div className='row mt-4 mx-auto' id='schedule-table-container'>
+         <div className='row mt-4'>
+             <div className='col-md-12 table-responsive' id='schedule-table-container'>
+
+             </div>
              {/** container to view the schedules inside of the system */}
          </div>
-
-         </div>
-
+</div>
      )
  }
 

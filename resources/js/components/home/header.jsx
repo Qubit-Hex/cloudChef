@@ -117,15 +117,17 @@ export class Header extends React.Component {
                                 Pricing
                             </a>
 
-                            <a className="nav-link" href="/login/">
+                            <a className="nav-link m-1" href="/login/">
                                 <button className="btn btn-primary header-action-no-margin">
                                     {" "}
                                     Login{" "}
                                 </button>
                             </a>
 
-                            <a className="nav-link" href="/register/">
-                                <button className="btn btn-primary header-action-no-margin">
+                            <a className="nav-link m-1" href="/register/">
+                                <button className="btn btn-primary header-action-no-margin" style={{
+
+                                }}>
                                     {" "}
                                     Register{" "}
                                 </button>

@@ -71,7 +71,7 @@ Route::group(['prefix' => 'mailer'], function () {
     Route::get('/permissions', [authentication::class, 'permissions'])->name('/auth/permission')->middleware('auth');
     // reset the password route.
     Route::post('/reset_password', [authentication::class, 'reset_password'])->name('/auth/reset_password');
-    
+
  });
 
 
@@ -183,6 +183,9 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
 
             // delete the store schedule entry group entry
             Route::delete('/delete', [schedule::class, 'delete'])->name('/schedule/delete');
+
+            // get the most recent schedule of the store in question. 
+            Route::get('/recent', [schedule::class, 'getRecent'])->name('/schedule/recent');
 
             // the actions on a shift of the schedule
             Route::group(['prefix' => 'shifts'], function () {

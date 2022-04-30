@@ -18,6 +18,10 @@ import {EmployeesPage} from "./dashboard.employees";
 import {DashboardHome} from "./dashboard.home";
 import {DashboardSettings} from "../components/dashboard/settings/settings";
 
+import { AdminGuard } from "../components/dashboard/core/guard";
+import { UserGuard } from "../components/dashboard/core/guard";
+
+
 /**
  *
  *  @component: UnAuthDashboard
@@ -84,8 +88,9 @@ export const DashboardContainer = (props) => { // the state of our component.
                             component={DashboardRecipies}/>
                         <Route path="/dashboard/schedule/"
                             component={SchedulePage}/>
-                        <Route path="/dashboard/employees/"
-                            component={EmployeesPage}/>
+                        <Route path="/dashboard/employees/">
+                            <AdminGuard cargo={<EmployeesPage />} />
+                        </Route>
                         <Route path="/dashboard/settings/"
                             component={DashboardSettings}/>
                         <Route path="/dashboard/logout/">

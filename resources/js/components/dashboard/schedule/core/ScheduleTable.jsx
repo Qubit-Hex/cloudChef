@@ -394,7 +394,7 @@ export const ScheduleTable = (props) => {
     }
 
     return (
-        <table className="schedule-table table-responsive">
+        <table className="schedule-table">
             <thead>
                 <tr>
                     <th>Employee</th>

@@ -69,14 +69,8 @@ class shifts extends Controller
 
             // now is the user a admin since this is a admin only priv
 
-            $currentUserAdmin = $this->storeMembers->storeMemberAdmin($currentUserStore->storeID, $currentUser->userID);
+           // $currentUserAdmin = $this->storeMembers->storeMemberAdmin($currentUserStore->storeID, $currentUser->userID);
 
-            if (!$currentUserAdmin) {
-                    return response()->json([
-                        'status' => 'error',
-                        'message' => 'You are not an admin of this store'
-                    ], 400);
-            }
 
             // now lets now start the process of getting the shift
             // does the scheduleID exists ?

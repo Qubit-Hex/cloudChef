@@ -204,12 +204,55 @@ class schedule extends Controller
                     'message' => 'Schedule entry deleted successfully'
                 ], 200);
             }
-            
+
                 return response()->json([
                     'status' => 'error',
                     'message' => 'Schedule entry could not be deleted'
                 ], 401);
 
         }
+
+        /**
+         *
+         *  @method: getRecent
+         *
+         *  @purpose: inorder to fetch the most recent schedule of the system
+         *
+         */
+
+         public function getRecent(Request $request)
+         {
+
+             $token = $request->header('accessToken');
+             $isMember = $this->service->isUserMember($token, true);
+
+             // check if the user is a member of the store
+             if (!$isMember) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'You are not a member of this store'
+                ], 401);
+             }
+
+             // get the most recent schedule entry
+             $getSchedules = $this->scheduleGroupModel->getRecentSchedule($isMember->storeID);
+
+             if ($getSchedules) {
+                // return the most recent schedule entry to the user in question
+
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'schedule entries found',
+                    'data' => $getSchedules
+                ], 200);
+
+             } else {
+              // no schedules were found in the system.
+                 return response()->json([
+                     'status' => 'error',
+                     'message' => 'No schedule entries found'
+                 ], 404);
+             }
+         }
 
 }

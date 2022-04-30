@@ -14,6 +14,174 @@ import FetchServiceProvider from "../lib/fetchServiceProvider";
 import { CreateRecipeModal } from "../components/dashboard/recipe/CreateRecipeModal";
 import { RecipeModifyModal } from "../components/dashboard/recipe/recipeModifyModal";
 import { DeleteRecipe } from "../components/dashboard/recipe/core/delete.recipe";
+import { AdminGuard } from "../components/dashboard/core/guard";
+import { UserGuard } from "../components/dashboard/core/guard";
+
+/**
+ *
+ *  @component: addRecipeCard
+ *
+ *
+ *  @purpose: inorder to add the recipe to the system
+ *
+ *
+ */
+
+const AddRecipeCard = (props) => {
+    return (
+        <div className="row">
+            {/** here we are going to add a component inorder to create a section to add recipes to the database  */}
+
+            <div className="col-md-6 mx-auto d-block">
+                <div className="card">
+                    {/** font awesome add button */}
+
+                    <div className="card-header bg-transparent">
+                        <h5 className="card-title header-subtitle">
+                            Add Recipe
+                        </h5>
+                        <small className="text-muted">
+                            {" "}
+                            Make your team stronger by connecting all your
+                            information in one place.{" "}
+                        </small>
+                    </div>
+
+                    <div className="card-body p-lg-5">
+                        <img
+                            src="/img/SVG/toast_out.svg"
+                            width={300}
+                            height={300}
+                            className="img-fluid mx-auto d-block"
+                            alt="chef-platter"
+                        />
+                        <p className="card-text text-center">
+                            Add a new recipe to your database
+                        </p>
+
+                        <button
+                            className="btn btn-message w-25 mx-auto d-block"
+                            data-toggle="modal"
+                            data-target="#addRecipeModal"
+                            onClick={(e) => {
+                                const modalContainer = document.getElementById("modal-container");
+
+                                return ReactDOM.render(
+                                    <CreateRecipeModal id={null} />,
+                                    modalContainer
+                                );
+                            }}
+                        >
+                            Add<i className="fas fa-plus-circle m-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+/***
+ *
+ *  @component: editRecipe
+ *
+ *  @purpose: inorder to render the edit recipe section of the table
+ *
+ *
+ */
+
+const EditRecipe = (props) => {
+    return (
+        <button
+            className="btn btn-warning m-2 "
+            data-toggle="modal"
+            data-target="#editRecipeModal"
+            onClick={(e) => {
+                const modalContainer =
+                    document.getElementById("modal-container");
+
+                return ReactDOM.render(
+                    <RecipeModifyModal id={props.recipeID} />,
+                    modalContainer
+                );
+            }}
+        >
+            Edit<i className="fas fa-edit m-2"></i>
+        </button>
+    );
+};
+
+/**\
+ *
+ *  @method: DeleteRecipeButton
+ *
+ *
+ *  @purpose: inorder to render the delete recipe button
+ *
+ */
+
+const DeleteRecipeButton = (props) => {
+    return (
+        <button
+            className="btn btn-danger m-2"
+            data-toggle="modal"
+            data-target="#deleteRecipeModal"
+            onClick={(e) => {
+                const modalContainer =
+                    document.getElementById("modal-container");
+                // this will contain the delete modal for delete a recipe from the database
+                return ReactDOM.render(
+                    <DeleteRecipe id={props.recipeID} />,
+                    modalContainer
+                );
+            }}
+        >
+            Delete<i className="fas fa-trash-alt m-2"></i>
+        </button>
+    );
+};
+
+/**
+ *
+ *  @component: ViewRecipeButton
+ *
+ *
+ *  @purpose: inorder to render the view recipe button
+ *
+ */
+
+const ViewRecipeButton = (props) => {
+    return (
+        <button
+            className="btn btn-message m-2"
+            data-toggle="modal"
+            data-target="#viewRecipeModal"
+            onClick={(e) => {
+                const modalContainer =
+                    document.getElementById("modal-container");
+
+                return ReactDOM.render(
+                    <RecipeModal id={props.recipeID} />,
+                    modalContainer
+                );
+            }}
+        >
+            View<i className="fas fa-eye m-2"></i>
+        </button>
+    );
+};
+
+
+/**
+ *
+ *  @component:DashboardRecipies
+ *
+ *  @purpose: inorder to render the main dashboard page.
+ *
+ *
+ */
+
+
 
 export const DashboardRecipies = (props) => {
     const [recipes, setRecipes] = React.useState({});
@@ -74,9 +242,7 @@ export const DashboardRecipies = (props) => {
         }
 
         return Object.keys(recipes).map((item, index) => {
-            // auto generate the tables rows for each of the recipes in the database
-
-            console.log(recipes[item]);
+            // auto generate the tables rows for each of the recipes in the database    
             return (
                 <tr key={index}>
                     <td> {recipes[item].recipe_name}</td>
@@ -84,74 +250,30 @@ export const DashboardRecipies = (props) => {
                     <td> {recipes[item].created_at}</td>
                     <td> {recipes[item].updated_at}</td>
                     <td className="d-flex">
-                        <button
-                            className="btn btn-message m-2"
-                            data-toggle="modal"
-                            data-target="#viewRecipeModal"
-                            onClick={(e) => {
-                                const modalContainer =
-                                    document.getElementById("modal-container");
-                                // we will create a rough draft of what the card will look like,
-                                // and then we will pass it to the modal container
-                                // later we will use components inorder to achieve the same result
-
-                                // for the code to be reusable though out our application
-                                // we will use the modal container to render the modal component
-                                return ReactDOM.render(
-                                    <RecipeModal
-                                        id={recipes[item].recipe_id}
-                                    />,
-                                    modalContainer
-                                );
-                            }}
-                        >
-                            View<i className="fas fa-eye m-2"></i>
-                        </button>
-
-                        {/** add a modifiy button to the table inorder to edit the recipes at will  */}
-                        <button
-                            className="btn btn-warning m-2 "
-                            data-toggle="modal"
-                            data-target="#editRecipeModal"
-                            onClick={(e) => {
-                                const modalContainer =
-                                    document.getElementById("modal-container");
-                                // we will create a rough draft of what the card will look like,
-                                // and then we will pass it to the modal container
-                                // later we will use components inorder to achieve the same result
-
-                                // for the code to be reusable though out our application
-                                // we will use the modal container to render the modal component
-                                return ReactDOM.render(
-                                    <RecipeModifyModal
-                                        id={recipes[item].recipe_id}
-                                    />,
-                                    modalContainer
-                                );
-                            }}
-                        >
-                            Edit<i className="fas fa-edit m-2"></i>
-                        </button>
-
-                        {/** addd a delete button to the table inorder to delete the recipes at will  */}
-                        <button
-                            className="btn btn-danger m-2"
-                            data-toggle="modal"
-                            data-target="#deleteRecipeModal"
-                            onClick={(e) => {
-                                const modalContainer =
-                                    document.getElementById("modal-container");
-                                // this will contain the delete modal for delete a recipe from the database
-                                return ReactDOM.render(
-                                    <DeleteRecipe
-                                        id={recipes[item].recipe_id}
-                                    />,
-                                    modalContainer
-                                );
-                            }}
-                        >
-                            Delete<i className="fas fa-trash-alt m-2"></i>
-                        </button>
+                        {/**
+                         *
+                         * only render the edit or delete button if the user is a admin.
+                         *
+                         */}
+                        <UserGuard
+                            cargo={
+                                <ViewRecipeButton
+                                    recipeID={recipes[item].recipe_id}
+                                />
+                            }
+                        />
+                        <AdminGuard
+                            cargo={
+                                <EditRecipe recipeID={recipes[item].recipeID} />
+                            }
+                        />
+                        <AdminGuard
+                            cargo={
+                                <DeleteRecipeButton
+                                    recipeID={recipes[item].recipe_id}
+                                />
+                            }
+                        />
                     </td>
                 </tr>
             );
@@ -185,70 +307,14 @@ export const DashboardRecipies = (props) => {
                 />
             </div>
 
-            <div className="row">
-                {/** here we are going to add a component inorder to create a section to add recipes to the database  */}
-
-                <div className="col-md-6 mx-auto d-block">
-                    <div className="card">
-                        {/** font awesome add button */}
-
-                        <div className="card-header bg-transparent">
-                            <h5 className="card-title header-subtitle">
-                                Add Recipe
-                            </h5>
-                            <small className="text-muted">
-                                {" "}
-                                Make your team stronger by connecting all your
-                                information in one place.{" "}
-                            </small>
-                        </div>
-
-                        <div className="card-body p-lg-5">
-                            <img
-                                src="/img/SVG/toast_out.svg"
-                                width={300}
-                                height={300}
-                                className="img-fluid mx-auto d-block"
-                                alt="chef-platter"
-                            />
-                            <p className="card-text text-center">
-                                Add a new recipe to your database
-                            </p>
-
-                            <button
-                                className="btn btn-message w-25 mx-auto d-block"
-                                data-toggle="modal"
-                                data-target="#addRecipeModal"
-                                onClick={(e) => {
-                                    const modalContainer =
-                                        document.getElementById(
-                                            "modal-container"
-                                        );
-                                    // we will create a rough draft of what the card will look like,
-                                    // and then we will pass it to the modal container
-                                    // later we will use components inorder to achieve the same result
-
-                                    // for the code to be reusable though out our application
-                                    // we will use the modal container to render the modal component
-                                    return ReactDOM.render(
-                                        <CreateRecipeModal id={null} />,
-                                        modalContainer
-                                    );
-                                }}
-                            >
-                                Add<i className="fas fa-plus-circle m-2"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <AdminGuard cargo={<AddRecipeCard />} />
 
             <div className="row">
                 <div className="col">
                     <div id="modal-container" className="modal-container"></div>
                     <div id="modal-alert-container"></div>
                     <div className="card">
-                        <div className="card-header bg-transparent">
+                        <div className="card-header bg-transparent text-center">
                             <h2 className="header-subtitle text-center mt-4 ">
                                 Current store recipes
                             </h2>
@@ -262,11 +328,11 @@ export const DashboardRecipies = (props) => {
                                 />
                             </div>
 
-                            <small className="text-center">
+                            <p className="text-center">
                                 {" "}
                                 All your recipes in one place, to make your life
                                 easier.{" "}
-                            </small>
+                            </p>
                         </div>
 
                         <div className="card-body">

@@ -22,8 +22,8 @@ import { ViewSchedules } from "../components/dashboard/schedule/schedule.view";
 import { EditSchedules } from "../components/dashboard/schedule/schedule.edit";
 import { DeleteSchedules } from "../components/dashboard/schedule/schedule.delete";
 import { ScheduleLabour } from "../components/dashboard/schedule/schedule.labour";
-
-
+import { AdminGuard } from "../components/dashboard/core/guard";
+import { UserGuard } from "../components/dashboard/core/guard";
 
 export const  SchedulePage = (props) => {
 
@@ -33,22 +33,22 @@ export const  SchedulePage = (props) => {
                 <Router>
                     <Switch>
                         <Route path='/dashboard/schedule/add/'>
-                            <AddScheduleEntry />
+                            <AdminGuard cargo={<AddScheduleEntry />} />
                         </Route>
                         <Route path="/dashboard/schedule/view">
-                            <ViewSchedules />
+                            <UserGuard cargo={<ViewSchedules />} />
                         </Route>
                         <Route path="/dashboard/schedule/edit/">
-                            <EditSchedules />
+                            <AdminGuard cargo={<EditSchedules />} />
                         </Route>
                         <Route path="/dashboard/schedule/delete">
-                            <DeleteSchedules />
+                            <AdminGuard cargo={<DeleteSchedules />} />
                         </Route>
                         <Route path='/dashboard/schedule/labour/'>
-                            <ScheduleLabour />
+                            <AdminGuard cargo={<ScheduleLabour />} />
                         </Route>
                         <Route exact path="/dashboard/schedule/">
-                            <ScheduleGridMenu />
+                            <UserGuard cargo={<ScheduleGridMenu />} />
                         </Route>
                     </Switch>
                 </Router>

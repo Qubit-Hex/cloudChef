@@ -11,6 +11,7 @@
 import React, { Component } from "react";
 
 import FetchServiceProvider from "../../lib/fetchServiceProvider";
+import { AdminGuard } from "./core/guard";
 
 export class DashboardNav extends Component {
 
@@ -90,6 +91,23 @@ export class DashboardNav extends Component {
     }
 
     render() {
+
+
+
+        // the employee link....
+        const EmployeeLink = (props) => {
+
+            return (
+                <a href="/dashboard/employees/" className="nav-link">
+                {/** employee tie icon */}
+                <i className='fas fa-user-tie'></i>
+                <span className="nav-link-text">Employees</span>
+            </a>
+            );
+
+        }
+
+
         return (
             <div>
                 <nav className="navbar p-2 shadow header-navbar-dashboard">
@@ -161,12 +179,7 @@ export class DashboardNav extends Component {
                             <span className="nav-link-text">Schedule</span>
                         </a>
 
-                        {/** employees */}
-                        <a href="/dashboard/employees/" className="nav-link">
-                            {/** employee tie icon */}
-                            <i className='fas fa-user-tie'></i>
-                            <span className="nav-link-text">Employees</span>
-                        </a>
+                        <AdminGuard cargo={<EmployeeLink />}  />
 
                         <a href="/dashboard/recipie/" className="nav-link">
                             {/**  food management pat for cloud recipes etcc... */}

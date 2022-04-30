@@ -140,5 +140,17 @@ class scheduleGroup extends Model
          }
 
 
+    /**
+     *
+     *  @method: getMostRecentSchedule
+     *
+     *  @purpose: to get the most recent schedule entry by store associated with the user
+     *
+     */
 
+     public function getRecentSchedule($storeID)
+     {
+         // get the most recent entry by year, and week
+            return $this->where('storeID', $storeID)->orderBy('week', 'desc')->orderBy('year', 'desc')->first();
+     }
 }
