@@ -267,7 +267,7 @@ export class LoginPage extends React.Component {
                                 </h3>
 
                                 <h4
-                                    className="error text-danger"
+                                    className="error text-danger text-center"
                                     id="error-response"
                                 >
                                     {" "}

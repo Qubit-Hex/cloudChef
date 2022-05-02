@@ -13,7 +13,7 @@ use App\Http\Controllers\settings;
 use App\Http\Controllers\shifts;
 use App\Http\Controllers\labour;
 use App\Http\Controllers\mailer;
-
+use App\Http\Controllers\accounts;
 
 
 /*
@@ -38,16 +38,6 @@ Route::group(['prefix' => 'mailer'], function () {
 
     // send the automated email that has to be send to the admin....
     Route::post('send_mail', [mailer::class, 'contact_send']);
-
-    // forgot password routeMailer
-
-
-    // active account route
-
-
-    // new user registration route
-
-
 });
 
 
@@ -74,6 +64,16 @@ Route::group(['prefix' => 'mailer'], function () {
 
  });
 
+
+
+// user specific routes for reseting passwords and activating accounts
+ Route::group(['prefix' => 'accounts'], function () {
+    // reset password route
+    Route::post('/reset_password', [accounts::class, 'reset_password'])->name('/accounts/reset_password');
+
+    // activate account route
+    Route::get('/activate/{token}', [accounts::class, 'account_activation'])->name('/accounts/activate');
+ });
 
 
 
@@ -184,7 +184,7 @@ Route::group(['prefix' => 'members', 'middleware' => 'auth'], function () {
             // delete the store schedule entry group entry
             Route::delete('/delete', [schedule::class, 'delete'])->name('/schedule/delete');
 
-            // get the most recent schedule of the store in question. 
+            // get the most recent schedule of the store in question.
             Route::get('/recent', [schedule::class, 'getRecent'])->name('/schedule/recent');
 
             // the actions on a shift of the schedule

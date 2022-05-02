@@ -153,7 +153,7 @@
                             Please Click the link below to activate your account.
                         </h4>
 
-                        <a href={{ url( 'http://cloud-chef.ca/auth/activate?token=' . $token ) }} style='color: rgb(11, 41, 70); text-decoration: none;'>
+                        <a href={{ url( 'http://cloud-chef.ca/auth/activate/' . $token . '/' ) }} style='color: rgb(11, 41, 70); text-decoration: none;'>
                             <button class="btn btn-primary" style='border-color: rgb(11, 41, 70);'>
                                 Activate Account
                             </button>

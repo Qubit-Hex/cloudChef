@@ -8,11 +8,6 @@ use App\Http\Controllers\mailer;
 use App\Models\user_registration_log;
 use Illuminate\Http\Request;
 
-// auto loading our sub-routes
-require 'domains.php';
-
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,13 +24,15 @@ require 'domains.php';
  *     @purpose: to provide the home page routes for the user
  */
 
-
+// the home routes for the mains pages.. 
 Route::get('/home/', [home::class, 'index']);
 Route::get('/login/', [home::class, 'loginPage']);
 Route::get('/register/', [home::class, 'index']);
 Route::get('/solutions/', [home::class, 'index']);
 Route::get('/pricing/', [home::class, 'index']);
 Route::get('/features/', [home::class, 'index']);
+Route::get('/reset/', [home::class, 'index']);
+
 
 
 Route::get('/email', function (Request $request) {
@@ -57,6 +54,18 @@ Route::get('/email', function (Request $request) {
 Route::post('/authentication/login/', [authentication::class, 'login'])->name('auth/login/');
 Route::post('/authentication/register/', [authentication::class, 'register'])->name('register');
 Route::get('/authentication/logout/', [authentication::class, 'logout'])->name('logout');
+
+
+Route::group(['prefix' => '/authentication'], function () {
+    Route::post('/login/', [authentication::class, 'login'])->name('auth/login/');
+    Route::post('/register/', [authentication::class, 'register'])->name('register');
+    Route::get('/logout/', [authentication::class, 'logout'])->name('logout');
+
+    // route of the activation token
+    Route::get('activate/{token}', [authentication::class, 'account_activation'])->name('activate');
+    // route of the reset password token.
+    Route::get('/reset/{token}', [authentication::class, 'reset'])->name('reset');
+});
 
 
 
@@ -81,8 +90,3 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
 // final route if no other route is matched
 Route::get('/', [home::class, 'index']);
 // end of home page application routes =
-
-
-
-
-

@@ -158,7 +158,7 @@
                             Please click button to reset your password.
                         </h4>
 
-                        <a href={{ url('http://cloud-chef.ca/auth/reset?token=' . $token)}} style='color: rgb(11, 41, 70); text-decoration: none;'>
+                        <a href={{ url('http://cloud-chef.ca/authentication/reset/' . $token . '/')}} style='color: rgb(11, 41, 70); text-decoration: none;'>
                             <button class="btn btn-primary" style='border-color: rgb(11, 41, 70);'>
                                 Reset Password
                             </button>

@@ -164,9 +164,6 @@ export const DashboardHome = (props) => {
                             </h5>
                         </div>
                         <div className="card-body">
-                            <p className="card-text">
-                                {/* current employees goes here */}
-
                                 <div className="table-responsive">
                                     <table className="table">
                                         <thead>
@@ -230,7 +227,6 @@ export const DashboardHome = (props) => {
                                         </tbody>
                                     </table>
                                 </div>
-                            </p>
                         </div>
                     </div>
                 </div>
