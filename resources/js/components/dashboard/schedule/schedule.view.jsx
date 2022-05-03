@@ -54,7 +54,6 @@ export const ViewSchedules = (props) => {
     // PREFORM the api call to get the schedules
     React.useEffect(() => {
         request().then(response => {
-            console.log(response);
             if (response.status === 200 || response.status === 'success') {
                 setSchedules(response.data);
                 setEmployee(response.employee);

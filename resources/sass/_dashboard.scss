@@ -15,8 +15,9 @@
 $navbar-bg-color: linear-gradient(to right, #fd9494, rgb(208, 68, 52) );
 $bg-color: linear-gradient(to right, #e1eec398, #e1eec398);
 $modal-bg-color: linear-gradient(to right, #2a5280, #154297c9);  /* Chrome 10-25, Safari 5.1-6 */
-
 $navbar-color-dashboard:  #cc5656;
+
+
 
 .remove-spacing {
     max-width: 30%;
@@ -1146,6 +1147,19 @@ thead
 }
 
 
+// nav bar fix for mobiles devices.
+.side-nav {
+    position: relative;
+    top: 0px;
+}
+
+
+
+@media (max-width: 991px) {
+    .side-nav {
+        top: 125px;
+    }
+}
 
 /** button tiles for the employee page */
 

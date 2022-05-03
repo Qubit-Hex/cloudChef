@@ -1172,6 +1172,16 @@
     transform: scale(1.1);
   }
 }
+.side-nav {
+  position: relative;
+  top: 0px;
+}
+
+@media (max-width: 991px) {
+  .side-nav {
+    top: 125px;
+  }
+}
 /** button tiles for the employee page */
 body {
   font: 18px Nunito, sans-serif;

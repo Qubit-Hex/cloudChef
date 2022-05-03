@@ -168,7 +168,7 @@ export class DashboardNav extends Component {
                     className="navbar dashboard-horizontal-nav"
                     id="expanding-nav"
                 >
-                    <div className="navbar ">
+                    <div className="navbar side-nav">
                         <a href="/dashboard/" className="nav-link">
                             <i className="fas fa-home"></i>
                             <span className="nav-link-text">Home</span>

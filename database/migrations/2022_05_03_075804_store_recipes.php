@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UserGroups extends Migration
+class StoreRecipes extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class UserGroups extends Migration
      */
     public function up()
     {
-        //
-        Schema::create('user_groups', function (Blueprint $table) {
-            $table->id('groupID')->autoIncrement();
-            $table->integer('storeID');
+        //id, store_id, token, created_at, updated_at
+        Schema::create('store_recipes', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('store_id');
+            $table->string('token');
+            $table->timestamps();
         });
     }
 
@@ -27,7 +29,6 @@ class UserGroups extends Migration
      */
     public function down()
     {
-        //
-        Schema::dropIfExists('user_groups');
+        Schema::dropIfExists('store_recipes');
     }
 }

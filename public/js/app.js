@@ -5923,7 +5923,7 @@ var DashboardNav = /*#__PURE__*/function (_Component) {
           className: "navbar dashboard-horizontal-nav",
           id: "expanding-nav",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-            className: "navbar ",
+            className: "navbar side-nav",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("a", {
               href: "/dashboard/",
               className: "nav-link",
@@ -15030,7 +15030,6 @@ var AddScheduleEntry = function AddScheduleEntry(props) {
                             // now lets render the schedule table and return our group id to the component
                             // destory container
                             react_dom__WEBPACK_IMPORTED_MODULE_2__.unmountComponentAtNode(container);
-                            console.log(response);
                             react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_core_ScheduleTable__WEBPACK_IMPORTED_MODULE_6__.ScheduleTable, {
                               scheduleID: response.schedule.id
                             }), container);
@@ -15197,8 +15196,6 @@ var DeleteSchedules = function DeleteSchedules(props) {
 
   react__WEBPACK_IMPORTED_MODULE_1__.useEffect(function () {
     request().then(function (response) {
-      console.log(response);
-
       if (response.status === 200 || response.status === 'success') {
         setSchedules(response.data);
         setEmployee(response.employee);
@@ -15388,8 +15385,6 @@ var EditSchedules = function EditSchedules(props) {
 
   react__WEBPACK_IMPORTED_MODULE_1__.useEffect(function () {
     request().then(function (response) {
-      console.log(response);
-
       if (response.status === 200 || response.status === 'success') {
         setSchedules(response.data);
         setEmployee(response.employee);
@@ -15768,7 +15763,6 @@ var WeeklyLabourCost = function WeeklyLabourCost(props) {
 
   var getWeeklyLabourCost = function getWeeklyLabourCost(labourCost) {
     return Object.keys(labourCost).map(function (employee, index) {
-      console.log(employee);
       return [labourCost[employee].first_name + ' ' + labourCost[employee].last_name, labourCost[employee].totalHours, " $" + Math.round(labourCost[employee].totalHours * labourCost[employee].salary)];
     });
   };
@@ -16095,8 +16089,6 @@ var ViewSchedules = function ViewSchedules(props) {
 
   react__WEBPACK_IMPORTED_MODULE_1__.useEffect(function () {
     request().then(function (response) {
-      console.log(response);
-
       if (response.status === 200 || response.status === 'success') {
         setSchedules(response.data);
         setEmployee(response.employee);

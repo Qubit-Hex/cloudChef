@@ -99,7 +99,6 @@ export const AddScheduleEntry = (props) => {
                                         // now lets render the schedule table and return our group id to the component
                                         // destory container
                                         ReactDOM.unmountComponentAtNode(container);
-                                        console.log(response);
                                         ReactDOM.render(<ScheduleTable scheduleID={response.schedule.id}/>, container);
                                     } else {
                                         // render the error message

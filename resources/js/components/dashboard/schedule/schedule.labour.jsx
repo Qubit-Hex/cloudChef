@@ -145,7 +145,6 @@ const WeeklyLabourCost = (props) => {
     const getWeeklyLabourCost = (labourCost) => {
 
        return  Object.keys(labourCost).map((employee, index) => {
-           console.log(employee);
             return [
                 labourCost[employee].first_name + ' ' + labourCost[employee].last_name,
                 labourCost[employee].totalHours,

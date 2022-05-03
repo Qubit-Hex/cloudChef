@@ -13,18 +13,13 @@ class Store extends Migration
      */
     public function up()
     {
-        /**
-         *  @purpose: the purpose of this table is create a store table.
-         * 
-         *  api:   /store/
-         * 
-         */
-        // make a store table for the restaurant 
+        // storeID, name, email, signature_token
         Schema::create('store', function (Blueprint $table) {
-            $table->id('storeID')->autoIncrement();
+            $table->bigIncrements('storeID');
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('signature_token')->unique();
+            $table->string('signature_token');
+            $table->timestamps();
         });
     }
 
@@ -35,7 +30,7 @@ class Store extends Migration
      */
     public function down()
     {
-        // drop the store of the table
+        //
         Schema::dropIfExists('store');
     }
 }
