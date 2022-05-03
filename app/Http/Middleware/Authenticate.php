@@ -23,19 +23,28 @@ class Authenticate
     public function handle(Request $request, Closure $next, $guard = null)
     {
 
+
         if (isset($_COOKIE['accessToken'])) {
             $accessKey = $_COOKIE['accessToken'];
         } else{
             $accessKey = $request->header('accessToken');
         }
 
-
         if (isset($accessKey)) {
             // authentication the user
             $user = DB::table('users')->where('remember_token', $accessKey)->first();
+
+            // make sure the user is not null
+            if (!$user) {
+                // destroy the cookie
+                setcookie('accessToken', '', time() - 3600, '/');
+                return "Unauthorized please click  <a href='/login'>here </a> to login";
+            }
+
+
             $user_session = DB::table('user_sessions')->where('user_id', $user->userID)->first();
 
-            if (!$user || !$user_session)  {
+            if (!$user_session)  {
                 // only let the user procceed to the login page if the user is not authenticated
                 // destroy the cookie
                 setcookie('accessToken', '', time() - 3600, '/');
