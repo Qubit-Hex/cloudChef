@@ -174,6 +174,7 @@ export const ModifyRecipeIngredients = (props) => {
         <div className='container'>
         <div className="row">
         <div className="col">
+            <hr />
             <h4 className='header-subtitle text-center'> Ingredients </h4>
             <div className="form-group">
             <div className='col-md-10 mx-auto d-block'>
@@ -182,7 +183,7 @@ export const ModifyRecipeIngredients = (props) => {
                 <small className='text-muted'> Example: 6oz of demi glaze. </small>
                 <input type='text' className="form-control mt-2 mb-2" id="recipe-ingredents" placeholder="Enter ingredents" />
                 <span  id='recipeIngredientsError' className='text-danger'></span>
-                <button className='btn btn-message mt-2 mx-auto d-block w-auto' onClick={(e) => {
+                <button className='btn btn-message mt-2 mx-auto d-block w-75' onClick={(e) => {
                 // append the the ingredents to the ingredents array
                 let ingredents = document.getElementById("recipe-ingredents").value;
                 // append the ingredents to the ingredents array
@@ -278,9 +279,10 @@ export const ModifyRecipeIngredients = (props) => {
         </div>
                             <div className="row mt-4 ml-4 mx-auto">
                                 { /** make back and next buttons in same row side by side  */}
+                                <hr />
 
                                 <div className='col mt-2'>
-                                    <button className='btn btn-message mx-auto d-block w-auto' onClick={(e) => {
+                                    <button className='btn header-action mx-auto d-block w-100' onClick={(e) => {
                                         // handle the nutritional facts for the ingredients
                                         handleNutritionalFacts();
                                     }}> Next </button>

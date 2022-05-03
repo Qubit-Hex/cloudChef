@@ -721,10 +721,8 @@ export const ModifyRecipeSummary = (props) => {
                 </div>
             </div>
 
-            <div className="row mt-4 mx-auto d-block">
+            <div className="row m-4 d-flex mx-auto">
                 {/** next and back buttons for the dialog  */}
-
-                <div className="col-md-6 mx-auto d-block">
 
 
                     <button onClick={
@@ -734,11 +732,10 @@ export const ModifyRecipeSummary = (props) => {
                             }
                         }
                     }
-                        className="btn btn-message w-50 btn-block m-3"
+                        className="btn header-action w-75 mx-auto"
                     >
                         Modify
                     </button>
-                </div>
 
 
                 </div>

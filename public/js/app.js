@@ -10421,18 +10421,15 @@ var ModifyRecipeSummary = function ModifyRecipeSummary(props) {
         })]
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-      className: "row mt-4 mx-auto d-block",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-        className: "col-md-6 mx-auto d-block",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
-          onClick: function onClick(e) {
-            if (validationCheck() === true) {
-              validateForm();
-            }
-          },
-          className: "btn btn-message w-50 btn-block m-3",
-          children: "Modify"
-        })
+      className: "row m-4 d-flex mx-auto",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
+        onClick: function onClick(e) {
+          if (validationCheck() === true) {
+            validateForm();
+          }
+        },
+        className: "btn header-action w-75 mx-auto",
+        children: "Modify"
       })
     })]
   });
@@ -11473,7 +11470,7 @@ var ModifyRecipeIngredients = function ModifyRecipeIngredients(props) {
       className: "row",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "col",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h4", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("hr", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h4", {
           className: "header-subtitle text-center",
           children: " Ingredients "
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
@@ -11497,7 +11494,7 @@ var ModifyRecipeIngredients = function ModifyRecipeIngredients(props) {
               id: "recipeIngredientsError",
               className: "text-danger"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
-              className: "btn btn-message mt-2 mx-auto d-block w-auto",
+              className: "btn btn-message mt-2 mx-auto d-block w-75",
               onClick: function onClick(e) {
                 // append the the ingredents to the ingredents array
                 var ingredents = document.getElementById("recipe-ingredents").value; // append the ingredents to the ingredents array
@@ -11592,19 +11589,19 @@ var ModifyRecipeIngredients = function ModifyRecipeIngredients(props) {
           })]
         }), " "]
       }) : false
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
       className: "row mt-4 ml-4 mx-auto",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("hr", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
         className: "col mt-2",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
-          className: "btn btn-message mx-auto d-block w-auto",
+          className: "btn header-action mx-auto d-block w-100",
           onClick: function onClick(e) {
             // handle the nutritional facts for the ingredients
             handleNutritionalFacts();
           },
           children: " Next "
         })
-      })
+      })]
     })]
   });
 };
@@ -11989,7 +11986,7 @@ var ModifyRecipeInstructions = function ModifyRecipeInstructions(props) {
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
       className: "row",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
-        className: "btn btn-message w-auto mx-auto d-block",
+        className: "btn m-4 header-action mx-auto d-block",
         onClick: function onClick(e) {
           // update the data and preform some validation checks
           updateData(instructions);
@@ -13172,11 +13169,7 @@ var RecipeModifyModal = function RecipeModifyModal(props) {
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)("div", {
         id: "_subContent_",
-        className: "mt-4 p-2",
-        style: {
-          border: '0.5px solid #ccc',
-          borderRadius: '5px'
-        }
+        className: "mt-4 p-2"
       })]
     })
   });

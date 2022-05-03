@@ -288,7 +288,7 @@ export const ModifyRecipeInstructions = (props) => {
         </div>
 
         <div className='row'>
-            <button className='btn btn-message w-auto mx-auto d-block' onClick={
+            <button className='btn m-4 header-action mx-auto d-block' onClick={
                 (e) => {
                     // update the data and preform some validation checks
                     updateData(instructions);
