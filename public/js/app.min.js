@@ -8518,7 +8518,7 @@ var CreateNutritionalFacts = function CreateNutritionalFacts(props) {
                     className: "text-danger mt-2"
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
                     type: "text",
-                    className: "form-control",
+                    className: "form-control mt-2",
                     name: "proteinPercentage",
                     placeholder: "Protein Percentage"
                   })]
@@ -8647,9 +8647,9 @@ var AddRecipeIngredients = function AddRecipeIngredients(props) {
 
       return react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         "class": "alert alert-danger",
-        children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("b", {
-          children: " Error: "
-        }), " Your Recipe Must contain at least one ingredient. "]
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("b", {
+          children: "Error:"
+        }), "Your Recipe Must contain at least one ingredient."]
       }), errorWrapper);
     } else {
       // if the list is not empty render our next page that will handle the nutritional facts
@@ -8670,7 +8670,7 @@ var AddRecipeIngredients = function AddRecipeIngredients(props) {
           "class": "modal-header",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h5", {
             "class": "modal-title ",
-            children: " Add Recipe "
+            children: "Add Recipe"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
             type: "button",
             "class": "btn-transparent modal-close far fa-times-circle",
@@ -8693,7 +8693,7 @@ var AddRecipeIngredients = function AddRecipeIngredients(props) {
                 className: "col",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h4", {
                   className: "header-subtitle text-center",
-                  children: " Ingredients "
+                  children: "Ingredients"
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
                   className: "form-group",
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
@@ -8702,10 +8702,10 @@ var AddRecipeIngredients = function AddRecipeIngredients(props) {
                       id: "modal-alert-container"
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
                       htmlFor: "recipe-ingredents",
-                      children: "Add Ingredient "
+                      children: "Add Ingredient"
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("small", {
                       className: "text-muted",
-                      children: " Example: 6oz of demi glaze. "
+                      children: "Example: 6oz of demi glaze."
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
                       type: "text",
                       className: "form-control mt-2 mb-2",
@@ -8747,42 +8747,42 @@ var AddRecipeIngredients = function AddRecipeIngredients(props) {
                               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("span", {
                                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("strong", {
                                   children: "Warning:"
-                                }), " Your recipe must contain one ingredient."]
+                                }), "Your recipe must contain one ingredient."]
                               })]
                             })
                           }), createAlert);
                         }
                       },
-                      children: " Add "
+                      children: "Add"
                     })]
                   })
                 })]
               })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
               className: "row mt-4",
-              children: // check our length of our render then render the table
+              children: [// check our length of our render then render the table
               checkLength(ingredient) ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h3", {
                   className: "header-subtitle text-center",
-                  children: "Ingredient List "
+                  children: "Ingredient List"
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("table", {
                   className: "table mt-4",
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("thead", {
                     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("tr", {
                       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("th", {
-                        children: " Ingredient "
+                        children: "Ingredient"
                       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("th", {
-                        children: " Action "
+                        children: "Action"
                       })]
                     })
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("tbody", {
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("tbody", {
                     id: "recipe-ingredents-list-container",
-                    children: ingredient.map(function (item, index) {
+                    children: [ingredient.map(function (item, index) {
                       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("tr", {
                         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("td", {
                           children: [" ", item, " "]
-                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("td", {
-                          children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+                        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("td", {
+                          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
                             className: "btn btn-danger mx-auto d-block w-auto",
                             "data-key": index,
                             onClick: // remove an item from the ingredents array
@@ -8802,35 +8802,37 @@ var AddRecipeIngredients = function AddRecipeIngredients(props) {
                               });
                               setIngredient(cleanArray);
                             },
-                            children: " Remove "
-                          })]
+                            children: "Remove"
+                          })
                         })]
                       }, index);
-                    })
+                    }), " "]
                   })]
-                }), " "]
-              }) : false
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-              className: "row mt-4 ml-4 mx-auto d-flex",
-              style: {
-                border: "1px solid #ccc",
-                borderRadius: "5px"
-              },
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
-                className: "btn btn-danger mx-auto d-block w-25 m-4",
-                onClick: function onClick(e) {
-                  // handle the nutritional facts for the ingredients
-                  var container = document.getElementById("modal-container");
-                  return react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_CreateRecipeModal__WEBPACK_IMPORTED_MODULE_2__.CreateRecipeModal, {}), container);
-                },
-                children: " Back "
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
-                className: "btn btn-message mx-auto d-block w-25 m-4",
-                onClick: function onClick(e) {
-                  // handle the nutritional facts for the ingredients
-                  handleNutritionalFacts();
-                },
-                children: " Next "
+                })]
+              }) : false, " "]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("hr", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+              className: "row m-4 mx-auto d-flex",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                className: "col-md-6",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+                  className: "btn header-action w-75",
+                  onClick: function onClick(e) {
+                    // handle the nutritional facts for the ingredients
+                    var container = document.getElementById("modal-container");
+                    return react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_CreateRecipeModal__WEBPACK_IMPORTED_MODULE_2__.CreateRecipeModal, {}), container);
+                  },
+                  children: "Back"
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                className: "col-md-6",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+                  className: "btn header-action w-75",
+                  onClick: function onClick(e) {
+                    // handle the nutritional facts for the ingredients
+                    handleNutritionalFacts();
+                  },
+                  children: "Next"
+                })
               })]
             })]
           })
@@ -9090,44 +9092,50 @@ var CreateInstructions = function CreateInstructions(props) {
                 })
               }) : false
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-              className: "row mt-4 mx-auto d-flex",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
-                className: "btn btn-danger btn-block m-2 mx-auto w-25",
-                onClick: function onClick(e) {
-                  var modalContainer = document.getElementById('modal-container'); // return the previous modal and pass out state to share the information
+              className: "row m-4 mx-auto d-flex",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                className: "col-md-6",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+                  className: "btn header-action w-75",
+                  onClick: function onClick(e) {
+                    var modalContainer = document.getElementById('modal-container'); // return the previous modal and pass out state to share the information
 
-                  return react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_create_recipeTime__WEBPACK_IMPORTED_MODULE_2__.CreateRecipeTime, {
-                    recipeIngredients: props.recipeIngredients,
-                    recipeSummary: props.recipeSummary,
-                    nutritionalFacts: props.nutritionalFacts
-                  }), modalContainer);
-                },
-                children: "Back"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
-                onClick: function onClick(e) {
-                  // some validation check before we move on
-                  var instructionData = instructions;
+                    return react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_create_recipeTime__WEBPACK_IMPORTED_MODULE_2__.CreateRecipeTime, {
+                      recipeIngredients: props.recipeIngredients,
+                      recipeSummary: props.recipeSummary,
+                      nutritionalFacts: props.nutritionalFacts
+                    }), modalContainer);
+                  },
+                  children: "Back"
+                })
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+                className: "col-md-6",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+                  className: "btn header-action w-75",
+                  onClick: function onClick(e) {
+                    // some validation check before we move on
+                    var instructionData = instructions;
 
-                  if (instructionData.length > 0) {
-                    // reset the errorContainer
-                    var errorContainer = document.getElementById('recipeInstructionsError');
-                    react_dom__WEBPACK_IMPORTED_MODULE_1__.unmountComponentAtNode(errorContainer);
-                    handleFinalize();
-                  } else {
-                    var _errorContainer = document.getElementById('recipeInstructionsError'); // trigger a bootstrap alert in order to notify the user that the ingredients
-                    // we must have at least one ingredents
+                    if (instructionData.length > 0) {
+                      // reset the errorContainer
+                      var errorContainer = document.getElementById('recipeInstructionsError');
+                      react_dom__WEBPACK_IMPORTED_MODULE_1__.unmountComponentAtNode(errorContainer);
+                      handleFinalize();
+                    } else {
+                      var _errorContainer = document.getElementById('recipeInstructionsError'); // trigger a bootstrap alert in order to notify the user that the ingredients
+                      // we must have at least one ingredents
 
 
-                    react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-                      "class": "alert alert-danger mt-2",
-                      children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("b", {
-                        children: " Error: "
-                      }), " Please add at least one instruction. "]
-                    }), _errorContainer);
-                  }
-                },
-                className: "btn btn-message btn-block m-2 mx-auto w-25",
-                children: "Next"
+                      react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+                        "class": "alert alert-danger mt-2",
+                        children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("b", {
+                          children: " Error: "
+                        }), " Please add at least one instruction. "]
+                      }), _errorContainer);
+                    }
+                  },
+                  children: "Next"
+                })
               })]
             })]
           })
@@ -9186,7 +9194,7 @@ var CreateRecipeTime = function CreateRecipeTime(props) {
           "class": "modal-header",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h5", {
             "class": "modal-title ",
-            children: " Cooking Time.  "
+            children: "Cooking Time."
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
             type: "button",
             "class": "btn-transparent modal-close far fa-times-circle",
@@ -9202,7 +9210,7 @@ var CreateRecipeTime = function CreateRecipeTime(props) {
           },
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("h1", {
             className: "header-subtitle text-center",
-            children: " How long does your recipe take?  "
+            children: "How long does your recipe take?"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
             className: "row",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
@@ -9211,14 +9219,13 @@ var CreateRecipeTime = function CreateRecipeTime(props) {
                 className: "form-group",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
                   htmlFor: "prepTime",
-                  children: " Prep Time "
+                  children: "Prep Time"
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
                   className: "text-muted",
-                  children: " (in minutes) "
+                  children: "(in minutes)"
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
                   id: "prepTimeError",
-                  className: "text-danger",
-                  children: " "
+                  className: "text-danger"
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
                   type: "text",
                   className: "form-control mt-2 mb-2",
@@ -9235,10 +9242,10 @@ var CreateRecipeTime = function CreateRecipeTime(props) {
                 className: "form-group",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("label", {
                   htmlFor: "cookTime",
-                  children: " Cook Time "
+                  children: "Cook Time"
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
                   className: "text-muted",
-                  children: " (in minutes) "
+                  children: "(in minutes)"
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
                   id: "cookTimeError"
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("input", {
@@ -9250,12 +9257,12 @@ var CreateRecipeTime = function CreateRecipeTime(props) {
               })
             })
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
-            className: "row mt-2",
+            className: "row m-4 mx-auto d-flex",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-              className: "col mx-auto d-block",
+              className: "col-md-6",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
                 type: "button",
-                className: "btn btn-danger btn-block m-4 w-25 mx-auto",
+                className: "btn header-action w-75",
                 onClick: function onClick(e) {
                   // go back to the last form
                   var container = document.getElementById("modal-container");
@@ -9268,10 +9275,10 @@ var CreateRecipeTime = function CreateRecipeTime(props) {
                 children: "Back"
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-              className: "col mx-auto d-block",
+              className: "col-md-6",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
                 type: "button",
-                className: "btn btn-message btn-block m-4 w-25 mx-auto",
+                className: "btn header-action w-75",
                 onClick: function onClick(e) {
                   // our elements to be validated
                   var container = document.getElementById("modal-container");
@@ -9286,9 +9293,9 @@ var CreateRecipeTime = function CreateRecipeTime(props) {
                     inputValidationState.push(false);
                     react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
                       "class": "alert alert-danger mt-2",
-                      children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("b", {
-                        children: " Error: "
-                      }), "  Please enter a cooking time "]
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("b", {
+                        children: "Error:"
+                      }), "Please enter a cooking time"]
                     }), cookingTimeError);
                   } else {
                     // check the input is a number
@@ -9297,18 +9304,18 @@ var CreateRecipeTime = function CreateRecipeTime(props) {
 
                       react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
                         "class": "alert alert-danger mt-2",
-                        children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("b", {
-                          children: " Error: "
-                        }), " Please enter a number invalid format.  "]
+                        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("b", {
+                          children: "Error:"
+                        }), "Please enter a number invalid format."]
                       }), cookingTimeError);
                     } else {
                       inputValidationState.push(true); // return the success message to the user.
 
                       react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
                         "class": "alert alert-success mt-2",
-                        children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("b", {
-                          children: " Success: "
-                        }), "  Input Looks good! "]
+                        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("b", {
+                          children: "Success:"
+                        }), "Input Looks good!"]
                       }), cookingTimeError);
                     }
                   }
@@ -9317,9 +9324,9 @@ var CreateRecipeTime = function CreateRecipeTime(props) {
                     inputValidationState.push(false);
                     react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
                       "class": "alert alert-danger mt-2",
-                      children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("b", {
-                        children: " Error: "
-                      }), "  Please enter a prep time "]
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("b", {
+                        children: "Error:"
+                      }), "Please enter a prep time"]
                     }), prepTimeError);
                   } else {
                     // check the input is a number
@@ -9328,18 +9335,18 @@ var CreateRecipeTime = function CreateRecipeTime(props) {
 
                       react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
                         "class": "alert alert-danger mt-2",
-                        children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("b", {
-                          children: " Error: "
-                        }), "  Please enter a number invalid format. "]
+                        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("b", {
+                          children: "Error:"
+                        }), "Please enter a number invalid format."]
                       }), prepTimeError);
                     } else {
                       inputValidationState.push(true); // return a success messsage to the user
 
                       react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
                         "class": "alert alert-success mt-2",
-                        children: [" ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("b", {
-                          children: " Success: "
-                        }), " Input Looks good! "]
+                        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("b", {
+                          children: "Success:"
+                        }), "Input Looks good!"]
                       }), prepTimeError);
                     }
                   } // check our validationState

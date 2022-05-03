@@ -372,7 +372,7 @@ export const CreateNutritionalFacts = (props) => {
                         <div className="form-group">
                             <label htmlFor="form-protein-percentage">Protein Percentage</label>
                             <span id="proteinPercentageError" className='text-danger mt-2'></span>
-                            <input type="text" className="form-control" name='proteinPercentage' placeholder="Protein Percentage" />
+                            <input type="text" className="form-control mt-2" name='proteinPercentage' placeholder="Protein Percentage" />
                         </div>
                     </div>
                 </div>

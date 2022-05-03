@@ -218,11 +218,13 @@ export const CreateInstructions = (props) => {
 
             }
         </div>
-                            <div className="row mt-4 mx-auto d-flex">
+                            <div className="row m-4 mx-auto d-flex">
                                     {/** next and back buttons for the dialog  */}
 
-                                        <button
-                                            className="btn btn-danger btn-block m-2 mx-auto w-25"
+                                    <div className='col-md-6'>
+
+                                    <button
+                                            className="btn header-action w-75"
                                             onClick={(e) => {
                                              let modalContainer = document.getElementById('modal-container');
 
@@ -235,30 +237,39 @@ export const CreateInstructions = (props) => {
                                             Back
                                         </button>
 
+                                    </div>
 
-                                        <button onClick={
-                                            (e) => {
 
-                                                // some validation check before we move on
-                                                const instructionData = instructions;
+                                    <div className='col-md-6'>
+                                        <button  className="btn header-action w-75"
+                                        onClick={
+                                                (e) => {
 
-                                                if (instructionData.length > 0) {
-                                                    // reset the errorContainer
-                                                    let errorContainer = document.getElementById('recipeInstructionsError');
-                                                    ReactDOM.unmountComponentAtNode(errorContainer);
-                                                    handleFinalize();
-                                                } else {
-                                                    const errorContainer = document.getElementById('recipeInstructionsError');
-                                                    // trigger a bootstrap alert in order to notify the user that the ingredients
-                                                    // we must have at least one ingredents
-                                                    ReactDOM.render((<div class="alert alert-danger mt-2"> <b> Error: </b> Please add at least one instruction. </div>), errorContainer);
+                                                    // some validation check before we move on
+                                                    const instructionData = instructions;
+
+                                                    if (instructionData.length > 0) {
+                                                        // reset the errorContainer
+                                                        let errorContainer = document.getElementById('recipeInstructionsError');
+                                                        ReactDOM.unmountComponentAtNode(errorContainer);
+                                                        handleFinalize();
+                                                    } else {
+                                                        const errorContainer = document.getElementById('recipeInstructionsError');
+                                                        // trigger a bootstrap alert in order to notify the user that the ingredients
+                                                        // we must have at least one ingredents
+                                                        ReactDOM.render((<div class="alert alert-danger mt-2"> <b> Error: </b> Please add at least one instruction. </div>), errorContainer);
+                                                    }
+
                                                 }
-
                                             }
-                                        }
-                                            className="btn btn-message btn-block m-2 mx-auto w-25">
-                                            Next
-                                        </button>
+                                                >
+                                                Next
+                                            </button>
+
+                                    </div>
+
+
+
 
                                 </div>
                             </div>
