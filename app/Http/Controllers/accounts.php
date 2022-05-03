@@ -61,7 +61,7 @@ class accounts extends Controller
             // delete the password reset entry
             $passwordResetEntry->delete();
 
-            // init the mailer object inorder to send the email to the user in question. 
+            // init the mailer object inorder to send the email to the user in question.
             $mail = new mailer();
 
             // send the email to the user with the new password.
@@ -87,6 +87,11 @@ class accounts extends Controller
         // run some tests to make sure the token is valid
 
         $activation  = user_activation::where('activation_code', $token)->first();
+
+        if (!$activation) {
+            return "Activation failed! Link has expired";
+        }
+
         $currentAccount = User::where('userID', $activation->user_id)->first();
 
         // check if the user is already activated

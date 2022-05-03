@@ -35,15 +35,6 @@ Route::get('/reset/', [home::class, 'index']);
 
 
 
-Route::get('/email', function (Request $request) {
-
-    $obj = [
-        'email' => 'test@gmail.com'
-    ];
-
-    return view('email/reset_password', $obj);
-});
-
 
 /**
  *      Group Route : Authentication routes

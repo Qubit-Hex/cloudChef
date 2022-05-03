@@ -123,11 +123,11 @@ class authentication extends Controller
 
 
         // check if the user has an activation record and the account of the user is activated
-        if (!$userActivation->getActivationRecord($userID) || $currentUser->status === 1) {
+     /*    if (!$userActivation->getActivationRecord($userID) || $currentUser->status === 1) {
             // user is activated
             return response()->json(['status' => 'error',
                                 'message' => 'Account is not activated, please check your email for the activation link']);
-        }
+        } */
 
         // user has been authentication properly so lets from the session for the user inorder to login into the system .
 
@@ -467,7 +467,7 @@ class authentication extends Controller
            // send the email to the user of the password reset.
             return $this->mail->password_reset($user->email, $resetToken, $user->userID);
 
-       }  // 
+       }  //
     }
 
        /**
