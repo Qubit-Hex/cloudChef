@@ -120,12 +120,13 @@
             <tr>
                 <td style='padding: 20px;'>
 
-                    <h1 style='text-align: center; font-size: 22px; color: rgb(11, 41, 70);'> User Registration was Successful. </h1>
+                    <h1 style='text-align: center; font-size: 22px; color: rgb(11, 41, 70);'> Password was changed sucessfully. </h1>
                     <hr />
                     <section style='text-align: center;'>
                         <p> Hello User,</p>
                         <p>
-                            Your registration of your account was successful. Please review the following information  below and click on the link to activate your account.
+                            Your password has been reset. Please use the following credentials to login, and change your password.
+                            via the settings page.
                         </p>
 
                     </section>
@@ -141,23 +142,11 @@
                     <h3 style='color: rgb(11, 41, 70); text-align: center; font-weight: 700; margin-top: 0px; padding-top: 0px;'> Account Details:  </h3>
 
                     <ul style='list-style-type: none; padding: 20px; text-align: center; font-size: 16px;' id='listed-items'>
-                        <li> Email: {{ $email }} </li>
+                        <li> Email:{{ $email }} </li>
                         <li> Password: {{ $password }} </li>
                         <li> Store ID: {{ $store_id }} </li>
                         <li> Request ID: {{ $request_id }} </li>
                     </ul>
-
-                    <div style='text-align: center;'>
-
-                        <h4 style='color: rgb(11, 41, 70); text-align: center; font-weight: 700;'>
-                            Please Click the link below to activate your account.
-                        </h4>
-
-                        <a href={{ url( 'http://cloud-chef.ca/authentication/activate/' . $token . '/' ) }} style='color: rgb(11, 41, 70); text-decoration: none;'>
-                            <button class="btn btn-primary" style='border-color: rgb(11, 41, 70);'>
-                                Activate Account
-                            </button>
-                        </a>
 
                 </td>
             </tr>

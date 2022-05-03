@@ -169,13 +169,10 @@ class User extends Authenticatable
 
                 $user = $userModel->getUserByID($userID);
 
-
+                
                 function generatePasswordHash($password, $salt) {
                     return hash('sha256', $password . $salt);
                 }
-
-
-
 
                 if ($user->password === $currentPassword) {
 
@@ -186,7 +183,6 @@ class User extends Authenticatable
                     if (generatePasswordHash($newPassword, $user->salt, 'sha256') === $user->password) {
                         return response()->json(['status' => 'error', 'message' => 'The new password must be different from the current password'], 400);
                     }
-
                     // if the password is different, update the password
                     $userModel->where('userID', $userID)->update(['password' => generatePasswordHash($newPassword, $user->salt, 'sha256')]);
                     return true;
@@ -196,6 +192,29 @@ class User extends Authenticatable
          }
 
 
+         /**
+          *  @method: activateAccount
+          *
+          *  @purpose: inorder to activate the account of the user
+          */
+
+          public function activateAccount($userID) {
+              // activate the account of the current user
+                return $this->where('userID', $userID)->update(['status' => 0]);
+          }
+
+          /**
+           *
+           *  @method: disableAccount
+           *
+           *  @purpose: inorder to disable the account of the user
+           *
+           */
+
+           public function disableAccount($userID) {
+               // disable the account of the current user
+               return $this->where('userID', $userID)->update(['status' => 1]);
+           }
 
 
 

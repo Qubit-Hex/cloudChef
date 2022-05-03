@@ -218,7 +218,13 @@ export const EmployeesPage = (props) => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {employees.map((employee) => {
+
+                                    {
+                                        /** loop through the employees and display them in the table */
+
+                                        employees.length > 0 ? (
+
+                                    employees.map((employee) => {
                                         // render the information of the employee that we have
                                         // recived from the api.
                                         return (
@@ -239,7 +245,17 @@ export const EmployeesPage = (props) => {
                                                 </td>
                                             </tr>
                                         );
-                                    })}
+                                    })
+                                        ) : (
+                                            <tr>
+                                                <td colSpan="8">
+                                                    <h3 className="text-center">
+                                                        No Employees Found
+                                                    </h3>
+                                                </td>
+                                            </tr>
+                                        )
+                                    }
                                 </tbody>
                             </table>
                         </div>

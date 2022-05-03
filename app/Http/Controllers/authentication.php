@@ -121,8 +121,13 @@ class authentication extends Controller
         $userID = $currentUser->userID;
         $userActivation = new user_activation();
 
-   
 
+        // check if the user has an activation record and the account of the user is activated
+        if (!$userActivation->getActivationRecord($userID) || $currentUser->status === 1) {
+            // user is activated
+            return response()->json(['status' => 'error',
+                                'message' => 'Account is not activated, please check your email for the activation link']);
+        }
 
         // user has been authentication properly so lets from the session for the user inorder to login into the system .
 
@@ -261,7 +266,7 @@ class authentication extends Controller
                     $userActivation = new user_activation();
 
                     // create a activation record in the database for the user.
-                    if (!$userActivation->createActivation($userID, $token)) {
+                    if (!$userActivation->createActivationRecord($userID, $token)) {
                         return response()->json([
                             'authenticated' => true,
                             'status' => 'success',
@@ -451,26 +456,18 @@ class authentication extends Controller
                 'status' => 'error',
                 'message' => 'User does not exist', 'error' => 'User does not exist'], 401);
         }
-
-
         // generate a reset token
         $random_paddings = openssl_random_pseudo_bytes(128);
         // time stamp the token
         // and hash it inorder to make it unique
-        $resetToken = hash('whirlpool', $user->userID . $user->email . $random_paddings . time());
+        $resetToken = hash('sha256', $user->userID . $user->email . $random_paddings . time());
 
        // add an entry to our password reset table.
        if (password_reset::add($user->email, $resetToken, $user->userID)) {
            // send the email to the user of the password reset.
             return $this->mail->password_reset($user->email, $resetToken, $user->userID);
 
-       }  else {
-           // couldn't  add the entry to the database
-              return response()->json([
-                'message' => 'Could not add the entry to the database',
-                'error' => 'Could not add the entry to the database'],
-                401);
-       }
+       }  // 
     }
 
        /**
@@ -483,27 +480,16 @@ class authentication extends Controller
         public function account_activation(Request $request, $token)
         {
 
+            // is the token valid?
             if ($token == null) {
                 return response()->json([
                     'status' => 'error',
                     'message' => 'Token is required', 'error' => 'Token is required'], 401);
             }
 
-            // if the token is not null then we will check if the token exists in the database
-            $activation = user_activation::where('activation_code', $token)->first();
-
-            if ($activation) {
-                // if the token exist then we will activate the account
-                return response()->json([
-                    'status' => 'success',
-                    'message' => 'Account has been activated', 'error' => 'Account has been activated'], 200);
-            } else {
-                return response()->json([
-                    'status' => 'error',
-                    'message' => 'Token is invalid', 'error' => 'Token is invalid'], 401);
+            // pass the token to the accounts controller inorder to validate or deny the request
+                return accounts::activate_account($request, $token);
             }
-
-        }
 
         /**
          *
@@ -517,21 +503,11 @@ class authentication extends Controller
          {
 
             if (!$token) {
-                return "Unauthorized";
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Token is required', 'error' => 'Token is required'], 401);
             }
-            // does the table exist on the password_reset table?
-            $passwordReset = password_reset::where('token', $token)->first();
-
-            if ($passwordReset) {
-                // delete the record from the password reset table
-                // create cookie that will contain the token inorder to proccess the password reset
-                // and send the user to the password reset page.
-                setcookie('passwordResetToken', $token, time() + (86400 * 30), "/");
-                // redirect the user to the appropriate page
-
-
-            } else { // return the message of un authorized to the user
-                    return "Unauthorized";
-            }
+            // reset the password of the user that is connected to the system.
+            return accounts::reset_password($request, $token);
          }
 }

@@ -181,7 +181,10 @@ export const DashboardHome = (props) => {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {employees.map((employee) => {
+                                            {
+                                            // is the employee data is not empty then display the data
+                                            employees.length > 0 ?
+                                                employees.map((employee) => {
                                                 // render the information of the employee that we have
                                                 // recived from the api.
                                                 return (
@@ -223,7 +226,14 @@ export const DashboardHome = (props) => {
                                                         </td>
                                                     </tr>
                                                 );
-                                            })}
+                                            })
+
+                                            :  <tr className='text-center'>
+                                                <td colSpan={10}>
+                                                    <h4>No Employees Found</h4>
+                                                </td>
+                                            </tr>
+                                            }
                                         </tbody>
                                     </table>
                                 </div>

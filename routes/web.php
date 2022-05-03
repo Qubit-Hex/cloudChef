@@ -24,7 +24,7 @@ use Illuminate\Http\Request;
  *     @purpose: to provide the home page routes for the user
  */
 
-// the home routes for the mains pages.. 
+// the home routes for the mains pages..
 Route::get('/home/', [home::class, 'index']);
 Route::get('/login/', [home::class, 'loginPage']);
 Route::get('/register/', [home::class, 'index']);
@@ -46,27 +46,21 @@ Route::get('/email', function (Request $request) {
 
 
 /**
- *      Routes: Authentication routes
+ *      Group Route : Authentication routes
  *
  *     @purpose: to route the authentication routes of the application
  */
 
-Route::post('/authentication/login/', [authentication::class, 'login'])->name('auth/login/');
-Route::post('/authentication/register/', [authentication::class, 'register'])->name('register');
-Route::get('/authentication/logout/', [authentication::class, 'logout'])->name('logout');
-
-
-Route::group(['prefix' => '/authentication'], function () {
+Route::group(['prefix' => 'authentication'], function () {
     Route::post('/login/', [authentication::class, 'login'])->name('auth/login/');
     Route::post('/register/', [authentication::class, 'register'])->name('register');
     Route::get('/logout/', [authentication::class, 'logout'])->name('logout');
 
-    // route of the activation token
-    Route::get('activate/{token}', [authentication::class, 'account_activation'])->name('activate');
-    // route of the reset password token.
-    Route::get('/reset/{token}', [authentication::class, 'reset'])->name('reset');
+      // route of the activation token
+  Route::get('activation/{token}', [authentication::class, 'account_activation'])->name('activate');
+  // route of the reset password token.
+  Route::get('reset/{token}', [authentication::class, 'reset'])->name('reset');
 });
-
 
 
 

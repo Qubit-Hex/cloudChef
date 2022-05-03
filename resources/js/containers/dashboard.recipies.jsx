@@ -242,7 +242,7 @@ export const DashboardRecipies = (props) => {
         }
 
         return Object.keys(recipes).map((item, index) => {
-            // auto generate the tables rows for each of the recipes in the database    
+            // auto generate the tables rows for each of the recipes in the database
             return (
                 <tr key={index}>
                     <td> {recipes[item].recipe_name}</td>

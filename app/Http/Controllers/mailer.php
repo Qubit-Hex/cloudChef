@@ -98,19 +98,6 @@ class mailer extends Controller
 
 
      /**
-      *
-      *  @method: store_invite
-      *
-      *  @purpose: inorder to proccess store invite in the system
-      *
-      */
-
-      public function store_invite(Request $request)
-      {
-        // for when a user is added to the store by an admin
-      }
-
-     /**
       *  @method: password_reset
       *
       *  @purpose: inorder to send the password reset to the email inorder to reset that password
@@ -143,5 +130,38 @@ class mailer extends Controller
                 'status' => 'error',
                 'message' => 'password reset email not sent']);
        }
+      }
+
+      /**
+       *
+       *  @method: new_password
+       *
+       *
+       *  @purpose: inorder to send the new password to the user
+       *
+       */
+
+       public function new_password($email, $password, $store_id)
+       {
+        // for when a user forgets their password
+        $info = array(
+            'email' => $email,
+            'password' => $password,
+            'store_id' => $store_id,
+            'request_id' => uniqid(),
+        );
+
+        // send the request to the server.
+       if (!Mail::to($email)->send(new \App\Mail\newPassword($info))) {
+              return response()->json([
+                'status' => 'success',
+                'message' => 'password reset email sent']);
+         }
+          else {
+              return response()->json([
+                'status' => 'error',
+                'message' => 'password reset email not sent']);
+       }
+
       }
 }

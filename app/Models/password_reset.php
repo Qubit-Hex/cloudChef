@@ -16,7 +16,9 @@ class password_reset extends Model
     /**
      * The attributes that are mass assignable.
      *
+     *
      * @var array
+     *
      */
     protected $fillable = [
         'email', 'token', 'user_id', 'created_at'];
@@ -26,8 +28,7 @@ class password_reset extends Model
      *
      *  @method: add
      *
-     *
-     *  @purpose: inorder to add a password reset entry to the system \
+     *  @purpose: inorder to add a password reset entry to the system
      *
      */
 
@@ -47,15 +48,14 @@ class password_reset extends Model
 
                 return $entry;
         } else {
+           
             // update the entry
             $entry->token = $token;
             $entry->user_id = $user_id;
             $entry->updated_at = date('Y-m-d H:i:s');
             $entry->save();
+            return true;
         }
     }
-
-
-
 
 }

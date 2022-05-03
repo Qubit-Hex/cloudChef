@@ -27,7 +27,7 @@ class user_activation extends Model
      *
      */
 
-     public function isActivated($userID)  {
+     public function getActivationRecord($userID)  {
             $userActivation = user_activation::where('user_id', $userID)->first();
             return $userActivation ? true : false;
      }

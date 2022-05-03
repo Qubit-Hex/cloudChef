@@ -19120,7 +19120,9 @@ var EmployeesPage = function EmployeesPage(props) {
                     })]
                   })
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("tbody", {
-                  children: employees.map(function (employee) {
+                  children:
+                  /** loop through the employees and display them in the table */
+                  employees.length > 0 ? employees.map(function (employee) {
                     // render the information of the employee that we have
                     // recived from the api.
                     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
@@ -19142,6 +19144,14 @@ var EmployeesPage = function EmployeesPage(props) {
                         children: [" ", employee.end_date === null ? "N/A" : employee.end_date, " "]
                       })]
                     }, employee.id);
+                  }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("tr", {
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                      colSpan: "8",
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h3", {
+                        className: "text-center",
+                        children: "No Employees Found"
+                      })
+                    })
                   })
                 })]
               })
@@ -19423,7 +19433,8 @@ var DashboardHome = function DashboardHome(props) {
                   })]
                 })
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("tbody", {
-                children: employees.map(function (employee) {
+                children: // is the employee data is not empty then display the data
+                employees.length > 0 ? employees.map(function (employee) {
                   // render the information of the employee that we have
                   // recived from the api.
                   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
@@ -19445,6 +19456,14 @@ var DashboardHome = function DashboardHome(props) {
                       children: [" ", employee.end_date === null ? "N/A" : employee.end_date, " "]
                     })]
                   }, employee.id);
+                }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("tr", {
+                  className: "text-center",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+                    colSpan: 10,
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h4", {
+                      children: "No Employees Found"
+                    })
+                  })
                 })
               })]
             })
@@ -19705,7 +19724,7 @@ var DashboardRecipies = function DashboardRecipies(props) {
     }
 
     return Object.keys(recipes).map(function (item, index) {
-      // auto generate the tables rows for each of the recipes in the database    
+      // auto generate the tables rows for each of the recipes in the database
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("tr", {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("td", {
           children: [" ", recipes[item].recipe_name]

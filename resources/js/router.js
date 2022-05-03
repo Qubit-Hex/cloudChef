@@ -37,14 +37,10 @@
         <Route path='/solutions/'>
             <SolutionsContainer />
         </Route>
-
-
         <Route path='/features/'>
 
             <FeaturesContainer />
         </Route>
-
-
         <Route path='/pricing/'>
           <PricingContainer />
 
@@ -58,6 +54,9 @@
         <Route path='/dashboard/'>
             <DashboardContainer />
           </Route>
+
+
+        
 
           <Route path="/">
              <HomeContainer />
