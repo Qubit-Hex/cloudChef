@@ -29,7 +29,7 @@ class Employee extends Migration
             $table->string('salary');
             $table->boolean('is_active');
             $table->date('start_date');
-            $table->date('end_date');
+            $table->date('end_date')->nullable();
             $table->timestamps();
         });
     }

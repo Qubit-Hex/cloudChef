@@ -82,6 +82,7 @@ class employee_shifts extends Model
               'start_time' => $start,
               'end_time' => $end,
               'day_of_week' => $day,
+              'dropped' => 0,
               'off' => $off
           ]);
       }
@@ -101,7 +102,7 @@ class employee_shifts extends Model
             $check =  DB::table('employee_shifts')->where('schedule_id', $schedule_id)->where('employee_id', $employee_id)->
                     where('day_of_week', $day)->first();
 
-    
+
            return DB::table('employee_shifts')->where('id', $check->id)->delete();
        }
 

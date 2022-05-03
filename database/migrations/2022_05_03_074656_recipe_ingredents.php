@@ -14,7 +14,7 @@ class RecipeIngredents extends Migration
     public function up()
     {
         // id, recipe_id, recipe_ingredients, created_at, updated_at
-        Schema::create('recipe_ingredients', function (Blueprint $table) {
+        Schema::create('recipe_ingredents', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('recipe_id');
             $table->json('recipe_ingredients');

@@ -56,6 +56,7 @@ export const ViewSchedules = (props) => {
         request().then(response => {
             if (response.status === 200 || response.status === 'success') {
                 setSchedules(response.data);
+                console.log(employee);
                 setEmployee(response.employee);
             }
         });
@@ -95,7 +96,7 @@ export const ViewSchedules = (props) => {
 
 
                         ReactDOM.unmountComponentAtNode(container);
-                        ReactDOM.render(<ScheduleTable scheduleID={scheduleId} employeeID={employee.id}  viewOnly={true}/>, container);
+                        ReactDOM.render(<ScheduleTable scheduleID={scheduleId}  viewOnly={true}/>, container);
                     }
                 }>View Schedule</button>
             </div>

@@ -19,9 +19,6 @@ import { Modal } from '../base/Modal';
 
 export const ModalDeleteSchedule = (props) => {
 
-    // debug
-    console.log(props);
-
     const request = async (scheduleID, employeeID) => {
       // implement the api call inorder to delete the schedule and the details of the schedule form the database
       const api = new FetchServiceProvider();

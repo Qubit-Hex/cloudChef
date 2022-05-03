@@ -54,7 +54,7 @@
      // PREFORM the api call to get the schedules
      React.useEffect(() => {
          request().then(response => {
-          
+
              if (response.status === 200 || response.status === 'success') {
                  setSchedules(response.data);
                  setEmployee(response.employee);
@@ -95,10 +95,9 @@
                      (e) => {
                          const scheduleId = document.getElementById('datePicker').value;
                          const container = document.getElementById('modal-container');
-                         const employeeID = employee.id;
 
                          // SENDS THE SCHEDULE ID TO THE MODAL
-                         return ReactDOM.render(<ModalDeleteSchedule scheduleId={scheduleId} employeeID={employeeID} />, container);
+                         return ReactDOM.render(<ModalDeleteSchedule scheduleId={scheduleId}  />, container);
                      }
                  }>
                         <i className="fas fa-trash-alt"></i>

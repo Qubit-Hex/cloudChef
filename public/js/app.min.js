@@ -13824,9 +13824,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 var ModalDeleteSchedule = function ModalDeleteSchedule(props) {
-  // debug
-  console.log(props);
-
   var request = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(scheduleID, employeeID) {
       var api, route, header;
@@ -15241,12 +15238,10 @@ var DeleteSchedules = function DeleteSchedules(props) {
           className: "btn header-action btn-lg w-100",
           onClick: function onClick(e) {
             var scheduleId = document.getElementById('datePicker').value;
-            var container = document.getElementById('modal-container');
-            var employeeID = employee.id; // SENDS THE SCHEDULE ID TO THE MODAL
+            var container = document.getElementById('modal-container'); // SENDS THE SCHEDULE ID TO THE MODAL
 
             return react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_core_Modal_deleteSchedule__WEBPACK_IMPORTED_MODULE_6__.ModalDeleteSchedule, {
-              scheduleId: scheduleId,
-              employeeID: employeeID
+              scheduleId: scheduleId
             }), container);
           },
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("i", {
@@ -15433,8 +15428,7 @@ var EditSchedules = function EditSchedules(props) {
               var container = document.getElementById('schedule-table-container');
               react_dom__WEBPACK_IMPORTED_MODULE_2__.unmountComponentAtNode(container);
               react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_core_ScheduleTable__WEBPACK_IMPORTED_MODULE_4__.ScheduleTable, {
-                scheduleID: scheduleId,
-                employeeID: employee.id
+                scheduleID: scheduleId
               }), container);
             },
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("i", {
@@ -16091,6 +16085,7 @@ var ViewSchedules = function ViewSchedules(props) {
     request().then(function (response) {
       if (response.status === 200 || response.status === 'success') {
         setSchedules(response.data);
+        console.log(employee);
         setEmployee(response.employee);
       }
     });
@@ -16136,7 +16131,6 @@ var ViewSchedules = function ViewSchedules(props) {
             react_dom__WEBPACK_IMPORTED_MODULE_2__.unmountComponentAtNode(container);
             react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_core_ScheduleTable__WEBPACK_IMPORTED_MODULE_4__.ScheduleTable, {
               scheduleID: scheduleId,
-              employeeID: employee.id,
               viewOnly: true
             }), container);
           },

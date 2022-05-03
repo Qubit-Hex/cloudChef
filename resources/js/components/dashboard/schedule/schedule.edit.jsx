@@ -98,7 +98,7 @@
 
 
                             ReactDOM.unmountComponentAtNode(container);
-                            ReactDOM.render(<ScheduleTable scheduleID={scheduleId} employeeID={employee.id}  />, container);
+                            ReactDOM.render(<ScheduleTable scheduleID={scheduleId} />, container);
                         }
                     }>
 
