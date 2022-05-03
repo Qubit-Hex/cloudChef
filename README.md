@@ -9,8 +9,7 @@
 <section>
     <h4> Purpose: </h4>
     <br/>
-    <p> The purpose of this project is i was i wanted a solution to schedule employees and hold the recipe information in one place 
-        inorder to make a job of a cook easier, by keeping all information in one place </p>
+    <p> The purpose of this project is i was i wanted a solution to schedule employees and hold the recipe information in one place</p>
 </section>
 
 
