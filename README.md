@@ -33,7 +33,7 @@
 
 
 <section>
-    <h3> Boostrap the database </h3>
+    <h3> Bootstrap the database </h3>
     <code>
         run bootstrap.sql
     </code>
