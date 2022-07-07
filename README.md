@@ -30,19 +30,3 @@
         run composer update
     </code>   
 </section>
-
-
-<section>
-    <h3> Bootstrap the database </h3>
-    <code>
-        run bootstrap.sql
-    </code>
- </section>
-  <br/>
-  
- <section> 
-    <h3> Closing </h3>
-    <p> And Lastly, just remember build things and have fun while doing so, its our curiousity of building things that makes, us build great things. </p>
-</section>
-
-
